@@ -1,37 +1,35 @@
-## Welcome to GitHub Pages
+# 株式会社エプコットソフトウェア GitHub Pages README
 
-You can use the [editor on GitHub](https://github.com/epkotsoftware/epkotsoftware.github.io/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+<https://epkotsoftware.github.io/>
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Organizationについて
 
-### Markdown
+- 現在「フリープラン」で登録しています。
+  - 主要な機能は他のプラン同様に、ほぼ問題なく使えますが「保護されたブランチ」が  
+    「パブリックリポジトリ」にしか使えないところが大きいです。
+- GitHub | すべての開発者のためのプラン
+  - <https://github.co.jp/pricing.html>
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## ページ構築対象ブランチ・パス
 
-```markdown
-Syntax highlighted code block
+- ブランチ: `main`
+- パス: [./docs](./docs)
 
-# Header 1
-## Header 2
-### Header 3
+## 注意点
 
-- Bulleted
-- List
+- 本リポジトリ及びページについては、公開されているため機密情報の取り扱いにはご注意ください。
+  - 個人情報、パスワードやクレジットカード番号といった機密情報のアップ、コメントは行わない。
+  - 社外秘資料等のアップ、コメントは行わない。
+- 公開されたGitHub Pagesのサイトは1GB以上であってはなりません。
+- GitHubは100 MB以上のプッシュをブロックします。
 
-1. Numbered
-2. List
+## GitHub Pages
 
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/epkotsoftware/epkotsoftware.github.io/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+- GitHub Pages
+  - <https://pages.github.com/>
+- GitHub Pages について
+  - <https://docs.github.com/ja/pages/getting-started-with-github-pages/about-github-pages>
+  - 使用制限
+    - <https://docs.github.com/ja/pages/getting-started-with-github-pages/about-github-pages#usage-limits>
+  - 禁止される用途
+    - <https://docs.github.com/ja/pages/getting-started-with-github-pages/about-github-pages#prohibited-uses>
