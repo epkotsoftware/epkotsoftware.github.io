@@ -1,9 +1,13 @@
-# 株式会社エプコットソフトウェア
+# 株式会社エプコットソフトウェア ～ GitHub
+
+## GitHub組織アカウント
+
+- <https://github.com/epkotsoftware>
 
 ## GitHub組織アカウントへの参加
 
 - SlackにてGitHubアカウントユーザー名を伝えて、組織アカウントへの招待を依頼してください。
-  - アカウントがない方は作成をお願いします。
+  - GitHubアカウントをお持ちではない方は作成をお願いします。
 
 ## GitHubアカウント作成
 
@@ -24,8 +28,8 @@
       - Name: `Yamada Taro`
   - [`Account security`](https://github.com/settings/security)
     - `Two-factor authentication`(2段階認証) は組織アカウントへの参加時は、今のところ必須にはしていませんが推奨します。
-  - [`Developer settings / Personal access tokens`](https://github.com/settings/tokens)
-    - 後述のGit使用時のパスワードの代わりとしてトークンを使用します。  
+  - [`Developer settings / Personal access tokens`](https://github.com/settings/tokens) （任意）
+    - Git使用時にパスワードの代わりとしてトークンを使用します。  
       **※ 作成は必要になった時で問題ありません。**
     - 作成方法
       - 「Generate new token」をクリック
@@ -37,3 +41,29 @@
       - 「Generate token」をクリック
       - トークンが表示されます（2度と表示されないので、忘れたらもう一度作成すること）。
       ![github_token_generated](./image/github_token_generated.png)
+
+    - 作成したトークンはGitで `git push` 等を行った際に入力を求められます。
+    ![github_sign_in](./image/github_sign_in.png)
+
+---
+
+上記内容については 2021/10 時点での内容です。  
+それ以降、UIや入力項目等が変更されているかもしれません。  
+
+## Gitインストール
+
+内部開発を行う方、新人研修へ参加する方はインストールをお願いします。  
+設定に関しては、プロジェクトによっても違うため  
+デフォルト設定でのインストールでOKです。
+
+- `Git` (ギット)
+  - <https://git-scm.com/downloads>
+
+既にインストール済みの方は、お使いのGitが脆弱性があるバージョンではないかを確認し  
+アップデートをお願いします。
+
+- gitバージョン確認コマンド
+  - `git --version`
+- Google検索
+  - <https://www.google.com/search?q=git+脆弱性>
+
