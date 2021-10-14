@@ -16,15 +16,15 @@
 
 - GitHubアカウント作成
   - <https://github.co.jp/>
-  - 例（会社用アカウントにする場合）
-    - Username: `taro-yamada-epkotsoftware`
-    - Email address: `taro.yamada@epkotsoftware.co.jp`
+  - 例
+    - Username: `taro-yamada-epkotsoftware` （自由、URLに使用されます）
+    - Email address: `taro.yamada@epkotsoftware.co.jp` （会社用アカウントにする場合は会社メールアドレス）
     - Password: 自由
     - Email preferences: どちらでもOK
 - GitHubアカウント設定
   - <https://github.com/settings/profile>
   - [`Profile`](https://github.com/settings/profile)
-    - 例
+    - 例（本名じゃなくてもOK）
       - Name: `Yamada Taro`
   - [`Account security`](https://github.com/settings/security)
     - `Two-factor authentication`(2段階認証) は組織アカウントへの参加時は、今のところ必須にはしていませんが推奨します。
@@ -40,10 +40,10 @@
           それ以外は任意です。
       - 「Generate token」をクリック
       - トークンが表示されます（2度と表示されないので、忘れたらもう一度作成すること）。
-      ![github_token_generated](./image/github_token_generated.png)
+        ![github_token_generated](./image/github_token_generated.png)
 
     - 作成したトークンはGitで `git push` 等を行った際に入力を求められます。
-    ![github_sign_in](./image/github_sign_in.png)
+      ![github_sign_in](./image/github_sign_in.png)
 
 ---
 
@@ -62,8 +62,20 @@
 既にインストール済みの方は、お使いのGitが脆弱性があるバージョンではないかを確認し  
 アップデートをお願いします。
 
-- gitバージョン確認コマンド
+- gitバージョン確認コマンド(Git Bash)
   - `git --version`
 - Google検索
   - <https://www.google.com/search?q=git+脆弱性>
 
+## Git設定
+
+- Git Bush アプリを開く
+- Git設定
+  - `git config --global user.email "{GitHubアカウントEmail address}"`
+  - `git config --global user.name "{GitHub Profile Name}"`
+  - 設定例
+
+    ```bash
+    git config --global user.email "taro.yamada@epkotsoftware.co.jp"
+    git config --global user.name "Yamada Taro"
+    ```
