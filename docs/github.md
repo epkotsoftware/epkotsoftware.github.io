@@ -24,8 +24,8 @@
 - GitHubアカウント設定
   - <https://github.com/settings/profile>
   - [`Profile`](https://github.com/settings/profile)
-    - 例（本名じゃなくてもOK）
-      - Name: `Yamada Taro`
+    - 例（フルネームじゃなくてもOK）
+      - Name: `Yamada Taro`、`Yamada.T`
   - [`Account security`](https://github.com/settings/security)
     - `Two-factor authentication`(2段階認証) は組織アカウントへの参加時は、今のところ必須にはしていませんが推奨します。
   - [`Developer settings / Personal access tokens`](https://github.com/settings/tokens) （任意）
