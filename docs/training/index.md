@@ -13,7 +13,21 @@
 - 【エディタ】`Visual Studio Code` (ビジュアル スタジオ コード)
   - <https://azure.microsoft.com/ja-jp/products/visual-studio-code/>
 
-### Visual Studio Code 詳細設定
+#### Git
+
+Gitが何かわからない方へ
+
+- Gitとは何か？Gitのオススメの学習方法について
+  - <https://youtu.be/iq9GHxjG1Xg>
+
+#### Visual Studio Code
+
+Visual Studio Code(VSCode) が初めての方へ
+
+- VSCode最初の1歩（インストール／日本語化／基本的な使い方）
+  - <https://youtu.be/auGKppIIV4Y>
+
+##### Visual Studio Code 詳細設定
 
 難しければ飛ばしてもOKです。
 
@@ -84,12 +98,37 @@
 実践については研修時に行います。  
 まずは動画を見て必要な知識や、プログラミングはどういうものなのかをイメージをつかみましょう。
 
+### 学習方法について
+
+- FAQ
+  - ★動画学習の時に、話すのが早すぎてついていけない。
+    - YouTube等の動画共有サービスでは、再生速度を変更することが可能です。  
+      逆に遅いと感じる場合、再生速度をあげましょう。
+      - YouTubeの場合
+        1. 動画下部にある設定アイコン(歯車)をクリック
+        1. 「再生速度」をクリック
+  - ★海外の動画を参考にしようと思ったが、英語で話している内容が聞き取れない。
+    - YouTubeでは字幕の表示が可能です（デフォルトは自動翻訳されたもので誤翻訳されている場合もある）。
+      1. 動画下部にある設定アイコン(歯車)をクリック
+      1. 「字幕」をクリック
+  - ★わからない用語が出てきた。
+    - 現場に入ってからも、わからない用語がたくさん出てくるかと思います  
+      検索力を身につけましょう。
+      - Google検索ヘルプ ～ ウェブ検索の精度を高める
+        - <https://support.google.com/websearch/answer/2466433>
+      - 画像検索も便利です。以下は「MVC」を画像検索した例
+        - <https://www.google.com/search?q=mvc&tbm=isch>
+      - リアルタイム検索は障害情報等を確認する時に便利、以下は「AWS」を検索した例
+        - <https://search.yahoo.co.jp/realtime/search?p=aws>
+
 ### 動画
 
 - Webアプリケーションを作るために学ぶべき技術
   - <https://www.youtube.com/watch?v=aC4O0thuTyw>
 - Webプログラミングの始め方
   - <https://www.youtube.com/watch?v=zxX8YMTxvyI>
+- 8割の人が知らない検索術・ググり方【知らないと損】
+  - <https://youtu.be/T6qcKQ-vEUA>
 - エンジニアは検索力が大事。プログラミングスキル向上にググり力は必須です。
   - <https://youtu.be/kNiD4rfNkFA>
 - Chrome DevToolsの使い方を徹底解説！Chrome Developer Toolsを使いこなすと開発効率が上がる！
