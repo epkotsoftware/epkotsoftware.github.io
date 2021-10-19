@@ -69,7 +69,7 @@
 
 ## Git設定
 
-- Git Bush アプリを開く
+- Git Bash アプリを開く
 - Git設定
   - `git config --global user.email "{GitHubアカウントEmail address}"`
   - `git config --global user.name "{GitHub Profile Name}"`
