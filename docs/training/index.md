@@ -4,6 +4,17 @@
 
 ---
 
+### PC設定
+
+ファイル名拡張子を表示しておくようにしましょう。
+
+- 拡張子とは
+  - <https://www.google.com/search?q=ファイル+拡張子とは>
+- Windows
+  - <https://www.google.com/search?q=Windows+ファイル+拡張子+表示>
+- Mac
+  - <https://www.google.com/search?q=Mac+ファイル+拡張子+表示>
+
 ### インストール
 
 以下をインストールしてください、いずれもデフォルト設定でOKです。
