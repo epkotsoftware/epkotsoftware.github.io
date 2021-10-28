@@ -1,12 +1,44 @@
 # 株式会社エプコットソフトウェア ～ 新人研修に参加する方へ
 
-## 環境構築
+## はじめに
 
 ---
 
-### PC設定
+入社前に予習をしたいという声が多かったため、このページを用意しました。  
+入社前ですので強制はしませんが、新人研修ではパソコンが扱える前提で話が進みますので  
+「[パソコンが不慣れな方へ](#パソコンが不慣れな方へ)」は予め確認しておくことをおすすめします。
 
-ファイル名拡張子を表示しておくようにしましょう。
+## パソコンが不慣れな方へ
+
+---
+
+研修時点では、お使いのパソコン(PC)にあわせて「Windows」か「Mac」のどちらかが出来れば問題ありません。  
+使い慣れている方は、[環境構築](#環境構築)へ進んでください。
+
+- 動画
+  - パソコンの使い方。基本講座【初心者向けPC教室】Windows/Mac対応
+    - <https://youtu.be/cxmRzjQgHHk>
+  - Windows パソコン初心者講座
+    - <https://www.youtube.com/playlist?list=PLqfgbYDnRRWD_8kpAXFmRldGnyDVeaVOQ>
+  - 【MacBook初心者向け】パソコンを買う前に知るべきマックブック基本の使い方
+    - <https://youtu.be/ydvXNRsZLLs>
+- サイト
+  - PCに不慣れな新入社員さんに伝えたい基本操作
+    - <https://pc-pier.com/blog/2020/02/20/basic-operation/>
+  - 初心者のためのMacBookシリーズ 使い方の基本【intel Mac】
+    - <https://funq.jp/flick/article/652845/>
+
+### ファイル操作
+
+現場によって管理方法が様々ですが  
+Dropbox等、共有しているファイルの扱いには注意しましょう。
+
+- PCに不慣れな新入社員、伝えるべきファイル操作の基本
+  - <https://xtech.nikkei.com/atcl/nxt/column/18/00667/032900003/>
+
+### ファイル拡張子
+
+ファイル拡張子を表示しておくようにしましょう。
 
 - 拡張子とは
   - <https://www.google.com/search?q=ファイル+拡張子とは>
@@ -14,6 +46,19 @@
   - <https://www.google.com/search?q=Windows+ファイル+拡張子+表示>
 - Mac
   - <https://www.google.com/search?q=Mac+ファイル+拡張子+表示>
+
+### ショートカットキー
+
+ショートカットキーを覚えると便利です。
+
+- パソコンで初心者が覚えるべき基本テクニック集【保存版】
+  - <https://youtu.be/WWphrRjWyAQ>
+- 【絶対に覚えておきたい！】MacBookの生産性を上げる便利なショートカットキー21選！【入門編】
+  - <https://youtu.be/WaW2IMMsijk>
+
+## 環境構築
+
+---
 
 ### インストール
 
@@ -148,23 +193,34 @@ Visual Studio Code(VSCode) が初めての方へ
   - <https://youtu.be/kNiD4rfNkFA>
 - Chrome DevToolsの使い方を徹底解説！Chrome Developer Toolsを使いこなすと開発効率が上がる！
   - <https://youtu.be/awRkFcv51r4>
+  - 設計やテストエビデンス等で、スクリーンショットを撮る事が多いです。
+    - DevToolで 「Ctrl」 + 「Shift」を押しながら 「P」 を押すと、コマンドパレットが出るので  
+      「screenshot」と打つと、いくつかのキャプチャ方法が出てきます。
+      - ![google_chrome_dev_tools](./../image/google_chrome_dev_tools.png)
+      - `Capture area screenshot` : 手動で選択範囲を指定してキャプチャ、画面上のカーソルが「+」になるのでドラッグして範囲を決める。
+      - `Capture full size screenshot` : スクロールした分も含めてページ全体をキャプチャ
+      - `Capture node screenshot` : 選択しているノードをキャプチャ
+      - `Capture screenshot` : iPhone等のフレームも含めてキャプチャ、顧客向けの資料作成に便利。
 - HTML講座
   - <https://www.youtube.com/playlist?list=PLwM1-TnN_NN457PTxsvNXxVxN8fkbYHKU>
 - CSS講座
   - <https://www.youtube.com/playlist?list=PLwM1-TnN_NN5jWN09yjtxWng2XZa88ate>
 - JavaScript講座
   - <https://www.youtube.com/playlist?list=PLwM1-TnN_NN7-zdRV8YsGUB82VVhfYiWW>
+- PHPプログラミング入門講座🔰【初心者でも1時間で学べるPHP入門！フル字幕】
+  - <https://youtu.be/J_pASVQXElA>
 - 【基本知識】GitHubとは？できることや基礎用語を解説！
   - <https://youtu.be/yzNPC_QzgFM>
 - 【Git入門】Git + Github使い方入門講座
   - <https://youtu.be/LDOR5HfI_sQ>
 
-## 研修内容
+## 何か作ってみたい方へ
 
 ---
 
-研修では、主に「CBC」というオンライン学習サイトを使い、学習していきます。  
-何か作ってみたい方は「入門コース」からやってみましょう。
+「CBC」という無料のオンライン学習サイトがありますので  
+何か作ってみたい方は「入門コース」からやってみましょう。  
+研修講師によってはこちらをベースに研修を行います。
 
 - CBC (CRI BOOT CAMP)
   - <https://cbc-study.com/>
