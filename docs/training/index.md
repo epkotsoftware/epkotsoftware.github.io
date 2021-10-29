@@ -224,3 +224,12 @@ Visual Studio Code(VSCode) が初めての方へ
 
 - CBC (CRI BOOT CAMP)
   - <https://cbc-study.com/>
+
+## 研修
+
+---
+
+- 小山内チーム
+  - 入社後に [新人研修](./training.md) を進めていきます。
+- 宇都宮チーム
+  - Slack・Discordで直接確認してください。

@@ -36,13 +36,16 @@
 
 まずは、Webプログラミングのイメージをつかみましょう。  
 課題の提出は「GitHub」を使うので何をするものか確認してください  
-提出の仕方については、提出時にお教えします。
+提出の仕方については、提出時にお教えします。  
+また、エンジニアになると検索することが多くなりますので検索力も身につけましょう。
 
 - 動画
   - <https://youtube.com/playlist?list=PLCX3wwS3Gg4x7RMa9JE5uelCqvzmdmVfA>
     - `4:57` 【初心者向け】Webエンジニアとして独り立ちするために学ぶべきスキルマップ【プログラミング】
     - `6:56` 【初心者向け】Webプログラミングの始め方 スキル0⇒1のためにやるべき具体的な手順
     - `11:02` GitHubとは？【分かりやすい解説シリーズ #14】【プログラミング】
+    - `12:30` 8割の人が知らない検索術・ググり方【知らないと損】
+    - `23:25` エンジニアは検索力が大事。プログラミングスキル向上にググり力は必須です。
 
 ### 休止時間
 
@@ -135,6 +138,19 @@ VSCodeでアップが可能です。
   - <https://youtu.be/vMZ0C06soxA?t=189s>
 
 Git・GitHubについては、[バージョン管理システム](#バージョン管理システム)
+
+### Chrome DevTools
+
+- Chrome DevToolsの使い方を徹底解説！Chrome Developer Toolsを使いこなすと開発効率が上がる！
+  - <https://youtu.be/awRkFcv51r4>
+  - 設計やテストエビデンス等で、スクリーンショットを撮る事が多いです。
+    - DevToolで 「Ctrl」 + 「Shift」を押しながら 「P」 を押すと、コマンドパレットが出るので  
+      「screenshot」と打つと、いくつかのキャプチャ方法が出てきます。
+      - ![google_chrome_dev_tools](./../image/google_chrome_dev_tools.png)
+      - `Capture area screenshot` : 手動で選択範囲を指定してキャプチャ、画面上のカーソルが「+」になるのでドラッグして範囲を決める。
+      - `Capture full size screenshot` : スクロールした分も含めてページ全体をキャプチャ
+      - `Capture node screenshot` : 選択しているノードをキャプチャ
+      - `Capture screenshot` : iPhone等のフレームも含めてキャプチャ、顧客向けの資料作成に便利。
 
 ## マークアップエンジニア編
 
