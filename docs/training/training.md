@@ -90,6 +90,12 @@ VDT症候群予防の観点から、1時間連続でPC上で作業した場合�
 
 ---
 
+- 動画
+  - 【2021年最新】HTML入門🔰初心者向けにHTMLの基礎を解説！
+    - <https://youtu.be/uBhpiOwHswE>
+  - 【CSS入門講座🔰】HTMLとCSSの基本を解説！WEBデザインの言語CSSを理解しよう
+    - <https://youtu.be/M-rfPz3vBKk>
+
 [CBC](https://cbc-study.com/)の入門コースをやっていきましょう。
 
 - 入門1（コーダー 初級）
@@ -105,7 +111,7 @@ VDT症候群予防の観点から、1時間連続でPC上で作業した場合�
   - <https://cbc-study.com/training/beginner/page8>
 
 2022/6/15でブラウザの「`Internet Explorer(IE)`」が廃止されることにより  
-CSSの「`grid-template`」が全ブラウザでサポートされます。  
+CSSの「`grid-template`」が、ほぼ全てのブラウザでサポートされます。  
 今後、使われる事が増えそうなので以下も覚えておきましょう。
 
 - 動画
@@ -155,6 +161,13 @@ Git・GitHubについては、[バージョン管理システム](#バージョ�
 ## マークアップエンジニア編
 
 ---
+
+- 動画
+  - <https://youtube.com/playlist?list=PLCX3wwS3Gg4y99r2bSBpir2nmMv4rzfcL>
+    - `12:56` HTTPの仕組み｜GET・POSTリクエスト/ステータスコード/サーバー通信/ユーザエージェントなどの基礎を解説
+    - `5:57` ポートとは？【TCP/IP基礎】｜プログラマー養成講座
+    - `6:28` ドメイン、サーバーとは？ホームページの仕組みを解説😃これでDNSやIPアドレスもわかるようになる！
+    - `6:24` WEBサーバーの仕組み入門｜ApacheやNginxなどWEBサーバーの基本を初心者向けに解説
 
 [CBC](https://cbc-study.com/)の基礎コースをやっていきましょう。  
 Excelをお持ちでない方はGoogleスプレッドシートやOffice OnlineでもOKです（それぞれアカウントが必要）
@@ -226,6 +239,8 @@ trainingリポジトリの [users/{★ユーザー名}/03_advanced/README.md](ht
 
 ### PHP入門（動画）
 
+- サーバーサイドとは？サーバーサイドとクライアントサイド言語の違い
+  - <https://youtu.be/okwLKI6eYbQ>
 - PHPプログラミング入門講座🔰【初心者でも1時間で学べるPHP入門！フル字幕】
   - <https://youtu.be/J_pASVQXElA>
 
