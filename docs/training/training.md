@@ -67,15 +67,22 @@ VDT症候群予防の観点から、1時間連続でPC上で作業した場合�
 
 - 「[新人研修に参加する方へ（PC設定・インストール）](./index.md#pc設定)」参照
 
+### Git設定確認
+
+[GitHub ～ Git設定確認](./../github.md#git設定確認) の設定が漏れていると  
+コミットが失敗しますので再度ご確認ください。
+
 ### ユーザーディレクトリ作成
 
 開発環境を構築し、プログラムファイルを格納するための  
-個人フォルダー（ディレクトリ）を作成します。  
+ブランチ(`feature/{★ユーザー名}`)及び、個人フォルダー（ディレクトリ）を作成します。  
 詳しくは [研修用リポジトリ(training)](https://github.com/epkotsoftware/training) のREADMEをご覧ください。  
 
 　※ [研修用リポジトリ(training)](https://github.com/epkotsoftware/training)の権限がないと失敗します。リポジトリが見えない方は管理者にご連絡ください。  
 
-上記の手順で「`training`」ディレクトリが出来ているので Visual Studio Code(VSCode) で開きましょう。  
+上記の手順でGitHub上には「`feature/{★ユーザー名}`」ブランチにユーザーディレクトリが出来ていて  
+ローカルには「`training`」ディレクトリが出来ているので  
+Visual Studio Code(VSCode) で開きましょう。  
 メニューバー「ファイル」→「フォルダーを開く」→「`training`」フォルダーを選択  
 
 ![vscode_training](./../image/vscode_training.png)
@@ -85,6 +92,11 @@ VDT症候群予防の観点から、1時間連続でPC上で作業した場合�
 
 ターミナルの種類はお好みで良いですが「Git Bash」がおすすめです。  
 ターミナルの「`+`」のすぐ横にあるアイコンで選択可能です。
+
+#### ユーザーディレクトリ作成報告
+
+研修担当者にユーザーディレクトリを作成した旨、報告をお願いします。  
+正しく出来ているか確認します。
 
 ## コーダー編
 
@@ -109,6 +121,7 @@ VDT症候群予防の観点から、1時間連続でPC上で作業した場合�
   - <https://cbc-study.com/training/beginner/page7>
 - 入門3（コーダー 上級）
   - <https://cbc-study.com/training/beginner/page8>
+  - **注意: [「8. 枠が完成！」](https://cbc-study.com/training/beginner/page8#pl-12) の「このようになります。」のリンクをクリックすると誤ったサンプルが出てきますので無視してください。**
 
 2022/6/15でブラウザの「`Internet Explorer(IE)`」が廃止されることにより  
 CSSの「`grid-template`」が、ほぼ全てのブラウザでサポートされます。  

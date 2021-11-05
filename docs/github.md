@@ -79,3 +79,15 @@
     git config --global user.email "taro.yamada@epkotsoftware.co.jp"
     git config --global user.name "Yamada Taro"
     ```
+
+## Git設定確認
+
+以下のコマンドで正しく[Git設定](#git設定)が出来ているか確認してください。  
+未設定だとコミット等で失敗します。
+
+```bash
+git config --global user.email
+git config --global user.name
+```
+
+![git_config](./image/git_config.png)
