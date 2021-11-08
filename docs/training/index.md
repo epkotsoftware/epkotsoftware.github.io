@@ -8,6 +8,35 @@
 入社前ですので強制はしませんが、新人研修ではパソコンが扱える前提で話が進みますので  
 「[パソコンが不慣れな方へ](#パソコンが不慣れな方へ)」は予め確認しておくことをおすすめします。
 
+## パソコンをこれから購入される方へ
+
+---
+
+研修では Windows・Mac どちらでもOKです。  
+Windows の現場が多いため、慣れていなければ Windows 推奨です。  
+既に Windows での開発に慣れている場合、iOSアプリ開発やMacを使用する現場も視野に入れて Mac を推奨します。  
+
+以下、研修での使用や、今後長く使う上での推奨スペックになります。
+
+- スペック
+  - メモリ: 8GB以上
+  - ストレージ: SSD 256GB以上
+  - その他: 以下の条件に当てはまれば問題なし
+    - 【Windows】Windows11もしくは、Windows10（Windows11 無料アップグレード可能）
+      - 上記メモリ・ストレージの条件を満たせていて Windows11 の要件を満たせていれば、開発に十分なスペック。
+      - 2021/11 時点ではWindows11はバグがあり、ソフトウェア対応状況等も未調査のため、Windows10 推奨
+      - Lenovo
+        - <https://www.lenovo.com/jp/ja/jpad/d/deals/promo-offers?sort=price-asc&resultsLayoutType=grid&visibleDatas=facet_freeform4%3AWindows11%20無料アップグレード対象%3Bfacet_Memory%3A8%20GB%3Bfacet_Memory%3A16%20GB>
+      - マウスコンピューター
+        - <https://www.mouse-jp.co.jp/store/goods/search.aspx?fmt=json&limit=40&po%5B%5D=形状・タイプから探す%3Aノートパソコン&s4%5B%5D=8GB&s4%5B%5D=16GB&s4%5B%5D=32GB&s4o=1&s6%5B%5D=256GB&s6%5B%5D=512GB&s6%5B%5D=1TB&s6o=1&search=x&k_uid=a3932b4cff82a99fbc6d2d914bde6308&sort=price&style=D>
+    - 【Mac】「MacBook Pro」推奨、最近のモデルであれば「MacBook Air」でも良さそうです。
+      - <https://www.apple.com/jp/shop/buy-mac/macbook-air>
+        - 115,280円～
+      - <https://www.apple.com/jp/shop/buy-mac/macbook-pro>
+        - 【14インチ】239,800円～
+      - 【2021年最新比較】MacBook AirとMacBook Proの性能・違いを一挙比較。オススメはどのモデル？
+        - <https://corriente.top/macbookair-macbookpro-compare-later2020/>
+
 ## パソコンが不慣れな方へ
 
 ---
