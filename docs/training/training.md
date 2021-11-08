@@ -137,6 +137,11 @@ CSSの「`grid-template`」が、ほぼ全てのブラウザでサポートさ�
 思いつかなければ「実践を踏まえたコーディング」で作ったページのレイアウト変更でもOKです。  
 課題提出についてはGitHubで行います。
 
+- 要件
+  - 対応ブラウザ
+    - Google Chrome
+  - 表示
+    - 横幅:`1000px` で表示が崩れないようにする。
 - フリー素材  ***※ フリー素材を使用する際は、利用規約は確認してください。***
   - `商用利用可能なアイコン・イラスト素材ならICON HOIHOI`
     - <http://iconhoihoi.oops.jp/>
@@ -146,6 +151,15 @@ CSSの「`grid-template`」が、ほぼ全てのブラウザでサポートさ�
     - <https://www.pakutaso.com/>
   - `かわいいフリー素材集 いらすとや`
     - <https://www.irasutoya.com/>
+
+横幅を指定した確認方法
+
+1. Google Chrome のDevToolsを開く(Windowsであれば「F12」キー)
+1. デバイスツールバーを開く
+  ![google_chrome_dev_tools_device](./../image/google_chrome_dev_tools_device.png)
+1. デバイスを選択する（今回の場合`iPad Pro`の縦表示で横幅が1024pxになるのでちょうど良い）  
+  「`Responsive`」で自由にピクセル指定も可能です。
+  ![google_chrome_dev_tools_device_ipad_pro](./../image/google_chrome_dev_tools_device_ipad_pro.png)
 
 作成した物は、GitHubにアップしてください。  
 
