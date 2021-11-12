@@ -5,6 +5,29 @@
 - CBC (CRI BOOT CAMP)
   - <https://cbc-study.com/>
 
+## 入社された方へ
+
+---
+
+入社初日は以下の作業をお願いします。  
+翌営業日から[カリキュラム](#カリキュラム)に入ります。
+
+### Discordの会社用アカウント作成
+
+ 会社用アカウントと言っても、会社メールアドレスで作成していただくだけなので  
+通常のアカウント作成と変わりません。  
+作成しましたら、研修用のグループに招待しますので研修担当者にご連絡ください。  
+Discordは、ビデオ通話・画面共有、研修の進捗報告・質問等に使用する予定です。
+
+### GitHub組織アカウントへの参加
+
+- 「[GitHub組織アカウントへの参加](./../github.md)」参照
+
+### 予習
+
+- 「[新人研修に参加する方へ](./index.md)」で予習を行ってください。
+  - 「[パソコンが不慣れな方へ](https://epkotsoftware.github.io/training/#パソコンが不慣れな方へ)」は必須知識になります（時間が足りない場合はご相談ください）。
+
 ## カリキュラム
 
 ---
@@ -16,7 +39,7 @@
 | 3 | - | [`コーダー編`](#コーダー編) |
 | 4 | - | [`マークアップエンジニア編`](#マークアップエンジニア編) |
 | 5 | - | [`フロントエンドエンジニア編`](#フロントエンドエンジニア編) |
-| 6 | - | [`Linux編`](#linux編) |
+| 6 | 3.0 | [`Linux編`](#linux編) |
 | 7 | 0.5 | [`コーディング規約編`](#コーディング規約編) |
 | 8 | - | [`開発手法編`](#開発手法編) |
 | 9 | - | [`設計編`](#設計編) |
@@ -58,10 +81,6 @@ VDT症候群予防の観点から、1時間連続でPC上で作業した場合�
 ## 準備
 
 ---
-
-### GitHub組織アカウントへの参加
-
-- 「[GitHub組織アカウントへの参加](./../github.md)」参照
 
 ### PC設定・インストール
 
@@ -161,16 +180,25 @@ CSSの「`grid-template`」が、ほぼ全てのブラウザでサポートさ�
   「`Responsive`」で自由にピクセル指定も可能です。
   ![google_chrome_dev_tools_device_ipad_pro](./../image/google_chrome_dev_tools_device_ipad_pro.png)
 
-作成した物は、GitHubにアップしてください。  
+### コーダー編課題GitHubアップロード
 
-trainingリポジトリの [users/{★ユーザー名}/01_beginner/README.md](https://github.com/epkotsoftware/training/blob/template/users/_template/01_beginner/README.md) にアップ先が記載されています。  
-
-VSCodeでアップが可能です。
+VSCodeでのアップ方法は以下を参考にしてください。
 
 - Gitクライアントはもういらない！ VSCodeで、Gitを使いこなそう (3:09～)
   - <https://youtu.be/vMZ0C06soxA?t=189s>
 
-Git・GitHubについては、[バージョン管理システム](#バージョン管理システム)
+#### アップ先
+
+trainingリポジトリの [users/{★ユーザー名}/01_beginner/README.md](https://github.com/epkotsoftware/training/blob/template/users/_template/01_beginner/README.md) にアップ先が記載されています。  
+
+- アップ方法 (OR)
+  - VSCodeで行う（コマンドと比べると簡単）。
+  - `Git Bash` でコマンドで行う。
+- 禁止事項
+  - 自分のユーザーディレクトリ以外のコミットを禁止（`users/_template` 内のファイル等）
+  - GitHub上でのアップロードは禁止します（Gitの学習を兼ねているため）
+
+Git・GitHubについては、「[バージョン管理システム編](#バージョン管理システム編)」で深く学習します。
 
 ### Chrome DevTools
 
@@ -302,7 +330,9 @@ trainingリポジトリの [users/{★ユーザー名}/03_advanced/README.md](ht
 
 ---
 
-Linuxコマンドについて学んでいきましょう。
+Linuxコマンドについて学んでいきましょう。  
+フロントエンドエンジニア編で作成した環境の[WEB Server](https://github.com/epkotsoftware/training/blob/template/users/_template/03_advanced/README.md#web-server)へ入ると操作が出来ます。  
+情報量が多く全て覚えるのは難しいので、「[vi](#vi)」までを2日、「[Linux模擬問題](#linux模擬問題)」を1日の計3日を目安としてください。
 
 - 動画
   - <https://youtube.com/playlist?list=PLCX3wwS3Gg4zOMS9ezkea4tDt5U7s2yRa>
@@ -319,13 +349,37 @@ Linuxコマンドについて学んでいきましょう。
     - <https://www.creatology.jp/unix/outin.html>
 - 【bash入門】bashシェルスクリプトの書き方
   - <https://tech-blog.rakus.co.jp/entry/20210525/shellscript>
-- ターミナルソフト
+- 初心者必見！よく使うLinuxコマンド一覧表【全33種】
+  - <https://www.sejuku.net/blog/5465>
+- ターミナルソフト（今の所、研修では使用しない）
   - RLogin
     - <https://kmiya-culti.github.io/RLogin/>
   - Tera Term
     - <https://forest.watch.impress.co.jp/library/software/utf8teraterm/>
   - ターミナルソフトはTeratermよりRLoginがおすすめの理由
     - <https://infrasenavi.com/mibunrui/361>
+
+### vi
+
+vi（ヴィーアイ）はLinuxのテキストエディタです。  
+サーバー上のcronやコンフィグファイル等の修正を行うことがあるので  
+適当なテキストファイルを配置し、実際に編集してみましょう。
+
+- Linuxの標準エディタvi(vim)の超基本的な使い方！動画で初心者にもわかりやすく解説！
+  - <https://blog.proglus.jp/4194/>
+
+### Linux模擬問題
+
+Linux技術者認定試験(LPIC)の一部にチャレンジしてみましょう。  
+問題数が多く、現場ではほぼ使用しないものもあるため1日で出来る範囲でOKです。  
+全問正解する必要はありませんが、答えの解説はしっかり確認してください。
+
+- LPIC模擬問題
+  - <https://lpic-study.com/>
+    - LPIC102 シェル、スクリプト、およびデータ管理の問題
+      - <https://lpic-study.com/exam/LPIC+102-no_1-next.php>
+    - LPIC101 GNUとUnixのコマンド **※ 問題数が多いため出来るところまで**
+      - <https://lpic-study.com/exam/LPIC+101-GNUとUnixのコマンド-no_1-next.php>
 
 ## コーディング規約編
 
@@ -539,7 +593,7 @@ Git で `master` という名称のブランチが使われていることが多
 - 現場で求められる技術の学習（現場が決まった場合）
 
 何を学習したら良いかわからないという場合、研修講師にご相談ください。  
-現場に入った後でもサポート致します。
+現場に入った後でもサポート致します。  
 
 ### 別チームの研修
 
