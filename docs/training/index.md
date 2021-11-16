@@ -84,6 +84,10 @@ Dropbox等、共有しているファイルの扱いには注意しましょう�
   - <https://youtu.be/WWphrRjWyAQ>
 - 【絶対に覚えておきたい！】MacBookの生産性を上げる便利なショートカットキー21選！【入門編】
   - <https://youtu.be/WaW2IMMsijk>
+- Windows 10 スクリーンショットを撮る4つの方法
+  - <https://www.pc-koubou.jp/magazine/35994>
+- Mac でスクリーンショットを撮る
+  - <https://support.apple.com/ja-jp/HT201361>
 
 ## 環境構築
 
