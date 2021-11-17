@@ -3,6 +3,10 @@
 
 @import "{{ site.theme }}";
 
+body {
+    background-color: #f4fff4;
+}
+
 main > h2 {
     position: -webkit-sticky;
     position: sticky;
@@ -10,4 +14,12 @@ main > h2 {
     background-color: #599ea6;
     color: #ffffff !important;
     padding-left: 0.25rem;
+}
+
+main > h3 {
+    background-color: #e6e6e6;
+}
+
+main > h4 {
+    background-color: #f4f4f4;
 }
