@@ -146,6 +146,8 @@ Visual Studio Code(VSCode) で開きましょう。
     - `11:25` 【Web業界の常識】「パス」の書き方、説明できますか？Webデザイナー・プログラマー志望の皆さんへ 初心者向け【HTML・CSS コーディング】
     - `14:24` 【Webデザイナー・プログラマーになりたい皆さんへ】Web業界の常識シリーズ10選！知らないままではマズいです… キャッシュ/スーパーリロード/アクセス制限の方法etc【初心者必見】
     - `8:22` HTML入門講座 #02：初めてのHTMLページを作ろう／ファイル名の付け方
+  - VSCode フォルダ・ファイル追加方法
+    ![vscode_add_dir_and_file.gif](./../image/vscode_add_dir_and_file.gif)
 
 動画を見終わったら、[CBC](https://cbc-study.com/)の入門コースをやっていきましょう。
 
@@ -199,6 +201,14 @@ CSSの「`grid-template`」が、ほぼ全てのブラウザでサポートさ�
 1. デバイスを選択する（今回の場合`iPad Pro`の縦表示で横幅が1024pxになるのでちょうど良い）  
   「`Responsive`」で自由にピクセル指定も可能です。
   ![google_chrome_dev_tools_device_ipad_pro](./../image/google_chrome_dev_tools_device_ipad_pro.png)
+
+- Edit でデバイスを追加することも可能です、以下は入力例
+  - Device Name: Desktop Test
+  - Width: 1000
+  - Height: 620
+  - Device pixel ratio: 1
+  - User agent string: 未入力
+  - User agent type: Desktop
 
 ### コーダー編課題GitHubアップロード
 
