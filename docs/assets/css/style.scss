@@ -1,0 +1,12 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+main > h2 {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: #599ea6;
+    color: #ffffff !important;
+}
