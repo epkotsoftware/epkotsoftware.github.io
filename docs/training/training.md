@@ -330,6 +330,9 @@ trainingリポジトリの [users/{★ユーザー名}/03_advanced/README.md](ht
       ![cbc_sortable.png](./../image/cbc_sortable.png)
 - 応用2（フロントエンドエンジニア 中級1）
   - <https://cbc-study.com/training/advanced/page5>
+    - PDO(DB_DNS)設定について
+      - CBCの設定と異なりますのでご注意ください。
+      - trainingリポジトリの [03_advanced/docker/.env](https://github.com/epkotsoftware/training/blob/template/users/_template/03_advanced/docker/.env) ファイルの DB_HOST_NAME がDB名となります。
   - <https://cbc-study.com/training/advanced/page6>
   - <https://cbc-study.com/training/advanced/page7>
 
