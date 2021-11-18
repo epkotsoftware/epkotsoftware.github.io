@@ -331,8 +331,8 @@ trainingリポジトリの [users/{★ユーザー名}/03_advanced/README.md](ht
 - 応用2（フロントエンドエンジニア 中級1）
   - <https://cbc-study.com/training/advanced/page5>
     - PDO(DB_DNS)設定について
-      - CBCの設定と異なりますのでご注意ください。
-      - trainingリポジトリの [03_advanced/docker/.env](https://github.com/epkotsoftware/training/blob/template/users/_template/03_advanced/docker/.env) ファイルの DB_HOST_NAME がDB名となります。
+      - CBCの設定(host)と異なりますのでご注意ください。[詳しくは03_advanced/README.md ～ PHP 参照](https://github.com/epkotsoftware/training/blob/template/users/_template/03_advanced/README.md#php)
+        - `define('DB_DNS', 'mysql:host=mysql; dbname=cri_sortable; charset=utf8');`
   - <https://cbc-study.com/training/advanced/page6>
   - <https://cbc-study.com/training/advanced/page7>
 
@@ -346,7 +346,7 @@ trainingリポジトリの [users/{★ユーザー名}/03_advanced/README.md](ht
 
 ### フロントエンドエンジニア編課題
 
-- 課題で作成したファイル
+- 「フロントエンドエンジニア編」で作成したファイル
 
 trainingリポジトリの [users/{★ユーザー名}/03_advanced/README.md](https://github.com/epkotsoftware/training/blob/template/users/_template/03_advanced/README.md) にアップ先が記載されています。
 
