@@ -22,6 +22,12 @@ Discordはパソコンにインストールし、ビデオ通話・画面共有�
 
 - Discord
   - <https://discord.com/>
+  - 画面共有設定
+    - Mac
+      - 「システム環境設定」→「セキュリティとプライバシー」  
+        →「プライバシー」タブ→「画面収録」→対象アプリにチェック
+        - <https://moji-seikatsu.net/2021/04/03/macdiscord/>
+
 
 #### GitHub組織アカウントへの参加
 
