@@ -15,6 +15,8 @@
 
 #### Discordの会社用アカウント作成
 
+**※ 今後、「Discord」ではなく「Microsoft Teams」の使用を検討しています。**  
+  
  会社用アカウントと言っても、会社メールアドレスで作成していただくだけなので  
 通常のアカウント作成と変わりません。  
 作成しましたら、研修用のグループに招待しますので研修担当者にご連絡ください。  
@@ -27,7 +29,6 @@ Discordはパソコンにインストールし、ビデオ通話・画面共有�
       - 「システム環境設定」→「セキュリティとプライバシー」  
         →「プライバシー」タブ→「画面収録」→対象アプリにチェック
         - <https://moji-seikatsu.net/2021/04/03/macdiscord/>
-
 
 #### GitHub組織アカウントへの参加
 
@@ -341,6 +342,12 @@ trainingリポジトリの [users/{★ユーザー名}/03_advanced/README.md](ht
         - `define('DB_DNS', 'mysql:host=mysql; dbname=cri_sortable; charset=utf8');`
   - <https://cbc-study.com/training/advanced/page6>
   - <https://cbc-study.com/training/advanced/page7>
+  - <https://cbc-study.com/training/advanced/class1>
+
+#### エラーが出た場合
+
+- URL(パス)に誤りがないか確認しましょう。
+- HTML側（`<input name="xxx">`）とPHP側（`$_POST['xxx']`）の名称が一致していることを確認しましょう。
 
 ### フレームワーク
 
