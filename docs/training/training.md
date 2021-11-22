@@ -471,6 +471,27 @@ Linux技術者認定試験(LPIC)の一部にチャレンジしてみましょう
 - DB設計
   - データベース入門講座
     - <https://www.youtube.com/playlist?list=PL-1KBX2gDRujQaRgEByueezHBiqHP8KDD>
+- 設計書テンプレート
+  - テンプレートが多くありますが現場で使うのは「基本設計」・「詳細設計書」になります。  
+    基本設計では「テーブル定義書」「画面レイアウト」は、ほぼ確実に現場で見ることになります。
+  - 設計書仕様書テンプレート PocketDOC
+    - <https://pocket9.net/pocketdoc>
+- UML
+  - UMLとは？クラス図・シーケンス図など種類や書き方、ツールを解説！【統一モデリング言語】UML入門
+    - <https://youtu.be/EvO_BvCJUCA>
+  - diagrams.net（Draw.io）
+    - こちらで無料で図の作成が可能です。
+    - <https://app.diagrams.net/>
+  - PlantUML
+    - こちらでもシーケンス図やER図等の作成が可能です。
+      - コードを書いて作成するため、細かいレイアウト調整は難しいですが、簡易的な図を作成する場合に有用です。
+      - SVG形式で出力することで、リンクも使用でき。Markdownでの設計書作成時に使われる事がある。
+    - <https://plantuml.com/ja/>
+    - サンプル 以下は自由に書き換えてOKです。
+      - [PlantUML ガントチャート](https://www.plantuml.com/plantuml/umla/TP4zQiGm48NxESLqgGJIA3-a2Nk45EcM58Cj5YzQEtZaOblV85LEa3fr8933EEGSCGk3DfQt6xxtpJDZRIHnduP3XCZjRk1Tm3t3Iz-qIIgE0MjkuX7WwkVhzVVj7OJJqDTyHEu3Lh6JK8CCxOAG9MUSCzPZ8qj89IH3zvWw94jax69FeRC5fBbl1LAvxWsTcm3RQVoUnizf_9YRdv45jq_sD4QM97YByqtoJwEiaMhNfUQpvbMxMsgKFpgF5zjyrdpMRagDiaQBDdZiktse4fwUMb1_kNM0UlJbZCgCDFD5vknPftdGynJI6lGA_Jga6UfEOIfKSnFQUZZ4Fm00)
+        ![ガントチャート](./../image/plantuml-gantt-chart.svg)
+      - [PlantUML アクティビティ図](https://www.plantuml.com/plantuml/umla/hLJFQnD16BtFNp6abmHqDpruIH0gGZtc89H0N6H8fzbeEhlipYOHANHciAP4i4Yjn4iG2z7ues114QlzOpxJfF-5aqbgXzgq8CrXoSpttZVllVcOXPYJY2UhDMJ-85GgpO7Q0jK7zHJK0SXle7gWzZqlT-v-tb3ASHtKIv1lGEw2-Z3gVm9nEFfreB-QUFlkqgng7h60KnnLApxFuS7dxkZjawEE1B5NAlcSXt7ETHkDXXFweSCeTrS9IqZDVK3S6c6LX5IeKw6CHeG7KUm4THhLgzJ0yPsJVSy3-UBtpyFXzZiGhs1Tp8Fw279_R4DjWdWDOlTKarn7A5Vs4_OmnZSnYIBowBvPfi_Oi9kCSv7VGRMkuVbiDflvJrkKkIi9A_Dgm1npydLpih5ZAT66H4_t0j47yVmUkzAeH6_GsXXiVW7H0Tb6A2GHhuuLuTHA455IzjEJT38f_1XXtF2hDOhJqngU5Z69JH9sI9aCmlfd9sD1hCiOTduSFpiHO3XcAYtOp0cz19EVjBCyWMg1UgzB8B-2tFkBJE6vnSLRDx9PO_AixiiI3vS3XqU4nSHSPcnIddMKvnbL4vkpGCSxxK6lRJnU1CXRhPhD9gWDayQEdjT9ghf3iLZyTzyc1a5mBh5GA5nCDE5tGIajKkFjvHIsfh-KBPkXGMlcxLZIKpZSxXwrjZJbTA49CGz2jA3X-dtw0m00)
+        ![アクティビティ図](./../image/plantuml-activity-diagram.svg)
 
 ### アプリ画面設計
 
