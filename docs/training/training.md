@@ -384,6 +384,35 @@ Linuxコマンドについて学んでいきましょう。
     - <https://www.creatology.jp/unix/outin.html>
 - 【bash入門】bashシェルスクリプトの書き方
   - <https://tech-blog.rakus.co.jp/entry/20210525/shellscript>
+  - bashの実行例
+
+```bash
+root@training-web:/var/www/html# # hoge.sh を作成
+root@training-web:/var/www/html# cat << 'EOF' > hoge.sh
+> #!/bin/bash
+>
+> NUM=8
+> MESSAGE=Hello_bash
+>
+> echo $NUM
+> echo $MESSAGE
+> EOF
+root@training-web:/var/www/html# # hoge.sh をテキスト表示
+root@training-web:/var/www/html# cat hoge.sh
+#!/bin/bash
+
+NUM=8
+MESSAGE=Hello_bash
+
+echo $NUM
+echo $MESSAGE
+root@training-web:/var/www/html# # hoge.sh を実行
+root@training-web:/var/www/html# sh hoge.sh
+8
+Hello_bash
+root@training-web:/var/www/html# 
+```
+
 - 初心者必見！よく使うLinuxコマンド一覧表【全33種】
   - <https://www.sejuku.net/blog/5465>
 - ターミナルソフト（今の所、研修では使用しない）
@@ -487,11 +516,8 @@ Linux技術者認定試験(LPIC)の一部にチャレンジしてみましょう
       - コードを書いて作成するため、細かいレイアウト調整は難しいですが、簡易的な図を作成する場合に有用です。
       - SVG形式で出力することで、リンクも使用でき。Markdownでの設計書作成時に使われる事がある。
     - <https://plantuml.com/ja/>
-    - サンプル 以下は自由に書き換えてOKです。
-      - [PlantUML ガントチャート](https://www.plantuml.com/plantuml/umla/TP4zQiGm48NxESLqgGJIA3-a2Nk45EcM58Cj5YzQEtZaOblV85LEa3fr8933EEGSCGk3DfQt6xxtpJDZRIHnduP3XCZjRk1Tm3t3Iz-qIIgE0MjkuX7WwkVhzVVj7OJJqDTyHEu3Lh6JK8CCxOAG9MUSCzPZ8qj89IH3zvWw94jax69FeRC5fBbl1LAvxWsTcm3RQVoUnizf_9YRdv45jq_sD4QM97YByqtoJwEiaMhNfUQpvbMxMsgKFpgF5zjyrdpMRagDiaQBDdZiktse4fwUMb1_kNM0UlJbZCgCDFD5vknPftdGynJI6lGA_Jga6UfEOIfKSnFQUZZ4Fm00)
-        ![ガントチャート](./../image/plantuml-gantt-chart.svg)
-      - [PlantUML アクティビティ図](https://www.plantuml.com/plantuml/umla/hLJFQnD16BtFNp6abmHqDpruIH0gGZtc89H0N6H8fzbeEhlipYOHANHciAP4i4Yjn4iG2z7ues114QlzOpxJfF-5aqbgXzgq8CrXoSpttZVllVcOXPYJY2UhDMJ-85GgpO7Q0jK7zHJK0SXle7gWzZqlT-v-tb3ASHtKIv1lGEw2-Z3gVm9nEFfreB-QUFlkqgng7h60KnnLApxFuS7dxkZjawEE1B5NAlcSXt7ETHkDXXFweSCeTrS9IqZDVK3S6c6LX5IeKw6CHeG7KUm4THhLgzJ0yPsJVSy3-UBtpyFXzZiGhs1Tp8Fw279_R4DjWdWDOlTKarn7A5Vs4_OmnZSnYIBowBvPfi_Oi9kCSv7VGRMkuVbiDflvJrkKkIi9A_Dgm1npydLpih5ZAT66H4_t0j47yVmUkzAeH6_GsXXiVW7H0Tb6A2GHhuuLuTHA455IzjEJT38f_1XXtF2hDOhJqngU5Z69JH9sI9aCmlfd9sD1hCiOTduSFpiHO3XcAYtOp0cz19EVjBCyWMg1UgzB8B-2tFkBJE6vnSLRDx9PO_AixiiI3vS3XqU4nSHSPcnIddMKvnbL4vkpGCSxxK6lRJnU1CXRhPhD9gWDayQEdjT9ghf3iLZyTzyc1a5mBh5GA5nCDE5tGIajKkFjvHIsfh-KBPkXGMlcxLZIKpZSxXwrjZJbTA49CGz2jA3X-dtw0m00)
-        ![アクティビティ図](./../image/plantuml-activity-diagram.svg)
+    - サンプル: 別ページに現場で使用経験のあるものを集めました。
+      - [PlantUML](./training_plantuml.md)
 
 ### アプリ画面設計
 
