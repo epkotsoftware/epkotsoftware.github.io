@@ -319,12 +319,13 @@ trainingリポジトリの [users/{★ユーザー名}/02_basic/README.md](https
 
 trainingリポジトリの [users/{★ユーザー名}/03_advanced/README.md](https://github.com/epkotsoftware/training/blob/template/users/_template/03_advanced/README.md) をご覧ください。
 
-### PHP入門（動画）
+### PHP入門
 
-- サーバーサイドとは？サーバーサイドとクライアントサイド言語の違い
-  - <https://youtu.be/okwLKI6eYbQ>
-- PHPプログラミング入門講座🔰【初心者でも1時間で学べるPHP入門！フル字幕】
-  - <https://youtu.be/J_pASVQXElA>
+- 動画
+  - <https://www.youtube.com/playlist?list=PLCX3wwS3Gg4wr82E46gEdFnT6VTo_uehr>
+    - `10:01` サーバーサイドとは？サーバーサイドとクライアントサイド言語の違い
+    - `1:02:33` PHPプログラミング入門講座🔰【初心者でも1時間で学べるPHP入門！フル字幕】
+    - `4:05` セッション変数とは？【分かりやすい解説シリーズ #17】【プログラミング】
 
 ### CBC 応用
 
