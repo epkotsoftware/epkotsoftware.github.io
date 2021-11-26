@@ -1,5 +1,32 @@
 # 株式会社エプコットソフトウェア ～ 新人研修
 
+## パソコン推奨スペック
+
+研修では Windows・Mac どちらでもOKです。  
+Windows の現場が多いため、慣れていなければ Windows 推奨です。  
+既に Windows での開発に慣れている場合、iOSアプリ開発やMacを使用する現場も視野に入れて Mac を推奨します。  
+
+以下、研修での使用や、今後長く使う上での推奨スペックになります。
+
+- スペック
+  - メモリ: 8GB以上
+  - ストレージ: SSD 256GB以上
+  - その他: 以下の条件に当てはまれば問題なし
+    - 【Windows】Windows10（Windows11 無料アップグレード可能）、Windows11でも可能ですが環境構築でうまくいかないケースがありました。
+      - 上記メモリ・ストレージの条件を満たせていて Windows11 の要件を満たせていれば、開発に十分なスペック。
+      - 2021/11 時点ではWindows11はバグがあり、ソフトウェア対応状況等も未調査のため、Windows10 推奨
+      - Lenovo
+        - <https://www.lenovo.com/jp/ja/jpad/d/deals/promo-offers?sort=price-asc&resultsLayoutType=grid&visibleDatas=facet_freeform4%3AWindows11%20無料アップグレード対象%3Bfacet_Memory%3A8%20GB%3Bfacet_Memory%3A16%20GB>
+      - マウスコンピューター
+        - <https://www.mouse-jp.co.jp/store/goods/search.aspx?fmt=json&limit=40&po%5B%5D=形状・タイプから探す%3Aノートパソコン&s4%5B%5D=8GB&s4%5B%5D=16GB&s4%5B%5D=32GB&s4o=1&s6%5B%5D=256GB&s6%5B%5D=512GB&s6%5B%5D=1TB&s6o=1&search=x&k_uid=a3932b4cff82a99fbc6d2d914bde6308&sort=price&style=D>
+    - 【Mac】「MacBook Pro」推奨、最近のモデルであれば「MacBook Air」でも良さそうです。
+      - <https://www.apple.com/jp/shop/buy-mac/macbook-air>
+        - 115,280円～
+      - <https://www.apple.com/jp/shop/buy-mac/macbook-pro>
+        - 【14インチ】239,800円～
+      - 【2021年最新比較】MacBook AirとMacBook Proの性能・違いを一挙比較。オススメはどのモデル？
+        - <https://corriente.top/macbookair-macbookpro-compare-later2020/>
+
 ## 入社された方へ
 
 入社初日は以下の作業をお願いします。  
@@ -9,30 +36,98 @@
 
 | No. | 作業 |
 | :---: | --- |
-| 1 | [Discordの会社用アカウント作成](#discordの会社用アカウント作成) |
+| 1 | [Teamsアカウント作成](#teamsアカウント作成) |
 | 2 | [GitHub組織アカウントへの参加](#github組織アカウントへの参加) |
-| 3 | [予習](#予習) |
+| 3 | [インストール](#インストール) |
+| 4 | [予習](#予習) |
 
-#### Discordの会社用アカウント作成
+#### Teamsアカウント作成
 
-**※ 今後、「Discord」ではなく「Microsoft Teams」の使用を検討しています。**  
-  
- 会社用アカウントと言っても、会社メールアドレスで作成していただくだけなので  
-通常のアカウント作成と変わりません。  
-作成しましたら、研修用のグループに招待しますので研修担当者にご連絡ください。  
-Discordはパソコンにインストールし、ビデオ通話・画面共有、研修の進捗報告・質問等に使用する予定です。
-
-- Discord
-  - <https://discord.com/>
-  - 画面共有設定
-    - Mac
-      - 「システム環境設定」→「セキュリティとプライバシー」  
-        →「プライバシー」タブ→「画面収録」→対象アプリにチェック
-        - <https://moji-seikatsu.net/2021/04/03/macdiscord/>
+- 研修中のビデオ通話・画面共有・研修の進捗報告や質問は「Microsoft Teams」を使用します。
+- 講師が招待URLをお送りしますので、案内に従い会社メールアドレスでアカウントを作成して参加してください。
+  - 途中でTeamsアプリのインストールを勧められますのでインストールしてください。
 
 #### GitHub組織アカウントへの参加
 
 - 「[GitHub組織アカウントへの参加](./../github.md)」参照
+
+#### インストール
+
+- 【ブラウザ】`Google Chrome` (クローム)
+  - <https://www.google.co.jp/intl/ja/chrome/>
+- 【エディタ】`Visual Studio Code` (ビジュアル スタジオ コード)
+  - <https://azure.microsoft.com/ja-jp/products/visual-studio-code/>
+
+Visual Studio Code(VSCode) が初めての方へ
+
+- VSCode最初の1歩（インストール／日本語化／基本的な使い方）
+  - <https://youtu.be/auGKppIIV4Y>
+
+##### Visual Studio Code 詳細設定
+
+難しければ飛ばしてもOKです。
+
+- 拡張機能のインストール
+  - 「`Japanese Language Pack for Visual Studio Code`」 VSCodeを日本語化出来ます。
+    - <https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-ja>
+  - 「`Trailing Spaces`」 行末のスペースを可視化してくれる機能です。
+    - <https://marketplace.visualstudio.com/items?itemName=shardulm94.trailing-spaces>
+  - 「`markdownlint`」 Markdown(`.md`)ファイルのスタイルチェックをしてくれる機能です。
+    - <https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint>
+  - 「`Code Spell Checker`」 スペルミスを検出してくれる機能です（名詞等はかかりやすいので ignoreWords に設定）
+    - <https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker>
+  - 「`Rainbow CSV`」 CSV・TSVファイルが見やすくなる機能です。
+    - <https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv>
+  - 「`open in browser`」 HTMLをブラウザで開く機能です。
+    - <https://marketplace.visualstudio.com/items?itemName=techer.open-in-browser>
+- `setting.json` の開き方
+  - メニューバー「表示」→「コマンドパレット」で「`Open Settings (JSON)`」
+  - `setting.json` の以下の設定は任意で
+
+  ```json
+  {
+      "explorer.copyRelativePathSeparator": "/", // 「相対パスをコピー」の時の区切り文字
+      "editor.fontFamily": "'BIZ UDゴシック', Consolas, 'Courier New', monospace",
+      "editor.rulers": [120], // エディタの120文字目の所にルーラーを表示
+      "editor.renderWhitespace": "all", // スペースを可視化
+      "editor.linkedEditing": true, // HTMLタグ等の編集時、関連する記号が更新される（PHPには無効）
+      "editor.bracketPairColorization.enabled": true, // 「{}」のペアに色がつく
+      "editor.guides.bracketPairs": true, // アクティブな「{}」のペアを強調表示
+      "files.eol": "\n", // 既定の改行文字、新規作成時のデフォルト
+      "files.trimTrailingWhitespace": true, // 保存時に行末のスペースを削除する
+      "[log]": {
+          // LOG ファイル設定
+          "editor.wordWrap": "off", // 行を折り返さない
+          "editor.insertSpaces": false, // Tabキーを押した時にスペースに変換されない
+      },
+      "[csv]": {
+          // CSV ファイル設定
+          "editor.wordWrap": "off", // 行を折り返さない
+      },
+      "[tsv]": {
+          // TSV ファイル設定
+          "editor.wordWrap": "off", // 行を折り返さない
+          "editor.insertSpaces": false, // Tabキーを押した時にスペースに変換されない
+      },
+      "[markdown]": {
+          // Markdown(.md) ファイル設定
+          "files.trimTrailingWhitespace": false, // 保存時に行末のスペースを削除しない
+          "editor.tabSize": 2
+      },
+      // 拡張機能: markdownlint 設定
+      "markdownlint.config": {
+          "MD033": false // html: Markdown のテーブル内改行で<br>を使うことがあるため
+      },
+      // 拡張機能: Code Spell Checker 設定
+      "cSpell.ignoreWords": [
+          // チェック対象外のワード
+          "epkot",
+          "markdownlint",
+          "laravel",
+      ],
+      // ↓↓↓ その他設定は略
+  }
+  ```
 
 #### 予習
 

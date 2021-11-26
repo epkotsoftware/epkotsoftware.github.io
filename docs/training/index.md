@@ -8,30 +8,9 @@
 
 ## パソコンをこれから購入される方へ
 
-研修では Windows・Mac どちらでもOKです。  
-Windows の現場が多いため、慣れていなければ Windows 推奨です。  
-既に Windows での開発に慣れている場合、iOSアプリ開発やMacを使用する現場も視野に入れて Mac を推奨します。  
-
-以下、研修での使用や、今後長く使う上での推奨スペックになります。
-
-- スペック
-  - メモリ: 8GB以上
-  - ストレージ: SSD 256GB以上
-  - その他: 以下の条件に当てはまれば問題なし
-    - 【Windows】Windows11もしくは、Windows10（Windows11 無料アップグレード可能）
-      - 上記メモリ・ストレージの条件を満たせていて Windows11 の要件を満たせていれば、開発に十分なスペック。
-      - 2021/11 時点ではWindows11はバグがあり、ソフトウェア対応状況等も未調査のため、Windows10 推奨
-      - Lenovo
-        - <https://www.lenovo.com/jp/ja/jpad/d/deals/promo-offers?sort=price-asc&resultsLayoutType=grid&visibleDatas=facet_freeform4%3AWindows11%20無料アップグレード対象%3Bfacet_Memory%3A8%20GB%3Bfacet_Memory%3A16%20GB>
-      - マウスコンピューター
-        - <https://www.mouse-jp.co.jp/store/goods/search.aspx?fmt=json&limit=40&po%5B%5D=形状・タイプから探す%3Aノートパソコン&s4%5B%5D=8GB&s4%5B%5D=16GB&s4%5B%5D=32GB&s4o=1&s6%5B%5D=256GB&s6%5B%5D=512GB&s6%5B%5D=1TB&s6o=1&search=x&k_uid=a3932b4cff82a99fbc6d2d914bde6308&sort=price&style=D>
-    - 【Mac】「MacBook Pro」推奨、最近のモデルであれば「MacBook Air」でも良さそうです。
-      - <https://www.apple.com/jp/shop/buy-mac/macbook-air>
-        - 115,280円～
-      - <https://www.apple.com/jp/shop/buy-mac/macbook-pro>
-        - 【14インチ】239,800円～
-      - 【2021年最新比較】MacBook AirとMacBook Proの性能・違いを一挙比較。オススメはどのモデル？
-        - <https://corriente.top/macbookair-macbookpro-compare-later2020/>
+- 小山内チームでの研修のパソコン推奨スペックについては以下を参照
+  - [新人研修 ～ パソコン推奨スペック](./training#パソコン推奨スペック)
+- 小山内チーム以外では研修講師に確認してください。
 
 ## パソコンが不慣れな方へ
 
@@ -87,14 +66,14 @@ Dropbox等、共有しているファイルの扱いには注意しましょう�
 
 ### インストール
 
-以下をインストールしてください、いずれもデフォルト設定でOKです。
-
 - 【ブラウザ】`Google Chrome` (クローム)
   - <https://www.google.co.jp/intl/ja/chrome/>
 - 【バージョン管理】`Git` (ギット)
   - <https://git-scm.com/downloads>
-- 【エディタ】`Visual Studio Code` (ビジュアル スタジオ コード)
-  - <https://azure.microsoft.com/ja-jp/products/visual-studio-code/>
+- 【エディタ】
+  - 書籍によってはTeraPadが推奨されていますが、現在では`Visual Studio Code`がおすすめです（小山内チームの場合は必須）
+  - `Visual Studio Code` (ビジュアル スタジオ コード)
+    - <https://azure.microsoft.com/ja-jp/products/visual-studio-code/>
 
 #### Git
 
@@ -102,79 +81,6 @@ Gitが何かわからない方へ
 
 - Gitとは何か？Gitのオススメの学習方法について
   - <https://youtu.be/iq9GHxjG1Xg>
-
-#### Visual Studio Code
-
-Visual Studio Code(VSCode) が初めての方へ
-
-- VSCode最初の1歩（インストール／日本語化／基本的な使い方）
-  - <https://youtu.be/auGKppIIV4Y>
-
-##### Visual Studio Code 詳細設定
-
-難しければ飛ばしてもOKです。
-
-- 拡張機能のインストール
-  - 「`Japanese Language Pack for Visual Studio Code`」 VSCodeを日本語化出来ます。
-    - <https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-ja>
-  - 「`Trailing Spaces`」 行末のスペースを可視化してくれる機能です。
-    - <https://marketplace.visualstudio.com/items?itemName=shardulm94.trailing-spaces>
-  - 「`markdownlint`」 Markdown(`.md`)ファイルのスタイルチェックをしてくれる機能です。
-    - <https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint>
-  - 「`Code Spell Checker`」 スペルミスを検出してくれる機能です（名詞等はかかりやすいので ignoreWords に設定）
-    - <https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker>
-  - 「`Rainbow CSV`」 CSV・TSVファイルが見やすくなる機能です。
-    - <https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv>
-  - 「`open in browser`」 HTMLをブラウザで開く機能です。
-    - <https://marketplace.visualstudio.com/items?itemName=techer.open-in-browser>
-- `setting.json` の開き方
-  - メニューバー「表示」→「コマンドパレット」で「`Open Settings (JSON)`」
-  - `setting.json` の以下の設定は任意で
-
-  ```json
-  {
-      "explorer.copyRelativePathSeparator": "/", // 「相対パスをコピー」の時の区切り文字
-      "editor.fontFamily": "'BIZ UDゴシック', Consolas, 'Courier New', monospace",
-      "editor.rulers": [120], // エディタの120文字目の所にルーラーを表示
-      "editor.renderWhitespace": "all", // スペースを可視化
-      "editor.linkedEditing": true, // HTMLタグ等の編集時、関連する記号が更新される（PHPには無効）
-      "editor.bracketPairColorization.enabled": true, // 「{}」のペアに色がつく
-      "editor.guides.bracketPairs": true, // アクティブな「{}」のペアを強調表示
-      "files.eol": "\n", // 既定の改行文字、新規作成時のデフォルト
-      "files.trimTrailingWhitespace": true, // 保存時に行末のスペースを削除する
-      "[log]": {
-          // LOG ファイル設定
-          "editor.wordWrap": "off", // 行を折り返さない
-          "editor.insertSpaces": false, // Tabキーを押した時にスペースに変換されない
-      },
-      "[csv]": {
-          // CSV ファイル設定
-          "editor.wordWrap": "off", // 行を折り返さない
-      },
-      "[tsv]": {
-          // TSV ファイル設定
-          "editor.wordWrap": "off", // 行を折り返さない
-          "editor.insertSpaces": false, // Tabキーを押した時にスペースに変換されない
-      },
-      "[markdown]": {
-          // Markdown(.md) ファイル設定
-          "files.trimTrailingWhitespace": false, // 保存時に行末のスペースを削除しない
-          "editor.tabSize": 2
-      },
-      // 拡張機能: markdownlint 設定
-      "markdownlint.config": {
-          "MD033": false // html: Markdown のテーブル内改行で<br>を使うことがあるため
-      },
-      // 拡張機能: Code Spell Checker 設定
-      "cSpell.ignoreWords": [
-          // チェック対象外のワード
-          "epkot",
-          "markdownlint",
-          "laravel",
-      ],
-      // ↓↓↓ その他設定は略
-  }
-  ```
 
 ## 予習
 
