@@ -274,7 +274,10 @@ CSSの「`grid-template`」が、ほぼ全てのブラウザでサポートさ�
   - 対応ブラウザ
     - Google Chrome
   - 表示
-    - 横幅:`1000px` で表示が崩れないようにする。
+    - 「`01_beginner/htdocs/index.html`」 をブラウザで開くと、作成したページが見れる。
+    - 横幅:`1024px` で表示が崩れないようにする。
+  - その他
+    - 「`01_beginner/htdocs/`」 のディレクトリ内にHTML・CSSが入っていること
 - フリー素材  ***※ フリー素材を使用する際は、利用規約は確認してください。***
   - `商用利用可能なアイコン・イラスト素材ならICON HOIHOI`
     - <http://iconhoihoi.oops.jp/>
@@ -296,7 +299,7 @@ CSSの「`grid-template`」が、ほぼ全てのブラウザでサポートさ�
 
 - Edit でデバイスを追加することも可能です、以下は入力例
   - Device Name: Desktop Test
-  - Width: 1000
+  - Width: 1024
   - Height: 620
   - Device pixel ratio: 1
   - User agent string: 未入力
