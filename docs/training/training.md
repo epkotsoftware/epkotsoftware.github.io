@@ -384,7 +384,14 @@ Googleマイドライブ → 「新規」 → 「ファイルのアップロー�
 ### マークアップエンジニア編課題
 
 - 作成したエクセルファイル
+  - 必須: 「`#2 エクセル関数（売上票を作る）`」、「`#3 エクセル関数（成績表を作る）`」
+  - 任意: 「`#4 オートカレンダーを作る`」
 - jQuery課題
+  - 必須
+    - 「`#7 簡単な機能をjQueryで実装しよう`」  
+      → 「`02_basic/htdocs/kadai_07.html`」
+    - 「`#8 変数を使う`」～ 「`#11 モーダルウィンドウを作ろう`」  
+      → 「`02_basic/htdocs/kadai_08.html`」
 
 trainingリポジトリの [users/{★ユーザー名}/02_basic/README.md](https://github.com/epkotsoftware/training/tree/template/users/_template/02_basic/README.md) にアップ先が記載されています。
 
