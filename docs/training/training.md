@@ -422,6 +422,10 @@ trainingリポジトリの [users/{★ユーザー名}/02_basic/README.md](https
 - `Docker Desktop`
   - <https://www.docker.com/products/docker-desktop>
 
+- インストール時に以下のようなメッセージが出てうまくいかなかったらご連絡ください。
+  - **「WSL 2 Installation is incomplete」**
+  - **「Docker Engine failed to start...」**
+
 ##### 構築手順
 
 trainingリポジトリの [users/{★ユーザー名}/03_advanced/README.md](https://github.com/epkotsoftware/training/blob/template/users/_template/03_advanced/README.md) をご覧ください。
