@@ -208,7 +208,9 @@ VDT症候群予防の観点から、1時間連続でPC上で作業した場合�
 ブランチ(`feature/{★ユーザー名}`)及び、個人フォルダー（ディレクトリ）を作成します。  
 詳しくは [研修用リポジトリ(training)](https://github.com/epkotsoftware/training) のREADMEをご覧ください。  
 
-　※ [研修用リポジトリ(training)](https://github.com/epkotsoftware/training)の権限がないと失敗します。リポジトリが見えない方は管理者にご連絡ください。  
+  ※ GitHubを開く時に Microsoft Edge を使用している場合、自動翻訳されることがあるので翻訳を解除してください。  
+    URLの右の方に「`aあ`」のアイコンがあり、翻訳設定が可能です。
+  ※ [研修用リポジトリ(training)](https://github.com/epkotsoftware/training)の権限がないと失敗します。リポジトリが見えない方は管理者にご連絡ください。  
 
 上記の手順でGitHub上には「`feature/{★ユーザー名}`」ブランチにユーザーディレクトリが出来ていて  
 ローカルには「`training`」ディレクトリが出来ているので  
@@ -423,8 +425,16 @@ trainingリポジトリの [users/{★ユーザー名}/02_basic/README.md](https
   - <https://www.docker.com/products/docker-desktop>
 
 - インストール時に以下のようなメッセージが出てうまくいかなかったらご連絡ください。
-  - **「WSL 2 Installation is incomplete」**
-  - **「Docker Engine failed to start...」**
+  - **「WSL 2 Installation is incomplete」**  
+    **「Docker Engine failed to start...」**
+    - 原因1: PowerShell等が起動中のためインストールに失敗
+      - 一度、Docker Desktopをアンインストール
+      - パソコンを再起動し、余計なアプリを開いていない状態でDocker Desktopをインストール
+    - 原因2: WSLが古い
+      - Linux kernel のアップデート「`wsl --update`」
+      - 一度、Docker Desktopを再インストール
+  - docker-comporse出来ない
+    - 原因: 環境変数まわりに問題がありそう。
 
 ##### 構築手順
 
@@ -777,6 +787,10 @@ Git で `master` という名称のブランチが使われていることが多
 
 何を学習したら良いかわからないという場合、研修講師にご相談ください。  
 現場に入った後でもサポート致します。  
+
+### Laravel学習
+
+- [Laravel](./laravel.md)
 
 ### 別チームの研修
 
