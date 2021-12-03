@@ -78,9 +78,82 @@ LTS(Long Term Support) がついているバージョンの最新バージョン
 - Laravel8.x
   - <https://readouble.com/laravel/8.x/ja/>
 
+## CBC
+
+- 実践（バックエンド Laravel）
+  - <https://cbc-study.com/training/backend/laravel1>
+
 ## 動画
 
 - Laravel入門(全13回)
   - <https://youtube.com/playlist?list=PLCyDm9NTxdhLnA4tH5ToQR1K1LcWIAdOa>
 - 【Laravel8初級】ログイン機能作成(全7回)
   - <https://youtube.com/playlist?list=PLCyDm9NTxdhLV5LFfCoRykyHW8Zw91YJB>
+
+## スターターキット
+
+動画では自作でログイン機能を作成していましたが  
+スターターキットを使ってログイン機能を追加することが出来ます。  
+ログイン画面、ユーザー登録画面、必要なDBのテーブル等を構築してくれます。
+
+- Laravel 8.x スターターキット
+  - <https://readouble.com/laravel/8.x/ja/starter-kits.html>
+  - Laravel UI （非推奨）
+    - <https://github.com/laravel/ui>
+  - Laravel Breeze
+    - <https://github.com/laravel/breeze>
+  - Laravel Jetstream
+    - <https://github.com/laravel/jetstream>
+
+### Laravel UI
+
+現在では「`Laravel Breeze`」または「`Laravel Jetstream`」を推奨されています。  
+推奨はされていないですが、実際に使われている現場は多そうです。  
+認証機能としては一番シンプルです。
+
+- GitHub
+  - <https://github.com/laravel/ui>
+- CSSフレームワーク
+  - Bootstrap
+    - <https://getbootstrap.jp/>
+
+### Laravel Breeze
+
+新規だとこちらが使われる事が多くなりそうです。  
+CSSフレームワークが「`Tailwind CSS`」が採用されており、「`Bootstrap`」より学習が難しいかもしれません。
+
+- GitHub
+  - <https://github.com/laravel/breeze>
+- CSSフレームワーク
+  - Tailwind CSS
+    - <https://tailwindcss.com/>
+- Laravel 8.x スターターキット
+  - <https://readouble.com/laravel/8.x/ja/starter-kits.html>
+
+### Laravel Jetstream
+
+スターターキットにも、まずは「Laravel Breeze」からはじめるように記載があります。  
+2要素認証等の高機能な認証が必要な場合、こちらを採用するのが良さそうです。  
+
+- GitHub
+  - <https://github.com/laravel/jetstream>
+- CSSフレームワーク
+  - Tailwind CSS
+    - <https://tailwindcss.com/>
+- Laravel 8.x スターターキット
+  - <https://readouble.com/laravel/8.x/ja/starter-kits.html>
+
+### トラブルシューティング
+
+- 「php artisan migrate」がうまくいかない
+  - データベースの接続設定の見直し
+  - 対象のデータベースが追加されているかを確認
+- 「npm install」がうまくいかない
+  - そもそも npm が入っていない
+    - aptでnpmをインストールする。
+  - npm が入っててもエラーになる。
+    - 以下を参照
+      - <https://laracasts.com/discuss/channels/javascript/tailwindlaravel-mix-dependency-tree-error?page=1&replyId=752990>
+- ホーム画面は出るけど、ログイン画面が開かない(apache)
+  - 「`mod_rewrite`」が有効化されていない
+    - 「`a2enmod rewrite`」コマンドで有効にする。
