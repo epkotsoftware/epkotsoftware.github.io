@@ -157,3 +157,57 @@ CSSフレームワークが「`Tailwind CSS`」が採用されており、「`Bo
 - ホーム画面は出るけど、ログイン画面が開かない(apache)
   - 「`mod_rewrite`」が有効化されていない
     - 「`a2enmod rewrite`」コマンドで有効にする。
+
+## Artisanコンソール
+
+ファイルの追加やmigrationの実行等、アプリケーション構築に必要なものを「`artisan`」を使って行います。
+
+```bash
+# artisan で使用できるコマンドリストが見れる
+php artisan list
+```
+
+---
+
+例: Artistsテーブルとそれに関連する各クラスを追加。  
+    最初はこれで開発の感覚を掴むと良いです。
+
+```bash
+# app/Models （--all を指定することで、関連するファイルを追加）
+php artisan make:model Artists --all
+# app/tests/Feature
+php artisan make:test Http/Controllers/ArtistsControllerTest
+# app/tests/Unit
+php artisan make:test Http/Controllers/ArtistsControllerTest --unit
+```
+
+- `app/Http/Controllers/ArtistsController.php`
+  - コントローラ <https://readouble.com/laravel/8.x/ja/controllers.html>
+- `app/Http/Requests/StoreArtistsRequest.php`
+- `app/Http/Requests/UpdateArtistsRequest.php`
+  - HTTP Requests <https://readouble.com/laravel/8.x/ja/requests.html>
+  - バリデーション <https://readouble.com/laravel/8.x/ja/validation.html>
+- `app/Models/Artists.php`
+  - Laravel 8.x Eloquentの準備 <https://readouble.com/laravel/8.x/ja/eloquent.html>
+- `app/Policies/ArtistsPolicy.php`
+  - 認可 <https://readouble.com/laravel/8.x/ja/authorization.html>
+- `app/database/migrations/YYYY_MM_DD_HHmmss_create_artists_table.php`
+  - マイグレーション <https://readouble.com/laravel/8.x/ja/migrations.html>
+- `app/database/seeders/ArtistsSeeder.php`
+  - データベース：シーディング <https://readouble.com/laravel/8.x/ja/seeding.html>
+- `app/database/factories/ArtistsFactory.php`
+  - データベーステスト <https://readouble.com/laravel/8.x/ja/database-testing.html>
+- `app/tests/Feature/Http/Controllers/ArtistsControllerTest.php`
+- `app/tests/Unit/Http/Controllers/ArtistsControllerTest.php`
+  - テスト: テストの準備 <https://readouble.com/laravel/8.x/ja/testing.html>
+
+---
+
+例: Artistsテーブルに関連する画面を追加する場合
+
+```bash
+# app/Http/Controllers
+php artisan make:controller ArtistsExtendController --model=Artists --resource --requests --test
+# app/tests/Unit
+php artisan make:test Http/Controllers/ArtistsExtendControllerTest --unit
+```
