@@ -647,7 +647,7 @@ Linux技術者認定試験(LPIC)の一部にチャレンジしてみましょう
     - サンプル: 別ページに現場で使用経験のあるものを集めました。
       - [PlantUML](./training_plantuml.md)
 
-### アプリ画面設計
+### 画面設計
 
 以下、参考程度にご覧ください。  
 特にiOSアプリはデザインで審査が通らなくなるケースもあるので  
@@ -664,6 +664,18 @@ Linux技術者認定試験(LPIC)の一部にチャレンジしてみましょう
 - マテリアルデザイン
   - <https://material.io/design>
   - <https://material.io/develop>
+- WEB
+  - ボタンやアラートの色は「Bootstrap」で学ぶと良いです。
+    - Laravelの標準が現在では「Tailwind CSS」となっているので情報を載せておきます。
+  - Bootstrap（ブートストラップ）
+    - Alerts (アラート) <https://getbootstrap.jp/docs/5.0/components/alerts/>
+    - Buttons (ボタン) <https://getbootstrap.jp/docs/5.0/components/buttons/>
+    - Forms (フォーム) <https://getbootstrap.jp/docs/5.0/forms/overview/>
+  - Tailwind CSS（テールウィンドCSS）
+    - Colors <https://tailwindcss.com/docs/customizing-colors>
+    - Alerts <https://v1.tailwindcss.com/components/alerts>
+    - Buttons <https://v1.tailwindcss.com/components/buttons>
+    - Forms <https://v1.tailwindcss.com/components/forms>
 
 ## テスト編
 
