@@ -380,10 +380,14 @@ Googleマイドライブ → 「新規」 → 「ファイルのアップロー�
   - <https://cbc-study.com/training/basic/page4>
   - <https://cbc-study.com/training/basic/page5>
   - `https://cbc-study.com/training/basic/page6` ※ page6はないようです。
-  - <https://cbc-study.com/training/basic/page7>
-  - <https://cbc-study.com/training/basic/page8>
+  - <https://cbc-study.com/training/basic/page7>  
+      → 「`02_basic/htdocs/kadai_07.html`」
+  - <https://cbc-study.com/training/basic/page8>  
+      → 「`02_basic/htdocs/kadai_08.html`」
 
 **※ 基礎3（マークアップエンジニア 上級） は研修外とします。興味があれば自己学習でお願いします。**
+**※ `css/common.css` はindex.htmlにも使われているCSSファイルで、共通で使うスタイルを想定しています。**  
+  **ページ固有のスタイルは入れないように注意しましょう。**
 
 ### マークアップエンジニア編課題
 
