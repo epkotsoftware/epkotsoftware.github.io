@@ -108,7 +108,7 @@ LTS(Long Term Support) がついているバージョンの最新バージョン
 ### Laravel UI
 
 現在では「`Laravel Breeze`」または「`Laravel Jetstream`」を推奨されています。  
-推奨はされていないですが、実際に使われている現場は多そうです。  
+推奨はされていないですが、Bootstrapを使用しているため、実際に使われている現場は多そうです。  
 認証機能としては一番シンプルです。
 
 - GitHub
@@ -116,6 +116,8 @@ LTS(Long Term Support) がついているバージョンの最新バージョン
 - CSSフレームワーク
   - Bootstrap
     - <https://getbootstrap.jp/>
+- Laravel 8.x JavaScriptとCSSスカフォールド
+  - <https://readouble.com/laravel/8.x/ja/frontend.html>
 
 ### Laravel Breeze
 
