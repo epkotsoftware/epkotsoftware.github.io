@@ -671,11 +671,14 @@ Linux技術者認定試験(LPIC)の一部にチャレンジしてみましょう
     - Alerts (アラート) <https://getbootstrap.jp/docs/5.0/components/alerts/>
     - Buttons (ボタン) <https://getbootstrap.jp/docs/5.0/components/buttons/>
     - Forms (フォーム) <https://getbootstrap.jp/docs/5.0/forms/overview/>
+    - サンプル <https://getbootstrap.jp/docs/5.0/examples/>
   - Tailwind CSS（テールウィンドCSS）
     - Colors <https://tailwindcss.com/docs/customizing-colors>
     - Alerts <https://v1.tailwindcss.com/components/alerts>
     - Buttons <https://v1.tailwindcss.com/components/buttons>
     - Forms <https://v1.tailwindcss.com/components/forms>
+    - Laravel で使える Dashboard template
+      - <https://github.com/tailwindcomponents/dashboard>
 
 ## テスト編
 
