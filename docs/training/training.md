@@ -494,9 +494,24 @@ trainingリポジトリの [users/{★ユーザー名}/03_advanced/README.md](ht
 ## Linux編
 
 Linuxコマンドについて学んでいきましょう。  
-フロントエンドエンジニア編で作成した環境の[WEB Server](https://github.com/epkotsoftware/training/blob/template/users/_template/03_advanced/README.md#web-server)へ入ると操作が出来ます。  
+フロントエンドエンジニア編で作成した環境の[WEB Server](https://github.com/epkotsoftware/training/blob/template/users/_template/03_advanced/README.md#web-server)へ入ると操作が出来ます（OSはDebian）。  
+[04_linux](https://github.com/epkotsoftware/training/tree/template/users/_template/04_linux) にUbuntu環境も用意しました（どちらもコマンドに大きい違いはありません）。
 情報量が多く全て覚えるのは難しいので、「[vi](#vi)」までを2日、「[Linux模擬問題](#linux模擬問題)」を1日の計3日を目安としてください。
 
+- Linux OS
+  - Ubuntu
+    - <https://www.ubuntulinux.jp/ubuntu>
+  - Debian
+    - <https://www.debian.or.jp/using/>
+  - CentOS
+    - <<https://www.centos.org/>
+    - 「CentOS Linux」は開発終了となり、今後は「CentOS Stream」に移行。
+    - Comparing Centos Linux and CentOS Stream
+      - <https://www.centos.org/cl-vs-cs/>
+    - 「CentOS Stream 9」、ダウンロード提供が開始
+      - <https://japan.zdnet.com/article/35180408/>
+  - 12月Webサイト向けLinuxシェア、Ubuntuの増加傾向続く
+    - <https://news.mynavi.jp/techplus/article/20211203-2211480/>
 - 動画
   - <https://youtube.com/playlist?list=PLCX3wwS3Gg4zOMS9ezkea4tDt5U7s2yRa>
     - `13:03` Linuxコマンドの使い方入門｜CUIとGUIの違いやシェルについて解説！【プログラマー必須スキル】
