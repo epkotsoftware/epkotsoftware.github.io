@@ -885,7 +885,7 @@ CBC研修でもレスポンシブデザインについてありますが、フ�
   - スターターテンプレート
     - <https://getbootstrap.jp/docs/5.0/getting-started/introduction/#スターターテンプレート>
   - サンプル
-    - Dashboard・Checkout の学習をおすすめします。
+    - Dashboard・Checkout・Gridの学習をおすすめします。
     - <https://getbootstrap.jp/docs/5.0/examples/>
 
 ### 別チームの研修
