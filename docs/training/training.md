@@ -406,8 +406,8 @@ trainingリポジトリの [users/{★ユーザー名}/02_basic/README.md](https
 
 ## フロントエンドエンジニア編
 
-[CBC](https://cbc-study.com/)の応用コースをやっていきます。  
-開発環境については仮想環境を構築します。
+フロントエンドエンジニア編ではCBCの応用コースをやっていきます。  
+開発環境については以下の仮想環境を構築します。
 
 ### 仮想環境
 
@@ -440,7 +440,7 @@ trainingリポジトリの [users/{★ユーザー名}/02_basic/README.md](https
     - 原因2: WSLが古い
       - Linux kernel のアップデート「`wsl --update`」
       - 一度、Docker Desktopを再インストール
-  - docker-comporse出来ない
+  - docker-compose出来ない
     - 原因: 環境変数まわりに問題がありそう。
 
 ##### 構築手順
@@ -490,7 +490,9 @@ trainingリポジトリの [users/{★ユーザー名}/03_advanced/README.md](ht
 
 - 「フロントエンドエンジニア編」で作成したファイル
 
-trainingリポジトリの [users/{★ユーザー名}/03_advanced/README.md](https://github.com/epkotsoftware/training/blob/template/users/_template/03_advanced/README.md) にアップ先が記載されています。
+trainingリポジトリの [users/{★ユーザー名}/03_advanced/README.md](https://github.com/epkotsoftware/training/blob/template/users/_template/03_advanced/README.md) にアップ先が記載されています。  
+
+**※ CBCのソースコードのコピーではうまくいかない部分もあるので、レビュー依頼前に自身でテストしましょう。**
 
 ## Linux編
 
@@ -770,8 +772,8 @@ XML・CSV・JSON・画像(JPG・PNG・GIF・WEBP・SVG) について学習しま
 
 ## バックエンド編
 
-[CBC](https://cbc-study.com/)の実践（バックエンド Laravel）をやっていきます。  
-開発環境についてはフロントエンドエンジニア編と同様にDockerで構築します。
+バックエンド編ではCBCの実践（バックエンド Laravel）をやっていきます。  
+開発環境についてはフロントエンドエンジニア編と同様に以下、Dockerで構築します。
 
 ### Laravel開発環境構築
 
