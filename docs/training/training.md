@@ -870,9 +870,23 @@ Git で `master` という名称のブランチが使われていることが多
 何を学習したら良いかわからないという場合、研修講師にご相談ください。  
 現場に入った後でもサポート致します。  
 
-### Laravel学習
+### Laravel自己学習
 
 - [Laravel](./laravel.md)
+
+### Bootstrap自己学習
+
+CSSフレームワークのBootstrapは日本語対応で、比較的学習しやすいのでおすすめです。  
+スターターテンプレートで、すぐに使用出来るようになります。  
+CBC研修でもレスポンシブデザインについてありますが、フレームワークを利用するのが一般的です。
+
+- Bootstrap
+  - <https://getbootstrap.jp/>
+  - スターターテンプレート
+    - <https://getbootstrap.jp/docs/5.0/getting-started/introduction/#スターターテンプレート>
+  - サンプル
+    - Dashboard・Checkout の学習をおすすめします。
+    - <https://getbootstrap.jp/docs/5.0/examples/>
 
 ### 別チームの研修
 
