@@ -235,6 +235,7 @@ https://docs.python.org/ja/3/tutorial/errors.html
 TODO
 
 - PHP
+  - <https://www.php.net/manual/ja/language.oop5.visibility.php>
 - JavaScript
 - Java
 - Python
@@ -247,6 +248,23 @@ TODO
 
 TODO
 
+- PHP
+  - <https://www.php.net/manual/ja/language.oop5.references.php>
+  - <https://www.php.net/manual/ja/language.references.pass.php>
+
+### static
+
+- PHP
+  - <https://www.php.net/manual/ja/language.oop5.static.php>
+- JavaScript
+  - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes/static>
+
+### クロージャ
+
+- PHP
+  - <https://www.php.net/manual/ja/functions.anonymous.php>
+- JavaScript
+  - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Closures>
 
 ### ミュータブル・イミュータブル
 
@@ -303,3 +321,12 @@ class CounterMutable implements Countable
     }
 }
 ```
+
+#### イテレータ(ジェネレータ)
+
+TODO
+
+- PHP
+  - <https://www.php.net/manual/ja/language.generators.overview.php>
+- JavaScript
+  - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/yield>
