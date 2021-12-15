@@ -52,8 +52,8 @@ Gitを扱うための拡張機能をご紹介します。
 
 #### developブランチ作成
 
-- リポジトリのメインページに移動 (<https://github.com/{★自身のユーザー名}/training-git/>)
-- ブランチ名に「`develop`」を入力し、「`Create branch: develop from 'main'`」をクリック
+- リポジトリのメインページに移動 (`https://github.com/{★自身のユーザー名}/training-git/`)
+- ブランチ名に「`develop`」を入力し、「`Create branch: develop from 'main'`」をクリック  
   ![github_create_branch_develop](../image/github_create_branch_develop.png)
 
 #### ブランチ設定
@@ -62,7 +62,7 @@ Gitを扱うための拡張機能をご紹介します。
 - 「`Settings`」タブをクリック
 - 「`Branches`」をクリック
 - Default branch ～ デフォルトブランチをdevelopに変更
-  - 切り替えアイコンをクリック
+  - 切り替えアイコンをクリック  
     ![github_switch_branch](../image/github_switch_branch.png)
   - 「`develop`」を選択して、「`Update`」ボタンをクリック
   - 「`I understand, update the default branch.`」ボタンをクリック
@@ -83,7 +83,7 @@ Gitを扱うための拡張機能をご紹介します。
 
 - Cloneする方法はいくつかありますが、今回はHTTPSで行います。
 - リポジトリのメインページに移動
-- 「`Code`」をクリックし、「`HTTPS`」タブに記載されているURLをコピー
+- 「`Code`」をクリックし、「`HTTPS`」タブに記載されているURLをコピー  
     ![github_code](../image/github_code.png)
 - このURLを `git clone` で使用します。
 
@@ -96,13 +96,13 @@ Gitを扱うための拡張機能をご紹介します。
 「`Git Bash`」で任意の場所に「`git clone "★URL"`」を実行しましょう。  
 URLはGitHub上で取得したものを使用します。  
 
-![git_clone](../image/git_clone.png)
+![git_clone](../image/git_clone.png)  
 
 VSCodeで「`training_git`」フォルダを開きましょう。  
 ターミナルは「`Git Bash`」を選択してください。  
 「`Git Graph`」は任意ですが表示方法は以下になります。  
 
-![vscode_training_git](../image/vscode_training_git.png)
+![vscode_training_git](../image/vscode_training_git.png)  
 
 ## Git学習シナリオ
 
@@ -118,9 +118,9 @@ VSCodeで「`training_git`」フォルダを開きましょう。
 
 |  | Mainへのマージ | Developへのマージ | push | 概要 |
 | :---: | :---: | :---: | :---: | --- |
-| Main | - | - | :x: | Production branch<br>本番リリース用ブランチ |
-| Develop | PRによるマージ | - | :x: | Development branch<br>開発ブランチ |
-| Feature | :x: | PRによるマージ | :o: | 開発ブランチ(機能・課題毎に分ける) |
+| Main | - | - | × | Production branch<br>本番リリース用ブランチ |
+| Develop | PRによるマージ | - | × | Development branch<br>開発ブランチ |
+| Feature | × | PRによるマージ | 〇 | 開発ブランチ(機能・課題毎に分ける) |
 
 ## featureブランチの作成
 
@@ -136,7 +136,7 @@ TODO
 git checkout -b feature/a origin/develop
 ```
 
-![git_new_branch_feature_a](../image/git_new_branch_feature_a.png)
+![git_new_branch_feature_a](../image/git_new_branch_feature_a.png)  
 
 ## 参考
 
