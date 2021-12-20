@@ -74,6 +74,9 @@ Dropbox等、共有しているファイルの扱いには注意しましょう�
 
 - 【学習法】プログラミングの勉強でノートはNG？メリットはない？
   - <https://kredo.jp/media/programming-study-note/>
+- 動画
+  - プログラミングにはやってはいけない勉強法がある！？爆速で成長する王道のプログラミング学習法を紹介！
+    - <https://youtu.be/ZJqVQJwvwNI>
 
 ## 環境構築
 
