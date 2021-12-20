@@ -317,6 +317,60 @@ A機能と平行で進めていると仮定します。
 以上の手順で「`develop`」ブランチにB機能が実装されました。  
 A機能の作業に戻りましょう。
 
+## A機能develop取り込み
+
+A機能のpush前に、トップ画面の「`htdocs/index.html`」にA画面へのリンクを追加することになりました。  
+ですが「`feature/a`」ブランチにはトップ画面がないので、「`develop`」ブランチの取り込みを行います。  
+
+まずは「`git fetch`」を実行しましょう。
+
+```bash
+git fetch
+```
+
+![git_fetch_git_graph](../image/git_fetch_git_graph.png)  
+
+上記のGraphの通り、「`develop`」ブランチから「`feature/a`」ブランチを作成した後に  
+「`develop`」ブランチに2つのコミットが入っていることがわかります（マージコミットを除く）。  
+
+「`develop`」を取り込む方法はいくつかあります。
+
+1. マージする
+1. リベースする
+
+やり方は以下を見ていきましょう。  
+スクリーンショットではリベースでの手順で行っていきます。
+
+### マージする場合
+
+シンプルな方法で「`develop`」を「`feature/a`」ブランチにマージするだけです。  
+
+```bash
+# 現在のブランチを確認
+git branch --show-current
+# 現在のブランチに「develop」をマージ
+git merge origin/develop
+```
+
+### リベースする場合
+
+最新の「`develop`」をベースにコミットを再適用します。  
+
+push前であれば、こちらの方法が使えます。  
+既にpushしていた場合、リベースに関してよくわからない場合はマージを選択することをおすすめします。
+
+```bash
+# 現在のブランチを確認
+git branch --show-current
+# 現在のブランチを最新「develop」の上にリベース
+git pull --rebase origin develop
+```
+
+![git_pull_rebase](../image/git_pull_rebase.png)  
+
+上記のGraphで分かる通り、最新の「`develop`」ブランチから「`feature/a`」ブランチを作成し、「`htdocs/a.html`」がコミットされたことになっています。  
+リベースを使うメリットとしては、マージコミットが減って履歴が綺麗になることです。  
+
 ## 参考
 
 TODO
