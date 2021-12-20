@@ -76,8 +76,24 @@ Gitを扱うための拡張機能をご紹介します。
   - 「`Create`」ボタンをクリック
 
 ※ 今回は、学習のための保護設定にしてあります。  
-　その他のブランチルールについては公式を参照  
+　学習外にはなりますが、その他のブランチルールについては公式を参照してください。  
 　<https://docs.github.com/ja/repositories/configuring-branches-and-merges-in-your-repository/defining-the-mergeability-of-pull-requests/managing-a-branch-protection-rule>
+
+#### タグ作成
+
+今回は不要ですが、開発準備が完了した時点（Laravelだとインストール直後のソースコード等）でタグの作成を行います。  
+タグに関しては、管理者が行うことが多いので学習外とし詳細説明を割愛します。  
+初回だと「`v0.1`」、リリース時は「`v1.0`」のようなタグが多いでしょうか。  
+コマンドでつける場合、「`git tag`」コマンドで行います。  
+
+- GitHub Managing releases in a repository
+  - <https://docs.github.com/ja/repositories/releasing-projects-on-github/managing-releases-in-a-repository>
+  - 本番リリースしないタグについては「This is a pre-release」にチェックをしましょう。
+- Laravel(GitHub)
+  - Laravelだと「`v8.6.9`」のようにタグをつけています。
+  - <https://github.com/laravel/laravel/tags>
+  - タグをつけることで、2つのタグを指定して変更点を確認することが容易に出来ます。
+    - <https://github.com/laravel/laravel/compare/v8.6.8...v8.6.9>
 
 #### CloneするためのURLを取得
 
@@ -109,6 +125,8 @@ VSCodeで「`training_git`」フォルダを開きましょう。
 現場のGit運用については「git flow」や「github flow」をベースにすることが多いかと思います。  
 今回は「git flow」を簡単にしたものを想定して実際にGit操作していきましょう。  
 
+### シナリオ
+
 以下はプロジェクト開始～リリースまでのブランチの流れを表しています。  
 開発者はあなたを含めて2名で、あなたはA機能を担当  
 もう1名はB機能を担当します。
@@ -118,25 +136,186 @@ VSCodeで「`training_git`」フォルダを開きましょう。
 
 |  | Mainへのマージ | Developへのマージ | push | 概要 |
 | :---: | :---: | :---: | :---: | --- |
-| Main | - | - | × | Production branch<br>本番リリース用ブランチ |
+| Main | - | △ | × | Production branch<br>本番リリース用ブランチ<br>他のブランチへのマージは、障害があった場合を除いて行われません。 |
 | Develop | PRによるマージ | - | × | Development branch<br>開発ブランチ |
 | Feature | × | PRによるマージ | 〇 | 開発ブランチ(機能・課題毎に分ける) |
 
 ## featureブランチの作成
 
-
-TODO
-
+A機能の実装を開始するため「Feature」ブランチを、リモートリポジトリの「Develop」ブランチから作成します。  
 
 ![git_new_branch_feature_a](../image/git_new_branch_feature_a.svg)
 [PlantUML](https://www.plantuml.com/plantuml/umla/NOyxRiD030Lxdk95gWttBW8NGReSWXAvMaBxCIHAYM-VB0n4XXi277AAkQxEYsyvqPj7pOhTXeMBKpHHX5fzg3z4VmFTfx9lYtO4Q77pExhmG6Vkm2i2eu_LRrPcqY8ur0_TDTNRiogwDz8yGJ_L92_E5rjv5dBRstj6dsoAlixt8MrwQ3owxUoAJ1cdTyX1XAIHm9UYtsY9OpokWQbKLoGDVi5aZZ7gEDVDSHhm7ucws6JbB8yQkcgHBQTV)  
 
+作成する前に「`git fetch`」コマンドにより、ローカルリポジトリを最新の状態にします。  
+チームで作業している場合、自分が作業している間に変更が加えられている可能性があるためです。
+
 ```bash
-# 「develop」ブランチから「feature/a」ブランチを作成
+# リモートリポジトリの最新をローカルリポジトリに取り込む
+git fetch
+# 「develop」リモートブランチから「feature/a」ブランチを作成
 git checkout -b feature/a origin/develop
 ```
 
 ![git_new_branch_feature_a](../image/git_new_branch_feature_a.png)  
+
+### originとは
+
+リモートリポジトリの名前（デフォルト名）と覚えておきましょう。  
+「`git clone`」コマンドを実行すると、デフォルトの「`origin`」が設定されます。  
+
+詳細については割愛しますが、先ほどの「`origin/{ブランチ名}`」はリモートトラッキングブランチ(追跡ブランチ)と言って、厳密にはリモートブランチではありません  
+「`git fetch`」を実行することで「`origin/{ブランチ名}`」はリモートブランチと同じ状態になると覚えてください。
+
+## A機能
+
+A機能の実装・テストに入りましょう。
+
+![git_imp_feature_a](../image/git_imp_feature_a.svg)
+[PlantUML](https://www.plantuml.com/plantuml/umla/JOunhi9034HxdsB-_XhHKw1KtCCXZcAHtOrs9n7S7WiQ6ijwzjFCqAcDUrxbZujbm-5Zqq9PV3BCjNAiJv4OI3TJxisI05ReV27DNtJM1EsO5VzBvURb8LOcV5Izqm-bnLNYuNIDvGBFsnfnXJ-CrYb3Y57d3G00)  
+
+### A機能実装
+
+まずは、A機能を実装します。  
+A機能はWEBページとしますので「`htdocs/a.html`」を適当に追加しましょう。
+
+![git_imp_feature_a](../image/vscode_add_a_html.png)  
+
+### A機能テスト
+
+A機能のテストをします。  
+テストと言ってもウォーターフォールで言う単体テストではなく、実装フェーズ内のセルフチェックです。  
+今回はシンプルな機能なので割愛しますが  
+実際は以下のような確認を行います。
+
+- 表示内容が仕様通りになっているか
+- 実装した機能が正常に動作するか
+- UnitTestが通るか
+  - UnitTestについては以下を参照
+    - PHPUnit マニュアル
+      - <https://phpunit.readthedocs.io/ja/latest/>
+    - Laravel 8.x Testing
+      - <https://readouble.com/laravel/8.x/ja/testing.html>
+
+### A機能コミット
+
+動作に問題なければローカルブランチにコミットします。  
+コミットに関しては変更内容を確認しながら行うため  
+コマンドラインでやることは少ないので、VSCodeでの方法をご紹介します。  
+コマンドラインで行う方法も覚えておきましょう。  
+
+- VSCodeの画面左にある「ソース管理」アイコンを選択
+- コミット対象のファイルを選択し、「+（変更をステージ）」アイコンをクリックし、「ステージされている変更」に入れる。
+- コミットメッセージを入力
+- 「✔（コミット）」アイコンをクリックし、「ステージされている変更」に入っているファイルをコミットする。
+  - コミットすると同期に関するボタンが出てきますが無視してください。
+
+![vscode_git_add_and_commit](../image/vscode_git_add_and_commit.gif)  
+
+```bash
+# VSCodeの「変更をステージ」と同様
+git add htdocs/a.html
+# VSCodeの「ステージされている変更」をコミット
+git commit -m ":sparkles: htdocs/a.html"
+```
+
+※ コミットコメントの「`:sparkles:`」は絵文字を表します。  
+※ この時点ではGitHubには反映されません。
+
+## B機能
+
+ここで一旦、B機能（Bさん）の作業を行いましょう。  
+A機能と平行で進めていると仮定します。  
+
+![git_imp_feature_b](../image/git_imp_feature_b.svg)
+[PlantUML](https://www.plantuml.com/plantuml/umla/JO-zJiKm38LtFuN9dH7x7L07n8nuWwG-QIBoKwLkWRSd5Rrg5rl-hE_87XQrJTUSw4a3CdYBhjcY5AA0VQtgwWzHBspUONLjCCICeb5_sVX_zE8CsuMzurkeEiVoHIZ2f_g63QdELrKEj8l2jwacEINXvzSUTo_uvlsUCP0TDMvMqJ5vT-mvvZaXe-Y5APR7AFUFpxrdj0aak8OCAD8V_mC0)  
+
+### B機能実装
+
+まずは、GitHubでFeatureブランチを作成します。
+
+- リポジトリのメインページに移動
+- 「`develop`」ブランチを選択し、ブランチ名に「`feature/b`」を入力し、「`Create branch: feature/b from 'develop'`」をクリック
+
+![github_create_feature_b](../image/github_create_feature_b.png)  
+
+次にB機能を実装します。
+
+- 「`feature/b`」ブランチを選択し、「`Create new file`」をクリック  
+  ![github_create_new_file](../image/github_create_new_file.png)  
+- ファイル名に「`htdocs/b.html`」を入力  
+  ![github_input_file_name](../image/github_input_file_name.gif)  
+- ファイル内容に以下を入力
+
+```html
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B機能</title>
+</head>
+<body>
+    B機能
+</body>
+</html>
+```
+
+- 任意のコミットメッセージを入力
+- 「`Commit new file`」ボタンで「`feature/b`」ブランチにコミット
+
+![github_commit_new_file](../image/github_commit_new_file.png)
+
+上記の要領で「`htdocs/index.html`」もコミットしてください。  
+ファイル内容は以下にしてください。
+
+```html
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <nav>
+        <ul>
+          <li><a href="b.html">B画面</a></li>
+        </ul>
+    </nav>
+</body>
+</html>
+```
+
+### B機能テスト
+
+テストは割愛します。
+
+### B機能PR作成
+
+以下の手順でPRを作成します。
+
+- リポジトリのメインページに移動
+- 「`Pull requests`」タブをクリック
+- 「`New pull request`」ボタンをクリック
+- ブランチを以下のように選択し、「`Create pull request`」をクリック
+  - 「`base: develop`」 ← 「`compare: feature/b`」  
+  ![github_comparing_changes](../image/github_comparing_changes.png)  
+- 「`Open a pull request`」画面で「`Create pull request`」をクリック
+
+### B機能PRマージ
+
+実際はレビューが通ったらマージを行いますが  
+今回はそのままマージします。
+
+- 「`Merge pull request`」ボタンをクリック
+- 「`Confirm merge`」ボタンをクリックし、マージを行う。
+- 「`Delete branch`」ボタンをクリックし、Featureブランチを削除
+
+以上の手順で「`develop`」ブランチにB機能が実装されました。  
+A機能の作業に戻りましょう。
 
 ## 参考
 
