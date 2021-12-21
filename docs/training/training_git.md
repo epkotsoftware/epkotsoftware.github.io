@@ -1,4 +1,4 @@
-# 株式会社エプコットソフトウェア ～ Git
+# 株式会社エプコットソフトウェア ～ Git編
 
 ## はじめる前に
 
@@ -17,9 +17,12 @@
 ### 環境
 
 - GitHubアカウント
+  - <https://github.com/>
 - インストール
   - Git Bash
+    - <https://git-scm.com/download/>
   - VSCode
+    - <https://azure.microsoft.com/ja-jp/products/visual-studio-code/>
 
 #### VSCode拡張機能
 
@@ -220,7 +223,7 @@ git commit -m ":sparkles: htdocs/a.html"
 ```
 
 ※ コミットコメントの「`:sparkles:`」は絵文字を表します。  
-※ この時点ではGitHubには反映されません。
+※ この時点ではGitHubには反映されません。  
 
 ## B機能
 
@@ -282,7 +285,7 @@ A機能と平行で進めていると仮定します。
 <body>
     <nav>
         <ul>
-          <li><a href="b.html">B画面</a></li>
+            <li><a href="b.html">B画面</a></li>
         </ul>
     </nav>
 </body>
@@ -317,12 +320,17 @@ A機能と平行で進めていると仮定します。
 以上の手順で「`develop`」ブランチにB機能が実装されました。  
 A機能の作業に戻りましょう。
 
-## A機能develop取り込み
+## develop取り込み
+
+「`feature/a`」ブランチに「`develop`」ブランチの取り込みを行いましょう。  
+
+![git_merge_or_rebase](../image/git_merge_or_rebase.svg)
+[PlantUML](https://www.plantuml.com/plantuml/umla/JS-nZeCm3CRntK_X2_FfzXigXgfFmMBgBn0LOXGCQj--KHdeObj_wJUuNLsAR_D4FpvY1k-fBvATngJWQEQzFOdgu723-5OGY1dPaxyun2FzIM1PEGete_cIyeEGbKzwnOx9bc-gH_f0vMQmIKyaTq-xE5ZFCmef_rxg_fzH1dJPIfSBUbb1RQNrYpS0)  
 
 A機能のpush前に、トップ画面の「`htdocs/index.html`」にA画面へのリンクを追加することになりました。  
-ですが「`feature/a`」ブランチにはトップ画面がないので、「`develop`」ブランチの取り込みを行います。  
+ですが「`feature/a`」ブランチにはトップ画面がないため、「`develop`」ブランチの取り込みを行います。  
 
-まずは「`git fetch`」を実行しましょう。
+まずは「`git fetch`」を実行し、Graphを見てみましょう。
 
 ```bash
 git fetch
@@ -346,7 +354,7 @@ git fetch
 シンプルな方法で「`develop`」を「`feature/a`」ブランチにマージするだけです。  
 
 ```bash
-# 現在のブランチを確認
+# 現在のブランチを確認（feature/a）
 git branch --show-current
 # 現在のブランチに「develop」をマージ
 git merge origin/develop
@@ -357,10 +365,11 @@ git merge origin/develop
 最新の「`develop`」をベースにコミットを再適用します。  
 
 push前であれば、こちらの方法が使えます。  
-既にpushしていた場合、リベースに関してよくわからない場合はマージを選択することをおすすめします。
+既にpushしていた場合、コンフリクト(競合)しそうな場合  
+リベースに関してよくわからない場合はマージを選択することをおすすめします。
 
 ```bash
-# 現在のブランチを確認
+# 現在のブランチを確認（feature/a）
 git branch --show-current
 # 現在のブランチを最新「develop」の上にリベース
 git pull --rebase origin develop
@@ -371,11 +380,192 @@ git pull --rebase origin develop
 上記のGraphで分かる通り、最新の「`develop`」ブランチから「`feature/a`」ブランチを作成し、「`htdocs/a.html`」がコミットされたことになっています。  
 リベースを使うメリットとしては、マージコミットが減って履歴が綺麗になることです。  
 
+### git pullとは
+
+「git pull」は「git fetch」+「git merge」を一緒にしたコマンドです。  
+「git pull」に「--rebase」オプションをつけると「git fetch」+「git rebase」を行います。  
+
+## A機能追加実装
+
+「`htdocs/index.html`」にリンクを追加しましょう。  
+ソース管理の対象ファイルを選択すると、変更点を確認することが出来ます。  
+
+![vscode_compare](../image/vscode_compare.png)  
+
+コマンドで行う場合は「`git diff`」でも可能です。  
+表示量が多い場合、抜けられなくなるかと思いますが  
+「q」を入力することで終了させることが出来ます。  
+
+![git_diff](../image/git_diff.png)  
+
+「`git diff`」の詳細説明については割愛します。  
+以下が参考になります。  
+
+- git diff を徹底攻略！よく使うオプションまとめ
+  - <https://www-creators.com/archives/755>
+
+変更点について問題なければコミットしましょう。
+
+## A機能push
+
+A機能の実装(テスト)が終わったら、「`feature/a`」ブランチをGitHub上に反映させるため、pushしましょう。
+
+![git_push](../image/git_push.svg)
+[PlantUML](https://www.plantuml.com/plantuml/umla/VSynRe0m38NXtQTupOwwCrHixT0Zi3XWm5A8KUAWzlQ5fQXB5m-_v4zwGtKktlP4Bxx9BZWr5ivEcyw2nSoZVH5T1-7J9aw1W9cT8rT1I7SQSv73ghgLxp6FUH7sLkIL0xWYaUGPZ_Ak_j7YNwR8RYx_E_OuFBcUx8942TqRh3zQtIZRdMJn7giwxeQkmOgkcl6hFUz6msLUuty0)  
+
+以下、コマンドを実行することで、GitHubに反映されます。
+
+```bash
+# 現在のブランチを確認（feature/a）
+git branch --show-current
+# 現在のブランチをリモートにアップ
+git push -u origin feature/a
+```
+
+「`-u`」オプションは「`--set-upstream`」の省略形で  
+簡単に言うと、リモートブランチへの参照を設定する事が出来て  
+以降、「`feature/a`」ブランチは引数なしで「`git push`」、「`git pull`」等を行うことが出来るようになります。  
+
+## A機能PR→マージ
+
+「`feature/a`」ブランチを「`develop`」にマージするPRを作成し、マージをします。
+
+![github_pr_merge](../image/github_pr_merge.svg)
+[PlantUML](https://www.plantuml.com/plantuml/umla/JS-n3e9030RWlKzHZzcuEnW6usnyWsB_WujmHuv2zEs5Q78iRVEdt_3NaqcsUUZfO1q6y1AQBD6e2mhsALcJtaJhO7U3s9pXY1dHWdtO-Lzq4iSoiHUkkcHZY2z2L2xqYWLz6lTK_z46bQiszLgGF2qiOc0jfnVomiSBw_d-sFQ0t88K-uyQKTSsNm00)  
+
+### PR作成
+
+GitHub上の操作になりますが「`develop`」ブランチへのマージPRを作成します。  
+
+- リポジトリのメインページに移動
+- 「`Compare & pull request`」をクリック  
+  ![github_compare_and_pull_request](../image/github_compare_and_pull_request.png)  
+
+- 以下を入力（現場に入った場合はルールに従うこと）
+  - ブランチ: `base: develop ← compare: feature/a`
+  - Title: 任意
+  - Comment: 任意
+- コミット・変更点の差分について想定通りかを確認
+- 「`Create pull request`」ボタンをクリック
+
+以上でPR作成できました。  
+実際には他のメンバーにレビューを依頼します。  
+
+### PRマージ
+
+実際はレビューが通ったら(Approveされたら)マージを行いますが  
+今回はそのままマージします。
+
+- 「`Merge pull request`」ボタンをクリック
+- 「`Confirm merge`」ボタンをクリックし、マージを行う。
+- 「`Delete branch`」ボタンをクリックし、Featureブランチを削除
+
+以上の手順で「`develop`」ブランチにA機能が実装されました。  
+
+## ブランチ整理
+
+「`feature/a`」ブランチが「`develop`」ブランチにマージされ  
+「`feature/a`」ブランチが削除されました。  
+ですが、ローカルブランチはまだ存在しています。  
+ブランチを綺麗にしていきましょう。  
+
+まずは現在のブランチを「`develop`」に切り替えます。  
+
+```bash
+# developブランチに切り替え
+git checkout develop
+```
+
+次に不要となったブランチを削除していきます。  
+
+```bash
+# 現在のブランチを確認（develop）
+git branch --show-current
+# developを最新化しつつ、不要となった origin/feature/a を削除
+git pull -p
+# ローカルの feature/a を削除
+git branch -d feature/a
+# ブランチ確認（Featureブランチが消えた）
+git branch -a
+```
+
+最終的なブランチの状態は以下になります。
+
+![vscode_develop](../image/vscode_develop.png)
+
+### 一括でローカルブランチを削除する方法
+
+使う場合は**自己責任**で  
+
+Linuxコマンドの xargs を使うとまとめて削除が可能です（Git BashのインストールでWindowsでも使用可能）。  
+オプションを「`-D`」にするとマージ前のブランチも対象になります。  
+
+```bash
+git checkout develop
+# 現在のブランチ以外のローカルブランチを削除
+git branch | grep "^ " | xargs git branch -D
+```
+
+エラーが出ても気にならなければ、以下でも可能。
+
+```bash
+git checkout develop
+# 現在のブランチも対象になるため、必ずエラーが発生
+git branch | xargs git branch -D
+```
+
+上記で「`main`」等も対象になりますが  
+リモートブランチが削除されるわけではないので  
+「`git checkout main`」を実行すると再生成されます。  
+
+## リリースまで
+
+実装完了後は「`develop`」ブランチで単体テスト・結合テスト・システムテスト等を行い  
+「`main`」ブランチへのPR→マージを行った後にリリースします。  
+今回は、Git研修のため割愛します。  
+
+## おわり
+
+以上でGit研修は終わりです。  
+追加機能やテストの際に発生したバグ改修については  
+再度「`develop`」からブランチを切って行います。  
+ここまでのシナリオについてはあくまでも1例に過ぎません。  
+
+実際「git flow」で運用する現場もあり、それをカスタマイズし、更に複雑化している現場もありました。  
+逆に「github flow」のようなシンプルな運用もあるかもしれません。  
+ここまで実際にやってみたことで、冒頭での動画を  
+再度見ると理解が深まるかと思います。
+
+## Gitコマンド
+
+それぞれ使い方についてはHELPを参照したり、WEBで検索してください。
+
+| コマンド | 備考 |
+| --- | --- |
+| `git clone "★URL"` | リモートリポジトリをローカルに複製 |
+| `git checkout "★ブランチ名"` | ブランチ切り替え |
+| `git checkout -b "★ブランチ名"` | 新しいブランチを生成してチェックアウト |
+| `git push -u origin "★ブランチ名"` | 初回push時に使用（`-u` は `--set-upstream` の省略） |
+| `git push` |  |
+| `git pull` | 「`git fetch`」+「`git merge`」 |
+| `git pull --rebase origin "★ブランチ名"` | 「`git fetch`」+「`git rebase`」 |
+| `git fetch -p` | リモートリポジトリで削除されたブランチをローカルに反映 |
+| `git status` |  |
+| `git merge "★ブランチ名"` | 指定ブランチを現在ブランチにマージする。<br>基本マージはPRで行うので、このコマンドを使う際は注意<br>主に派生元のブランチを取り込む場合に使用する。 |
+| `git cherry-pick "★コミットID"` | 別ブランチのコミットを適用するのに使用<br>コンフィグ、定数クラス等軽いコミットの取り込みに使う |
+| `git log -n5 --oneline` | コミットログを1コミット1行で、最新の5件表示する<br>1番左に出ている7桁の文字列はコミットIDを短くしたもの |
+| `git diff "★コミットID" "★コミットID"` | 指定したコミットの差分を表示する<br>表示内容が多くなるため、中断する場合は「q」を押すと抜けられる。 |
+| `git commit --allow-empty -m "★コミットメッセージ"` | 空コミットが可能、ブランチやプロジェクトの開始を表すコミットで使うことがある。<br>使うかは現場次第 |
+| `git branch -D "★ブランチ名"` | ローカルブランチ削除（`-D` は `--delete –force` の省略） |
+| `git stash` | 操作が複雑なので以下を参照<br><https://qiita.com/chihiro/items/f373873d5c2dfbd03250> |
+
 ## 参考
 
-TODO
-
 - サイト
+  - Git公式
+    - <https://git-scm.com/book/ja/>
+  - Git チュートリアルとトレーニング
+    - <https://www.atlassian.com/ja/git/tutorials>
   - サル先生のGit入門
     - <https://backlog.com/ja/git-tutorial/>
 - git help

@@ -162,7 +162,8 @@ Visual Studio Code(VSCode) が初めての方へ
 | 12 | - | [`セキュリティ編`](#セキュリティ編) |
 | 13 | - | [`バックエンド編`](#バックエンド編) |
 | 14 | - | [`バージョン管理システム編`](#バージョン管理システム編) |
-| 15 | 20 | [`自己学習`](#自己学習) |
+| 15 | - | [`Git編`](#git編) |
+| 16 | 20 | [`自己学習`](#自己学習) |
 
 ## はじめに
 
@@ -835,34 +836,6 @@ Git で `master` という名称のブランチが使われていることが多
 - Twitter、コードやドキュメント内の用語「Whitelist/Blacklist」「Master/Slave」「Dummy value」などを好ましい用語へ置き換え、具体例も発表
   - <https://www.publickey1.jp/blog/20/twitterwhitelistblacklistmasterslavedummy_value.html>
 
-### Gitコマンド
-
-講師がよくつかうコマンド  
-「`git add`」や「`git commit`」は、VSCodeやGitGUIで変更内容を確認しながら行うことが多いので、コマンドを使うことが少ない。
-
-| コマンド | 備考 |
-| --- | --- |
-| `git clone "★URL"` |  |
-| `git checkout "★ブランチ名"` |  |
-| `git checkout -b "★ブランチ名"` | 新しいブランチを生成してチェックアウト |
-| `git push -u origin "★ブランチ名"` | 初回push時に使用（`-u` は `--set-upstream` の省略） |
-| `git push` |  |
-| `git pull` |  |
-| `git fetch -p` | リモートリポジトリで削除されたブランチをローカルに反映 |
-
-たまに使う
-
-| コマンド | 備考 |
-| --- | --- |
-| `git status` |  |
-| `git merge "★ブランチ名"` | 指定ブランチを現在ブランチにマージする。<br>基本マージはPRで行うので、このコマンドを使う際は注意<br>主に派生元のブランチを取り込む場合に使用する。<br><br>例: developブランチをfeatureブランチに取り込む場合<br>`git checkout feature`<br>`git merge origin/develop` |
-| `git cherry-pick "★コミットID"` | 別ブランチのコミットを適用するのに使用<br>コンフィグ、定数クラス等軽いコミットの取り込みに使う |
-| `git log -n5 --oneline` | コミットログを1コミット1行で、最新の5件表示する<br>1番左に出ている7桁の文字列はコミットIDを短くしたもの |
-| `git diff "★コミットID" "★コミットID"` | 指定したコミットの差分を表示する<br>表示内容が多くなるため、中断する場合は「q」を押すと抜けられる。 |
-| `git commit --allow-empty -m "★コミットメッセージ"` | 空コミットが可能、ブランチやプロジェクトの開始を表すコミットで使うことがある。<br>使うかは現場次第 |
-| `git branch -D "★ブランチ名"` | ローカルブランチ削除（`-D` は `--delete –force` の省略） |
-| `git stash` | 操作が複雑なので以下を参照<br><https://qiita.com/chihiro/items/f373873d5c2dfbd03250> |
-
 ### バージョン管理システム編課題
 
 ここまで課題をアップしてきた自分のFeatureブランチを  
@@ -880,6 +853,13 @@ Git で `master` という名称のブランチが使われていることが多
 - 研修講師へ、レビュー依頼をしてください。
 - 問題なければ研修講師がマージ＆Featureブランチを削除します。
   - 今後もtrainingリポジトリの自分のユーザーディレクトリを使用したい場合は`main`ブランチをお使いください。
+
+## Git編
+
+Gitについて、より深く学んでいきます。  
+別資料で用意していますので、以下を参照してください。  
+
+- [Git編](./training_git.md)
 
 ## 自己学習
 
