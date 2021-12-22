@@ -75,11 +75,13 @@
 - Git設定
   - `git config --global user.email "{GitHubアカウントEmail address}"`
   - `git config --global user.name "{GitHub Profile Name}"`
+  - `git config --global core.autocrlf false`
   - 設定例
 
     ```bash
     git config --global user.email "taro.yamada@epkotsoftware.co.jp"
     git config --global user.name "Yamada Taro"
+    git config --global core.autocrlf false
     ```
 
 ## Git設定確認
@@ -90,6 +92,27 @@
 ```bash
 git config --global user.email
 git config --global user.name
+git config --global core.autocrlf
 ```
 
 ![git_config](./image/git_config.png)
+
+※ スクリーンショットに「`git config --global core.autocrlf`」が含まれていませんが「`false`」が表示されることをご確認ください。
+
+## その他のGit設定
+
+### core.autocrlf
+
+初期設定では全体設定として「`false`」を設定しています。
+リポジトリ毎の設定に関しては  
+リポジトリ管理者・研修講師にご確認ください。
+
+```bash
+# ローカル設定(リポジトリ毎)
+#   true: チェックアウト・コミット時に改行コードを自動変換
+git config --local core.autocrlf true
+#   input: コミット時に改行コードを自動変換
+git config --local core.autocrlf input
+#   false: 改行コードの自動変換は行わない
+git config --local core.autocrlf false
+```
