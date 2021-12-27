@@ -458,8 +458,12 @@ trainingリポジトリの [users/{★ユーザー名}/03_advanced/README.md](ht
 
 ### CBC 応用
 
+CBCと開発環境が異なるので、気を付けてください。  
+
 - 応用1（フロントエンドエンジニア 初級）
-  - <https://cbc-study.com/training/advanced/page1> ※ 環境はDockerで構築するため内容を確認するだけでOKです。
+  - <https://cbc-study.com/training/advanced/page1>
+    - **MAMP、XAMPPは不要です！**
+    - 環境はDockerで構築するため内容を確認するだけでOKです。
   - <https://cbc-study.com/training/advanced/page2>
   - <https://cbc-study.com/training/advanced/page3>
   - <https://cbc-study.com/training/advanced/page4>
