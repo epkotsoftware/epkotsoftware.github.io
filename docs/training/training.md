@@ -456,6 +456,20 @@ trainingリポジトリの [users/{★ユーザー名}/03_advanced/README.md](ht
     - `1:02:33` PHPプログラミング入門講座🔰【初心者でも1時間で学べるPHP入門！フル字幕】
     - `4:05` セッション変数とは？【分かりやすい解説シリーズ #17】【プログラミング】
 
+### PHP VSCode拡張機能
+
+以下の導入を推奨します。  
+「`PHP DocBlocker`」はPHPDocが必須の現場では重宝します。
+
+- PHP Intelephense
+  - コード補完・PSR-12コードフォーマット等、PHPに関する様々な機能が追加されます。
+  - <https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client>
+- PHP DocBlocker
+  - 関数等のメンバーの上で「`/**`」を入力してEnterキーを押すだけで、自動的にPHPDocが生成されます。
+  - <https://marketplace.visualstudio.com/items?itemName=neilbrayfield.php-docblocker>
+  - PHPDocリファレンス
+    - <https://zonuexe.github.io/phpDocumentor2-ja/references/phpdoc/index.html>
+
 ### CBC 応用
 
 CBCと開発環境が異なるので、気を付けてください。  
