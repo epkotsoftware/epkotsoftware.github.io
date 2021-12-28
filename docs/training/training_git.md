@@ -24,6 +24,40 @@
   - VSCode
     - <https://azure.microsoft.com/ja-jp/products/visual-studio-code/>
 
+### Git設定
+
+Gitを初期設定のままインストールを進めると  
+テキストファイルの改行コードが自動変換される設定になります。  
+自動変換されないように「`core.autocrlf`」に「`false`」を設定しておきます。  
+
+```bash
+git config --global core.autocrlf false
+```
+
+「`core.autocrlf`」設定値は3種類あり、Windowsはデフォルトの改行コードがCRLFになるため  
+設定値によって以下のように変換されます。
+
+| core.autocrlf | git checkout | git commit | 備考 |
+| :---: | :---: | :---: | --- |
+| true | LF -> CRLF | CRLF -> LF | ほぼ使われない設定 |
+| input | - | CRLF -> LF | 開発する際に便利な設定<br>稀に問題が発生するケースあり |
+| false | - | - | 自動変換が行われないので安全<br>コーディングの際の改行コードは自身で確認が必要 |
+
+Linux環境で動作するPHP等では改行コードは「`LF`」とされているため  
+PHPファイルの改行コードは「`LF`」とされています（[参照:PSR-12 ～ 2.2 Files](https://www.php-fig.org/psr/psr-12/)）。  
+
+- 「`true`」の場合
+  - checkoutした時に「`true`」になっていると  
+    ローカルのファイルが自動で「`CRLF`」に変換されてしまうため  
+    例えばMacや本番環境で動かした場合、異なる動作をする場合があります。  
+    現場でもほぼ使われない設定です。
+- 「`input`」の場合
+  - checkoutした場合に変換は行われません。  
+    コーディング時の改行コードに誤って「`CRLF`」が含まれていた場合でも、自動的に「`LF`」に変換してくれます。
+  - デメリット
+    - 稀にCRLFのファイルをそのままコミットしたいケース、バイナリファイルをコミットするケースがあり  
+      その場合に自動変換されトラブルになることがあります。  
+
 #### VSCode拡張機能
 
 Gitを扱うための拡張機能をご紹介します。
