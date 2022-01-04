@@ -42,12 +42,27 @@ Dropbox等、共有しているファイルの扱いには注意しましょう�
 
 ファイル拡張子を表示しておくようにしましょう。
 
+- 動画
+  - 拡張子とは何かを解説【PC必須知識】
+    - <https://youtu.be/45BQZWjlRls>
+  - 拡張子とは何かを説明！パソコン・プログラミングを学習する上で重要な基礎知識です！
+    - <https://youtu.be/_UjT-xsE6Oc>
 - 拡張子とは
   - <https://www.google.com/search?q=ファイル+拡張子とは>
 - Windows
   - <https://www.google.com/search?q=Windows+ファイル+拡張子+表示>
 - Mac
   - <https://www.google.com/search?q=Mac+ファイル+拡張子+表示>
+
+### 圧縮ファイル
+
+- ZIP形式をはじめとするデータの圧縮や解凍方法、ZIP形式の注意点についてご紹介
+  - <https://www.dospara.co.jp/5info/cts_str_pc_comp-file>
+- ZIPファイル
+  - 【Windows,ZIP】フォルダを圧縮、展開(解凍)する方法、超簡単！
+    - <https://youtu.be/Gc08O5JEmbw>
+- 【gzip】 ファイルを圧縮・展開する（拡張子.gz）
+  - <https://xtech.nikkei.com/it/article/COLUMN/20060227/230791/>
 
 ### ショートカットキー
 
@@ -61,6 +76,11 @@ Dropbox等、共有しているファイルの扱いには注意しましょう�
   - <https://www.pc-koubou.jp/magazine/35994>
 - Mac でスクリーンショットを撮る
   - <https://support.apple.com/ja-jp/HT201361>
+
+### タイピング
+
+- 高速タイピング練習のコツ｜3日でマスター！タッチタイピング（ブラインドタッチ）【初心者向け入門講座】
+  - <https://youtu.be/XiFZnCZEG1E>
 
 ## 学習方法
 
