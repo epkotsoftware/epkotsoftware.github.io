@@ -572,7 +572,7 @@ MESSAGE=Hello_bash
 echo $NUM
 echo $MESSAGE
 root@training-web:/var/www/html# # hoge.sh を実行
-root@training-web:/var/www/html# sh hoge.sh
+root@training-web:/var/www/html# bash hoge.sh
 8
 Hello_bash
 root@training-web:/var/www/html# 
@@ -587,6 +587,18 @@ root@training-web:/var/www/html#
     - <https://forest.watch.impress.co.jp/library/software/utf8teraterm/>
   - ターミナルソフトはTeratermよりRLoginがおすすめの理由
     - <https://infrasenavi.com/mibunrui/361>
+
+### シェル実行の注意点
+
+UbuntuやDebianでシェルを実行する際に「`sh "ファイル名"`」で実行すると「`bash`」ではなく「`Debian Almquist shell(dash)`」で実行されます。  
+「`#!/bin/bash`」の記載があるシェルを実行する際は、「`bash "ファイル名"`」で実行します。  
+
+```bash
+bash hoge.sh
+```
+
+Debian(Ubuntu)の「`/bin/sh`」のシンボリックリンクが「`/bin/dash`」になっているため  
+このようなことが発生します。  
 
 ### vi
 
