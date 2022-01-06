@@ -914,6 +914,9 @@ Gitについて、より深く学んでいきます。
 
 おすすめの書籍がありましたら、追記しますので講師までご連絡ください。
 
+- HTML・CSS
+  - `HTML&CSS全事典 改訂版 HTML Living Standard & CSS3/4対応`
+    - <https://www.amazon.co.jp/dp/4295008281>
 - DB
   - `スッキリわかるSQL入門 第2版 ドリル222問付き! (スッキリわかる入門シリーズ)`
     - <https://www.amazon.co.jp/dp/4295005096>
