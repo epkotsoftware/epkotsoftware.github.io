@@ -92,7 +92,42 @@ echo App\AlbumHelper::albumsToTsvString($albums);
 ### 出力例
 
 ```tsv
-// 1	ALBUM01	NOTE01	TRACK0101,TRACK0102,TRACK0103
-// 2	ALBUM02	NOTE02	TRACK0201
-// 3	ALBUM03	NOTE03	TRACK0301,TRACK0302,TRACK0303
+1	ALBUM01	NOTE01	TRACK0101,TRACK0102,TRACK0103
+2	ALBUM02	NOTE02	TRACK0201
+3	ALBUM03	NOTE03	TRACK0301,TRACK0302,TRACK0303
 ```
+
+## クラスについて理解を深める
+
+- 静的クラス（PHPだとstaticメソッドのみを持つクラス）
+  - Strクラス
+    - <https://readouble.com/laravel/8.x/ja/helpers.html>
+    - GitHub
+      - <https://github.com/illuminate/support/blob/v8.78.1/Str.php>
+- 動的クラス（new でインスタンスを生成するクラス）
+  - Collectionクラス
+    - <https://readouble.com/laravel/8.x/ja/collections.html>
+    - GitHub
+      - <https://github.com/illuminate/collections/blob/v8.78.1/Collection.php>
+    - `collect`関数は内部的に「`new Collection($value)`」をしています。
+      - <https://github.com/illuminate/collections/blob/v8.78.1/helpers.php#L15>
+
+## プログラミング力を身につけるには
+
+単純なプログラミング力を身につけるには  
+競技プログラミングがおすすめです。  
+ただ、これで上位に上がったからと言って実務で通用するわけではないので  
+基礎が身につき、プログラミングのスピードが向上したら  
+別の学習をする方が良いです。
+
+- AtCoder
+  - <https://atcoder.jp/>
+  - 新規登録後、チュートリアルがあります。  
+    使用経験はないですが、競技プログラミングで人気があるようです。
+- paiza
+  - <https://paiza.jp/challenges/info>
+  - こちらはランク毎に問題が選べます。  
+    以前、3年目の同僚がチャレンジし、Cランクだったので  
+    Cランクで何問か解けるようになると、プログラミングに限れば  
+    現場で通用するレベルと言えます。  
+    問題毎で上位50位以内に入るとランキングが見れるようになります。
