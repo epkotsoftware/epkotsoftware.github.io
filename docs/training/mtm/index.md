@@ -1,4 +1,4 @@
-# プログラミング
+# 株式会社エプコットソフトウェア ～ プログラミング実践
 
 ## 課題1
 
@@ -46,7 +46,7 @@ echo "<br>";
 | 1 | id | albums.id |  |
 | 2 | name | albums.name |  |
 | 3 | note | albums.note |  |
-| 4 | track_names | tracks.name | 「.」区切りで連結して出力する |
+| 4 | track_names | tracks.name | 「,」区切りで連結して出力する |
 
 ### kadai02.php
 
