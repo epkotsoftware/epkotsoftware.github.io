@@ -400,7 +400,8 @@ Googleマイドライブ → 「新規」 → 「ファイルのアップロー�
   - 必須
     - 「`#7 簡単な機能をjQueryで実装しよう`」  
       → 「`02_basic/htdocs/kadai_07.html`」
-    - 「`#8 変数を使う`」～ 「`#11 モーダルウィンドウを作ろう`」  
+    - 「`#8 変数を使う`」、「`#9 関数を使う`」、「`#10 コンソールでデータの確認`」、「`#11 モーダルウィンドウを作ろう`」  
+      見た目も`kadai_07.html`と似せましょう。
       → 「`02_basic/htdocs/kadai_08.html`」
 
 trainingリポジトリの [users/{★ユーザー名}/02_basic/README.md](https://github.com/epkotsoftware/training/tree/template/users/_template/02_basic/README.md) にアップ先が記載されています。
@@ -441,8 +442,14 @@ trainingリポジトリの [users/{★ユーザー名}/02_basic/README.md](https
     - 原因2: WSLが古い
       - Linux kernel のアップデート「`wsl --update`」
       - 一度、Docker Desktopを再インストール
-  - docker-compose出来ない
+  - docker-compose が実行出来ない
     - 原因: 環境変数まわりに問題がありそう。
+  - docker-compose で 「`docker: no matching manifest for linux/arm64/v8 in the manifest list entries.`」が出る
+    - MacのM1チップ搭載のものでエラーが出ることがある。以下のようにymlファイルを編集することで解決可能
+      - <https://ryotarch.com/docker/no-matching-manifest-for-linux-arm64-v8-on-m1-mac/>
+  - docker-compose で File Sharing に関するエラーが出る
+    - Macの場合、以下の「File sharing」タブで現在使用しているディレクトリを追加する（今回であればリポジトリのディレクトリ「training」が設定されていればOK）
+      - <https://matsuand.github.io/docs.docker.jp.onthefly/desktop/mac/>
 
 ##### 構築手順
 
