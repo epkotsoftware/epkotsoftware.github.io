@@ -173,11 +173,15 @@ let $map = {
 ```
 
 - Wikipedia
+  - <https://ja.wikipedia.org/wiki/配列>
   - <https://ja.wikipedia.org/wiki/連想配列>
 - PHP
   - <https://www.php.net/manual/ja/language.types.array.php>
 - JavaScript
-  - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array>
+  - Array
+    - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array>
+  - オブジェクトでの作業
+    - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Working_with_Objects>
 - 動画
   - 配列とは？【分かりやすい解説シリーズ #37】【プログラミング】
     - <https://youtu.be/SdX8I1ImlVA>
@@ -910,7 +914,7 @@ for ($i=0; $i < 10000; $i++) {
 //   メモリ: 528440
 // ■ arr2に代入
 $arr2 = $arr;
-//   メモリ: 528440 ($arr2に代入されたが)
+//   メモリ: 528440 ($arr2に代入されたが、参照が渡されただけなので変化なし)
 // ■ arrに要素を追加（arr2 には「bbb」は追加されない）
 $arr[] = "bbb";
 //   メモリ: 1056880 (arrに変更が加えられたため、複製される)
