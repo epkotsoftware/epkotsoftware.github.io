@@ -154,16 +154,17 @@ Visual Studio Code(VSCode) が初めての方へ
 | 4 | - | [`マークアップエンジニア編`](#マークアップエンジニア編) |
 | 5 | - | [`フロントエンドエンジニア編`](#フロントエンドエンジニア編) |
 | 6 | 3.0 | [`Linux編`](#linux編) |
-| 7 | 0.5 | [`コーディング規約編`](#コーディング規約編) |
-| 8 | - | [`開発手法編`](#開発手法編) |
-| 9 | - | [`設計編`](#設計編) |
-| 10 | - | [`テスト編`](#テスト編) |
-| 11 | - | [`ファイル編`](#ファイル編) |
-| 12 | - | [`セキュリティ編`](#セキュリティ編) |
-| 13 | - | [`バックエンド編`](#バックエンド編) |
-| 14 | - | [`バージョン管理システム編`](#バージョン管理システム編) |
-| 15 | - | [`Git編`](#git編) |
-| 16 | 20 | [`自己学習`](#自己学習) |
+| 7 | - | [`開発手法編`](#開発手法編) |
+| 8 | - | [`設計編`](#設計編) |
+| 9 | - | [`テスト編`](#テスト編) |
+| 10 | - | [`ファイル編`](#ファイル編) |
+| 11 | - | [`セキュリティ編`](#セキュリティ編) |
+| 12 | - | [`バックエンド編`](#バックエンド編) |
+| 13 | - | [`バージョン管理システム編`](#バージョン管理システム編) |
+| 14 | - | [`Git編`](#git編) |
+| 15 | - | [`プログラミング編`](#プログラミング編) |
+| 16 | 0.5 | [`コーディング規約編`](#コーディング規約編) |
+| 17 | 20 | [`自己学習`](#自己学習) |
 
 ## はじめに
 
@@ -629,47 +630,6 @@ Linux技術者認定試験(LPIC)の一部にチャレンジしてみましょう
     - LPIC101 GNUとUnixのコマンド **※ 問題数が多いため出来るところまで**
       - <https://lpic-study.com/exam/LPIC+101-GNUとUnixのコマンド-no_1-next.php>
 
-## コーディング規約編
-
-3時間を目安に学習してください。
-  
-現場に入ると、コーディング規約が設けられている事が多いです  
-一般的なコーディング規約のリンクをまとめました。  
-  
-現場ではベースになるコーディング規約 + α になることが多いかと思います。  
-現場が決まっていない場合は、PHPのコーディング規約を見て  
-わからないところが出てきたら調べてみましょう。
-  
-ベテランでも意味を理解していなかったり、違反する事が多いので  
-今は「こういうのがあるんだ」程度の理解で大丈夫です。
-
-- PHP
-  - PSR （Laravelが採用しているコーディング規約）
-    - PSR-1: Basic Coding Standard
-      - <https://www.php-fig.org/psr/psr-1/>
-    - PSR-4: Autoloader
-      - <https://www.php-fig.org/psr/psr-4/>
-    - PSR-12: Extended Coding Style
-      - <https://www.php-fig.org/psr/psr-12/>
-  - PSRは全て英語なので、日本語にしたい場合はブラウザの翻訳を使うか、翻訳しているサイトをご覧ください。
-    - 個人によるPSRの日本語訳
-      - <https://github.com/thatblue/fig-standards>
-- C#
-  - コーディングスタイル(Microsoft公式)
-    - 識別子名
-      - <https://docs.microsoft.com/ja-jp/dotnet/csharp/fundamentals/coding-style/identifier-names>
-    - C# のコーディング規則
-      - <https://docs.microsoft.com/ja-jp/dotnet/csharp/fundamentals/coding-style/coding-conventions>
-- Visual Basic(`VB.Net`)
-  - プログラム構造とコード規則(Microsoft公式)
-    - <https://docs.microsoft.com/ja-jp/dotnet/visual-basic/programming-guide/program-structure/program-structure-and-code-conventions>
-- Java
-  - Javaコーディング規約
-    - <https://future-architect.github.io/coding-standards/documents/forJava/Javaコーディング規約.html>
-- Swift
-  - Swift Style Guide(Google公式)
-    - <https://google.github.io/swift/>
-
 ## 開発手法編
 
 - ウォーターフォール型の開発手法とは？要件定義・基本設計などシステム開発の進め方を解説！
@@ -898,9 +858,58 @@ Gitについて、より深く学んでいきます。
 
 - [Git編](./training_git.md)
 
+## プログラミング編
+
+プログラミングの基礎について、より深く学んでいきます。  
+別資料で用意していますので、以下を参照してください。  
+
+- [プログラミング編](./programming.md)
+
+## コーディング規約編
+
+3時間を目安に学習してください。
+  
+現場に入ると、コーディング規約が設けられている事が多いです  
+一般的なコーディング規約のリンクをまとめました。  
+  
+現場ではベースになるコーディング規約 + α になることが多いかと思います。  
+現場が決まっていない場合は、PHPのコーディング規約を見て  
+わからないところが出てきたら調べてみましょう。
+  
+ベテランでも意味を理解していなかったり、違反する事が多いので  
+今は「こういうのがあるんだ」程度の理解で大丈夫です。
+
+- PHP
+  - PSR （Laravelが採用しているコーディング規約）
+    - PSR-1: Basic Coding Standard
+      - <https://www.php-fig.org/psr/psr-1/>
+    - PSR-4: Autoloader
+      - <https://www.php-fig.org/psr/psr-4/>
+    - PSR-12: Extended Coding Style
+      - <https://www.php-fig.org/psr/psr-12/>
+  - PSRは全て英語なので、日本語にしたい場合はブラウザの翻訳を使うか、翻訳しているサイトをご覧ください。
+    - 個人によるPSRの日本語訳
+      - <https://github.com/thatblue/fig-standards>
+- C#
+  - コーディングスタイル(Microsoft公式)
+    - 識別子名
+      - <https://docs.microsoft.com/ja-jp/dotnet/csharp/fundamentals/coding-style/identifier-names>
+    - C# のコーディング規則
+      - <https://docs.microsoft.com/ja-jp/dotnet/csharp/fundamentals/coding-style/coding-conventions>
+- Visual Basic(`VB.Net`)
+  - プログラム構造とコード規則(Microsoft公式)
+    - <https://docs.microsoft.com/ja-jp/dotnet/visual-basic/programming-guide/program-structure/program-structure-and-code-conventions>
+- Java
+  - Javaコーディング規約
+    - <https://future-architect.github.io/coding-standards/documents/forJava/Javaコーディング規約.html>
+- Swift
+  - Swift Style Guide(Google公式)
+    - <https://google.github.io/swift/>
+
 ## 自己学習
 
 新人研修の必須科目としては以上となります。  
+自己学習に入る方は講師にご報告ください。  
 ここからは決められた研修や課題等はありませんので  
 各自で目標を決めて学習をしてください。
 
