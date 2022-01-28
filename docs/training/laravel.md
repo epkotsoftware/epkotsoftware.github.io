@@ -272,20 +272,26 @@ PCで扱うことを想定した、機能重視のdashboard・adminテンプレ�
 同じパスが存在していますが、HTTPメソッドが異なるため  
 別々のルートとして認識されます。  
 
-| 機能名 | HTTP<br>メソッド | URI | Controller<br>メソッド |
-| --- | --- | --- | --- |
-| 一覧画面 | GET             | /posts                | index |
-| 新規画面 | GET             | /posts/create         | create |
-| 新規     | POST            | /posts                | store |
-| 詳細画面 | GET             | /posts/{post}         | show |
-| 編集画面 | GET             | /posts/{post}/edit    | edit |
-| 確認画面 | POST            | /posts/{post}/confirm | confirm |
-| 更新     | PUT or<br>PATCH | /posts/{post}         | update |
-| 削除     | DELETE          | /posts/{post}         | destroy |
+| 機能名 | HTTP<br>メソッド | URI | Controller<br>メソッド | 備考 |
+| --- | --- | --- | --- | --- |
+| 一覧画面 | GET             | /posts                | index   |  |
+| 新規画面 | GET             | /posts/create         | create  |  |
+| 新規     | POST            | /posts                | store   |  |
+| 詳細画面 | GET             | /posts/{post}         | show    |  |
+| 編集画面 | GET             | /posts/{post}/edit    | edit    |  |
+| 確認画面 | POST            | /posts/{post}/confirm | confirm |  |
+| 更新     | PUT or PATCH    | /posts/{post}         | update  | バリデーションは確認画面と同様に行う<br>（同じRequestクラスもしくは継承したRequestクラスを使う） |
+| 削除     | DELETE          | /posts/{post}         | destroy | 実際にDELETE文は使用せず、deleted_atカラムを更新する<br>ソフトデリートで行うケースが多い |
 
 - Laravel 8.x HTTP Requests
   - <https://readouble.com/laravel/8.x/ja/requests.html>
 - Laravel 8.x ルーティング
   - <https://readouble.com/laravel/8.x/ja/routing.html>
+- Laravel 8.x ミドルウェア
+  - <https://readouble.com/laravel/8.x/ja/middleware.html>
 - Laravel 8.x コントローラ
   - <https://readouble.com/laravel/8.x/ja/controllers.html>
+- Laravel 8.x Eloquentの準備 ソフトデリート
+  - <https://readouble.com/laravel/8.x/ja/eloquent.html#soft-deleting>
+- Laravel 8.x CSRF保護
+  - <https://readouble.com/laravel/8.x/ja/csrf.html>
