@@ -264,8 +264,8 @@ PCで扱うことを想定した、機能重視のdashboard・adminテンプレ�
 - 対象DBテーブル名
   - posts
 - クラス
-  - PostController
-  - PostModel
+  - `App\Http\Controllers\PostController`
+  - `App\Models\Post`
 
 ■ ルーティング  
 
