@@ -160,6 +160,28 @@ CSSフレームワークが「`Tailwind CSS`」が採用されており、「`Bo
   - 「`mod_rewrite`」が有効化されていない
     - 「`a2enmod rewrite`」コマンドで有効にする。
 
+## Composer
+
+Composerはパッケージ管理システムです。  
+Laravelをインストールすると自動で`composer.json`が作成されます。  
+
+### Composerパッケージ
+
+Laravel標準以外でおすすめのパッケージをご紹介します。  
+
+#### PHP_CodeSniffer
+
+コーディング規約違反を検出(phpcs)及び、規約違反を自動的に修正(phpcdf) を行うパッケージです。
+
+- GitHub
+  - <https://github.com/squizlabs/PHP_CodeSniffer>
+
+以下のコマンドでインストール可能です。  
+
+```bash
+composer require --dev squizlabs/php_codesniffer
+```
+
 ## Artisanコンソール
 
 ファイルの追加やmigrationの実行等、アプリケーション構築に必要なものを「`artisan`」を使って行います。
@@ -171,45 +193,99 @@ php artisan list
 
 ---
 
-例: Artistsテーブルとそれに関連する各クラスを追加。  
+例: Artistモデルとそれに関連する各クラスを追加。  
     最初はこれで開発の感覚を掴むと良いです。
 
 ```bash
 # app/Models （--all を指定することで、関連するファイルを追加）
-php artisan make:model Artists --all
+php artisan make:model Artist --all
 # app/tests/Feature
-php artisan make:test Http/Controllers/ArtistsControllerTest
+php artisan make:test Http/Controllers/ArtistControllerTest
 # app/tests/Unit
-php artisan make:test Http/Controllers/ArtistsControllerTest --unit
+php artisan make:test Http/Controllers/ArtistControllerTest --unit
 ```
 
-- `app/Http/Controllers/ArtistsController.php`
+- `app/Http/Controllers/ArtistController.php`
   - コントローラ <https://readouble.com/laravel/8.x/ja/controllers.html>
-- `app/Http/Requests/StoreArtistsRequest.php`
-- `app/Http/Requests/UpdateArtistsRequest.php`
+- `app/Http/Requests/StoreArtistRequest.php`
+- `app/Http/Requests/UpdateArtistRequest.php`
   - HTTP Requests <https://readouble.com/laravel/8.x/ja/requests.html>
   - バリデーション <https://readouble.com/laravel/8.x/ja/validation.html>
-- `app/Models/Artists.php`
+- `app/Models/Artist.php`
   - Laravel 8.x Eloquentの準備 <https://readouble.com/laravel/8.x/ja/eloquent.html>
-- `app/Policies/ArtistsPolicy.php`
+- `app/Policies/ArtistPolicy.php`
   - 認可 <https://readouble.com/laravel/8.x/ja/authorization.html>
-- `app/database/migrations/YYYY_MM_DD_HHmmss_create_artists_table.php`
+- `app/database/migrations/YYYY_MM_DD_HHmmss_create_artist_table.php` （テーブル名は複数形をおすすめします）
   - マイグレーション <https://readouble.com/laravel/8.x/ja/migrations.html>
-- `app/database/seeders/ArtistsSeeder.php`
+- `app/database/seeders/ArtistSeeder.php`
   - データベース：シーディング <https://readouble.com/laravel/8.x/ja/seeding.html>
-- `app/database/factories/ArtistsFactory.php`
+- `app/database/factories/ArtistFactory.php`
   - データベーステスト <https://readouble.com/laravel/8.x/ja/database-testing.html>
-- `app/tests/Feature/Http/Controllers/ArtistsControllerTest.php`
-- `app/tests/Unit/Http/Controllers/ArtistsControllerTest.php`
+- `app/tests/Feature/Http/Controllers/ArtistControllerTest.php`
+- `app/tests/Unit/Http/Controllers/ArtistControllerTest.php`
   - テスト: テストの準備 <https://readouble.com/laravel/8.x/ja/testing.html>
 
 ---
 
-例: Artistsテーブルに関連する画面を追加する場合
+例: Artistモデルに関連する画面を追加する場合
 
 ```bash
 # app/Http/Controllers
-php artisan make:controller ArtistsExtendController --model=Artists --resource --requests --test
+php artisan make:controller ArtistExtendController --model=Artist --resource --requests --test
 # app/tests/Unit
-php artisan make:test Http/Controllers/ArtistsExtendControllerTest --unit
+php artisan make:test Http/Controllers/ArtistExtendControllerTest --unit
 ```
+
+## CRUD
+
+WEBサービスを作る際、管理者がデータ登録・閲覧するための管理画面(Admin)を作る事があります。  
+PCで扱うことを想定した、機能重視のdashboard・adminテンプレートのような画面レイアウトが多いです。  
+
+- 参考
+  - Laravel CRUD
+    - <https://qiita.com/takeshisakuma/items/8d33b1f10b273f0050b1>
+  - LaravelのControllerの薄いメソッドでも書く
+    - <https://crieit.net/posts/Laravel-Controller>
+  - ダッシュボードテンプレートデモ
+    - GitHub
+      - <https://github.com/themesberg/tailwind-dashboard-windster>
+    - Demo
+      - ユーザーの一覧画面の例です。この例ではポップアップで編集を行っていますが  
+        「一覧画面(index)」から「詳細画面(show)」、「新規画面(create)」、「編集画面(edit)」に遷移させるケースが多いです。  
+        日本のWEBページでは、ショッピングサイト等にもよく見られる  
+        更新前の「確認画面(confirm)」を挟む事もあります。
+      - <https://demo.themesberg.com/windster/users/list/>
+- テンプレ検索ワード
+  - 「admin template」
+  - 「dashboard template」
+
+■ 例  
+
+- 対象DBテーブル名
+  - posts
+- クラス
+  - PostController
+  - PostModel
+
+■ ルーティング  
+
+同じパスが存在していますが、HTTPメソッドが異なるため  
+別々のルートとして認識されます。  
+
+| 機能名 | HTTP<br>メソッド | URI | Controller<br>メソッド |
+| --- | --- | --- | --- |
+| 一覧画面 | GET             | /posts                | index |
+| 新規画面 | GET             | /posts/create         | create |
+| 新規     | POST            | /posts                | store |
+| 詳細画面 | GET             | /posts/{post}         | show |
+| 編集画面 | GET             | /posts/{post}/edit    | edit |
+| 確認画面 | POST            | /posts/{post}/confirm | confirm |
+| 更新     | PUT or<br>PATCH | /posts/{post}         | update |
+| 削除     | DELETE          | /posts/{post}         | destroy |
+
+- Laravel 8.x HTTP Requests
+  - <https://readouble.com/laravel/8.x/ja/requests.html>
+- Laravel 8.x ルーティング
+  - <https://readouble.com/laravel/8.x/ja/routing.html>
+- Laravel 8.x コントローラ
+  - <https://readouble.com/laravel/8.x/ja/controllers.html>
