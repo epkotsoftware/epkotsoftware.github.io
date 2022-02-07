@@ -376,6 +376,24 @@ test('HttpMethod.GET'); // エラー
 全て同じものと認識していても問題はありません（厳密には違うものもある）。  
 引数・戻り値は必ず使うので覚えておきましょう。  
 
+```php
+/**
+ * 【PHP】関数定義
+ */
+function 関数名($引数1, $引数2, ...$引数n)
+{
+    // 処理
+
+    // 値を返す
+    return 戻り値;
+}
+```
+
+```php
+// 【PHP】関数の実行、戻り値は $result に入る
+$result = 関数名(1, 2, 3);
+```
+
 - Wikipedia
   - <https://ja.wikipedia.org/wiki/サブルーチン>
   - <https://ja.wikipedia.org/wiki/メソッド_(計算機科学)>
@@ -394,6 +412,8 @@ test('HttpMethod.GET'); // エラー
     - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Functions>
   - アロー関数式
     - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Functions/Arrow_functions>
+- 記事
+  - <https://blog.senseshare.jp/argument.html>
 - 動画
   - 関数とは？【分かりやすい解説シリーズ #2】【プログラミング】
     - <https://youtu.be/PtQekBoRHZ0>
