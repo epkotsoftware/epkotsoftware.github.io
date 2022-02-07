@@ -179,6 +179,13 @@ Gitが何かわからない方へ
 - 【Git入門】Git + Github使い方入門講座
   - <https://youtu.be/LDOR5HfI_sQ>
 
+### サイト
+
+- JavaScript入門
+  - <https://www.javadrive.jp/javascript/>
+  - 変数・配列・関数は、PHP等の他の言語でも存在するものになります。  
+    しっかり学んでおくと、今後の学習がスムーズに進みます。
+
 ## 何か作ってみたい方へ
 
 「CBC」という無料のオンライン学習サイトがありますので  
