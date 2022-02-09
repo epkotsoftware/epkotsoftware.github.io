@@ -2,7 +2,9 @@
 
 「`helper.js`」ファイルを新規作成し、以下の仕様を満たす[same関数](#same関数)を定義してください。  
 初めての方は、[参考資料](#参考資料)に学習用の動画・サイトのリンクがあります。  
-また、[禁止事項](#禁止事項)には目を通すようお願い致します。
+また、[禁止事項](#禁止事項)には目を通すようお願い致します。  
+  
+動作確認には[動作確認用HTMLファイル](#動作確認用htmlファイル)をお使いください。
 
 - 言語
   - JavaScript
@@ -16,11 +18,17 @@
 
 | No. |  |
 | --- | --- |
-| 1 | [same関数](#same関数) |
-| 2 | [例](#例) |
-| 3 | [提出について](#提出について) |
-| 4 | [参考資料](#参考資料) |
-| 5 | [禁止事項](#禁止事項) |
+| 1 | [動作確認用HTMLファイル](#動作確認用htmlファイル) |
+| 2 | [same関数](#same関数) |
+| 3 | [例](#例) |
+| 4 | [提出について](#提出について) |
+| 5 | [参考資料](#参考資料) |
+| 6 | [禁止事項](#禁止事項) |
+
+## 動作確認用HTMLファイル
+
+- 以下のZIPファイルを解凍してお使いください。
+  - [htdocs.zip](./htdocs.zip)
 
 ## same関数
 
@@ -52,9 +60,7 @@
 ```js
 // same関数を実行
 let result = same(1, 1);
-
-// same関数の結果を確認
-document.write("(" + (typeof result) + ") " + result); // (boolean) true
+// result変数には true が入る
 ```
 
 ### value1 = 2、value2 = 2、戻り値 = true
@@ -62,9 +68,7 @@ document.write("(" + (typeof result) + ") " + result); // (boolean) true
 ```js
 // same関数を実行
 let result = same(2, 2);
-
-// same関数の結果を確認
-document.write("(" + (typeof result) + ") " + result); // (boolean) true
+// result変数には true が入る
 ```
 
 ### value1 = '1'、value2 = '1'、戻り値 = true
@@ -72,9 +76,7 @@ document.write("(" + (typeof result) + ") " + result); // (boolean) true
 ```js
 // same関数を実行
 let result = same('1', '1');
-
-// same関数の結果を確認
-document.write("(" + (typeof result) + ") " + result); // (boolean) true
+// result変数には true が入る
 ```
 
 ### value1 = 1、value2 = 2、戻り値 = false
@@ -82,9 +84,7 @@ document.write("(" + (typeof result) + ") " + result); // (boolean) true
 ```js
 // same関数を実行
 let result = same(1, 2);
-
-// same関数の結果を確認
-document.write("(" + (typeof result) + ") " + result); // (boolean) false
+// result変数には false が入る
 ```
 
 ### value1 = 1、value2 = '1'、戻り値 = false
@@ -94,9 +94,7 @@ document.write("(" + (typeof result) + ") " + result); // (boolean) false
 ```js
 // same関数を実行
 let result = same(1, '1');
-
-// same関数の結果を確認
-document.write("(" + (typeof result) + ") " + result); // (boolean) false
+// result変数には false が入る
 ```
 
 ## 提出について
