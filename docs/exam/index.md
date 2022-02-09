@@ -124,6 +124,12 @@ ZIP圧縮を行い、担当者までメールでお送りください。
 
 ### エディタ
 
+JavaScriptを書くには「メモ帳」等のアプリでも可能ですが  
+「Visual Studio Code」がおすすめで、HTML講座動画内でも使われています。  
+サブのエディタとして「サクラエディタ」等も良いです。  
+
+- Visual Studio Code (ビジュアル スタジオ コード)
+  - <https://azure.microsoft.com/ja-jp/products/visual-studio-code/>
 - サクラエディタ
   - <https://sakura-editor.github.io/>
 
