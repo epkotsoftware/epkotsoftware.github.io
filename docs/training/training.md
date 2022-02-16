@@ -919,6 +919,9 @@ Gitについて、より深く学んでいきます。
 
 ## データベース編
 
+フロントエンドエンジニア編等で使ったDocker環境に  
+MySQL・phpMyAdmin環境が入っているので、練習してみましょう。
+
 - 動画
   - SQL入門講座
     - <https://www.youtube.com/playlist?list=PLs3eD4QT7ow6mguoDEUsS-dRbzf_nkeei>
@@ -931,6 +934,8 @@ Gitについて、より深く学んでいきます。
       - `6:46` 知らないと恥をかくIT用語「SQL」を解説！DBとの違いを説明できますか？
   - 【MySQL入門決定版】2時間半で学ぶ初心者向けMySQLデータベースチュートリアル【MySQLの基本とSQLの基礎文法の徹底的にマスター】
     - <https://youtu.be/kKMm1acGt3I>
+- SQL練習問題 – 一覧まとめ
+  - <https://tech.pjin.jp/blog/2016/12/05/sql練習問題-一覧まとめ/>
 
 ## 自己学習
 
