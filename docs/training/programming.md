@@ -127,7 +127,9 @@ $variables = [
 ### 文字列
 
 - PHP
-  - <https://www.php.net/manual/ja/language.types.intro.php>
+  - <https://www.php.net/manual/ja/language.types.string.php>
+- JavaScript
+  - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/String>
 - 動画
   - 文字列関数とは？【分かりやすい解説シリーズ #51】【プログラミング】
     - <https://youtu.be/5SsPBjO6yOM>
@@ -154,6 +156,16 @@ $map = [
     'name' => 'NAME_101',
     'note' => 'NOTE_101',
 ];
+
+// 配列から1番目の要素を取り出す
+$result1 = $array[0]; // $result1 には 101 が入る
+// 配列から3番目の要素を取り出す
+$result2 = $array[2]; // $result2 には NOTE101 が入る
+
+// 連想配列からキー「id」の要素を取り出す
+$result3 = $map['id']; // $result3 には 101 が入る
+// 連想配列からキー「note」の要素を取り出す
+$result4 = $map['note']; // $result4 には NOTE101 が入る
 ```
 
 ```javascript
@@ -165,7 +177,7 @@ let array = [
     'NOTE_101',
 ];
 //   連想配列（JavaScriptではObject型となる）
-let $map = {
+let map = {
     id: '101',
     name: 'NAME_101',
     note: 'NOTE_101',
@@ -420,6 +432,77 @@ $result = 関数名(1, 2, 3);
   - 引数、戻り値とは？【分かりやすい解説シリーズ #7】【プログラミング】
     - <https://youtu.be/aTkXCEU65bg>
 
+### 関数定義・実行例1
+
+例として2つの整数を引数として渡し、大きい方を返す  
+maximum関数を定義してみましょう。  
+
+```php
+  <?php
+// 関数定義 ===================================================
+/**
+ * 2つの整数のうち、大きい方を返します。
+ *
+ * @param int $number1 引数1
+ * @param int $number2 引数2
+ * @return int
+ */
+function maximum(int $number1, int $number2): int
+{
+    if ($number1 < $number2) {
+        // $number1 < $number2 になるので $number2 を返す。
+        return $number2;
+        // 関数の処理は return の時点で終了するため、後続の処理は行われない。
+    }
+    // $number1 >= $number2 になるので $number1 を返す。
+    return $number1;
+}
+
+// 関数実行 ===================================================
+$result1 = maximum(1, 2); // $result1 には 2 が入る
+$result2 = maximum(3, 2); // $result2 には 3 が入る
+$result3 = maximum(4, 4); // $result3 には 4 が入る
+```
+
+return する値は必ずしも変数にする必要はありません。  
+[三項演算子](https://www.php.net/manual/ja/language.operators.comparison.php#language.operators.comparison.ternary)を使うと以下のように書く事も出来ます。
+
+```php
+function maximum(int $number1, int $number2): int
+{
+    return ($number1 < $number2) ? $number2 : $number1;
+}
+```
+
+### 関数定義・実行例2
+
+実業務であった関数例です。
+
+```php
+<?php
+/**
+ * タイトルとサブタイトルを結合した結果を返します。
+ *
+ * @param string $title タイトル
+ * @param string $subtitle サブタイトル
+ * @return string
+ */
+function concatTitle(string $title, string $subtitle): string
+{
+    return $title . ' (' . $subtitle . ')';
+}
+
+$result1 = concatTitle('MainTitle1', 'Subtitle1'); // $result1 には 'MainTitle1 (Subtitle1)' が入る
+$result2 = concatTitle('MainTitle2', 'Subtitle2'); // $result2 には 'MainTitle2 (Subtitle2)' が入る
+```
+
+関数の説明とは関係ありませんが、二重引用符で変数のパースを行うことで以下のような記述も可能です。
+
+```php
+    // return $title . ' (' . $subtitle . ')'; と同じ結果
+    return "{$title} ({$subtitle})";
+```
+
 ### クロージャ
 
 - PHP
@@ -436,20 +519,28 @@ $result = 関数名(1, 2, 3);
 
 クラスを使わない現場はほぼありません。  
 Laravelフレームワークを使う場合、必ずクラスを使用し  
-Controllerクラス等はコマンドで作成します。
+Controllerクラス等はコマンドで作成します。  
 現場で採用しているアーキテクチャによっては  
-各自でクラスを手動で新規作成する必要があります。
+各自でクラスを手動で新規作成する必要があります。  
+  
+また、インターネットでは非公開のクラスを使う事もあるので  
+使い方も覚えておきましょう。  
 
 - Wikipedia
-  - <https://ja.wikipedia.org/wiki/クラス_(コンピュータ)>
+  - クラスの基礎
+    - <https://ja.wikipedia.org/wiki/クラス_(コンピュータ)>
 - PHP
-  - <https://www.php.net/manual/ja/language.oop5.basic.php>
+  - クラスの基礎
+    - <https://www.php.net/manual/ja/language.oop5.basic.php>
+  - スコープ定義演算子 (::)
+    - <https://www.php.net/manual/ja/language.oop5.paamayim-nekudotayim.php>
 - JavaScript
   - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Classes>
   - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/class>
-  - ClassはIE非対応のため
+  - ClassはIE非対応のため、対応させる場合は関数・prototypeを使用する。
     - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/function>
     - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/new>
+    - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Function#instance_methods>
 - 動画
   - クラスとは？【分かりやすい解説シリーズ #67】【プログラミング】
     - <https://youtu.be/FRiF6XLRpSE>
@@ -503,6 +594,13 @@ class Collection
 }
 ```
 
+```php
+// 例
+$collection = new Collection(['name' => 'taylor', 'framework' => 'laravel']);
+$value = $collection->get('name');
+// $value には 'taylor' が入る
+```
+
 ### 静的クラス
 
 - 静的クラス（PHPだとstaticメソッドのみを持つクラス）
@@ -536,6 +634,12 @@ class Str
         return str_repeat($string, $times);
     }
 }
+```
+
+```php
+// 例
+$length = Str::length('Laravel');
+// $length には 7 が入る
 ```
 
 ### static
