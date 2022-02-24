@@ -182,6 +182,18 @@ let map = {
     name: 'NAME_101',
     note: 'NOTE_101',
 };
+
+// 配列から1番目の要素を取り出す
+let result1 = array[0]; // result1 には 101 が入る
+// 配列から3番目の要素を取り出す
+let result2 = array[2]; // result2 には NOTE101 が入る
+
+// 連想配列からキー「id」の要素を取り出す
+let result3 = map['id']; // result3 には 101 が入る
+let result3_2 = map.id; // result3_2 には 101 が入る
+// 連想配列からキー「note」の要素を取り出す
+let result4 = map['note']; // result4 には NOTE101 が入る
+let result4_2 = map.note; // result4_2 には 101 が入る
 ```
 
 - Wikipedia
