@@ -59,15 +59,30 @@ echo "<br>";
 
 ### 仕様
 
-- 改行コードは「LF」
-- 連想配列内の順番は保障しない。
+#### ER図
 
-| No. | TSVカラム | カラム名 | 備考 |
+- [PlantUML](https://www.plantuml.com/plantuml/umla/VSwn2eD0383XFKyH70k-G15nwjAbRr3EC-3X9KekbehwxjKAfKFf5lx0brJ9dDh84ThG4FgWFj8n4mys8HFNf0bI5sHmwXXZ4B9f8EpLsXw0n89DcBbOZvmod07n51eyOn33ehXTot9FufYs-23rhTEjI6zxC7eQh1_6rFdk3_C-S_zQN7xxAnmFBKkUBpCUB5GapSZn1G00)  
+  ![ER図](./images/er.svg)  
+
+#### TSV
+
+- TSVヘッダーは出力対象外
+- 改行コードは「LF」
+- 出力イメージは[出力例](#出力例)を参照。
+
+| No. | TSVカラム | レコードカラム | 備考 |
 | :---: | --- | --- | --- |
 | 1 | id | albums.id |  |
 | 2 | name | albums.name |  |
 | 3 | note | albums.note |  |
 | 4 | track_names | tracks.name | 「,」区切りで連結して出力する |
+
+#### レコード
+
+- 連想配列内の順番は保障しない。
+- レコード配列のイメージ
+  - [PlantUML](https://www.plantuml.com/plantuml/umla/bP8_3u903CNt-nHDvnkWtPX0u-GV4uEJOI32e4P8u3R2T_TomKEX9Dg9zBqytY-zk3LvO-vjNQcB0ZkTWc7mLc04eHuNLVuixGgJtUgy3qByb6hZfCCntNmhficlZzPgBjzFDyG7eHw3qrEotWPsXxsMtIIuQT7DWfknz-RCVVLQ88S8Q8eEdfrcxF269m4U97htYn4VV4Ux_BaZB_PWNAxF_tHagICBDvfx23Nu59hwlS9Ild0dbQcuh0htMby0)  
+  ![レコード](./images/array.svg)  
 
 ### kadai02.php
 
@@ -107,7 +122,12 @@ $albums = [
     ],
 ];
 // 実行・レスポンス出力
-echo App\AlbumHelper::albumsToTsvString($albums);
+$result = App\AlbumHelper::albumsToTsvString($albums);
+if (!is_string($result) || empty($result)) {
+    echo 'エラー: 戻り値が不正です。';
+    exit(1);
+}
+echo $result;
 ```
 
 ### 出力例
