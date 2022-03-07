@@ -53,6 +53,12 @@
   - エディタ・IDEが決まっている現場もあるため注意です。
 - 各バージョン
   - PHP、フレームワーク、DBのバージョンを聞いておくと事前学習の方向性が定まります。
+  - PHP
+    - PHP5と7は変更点が多いです。PHP5はサポート切れで公式からも情報が消されているため、情報を探すのに苦労するかもしれません。
+  - CodeIgniter
+    - CodeIgniter3と4は大きく異なっているため確認しておきましょう（CodeIgniter4はLaravelに近い）。
+  - Bootstrap
+    - Bootstrap5からjQueryが必須ではなくなりました
 - バージョン管理システム
   - Git以外にも存在するため、確認しておきましょう。
 - プロジェクト管理ツール
@@ -60,83 +66,4 @@
 
 ## 用語集
 
-- 言語・フレームワーク・ライブラリ
-  - PHP (ピーエイチピー)
-    - Laravel (ララベル) ※ 内部で「Symfony」が含まれます。
-    - Symfony（シンフォニー）
-    - FuelPHP (フューエルピーエイチピー)
-    - CakePHP (ケイクピーエイチピー)
-    - CodeIgniter (コードイグナイター)
-    - Zend Framework (ゼンドフレームワーク)
-  - JavaScript (ジャバスクリプト)
-    - Svelte (スヴェルト)
-    - React (リアクト)
-    - Vue.js (ヴュー・ジェイエス)
-    - jQuery (ジェイクエリー)
-  - TypeScript (タイプスクリプト)
-  - CSS (シーエスエス)
-    - Tailwind CSS (テイルウィンドシーエスエス) ※ 「Laravel Breeze」等ではこちらが使われます。
-    - Bootstrap (ブートストラップ) ※ 「Bootstrap5」未満では「jQuery」が含まれます。
-  - Sass (サース)
-  - Unitテスト (ユニットテスト、単体テスト）
-    - テストフレームワーク
-      - PHPUnit (ピーエイチピーユニット)
-    - モックオブジェクトフレームワーク
-      - Mockery (モッカリイ)
-- WEBサーバー
-  - Apache (アパッチ)
-  - NGINX (エンジンエックス)
-- 開発手法
-  - ウォータフォールモデル
-  - アジャイル開発
-    - スクラム開発
-  - スパイラルモデル
-  - プロトタイピングモデル
-- バージョン管理システム
-  - Git (ギット)
-    - プラットフォーム
-      - GitHub (ギットハブ)
-      - GitLab (ギットラブ)
-      - BitBucket (ビットバケット)
-  - Subversion (サブバージョン) ※ 略して「SVN」とも呼ばれます。
-- プロジェクト管理ツール
-  - GitHub (ギットハブ) ※ Gitのプラットフォームとして主に使わていますが、プロジェクト管理機能もあります。
-  - Redmine (レッドマイン)
-  - Backlog (バックログ)
-  - JIRA（ジラ）
-  - Trello (トレロ)
-- 開発環境
-  - 実行環境
-    - XAMPP (ザンプ)
-  - 仮想環境
-    - ホスト型
-      - VirtualBox (バーチャルボックス)
-        - Vagrant (ベイグラント)
-      - VMware Workstation Player (ヴイエムウェア ワークステーション プレイヤー)
-    - ハイパーバイザー型
-      - Hyper-V (ハイパーヴイ)
-      - VMware ESXi (ヴイエムウェア・イーエスエックスアイ)
-    - コンテナ型
-      - Docker (ドッカー)
-      - Kubernetes (クバネティス)
-  - IDE・エディタ
-    - PhpStorm (ピーエイチピーストーム)
-    - Visual Studio Code (ヴィジュアル スタジオ コード)
-    - Eclipse（エクリプス、イクリプス）
-- プログラミング
-  - bool (ブール)
-  - boolean (ブーリアン)
-  - true (トゥルー)
-  - false (フォルス、フォールス)
-  - string (ストリング)
-  - array (アレイ)
-  - else (エルス)
-  - foreach (フォーイーチ)
-  - 引数 (ひきすう)
-  - 関数 (かんすう)
-  - 戻り値 (もどりち)
-- ターミナルソフト
-  - Tera Term (テラターム)
-  - RLogin (アールログイン)
-- その他の用語
-  - <https://wepicks.net/itglossary-list/>
+- [用語集](./glossary.md) 参照
