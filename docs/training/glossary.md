@@ -6,6 +6,16 @@
 
 ## 用語集
 
+- OS
+  - Windows (ウィンドウズ)
+    - Windows Server (ウィンドウズサーバー)
+  - Mac (マック)
+  - Linux (リナックス)
+    - Debian (デビアン)
+      - Ubuntu (ウブントゥ)
+    - Red Hat Linux (レッドハットリナックス)
+      - CentOS (セントオーエス) ※ 2021年でサポート終了
+      - CentOS Stream (セントオーエスストリーム)
 - 言語・フレームワーク・ライブラリ
   - PHP (ピーエイチピー)
     - Laravel (ララベル) ※ 内部で「Symfony」が含まれます。
@@ -19,6 +29,7 @@
     - React (リアクト)
     - Vue.js (ヴュー・ジェイエス)
     - jQuery (ジェイクエリー)
+    - Node.js (ノード・ジェイエス) ※ サーバーサイドのJavaScript環境
   - TypeScript (タイプスクリプト)
   - CSS (シーエスエス)
     - Tailwind CSS (テイルウィンドシーエスエス) ※ 「Laravel Breeze」等ではこちらが使われます。
@@ -32,6 +43,12 @@
 - WEBサーバー
   - Apache (アパッチ)
   - NGINX (エンジンエックス)
+  - IIS (アイアイエス)
+- DB
+  - MySQL (マイエスキューエル)
+  - Oracle (オラクル)
+  - Microsoft SQL Server (マイクロソフトエスキューエルサーバー)
+  - PostgreSQL (ポストグレスキューエル) ※ ポスグレと略されることが多いです。
 - 開発手法
   - ウォータフォールモデル
   - アジャイル開発
@@ -44,7 +61,12 @@
       - GitHub (ギットハブ)
       - GitLab (ギットラブ)
       - BitBucket (ビットバケット)
+    - ツール
+      - Sourcetree (ソースツリー)
+      - TortoiseGit (トータスギット)
   - Subversion (サブバージョン) ※ 略して「SVN」とも呼ばれます。
+    - ツール
+      - TortoiseSVN (トータスエスブイエヌ)
 - プロジェクト管理ツール
   - GitHub (ギットハブ) ※ Gitのプラットフォームとして主に使わていますが、プロジェクト管理機能もあります。
   - Redmine (レッドマイン)
@@ -52,6 +74,14 @@
   - JIRA（ジラ）
   - Trello (トレロ)
 - 開発環境
+  - 組み合わせ
+    - LAMP (ランプ)
+      - 以下の頭文字
+        - Linux + Apache + MySQL + PHP(Python、Perl)
+    - LEMP (レンプ)
+      - LAMPのApacheを「Engine-X(NGINX)」に変えたものです。
+    - LAPP (ラップ)
+      - LAMPのMySQLを「PostgreSQL」に変えたものです。
   - 実行環境
     - XAMPP (ザンプ)
   - 仮想環境
@@ -68,8 +98,10 @@
   - IDE・エディタ
     - PhpStorm (ピーエイチピーストーム)
     - Visual Studio Code (ヴィジュアル スタジオ コード)
-    - Eclipse（エクリプス、イクリプス）
+    - Eclipse (エクリプス、イクリプス)
+    - NetBeans (ネットビーンズ)
 - プログラミング
+  - null (ヌル)
   - bool (ブール)
   - boolean (ブーリアン)
   - true (トゥルー)
@@ -81,9 +113,49 @@
   - 引数 (ひきすう)
   - 関数 (かんすう)
   - 戻り値 (もどりち)
+  - Queue (キュー)
+    - Enqueue (エンキュー)
+    - Dequeue (デキュー)
+  - FIFO (ファイフォ)
+  - Stack (スタック)
+    - Push (プッシュ)
+    - Pop (ポップ)
+  - alert (アラート)
+  - CRUD (クラッド)
+    - create (クリエイト)
+    - read (リード)
+    - update (アップデート)
+    - delete (デリート)
+  - register (レジスター)
+  - confirm (コンファーム)
+  - store (ストア) ※ 一般的には「店」になるが、プログラミングでは保存等の意味になるので注意
+  - destroy (ディストゥロイ)
+  - fatal (フェイタル)
+  - warning (ワーニング)
+  - allow (アラウ)
+  - deny (デナイ)
+  - auth (オース)
+  - authentication (オーセンティケーション)
+- インターネット （かなり多いため、現場で使用した用語だけをピックアップ）
+  - TCP/IP (ティーシーピーアイピー)
+    - HTTP (エイチティーティーピー)
+    - FTP (エフティーピー)
+    - SSH (エスエスエイチ)
+    - TLS (ティーエルエス)
+    - DNS (ディーエヌエス)
+    - SMTP (エスエムティーピー)
+    - POP (ポップ)
+    - IMAP (アイマップ)
+    - IPv4 (アイピーブイフォー)
+    - IPv6 (アイピーブイシックス) ※ 現場では「アイピーブイロク」と呼ばれる事が多い気がします。
 - ターミナルソフト
   - Tera Term (テラターム)
   - RLogin (アールログイン)
+- クラウドサービス
+  - AWS (エーダブリューエス) ※ Amazon Web Services の略
+    - Amazon EC2 (アマゾンイーシーツー) ※ Amazon Elastic Compute Cloud の略
+    - Amazon S3 (アマゾンエススリー) ※ Amazon Simple Storage Service の略
+    - Amazon SQS (アマゾンエスキューエス) ※ Amazon Simple Queue Service の略
 
 ## その他
 
