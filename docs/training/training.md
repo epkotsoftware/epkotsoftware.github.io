@@ -1010,6 +1010,13 @@ MySQL・phpMyAdmin環境が入っているので、練習してみましょう�
 
 - [Laravel](./laravel.md)
 
+### CodeIgniter4自己学習
+
+こちらは研修では触れていないCodeIgniter4に関する資料です。  
+Laravelに非常に似ているため、参考までに。
+
+- [CodeIgniter4](./codeigniter4.md)
+
 ### Bootstrap自己学習
 
 CSSフレームワークのBootstrapは日本語対応で、比較的学習しやすいのでおすすめです。  

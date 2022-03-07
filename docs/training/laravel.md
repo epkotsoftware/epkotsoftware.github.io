@@ -9,9 +9,9 @@
 ### Laravelバージョン
 
 Laravelに限らず、最新バージョンのフレームワーク等は情報が少ないため  
-LTS(Long Term Support) がついているバージョンの最新バージョンが良さそうです（Laravel 8 は 9 のリリースが延びたことにより 8 のサポート期間が延びたので 8 でもOK）。  
+LTS(Long Term Support) がついているバージョンの最新バージョンが良さそうです。  
 
-2022年1月25日に9がリリースされるため、それ以降に開発着手の場合、`Laravel 9(LTS)` を選択したいところ
+Laravel9はLTS予定でしたが、公式からはLTSがはずれたようです（理由は不明）。
 
 - Laravel Release Notes
   - <https://laravel.com/docs/releases>
@@ -26,8 +26,8 @@ LTS(Long Term Support) がついているバージョンの最新バージョン
 - 【GitHub】Laravel Releases
   - <https://github.com/laravel/laravel/>
     - 左のブランチ選択のところで「Tags」タブから対象のバージョンを選択して、`composer.json`を選択。
-    - 「`v8.6.8`」の場合
-      - <https://github.com/laravel/laravel/blob/v8.6.8/composer.json#L8>
+    - 「`v8.6.11`」の場合
+      - <https://github.com/laravel/laravel/blob/v8.6.11/composer.json#L8>
         - 「`^7.3`」の場合、7.3以上、8.0未満
         - 「`^8.0`」の場合、8.0以上、9.0未満
 - PHP Supported Versions
@@ -56,14 +56,15 @@ LTS(Long Term Support) がついているバージョンの最新バージョン
     - PHP8.1から下位互換性のない変更点・推奨されなくなる機能
       - <https://www.php.net/manual/ja/migration81.incompatible.php>
       - <https://www.php.net/manual/ja/migration81.deprecated.php>
-- Laravel8 > Laravel6
+- LaravelXX(LTS) > Laravel9 ≒ Laravel8 > Laravel6(LTS)
   - 理由
-    - 基本的にはLTSのバージョンか Laravel8 を学習するのが良さそう。
+    - 基本的にはLTSの最新バージョンか Laravel9, Laravel8 を学習するのが良さそう。
       - LTSは現場でも採用されやすいため
       - Laravel8 は特殊でサポート期間が長く、Laravel9へ移行もしやすい。
-    - Laravel9についてはまだリリース前のため含めていない。
   - 旧バージョンを学習する際の注意点
     - ディレクトリ構成等が変わっていることがあるので、調べる際には注意。
+    - Laravel 9.x アップグレードガイド
+      - <https://readouble.com/laravel/9.x/ja/upgrade.html>
     - Laravel 8.x アップグレードガイド
       - <https://readouble.com/laravel/8.x/ja/upgrade.html>
     - Laravel 7.x アップグレードガイド
@@ -77,6 +78,8 @@ LTS(Long Term Support) がついているバージョンの最新バージョン
   - <https://readouble.com/laravel/6.x/ja/>
 - Laravel8.x
   - <https://readouble.com/laravel/8.x/ja/>
+- Laravel9.x
+  - <https://readouble.com/laravel/9.x/ja/>
 
 ## CBC
 
@@ -96,8 +99,8 @@ LTS(Long Term Support) がついているバージョンの最新バージョン
 スターターキットを使ってログイン機能を追加することが出来ます。  
 ログイン画面、ユーザー登録画面、必要なDBのテーブル等を構築してくれます。
 
-- Laravel 8.x スターターキット
-  - <https://readouble.com/laravel/8.x/ja/starter-kits.html>
+- Laravel 9.x スターターキット
+  - <https://readouble.com/laravel/9.x/ja/starter-kits.html>
   - Laravel UI （非推奨）
     - <https://github.com/laravel/ui>
   - Laravel Breeze
@@ -116,8 +119,8 @@ LTS(Long Term Support) がついているバージョンの最新バージョン
 - CSSフレームワーク
   - Bootstrap
     - <https://getbootstrap.jp/>
-- Laravel 8.x JavaScriptとCSSスカフォールド
-  - <https://readouble.com/laravel/8.x/ja/frontend.html>
+- Laravel 9.x JavaScriptとCSSスカフォールド
+  - <https://readouble.com/laravel/9.x/ja/frontend.html>
 
 ### Laravel Breeze
 
@@ -142,8 +145,8 @@ CSSフレームワークが「`Tailwind CSS`」が採用されており、「`Bo
 - CSSフレームワーク
   - Tailwind CSS
     - <https://tailwindcss.com/>
-- Laravel 8.x スターターキット
-  - <https://readouble.com/laravel/8.x/ja/starter-kits.html>
+- Laravel 9.x スターターキット
+  - <https://readouble.com/laravel/9.x/ja/starter-kits.html>
 
 ### トラブルシューティング
 
@@ -206,24 +209,24 @@ php artisan make:test Http/Controllers/ArtistControllerTest --unit
 ```
 
 - `app/Http/Controllers/ArtistController.php`
-  - コントローラ <https://readouble.com/laravel/8.x/ja/controllers.html>
+  - コントローラ <https://readouble.com/laravel/9.x/ja/controllers.html>
 - `app/Http/Requests/StoreArtistRequest.php`
 - `app/Http/Requests/UpdateArtistRequest.php`
-  - HTTP Requests <https://readouble.com/laravel/8.x/ja/requests.html>
-  - バリデーション <https://readouble.com/laravel/8.x/ja/validation.html>
+  - HTTP Requests <https://readouble.com/laravel/9.x/ja/requests.html>
+  - バリデーション <https://readouble.com/laravel/9.x/ja/validation.html>
 - `app/Models/Artist.php`
-  - Laravel 8.x Eloquentの準備 <https://readouble.com/laravel/8.x/ja/eloquent.html>
+  - Laravel 9.x Eloquentの準備 <https://readouble.com/laravel/9.x/ja/eloquent.html>
 - `app/Policies/ArtistPolicy.php`
-  - 認可 <https://readouble.com/laravel/8.x/ja/authorization.html>
+  - 認可 <https://readouble.com/laravel/9.x/ja/authorization.html>
 - `app/database/migrations/YYYY_MM_DD_HHmmss_create_artist_table.php` （テーブル名は複数形をおすすめします）
-  - マイグレーション <https://readouble.com/laravel/8.x/ja/migrations.html>
+  - マイグレーション <https://readouble.com/laravel/9.x/ja/migrations.html>
 - `app/database/seeders/ArtistSeeder.php`
-  - データベース：シーディング <https://readouble.com/laravel/8.x/ja/seeding.html>
+  - データベース：シーディング <https://readouble.com/laravel/9.x/ja/seeding.html>
 - `app/database/factories/ArtistFactory.php`
-  - データベーステスト <https://readouble.com/laravel/8.x/ja/database-testing.html>
+  - データベーステスト <https://readouble.com/laravel/9.x/ja/database-testing.html>
 - `app/tests/Feature/Http/Controllers/ArtistControllerTest.php`
 - `app/tests/Unit/Http/Controllers/ArtistControllerTest.php`
-  - テスト: テストの準備 <https://readouble.com/laravel/8.x/ja/testing.html>
+  - テスト: テストの準備 <https://readouble.com/laravel/9.x/ja/testing.html>
 
 ---
 
@@ -283,15 +286,15 @@ PCで扱うことを想定した、機能重視のdashboard・adminテンプレ�
 | 更新     | PUT or PATCH    | /posts/{post}         | update  | バリデーションは確認画面と同様に行う<br>（同じRequestクラスもしくは継承したRequestクラスを使う） |
 | 削除     | DELETE          | /posts/{post}         | destroy | 実際にDELETE文は使用せず、deleted_atカラムを更新する<br>ソフトデリートで行うケースが多い |
 
-- Laravel 8.x HTTP Requests
-  - <https://readouble.com/laravel/8.x/ja/requests.html>
-- Laravel 8.x ルーティング
-  - <https://readouble.com/laravel/8.x/ja/routing.html>
-- Laravel 8.x ミドルウェア
-  - <https://readouble.com/laravel/8.x/ja/middleware.html>
-- Laravel 8.x コントローラ
-  - <https://readouble.com/laravel/8.x/ja/controllers.html>
-- Laravel 8.x Eloquentの準備 ソフトデリート
-  - <https://readouble.com/laravel/8.x/ja/eloquent.html#soft-deleting>
-- Laravel 8.x CSRF保護
-  - <https://readouble.com/laravel/8.x/ja/csrf.html>
+- Laravel 9.x HTTP Requests
+  - <https://readouble.com/laravel/9.x/ja/requests.html>
+- Laravel 9.x ルーティング
+  - <https://readouble.com/laravel/9.x/ja/routing.html>
+- Laravel 9.x ミドルウェア
+  - <https://readouble.com/laravel/9.x/ja/middleware.html>
+- Laravel 9.x コントローラ
+  - <https://readouble.com/laravel/9.x/ja/controllers.html>
+- Laravel 9.x Eloquentの準備 ソフトデリート
+  - <https://readouble.com/laravel/9.x/ja/eloquent.html#soft-deleting>
+- Laravel 9.x CSRF保護
+  - <https://readouble.com/laravel/9.x/ja/csrf.html>
