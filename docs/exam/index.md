@@ -1,6 +1,6 @@
 # 試験
 
-「`helper.js`」ファイルを新規作成し、以下の仕様を満たす[same関数](#same関数)を定義してください。  
+「`helper.js`」ファイルを新規作成し、仕様を満たす[same関数](#same関数)を定義してください。  
 初めての方は、[参考資料](#参考資料)に学習用の動画・サイトのリンクがあります。  
 また、[禁止事項](#禁止事項)には目を通すようお願い致します。  
   
@@ -31,6 +31,8 @@
   - [htdocs.zip](./htdocs.zip)
 
 ## same関数
+
+same関数の仕様は以下になります。
 
 ### 説明
 
@@ -108,6 +110,7 @@ ZIP圧縮を行い、担当者までメールでお送りください。
   - `helper.js` に `console.log` 等の動作確認のためのコードが残っていないか
   - `helper.js` のTODOコメントが削除されているか  
   （基本的に成果物にはTODOをつけたコメントは残しません）
+  - [same関数](#same関数) が仕様通りに定義出来ているか
 
 ### 正常時の画面表示例
 
@@ -160,3 +163,20 @@ JavaScriptを書くには「メモ帳」等のアプリでも可能ですが
 
 - 第三者に本ページのURL・スクリーンショット・記載内容を見せることを禁止する。
 - 第三者に本課題の協力を求めることを禁止する。 ※ 研修は本課題レベルのスキルがある前提で進むため。
+
+## 試験資料について
+
+本試験資料はプログラミング言語公式サイトのAPIリファレンス等を参考に作成しています。
+
+- 【C#】 `.NET API ブラウザー`
+  - <https://docs.microsoft.com/ja-jp/dotnet/api/>
+  - `Math.Max メソッド`
+    - <https://docs.microsoft.com/ja-jp/dotnet/api/system.math.max#system-math-max(system-int32-system-int32)>
+- 【PHP】 `PHPマニュアル`
+  - <https://www.php.net/manual/ja/>
+  - `max`
+    - <https://www.php.net/manual/ja/function.max.php>
+- 【JavaScript】 MDN Web Docs
+  - <https://developer.mozilla.org/ja/>
+  - `Math.max()`
+    - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Math/max>
