@@ -345,6 +345,22 @@ trainingリポジトリの [users/{★ユーザー名}/01_beginner/README.md](ht
 
 Git・GitHubについては、「[バージョン管理システム編](#バージョン管理システム編)」で深く学習します。
 
+#### 課題提出例
+
+VSCodeを使用した提出例です。
+
+1. 「`ソース管理`」アイコンをクリック
+1. 「`ツリーとして表示`」アイコンをクリックし、アップするファイルに間違いがないか確認する。
+1. コミット対象ファイル・フォルダの「`+`」アイコン(変更をステージ)をクリックし、ステージする。  
+  **※ 対象外のファイルはステージしないこと**
+1. コミットメッセージを入力
+1. 「`コミット`」アイコンをクリックし、ステージしたファイルをコミットする。
+1. 「`git push`」コマンドでコミットした内容をGitHubへ反映する。
+1. GitHubでコミットが反映されたか確認する  
+  <https://github.com/epkotsoftware/training/commits/>
+
+![git_commit_push.gif](../image/git_commit_push.gif)
+
 ### Chrome DevTools
 
 - Chrome DevToolsの使い方を徹底解説！Chrome Developer Toolsを使いこなすと開発効率が上がる！
