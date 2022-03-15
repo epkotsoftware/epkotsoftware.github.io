@@ -460,7 +460,8 @@ trainingリポジトリの [users/{★ユーザー名}/02_basic/README.md](https
 
 - `Docker Desktop`
   - <https://www.docker.com/products/docker-desktop>
-
+- インストール完了後のチュートリアルはスキップしてください。
+  - 「Try running a container」と出ているコマンドは実行不要です。
 - インストール時に以下のようなメッセージが出てうまくいかなかったらご連絡ください。
   - **「WSL 2 Installation is incomplete」**  
     **「Docker Engine failed to start...」**
