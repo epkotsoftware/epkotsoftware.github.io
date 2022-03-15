@@ -156,6 +156,24 @@
     - Amazon EC2 (アマゾンイーシーツー) ※ Amazon Elastic Compute Cloud の略
     - Amazon S3 (アマゾンエススリー) ※ Amazon Simple Storage Service の略
     - Amazon SQS (アマゾンエスキューエス) ※ Amazon Simple Queue Service の略
+- 位取り記数法等
+  - HEX (ヘクス) ※ 16進数 hexadecimal number (ヘキサデシマル・ヘクサデシマル) の略
+  - decimal number (デシマル) ※ 10進数
+  - octal number (オクタル) ※ 8進数
+  - binary number (バイナリ) ※ 2進数
+  - odd number (オッド) ※ 奇数
+  - even number (イーブン) ※ 偶数
+- 文字コード
+  - UTF-8 (ユーティーエフエイト)
+  - Shift_JIS (シフトジス)
+  - EUC-JP (イーユーシージェーピー)
+- 改行コード
+  - CR (シーアール) ※ Carriage Return (キャリッジリターン) の略
+  - LF (エルエフ) ※ Line Feed (ラインフィード) の略
+- 業務委託
+  - オフショア開発
+  - ニアショア開発
+  - オンショア開発
 
 ## その他
 
