@@ -101,6 +101,11 @@
     - Eclipse (エクリプス、イクリプス)
     - NetBeans (ネットビーンズ)
 - プログラミング
+  - API (エーピーアイ)
+    - Web API (ウェブエーピーアイ)
+      - REST API (レストエーピーアイ)
+      - SOAP API (ソープエーピーアイ)
+  - app (アップ、エーピーピー)
   - null (ヌル)
   - bool (ブール)
   - boolean (ブーリアン)
@@ -136,6 +141,37 @@
   - deny (デナイ)
   - auth (オース)
   - authentication (オーセンティケーション)
+  - require (リクワイアー)
+  - include (インクルード)
+  - define (ディファイン)
+  - const (コンスト)
+  - let (レット)
+  - var (バー)
+  - validate (バリデート)
+  - namespace (ネームスペース)
+  - use (ユース)
+  - and (アンド)
+  - or (オア)
+  - not (ノット)
+  - xor (エックスオア)
+- DB
+  - Primary key (プライマリーキー)
+  - Foreign key (フォーレンキー、フォーリンキー)
+  - Natural key (ナチュラルキー)
+  - Surrogate key (サロゲートキー)
+  - Unique (ユニーク)
+  - Index (インデックス)
+  - Ignore (イグノアー)
+  - Alternate (オルタネイト)
+  - char (チャー、キャラ)
+  - varchar (バーチャー、バーキャラ)
+  - ALTER (オルター)
+  - EXPLAIN (エクスプレイン)
+  - TRANSACTION (トランザクション)
+  - BEGIN (ビギン)
+  - COMMIT (コミット)
+  - ROLLBACK (ロールバック)
+  - as (アズ)
 - インターネット （かなり多いため、現場で使用した用語だけをピックアップ）
   - TCP/IP (ティーシーピーアイピー)
     - HTTP (エイチティーティーピー)
@@ -174,6 +210,8 @@
   - オフショア開発
   - ニアショア開発
   - オンショア開発
+- その他
+  - プロパー （[プロパー社員](https://www.google.com/search?q=プロパー社員) を指すことが多い）
 
 ## その他
 
