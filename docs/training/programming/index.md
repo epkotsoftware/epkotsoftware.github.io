@@ -9,6 +9,13 @@
 現場で実装(プログラミング)する場合、現場側で用意されたコードを理解し  
 今回、学習する機能を組み合わせて作っていく必要があります。  
 
+本資料では基本的に公式やWikipediaのリンクを載せていますが  
+難しくてわからない場合、動画・[CBC](https://cbc-study.com/)での復習  
+または検索して自身がわかる情報を探してください。  
+
+読むだけでは身につかないので、実際にコードを書き  
+使いながら学んでいきましょう。  
+
 ## 言語について
 
 プログラミング言語は多数ありますが  
@@ -193,7 +200,7 @@ let result3 = map['id']; // result3 には 101 が入る
 let result3_2 = map.id; // result3_2 には 101 が入る
 // 連想配列からキー「note」の要素を取り出す
 let result4 = map['note']; // result4 には NOTE101 が入る
-let result4_2 = map.note; // result4_2 には 101 が入る
+let result4_2 = map.note; // result4_2 には NOTE101 が入る
 ```
 
 - Wikipedia
@@ -255,6 +262,68 @@ function test(int $value): string
 - JavaScript
   - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Expressions_and_Operators>
 
+### PHPで使用頻度の高い演算子
+
+PHPで良く使用する演算子は以下です。
+
+| 種別 | 例 | 名前 |
+| --- | --- | --- |
+| [代入演算子](https://www.php.net/manual/ja/language.operators.assignment.php) | `=`         | 代入 |
+| [文字列演算子](https://www.php.net/manual/ja/language.operators.string.php)   | `$a . $b` | 文字列結合 |
+| [比較演算子](https://www.php.net/manual/ja/language.operators.comparison.php) | `$a === $b` | 等しい |
+| [比較演算子](https://www.php.net/manual/ja/language.operators.comparison.php) | `$a !== $b` | 等しくない |
+| [比較演算子](https://www.php.net/manual/ja/language.operators.comparison.php) | `$a < $b` | より少ない |
+| [比較演算子](https://www.php.net/manual/ja/language.operators.comparison.php) | `$a > $b` | より多い |
+| [比較演算子](https://www.php.net/manual/ja/language.operators.comparison.php) | `$a <= $b` | より少ないか等しい |
+| [比較演算子](https://www.php.net/manual/ja/language.operators.comparison.php) | `$a >= $b` | より多いか等しい |
+| [論理演算子](https://www.php.net/manual/ja/language.operators.logical.php)    | `!$a` | 否定 |
+| [論理演算子](https://www.php.net/manual/ja/language.operators.logical.php)    | `$a && $b` | 論理積 |
+| [論理演算子](https://www.php.net/manual/ja/language.operators.logical.php)    | `$a || $b` | 論理和 |
+| [加算子/減算子](https://www.php.net/manual/ja/language.operators.increment.php) | `$a++` | 後置加算子 |
+| [算術演算子](https://www.php.net/manual/ja/language.operators.arithmetic.php) | `-$a`       | 負にする |
+| [算術演算子](https://www.php.net/manual/ja/language.operators.arithmetic.php) | `$a + $b`   | 加算 |
+| [算術演算子](https://www.php.net/manual/ja/language.operators.arithmetic.php) | `$a - $b`   | 減算 |
+| [算術演算子](https://www.php.net/manual/ja/language.operators.arithmetic.php) | `$a * $b`   | 乗算 |
+| [算術演算子](https://www.php.net/manual/ja/language.operators.arithmetic.php) | `$a / $b`   | 除算 |
+
+### PHPの演算子の優先順位
+
+- 演算子の優先順位
+  - <https://www.php.net/manual/ja/language.operators.precedence.php>
+
+数学の四則演算における演算記号と同様に  
+プログラミングの演算子には優先順位があります。  
+以下のif文の条件を見ていきましょう。
+
+```php
+// スコアがマイナス、または100を超えた場合はエラー
+if ($score < 0 || $score > 100) {
+    throw new Exception('スコアが不正です。');
+}
+```
+
+上記の条件で演算子の優先順についてはPHPマニュアルに書かれている通り  
+以下の順番になります。
+
+| 優先順 | 演算子 |
+| --- | --- |
+| 1 | `<` `<=` `>` `>=` |
+| 2 | `||` |
+
+よって優先度の高い「`$score < 0`」と「`$score > 100`」の条件が先に評価され  
+その2つの条件式の結果の論理和(`||`)を求めます。  
+
+優先順位の低い演算子を優先させたい場合、四則演算と同様に  
+「`()`」をつけることで優先順位を上げる事が出来ます。  
+また、条件が複雑になり可読性が悪くなってしまう場合にも「`()`」をつけると良いです。  
+
+```php
+// スコアがマイナス、または100を超えた場合はエラー
+if (($score < 0) || ($score > 100)) {
+    throw new Exception('スコアが不正です。');
+}
+```
+
 ## ループ処理
 
 業務ではforeach・while・do-whileを使用するケースが多いです。
@@ -301,14 +370,6 @@ function iterableToString(iterable $iterable): string
     - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/for...in>
   - 配列の場合は「`for...of`」（IEでは使用不可）
     - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/for...of>
-
-### 多次元配列
-
-APIを使用して際に結果を多次元配列で受け取るケースが多いです。
-
-- 動画
-  - PHPの多次元連想配列徹底攻略【PHPによるWebアプリケーション開発講座#ex1】
-    - <https://youtu.be/PDG7tD2FZrc>
 
 ### while
 
@@ -678,6 +739,7 @@ Laravelでは様々なクラスの継承をすることが多いため、使用�
 
 ## 名前空間
 
+名前空間はLaravel等のフレームワークを使う場合は必須となります。
 JavaScriptには名前空間がないため、Objectで表現することがあります。  
 
 ```js
@@ -711,6 +773,81 @@ console.log($c2);
 - 動画
   - 名前空間とは？PHP 【分かりやすい解説シリーズ #63】【プログラミング】
     - <https://youtu.be/yrFBO6PBQMA>
+
+### 名前空間の例
+
+PHPで名前空間に属するクラスを使用する例です。  
+まず以下のようなクラスがあるとします。  
+
+```php
+<?php
+// ファイル名は UserModel.php とする
+
+namespace App\Models;
+
+class UserModel
+{
+    public static function find($id)
+    {
+        // 処理
+    }
+}
+```
+
+上記のクラスにアクセスするには名前空間とクラス名を「`\`」で連結し  
+先頭には「`\`」をつけ、「`\App\Models\UserModel`」となります。  
+このクラスを使う場合は以下のように行います。
+
+```php
+<?php
+require_once("UserModel.php");
+
+namespace App\Controllers;
+
+class UserController
+{
+    public function index()
+    {
+        // 名前空間とクラス名を「\」で連結しクラスにアクセス
+        // （現在の名前空間である App\Controllers の相対となってしまうため先頭に「\」をつける）
+        $user1 = \App\Models\UserModel::find(101);
+        $user2 = \App\Models\UserModel::find(102);
+        var_dump($user1, $user2);
+    }
+}
+```
+
+クラスにアクセスする度に長い名前空間を指定すると面倒なので  
+基本的には「use」を使い、エイリアス(別名)を作成します。  
+
+```php
+<?php
+require_once("UserModel.php");
+
+namespace App\Controllers;
+
+// 「\App\Models\UserModel」を「UserModel」という名前でもアクセス出来るようにする。
+//  （useでは先頭の「\」は不要となる）
+use App\Models\UserModel as UserModel;
+
+class UserController
+{
+    public function index()
+    {
+        // 「UserModel」という名前で「\App\Models\UserModel」にアクセス
+        $user1 = UserModel::find(101);
+        $user2 = UserModel::find(102);
+        var_dump($user1, $user2);
+    }
+}
+```
+
+「`\`」区切りの末端の名称（今回の場合、クラス名のUserModel）で良い場合は as を省略できます。
+
+```php
+// use App\Models\UserModel as UserModel; と同じ
+use App\Models\UserModel;
+```
 
 ## 例外処理
 
@@ -983,6 +1120,8 @@ PHPの内部構造について調べることがありました。
   - <https://ja.wikipedia.org/wiki/Model_View_Controller>
   - MVCとは？【分かりやすい解説シリーズ #26】【プログラミング】
     - <https://youtu.be/OkJLiASeiAg>
+  - CBC Laravelの仕組み〜MVCの理解〜
+    - <https://cbc-study.com/training/backend/laravel3#pl-0>
 - リポジトリパターン
 
 ### 実例
@@ -1098,24 +1237,6 @@ Modelを作る際に`SoftDeletes`を使うことは多いかと思います。
 - 初心者向けJavaScript入門講座
   - <https://youtube.com/playlist?list=PL3PnJ18ZwZne_FCED6rBqPrCvrMr1uaiY>
 
-## 現場で経験した機能
+## 応用
 
-基礎をフル活用する実業務であった例としては「`AWS SDK for PHP`」の `Aws\Ec2\Ec2Client` クラスの  
-`describeInstances` メソッドを使って、複数あるEC2サーバー情報・状態を取得し、表示するという処理を行ったことがあります。  
-公式ページでAPI仕様を理解すること、「`foreach`」、「`if`」、関数、文字列連結、配列、連想配列、例外処理等の基礎的なプログラミング知識がないと実装出来ない内容になります。  
-
-- Amazon EC2
-  - <https://aws.amazon.com/jp/ec2/>
-- Ec2Client DescribeInstances
-  - <https://docs.aws.amazon.com/aws-sdk-php/v3/api/api-ec2-2016-11-15.html#describeinstances>
-  - APIを使用する場合、「Result Syntax」に書かれているような階層の深い配列を処理する必要があります。
-
-APIを使う場合、非同期処理（同時に複数処理を動かす）が求められる事もあります。  
-実際にはAWSの大量のS3オブジェクトに対して、非同期処理を使いタグ付けするという処理を行ったことがあります。  
-
-- Amazon S3
-  - <https://aws.amazon.com/jp/s3/>
-- Promises in the AWS SDK for PHP Version 3
-  - <https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/guide_promises.html>
-- 非同期処理とは何か？【超入門編/JavaScript/プログラミング】
-  - <https://youtu.be/OBqj4I5NAEg>
+- [プログラミング編 応用](./advanced.md)
