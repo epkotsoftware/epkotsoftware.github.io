@@ -16,6 +16,55 @@
 読むだけでは身につかないので、実際にコードを書き  
 使いながら学んでいきましょう。  
 
+## 目的
+
+この研修ではプログラミング学習がメインにはなっていますが  
+読解力の向上や、公式ドキュメントを読む癖をつけてもらうのも目的の一つです。  
+
+実際、現場に入ると難しい文章を読む機会が多く出てきます。  
+
+- 設計書・仕様書（現場によっては英語のケースもある）
+- 高度な技術を使ったもの
+- 業務知識に関する資料
+- 現場独自のフレームワークが用意されており、用意されたドキュメントを読むしかなく検索しても出てこない。
+- 検索しても日本サイトが出てこないようなリファレンス（最新のAPI・フレームワーク等）
+- マイナーなライブラリのリファレンス
+
+### 実際必要になった資料
+
+実際、現場で読む必要が出てきた公開されている資料です。  
+ほとんどがやりたいことを検索してもヒットせず  
+公式資料から情報を得るしかありませんでした。  
+
+これらの資料は必要になったら読めば良いので  
+この業界で仕事を続けていく上で、公式ドキュメントは  
+読む必要が出てくるということだけ覚えておきましょう。  
+
+- GitHub Docs
+  - <https://docs.github.com/ja>
+- ライブラリ・API関連
+  - Android API reference （2010年頃は日本語の記事がほとんどなかった）
+    - <https://developer.android.com/reference>
+  - Laravel API （基本的には日本語の公式情報だけでも何とかなるが、Modelの細かい部分に関しては調べても出てこないが多かったためリファレンスから情報を得ていた）
+    - <https://laravel.com/api/9.x/>
+  - AWS
+    - AWS SDK for PHP Documentation
+      - <https://docs.aws.amazon.com/sdk-for-php/>
+  - YouTube Data API
+    - <https://developers.google.com/youtube/v3/docs>
+  - Dojo Toolkit
+    - <https://dojotoolkit.org/>
+  - Bing Maps Documentation
+    - <https://docs.microsoft.com/en-us/bingmaps/>
+  - ArcGIS Developer guides
+    - <https://developers.arcgis.com/documentation/>
+- ファイル関連
+  - DDEX
+    - DDEX Knowledge Base
+      - <https://kb.ddex.net/display/HBK/>
+    - DDEX Data Dictionary ern:NewReleaseMessage
+      - <http://service.ddex.net/dd/ERN38/dd/ern_NewReleaseMessage.html>
+
 ## 言語について
 
 プログラミング言語は多数ありますが  
@@ -68,6 +117,8 @@ const CONSTANT_VALUE = "constant value";
 let value = "value";
 ```
 
+- CBC ～ PHPの変数
+  - <https://cbc-study.com/training/advanced/page2#s3>
 - Wikipedia
   - 定数
     - <https://ja.wikipedia.org/wiki/定数_(プログラミング)>
@@ -241,6 +292,8 @@ function test(int $value): string
 }
 ```
 
+- CBC ～ PHPで条件によって処理を変える（条件分岐）
+  - <https://cbc-study.com/training/advanced/page3#pl-0>
 - Wikipedia
   - <https://ja.wikipedia.org/wiki/If文>
 - PHP
@@ -331,6 +384,8 @@ if (($score < 0) || ($score > 100)) {
 - 動画
   - ループ処理とは？【分かりやすい解説シリーズ #3】【プログラミング】
     - <https://youtu.be/GD5sDKbqoh8>
+- CBC ～ PHPで繰り返し処理を行う（ループ処理）
+  - <https://cbc-study.com/training/advanced/page3#pl-2>
 
 ### for
 
@@ -627,6 +682,9 @@ Controllerクラス等はコマンドで作成します。
       - <https://github.com/illuminate/collections/blob/v8.80.0/Collection.php>
     - `collect`関数は内部的に「`new Collection($value)`」をしています。
       - <https://github.com/illuminate/collections/blob/v8.80.0/helpers.php#L13-L16>
+- 動画
+  - 【JavaScript超入門】クラスとインスタンスを世界一わかり  やすく解説！
+    - <https://youtu.be/t7hLDtK8MO4>
 
 ```php
 <?php
