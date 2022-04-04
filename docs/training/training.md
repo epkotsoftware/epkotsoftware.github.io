@@ -104,7 +104,14 @@ Visual Studio Code(VSCode) が初めての方へ
       "editor.renderWhitespace": "all", // スペースを可視化
       "editor.linkedEditing": true, // HTMLタグ等の編集時、関連する記号が更新される（PHPには無効）
       "editor.bracketPairColorization.enabled": true, // 「{}」のペアに色がつく
+      "editor.bracketPairColorization.independentColorPoolPerBracketType": true, // 異なるタイプのブラケットは同じ色にする
       "editor.guides.bracketPairs": true, // アクティブな「{}」のペアを強調表示
+      "workbench.colorCustomizations": {
+          // ブラケットの色（お好みで）
+          "editorBracketHighlight.foreground1": "#D3D3D3",
+          "editorBracketHighlight.foreground2": "#DCDCAA",
+          "editorBracketHighlight.foreground3": "#C586BB",
+      },
       "files.eol": "\n", // 既定の改行文字、新規作成時のデフォルト
       "files.trimTrailingWhitespace": true, // 保存時に行末のスペースを削除する
       "[log]": {
