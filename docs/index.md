@@ -2,7 +2,7 @@
 
 ## コーポレートサイト
 
-- <http://epkotsoftware.co.jp/>
+- <https://epkotsoftware.co.jp/>
 
 ## GitHub
 
