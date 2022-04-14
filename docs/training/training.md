@@ -255,6 +255,10 @@ Visual Studio Code(VSCode) で開きましょう。
 
 ## コーダー編
 
+| 課題 | 格納フォルダ・ファイル |
+| --- | --- |
+| [コーダー編課題](#コーダー編課題) (HTML・CSS等) | `users/自分のユーザー名/01_beginner/htdocs/index.html` |
+
 まずは動画で学習しましょう。
 
 - 動画
@@ -383,6 +387,12 @@ VSCodeを使用した提出例です。
 
 ## マークアップエンジニア編
 
+| 課題 | 格納フォルダ・ファイル |
+| --- | --- |
+| Excel(売上表・成績表) | `users/自分のユーザー名/02_basic/excel` |
+| jQuery(#7 簡単な機能をjQueryで実装しよう) | `users/自分のユーザー名/02_basic/htdocs/kadai_07.html` |
+| jQuery(#8 変数を使う 〜 #11 モーダルウィンドウを作ろう) | `users/自分のユーザー名/02_basic/htdocs/kadai_08.html` |
+
 - 動画
   - <https://youtube.com/playlist?list=PLCX3wwS3Gg4y99r2bSBpir2nmMv4rzfcL>
     - `12:56` HTTPの仕組み｜GET・POSTリクエスト/ステータスコード/サーバー通信/ユーザエージェントなどの基礎を解説
@@ -393,10 +403,8 @@ VSCodeを使用した提出例です。
     - `16:19` 【超入門】初心者向け レスポンシブデザイン完全攻略！メディアクエリ等解説【HTML・CSS コーディング】
 
 [CBC](https://cbc-study.com/)の基礎コースをやっていきましょう。  
-Excelをお持ちでない方はGoogleスプレッドシートやOffice OnlineでもOKです（それぞれアカウントが必要）
+Excelをお持ちでない方は、無料のOffice OnlineでもOKです。
 
-- Googleマイドライブ
-  - <https://drive.google.com/drive/my-drive>
 - Microsoft Office Online (Excel)
   - <https://www.office.com/launch/excel>
 
@@ -442,6 +450,13 @@ Googleマイドライブ → 「新規」 → 「ファイルのアップロー�
 trainingリポジトリの [users/{★ユーザー名}/02_basic/README.md](https://github.com/epkotsoftware/training/tree/template/users/_template/02_basic/README.md) にアップ先が記載されています。
 
 ## フロントエンドエンジニア編
+
+| 課題 | 格納フォルダ・ファイル |
+| --- | --- |
+| #1 PHPとjsで簡単なアプリを作ってみよう 〜 | `users/自分のユーザー名/03_advanced/htdocs/` |
+| #11 PHPでClassクラスを理解するための準備 | `users/自分のユーザー名/03_advanced/htdocs/sortable2/` |
+| #12 PHPアプリケーションをクラス化してみよう | `users/自分のユーザー名/03_advanced/htdocs/sortable3/` |
+| 任意課題 | `users/自分のユーザー名/03_advanced/htdocs/epkot/` |
 
 フロントエンドエンジニア編ではCBCの応用コースをやっていきます。  
 開発環境については以下の仮想環境を構築します。
@@ -804,6 +819,10 @@ XML・CSV・JSON・画像(JPG・PNG・GIF・WEBP・SVG) について学習しま
       - <https://readouble.com/laravel/8.x/ja/queries.html>
 
 ## バックエンド編
+
+| 課題 | 格納フォルダ・ファイル |
+| --- | --- |
+| Laravel | `users/自分のユーザー名/05_laravel/` |
 
 バックエンド編ではCBCの実践（バックエンド Laravel）をやっていきます。  
 開発環境についてはフロントエンドエンジニア編と同様に以下、Dockerで構築します。
