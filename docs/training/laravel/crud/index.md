@@ -3,7 +3,9 @@
 `TODO: 【作成中】この資料は作成中です。`  
 
 実際にCRUDを作っていきましょう。  
-Laravelについては、ある程度理解している前提で進めていきます。
+PHP・Laravelについては、ある程度理解している前提で進めていきます。  
+特に名前空間に関して理解していないと動作させることも出来ないので  
+しっかり学習しておきましょう。
 
 ## 環境
 
@@ -93,6 +95,7 @@ database/migrations/YYYY_MM_DD_hhmmss_create_jobs_table.php
             $table->timestamp('created_at')->nullable()->comment('作成日時'); // created_at
             $table->timestamp('updated_at')->nullable()->comment('更新日時'); // updated_at
         });
+        // Illuminate\Support\Facades\DB
         DB::statement("ALTER TABLE {$tableName} COMMENT '職業'");
     }
 ```
@@ -151,6 +154,7 @@ database/seeders/JobSeeder.php
     {
         // 開発環境のみ100レコードを追加する。
         if (app()->isLocal()) {
+            // App\Models\Job
             // 全件削除
             Job::truncate();
             // JobFactoryクラスを使って100件追加
@@ -204,6 +208,7 @@ app/Models/Job.php
 class Job extends Model
 {
     use HasFactory;
+    // Illuminate\Database\Eloquent\SoftDeletes
     use SoftDeletes;
 
     /**
@@ -215,8 +220,22 @@ class Job extends Model
 }
 ```
 
-- 参考: Eloquentの準備
-  - <https://readouble.com/laravel/9.x/ja/eloquent.html>
+HasFactory, SoftDeletes はclassではなくtraitになり  
+useを使うことでメソッドを追加しています。  
+
+HasFactoryをuseし、factoryメソッドを追加していて  
+今回、JobSeederクラスで使用しています。
+
+- 参考
+  - Eloquentの準備 〜 複数代入
+    - <https://readouble.com/laravel/9.x/ja/eloquent.html#mass-assignment>
+  - Eloquentの準備 〜 ソフトデリート
+    - <https://readouble.com/laravel/9.x/ja/eloquent.html#soft-deleting>
+  - データベーステスト 〜 ファクトリの生成
+    - <https://readouble.com/laravel/9.x/ja/database-testing.html#generating-factories>
+  - PHP
+    - トレイト
+      - <https://www.php.net/manual/ja/language.oop5.traits.php>
 
 ## Routes
 
@@ -233,6 +252,7 @@ Route::prefix('admin')->as('admin')->group(function () {
     // admin/
     Route::view('', 'admin.index')->name('.index');
     // admin/jobs    admin.jobs
+    // App\Http\Controllers\JobController
     Route::prefix('jobs')->as('.jobs')->controller(JobController::class)->group(function () {
         Route::get('', 'index')->name('.index');
         Route::post('', 'store')->name('.store');
@@ -333,6 +353,7 @@ app/Providers/AppServiceProvider.php
 ```php
     public function boot()
     {
+        // Illuminate\Pagination\Paginator
         // Bootstrap4を使用
         Paginator::useBootstrapFour();
 
