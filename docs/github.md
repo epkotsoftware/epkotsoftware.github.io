@@ -6,7 +6,7 @@
 
 ## GitHub組織アカウントへの参加
 
-- SlackにてGitHubアカウントユーザー名を伝えて、組織アカウントへの招待を依頼してください。
+- Slack(Teams)にて管理者にGitHubアカウントユーザー名を伝えて、組織アカウントへの招待を依頼してください。
   - GitHubアカウントをお持ちではない方は作成をお願いします。
   - 参加後は以下にアクセス出来る事を確認してください。
     - <https://github.com/epkotsoftware/training>
@@ -41,11 +41,10 @@
         - Select scopes: プライベートリポジトリの操作のため `repo` をチェックします。  
           それ以外は任意です。
       - 「Generate token」をクリック
-      - トークンが表示されます（2度と表示されないので、忘れたらもう一度作成すること）。
-        ![github_token_generated](./image/github_token_generated.png)
-
-    - 作成したトークンはGitで `git push` 等を行った際に入力を求められます。
-      ![github_sign_in](./image/github_sign_in.png)
+      - トークンが表示されます（2度と表示されないので、忘れたらもう一度作成すること）。  
+        ![github_token_generated](./image/github_token_generated.png)  
+    - 作成したトークンはGitで `git push` 等を行った際に入力を求められます。  
+      ![github_sign_in](./image/github_sign_in.png)  
 
 ---
 
