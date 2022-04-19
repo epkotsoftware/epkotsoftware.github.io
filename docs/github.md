@@ -30,25 +30,44 @@
       - Name: `Yamada Taro`、`Yamada.T`
   - [`Account security`](https://github.com/settings/security)
     - `Two-factor authentication`(2段階認証) は組織アカウントへの参加時は、今のところ必須にはしていませんが推奨します。
-  - [`Developer settings / Personal access tokens`](https://github.com/settings/tokens) （任意）
-    - Git使用時にパスワードの代わりとしてトークンを使用します。  
-      **※ 作成は必要になった時で問題ありません。**
-    - 作成方法
-      - 「Generate new token」をクリック
-      - 以下を入力
-        - Note: 目的を設定します。
-        - Expiration: 有効期限を設定します（`No expiration` は無期限）。
-        - Select scopes: プライベートリポジトリの操作のため `repo` をチェックします。  
-          それ以外は任意です。
-      - 「Generate token」をクリック
-      - トークンが表示されます（2度と表示されないので、忘れたらもう一度作成すること）。  
-        ![github_token_generated](./image/github_token_generated.png)  
-    - 作成したトークンはGitで `git push` 等を行った際に入力を求められます。  
-      ![github_sign_in](./image/github_sign_in.png)  
+
+## トークン
+
+トークンは必要になったら作成してください。  
+Gitでクローンやプッシュをする際に必要になります。
+
+- [`Developer settings / Personal access tokens`](https://github.com/settings/tokens) （任意）
+  - Git使用時にパスワードの代わりとしてトークンを使用します。  
+    **※ 作成は必要になった時で問題ありません。**
+  - 作成方法
+    - 「Generate new token」をクリック
+    - 以下を入力
+      - Note: 目的を設定します。
+      - Expiration: 有効期限を設定します（`No expiration` は無期限）。
+      - Select scopes: プライベートリポジトリの操作のため `repo` をチェックします。  
+        それ以外は任意です。
+    - 「Generate token」をクリック
+    - トークンが表示されます（2度と表示されないので、忘れたらもう一度作成すること）。  
+      ![github_token_generated](./image/github_token_generated.png)  
+
+### トークン入力(Windows)
+
+- Git Bashで `git clone` 等を行った際に入力を求められます。  
+  ![github_sign_in](./image/github_sign_in.png)  
+  ※ 現在では画面が少し異なります。
+
+### トークン入力(Mac)
+
+- ターミナルで `git clone` 等を行った際に入力を求められます。  
+
+  ```bash
+  Username for 'https://github.com':  ★GitHubユーザー名を入力　例:taro-yamada-epkotsoftware
+  Password for 'https://{自分のGitHubユーザー名}@github.com': ★トークンを入力　※入力しても見えないので注意
+  ```
 
 ---
 
-上記内容については 2021/10 時点での内容です。  
+各画面については 2021/10 時点での内容です。  
 それ以降、UIや入力項目等が変更されているかもしれません。  
 
 ## Gitインストール
