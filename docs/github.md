@@ -36,7 +36,10 @@
 トークンは必要になったら作成してください。  
 Gitでクローンやプッシュをする際に必要になります。
 
-- [`Developer settings / Personal access tokens`](https://github.com/settings/tokens) （任意）
+### トークン作成
+
+- `GitHub 〜 Settings / Developer settings / Personal access tokens`
+  - <https://github.com/settings/tokens>
   - Git使用時にパスワードの代わりとしてトークンを使用します。  
     **※ 作成は必要になった時で問題ありません。**
   - 作成方法
@@ -50,12 +53,6 @@ Gitでクローンやプッシュをする際に必要になります。
     - トークンが表示されます（2度と表示されないので、忘れたらもう一度作成すること）。  
       ![github_token_generated](./image/github_token_generated.png)  
 
-### トークン入力(Windows)
-
-- Git Bashで `git clone` 等を行った際に入力を求められます。  
-  ![github_sign_in](./image/github_sign_in.png)  
-  ※ 現在では画面が少し異なります。
-
 ### トークン入力(Mac)
 
 - ターミナルで `git clone` 等を行った際に入力を求められます。  
@@ -64,6 +61,12 @@ Gitでクローンやプッシュをする際に必要になります。
   Username for 'https://github.com':  ★GitHubユーザー名を入力　例:taro-yamada-epkotsoftware
   Password for 'https://{自分のGitHubユーザー名}@github.com': ★トークンを入力　※入力しても見えないので注意
   ```
+
+### トークン入力(Windows)
+
+- Git Bashで `git clone` 等を行った際に入力を求められます。  
+  ![github_sign_in](./image/github_sign_in.png)  
+  ※ 現在では画面が少し異なります。
 
 ---
 
