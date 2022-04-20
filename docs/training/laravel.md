@@ -129,11 +129,13 @@ CSSフレームワークが「`Tailwind CSS`」が採用されており、「`Bo
 
 - GitHub
   - <https://github.com/laravel/breeze>
+  - インストールすると `stubs/default/` のファイルが追加されます。
+    - <https://github.com/laravel/breeze/tree/1.x/stubs/default>
 - CSSフレームワーク
   - Tailwind CSS
     - <https://tailwindcss.com/>
-- Laravel 8.x スターターキット
-  - <https://readouble.com/laravel/8.x/ja/starter-kits.html>
+- Laravel 9.x スターターキット
+  - <https://readouble.com/laravel/9.x/ja/starter-kits.html>
 
 ### Laravel Jetstream
 
@@ -142,11 +144,16 @@ CSSフレームワークが「`Tailwind CSS`」が採用されており、「`Bo
 
 - GitHub
   - <https://github.com/laravel/jetstream>
+  - インストールすると `stubs/` のファイルが追加されます。
+    - <https://github.com/laravel/jetstream/tree/2.x/stubs>
 - CSSフレームワーク
   - Tailwind CSS
     - <https://tailwindcss.com/>
 - Laravel 9.x スターターキット
   - <https://readouble.com/laravel/9.x/ja/starter-kits.html>
+- Laravel Jetstreamでは、内部でFortifyが使われています。
+  - Laravel Fortify
+    - <https://readouble.com/laravel/9.x/ja/fortify.html>
 
 ### トラブルシューティング
 
