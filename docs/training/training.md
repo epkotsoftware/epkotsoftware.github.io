@@ -1102,7 +1102,7 @@ MySQL・phpMyAdmin環境が入っているので、練習してみましょう�
 
 ### Laravel自己学習
 
-- [Laravel](./laravel.md)
+- [Laravel](./laravel/index.md)
 
 ### CodeIgniter4自己学習
 
