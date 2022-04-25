@@ -484,23 +484,8 @@ trainingリポジトリの [users/{★ユーザー名}/02_basic/README.md](https
   - <https://www.docker.com/products/docker-desktop>
 - インストール完了後のチュートリアルはスキップしてください。
   - 「Try running a container」と出ているコマンドは実行不要です。
-- インストール時に以下のようなメッセージが出てうまくいかなかったらご連絡ください。
-  - **「WSL 2 Installation is incomplete」**  
-    **「Docker Engine failed to start...」**
-    - 原因1: PowerShell等が起動中のためインストールに失敗
-      - 一度、Docker Desktopをアンインストール
-      - パソコンを再起動し、余計なアプリを開いていない状態でDocker Desktopをインストール
-    - 原因2: WSLが古い
-      - Linux kernel のアップデート「`wsl --update`」
-      - 一度、Docker Desktopを再インストール
-  - docker-compose が実行出来ない
-    - 原因: 環境変数まわりに問題がありそう。
-  - docker-compose で 「`docker: no matching manifest for linux/arm64/v8 in the manifest list entries.`」が出る
-    - MacのM1チップ搭載のものでエラーが出ることがある。以下のようにymlファイルを編集することで解決可能
-      - <https://ryotarch.com/docker/no-matching-manifest-for-linux-arm64-v8-on-m1-mac/>
-  - docker-compose で File Sharing に関するエラーが出る
-    - Macの場合、以下の「File sharing」タブで現在使用しているディレクトリを追加する（今回であればリポジトリのディレクトリ「training」が設定されていればOK）
-      - <https://matsuand.github.io/docs.docker.jp.onthefly/desktop/mac/>
+- インストールやコンテナ起動がうまくいかなかったらご連絡ください。
+  - [Docker トラブルシューティング](./docker/troubleshoot.md)
 
 ##### 構築手順
 
