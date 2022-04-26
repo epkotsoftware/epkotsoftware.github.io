@@ -336,6 +336,13 @@ CSSの「`grid-template`」が、ほぼ全てのブラウザでサポートさ�
   - User agent string: 未入力
   - User agent type: Desktop
 
+#### コーダー編課題チェックリスト
+
+- 要件通り作られていること
+  - 自分のユーザーディレクトリの「`01_beginner/htdocs/index.html`」をブラウザで開くと、作成したページが見れこと
+  - Google Chrome で見れること
+  - 横幅:`1024px` で表示が崩れないこと、横スクロールバーが出ないこと
+
 ### コーダー編課題GitHubアップロード
 
 VSCodeでのアップ方法は以下を参考にしてください。
@@ -449,6 +456,15 @@ Googleマイドライブ → 「新規」 → 「ファイルのアップロー�
 
 trainingリポジトリの [users/{★ユーザー名}/02_basic/README.md](https://github.com/epkotsoftware/training/tree/template/users/_template/02_basic/README.md) にアップ先が記載されています。
 
+#### マークアップエンジニア編課題チェックリスト
+
+- `css/common.css` にページ固有のスタイルが入っていないこと
+  - 例えばモーダル関連のスタイル等
+- 全ページのデザインが統一されていること
+- `kadai_07.html` 用のJavaScriptおよびスタイルが他ページに適用されないこと
+- `kadai_08.html` 用のJavaScriptおよびスタイルが他ページに適用されないこと
+- TODOコメントが全て削除されていること
+
 ## フロントエンドエンジニア編
 
 | 課題 | 格納フォルダ・ファイル |
@@ -553,6 +569,28 @@ CBCと開発環境が異なるので、気を付けてください。
 - 「フロントエンドエンジニア編」で作成したファイル
 
 trainingリポジトリの [users/{★ユーザー名}/03_advanced/README.md](https://github.com/epkotsoftware/training/blob/template/users/_template/03_advanced/README.md) にアップ先が記載されています。  
+
+#### フロントエンドエンジニア編課題チェックリスト
+
+- `htdocs/index.php`
+  - 登録ボタン
+    - 男性での登録が可能なこと
+    - 女性での登録が可能なこと
+  - ドラッグ
+    - 移動することが出来、DBも更新されること
+- `htdocs/sortable2/index.php`
+  - 登録ボタン
+    - 男性での登録が可能なこと
+    - 女性での登録が可能なこと
+  - ドラッグ
+    - 移動することが出来、DBも更新されること
+- `htdocs/sortable3/index.php`
+  - 登録ボタン
+    - 男性での登録が可能なこと
+    - 女性での登録が可能なこと
+  - ドラッグ
+    - 移動することが出来、DBも更新されること
+
 
 **※ CBCのソースコードのコピーではうまくいかない部分もあるので、レビュー依頼前に自身でテストしましょう。**
 
@@ -826,7 +864,7 @@ LaravelのバージョンがCBCと異なるため、一つ一つコードを理�
   - <https://cbc-study.com/training/backend/laravel1>
 - `#4`～`#9` は手順通り進めてみましょう。
   - 注意
-    - RoutingについてはLaravel8から手法が変わっているので、以下で学習し実装してください。
+    - RoutingについてはLaravel8から手法が変わっているので、以下で学習し実装してください（「`#7 Laravelでデータベースのデータを表示する方法`」の手法が古いです）。
       - <https://readouble.com/laravel/8.x/ja/routing.html>
     - ディレクトリ構成がCBCと違うので読み替えてください。
       - 「`CBC_Laravel/resources/views/`」の場合、「`05_laravel/app/resources/views/`」
