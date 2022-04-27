@@ -13,8 +13,6 @@
 
 - Linux kernel のアップデート「`wsl --update`」をコマンドプロンプトで実行する（終わったら次のコマンドが求められるので書かれている通り実行する  
   たしか「`wsl --shutdown`」のコマンド）
-- docker-compose が実行出来ない
-  - 原因: 環境変数まわりに問題がありそう。
 
 ### PowerShell
 
@@ -24,13 +22,7 @@
 
 ### BIOS
 
-![WSL 2 Installation is incomplete](./images/docker-bios-error.png)  
-
-```txt
-An unexpected error occurred
-
-Hardware assisted virtualization and data execution protection must be enabled in the BIOS. 
-```
+![An unexpected error occurred](./images/docker-bios-error.png)  
 
 まずは「Windows の機能の有効化または無効化」で  
 WSL (Windows Subsystem for Linux)、「Virtual Machine Platform」、「Hyper-V」を有効化します。  
@@ -48,6 +40,23 @@ BIOS設定はWindowsでは行わないため、ブラウザを見ながら出来
     - <https://www2.mouse-jp.co.jp/ssl/user_support2/sc_faq_documents.asp?FaqID=28709>
 
 ## コンテナ起動
+
+### docker-compose が実行出来ない
+
+DockerDesktopは正常にインストール出来たが  
+docker-composeコマンド実行時に「command not found」のメッセージが出る場合  
+環境変数(Path)の設定に問題があります。
+
+- 対応方法1: 再起動する。
+  - 再起動することで環境変数が設定されることがある。
+  - 解決しなければ対応方法2へ
+- 対応方法2: 環境変数(Path)に設定
+  - docker-composeファイル等が置かれているディレクトリパスを探す。
+    - デフォルト: `C:\Program Files\Docker\Docker\resources\bin`
+  - 環境変数にディレクトリパスを設定する。
+    - コントロールパネル → システム → システムの詳細設定 → 環境変数
+    - システム環境変数の「Path」を選択して編集ボタン押下
+    - 新規ボタンでディレクトリパスを追加する。
 
 ### failed: port is already allocated
 

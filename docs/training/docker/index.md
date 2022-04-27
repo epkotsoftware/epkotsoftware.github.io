@@ -21,10 +21,42 @@
 
 ## コマンド
 
-- docker
-  - <https://docs.docker.com/engine/reference/commandline/cli/>
 - docker-compose
   - <https://docs.docker.com/compose/reference/>
+- docker
+  - <https://docs.docker.com/engine/reference/commandline/cli/>
+- docker exec 〜 コンテナ内でコマンドを実行
+  - <https://docs.docker.com/engine/reference/commandline/exec/>
+- docker ps 〜 コンテナ一覧
+  - <https://docs.docker.com/engine/reference/commandline/ps/>
+- docker inspect 〜 Dockerオブジェクト情報表示
+  - <https://docs.docker.com/engine/reference/commandline/inspect/>
+- docker start 〜 コンテナ起動
+  - <https://docs.docker.com/engine/reference/commandline/start/>
+- docker stop 〜 コンテナ停止
+  - <https://docs.docker.com/engine/reference/commandline/stop/>
+- docker restart 〜 コンテナ再起動
+  - <https://docs.docker.com/engine/reference/commandline/restart/>
+- docker rm 〜 コンテナ削除
+  - <https://docs.docker.com/engine/reference/commandline/rm/>
+- docker images 〜 イメージ一覧
+  - <https://docs.docker.com/engine/reference/commandline/images/>
+- docker rmi 〜 イメージ削除
+  - <https://docs.docker.com/engine/reference/commandline/rmi/>
+- docker volume ls 〜 ボリューム一覧
+  - <https://docs.docker.com/engine/reference/commandline/volume_ls/>
+- docker volume rm 〜 ボリューム削除
+  - <https://docs.docker.com/engine/reference/commandline/volume_rm/>
+- docker network ls 〜 ネットワーク一覧
+  - <https://docs.docker.com/engine/reference/commandline/network_ls/>
+- docker network inspect 〜 ネットワーク詳細情報表示
+  - <https://docs.docker.com/engine/reference/commandline/network_inspect/>
+- docker logs 〜 コンテナのログ取得
+  - <https://docs.docker.com/engine/reference/commandline/logs/>
+- docker stats 〜 CPUなどのリソース利用統計取得
+  - <https://docs.docker.com/engine/reference/commandline/stats/>
+  - Ctl+C (Macの場合 control+C) で終了します。
+  - 一度確認するだけなら `docker stats --no-stream` を推奨します。
 
 ## Dockerファイル
 
