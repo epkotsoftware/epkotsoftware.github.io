@@ -137,6 +137,11 @@ let value = "value";
   - 変数名の付け方のコツ、教えます。【プログラミング】
     - <https://youtu.be/VncXPUjI2As>
 
+数値型を扱う際に以下も把握しておきましょう。
+
+- コンピュータで扱う数値の誤差について｜ 基本情報技術者試験のポイント解説
+  - <https://www.foresight.jp/fe/column/about-error/>
+
 ### データ型
 
 ```php
@@ -338,6 +343,11 @@ PHPで良く使用する演算子は以下です。
 | [算術演算子](https://www.php.net/manual/ja/language.operators.arithmetic.php) | `$a - $b`   | 減算 |
 | [算術演算子](https://www.php.net/manual/ja/language.operators.arithmetic.php) | `$a * $b`   | 乗算 |
 | [算術演算子](https://www.php.net/manual/ja/language.operators.arithmetic.php) | `$a / $b`   | 除算 |
+
+論理演算子については以下も学習しておきましょう。
+
+- 論理演算の種類とパターンについて｜基本情報技術者試験のポイント解説！
+  - <https://www.foresight.jp/fe/column/logical-operation/>
 
 ### PHPの演算子の優先順位
 
@@ -1283,6 +1293,10 @@ Modelを作る際に`SoftDeletes`を使うことは多いかと思います。
       - <https://readouble.com/laravel/8.x/ja/helpers.html#method-dd>
     - dump
       - <https://readouble.com/laravel/8.x/ja/helpers.html#method-dump>
+
+## JavaScript独自仕様
+
+- [JavaScript](./js/index.md)
 
 ## 動画
 
