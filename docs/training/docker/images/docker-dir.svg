@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="416px" preserveAspectRatio="none" style="width:491px;height:416px;background:#FFFFFF;" version="1.1" viewBox="0 0 491 416" width="491px" zoomAndPan="magnify"><defs/><g><rect fill="#DDDDDD" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="51" x="10" y="188.8906"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="31" x="20" y="211.8857">root</text><rect fill="#FFF450" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="70" x="111" y="104.4453"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="50" x="121" y="127.4404">docker</text><rect fill="#FFF450" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="39" x="231" y="48.1484"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="19" x="241" y="71.1436">db</text><rect fill="#FFF450" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="40" x="320" y="20"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="20" x="330" y="42.9951">sql</text><rect fill="#FFFFFF" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="69" x="410" y="20"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="49" x="420" y="42.9951">init.sql</text><path d="M360,38.1484 L370,38.1484 C385,38.1484 385,38.1484 400,38.1484 L410,38.1484 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><path d="M270,66.2969 L280,66.2969 C295,66.2969 295,38.1484 310,38.1484 L320,38.1484 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#FFFFFF" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="70" x="320" y="76.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="50" x="330" y="99.292">my.cnf</text><path d="M270,66.2969 L280,66.2969 C295,66.2969 295,94.4453 310,94.4453 L320,94.4453 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><path d="M181,122.5938 L191,122.5938 C206,122.5938 206,66.2969 221,66.2969 L231,66.2969 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#FFF450" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="49" x="231" y="160.7422"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="29" x="241" y="183.7373">php</text><rect fill="#FFFFFF" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="95" x="330" y="132.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="75" x="340" y="155.5889">Dockerfile</text><path d="M280,178.8906 L290,178.8906 C305,178.8906 305,150.7422 320,150.7422 L330,150.7422 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#FFFFFF" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="71" x="330" y="188.8906"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="51" x="340" y="211.8857">php.ini</text><path d="M280,178.8906 L290,178.8906 C305,178.8906 305,207.0391 320,207.0391 L330,207.0391 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><path d="M181,122.5938 L191,122.5938 C206,122.5938 206,178.8906 221,178.8906 L231,178.8906 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><path d="M61,207.0391 L71,207.0391 C86,207.0391 86,122.5938 101,122.5938 L111,122.5938 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#FFF450" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="73" x="111" y="245.1875"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="53" x="121" y="268.1826">project</text><rect fill="#FFFFFF" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="93" x="234" y="245.1875"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="73" x="244" y="268.1826">index.php</text><path d="M184,263.3359 L194,263.3359 C209,263.3359 209,263.3359 224,263.3359 L234,263.3359 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><path d="M61,207.0391 L71,207.0391 C86,207.0391 86,263.3359 101,263.3359 L111,263.3359 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#FFFFFF" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="51" x="111" y="301.4844"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="31" x="121" y="324.4795">.env</text><path d="M61,207.0391 L71,207.0391 C86,207.0391 86,319.6328 101,319.6328 L111,319.6328 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><rect fill="#FFFFFF" height="36.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:1.5;" width="173" x="111" y="357.7813"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="153" x="121" y="380.7764">docker-compose.yml</text><path d="M61,207.0391 L71,207.0391 C86,207.0391 86,375.9297 101,375.9297 L111,375.9297 " fill="none" style="stroke:#181818;stroke-width:1.0;"/><!--MD5=[1b41255a3316d06b121a39361bd12d9f]
+@startmindmap
+<style>
+node {
+  BackgroundColor #FFF450
+}
+rootNode {
+  BackgroundColor #DDDDDD
+}
+leafNode {
+  BackgroundColor #FFFFFF
+}
+</style>
+
++ root
+++ docker
++++ db
+++++ sql
++++++ init.sql
+++++ my.cnf
++++ php
+++++ Dockerfile
+++++ php.ini
+++ project
++++ index.php
+++ .env
+++ docker-compose.yml
+@endmindmap
+
+PlantUML version 1.2022.5(Sat Apr 30 10:55:52 UTC 2022)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>
