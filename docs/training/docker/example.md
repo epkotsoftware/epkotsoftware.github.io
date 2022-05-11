@@ -21,7 +21,6 @@
 | DB名 | `example_db` |  |
 | DB接続情報 | ホスト名: localhost<br>ユーザーID: root<br>パスワード: my-pass<br>ポート番号: 3307 | SQLクライアントソフトで接続する。 |
 
-
 ### 構成図
 
 - 簡易ネットワーク構成
@@ -217,7 +216,7 @@ RUN apt-get update && apt-get install -y \
 #### index.php
 
 任意のPHPファイルを置きましょう。  
-以下は、DB接続を確認するためのコードになります。
+以下は、DB接続や各種設定を確認するためのコードになります。
 
 ```php
 <?php
@@ -238,13 +237,12 @@ echo 'DB接続成功';
 phpinfo();
 ```
 
-- phpinfo
-- <https://www.php.net/manual/ja/function.phpinfo.php>
-
 - PDO クラス
   - <https://www.php.net/manual/ja/class.pdo.php>
 - MySQL 関数 (PDO_MYSQL)
   - <https://www.php.net/manual/ja/ref.pdo-mysql.php>
+- phpinfo
+  - <https://www.php.net/manual/ja/function.phpinfo.php>
 
 ### dbコンテナ
 
