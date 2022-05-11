@@ -64,18 +64,21 @@ services:
     container_name: "example-web"
     hostname: "example-web-server"
     build:
-      context: ./docker/php
+      context: "./docker/php"
     ports:
       - "127.0.0.1:8001:80"
     volumes:
       - "./project:/var/www/html"
+    environment:
+      - "TZ=Asia/Tokyo"
     restart: always
   db:
     platform: linux/x86_64 # M1チップ対応
     container_name: "example-mysql"
     hostname: "my-db"
     image: mysql:8.0.28
-    restart: always
+    ports:
+      - "127.0.0.1:3307:3306"
     volumes:
         - "mysql_data_volume:/var/lib/mysql" # volumes -> mysql_data_volume
         - "./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf"
@@ -83,19 +86,19 @@ services:
     environment:
       - "MYSQL_ROOT_PASSWORD=my-pass"
       - "TZ=Asia/Tokyo"
-    ports:
-      - "127.0.0.1:3307:3306"
+    restart: always
   phpmyadmin:
     container_name: "example-phpmyadmin"
     hostname: "example-phpmyadmin-server"
     image: phpmyadmin/phpmyadmin:5.1.3
-    restart: always
     ports:
       - "127.0.0.1:8888:80"
     environment:
       - "PMA_HOST=my-db" # db -> hostname
       - "PMA_USER=root"
       - "PMA_PASSWORD=my-pass" # db -> environment -> MYSQL_ROOT_PASSWORD
+      - "TZ=Asia/Tokyo"
+    restart: always
 volumes:
   mysql_data_volume:
     name: "example-mysql-volume"
@@ -105,6 +108,7 @@ volumes:
 | --- | --- |
 | [image](https://docs.docker.com/compose/compose-file/compose-file-v3/#image) | コンテナを開始するイメージを指定します。<br>指定例: `イメージ名:タグ` |
 | [ports](https://docs.docker.com/compose/compose-file/compose-file-v3/#ports) | 設定例: `IPアドレス:ホストPort:コンテナPort` |
+| [environment](https://docs.docker.com/compose/compose-file/compose-file-v3/#environment) | 環境変数を追加します。<br>`TZ` でタイムゾーンを設定します（デフォルトはUTC）。 |
 | [restart](https://docs.docker.com/compose/compose-file/compose-file-v3/#restart) | `always` を指定するとコンテナが停止されると自動的に再起動されます。 |
 
 - Compose specification
@@ -124,19 +128,21 @@ volumes:
     container_name: "example-web"
     hostname: "example-web-server"
     build:
-      context: ./docker/php
+      context: "./docker/php"
     ports:
       - "127.0.0.1:8001:80"
     volumes:
       - "./project:/var/www/html"
+    environment:
+      - "TZ=Asia/Tokyo"
     restart: always
 ```
 
-- Php - Official Image | Docker Hub
+- `Php - Official Image | Docker Hub`
   - <https://hub.docker.com/_/php>
-- phpmyadmin/phpmyadmin - Docker Image | Docker Hub
+- `phpmyadmin/phpmyadmin - Docker Image | Docker Hub`
   - <https://hub.docker.com/r/phpmyadmin/phpmyadmin/>
-- Mysql - Official Image | Docker Hub
+- `Mysql - Official Image | Docker Hub`
   - <https://hub.docker.com/_/mysql>
 
 #### php.ini
@@ -215,7 +221,8 @@ echo 'DB接続成功';
     container_name: "example-mysql"
     hostname: "my-db"
     image: mysql:8.0.28
-    restart: always
+    ports:
+      - "127.0.0.1:3307:3306"
     volumes:
         - "mysql_data_volume:/var/lib/mysql" # volumes -> mysql_data_volume
         - "./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf"
@@ -223,8 +230,7 @@ echo 'DB接続成功';
     environment:
       - "MYSQL_ROOT_PASSWORD=my-pass"
       - "TZ=Asia/Tokyo"
-    ports:
-      - "127.0.0.1:3307:3306"
+    restart: always
 ```
 
 - Mysql - Official Image | Docker Hub
@@ -283,14 +289,48 @@ CREATE DATABASE `example_db`;
     container_name: "example-phpmyadmin"
     hostname: "example-phpmyadmin-server"
     image: phpmyadmin/phpmyadmin:5.1.3
-    restart: always
     ports:
       - "127.0.0.1:8888:80"
     environment:
       - "PMA_HOST=my-db" # db -> hostname
       - "PMA_USER=root"
       - "PMA_PASSWORD=my-pass" # db -> environment -> MYSQL_ROOT_PASSWORD
+      - "TZ=Asia/Tokyo"
+    restart: always
 ```
+
+## 構築
+
+以下のコマンドでコンテナの構築および起動します。  
+実行するディレクトリは`docker-compose.yml`があるディレクトリです。
+
+```bash
+# コマンド
+docker-compose up -d
+```
+
+実行例
+
+```bash
+$ # docker-compose.yml があるか確認
+$ ls
+docker                  docker-compose.yml      project
+$ # コンテナ起動
+$ docker-compose up -d
+
+　・
+　・　※省略
+　・
+
+Creating network "example_default" with the default driver
+Creating example-mysql      ... done
+Creating example-web        ... done
+Creating example-phpmyadmin ... done
+$ 
+```
+
+- `docker-compose up`
+  - <https://docs.docker.com/compose/reference/up/>
 
 ## 動作確認
 
