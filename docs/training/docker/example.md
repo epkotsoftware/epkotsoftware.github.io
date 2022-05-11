@@ -18,7 +18,9 @@
 | --- | --- | --- |
 | Web URL | <http://localhost:8001/> | PHPページの表示 |
 | phpMyAdmin URL | <http://localhost:8888/> | データベースの確認 |
-| DB名 | `example_db` |
+| DB名 | `example_db` |  |
+| DB接続情報 | ホスト名: localhost<br>ユーザーID: root<br>パスワード: my-pass<br>ポート番号: 3307 | SQLクライアントソフトで接続する。 |
+
 
 ### 構成図
 
@@ -147,17 +149,44 @@ volumes:
 
 #### php.ini
 
-PHP設定ファイルを用意します。
+PHP設定ファイルを用意します。  
+PHPのバージョンによって設定内容が異なるため  
+PHPマニュアルやGitHubの`php.ini-development`を確認して設定してください。  
+現在では文字コードがUTF8が標準になってきているので、デフォルト設定で良いものが増えてきました。
 
 ```ini
 # docker/php/php.ini
+[Date]
 date.timezone = Asia/Tokyo
+
+[mbstring]
+mbstring.language = Japanese
+mbstring.substitute_character = none
 ```
 
 - 実行時設定
   - <https://www.php.net/manual/ja/configuration.php>
+- Multibyte String 実行時設定
+  - <https://www.php.net/manual/ja/mbstring.configuration.php#ini.mbstring.substitute-character>
 - php.ini ディレクティブのリスト
   - <https://www.php.net/manual/ja/ini.list.php>
+- GitHub php.ini-development
+  - <https://github.com/php/php-src/blob/PHP-8.1.4/php.ini-development>
+
+`mbstring.detect_order` についてはデフォルトでは微妙な部分があるため  
+文字化け等の問題が発生したら見直してください。
+
+```bash
+root@example-web-server:/var/www/html# # mbstring.language = Japanese の場合
+root@example-web-server:/var/www/html# php -r "var_export(mb_detect_order());"
+array (
+  0 => 'ASCII',
+  1 => 'JIS',
+  2 => 'UTF-8',
+  3 => 'EUC-JP',
+  4 => 'SJIS',
+)root@example-web-server:/var/www/html# 
+```
 
 #### Dockerfile
 
@@ -203,9 +232,19 @@ const DB_CHARSET = 'utf8mb4';
 
 $dsn = 'mysql:host=' . DB_HOST . ';port=' . DB_PORT . ';dbname=' . DB_DATABASE . ';charset=' . DB_CHARSET;
 $dbh = new PDO($dsn, DB_USERNAME, DB_PASSWORD);
-echo 'DB接続成功';
 
+echo 'DB接続成功';
+// PHP の設定情報を出力
+phpinfo();
 ```
+
+- phpinfo
+- <https://www.php.net/manual/ja/function.phpinfo.php>
+
+- PDO クラス
+  - <https://www.php.net/manual/ja/class.pdo.php>
+- MySQL 関数 (PDO_MYSQL)
+  - <https://www.php.net/manual/ja/ref.pdo-mysql.php>
 
 ### dbコンテナ
 
@@ -348,6 +387,12 @@ $
 ### DB
 
 - SQLクライアントソフトで接続できること
+  - 「`A5:SQL Mk-2`」の場合
+    - MySQL
+      - ホスト名: `localhost`
+      - ユーザーID: `root`
+      - パスワード: `my-pass`
+      - ポート番号: `3307`
   - 「`DBeaver`」の場合
     - MySQL
       - Server
@@ -357,12 +402,6 @@ $
       - 認証 (Database Native)
         - ユーザー名: `root`
         - パスワード: `my-pass`
-  - 「`A5:SQL Mk-2`」の場合
-    - MySQL
-      - ホスト名: `localhost`
-      - ユーザーID: `root`
-      - パスワード: `my-pass`
-      - ポート番号: `3307`
 
 #### SQLクライアントソフトダウンロード
 
