@@ -135,4 +135,4 @@ YMLファイル
 
 ## 構築例
 
-- [Docker例](./example.md)
+- [Docker例](./example/index.md)
