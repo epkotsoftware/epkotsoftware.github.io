@@ -97,6 +97,14 @@
 - JavaScriptを調べる際は「MDN Web Docs」で調べることを推奨します（対応ブラウザがわかるため）。
   - <https://developer.mozilla.org/ja/docs/Web/JavaScript>
 
+## 問題集
+
+paizaというサイトに問題集がありますので  
+学習した内容の理解度の確認で、こちらにチャレンジしましょう。
+
+- paizaラーニング レベルアップ問題集
+  - <https://paiza.jp/works/mondai>
+
 ## 型
 
 ### 宣言
