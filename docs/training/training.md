@@ -549,16 +549,16 @@ trainingリポジトリの [users/{★ユーザー名}/02_basic/README.md](https
 
 ##### Dockerインストール
 
-- `Docker Desktop`
-  - <https://www.docker.com/products/docker-desktop>
-- インストール完了後のチュートリアルはスキップしてください。
-  - 「Try running a container」と出ているコマンドは実行不要です。
-- インストールやコンテナ起動がうまくいかなかったらご連絡ください。
-  - [Docker トラブルシューティング](./docker/troubleshoot.md)
+Docker Desktop をインストールしてください。
+
+- [Docker Desktopインストール](./docker/install.md)
 
 ##### 構築手順
 
 trainingリポジトリの [users/{★ユーザー名}/03_advanced/README.md](https://github.com/epkotsoftware/training/blob/template/users/_template/03_advanced/README.md) をご覧ください。
+
+- コンテナ起動がうまくいかなかったらご連絡ください。
+  - [Docker トラブルシューティング](./docker/troubleshoot.md)
 
 ### PHP入門
 
