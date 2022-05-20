@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap5 https://getbootstrap.jp/ -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>API</title>
+</head>
+
+<body>
+    <header>
+        <h1>株式会社エプコットソフトウェア課題</h1>
+    </header>
+    <!-- Bootstrap5 Containers https://getbootstrap.com/docs/5.1/getting-started/introduction/ -->
+    <main class="container">
+        <h2><a href="https://open-meteo.com/en/docs/geocoding-api" target="_blank" rel="noopener noreferrer">Geocoding
+                API</a></h2>
+        <div>
+            <label for="inputName">name</label>
+            <input type="search" id="inputName" list="names" value="Tokyo" placeholder="検索ワードを入力">
+            <datalist id="names">
+                <option value="Tokyo">
+                </option>
+                <option value="Yokohama">
+                </option>
+            </datalist>
+            <!-- Bootstrap5 Buttons https://getbootstrap.jp/docs/5.0/components/buttons/ -->
+            <button id="buttonSearch" class="btn btn-primary">Search</button>
+        </div>
+        <h3>「<span id="spanName">Tokyo</span>」の検索結果</h3>
+        <hr>
+        <!-- Bootstrap5 Spinners https://getbootstrap.jp/docs/5.0/components/spinners/ -->
+        <div id="divLoading" class="spinner-border" role="status" style="display: none;"></div>
+        <!-- Bootstrap5 Tables https://getbootstrap.jp/docs/5.0/content/tables/ -->
+        <table id="tableResult" class="table">
+            <thead>
+                <tr>
+                    <td>country</td>
+                    <td>name</td>
+                    <td>latitude</td>
+                    <td>longitude</td>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- TODO: tbody内をJavaScriptで出せるようにすること。 -->
+                <tr>
+                    <td>日本</td>
+                    <td>東京</td>
+                    <td>35.6895</td>
+                    <td>139.69171</td>
+                </tr>
+
+                <tr>
+                    <td>パプア・ニューギニア</td>
+                    <td>Tokyo</td>
+                    <td>-8.4</td>
+                    <td>147.15</td>
+                </tr>
+
+                <tr>
+                    <td>ネパール王国</td>
+                    <td>Tokyo</td>
+                    <td>29.16998</td>
+                    <td>83.16319</td>
+                </tr>
+
+                <tr>
+                    <td>日本</td>
+                    <td>東境山</td>
+                    <td>37.94393</td>
+                    <td>138.47507</td>
+                </tr>
+
+                <tr>
+                    <td>アメリカ</td>
+                    <td>Tokyo Hill</td>
+                    <td>26.92061</td>
+                    <td>-97.86361</td>
+                </tr>
+
+                <tr>
+                    <td>日本</td>
+                    <td>Tokyo Heliport</td>
+                    <td>35.63333</td>
+                    <td>139.85</td>
+                </tr>
+
+                <tr>
+                    <td>日本</td>
+                    <td>東京ディズニーランド</td>
+                    <td>35.63308</td>
+                    <td>139.88057</td>
+                </tr>
+
+                <tr>
+                    <td>日本</td>
+                    <td>トウキョウドイツムラ</td>
+                    <td>35.40516</td>
+                    <td>140.06017</td>
+                </tr>
+
+                <tr>
+                    <td>日本</td>
+                    <td>東京港野鳥公園</td>
+                    <td>35.58362</td>
+                    <td>139.76283</td>
+                </tr>
+
+                <tr>
+                    <td>日本</td>
+                    <td>Tokyo Disney Resort</td>
+                    <td>35.63285</td>
+                    <td>139.88129</td>
+                </tr>
+            </tbody>
+        </table>
+        <template id="tableResultRow">
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </template>
+    </main>
+    <footer>
+        <a href="https://getbootstrap.com/" target="_blank" rel="noopener noreferrer">Bootstrap</a><br>
+        <a href="https://getbootstrap.jp/" target="_blank" rel="noopener noreferrer">Bootstrap(日本語)</a> ※
+        更新が遅いため最新バージョンは英語の方を参照<br>
+        <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Weather data by Open-Meteo.com</a>
+    </footer>
+    <!-- TODO: JavaScript追加 -->
+</body>
+
+</html>
