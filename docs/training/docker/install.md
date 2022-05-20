@@ -2,8 +2,8 @@
 
 ## 公式
 
-- docker docs 〜 Logs and troubleshooting
-  - <https://docs.docker.com/desktop/windows/troubleshoot/>
+- Docker Desktop overview
+  - <https://docs.docker.com/desktop/>
 
 ## インストール準備(Windows)
 
@@ -15,7 +15,7 @@
 
 ![タスクマネージャー](./images/task-manager.png)  
 
-無効になっている場合は有効化してください。 
+無効になっている場合は有効化してください。  
 
 #### 有効化
 
@@ -38,6 +38,19 @@ BIOS設定についてはパソコンのメーカーによってやり方が異�
 ![コマンドプロンプト](./images/cmd-wsl-update.png)  
 
 更新した場合、恐らく「`wsl --shutdown`」コマンド実行を求められますので、指示通り実行しましょう。  
+
+## インストール準備(Mac)
+
+Macでは特別な設定が不要ですが  
+Appleシリコン搭載Mac（M1チップ搭載のもの等）では「Rosetta 2」のインストールを推奨されています（筆者の`MacBook Air (M1, 2020)`ではなしで動作している）。  
+インストールは任意でお願いします。
+
+```bash
+softwareupdate --install-rosetta
+```
+
+- Apple シリコン搭載の Mac コンピュータ
+  - <https://support.apple.com/ja-jp/HT211814>
 
 ## インストール
 
