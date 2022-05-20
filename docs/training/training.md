@@ -757,15 +757,20 @@ Linux技術者認定試験(LPIC)の一部にチャレンジしてみましょう
 
 ## 開発手法編
 
-- ウォーターフォール型の開発手法とは？要件定義・基本設計などシステム開発の進め方を解説！
-  - <https://youtu.be/qVsRGd2bvcU>
-- アジャイル開発入門！スクラムで実践するアジャイル開発のやり方と勉強法とは
-  - <https://youtu.be/Jm3I6QXzjXw>
+- 動画
+  - ウォーターフォール型の開発手法とは？要件定義・基本設計などシステム開発の進め方を解説！
+    - <https://youtu.be/qVsRGd2bvcU>
+  - アジャイル開発入門！スクラムで実践するアジャイル開発のやり方と勉強法とは
+    - <https://youtu.be/Jm3I6QXzjXw>
+- 基本情報技術者試験で問われるシステム開発手法の解説！
+  - <https://www.foresight.jp/fe/column/system-development-method/>
 
 ## 設計編
 
 - システム設計の流れ｜基本設計と詳細設計の違いや、設計書の書き方を解説！
   - <https://youtu.be/OXJtc_aBm9M>
+- システム設計とは？基本情報技術者試験の重要用語解説！
+  - <https://www.foresight.jp/fe/column/system-design/>
 - DB設計
   - データベース入門講座
     - <https://www.youtube.com/playlist?list=PL-1KBX2gDRujQaRgEByueezHBiqHP8KDD>
@@ -774,6 +779,8 @@ Linux技術者認定試験(LPIC)の一部にチャレンジしてみましょう
       フロントエンドエンジニア編で作成したテーブルの定義書になります。
       - [テーブル定義書.xlsx](./files/テーブル定義書.xlsx)
       - [テーブル定義書.pdf](./files/テーブル定義書.pdf) （ExcelをPDF変換したもの）
+  - 基本情報技術者試験の鬼門であるデータベースの正規化について解説
+    - <https://www.foresight.jp/fe/column/normalization/>
 - 設計書テンプレート
   - テンプレートが多くありますが現場で使うのは「基本設計」・「詳細設計書」になります。  
     基本設計では「テーブル定義書」「画面レイアウト」は、ほぼ確実に現場で見ることになります。
@@ -838,6 +845,8 @@ Linux技術者認定試験(LPIC)の一部にチャレンジしてみましょう
     - `6:58` テスト入門講座03 テストデータ作成のコツ・ポイント
     - `9:13` テスト入門講座04 テスト自動化！JUnitの使い方
     - `19:24` テスト入門講座05 バッチ処理のテスト自動化！生産性を劇的に上げるDBUnitの使い方
+- システム開発におけるテストとは？基本情報技術者試験の重要用語解説！
+  - <https://www.foresight.jp/fe/column/conducting-test/>
 - PHPUnit
   - <https://phpunit.readthedocs.io/ja/latest/>
   - テストダブル
@@ -879,6 +888,8 @@ XML・CSV・JSON・画像(JPG・PNG・GIF・WEBP・SVG) について学習しま
     - `8:03` SQLインジェクション【サイバー攻撃＆対策】【分かりやすい解説シリーズ #60】【プログラミング】
     - `8:09` SSHとは？【分かりやすい解説シリーズ #65】【プログラミング】
     - `4:56` 公開鍵認証とは？【分かりやすい解説シリーズ #24】【プログラミング】
+- 基本情報技術者試験で問われる情報セキュリティの基本を解説！
+  - <https://www.foresight.jp/fe/column/information-security/>
 - PHP
   - PHPマニュアル 安全なパスワードハッシュ
     - <https://www.php.net/manual/ja/faq.passwords.php>
@@ -1048,6 +1059,8 @@ Gitについて、より深く学んでいきます。
 フロントエンドエンジニア編等で使ったDocker環境に  
 MySQL・phpMyAdmin環境が入っているので、練習してみましょう。
 
+- 基本情報技術者試験で覚えておきたいSQL文の基本構文について
+  - <https://www.foresight.jp/fe/column/sql/>
 - 動画
   - SQL入門講座
     - <https://www.youtube.com/playlist?list=PLs3eD4QT7ow6mguoDEUsS-dRbzf_nkeei>
@@ -1115,6 +1128,7 @@ MySQL・phpMyAdmin環境が入っているので、練習してみましょう�
 開始前に以下の準備をお願いします。  
 
 - 面談資料について読み込んでおくこと
+  - [開発手法編](#開発手法編)、[設計編](#設計編)も復習しておくこと（実際の面談でも聞かれることが多いため）
 - 経歴について説明できるようになっておくこと
 - 案件情報
   - まだ、決まっていない方はPHP・Laravel等の現場を想定して行います。
