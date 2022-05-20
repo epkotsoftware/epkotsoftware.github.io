@@ -251,48 +251,22 @@ php artisan make:test Http/Controllers/ArtistExtendControllerTest --unit
 WEBサービスを作る際、管理者がデータ登録・閲覧するための管理画面(Admin)を作る事があります。  
 PCで扱うことを想定した、機能重視のdashboard・adminテンプレートのような画面レイアウトが多いです。  
 
-- 参考
-  - Laravel CRUD
-    - <https://qiita.com/takeshisakuma/items/8d33b1f10b273f0050b1>
-  - LaravelのControllerの薄いメソッドでも書く
-    - <https://crieit.net/posts/Laravel-Controller>
-  - ダッシュボードテンプレートデモ
-    - GitHub
-      - <https://github.com/themesberg/tailwind-dashboard-windster>
-    - Demo
-      - ユーザーの一覧画面の例です。この例ではポップアップで編集を行っていますが  
-        「一覧画面(index)」から「詳細画面(show)」、「新規画面(create)」、「編集画面(edit)」に遷移させるケースが多いです。  
-        日本のWEBページでは、ショッピングサイト等にもよく見られる  
-        更新前の「確認画面(confirm)」を挟む事もあります。
-      - <https://demo.themesberg.com/windster/users/list/>
+CRUDの実践については[こちら](./crud/index.md)を参照。
+
+### 参考
+
+- ダッシュボードテンプレートデモ
+  - GitHub
+    - <https://github.com/themesberg/tailwind-dashboard-windster>
+  - Demo
+    - ユーザーの一覧画面の例です。この例ではポップアップで編集を行っていますが  
+      「一覧画面(index)」から「詳細画面(show)」、「新規画面(create)」、「編集画面(edit)」に遷移させるケースが多いです。  
+      日本のWEBページでは、ショッピングサイト等にもよく見られる  
+      更新前の「確認画面(confirm)」を挟む事もあります。
+    - <https://demo.themesberg.com/windster/users/list/>
 - テンプレ検索ワード
-  - 「admin template」
-  - 「dashboard template」
-
-■ 例  
-
-- 対象DBテーブル名
-  - posts
-- クラス
-  - `App\Http\Controllers\PostController`
-  - `App\Models\Post`
-
-■ ルーティング  
-
-同じパスが存在していますが、HTTPメソッドが異なるため  
-別々のルートとして認識されます。  
-
-| 機能名 | HTTP<br>メソッド | URI | Controller<br>メソッド | 備考 |
-| --- | --- | --- | --- | --- |
-| 一覧画面 | GET             | /posts                | index   |  |
-| 新規画面 | GET             | /posts/create         | create  |  |
-| 新規     | POST            | /posts                | store   |  |
-| 詳細画面 | GET             | /posts/{post}         | show    |  |
-| 編集画面 | GET             | /posts/{post}/edit    | edit    |  |
-| 確認画面 | POST            | /posts/{post}/confirm | confirm |  |
-| 更新     | PUT or PATCH    | /posts/{post}         | update  | バリデーションは確認画面と同様に行う<br>（同じRequestクラスもしくは継承したRequestクラスを使う） |
-| 削除     | DELETE          | /posts/{post}         | destroy | 実際にDELETE文は使用せず、deleted_atカラムを更新する<br>ソフトデリートで行うケースが多い |
-
+  - 「[admin template](https://www.google.com/search?q=admin+template)」
+  - 「[dashboard template](https://www.google.com/search?q=dashboard+template)」
 - Laravel 9.x HTTP Requests
   - <https://readouble.com/laravel/9.x/ja/requests.html>
 - Laravel 9.x ルーティング
