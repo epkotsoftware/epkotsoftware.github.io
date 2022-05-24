@@ -359,10 +359,11 @@ $ docker-compose up -d
 　・　※省略
 　・
 
-Creating network "example_default" with the default driver
-Creating example-mysql      ... done
-Creating example-web        ... done
-Creating example-phpmyadmin ... done
+ ⠿ Network env-php_default        Created                                                                                                 0.1s
+ ⠿ Volume "env-php-mysql-volume"  Created                                                                                                 0.0s
+ ⠿ Container env-php-mysql        Started                                                                                                 0.5s
+ ⠿ Container env-php-web          Started                                                                                                 0.5s
+ ⠿ Container env-php-phpmyadmin   Started                                                                                                 0.5s
 $ 
 ```
 

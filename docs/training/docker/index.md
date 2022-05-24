@@ -4,6 +4,7 @@
 
 - [公式](#公式)
 - [動画](#動画)
+- [インストール](#インストール)
 - [用語](#用語)
 - [コマンド](#コマンド)
 - [Dockerファイル](#dockerファイル)
@@ -26,6 +27,10 @@
   - <https://youtu.be/VIzLh4BgKck>
 - Docker超入門講座 合併版 | ゼロから実践する4時間のフルコース
   - <https://youtu.be/lZD1MIHwMBY>
+
+## インストール
+
+- [Docker Desktopインストール](./install.md)
 
 ## 用語
 
