@@ -77,7 +77,7 @@ services:
     platform: linux/x86_64 # M1チップ対応
     container_name: "example-mysql"
     hostname: "my-db"
-    image: mysql:8.0.28
+    image: mysql:8.0.29
     ports:
       - "127.0.0.1:3307:3306"
     volumes:
@@ -91,7 +91,7 @@ services:
   phpmyadmin:
     container_name: "example-phpmyadmin"
     hostname: "example-phpmyadmin-server"
-    image: phpmyadmin/phpmyadmin:5.1.3
+    image: phpmyadmin/phpmyadmin:5.2.0
     ports:
       - "127.0.0.1:8888:80"
     environment:
@@ -194,7 +194,7 @@ array (
 
 ```bash
 # docker/php/Dockerfile
-FROM php:8.1.4-apache
+FROM php:8.1.6-apache
 
 # php.ini をWebサーバーの「/usr/local/etc/php/」にコピー
 COPY ./php.ini /usr/local/etc/php/
@@ -257,7 +257,7 @@ phpinfo();
     platform: linux/x86_64 # M1チップ対応
     container_name: "example-mysql"
     hostname: "my-db"
-    image: mysql:8.0.28
+    image: mysql:8.0.29
     ports:
       - "127.0.0.1:3307:3306"
     volumes:
@@ -325,7 +325,7 @@ CREATE DATABASE `example_db`;
   phpmyadmin:
     container_name: "example-phpmyadmin"
     hostname: "example-phpmyadmin-server"
-    image: phpmyadmin/phpmyadmin:5.1.3
+    image: phpmyadmin/phpmyadmin:5.2.0
     ports:
       - "127.0.0.1:8888:80"
     environment:
@@ -429,3 +429,9 @@ docker exec -it example-mysql bash
 # MySQLログイン
 mysql -uroot -p"$MYSQL_ROOT_PASSWORD"
 ```
+
+## ダウンロード
+
+実際に動作する環境は以下からダウンロードしてください。  
+
+- [env_php.zip](./files/env_php.zip)
