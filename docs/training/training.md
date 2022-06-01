@@ -11,6 +11,7 @@
 ## 入社前の準備
 
 - [パソコン](#パソコン)
+- [便利ソフト](#便利ソフト)
 - [予習](#予習)
 
 ### パソコン
@@ -36,6 +37,7 @@ Windows の現場が多いため、慣れていなければ Windows 推奨です
 | ストレージ | SSD 256GB以上 |  |
 | CPU | Windows11の要件を満たすもの |  |
 | OS | Windows11<br>または<br>Windows10 (Windows11 に無償アップグレード可能なもの) | 無償アップグレードが可能か分からない場合<br>メーカーに問い合わせてください。<br>（メモリ・CPU要件満たせていてもアップグレード出来ないケースがあります） |
+| Ｍicrosoft Office | 不要 | あれば便利ですが、研修や普段使いではなくてもOKです。<br>「[Office on the web](https://www.microsoft.com/ja-jp/microsoft-365/free-office-online-for-the-web)」で無料のOfficeが利用可能です（使える機能は少ない）。 |
 
 - Lenovo
   - <https://www.lenovo.com/jp/ja/jpad/d/deals/promo-offers?sort=price-asc&resultsLayoutType=grid&visibleDatas=facet_freeform4%3AWindows11%20無料アップグレード対象%3Bfacet_Memory%3A8%20GB%3Bfacet_Memory%3A16%20GB>
@@ -57,6 +59,43 @@ Windows の現場が多いため、慣れていなければ Windows 推奨です
   - 13インチについてはAirと比べスペックの大きい違いがない
 - 「MacBook Air」「MacBook Pro」シリーズ4機種の違いをチェック【2022年2月版】
   - <https://www.itmedia.co.jp/fav/articles/2202/04/news168.html>
+
+### 便利ソフト
+
+筆者が現場で使うフリーソフトをご紹介します。  
+興味があればインストールしてください。  
+GitやVSCode等、主要のソフトは除いています。
+
+- メーラー 〜 会社メールの送受信に
+  - 【Win・Mac】 Thunderbird
+    - <https://www.thunderbird.net/ja/>
+    - Microsoft Outlookをお持ちでない方におすすめです。
+    - epkotメールセットアップについては以下を参照
+      - [Thunderbird設定](../thunderbird/index.md)
+- エディタ 〜 VSCodeと併用で、メモ帳代わりに
+  - 【Win】 サクラエディタ
+    - <https://sakura-editor.github.io/>
+  - 【Mac】 CotEditor
+    - <https://coteditor.com/>
+- 比較ツール 〜 ファイル・ディレクトリの比較に
+  - 【Win】 WinMerge
+    - <https://winmerge.org/>
+  - 【Mac】 CompareMerge2
+    - <https://apps.apple.com/jp/app/comparemerge-lite/id1459748650>
+- SQLクライアント 〜 データベース・テーブル操作を行う、現場では必須レベル
+  - 【Win】 A5:SQL Mk-2
+    - <https://a5m2.mmatsubara.com/>
+  - 【Win・Mac】 DBeaver
+    - <https://dbeaver.io/>
+- キャプチャ(gif) 〜 録画ソフト Gif画像はGitHubのPRで貼り付けたり、テストのエビデンスに
+  - 【Win・Mac】 LICEcap
+    - <https://dev.classmethod.jp/articles/introduce-licecap/>
+- ターミナルソフト 〜 開発環境・リモートサーバーへのSSH接続に
+  - 【Win】 RLogin
+    - <https://kmiya-culti.github.io/RLogin/>
+- Office 〜 ブラウザでOfficeを無料で使う
+  - 【Win・Mac】 Office on the web
+    - <https://www.office.com/>
 
 ### 予習
 
@@ -1053,6 +1092,15 @@ Gitについて、より深く学んでいきます。
 - Swift
   - Swift Style Guide(Google公式)
     - <https://google.github.io/swift/>
+- JavaScript
+  - JavaScript guidelines - The MDN project | MDN
+    - <https://developer.mozilla.org/en-US/docs/MDN/Guidelines/Code_guidelines/JavaScript>
+  - Airbnb JavaScript Style Guide
+    - <https://github.com/airbnb/javascript>
+    - 日本語
+      - <https://github.com/mitsuruog/javascript-style-guide>
+  - JavaScript Standard Style
+    - <https://standardjs.com/>
 
 ## データベース編
 
@@ -1110,6 +1158,12 @@ MySQL・phpMyAdmin環境が入っているので、練習してみましょう�
 
 何を学習したら良いかわからないという場合、研修講師にご相談ください。  
 現場に入った後でもサポート致します。  
+
+### ソフトウェア
+
+筆者が実務で使用経験のあるソフトをまとめています。
+
+- [便利ソフト](#便利ソフト)
 
 ### 内部開発
 
