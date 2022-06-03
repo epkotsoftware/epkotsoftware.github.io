@@ -1,5 +1,33 @@
 # 株式会社エプコットソフトウェア ～ プログラミング編
 
+## 目次
+
+| No. |  |
+| :---: | --- |
+| 1 | [はじめに](#はじめに) |
+| 2 | [目的](#目的) |
+| 3 | [PHPについて](#phpについて) |
+| 4 | [JavaScriptについて](#javascriptについて) |
+| 5 | [問題集](#問題集) |
+| 6 | [型](#型) |
+| 7 | [if](#if) |
+| 8 | [演算子](#演算子) |
+| 9 | [ループ処理](#ループ処理) |
+| 10 | [enum(列挙型)](#enum(列挙型)) |
+| 11 | [関数](#関数) |
+| 12 | [オブジェクト指向](#オブジェクト指向) |
+| 13 | [クラス](#クラス) |
+| 14 | [アクセス修飾子](#アクセス修飾子) |
+| 15 | [名前空間](#名前空間) |
+| 16 | [例外処理](#例外処理) |
+| 17 | [ミュータブル・イミュータブル](#ミュータブル・イミュータブル) |
+| 18 | [イテレータ(ジェネレータ)](#イテレータ(ジェネレータ)) |
+| 19 | [アーキテクチャ](#アーキテクチャ) |
+| 20 | [PHP独自仕様](#php独自仕様) |
+| 21 | [JavaScript独自仕様](#javascript独自仕様) |
+| 22 | [動画](#動画) |
+| 23 | [応用](#応用) |
+
 ## はじめに
 
 このページで学習する内容については、プログラミングの基礎的な部分となり  
@@ -45,8 +73,9 @@
 - ライブラリ・API関連
   - Android API reference （2010年頃は日本語の記事がほとんどなかった）
     - <https://developer.android.com/reference>
-  - Laravel API （基本的には日本語の公式情報だけでも何とかなるが、Modelの細かい部分に関しては調べても出てこないが多かったためリファレンスから情報を得ていた）
+  - Laravel API
     - <https://laravel.com/api/9.x/>
+    - 基本的には日本語の公式情報だけでも何とかなるが、Modelの細かい部分に関しては調べても出てこないことが多かったためリファレンスから情報を得ていた。
   - AWS
     - AWS SDK for PHP Documentation
       - <https://docs.aws.amazon.com/sdk-for-php/>
@@ -397,7 +426,8 @@ if (($score < 0) || ($score > 100)) {
 
 ## ループ処理
 
-業務ではforeach・while・do-whileを使用するケースが多いです。
+実業務では、for文を使うことは少なく  
+foreach・while・do-whileを使用するケースが多いです。
 
 - 動画
   - ループ処理とは？【分かりやすい解説シリーズ #3】【プログラミング】
@@ -421,7 +451,7 @@ if (($score < 0) || ($score > 100)) {
 ```php
 // PHP
 /**
- * @param iterable|array|Generator $iterable
+ * @param iterable|array|Generator $iterable 配列等
  * @return string
  */
 function iterableToString(iterable $iterable): string
@@ -658,6 +688,12 @@ $result2 = concatTitle('MainTitle2', 'Subtitle2'); // $result2 には 'MainTitle
 
 ## オブジェクト指向
 
+フレームワークが充実している2022年現在では、深く理解しなくても  
+現場で活躍しているエンジニアは多くいます。  
+
+大規模開発の共通クラス設計・開発を行う場合、フレームワーク開発を行う場合には、必要な知識になり  
+通常の開発であっても、フレームワーク理解度・開発効率・可読性・品質の向上に繋がります。  
+
 - オブジェクト指向とは？10分で学ぶ【分かりやすい解説シリーズ#57】【プログラミング】
   - <https://youtu.be/2zHcch5piP8>
 
@@ -669,8 +705,8 @@ Controllerクラス等はコマンドで作成します。
 現場で採用しているアーキテクチャによっては  
 各自でクラスを手動で新規作成する必要があります。  
   
-また、インターネットでは非公開のクラスを使う事もあるので  
-使い方も覚えておきましょう。  
+また、現場独自のフレームワーク等で、インターネットでは非公開のクラスを扱う事もあるので  
+定義・使用方法をしっかり覚えておきましょう。  
 
 - Wikipedia
   - クラスの基礎
@@ -749,6 +785,66 @@ $collection = new Collection(['name' => 'taylor', 'framework' => 'laravel']);
 $value = $collection->get('name');
 // $value には 'taylor' が入る
 ```
+
+### this
+
+`this`（PHPの場合は`$this`）は、自身のオブジェクトを指します。  
+以下の例を実行すると、`this`と`new`で生成されたオブジェクトは同一であることがわかります。
+
+- [paiza.io](https://paiza.io/projects/aprRTXDjq9sdhJtZ5p74ig?language=javascript)
+
+```js
+// JavaScript
+class ThisTest {
+  /**
+   * コンストラクタ（インスタンス生成時に実行）
+   * @param {*} value
+   */
+  constructor(value) {
+    this.val = value;
+  }
+  /**
+   * dumpThisメソッド this の内容を出力します。
+   */
+  dumpThis() {
+    console.log("# this");
+    console.log(this);
+  }
+}
+
+// thisTest1
+const thisTest1 = new ThisTest(1);
+thisTest1.dumpThis();
+console.log("# thisTest1");
+console.log(thisTest1);
+
+// thisTest2
+const thisTest2 = new ThisTest(2);
+thisTest2.dumpThis();
+console.log("# thisTest2");
+console.log(thisTest2);
+```
+
+```log
+# this
+ThisTest { val: 1 }
+# thisTest1
+ThisTest { val: 1 }
+# this
+ThisTest { val: 2 }
+# thisTest2
+ThisTest { val: 2 }
+```
+
+JavaScriptの`this`については、複雑になるため  
+詳しくはMDNを参照してください。
+
+- PHP
+  - クラスの基礎 （疑似変数 `$this`）
+    - <https://www.php.net/manual/ja/language.oop5.basic.php>
+- JavaScript
+  - `this - JavaScript | MDN`
+    - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/this>
 
 ### 静的クラス
 
