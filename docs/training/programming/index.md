@@ -154,8 +154,11 @@ const CONSTANT_VALUE = "constant value";
 let value = "value";
 ```
 
-- CBC ～ PHPの変数
-  - <https://cbc-study.com/training/advanced/page2#s3>
+- CBC
+  - JavaScriptの変数
+    - <https://cbc-study.com/training/basic/page8>
+  - PHPの変数
+    - <https://cbc-study.com/training/advanced/page2#s3>
 - Wikipedia
   - 定数
     - <https://ja.wikipedia.org/wiki/定数_(プログラミング)>
@@ -352,6 +355,9 @@ function test(int $value): string
 
 ## 演算子
 
+- CBC
+  - PHPを便利にするいろんな記号
+    - <https://cbc-study.com/training/advanced/page4#pl-0>
 - PHP
   - <https://www.php.net/manual/ja/language.operators.php>
 - JavaScript
@@ -464,6 +470,9 @@ function iterableToString(iterable $iterable): string
 }
 ```
 
+- CBC
+  - PHPで配列のループ処理
+    - <https://cbc-study.com/training/advanced/page3#pl-15>
 - Wikipedia
   - <https://ja.wikipedia.org/wiki/Foreach文>
 - PHP
@@ -582,6 +591,9 @@ function 関数名($引数1, $引数2, ...$引数n)
 $result = 関数名(1, 2, 3);
 ```
 
+- CBC
+  - JavaScriptの関数
+    - <https://cbc-study.com/training/basic/page8#pl-4>
 - Wikipedia
   - <https://ja.wikipedia.org/wiki/サブルーチン>
   - <https://ja.wikipedia.org/wiki/メソッド_(計算機科学)>
@@ -694,6 +706,9 @@ $result2 = concatTitle('MainTitle2', 'Subtitle2'); // $result2 には 'MainTitle
 大規模開発の共通クラス設計・開発を行う場合、フレームワーク開発を行う場合には、必要な知識になり  
 通常の開発であっても、フレームワーク理解度・開発効率・可読性・品質の向上に繋がります。  
 
+- CBC
+  - PHPアプリケーションをクラス化してみよう
+    - <https://cbc-study.com/training/advanced/class1#pl-7>
 - オブジェクト指向とは？10分で学ぶ【分かりやすい解説シリーズ#57】【プログラミング】
   - <https://youtu.be/2zHcch5piP8>
 
@@ -936,6 +951,9 @@ console.log($c1);
 console.log($c2);
 ```
 
+- CBC
+  - namespaceやuseについて
+    - <https://cbc-study.com/training/backend/laravel3#pl-9>
 - Wikipedia
   - <https://ja.wikipedia.org/wiki/名前空間>
 - PHP
