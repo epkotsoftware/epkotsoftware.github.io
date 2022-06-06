@@ -16,10 +16,12 @@
 
 ### 環境
 
+- OS
+  - Windows or Mac (研修資料は、Windowsを想定しています)
 - GitHubアカウント
   - <https://github.com/>
 - インストール
-  - Git Bash
+  - Git
     - <https://git-scm.com/download/>
   - VSCode
     - <https://azure.microsoft.com/ja-jp/products/visual-studio-code/>
@@ -91,7 +93,7 @@ Gitを扱うための拡張機能をご紹介します。
 
 - リポジトリのメインページに移動 (`https://github.com/{★自身のユーザー名}/training-git/`)
 - ブランチ名に「`develop`」を入力し、「`Create branch: develop from 'main'`」をクリック  
-  ![github_create_branch_develop](../image/github_create_branch_develop.png)
+  ![github_create_branch_develop](./images/github_create_branch_develop.png)
 
 #### ブランチ設定
 
@@ -100,7 +102,7 @@ Gitを扱うための拡張機能をご紹介します。
 - 「`Branches`」をクリック
 - Default branch ～ デフォルトブランチをdevelopに変更
   - 切り替えアイコンをクリック  
-    ![github_switch_branch](../image/github_switch_branch.png)
+    ![github_switch_branch](./images/github_switch_branch.png)
   - 「`develop`」を選択して、「`Update`」ボタンをクリック
   - 「`I understand, update the default branch.`」ボタンをクリック
 - Branch protection rules ～ ブランチ保護ルール追加
@@ -132,30 +134,45 @@ Gitを扱うための拡張機能をご紹介します。
   - タグをつけることで、2つのタグを指定して変更点を確認することが容易に出来ます。
     - <https://github.com/laravel/laravel/compare/v8.6.8...v8.6.9>
 
-#### CloneするためのURLを取得
-
-- Cloneする方法はいくつかありますが、今回はHTTPSで行います。
-- リポジトリのメインページに移動
-- 「`Code`」をクリックし、「`HTTPS`」タブに記載されているURLをコピー  
-    ![github_code](../image/github_code.png)
-- このURLを `git clone` で使用します。
-
 ## リモートリポジトリ複製
 
-![git_clone_image](../image/git_clone_image.svg)
+![git_clone_image](./images/git_clone_image.svg)
 [PlantUML](https://www.plantuml.com/plantuml/umla/PSyn3i8m38NXtQTuPES27L0t63W2YzEwD98ReyIjuFO4bWgnUFZbpvBxwbnyNPGEFiiYs58id9tcD0ecCu_s96e3uMe3Qo1WPEV8LH3qaswvoCDgSYkl0AvGaZnYX-VabpN-oYABkVnHsoaFdZPsQSrmF46xGIqBvUQWCdc7Ut9yuxwirBSBxQ4t)  
 
 リモートリポジトリ（GitHub上のリポジトリ）をローカルに複製します。  
-「`Git Bash`」で任意の場所に「`git clone "★URL"`」を実行しましょう。  
+
+### ローカルディレクトリ準備
+
+複製先を用意します。  
+実務でも複数リポジトリ（複数プロジェクト）を扱う事は、よくあるので  
+混同しないよう、リポジトリ毎にディレクトリを分けるようにしましょう。  
+`training-git`ディレクトリは、複製時に作られるため  
+現時点では不要です。
+
+- [PlantUML](https://www.plantuml.com/plantuml/umla/VP7DIiD04CVlynG1Bp5GzA2NMAIer9ll4CnQbhRPibq_H0IxMsqX1psKYeU2AAZuKGyYQ2BwBavCw5ku9Zcc_fdZZvdVyA-qXSD5atfkqsc1eA9135HFg3vGFg3IqqDvZUeHvJEgFghx-DQF-sVHfm_bjjXla6Nmc4kC0p2C5MUpNkDistDNMODnOwPQhIuipiCXSCR4nbHiBOt6odFvIh3i6XLWHc4OTqzdby2oRDAgCz5cMsBNuGJCvBMRl0zGNls9oXjKBzel9IrRS8TwrAjfwd8GVOsrDgeHohViXPnooKvfJmVCdvFZYRgR3Fta8YXYRQO39dP6s1b7uR3uwlTvBnim2vVajuxyA0Z-zowbpwzJCKs_GdHXMMc_)  
+  ![Gitディレクトリ構成](./images/git_dir.svg)  
+
+### URL取得
+
+- 複製する方法はいくつかありますが、今回はHTTPSで行います。
+- リポジトリのメインページに移動
+- 「`Code`」をクリックし、「`HTTPS`」タブに記載されているURLをコピー  
+    ![github_code](./images/github_code.png)
+- このURLを `git clone` で使用します。
+
+### git clone
+
+「`Git Bash`」等のターミナルで、任意の場所に
+「`git clone "★URL"`」を実行しましょう（上記の例の場合、個人アカウントディレクトリで実行）。  
 URLはGitHub上で取得したものを使用します。  
 
-![git_clone](../image/git_clone.png)  
+![git_clone](./images/git_clone.png)  
 
-VSCodeで「`training_git`」フォルダを開きましょう。  
-ターミナルは「`Git Bash`」を選択してください。  
+VSCodeで出来あがった「`training_git`」フォルダを開きましょう。  
+ターミナルは、Windowsであれば「`Git Bash`」を選択してください。  
 「`Git Graph`」は任意ですが表示方法は以下になります。  
 
-![vscode_training_git](../image/vscode_training_git.png)  
+![vscode_training_git](./images/vscode_training_git.png)  
 
 ## Git学習シナリオ
 
@@ -168,7 +185,7 @@ VSCodeで「`training_git`」フォルダを開きましょう。
 開発者はあなたを含めて2名で、あなたはA機能を担当  
 もう1名はB機能を担当します。
 
-![git_flow_simple](../image/git_flow_simple.svg)
+![git_flow_simple](./images/git_flow_simple.svg)
 [PlantUML](https://www.plantuml.com/plantuml/umla/VP3DJiCm3CVlUGhJdHdRjGUq0-A6X10lu2nEQorEfjOjxErPb4hfOEAIoF-FdomVHiL19mdcGNiIWfdjW55Dpux0fwGsVHjpVQ1v9THfeCO0K5JM2pI-I4_O08xW4JPzqZF7qvsCBHbRCnGTLFmBpHJIUOrtYvIB3ZPT2kvNwGqvhXkIvnmNs0JkUXrF5nicgZKyAi-e16847fz1MewiZ06EIOJLn7GrXznjFx5hOTvjzoNgQjaPbnMFRQGlo2SxzjNrQ3mkFh2S0mb5NMbAeou4UvzWZRUBNmbLAuGoklRz8_z2GqV6qGq4_qzWsSAjLvARj1G91Wg48_qzptwxCmUARfBm0m00)  
 
 |  | Mainへのマージ | Developへのマージ | push | 概要 |
@@ -181,7 +198,7 @@ VSCodeで「`training_git`」フォルダを開きましょう。
 
 A機能の実装を開始するため「Feature」ブランチを、リモートリポジトリの「Develop」ブランチから作成します。  
 
-![git_new_branch_feature_a](../image/git_new_branch_feature_a.svg)
+![git_new_branch_feature_a](./images/git_new_branch_feature_a.svg)
 [PlantUML](https://www.plantuml.com/plantuml/umla/NOyxRiD030Lxdk95gWttBW8NGReSWXAvMaBxCIHAYM-VB0n4XXi277AAkQxEYsyvqPj7pOhTXeMBKpHHX5fzg3z4VmFTfx9lYtO4Q77pExhmG6Vkm2i2eu_LRrPcqY8ur0_TDTNRiogwDz8yGJ_L92_E5rjv5dBRstj6dsoAlixt8MrwQ3owxUoAJ1cdTyX1XAIHm9UYtsY9OpokWQbKLoGDVi5aZZ7gEDVDSHhm7ucws6JbB8yQkcgHBQTV)  
 
 作成する前に「`git fetch`」コマンドにより、ローカルリポジトリを最新の状態にします。  
@@ -194,7 +211,7 @@ git fetch
 git checkout -b feature/a origin/develop
 ```
 
-![git_new_branch_feature_a](../image/git_new_branch_feature_a.png)  
+![git_new_branch_feature_a](./images/git_new_branch_feature_a.png)  
 
 ### originとは
 
@@ -208,7 +225,7 @@ git checkout -b feature/a origin/develop
 
 A機能の実装・テストに入りましょう。
 
-![git_imp_feature_a](../image/git_imp_feature_a.svg)
+![git_imp_feature_a](./images/git_imp_feature_a.svg)
 [PlantUML](https://www.plantuml.com/plantuml/umla/JOunhi9034HxdsB-_XhHKw1KtCCXZcAHtOrs9n7S7WiQ6ijwzjFCqAcDUrxbZujbm-5Zqq9PV3BCjNAiJv4OI3TJxisI05ReV27DNtJM1EsO5VzBvURb8LOcV5Izqm-bnLNYuNIDvGBFsnfnXJ-CrYb3Y57d3G00)  
 
 ### A機能実装
@@ -216,7 +233,7 @@ A機能の実装・テストに入りましょう。
 まずは、A機能を実装します。  
 A機能はWEBページとしますので「`htdocs/a.html`」を適当に追加しましょう。
 
-![git_imp_feature_a](../image/vscode_add_a_html.png)  
+![git_imp_feature_a](./images/vscode_add_a_html.png)  
 
 ### A機能テスト
 
@@ -247,7 +264,7 @@ A機能のテストをします。
 - 「✔（コミット）」アイコンをクリックし、「ステージされている変更」に入っているファイルをコミットする。
   - コミットすると同期に関するボタンが出てきますが無視してください。
 
-![vscode_git_add_and_commit](../image/vscode_git_add_and_commit.gif)  
+![vscode_git_add_and_commit](./images/vscode_git_add_and_commit.gif)  
 
 ```bash
 # VSCodeの「変更をステージ」と同様
@@ -264,7 +281,7 @@ git commit -m ":sparkles: htdocs/a.html"
 ここで一旦、B機能（Bさん）の作業を行いましょう。  
 A機能と平行で進めていると仮定します。  
 
-![git_imp_feature_b](../image/git_imp_feature_b.svg)
+![git_imp_feature_b](./images/git_imp_feature_b.svg)
 [PlantUML](https://www.plantuml.com/plantuml/umla/JO-zJiKm38LtFuN9dH7x7L07n8nuWwG-QIBoKwLkWRSd5Rrg5rl-hE_87XQrJTUSw4a3CdYBhjcY5AA0VQtgwWzHBspUONLjCCICeb5_sVX_zE8CsuMzurkeEiVoHIZ2f_g63QdELrKEj8l2jwacEINXvzSUTo_uvlsUCP0TDMvMqJ5vT-mvvZaXe-Y5APR7AFUFpxrdj0aak8OCAD8V_mC0)  
 
 ### B機能実装
@@ -274,14 +291,14 @@ A機能と平行で進めていると仮定します。
 - リポジトリのメインページに移動
 - 「`develop`」ブランチを選択し、ブランチ名に「`feature/b`」を入力し、「`Create branch: feature/b from 'develop'`」をクリック
 
-![github_create_feature_b](../image/github_create_feature_b.png)  
+![github_create_feature_b](./images/github_create_feature_b.png)  
 
 次にB機能を実装します。
 
 - 「`feature/b`」ブランチを選択し、「`Create new file`」をクリック  
-  ![github_create_new_file](../image/github_create_new_file.png)  
+  ![github_create_new_file](./images/github_create_new_file.png)  
 - ファイル名に「`htdocs/b.html`」を入力  
-  ![github_input_file_name](../image/github_input_file_name.gif)  
+  ![github_input_file_name](./images/github_input_file_name.gif)  
 - ファイル内容に以下を入力
 
 ```html
@@ -302,7 +319,7 @@ A機能と平行で進めていると仮定します。
 - 任意のコミットメッセージを入力
 - 「`Commit new file`」ボタンで「`feature/b`」ブランチにコミット
 
-![github_commit_new_file](../image/github_commit_new_file.png)
+![github_commit_new_file](./images/github_commit_new_file.png)
 
 上記の要領で「`htdocs/index.html`」もコミットしてください。  
 ファイル内容は以下にしてください。
@@ -339,7 +356,7 @@ A機能と平行で進めていると仮定します。
 - 「`New pull request`」ボタンをクリック
 - ブランチを以下のように選択し、「`Create pull request`」をクリック
   - 「`base: develop`」 ← 「`compare: feature/b`」  
-  ![github_comparing_changes](../image/github_comparing_changes.png)  
+  ![github_comparing_changes](./images/github_comparing_changes.png)  
 - 「`Open a pull request`」画面で「`Create pull request`」をクリック
 
 ### B機能PRマージ
@@ -358,7 +375,7 @@ A機能の作業に戻りましょう。
 
 「`feature/a`」ブランチに「`develop`」ブランチの取り込みを行いましょう。  
 
-![git_merge_or_rebase](../image/git_merge_or_rebase.svg)
+![git_merge_or_rebase](./images/git_merge_or_rebase.svg)
 [PlantUML](https://www.plantuml.com/plantuml/umla/JS-nZeCm3CRntK_X2_FfzXigXgfFmMBgBn0LOXGCQj--KHdeObj_wJUuNLsAR_D4FpvY1k-fBvATngJWQEQzFOdgu723-5OGY1dPaxyun2FzIM1PEGete_cIyeEGbKzwnOx9bc-gH_f0vMQmIKyaTq-xE5ZFCmef_rxg_fzH1dJPIfSBUbb1RQNrYpS0)  
 
 A機能のpush前に、トップ画面の「`htdocs/index.html`」にA画面へのリンクを追加することになりました。  
@@ -370,7 +387,7 @@ A機能のpush前に、トップ画面の「`htdocs/index.html`」にA画面へ�
 git fetch
 ```
 
-![git_fetch_git_graph](../image/git_fetch_git_graph.png)  
+![git_fetch_git_graph](./images/git_fetch_git_graph.png)  
 
 上記のGraphの通り、「`develop`」ブランチから「`feature/a`」ブランチを作成した後に  
 「`develop`」ブランチに2つのコミットが入っていることがわかります（マージコミットを除く）。  
@@ -409,7 +426,7 @@ git branch --show-current
 git pull --rebase origin develop
 ```
 
-![git_pull_rebase](../image/git_pull_rebase.png)  
+![git_pull_rebase](./images/git_pull_rebase.png)  
 
 上記のGraphで分かる通り、最新の「`develop`」ブランチから「`feature/a`」ブランチを作成し、「`htdocs/a.html`」がコミットされたことになっています。  
 リベースを使うメリットとしては、マージコミットが減って履歴が綺麗になることです。  
@@ -424,13 +441,13 @@ git pull --rebase origin develop
 「`htdocs/index.html`」にリンクを追加しましょう。  
 ソース管理の対象ファイルを選択すると、変更点を確認することが出来ます。  
 
-![vscode_compare](../image/vscode_compare.png)  
+![vscode_compare](./images/vscode_compare.png)  
 
 コマンドで行う場合は「`git diff`」でも可能です。  
 表示量が多い場合、抜けられなくなるかと思いますが  
 「q」を入力することで終了させることが出来ます。  
 
-![git_diff](../image/git_diff.png)  
+![git_diff](./images/git_diff.png)  
 
 「`git diff`」の詳細説明については割愛します。  
 以下が参考になります。  
@@ -444,7 +461,7 @@ git pull --rebase origin develop
 
 A機能の実装(テスト)が終わったら、「`feature/a`」ブランチをGitHub上に反映させるため、pushしましょう。
 
-![git_push](../image/git_push.svg)
+![git_push](./images/git_push.svg)
 [PlantUML](https://www.plantuml.com/plantuml/umla/VSynRe0m38NXtQTupOwwCrHixT0Zi3XWm5A8KUAWzlQ5fQXB5m-_v4zwGtKktlP4Bxx9BZWr5ivEcyw2nSoZVH5T1-7J9aw1W9cT8rT1I7SQSv73ghgLxp6FUH7sLkIL0xWYaUGPZ_Ak_j7YNwR8RYx_E_OuFBcUx8942TqRh3zQtIZRdMJn7giwxeQkmOgkcl6hFUz6msLUuty0)  
 
 以下、コマンドを実行することで、GitHubに反映されます。
@@ -464,7 +481,7 @@ git push -u origin feature/a
 
 「`feature/a`」ブランチを「`develop`」にマージするPRを作成し、マージをします。
 
-![github_pr_merge](../image/github_pr_merge.svg)
+![github_pr_merge](./images/github_pr_merge.svg)
 [PlantUML](https://www.plantuml.com/plantuml/umla/JS-n3e9030RWlKzHZzcuEnW6usnyWsB_WujmHuv2zEs5Q78iRVEdt_3NaqcsUUZfO1q6y1AQBD6e2mhsALcJtaJhO7U3s9pXY1dHWdtO-Lzq4iSoiHUkkcHZY2z2L2xqYWLz6lTK_z46bQiszLgGF2qiOc0jfnVomiSBw_d-sFQ0t88K-uyQKTSsNm00)  
 
 ### PR作成
@@ -473,7 +490,7 @@ GitHub上の操作になりますが「`develop`」ブランチへのマージPR
 
 - リポジトリのメインページに移動
 - 「`Compare & pull request`」をクリック  
-  ![github_compare_and_pull_request](../image/github_compare_and_pull_request.png)  
+  ![github_compare_and_pull_request](./images/github_compare_and_pull_request.png)  
 
 - 以下を入力（現場に入った場合はルールに従うこと）
   - ブランチ: `base: develop ← compare: feature/a`
@@ -523,9 +540,9 @@ git branch -d feature/a
 git branch -a
 ```
 
-最終的なブランチの状態は以下になります。
+最終的なブランチの状態は以下になります（リベースを選択した場合）。
 
-![vscode_develop](../image/vscode_develop.png)
+![vscode_develop](./images/vscode_develop.png)
 
 ### 一括でローカルブランチを削除する方法
 
@@ -557,6 +574,24 @@ git branch | xargs git branch -D
 実装完了後は「`develop`」ブランチで単体テスト・結合テスト・システムテスト等を行い  
 「`main`」ブランチへのPR→マージを行った後にリリースします。  
 今回は、Git研修のため割愛します。  
+
+## その他
+
+### コンフリクト
+
+今回のシナリオではやりませんでしたが  
+複数人が同じファイルの同じ箇所を修正することにより  
+コンフリクト（競合）が発生することがあります。  
+
+コンフリクトの解消方法については動画・サイトの記事を参考にしてください。  
+GitHubで解消することも出来ます。
+
+- `【Git入門】Git + Github使い方入門講座🐒Gitの仕組みや使い方を完全解説！パーフェクトGit入門！ 〜 コンフリクト(編集の競合)`
+  - <https://www.youtube.com/watch?v=LDOR5HfI_sQ&t=2568s>
+- GitHub でのマージ コンフリクトを解決する
+  - <https://docs.github.com/ja/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-on-github>
+- コマンド ラインを使用してマージ コンフリクトを解決する
+  - <https://docs.github.com/ja/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-using-the-command-line>
 
 ## おわり
 
