@@ -2,16 +2,38 @@
 
 他言語のプログラミング基礎が出来ていて、HTML・CSSの知識がある方を対象とした資料です。
 
+## 目次
+
+| No. |  |
+| :---: | --- |
+| 1 | [はじめに](#はじめに) |
+| 2 | [Internet Explorer](#internet-explorer) |
+| 3 | [動画](#動画) |
+| 4 | [JavaScriptガイド](#javascriptガイド) |
+| 5 | [要素を取得する](#要素を取得する) |
+| 6 | [window](#window) |
+| 7 | [即時実行関数式](#即時実行関数式) |
+| 8 | [タイマー](#タイマー) |
+| 9 | [イベント](#イベント) |
+| 10 | [API](#api) |
+| 11 | [template](#template) |
+| 12 | [JavaScript高速化について](#javascript高速化について) |
+
 ## はじめに
 
 JavaScriptは情報が多く出ており、誤った情報も多いため  
 Mozillaの公式ウェブサイト(MDN)をメインに学習していきます。  
-また、ライブラリ(jQuery等)・フレームワーク(Vue.js等)は本資料では学習対象外です。
+また、ライブラリ(jQuery等)・フレームワーク(Vue.js等)は本資料では学習対象外です。  
+見ることは少なそうですが、「HTML Living Standard」を策定しているWHATWGのリンクも載せておきます。  
 
 - Wikipedia - MDN Web Docs
   - <https://ja.wikipedia.org/wiki/MDN_Web_Docs>
 - MDN Web Docs
   - <https://developer.mozilla.org/>
+- Wikipedia - Web Hypertext Application Technology Working Group
+  - <https://ja.wikipedia.org/wiki/Web_Hypertext_Application_Technology_Working_Group>
+- Web Hypertext Application Technology Working Group (WHATWG)
+  - <https://whatwg.org/>
 
 ## Internet Explorer
 
@@ -263,7 +285,20 @@ JavaScriptでグローバルスコープの関数・変数が増えていくと�
 ```js
 let message = 'outer';
 (function () {
-    let message = 'inner'; // 関数内のみ有効
+  let message = 'inner'; // 関数内のみ有効
+})();
+alert(message); // outer
+```
+
+アロー関数式を使うと少し短く書けます（IE非対応）。
+
+- アロー関数式
+  - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Functions/Arrow_functions>
+
+```js
+let message = 'outer';
+(() => {
+  let message = 'inner'; // 関数内のみ有効
 })();
 alert(message); // outer
 ```
@@ -296,6 +331,82 @@ alert(message); // outer
 - `jQuery.post()`
   - <https://api.jquery.com/jquery.post/>
 
+### 非同期処理
+
+API(Web API)を実行する際は非同期処理を使用します。  
+レスポンスによく使われるJSONについても学習しましょう。
+
+- 動画
+  - 【JavaScript入門 #8】WebAPIを叩いてみよう！async await構文を使うと簡単！【ヤフー出身エンジニアの入門プログラミング講座】
+    - <https://youtu.be/QugDLcOo_EE>
+  - JSONについてわかりやすく説明します
+    - <https://youtu.be/us6xwYvThh4>
+  - JavaScriptの非同期処理解説シリーズ
+    - <https://www.youtube.com/playlist?list=PL3PnJ18ZwZneYxvTkTGMgCh07OoTYlYw->
+
+#### 並列処理との違い
+
+非同期処理というと並列処理・マルチスレッドという言葉も出てきますが  
+JavaScript は基本的にシングルスレッドで動作し、同時に処理が実行されることはありません（後述の Web Workers API を使用する場合は除く）。  
+
+`async function`を定義した場合、非同期関数となりますが  
+自身で作成したJavaScriptはシングルスレッドで動作するため  
+マルチスレッドでは出来ないDOM操作を行うことが出来ます。  
+
+例えば、以下の処理で`test`関数を実行した場合、リクエスト処理自体は  
+メインスレッド外で行われますが、それ以外の処理はメインスレッドで実行されます。  
+
+```js
+function test() {
+  console.log('test A');
+  testAsync();
+  console.log('test B');
+}
+/**
+ * @returns {Promise}  ※ 非同期(async)関数では暗黙的に戻り値がPromiseになります。
+ */
+async function testAsync() {
+  console.log('testAsync A');
+
+  const url = 'https://geocoding-api.open-meteo.com/v1/search?name=Tokyo';
+  const p = fetch(url).then(r => r.json())
+  console.log('testAsync B');
+  const obj = await p;
+  console.log('testAsync C');
+}
+```
+
+上記コードの場合、await以降の処理（`testAsync C`）が  
+`test`関数完了以降に実行されるように、処理の順番待ち状態になります。  
+その為、処理`test B`が何分もかかるような重い処理であっても、`testAsync C`の処理は並列で行われることはなく  
+必ず処理`test B`が終わった後に実行されるようになります。
+
+```log
+test A
+testAsync A
+testAsync B
+test B
+testAsync C
+```
+
+#### 別スレッドで処理を行うには
+
+別スレッドで処理を行いたい場合は  
+「Web Workers API」を使うことで実現可能です。  
+実務で使用するのは稀で難しい話になってくるため、こういうものがあるという程度の理解で十分です。
+
+- Web Workers API
+  - <https://developer.mozilla.org/ja/docs/Web/API/Web_Workers_API>
+
+`new Worker('xxx.js');` のようなコードがあった場合、`xxx.js`は  
+別スレッド（ワーカースレッド）で行われる処理と認識してください。  
+メインスレッド以外では、DOM操作を行うことが出来ないのでご注意ください。  
+
+重い処理はサーバー側に任せることがほとんどで  
+JavaScriptで時間がかかる処理は、DOM操作が必要なものが多く  
+また、複雑なテストケースが増えてしまうため  
+JavaScript経験が長い筆者でもWorkerが必要になったことは、一度もありません。
+
 ## template
 
 APIで取得した情報を`<table>`で表示させるパターンは多いため、参考にしてください。  
@@ -305,3 +416,113 @@ APIで取得した情報を`<table>`で表示させるパターンは多いた�
   - <https://developer.mozilla.org/ja/docs/Web/HTML/Element/template>
 - テンプレートとスロットの使用
   - <https://developer.mozilla.org/ja/docs/Web/Web_Components/Using_templates_and_slots>
+
+## JavaScript高速化について
+
+JavaScriptに限らず、昔と違いセキュリティや可読性が重視されますので  
+簡易的で大きくパフォーマンスが改善できるものをピックアップします。  
+
+### script(defer属性)
+
+以下が参考になります。
+
+- `<script> タグに async / defer を付けた場合のタイミング`
+  - <https://qiita.com/phanect/items/82c85ea4b8f9c373d684>
+  - `HTML Standard - The script element`
+    - <https://html.spec.whatwg.org/multipage/scripting.html#attr-script-async>
+
+`defer`属性を使うことで、HTMLパースとJSファイルのダウンロードを並列で行い  
+`DOMContentLoaded`イベント直前に、記載順通りにスクリプトを実行します。  
+`defer`属性を使う場合、`head`要素内に`script`を記載するようにしましょう。  
+
+`async`属性は広告表示等、独立したJSを実行するのに適しています。  
+詳細については割愛しますが、`async`はデメリットが多いため  
+`defer`属性の利用をお勧めします。
+
+#### defer属性を使う際の注意点
+
+以下のような`src`属性がない`script`要素（インラインスクリプト）には、
+`defer`属性は効果がありません。
+
+```html
+  <!-- NG: deferの効果なし -->
+  <script defer>
+    console.log('インラインスクリプト');
+  </script>
+```
+
+defer属性を指定したJSファイル実行後に、インラインスクリプトを実行したい場合は  
+`DOMContentLoaded`イベントで処理を行うことで解決します。  
+
+```html
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>API</title>
+  <script defer src="main.js"></script><!-- main.js には console.log('main'); を記載 -->
+  <script>
+    // main.js 実行前
+    console.log('インラインスクリプト');
+
+    // DOMContentLoaded
+    document.addEventListener('DOMContentLoaded', (event) => {
+    // main.js 実行後
+      console.log('DOMContentLoaded: インラインスクリプト');
+    });
+  </script>
+</head>
+```
+
+ログ内容
+
+```log
+インラインスクリプト
+main
+DOMContentLoaded: インラインスクリプト
+```
+
+### Reflow
+
+まず、JavaScript高速化で意識する必要があるのは  
+DOMアクセスで発生するReflow(再フロー、リフロー)を抑える事です。  
+
+- <https://developer.mozilla.org/ja/docs/Glossary/Reflow>
+
+これは他の言語・プラットフォームでも同様で、時間のかかる画面表示更新を抑えることで高速化が可能になります。  
+
+#### DocumentFragment
+
+ループでDOM要素を大量に追加する際には、DocumentFragmentを使用するとReflowの抑制が出来ます。  
+
+- Document.createDocumentFragment()
+  - <https://developer.mozilla.org/ja/docs/Web/API/Document/createDocumentFragment>
+
+例えば、`table`要素に`tr`要素を追加する必要がある時に
+単純に追加してしまうと以下のような流れになります。
+
+1. `table`要素に`tr`要素を追加
+1. Reflow (自動)
+1. `table`要素に`tr`要素を追加
+1. Reflow (自動)
+1. `table`要素に`tr`要素を追加
+1. Reflow (自動)
+
+DocumentFragmentを使うと以下の流れです。
+
+1. `DocumentFragment`生成
+1. `DocumentFragment`に`tr`要素を追加
+1. `DocumentFragment`に`tr`要素を追加
+1. `DocumentFragment`に`tr`要素を追加
+1. `table`要素に`DocumentFragment`（3つの`tr`要素）を追加
+1. Reflow (自動)
+
+Reflowが抑えられ、追加する要素が増えるほど  
+高速化が期待できます。
+
+#### textContent
+
+textContent を使用することでXSS対策が出来、Reflow抑制もできるので積極的に使いましょう。
+
+- Node.textContent
+  - <https://developer.mozilla.org/ja/docs/Web/API/Node/textContent>
