@@ -274,7 +274,8 @@ Visual Studio Code(VSCode) が初めての方へ
 | 15 | - | [`プログラミング編`](#プログラミング編) |
 | 16 | 0.5 | [`コーディング規約編`](#コーディング規約編) |
 | 17 | - | [`データベース編`](#データベース編) |
-| 18 | 20 | [`自己学習`](#自己学習) |
+| 18 | - | [`自己学習`](#自己学習) |
+| 19 | - | [`追加学習`](#追加学習) |
 
 ## はじめに
 
@@ -1153,8 +1154,9 @@ MySQL・phpMyAdmin環境が入っているので、練習してみましょう�
 - 伸ばしたいスキルの学習
   - フロントエンド
   - バックエンド
-  - フレームワーク (Laravel、Ruby on Rails等)
-  - 言語 (Java、C#、Python、Swift、Ruby等)
+  - フレームワーク (Laravel等)
+  - 言語 (Java、Python等)
+- 面談対策
 - 現場で求められる技術の学習（現場が決まった場合）
 
 何を学習したら良いかわからないという場合、研修講師にご相談ください。  
@@ -1217,7 +1219,7 @@ MySQL・phpMyAdmin環境が入っているので、練習してみましょう�
       参考になる書籍になりますが古い書籍なので、情報が古いところもあったりします。  
       この書籍のアンチパターンを使用するケースもあるので、状況に応じてどちらが良いか判断しましょう。
 - PHP
-  - `気づけばプロ並みPHP 改訂版--ゼロから作れる人になる!`
+  - **≪非推奨≫**`気づけばプロ並みPHP 改訂版--ゼロから作れる人になる!`
     - <https://www.amazon.co.jp/dp/4865940650>
     - 以前、研修で使用していた書籍です。
     - 内容は初心者向けではあり、わかりやすい書籍です。  
@@ -1245,23 +1247,37 @@ MySQL・phpMyAdmin環境が入っているので、練習してみましょう�
 読みたい書籍がある場合は、マネージャーにお問い合わせください。  
 会社にない書籍については、会社負担で購入も可能です（会社負担での購入の場合も借用扱いになるので、返却すること）。
 
-### Docker自己学習
+### 動画自己学習
 
-現場でDockerについて深い知識が必要になるケースは稀ですが  
-様々な環境を構築出来るので興味がある方や、Dockerの使い方がよくわからない方は学習してみましょう。
+カリキュラムとは別な動画を用意しました。
 
-- [Docker](./docker/index.md)
+- `プログラミングの基礎：基本 - LinkedInラーニング`
+  - <https://jp.linkedin.com/learning/programming-foundations-fundamentals-2>
+- `プログラミングの基礎：データベース - LinkedInラーニング`
+  - <https://jp.linkedin.com/learning/programming-foundations-databases-3>
+- `HTML5 基本講座 - LinkedInラーニング`
+  - <https://jp.linkedin.com/learning/html5-essential-training-2>
+- `CSS 基本講座 - LinkedInラーニング`
+  - <https://jp.linkedin.com/learning/css-essential-training-2>
+- `JavaScript 基本講座 - LinkedInラーニング`
+  - <https://jp.linkedin.com/learning/javascript-essential-training-4>
+- `GitHub 入門 - LinkedInラーニング`
+  - <https://jp.linkedin.com/learning/learning-github-2>
 
 ### Laravel自己学習
 
+LaravelでのCRUD機能を作成出来るレベルまで学習しましょう。
+
 - [Laravel](./laravel/index.md)
 
-### CodeIgniter4自己学習
+### Docker自己学習
 
-こちらは研修では触れていないCodeIgniter4に関する資料です。  
-Laravelに非常に似ているため、参考までに。
+現場でDockerについて深い知識が必要になるケースは稀ですが  
+様々な環境を構築出来るので興味がある方や、Dockerの使い方がよくわからない方は学習してみましょう。  
+現場ではDockerを使ってないなかったり、環境を0から作ることは  
+ほぼないため、利用出来れば十分です。
 
-- [CodeIgniter4](./codeigniter4.md)
+- [Docker](./docker/index.md)
 
 ### Bootstrap自己学習
 
@@ -1276,6 +1292,241 @@ CBC研修でもレスポンシブデザインについてありますが、フ�
   - サンプル
     - Dashboard・Checkout・Gridの学習をおすすめします。
     - <https://getbootstrap.jp/docs/5.0/examples/>
+
+## 追加学習
+
+ここからは現場参画が決まっていたり、面談対策が出来ており  
+現場参画しても問題がない研修生向けの学習資料・リンクになります。  
+
+### 追加学習の前に
+
+- 現場参画が決まっている（現場環境に合わせて学習）
+- 面談対策が出来ている
+- カリキュラムの学習については復習済み
+
+以下、実務でよく使うものをまとめました。  
+わからない場合は復習しましょう。
+
+- 設計
+  - UML
+  - 画面設計
+  - データベース設計(テーブル定義・ER図)
+  - 詳細設計
+- 開発
+  - HTML
+    - head
+      - title
+      - script
+      - link
+    - body
+      - header
+      - div
+      - table
+      - a
+      - form
+      - label
+      - input
+        - id
+        - name
+        - type (text, checkbox, radio, hidden, file, date, email, number, password等)
+        - value
+        - checked
+        - readonly
+        - disabled
+      - select
+      - textarea
+      - button
+  - CSS
+    - セレクタ全般
+    - 表示・非表示
+  - JavaScript
+    - 基礎(変数, if, ループ, 配列, 関数, DOM操作)
+    - WebAPI
+    - 非同期処理(async, await, Promise)
+  - PHP
+    - 基礎(変数, if, ループ, 配列, 関数, クラス)
+    - Laravel
+      - コントローラ
+      - HTTP Requests, HTTPレスポンス
+      - HTTPセッション
+      - バリデーション
+      - CSRF保護
+      - ルーティング
+      - ミドルウェア
+      - ビュー, Bladeテンプレート
+      - ペジネーション
+      - Eloquent
+      - UnitTest
+        - Feature
+        - Unit
+- テスト
+  - 単体テスト仕様書
+- データベース
+  - データベース
+  - テーブル
+  - インデックス
+  - ユニーク
+  - トリガー
+  - SQL
+    - SELECT, INSERT, UPDATE, DELETE
+    - WHERE
+      - AND, OR, BETWEEN, LIKE, IN, NOT IN
+    - ON DUPLICATE KEY UPDATE (UPSERT)
+    - BEGIN(START TRANSACTION), COMMIT, ROLLBACK
+    - HAVING (WHEREとの違いを理解しておく)
+    - DISTINCT
+    - COUNT, MAX, MIN, SUM, AVG
+    - LIMIT
+    - UNION
+    - GROUP BY
+    - ORDER BY
+    - 副問合せ
+    - INNER JOIN, LEFT JOIN
+    - CREATE TABLE
+    - CREATE TRIGGER
+    - PRIMARY KEY
+    - INDEX
+    - UNIQUE
+    - AUTO_INCREMENT
+    - ALTER TABLE
+    - EXPLAIN
+- Linux
+  - cd
+  - ls
+  - 標準入力・出力
+  - vi
+  - grep
+  - tail
+  - シェル
+- Git
+  - ブランチ作成・切り替え
+  - コミット, マージ, フェッチ, プル, プッシュ
+  - コンフリクト解消
+- GitHub
+  - 基本的な使い方
+  - プルリクエスト
+- ファイル
+  - JSON, LOG, TXT, CSV, TSV, PNG, JPG, GIF, SVG
+- ウォーターフォール
+- コーディング規約
+
+### システム開発工程
+
+企画からテストまでを、徳田さんが動画にしているので参考にしてください。
+
+- 開発実況シリーズ
+  - <https://www.youtube.com/playlist?list=PLgx8xyH2m7OUtmSNw_RLOUDiBnZjhz0d8>
+
+### TypeScript
+
+案件が少ないかもしれませんが TypeScript をご紹介します。  
+
+TypeScriptは、大規模開発には向いていないJavaScriptに  
+静的型付けを出来るようにしたプログラミング言語です。  
+TypeScriptをコンパイルすると、JavaScriptが出来上がります。  
+
+Playground はTypeScriptをコンパイルし、実行できるサイトです。  
+
+- TypeScript超入門 覚えることは9個だけ！
+  - <https://youtu.be/FSTrSYwqhLg>
+- TypeScript
+  - <https://www.typescriptlang.org/>
+- `TypeScript: TS Playground`
+  - <https://www.typescriptlang.org/play>
+
+### JavaScriptフレームワーク
+
+2022年現在、日本では`Vue.js`, `React.js`の人気が高いです。  
+フロントエンドは入れ替わりが激しいため、廃れる事も想定して浅く学習しておきましょう。
+
+- Vue.js
+  - <https://jp.vuejs.org/index.html>
+- React
+  - <https://ja.reactjs.org/>
+- Vue.js 入門
+  - <https://jp.linkedin.com/learning/learning-vue-js-2>
+- React.js 入門
+  - <https://jp.linkedin.com/learning/learning-react-js>
+- Angular 4 基本講座
+  - <https://jp.linkedin.com/learning/angular-4-essential-training>
+
+#### 新しいJavaScriptフレームワーク
+
+参考までに新しいフレームワークをご紹介します。  
+Vue.js、React.jsで採用されている仮想DOMを使用しないことにより  
+高速化を実現しています。
+
+- `Solid`
+  - <https://www.solidjs.com/>
+  - `2021/06/28 v1.0.0`
+    - <https://github.com/solidjs/solid/releases/tag/v1.0.0>
+  - チュートリアル
+    - <https://www.solidjs.com/tutorial/introduction_basics>
+- `Svelte`
+  - <https://svelte.jp/>
+  - `2016/11/30 v1.0.0`
+    - <https://github.com/sveltejs/svelte/releases/tag/v1.0.0>
+  - チュートリアル
+    - <https://svelte.jp/tutorial/basics>
+- `The State of JS 2021 - Front-end Frameworks`
+  - <https://2021.stateofjs.com/en-US/libraries/front-end-frameworks/>
+
+### CodeIgniter4
+
+PHPフレームワークのCodeIgniter4に関する資料です。  
+Laravelに非常に似ているため、参考までに。
+
+- [CodeIgniter4](./codeigniter4.md)
+
+### Java
+
+「Java」は古くからある言語で、大規模開発にも利用されており  
+オブジェクト指向言語の代表とも呼べる言語です。  
+PHPが動的型付け言語に対し、Javaは静的型付け言語のため  
+変数宣言時に型を明確にして宣言したり、引数の型も必須になります。  
+プログラミング学習においては、動的型付け言語はおすすめです。  
+
+IDEは、VSCodeはほとんど使われず、「eclipse」が多そうです。  
+
+- Java 入門
+  - <https://jp.linkedin.com/learning/learning-java?trk=learning-serp_learning-search-card_search-card&upsellOrderOrigin=default_guest_learning>
+
+### Python
+
+「Python」はライブラリが充実しており  
+Webやクライアントアプリ開発が可能です。  
+需要も上がってきており、将来性もある言語なので興味がある方は学習してください。  
+Python案件に参画している社員もいます。
+
+- Python
+  - <https://www.python.org/>
+- プログラミング言語 Python情報サイト
+  - <https://www.python.jp/>
+- DockerでPython実行環境を作ってみる
+  - <https://github.com/jhorikawa/Create-Docker-Container-for-Python-Environment-Handson>
+- `The State of the Octoverse | Top languages over the years`
+  - <https://octoverse.github.com/#top-languages-over-the-years>
+
+### Tailwind CSS
+
+Laravelのスターターテンプレートにも組み込まれている、CSSフレームワークです。  
+ペジネーションのデフォルトも Tailwind CSS に互換性があるHTMLが生成されます。  
+書き方は、Bootstrapに似ていますので、必要になったら学習してください。
+
+- `Tailwind CSS`
+  - <https://tailwindcss.com/>
+- `Laravel 9.x Database：ペジネーション`
+  - <https://readouble.com/laravel/9.x/ja/pagination.html>
+
+### 資格
+
+エンジニアで取得が必須となる資格はありませんが  
+「基本情報技術者試験」の学習は、必要な基礎知識が身につきます。
+
+- `試験制度: 試験区分一覧`
+  - <https://www.jitec.ipa.go.jp/1_11seido/seido_gaiyo.html>
+- 基本情報技術者についてもっと詳しく知る！
+  - <https://www.foresight.jp/fe/column/>
 
 ### 別チームの研修
 
