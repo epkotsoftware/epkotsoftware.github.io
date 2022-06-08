@@ -55,6 +55,7 @@
   - Pythonを使ったことがありますか？
   - TypeScriptを知ってますか？
   - jQuery以外のライブラリ・フレームワークは使えますか？
+  - PHPのClassはわかりますか？
   - Linuxはどの程度できますか？
   - SQLはどの程度できますか？
   - CSSやJavaScriptの経験はありますか？
