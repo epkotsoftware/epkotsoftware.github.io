@@ -92,7 +92,10 @@ Gitでクローンやプッシュをする際に必要になります。
 
 ## Git設定
 
-- Git Bash アプリを開く
+Git Bash等のターミナルで  
+以下のコマンドを1行ずつ打ち、Enterキーで設定を行います。  
+
+- Git Bash （Macの場合、ターミナル）アプリを開く
 - Git設定
   - `git config --global user.email "{GitHubアカウントEmail address}"`
   - `git config --global user.name "{GitHub Profile Name}"`
@@ -107,8 +110,8 @@ Gitでクローンやプッシュをする際に必要になります。
 
 ## Git設定確認
 
-以下のコマンドで正しく[Git設定](#git設定)が出来ているか確認してください。  
-未設定だとコミット等で失敗します。
+以下のコマンドで、正しく[Git設定](#git設定)が出来ているか確認してください。  
+未設定だとコミット等で失敗します。  
 
 ```bash
 git config --global user.email
@@ -116,7 +119,9 @@ git config --global user.name
 git config --global core.autocrlf
 ```
 
-![git_config](./image/git_config.png)
+コマンド実行例は以下です。  
+
+![git_config](./image/git_config.png)  
 
 ※ スクリーンショットに「`git config --global core.autocrlf`」が含まれていませんが「`false`」が表示されることをご確認ください。
 
