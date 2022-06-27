@@ -126,7 +126,8 @@ GitやVSCode等、主要のソフトは除いています。
 | 2 | [Teamsアカウント作成](#teamsアカウント作成) |
 | 3 | [GitHub組織アカウントへの参加](#github組織アカウントへの参加) |
 | 4 | [インストール](#インストール) |
-| 5 | [入社初日の予習](#入社初日の予習) |
+| 5 | [通知設定](#通知設定) |
+| 6 | [入社初日の予習](#入社初日の予習) |
 
 #### エプコット用PCユーザー作成
 
@@ -246,6 +247,14 @@ Visual Studio Code(VSCode) が初めての方へ
       // ↓↓↓ その他設定は略
   }
   ```
+
+#### 通知設定
+
+Teams・メール・Slackは、すぐに反応できるようにしてください。  
+Macの場合、以下の通知設定をしておきましょう。  
+
+- 【Mac】通知設定について解説
+  - <https://macblog.site/system-preferences-notification/>
 
 #### 入社初日の予習
 
@@ -1241,10 +1250,13 @@ MySQL・phpMyAdmin環境が入っているので、練習してみましょう�
     - Ubuntuデスクトップ（Windowsのような画面）の学習をするのに良さそうです。
     - コマンドライン操作の基本と応用の学習も出来ます。
     - 「Windows Subsystem for Linux(WSL)」について触れているので、Mac向けではないかもしれません。
+- Java
+  - `後悔しないためのSpring Boot 入門書：Spring 解体新書（第2版）: Spring Bootが丸分かり Spring解体新書`
+    - <https://www.amazon.co.jp/dp/4802092865>
 
 #### 書籍の購入
 
-読みたい書籍がある場合は、マネージャーにお問い合わせください。  
+読みたい書籍がある場合は、購入前に総務・マネージャーにお問い合わせください。  
 会社にない書籍については、会社負担で購入も可能です（会社負担での購入の場合も借用扱いになるので、返却すること）。
 
 ### 動画自己学習
@@ -1450,6 +1462,8 @@ Playground はTypeScriptをコンパイルし、実行できるサイトです�
   - <https://jp.linkedin.com/learning/learning-vue-js-2>
 - React.js 入門
   - <https://jp.linkedin.com/learning/learning-react-js>
+- 新・日本一わかりやすいReact入門【基礎編】
+  - <https://www.youtube.com/playlist?list=PLX8Rsrpnn3IWPoM7-1YPDksRRkamRY25k>
 - Angular 4 基本講座
   - <https://jp.linkedin.com/learning/angular-4-essential-training>
 
