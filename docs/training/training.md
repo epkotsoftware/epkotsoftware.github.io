@@ -1523,6 +1523,8 @@ Python案件に参画している社員もいます。
   - <https://github.com/jhorikawa/Create-Docker-Container-for-Python-Environment-Handson>
 - `The State of the Octoverse | Top languages over the years`
   - <https://octoverse.github.com/#top-languages-over-the-years>
+- 【動画】Python入門
+  - <https://www.youtube.com/playlist?list=PLiaZfx-34L5oK_8hLi_jbmFfZgZoGCqnr>
 
 ### Tailwind CSS
 
