@@ -887,6 +887,9 @@ Linux技術者認定試験(LPIC)の一部にチャレンジしてみましょう
 
 ## テスト編
 
+PHPUnit・Laravelに関しては、現場で採用されることもありますが  
+今は詳細なところまで学習する必要はありません。  
+
 - 動画
   - <https://www.youtube.com/playlist?list=PLCX3wwS3Gg4woCtbeXq9KTT4_HevW-vVz>
     - `11:58` テスト入門講座01 テストの概要・流れ・前提知識
@@ -910,6 +913,16 @@ Linux技術者認定試験(LPIC)の一部にチャレンジしてみましょう
       - <https://readouble.com/laravel/8.x/ja/mocking.html>
   - Mockery
     - <https://readouble.com/mockery/1.0/ja/>
+
+ブラックボックステスト・ホワイトボックステストについては理解を深めておきましょう。
+
+- 動画
+  - ブラックボックステストとは
+    - <https://youtu.be/05iyTsuhahk>
+  - ホワイトボックステストとは？ブラックボックステストとの違い
+    - <https://youtu.be/H__gN5Jpuvk>
+- 「ブラックボックステスト」と「ホワイトボックステスト」の違い
+  - <https://medium-company.com/ブラックボックス-ホワイトボックス-違い/>
 
 ## ファイル編
 
