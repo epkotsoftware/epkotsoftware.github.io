@@ -6,9 +6,12 @@
    */
   function geocodeAsync(name) {
     // fetch メソッド  resource 引数
-    const resource = 'https://geocoding-api.open-meteo.com/v1/search?' + (new URLSearchParams({ name: name, language: 'ja', count: 100 })).toString();
+    const url = new URL('https://geocoding-api.open-meteo.com/v1/search');
+    url.search =  new URLSearchParams({ name: name, language: 'ja', count: 100 });
+    const resource = url.href;
     // fetch メソッド  init 引数
     const init = { method: 'GET' };
+
     // Promise.prototype.then メソッド  onFulfilled 引数
     /**
      * @param {Response} value
@@ -47,9 +50,9 @@
     $tbody.innerHTML = '';
     $divLoading.style.display = '';
 
-    $p = geocodeAsync(name);
+    const promise = geocodeAsync(name);
 
-    const obj = await $p;
+    const obj = await promise;
     $divLoading.style.display = 'none';
 
     const $templateRow = document.getElementById('tableResultRow').content;
