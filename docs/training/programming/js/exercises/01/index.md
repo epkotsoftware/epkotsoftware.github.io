@@ -13,3 +13,11 @@ HTMLは以下のサンプルを参考にしてください。
 ## 応用
 
 上記課題が出来たら、初期表示で「Tokyo」の検索結果を出すようにしてみましょう。  
+
+## 解答例
+
+課題が出来たら解答例も見てみましょう。
+
+- 解答例
+  - [HTML](./example-answer/index.html)
+  - [JS](./example-answer/exercises-01.js)
