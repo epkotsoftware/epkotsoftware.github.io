@@ -18,6 +18,8 @@
 | 10 | [API](#api) |
 | 11 | [template](#template) |
 | 12 | [JavaScript高速化について](#javascript高速化について) |
+| 13 | [WebAPI](#webapi) |
+| 14 | [JavaScript課題](#javascript課題) |
 
 ## はじめに
 
@@ -526,3 +528,92 @@ textContent を使用することでXSS対策が出来、Reflow抑制もでき�
 
 - Node.textContent
   - <https://developer.mozilla.org/ja/docs/Web/API/Node/textContent>
+
+## WebAPI
+
+無料で使えるWebAPIです。  
+JavaScriptのFetchAPIで利用が可能です。
+
+- `【Open-Meteo】 Geocoding API`
+  - <https://open-meteo.com/en/docs/geocoding-api>
+  - 使用例
+    - 「Tokyo」で検索
+      - nameパラメータに「Tokyo」を指定します。 結果はJSONで返ってきます。
+        - <https://geocoding-api.open-meteo.com/v1/search?name=Tokyo>
+    - 「Yokohama」で検索
+      - nameパラメータに「Yokohama」を指定します。 結果はJSONで返ってきます。
+        - <https://geocoding-api.open-meteo.com/v1/search?name=Yokohama>
+- `【Open-Meteo】 Weather Forecast API`
+  - <https://open-meteo.com/en/docs>
+  - 使用例
+    - 「緯度: 35.75  経度: 139.75」で、現在の天気を検索
+      - 以下のパラメータを指定します。 結果はJSONで返ってきます。
+        - latitude: `35.75`
+        - longitude: `139.75`
+        - current_weather: `true`
+        - timezone: `Asia/Tokyo`
+      - <https://api.open-meteo.com/v1/forecast?latitude=35.75&longitude=139.75&current_weather=true&timezone=Asia/Tokyo>
+
+以下は、「Geocoding API」をfetchで使った例です。
+
+```js
+// JavaScript
+(async () => {
+  // geocodeAsync関数(ユーザー定義)を呼び出し obj に結果を代入
+  //   name = Tokyo で検索
+  const obj = await geocodeAsync('Tokyo');
+  console.log(obj);
+
+  /**
+   * Geocoding APIを呼び出します。
+   * @param {string} name 名前
+   * @returns {Promise}
+   */
+  function geocodeAsync(name) {
+    // fetch メソッド  resource 引数
+    const url = new URL('https://geocoding-api.open-meteo.com/v1/search');
+    url.search =  new URLSearchParams({ name: name, language: 'ja', count: 100 });
+    const resource = url.href;
+    // fetch メソッド  init 引数
+    const init = { method: 'GET' };
+
+    // Promise.prototype.then メソッド  onFulfilled 引数
+    /**
+     * @param {Response} value
+     * @returns {Promise}
+     */
+    const onFulfilled = (value) => {
+      if (!value.ok) {
+        // HTTPステータスコードが 200~299 以外の場合にエラー
+        console.error('リクエスト失敗');
+        throw new Error(value.status + ' (' + value.statusText + ')');
+      }
+      return value.json();
+    };
+    // Promise.prototype.then メソッド  onRejected 引数
+    const onRejected = (reason) => {
+      console.error('リクエスト失敗');
+      throw reason;
+    };
+
+    // fetch メソッド実行
+    return fetch(resource, init).then(onFulfilled, onRejected);
+  }
+})();
+```
+
+- 参考
+  - `非同期関数`
+    - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/async_function>
+  - `URL`
+    - <https://developer.mozilla.org/ja/docs/Web/API/URL>
+  - `Fetch API`
+    - <https://developer.mozilla.org/ja/docs/Web/API/Fetch_API>
+  - `Promise.prototype.then()`
+    - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Promise/then>
+  - `Response`
+    - <https://developer.mozilla.org/ja/docs/Web/API/Response>
+
+## JavaScript課題
+
+- [JavaScript課題1](./exercises/01/index.md)
