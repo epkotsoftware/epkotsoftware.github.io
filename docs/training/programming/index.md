@@ -134,6 +134,11 @@ paizaというサイトに問題集がありますので
 - paizaラーニング レベルアップ問題集
   - <https://paiza.jp/works/mondai>
 
+課題も用意しておりますので、こちらにもチャレンジしてください。  
+この課題については、提出は不要です。
+
+- [課題(tweets)](./php/exercises/tweets/index.md)
+
 ## 型
 
 ### 宣言
