@@ -2,7 +2,7 @@
 
 ## 課題
 
-ツイートのレスポンス情報から、Viewに渡すための配列データを作成する  
+ツイートのレスポンス情報から、Viewに渡すためのtweet配列データを作成する  
 `Helper`クラスの`convertToViewData`メソッドを実装してください。
 
 ## 仕様
@@ -50,6 +50,8 @@ var_dump($result);
     - <https://developer.twitter.com/en/docs/twitter-api/data-dictionary/object-model/user>
 
 ### 戻り値
+
+Viewに渡すためのtweet配列データの仕様です。
 
 | No. | Viewデータカラム | レスポンスフィールド | 備考 |
 | :---: | --- | --- | --- |
