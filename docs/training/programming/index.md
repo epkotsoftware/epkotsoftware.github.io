@@ -236,12 +236,237 @@ $variables = [
 - 動画
   - 文字列関数とは？【分かりやすい解説シリーズ #51】【プログラミング】
     - <https://youtu.be/5SsPBjO6yOM>
-  - エスケープとは？【分かりやすい解説シリーズ #47】【プログラミング】
-    - <https://youtu.be/E6-JRNfYFu8>
   - PHPマニュアルを一緒に読み解こう！#10「型：文字列」【プログラミング】
     - <https://youtu.be/MAi4cdq7EKY>
   - PHPマニュアルを一緒に読み解こう！#11「型：文字列（後編）」【プログラミング】
     - <https://youtu.be/P6OJzmCXSHk>
+
+#### 文字列操作
+
+##### 結合
+
+Java等のプログラミング言語では、StringBuilderを使って結合するのが一般的ですが  
+PHPとJavaScriptは単純に文字列演算子を使って結合します。  
+PHPの場合は結合代入演算子(`.=`)、JavaScriptの場合は加算代入演算子(`+=`)で  
+結合と代入を同時に行うことも出来るので覚えておきましょう。
+
+```php
+<?php
+// 文字列演算子「.」を使って結合
+$result = 'Git' . 'Hub';
+echo $result;
+// 出力結果: GitHub
+```
+
+- `PHP: 文字列演算子`
+  - <https://www.php.net/manual/ja/language.operators.string.php>
+
+```js
+// JavaScript
+// 文字列演算子「+」を使って結合
+const result = 'Git' + 'Hub';
+console.log(result);
+// 出力結果: GitHub
+```
+
+- `JavaScript: 文字列を連結する`
+  - <https://developer.mozilla.org/ja/docs/Learn/JavaScript/First_steps/Strings#concatenating_strings>
+
+##### トリム(trim)
+
+文字列の両端の空白を削除します。
+
+```php
+<?php
+
+$str = "  abc  ";
+// trim関数実行
+$result = trim($str);
+var_dump($result);
+// 出力結果: string(3) "abc"
+```
+
+- `PHP: trim`
+  - <https://www.php.net/manual/ja/function.trim.php>
+
+```js
+// JavaScript
+const str = "  abc  ";
+// trimメソッド実行
+const result = str.trim();
+console.log(result);
+// 出力結果: abc
+```
+
+- `JavaScript: String.prototype.trim()`
+- <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/String/trim>
+
+##### 取り出し(Substring)
+
+文字列から、指定した部分の文字列を切り出します。
+
+```php
+<?php
+
+$str = 'abcdefg';
+// substr関数実行 3文字目から3文字切り出す。
+$result = substr($str, 2,3);
+var_dump($result);
+// 出力結果: string(3) "cde"
+```
+
+- `PHP: substr`
+  - <https://www.php.net/manual/ja/function.substr.php>
+
+```js
+// JavaScript
+const str = 'abcdefg';
+// substringメソッド実行 3文字目〜5文字目までを切り出す。
+const result = str.substring(2, 5);
+console.log(result);
+// 出力結果: cde
+```
+
+`slice()`も`substring()`メソッド同様に文字列を切り出すメソッドです。
+
+- `JavaScript: String.prototype.substring()`
+  - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/String/substring>
+- `JavaScript: String.prototype.slice()`
+  - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/String/slice>
+
+##### 置換(Replace)
+
+検索文字列に一致した文字列を置換します。
+
+```php
+<?php
+
+$str = 'abcdefg';
+// str_replace関数実行 cde を 123 に置き換え
+$result = str_replace('cde', '123', $str);
+var_dump($result);
+// 出力結果: string(7) "ab123fg"
+```
+
+置換と似ていますが、メッセージ等の文字列フォーマットに対して値を埋め込みたい場合  
+PHPではsprintf(エスプリントエフ)を使います。
+
+- `PHP: str_replace`
+  - <https://www.php.net/manual/ja/function.str-replace.php>
+- `PHP: sprintf`
+  - <https://www.php.net/manual/ja/function.sprintf.php>
+
+```js
+// JavaScript
+const str = 'abcdefg';
+// replaceメソッド実行 cde を 123 に置き換え
+const result = str.replace('cde', '123');
+console.log(result);
+// 出力結果: ab123fg
+```
+
+- `JavaScript: String.prototype.replace()`
+  - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/String/replace>
+
+##### 配列を結合(Join)
+
+文字列配列を、指定した区切り文字で連結して一つの文字列にします。
+
+```php
+<?php
+
+$columns = ['id', 'name', 'note'];
+// implode関数実行 文字列配列の全要素を ', ' 区切りで連結
+$result = implode(', ', $columns);
+var_dump($result);
+// 出力結果: string(14) "id, name, note"
+```
+
+- `PHP: implode`
+  - <https://www.php.net/manual/ja/function.implode.php>
+
+```js
+// JavaScript
+const columns = ['id', 'name', 'note'];
+// joinメソッド実行 文字列配列の全要素を ', ' 区切りで連結
+const result = columns.join(', ');
+console.log(result);
+// 出力結果: id, name, note
+```
+
+- `JavaScript: Array.prototype.join()`
+  - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/join>
+
+##### 配列に分割(Split)
+
+SplitはJoinの逆を行います。
+
+```php
+<?php
+
+$str = 'id, name, note';
+// explode関数実行 ', ' 区切りの文字列を配列に分割
+$result = explode(', ', $str);
+var_dump($result);
+// 出力結果: array(3) { [0]=> string(2) "id" [1]=> string(4) "name" [2]=> string(4) "note" }
+```
+
+- `PHP: explode`
+  - <https://www.php.net/manual/ja/function.explode.php>
+
+```js
+// JavaScript
+const str = 'id, name, note';
+// splitメソッド実行 ', ' 区切りで配列の要素を連結
+const result = str.split(', ');
+console.log(result);
+// 出力結果: [ 'id', 'name', 'note' ]
+```
+
+- `JavaScript: String.prototype.split()`
+  - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/String/split>
+
+#### エスケープ
+
+エスケープは、特殊文字(制御文字等)を文字列として扱う為に、別な文字列に置き換える事を指します。
+
+- PHP
+  - 文字列 - 二重引用符
+    - <https://www.php.net/manual/ja/language.types.string.php#language.types.string.syntax.double>
+- JavaScript
+  - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Lexical_grammar>
+  - CRLF
+    - <https://developer.mozilla.org/ja/docs/Glossary/CRLF>
+- 動画
+  - エスケープとは？【分かりやすい解説シリーズ #47】【プログラミング】
+    - <https://youtu.be/E6-JRNfYFu8>
+
+| 記述 | 意味 |
+| :---: | --- |
+| `\n` | 改行コード: LF (ラインフィード) |
+| `\r\n` | 改行コード: CRLF (キャリッジリターン / ラインフィード) |
+| `\t` | 水平タブ (メモ帳等で、キーボードのTabキー押下で出てくる文字) |
+
+```php
+<?php
+
+$str11 = '1-1';
+$str12 = '1-2';
+$str21 = '2-1';
+$str22 = '2-2';
+
+// \n = 改行(LF).   \t = タブ   PHPは「"」で囲む必要がある。
+$result = $str11 . "\t" . $str12 . "\n" . $str21 . "\t" . $str22;
+
+echo "<pre>\n{$result}\n</pre>";
+```
+
+```html
+<pre>
+1-1	1-2
+2-1	2-2
+</pre>
+```
 
 ### 配列
 
