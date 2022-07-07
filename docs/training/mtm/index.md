@@ -28,6 +28,9 @@
 
 ### kadai01.php
 
+Helperクラス・メソッドの使用例です。  
+動作確認にご利用ください。
+
 ```php
 <?php
 require_once("app/Helper.php");
@@ -138,21 +141,6 @@ echo $result;
 3	ALBUM03	NOTE03	TRACK0301,TRACK0302,TRACK0303
 ```
 
-## クラスについて理解を深める
-
-- 静的クラス（PHPだとstaticメソッドのみを持つクラス）
-  - Strクラス
-    - <https://readouble.com/laravel/8.x/ja/helpers.html>
-    - GitHub
-      - <https://github.com/illuminate/support/blob/v8.78.1/Str.php>
-- 動的クラス（new でインスタンスを生成するクラス）
-  - Collectionクラス
-    - <https://readouble.com/laravel/8.x/ja/collections.html>
-    - GitHub
-      - <https://github.com/illuminate/collections/blob/v8.78.1/Collection.php>
-    - `collect`関数は内部的に「`new Collection($value)`」をしています。
-      - <https://github.com/illuminate/collections/blob/v8.78.1/helpers.php#L15>
-
 ## プログラミング力を身につけるには
 
 単純なプログラミング力を身につけるには  
@@ -168,7 +156,25 @@ echo $result;
 - paiza
   - <https://paiza.jp/challenges/info>
   - こちらはランク毎に問題が選べます。  
-    以前、3年目の同僚がチャレンジし、Cランクだったので  
-    Cランクで何問か解けるようになると、プログラミングに限れば  
-    現場で通用するレベルと言えます。  
-    問題毎で上位50位以内に入るとランキングが見れるようになります。
+    - Cランクの難しい問題が解けるようになると、十分なレベルと言えます。
+
+JavaScriptを身につけるには、競技プログラミングは向いていないので  
+実際にHTMLを作り、DOM操作に慣れておきましょう。  
+
+## 今後の流れ
+
+研修は引き続きやっていきますが  
+並行して、以下を進めていきます。
+
+- スキルシート作成
+  - 社長の方でスキルシートを作成します。  
+    不備等がないか確認して下さい。
+  - 作戦会議までに、面談対策資料や内部開発案件の内容には  
+    目を通しておきましょう。
+- 作戦会議
+  - 社長・営業・講師を含め会議を行い  
+    スキルシートの修正を行います。
+- 営業開始
+  - 営業を開始し、案件情報を持ってきます。
+- 面談
+- 参画
