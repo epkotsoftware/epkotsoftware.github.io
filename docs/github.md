@@ -129,7 +129,7 @@ git config --global core.autocrlf
 
 ### core.autocrlf
 
-初期設定では全体設定として「`false`」を設定しています。
+初期設定では全体設定として「`false`」を設定しています。  
 リポジトリ毎の設定に関しては  
 リポジトリ管理者・研修講師にご確認ください。
 
