@@ -181,6 +181,9 @@ Gitが何かわからない方へ
 
 ### サイト
 
+- HTML&CSS入門 Webデザインをイチから学ぼう
+  - <https://saruwakakun.com/html-css/basic>
+  - HTML・CSSの基礎について分かりやすく解説があります。
 - JavaScript入門
   - <https://www.javadrive.jp/javascript/>
   - 変数・配列・関数は、PHP等の他の言語でも存在するものになります。  
