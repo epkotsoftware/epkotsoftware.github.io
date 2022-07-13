@@ -856,6 +856,8 @@ Linux技術者認定試験(LPIC)の一部にチャレンジしてみましょう
 特にiOSアプリはデザインで審査が通らなくなるケースもあるので  
 画面設計時は注意が必要です（実際に手戻りが発生した事がありました）。
 
+- 画面部品
+  - [画面部品](./design/forms/forms.html)
 - 画面設計書のイメージ
   - 発注者ビューガイドラインの公開
     - <https://www.ipa.go.jp/sec/softwareengineering/reports/20080710_3.html>
