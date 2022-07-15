@@ -40,18 +40,7 @@ PHP・Laravelについては、ある程度理解している前提で進めて�
 
 #### jobs(職業)
 
-`TODO: 【作成中】後で表にする`
-
-```sql
-CREATE TABLE `jobs` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT '名称',
-  `deleted_at` timestamp NULL DEFAULT NULL COMMENT '削除日時',
-  `created_at` timestamp NULL DEFAULT NULL COMMENT '作成日時',
-  `updated_at` timestamp NULL DEFAULT NULL COMMENT '更新日時',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci COMMENT='職業'
-```
+[テーブル定義書](./def/index.html) を参照
 
 ## 各ファイルを生成
 
