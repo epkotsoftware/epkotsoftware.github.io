@@ -10,7 +10,7 @@
 - [PlantUML](https://www.plantuml.com/plantuml/umla/TL91Im915Bw_Np7OBH0yxo4yHD1lY0xYZhYWkx8xKX91kH0KMHqYCkiYfIL4aeAHGJzcozqzzHTwpdDis2KFRtpVlFUzxtkpUKyKN56lLg1icPpnQaqqcCczeclLXENOWFU2i-XmCdjuPdkmo3DVRmTHhnzUJkExReOLF6RP9jy56OtPrJ3gdGV-RT3y3FoHGg_Fml7mv-DcSps9V5-qmlumXHwVnEtxFnerc-WpR3xM4uxBsSe6_dAvH8MchkXol00wZB0zZKzVqyJHqmWdQsrUsTc1UJ32oMFSELgs4FYlmCuO5KY6Uir4I0bK1TGe2t3NmdKQoGgQfqdXfYLW7eom-nuDMkcfXEkc7RjakLLOd0R9qXgtLhTPDhkclnt3bBQaSWIaMKQF53HV0dyG-3x-KIKLNX9Ojh02ojAIcGWnf-S26ObPBPXf_IfVMiOaQKPsqtA13WGa6-n3djicVjA_)  
   ![PlantUML](./images/screen-transition-diagrams.svg)  
 
-## 画面レイアウト
+## 画面レイアウト(一覧画面)
 
 ### 一覧画面
 
@@ -45,6 +45,8 @@
 
 ※ 論理削除は、Laravelの[ソフトデリート](https://readouble.com/laravel/9.x/ja/eloquent.html#soft-deleting)を指します。
 
+## 画面レイアウト(新規画面)
+
 ### 新規画面
 
 | コード | 画面名 |
@@ -71,6 +73,8 @@
 | 一覧へボタンクリック | [一覧画面](#一覧画面)に遷移 |
 | 登録ボタンクリック（正常） | レコード追加後、[詳細画面](#詳細画面)に遷移し、正常メッセージを表示する。 |
 | 登録ボタンクリック（バリデーションエラー） | 対象項目下部にエラーメッセージを表示する。 |
+
+## 画面レイアウト(詳細画面)
 
 ### 詳細画面
 
@@ -111,6 +115,8 @@
 | 編集ボタンクリック | 対象レコードの[編集画面](#編集画面)に遷移 |
 | 削除ボタンクリック | [一覧画面](#一覧画面)と同じ仕様 |
 
+## 画面レイアウト(編集画面)
+
 ### 編集画面
 
 | コード | 画面名 |
@@ -137,6 +143,8 @@
 | 詳細へボタンクリック | [詳細画面](#詳細画面)に遷移 |
 | 確認ボタンクリック（正常） | [編集確認画面](#編集確認画面)に遷移 |
 | 確認ボタンクリック（バリデーションエラー） | 対象項目下部にエラーメッセージを表示する。 |
+
+## 画面レイアウト(編集確認画面)
 
 ### 編集確認画面
 
