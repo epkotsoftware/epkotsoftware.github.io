@@ -14,33 +14,11 @@ PHP・Laravelについては、ある程度理解している前提で進めて�
 - Bootstrap4
 - jQuery
 
-## 仕様
+## 設計書
 
-データベースのjobs(職業)テーブルを参照・更新する機能を開発します。
+以下を参照してください。
 
-### 機能一覧
-
-| URI | HTTP<br>メソッド | ルート名 | 種別 | 機能名 | 備考 |
-| --- | --- | --- | --- | --- | --- |
-| admin/jobs              | GET    | admin.jobs.index   | 画面 | 職業 一覧画面     |  |
-| admin/jobs              | POST   | admin.jobs.store   | 機能 | 職業 新規         |  |
-| admin/jobs/create       | GET    | admin.jobs.create  | 画面 | 職業 新規画面     |  |
-| admin/jobs/{id}         | GET    | admin.jobs.show    | 画面 | 職業 詳細画面     |  |
-| admin/jobs/{id}         | PATCH  | admin.jobs.update  | 機能 | 職業 更新         |  |
-| admin/jobs/{id}         | DELETE | admin.jobs.destroy | 機能 | 職業 削除         |  |
-| admin/jobs/{id}/edit    | GET    | admin.jobs.edit    | 画面 | 職業 編集画面     |  |
-| admin/jobs/{id}/confirm | POST   | admin.jobs.confirm | 画面 | 職業 編集確認画面 |  |
-
-### 画面遷移図
-
-- [PlantUML](https://www.plantuml.com/plantuml/umla/TL91Im915Bw_Np7OBH0yxo4yHD1lY0xYZhYWkx8xKX91kH0KMHqYCkiYfIL4aeAHGJzcozqzzHTwpdDis2KFRtpVlFUzxtkpUKyKN56lLg1icPpnQaqqcCczeclLXENOWFU2i-XmCdjuPdkmo3DVRmTHhnzUJkExReOLF6RP9jy56OtPrJ3gdGV-RT3y3FoHGg_Fml7mv-DcSps9V5-qmlumXHwVnEtxFnerc-WpR3xM4uxBsSe6_dAvH8MchkXol00wZB0zZKzVqyJHqmWdQsrUsTc1UJ32oMFSELgs4FYlmCuO5KY6Uir4I0bK1TGe2t3NmdKQoGgQfqdXfYLW7eom-nuDMkcfXEkc7RjakLLOd0R9qXgtLhTPDhkclnt3bBQaSWIaMKQF53HV0dyG-3x-KIKLNX9Ojh02ojAIcGWnf-S26ObPBPXf_IfVMiOaQKPsqtA13WGa6-n3djicVjA_)  
-  ![PlantUML](./images/screen-transition-diagrams.svg)
-
-### DB
-
-#### jobs(職業)
-
-[テーブル定義書](./def/index.html) を参照
+- [Laravel CRUD 設計](./design/index.md)
 
 ## 各ファイルを生成
 
