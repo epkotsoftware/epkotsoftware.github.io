@@ -895,6 +895,14 @@ Linux技術者認定試験(LPIC)の一部にチャレンジしてみましょう
     - Laravel で使える Dashboard template
       - <https://github.com/tailwindcomponents/dashboard>
 
+### 設計例
+
+こちらを参考にしてください。
+
+- [Laravel CRUD 設計](./laravel/crud/design/index.md)
+
+※ Laravel CRUDの開発は今後の学習で行いますので、飛ばしてください。
+
 ## テスト編
 
 PHPUnit・Laravelに関しては、現場で採用されることもありますが  
