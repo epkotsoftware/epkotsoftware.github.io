@@ -11,6 +11,10 @@
 | 1 | [機能一覧](#機能一覧) |
 | 2 | [テーブル定義](./db/index.html) |
 | 3 | [画面設計](./screens/index.md) |
+| 4 | [詳細設計（職業 詳細）](./detail/show/index.md) |
+| 5 | [詳細設計（職業 削除）](./detail/destroy/index.md) |
+
+
 
 ## 機能一覧
 
