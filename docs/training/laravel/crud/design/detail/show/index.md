@@ -66,3 +66,40 @@ select * from `jobs` where `id` = '100' and `deleted_at` is null
 ## 初期表示
 
 - 対象レコードの情報を画面表示する。
+
+## 一覧へボタンクリック
+
+- 一覧画面へ遷移する。
+
+| 遷移先画面コード | パラメータ | 備考 |
+| --- | --- | --- |
+| admin.jobs.index | なし |  |
+
+## 編集ボタンクリック
+
+- 編集画面へ遷移する。
+
+| 遷移先画面コード | パラメータ | 備考 |
+| --- | --- | --- |
+| admin.jobs.edit | `{job}` = jobs.id |  |
+
+## 削除ボタンクリック
+
+- 「削除確認ダイアログ」を開く
+
+## 【削除確認ダイアログ】OKボタンクリック
+
+- 削除機能を呼び出す。
+
+| 機能コード | パラメータ | 備考 |
+| --- | --- | --- |
+| admin.jobs.destroy | `{job}` = jobs.id<br>`_method` = `DELETE`<br>`_token` = トークン | `HTTPメソッド: POST` |
+
+- `Laravel 9.x ルーティング ～ 疑似フォームメソッド`
+  - <https://readouble.com/laravel/9.x/ja/routing.html#form-method-spoofing>
+- `Laravel 9.x CSRF保護`
+  - <https://readouble.com/laravel/9.x/ja/csrf.html>
+
+## 【削除確認ダイアログ】キャンセルボタンクリック
+
+- 削除確認ダイアログを閉じる。
