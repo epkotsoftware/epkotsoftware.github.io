@@ -39,6 +39,18 @@ BIOS設定はWindowsでは行わないため、ブラウザを見ながら出来
   - B350チップセット Mini-ITXモデル 「 CPU仮想化機能 」 を有効に設定する方法 （ Windows10 ）
     - <https://www2.mouse-jp.co.jp/ssl/user_support2/sc_faq_documents.asp?FaqID=28709>
 
+### Access denied
+
+![Docker Desktop - Access denied](./images/docker-desktop-access-denied.png)  
+
+他のユーザーでインストールしてしまった等で発生することがあります。  
+「`docker-users`」グループに所属させることで解決します。  
+
+- Docker for Windowsで起動時に「Docker for Windows - Access denied」と表示される場合の対処法
+  - <https://qiita.com/toro_ponz/items/d75706a3039f00ba1205>
+- Windows でローカルのユーザー アカウントまたは管理者アカウントを作成する
+  - <https://support.microsoft.com/ja-jp/windows/windows-でローカルのユーザー-アカウントまたは管理者アカウントを作成する-20de74e0-ac7f-3502-a866-32915af2a34d>
+
 ## コンテナ起動
 
 ### docker-compose が実行出来ない
