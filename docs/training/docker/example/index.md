@@ -430,8 +430,10 @@ docker exec -it example-mysql bash
 mysql -uroot -p"$MYSQL_ROOT_PASSWORD"
 ```
 
-## ダウンロード
+## GitHubテンプレートリポジトリ
 
-実際に動作する環境は以下からダウンロードしてください。  
+以下のテンプレートを使って、リポジトリを新しく作ったり  
+ZIP形式でダウンロードも可能です。
 
-- [env_php.zip](./files/env_php.zip)
+- PHP8.1 のテンプレートリポジトリ
+  - <https://github.com/epkotsoftware/template-php8.1-jp>
