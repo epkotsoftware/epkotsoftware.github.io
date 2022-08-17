@@ -123,9 +123,9 @@ GitやVSCode等、主要のソフトは除いています。
 | No. | 作業 |
 | :---: | --- |
 | 1 | [エプコット用PCユーザー作成](#エプコット用pcユーザー作成]) |
-| 2 | [Teamsアカウント作成](#teamsアカウント作成) |
+| 2 | [インストール](#インストール) |
 | 3 | [GitHub組織アカウントへの参加](#github組織アカウントへの参加) |
-| 4 | [インストール](#インストール) |
+| 4 | [Teamsアカウント作成](#teamsアカウント作成) |
 | 5 | [通知設定](#通知設定) |
 | 6 | [入社初日の予習](#入社初日の予習) |
 
@@ -157,25 +157,19 @@ Windowsの場合、会社のメールアドレスでアカウントを作成し�
   - Macのユーザ、ゲスト、およびグループを設定する
     - <https://support.apple.com/ja-jp/guide/mac-help/mtusr001/mac>
 
-#### Teamsアカウント作成
-
-- 研修中のビデオ通話・画面共有・研修の進捗報告や質問は「Microsoft Teams」を使用します。
-- 講師が招待URLをお送りしますので、案内に従い会社メールアドレスでアカウントを作成して参加してください。
-  - 途中でTeamsアプリのインストールを勧められますのでインストールしてください（パソコンにインストールしてください）。
-
-#### GitHub組織アカウントへの参加
-
-GitHubの管理者は講師になりますので  
-アカウントを作成しましたら、講師までご連絡ください。
-
-- 「[GitHub組織アカウントへの参加](./../github.md)」参照
-
 #### インストール
 
-- 【ブラウザ】`Google Chrome` (クローム)
-  - <https://www.google.co.jp/intl/ja/chrome/>
-- 【エディタ】`Visual Studio Code` (ビジュアル スタジオ コード)
-  - <https://azure.microsoft.com/ja-jp/products/visual-studio-code/>
+- パソコンにインストール
+  - 【ブラウザ】`Google Chrome` (クローム)
+    - <https://www.google.co.jp/intl/ja/chrome/>
+  - 【エディタ】`Visual Studio Code` (ビジュアル スタジオ コード)
+    - <https://azure.microsoft.com/ja-jp/products/visual-studio-code/>
+- スマートフォンにインストール
+  - Slack
+    - iOS 版 Slack
+      - <https://slack.com/intl/ja-jp/downloads/ios>
+    - Android 版 Slack
+      - <https://slack.com/intl/ja-jp/downloads/android>
 
 Visual Studio Code(VSCode) が初めての方へ
 
@@ -255,6 +249,19 @@ Visual Studio Code(VSCode) が初めての方へ
   }
   ```
 
+#### GitHub組織アカウントへの参加
+
+GitHubの管理者は講師になりますので  
+アカウントを作成しましたら、講師までご連絡ください。
+
+- 「[GitHub組織アカウントへの参加](./../github.md)」参照
+
+#### Teamsアカウント作成
+
+- 研修中のビデオ通話・画面共有・研修の進捗報告や質問は「Microsoft Teams」を使用します。
+- 講師が招待URLまたは招待メールをお送りしますので、案内に従い会社メールアドレスでアカウントを作成して参加してください。
+  - 途中でTeamsアプリのインストールを勧められますのでインストールしてください（パソコンにインストールしてください）。
+
 #### 通知設定
 
 Teams・メール・Slackは、すぐに反応できるようにしてください。  
@@ -264,6 +271,10 @@ Macの場合、以下の通知設定をしておきましょう。
   - <https://macblog.site/system-preferences-notification/>
 
 #### 入社初日の予習
+
+まず、ここまでで忘れていることがないかチェックしておきましょう。
+
+- [入社初日の作業](#入社初日の作業)
 
 入社初日は予習をしておいてください。
 
@@ -549,7 +560,7 @@ Googleマイドライブ → 「新規」 → 「ファイルのアップロー�
 
 **※ 基礎3（マークアップエンジニア 上級） は研修外とします。興味があれば自己学習でお願いします。**  
 **※ `css/common.css` はindex.htmlにも使われているCSSファイルで、共通で使うスタイルを想定しています。**  
-　**ページ固有のスタイルは入れないように注意しましょう。**
+　**ページ固有のスタイルは入れないように注意しましょう（よくあるのが #change_btn 等のスタイルを入れてしまっている）。**
 
 ### マークアップエンジニア編課題
 
@@ -569,7 +580,7 @@ trainingリポジトリの [users/{★ユーザー名}/02_basic/README.md](https
 #### マークアップエンジニア編課題チェックリスト
 
 - `css/common.css` にページ固有のスタイルが入っていないこと
-  - 例えばモーダル関連のスタイル等
+  - 例えばモーダル関連のスタイルや `#change_btn` 等
 - 全ページのデザインが統一されていること
 - `kadai_07.html` 用のJavaScriptおよびスタイルが他ページに適用されないこと
 - `kadai_08.html` 用のJavaScriptおよびスタイルが他ページに適用されないこと
@@ -1601,7 +1612,14 @@ Laravelのスターターテンプレートにも組み込まれている、CSS�
 - 基本情報技術者についてもっと詳しく知る！
   - <https://www.foresight.jp/fe/column/>
 
-### 別チームの研修
+### 社外研修
 
-別チームの研修情報はスプレッドシートにまとめてあります  
-Laravel課題等もありますので興味がある方は研修講師まで
+- mixi
+  - データベース研修【ミクシィ22新卒技術研修】
+    - <https://youtu.be/dseGQ2MZF1U>
+  - 設計・テスト研修講義【21新卒技術研修】
+    - <https://youtu.be/zfAo0DyIBJ0>
+  - Git研修講義【21新卒技術研修】
+    - <https://youtu.be/aZ90usArA6g>
+  - コンテナ研修【ミクシィ22新卒技術研修】
+    - <https://youtu.be/qYp8Vvevcok>
