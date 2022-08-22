@@ -251,7 +251,9 @@ php artisan make:test Http/Controllers/ArtistExtendControllerTest --unit
 WEBサービスを作る際、管理者がデータ登録・閲覧するための管理画面(Admin)を作る事があります。  
 PCで扱うことを想定した、機能重視のdashboard・adminテンプレートのような画面レイアウトが多いです。  
 
-CRUDの実践については[こちら](./crud/index.md)を参照。
+CRUDの実践については以下を参照。
+
+- [Laravel CRUD](./crud/index.md)
 
 ### 参考
 
