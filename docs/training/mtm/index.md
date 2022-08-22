@@ -125,7 +125,7 @@ $albums = [
     ],
 ];
 // 実行・レスポンス出力
-$result = App\AlbumHelper::albumsToTsvString($albums);
+$result = \App\AlbumHelper::albumsToTsvString($albums);
 if (!is_string($result) || empty($result)) {
     echo 'エラー: 戻り値が不正です。';
     exit(1);
@@ -171,6 +171,8 @@ JavaScriptを身につけるには、競技プログラミングは向いてい�
     不備等がないか確認して下さい。
   - 作戦会議までに、面談対策資料や内部開発案件の内容には  
     目を通しておきましょう。
+    - [面談対策資料](./../interview.md)
+    - [社内開発](https://github.com/epkotsoftware/training#社内開発)
 - 作戦会議
   - 社長・営業・講師を含め会議を行い  
     スキルシートの修正を行います。
