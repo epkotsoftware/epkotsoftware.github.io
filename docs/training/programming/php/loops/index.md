@@ -4,9 +4,10 @@
 
 | No. |  |
 | :---: | --- |
-| 1 | [名前空間](#名前空間) |
-| 2 | [useの注意点](#useの注意点) |
-| 3 | [PHPマニュアル](#phpマニュアル) |
+| 1 | [種類](#種類) |
+| 2 | [foreach](#foreach) |
+| 3 | [foreachの変数名のコツ](#foreachの変数名のコツ) |
+| 4 | [PHPマニュアル](#phpマニュアル) |
 
 ## 種類
 
@@ -168,3 +169,10 @@ foreach ($idRecordMap as $id => $record) {
     // 処理
 }
 ```
+
+## PHPマニュアル
+
+資料作成で参考にしたPHPマニュアルのリンクです。
+
+- `制御構造`
+  - <https://www.php.net/manual/ja/language.control-structures.php>
