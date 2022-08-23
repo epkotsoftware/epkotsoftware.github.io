@@ -1,285 +1,5 @@
 # 株式会社エプコットソフトウェア ～ 新人研修
 
-## 目次
-
-| No. |  |  |
-| :---: | --- | --- |
-| 1 | 入社前 | [入社前の準備](#入社前の準備) |
-| 2 | 入社1日目 | [入社された方へ](#入社された方へ) |
-| 3 | 入社2日目以降 | [カリキュラム](#カリキュラム) |
-
-## 入社前の準備
-
-- [パソコン](#パソコン)
-- [便利ソフト](#便利ソフト)
-- [予習](#予習)
-
-### パソコン
-
-パソコンをお持ちではない方は準備をお願いします。  
-
-#### パソコン推奨スペック
-
-研修では Windows・Mac どちらでもOKです。  
-Windows の現場が多いため、慣れていなければ Windows 推奨です。  
-既に Windows での開発に慣れている場合、iOSアプリ開発やMacを使用する現場も視野に入れて Mac を推奨します。  
-  
-個人利用（ゲーム・動画編集等）で必要なスペックについてはご自身で調べて購入するようお願いします。  
-  
-以下、研修での使用や、今後長く使う上での推奨スペックになります。  
-
-##### Windows
-
-|  |  |  |
-| --- | --- | --- |
-| メーカー | 自由 | Lenovo、マウスコンピューターは比較的安価です。 |
-| メモリ | 8GB以上 |  |
-| ストレージ | SSD 256GB以上 |  |
-| CPU | Windows11の要件を満たすもの |  |
-| OS | Windows11<br>または<br>Windows10 (Windows11 に無償アップグレード可能なもの) | 無償アップグレードが可能か分からない場合<br>メーカーに問い合わせてください。<br>（メモリ・CPU要件満たせていてもアップグレード出来ないケースがあります） |
-| Ｍicrosoft Office | 不要 | あれば便利ですが、研修や普段使いではなくてもOKです。<br>「[Office on the web](https://www.microsoft.com/ja-jp/microsoft-365/free-office-online-for-the-web)」で無料のOfficeが利用可能です（使える機能は少ない）。 |
-
-- Lenovo
-  - <https://www.lenovo.com/jp/ja/jpad/d/deals/promo-offers?sort=price-asc&resultsLayoutType=grid&visibleDatas=facet_freeform4%3AWindows11%20無料アップグレード対象%3Bfacet_Memory%3A8%20GB%3Bfacet_Memory%3A16%20GB>
-- マウスコンピューター
-  - <https://www.mouse-jp.co.jp/store/goods/search.aspx?fmt=json&limit=40&po%5B%5D=形状・タイプから探す%3Aノートパソコン&s4%5B%5D=8GB&s4%5B%5D=16GB&s4%5B%5D=32GB&s4o=1&s6%5B%5D=256GB&s6%5B%5D=512GB&s6%5B%5D=1TB&s6o=1&search=x&k_uid=a3932b4cff82a99fbc6d2d914bde6308&sort=price&style=D>
-
-##### Mac
-
-「MacBook Pro」推奨、最近のモデルであれば「MacBook Air」でも問題ありません。  
-
-- MacBook Air (115,280円～)
-  - <https://www.apple.com/jp/shop/buy-mac/macbook-air>
-  - 講師が使用しているパソコン（MacBook Airの一番安いモデル）
-    - 研修は問題なく進められます。
-    - 機種 ID：MacBookAir10,1
-      - <https://support.apple.com/kb/SP825>
-- MacBook Pro (【14インチ】239,800円～)
-  - <https://www.apple.com/jp/shop/buy-mac/macbook-pro>
-  - 13インチについてはAirと比べスペックの大きい違いがない
-- 「MacBook Air」「MacBook Pro」シリーズ4機種の違いをチェック【2022年2月版】
-  - <https://www.itmedia.co.jp/fav/articles/2202/04/news168.html>
-
-### 便利ソフト
-
-筆者が現場で使うフリーソフトをご紹介します。  
-興味があればインストールしてください。  
-GitやVSCode等、主要のソフトは除いています。
-
-- メーラー 〜 会社メールの送受信に
-  - 【Win・Mac】 Thunderbird
-    - <https://www.thunderbird.net/ja/>
-    - Microsoft Outlookをお持ちでない方におすすめです。
-    - epkotメールセットアップについては以下を参照
-      - [Thunderbird設定](../thunderbird/index.md)
-- エディタ 〜 VSCodeと併用で、メモ帳代わりに
-  - 【Win】 サクラエディタ
-    - <https://sakura-editor.github.io/>
-  - 【Mac】 CotEditor
-    - <https://coteditor.com/>
-- 比較ツール 〜 ファイル・ディレクトリの比較に
-  - 【Win】 WinMerge
-    - <https://winmerge.org/>
-  - 【Mac】 CompareMerge2
-    - <https://apps.apple.com/jp/app/comparemerge-lite/id1459748650>
-- SQLクライアント 〜 データベース・テーブル操作を行う、現場では必須レベル
-  - 【Win】 A5:SQL Mk-2
-    - <https://a5m2.mmatsubara.com/>
-  - 【Win・Mac】 DBeaver
-    - <https://dbeaver.io/>
-- キャプチャ(gif) 〜 録画ソフト Gif画像はGitHubのPRで貼り付けたり、テストのエビデンスに
-  - 【Win・Mac】 LICEcap
-    - <https://dev.classmethod.jp/articles/introduce-licecap/>
-- ターミナルソフト 〜 開発環境・リモートサーバーへのSSH接続に
-  - 【Win】 RLogin
-    - <https://kmiya-culti.github.io/RLogin/>
-- Office 〜 ブラウザでOfficeを無料で使う
-  - 【Win・Mac】 Office on the web
-    - <https://www.office.com/>
-
-### 予習
-
-必須ではないですが、入社前に学習したい方は以下の予習を行なってください。  
-研修ではパソコンの使用は慣れている前提で話が進みます。
-
-- 「[新人研修に参加する方へ](./index.md)」で予習を行ってください。
-  - 「[パソコンが不慣れな方へ](./index.md#パソコンが不慣れな方へ)」は必須知識になります（時間が足りない場合はご相談ください）。
-  - 「`パソコンが不慣れ`」の定義として、以下のいずれかに該当する場合とします。
-    - 基本操作が出来ない。
-    - ファイル・フォルダがわからない。
-    - 保存するショートカットキーがわからない。
-    - コピー・ペーストのショートカットキーがわからない。
-    - ひとつ前に戻るショートカットキーがわからない。
-    - パソコン画面のスクリーンショットを撮る方法がわからない。
-    - 拡張子が何かわからない。
-
-## 入社された方へ
-
-入社初日は以下の作業をお願いします。  
-翌営業日から[カリキュラム](#カリキュラム)に入ります。
-
-### 入社初日の作業
-
-| No. | 作業 |
-| :---: | --- |
-| 1 | [エプコット用PCユーザー作成](#エプコット用pcユーザー作成]) |
-| 2 | [インストール](#インストール) |
-| 3 | [GitHub組織アカウントへの参加](#github組織アカウントへの参加) |
-| 4 | [Teamsアカウント作成](#teamsアカウント作成) |
-| 5 | [通知設定](#通知設定) |
-| 6 | [入社初日の予習](#入社初日の予習) |
-
-#### エプコット用PCユーザー作成
-
-プライベートのユーザーアカウントと  
-仕事で使用するユーザーアカウントは分けることを推奨します。  
-分けなかった場合、実際に問題が起きたことがあります。  
-
-- 誤って情報を流出してしまった。
-- 画面共有でプライベートの見られたくないものを見られてしまった。
-  - 相手が自分のPCを遠隔で操作することもあります。
-- プライベートのGitHubアカウントでコミットしてしまった（アカウントを分けている場合）。
-- 成果物のテストのため、ブラウザの履歴情報を削除する必要が出てしまった（プライベートで、サイトに入力した情報が削除されてしまう）。
-
-また、退職した際にパソコン内のソースコードや設計書などの情報を削除する必要があるため  
-ユーザーアカウントを作っておくと削除が容易になります。  
-Windowsの場合、会社のメールアドレスでアカウントを作成しましょう(Teamsでも使うため)。
-
-- **注意点**
-  - 追加したユーザーは、「**管理者**」にすることを忘れないでください。
-- 参考
-  - 【Windows 10】ユーザーアカウントを追加して仕事とプライベートなどを分ける
-    - <https://atmarkit.itmedia.co.jp/ait/articles/2010/08/news033.html>
-  - リモートで仕事するならPC（Mac）に仕事とプライベートのログインアカウントをそれぞれ設定し、使い分けよう
-    - <https://20ro.diary.to/archives/27810909.html>
-  - Windows 11 標準ユーザーの制限と管理者に変更する
-    - <https://www.tipsfound.com/windows11/02012>
-  - Macのユーザ、ゲスト、およびグループを設定する
-    - <https://support.apple.com/ja-jp/guide/mac-help/mtusr001/mac>
-
-#### インストール
-
-- パソコンにインストール
-  - 【ブラウザ】`Google Chrome` (クローム)
-    - <https://www.google.co.jp/intl/ja/chrome/>
-  - 【エディタ】`Visual Studio Code` (ビジュアル スタジオ コード)
-    - <https://azure.microsoft.com/ja-jp/products/visual-studio-code/>
-- スマートフォンにインストール
-  - Slack
-    - iOS 版 Slack
-      - <https://slack.com/intl/ja-jp/downloads/ios>
-    - Android 版 Slack
-      - <https://slack.com/intl/ja-jp/downloads/android>
-
-Visual Studio Code(VSCode) が初めての方へ
-
-- VSCode最初の1歩（インストール／日本語化／基本的な使い方）
-  - <https://youtu.be/auGKppIIV4Y>
-
-##### Visual Studio Code 詳細設定
-
-難しければ飛ばしてもOKです。
-
-- 拡張機能のインストール
-  - 「`Japanese Language Pack for Visual Studio Code`」 VSCodeを日本語化出来ます。
-    - <https://marketplace.visualstudio.com/items?itemName=MS-CEINTL.vscode-language-pack-ja>
-  - 「`Trailing Spaces`」 行末のスペースを可視化してくれる機能です。
-    - <https://marketplace.visualstudio.com/items?itemName=shardulm94.trailing-spaces>
-  - 「`markdownlint`」 Markdown(`.md`)ファイルのスタイルチェックをしてくれる機能です。
-    - <https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint>
-  - 「`Code Spell Checker`」 スペルミスを検出してくれる機能です（名詞等はかかりやすいので ignoreWords に設定）
-    - <https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker>
-  - 「`Rainbow CSV`」 CSV・TSVファイルが見やすくなる機能です。
-    - <https://marketplace.visualstudio.com/items?itemName=mechatroner.rainbow-csv>
-  - 「`open in browser`」 HTMLをブラウザで開く機能です。
-    - <https://marketplace.visualstudio.com/items?itemName=techer.open-in-browser>
-- `setting.json` の開き方
-  - メニューバー「表示」→「コマンドパレット」で「`Open Settings (JSON)`」
-  - `setting.json` の以下の設定は任意で
-
-  ```json
-  {
-      "explorer.copyRelativePathSeparator": "/", // 「相対パスをコピー」の時の区切り文字
-      "editor.fontFamily": "'BIZ UDゴシック', Consolas, 'Courier New', monospace",
-      "editor.rulers": [120], // エディタの120文字目の所にルーラーを表示
-      "editor.renderWhitespace": "all", // スペースを可視化
-      "editor.linkedEditing": true, // HTMLタグ等の編集時、関連する記号が更新される（PHPには無効）
-      "editor.bracketPairColorization.enabled": true, // 「{}」のペアに色がつく
-      "editor.bracketPairColorization.independentColorPoolPerBracketType": true, // 異なるタイプのブラケットは同じ色にする
-      "editor.guides.bracketPairs": true, // アクティブな「{}」のペアを強調表示
-      "workbench.colorCustomizations": {
-          // ブラケットの色（お好みで）
-          "editorBracketHighlight.foreground1": "#D3D3D3",
-          "editorBracketHighlight.foreground2": "#DCDCAA",
-          "editorBracketHighlight.foreground3": "#C586BB",
-      },
-      "files.eol": "\n", // 既定の改行文字、新規作成時のデフォルト
-      "files.trimTrailingWhitespace": true, // 保存時に行末のスペースを削除する
-      "[log]": {
-          // LOG ファイル設定
-          "editor.wordWrap": "off", // 行を折り返さない
-          "editor.insertSpaces": false, // Tabキーを押した時にスペースに変換されない
-      },
-      "[csv]": {
-          // CSV ファイル設定
-          "editor.wordWrap": "off", // 行を折り返さない
-      },
-      "[tsv]": {
-          // TSV ファイル設定
-          "editor.wordWrap": "off", // 行を折り返さない
-          "editor.insertSpaces": false, // Tabキーを押した時にスペースに変換されない
-      },
-      "[markdown]": {
-          // Markdown(.md) ファイル設定
-          "files.trimTrailingWhitespace": false, // 保存時に行末のスペースを削除しない
-          "editor.tabSize": 2
-      },
-      // 拡張機能: markdownlint 設定
-      "markdownlint.config": {
-          "MD033": false // html: Markdown のテーブル内改行で<br>を使うことがあるため
-      },
-      // 拡張機能: Code Spell Checker 設定
-      "cSpell.ignoreWords": [
-          // チェック対象外のワード
-          "epkot",
-          "markdownlint",
-          "laravel",
-      ],
-      // ↓↓↓ その他設定は略
-  }
-  ```
-
-#### GitHub組織アカウントへの参加
-
-GitHubの管理者は講師になりますので  
-アカウントを作成しましたら、講師までご連絡ください。
-
-- 「[GitHub組織アカウントへの参加](./../github.md)」参照
-
-#### Teamsアカウント作成
-
-- 研修中のビデオ通話・画面共有・研修の進捗報告や質問は「Microsoft Teams」を使用します。
-- 講師が招待URLまたは招待メールをお送りしますので、案内に従い会社メールアドレスでアカウントを作成して参加してください。
-  - 途中でTeamsアプリのインストールを勧められますのでインストールしてください（パソコンにインストールしてください）。
-
-#### 通知設定
-
-Teams・メール・Slackは、すぐに反応できるようにしてください。  
-Macの場合、以下の通知設定をしておきましょう。  
-
-- 【Mac】通知設定について解説
-  - <https://macblog.site/system-preferences-notification/>
-
-#### 入社初日の予習
-
-まず、ここまでで忘れていることがないかチェックしておきましょう。
-
-- [入社初日の作業](#入社初日の作業)
-
-入社初日は予習をしておいてください。
-
-- [予習](#予習)
-
 ## カリキュラム
 
 | No. | 日数 | 内容 |
@@ -334,10 +54,6 @@ VDT症候群予防の観点から、1時間連続でPC上で作業した場合�
 上記の休止時間を考慮して、1日の研修時間は**8.0h**ではなく**6.5h**程度が目安です。
 
 ## 準備
-
-### PC設定・インストール
-
-- 「[新人研修に参加する方へ（PC設定・インストール）](./index.md#pc設定)」参照
 
 ### Git設定確認
 
@@ -1197,16 +913,15 @@ MySQL・phpMyAdmin環境が入っているので、練習してみましょう�
 新人研修の必須科目としては以上となります。  
 自己学習に入る方は講師にご報告ください。  
 ここからは決められた研修や課題等はありませんので  
-各自で目標を決めて学習をしてください。
+各自で目標を決めて学習をしてください。  
+
+※ **Laravel CRUDは必修化を予定しているので学習してください**  
 
 - これまで学習したことの復習、更に深い学習。
-- CBCで未着手の学習
-  - CBC 基礎3（マークアップエンジニア 上級）等
 - 伸ばしたいスキルの学習
   - フロントエンド
   - バックエンド
   - フレームワーク (Laravel等)
-  - 言語 (Java、Python等)
 - 面談対策
 - 現場で求められる技術の学習（現場が決まった場合）
 
@@ -1217,7 +932,13 @@ MySQL・phpMyAdmin環境が入っているので、練習してみましょう�
 
 筆者が実務で使用経験のあるソフトをまとめています。
 
-- [便利ソフト](#便利ソフト)
+- [便利ソフト](./../preparation/index.md#便利ソフト)
+
+### Laravel自己学習
+
+LaravelでのCRUD機能を作成出来るレベルまで学習しましょう。
+
+- [Laravel](./laravel/index.md)
 
 ### 内部開発
 
@@ -1241,7 +962,7 @@ MySQL・phpMyAdmin環境が入っているので、練習してみましょう�
 - 案件情報
   - まだ、決まっていない方はPHP・Laravel等の現場を想定して行います。
 - スキルシート(ファイル)
-  - 紙媒体でしかもらっていない場合、社長・営業に問い合わせてください。
+  - 営業との作戦会議後の時点で紙媒体でしかもらっていない場合、社長・営業に問い合わせてください。
 
 #### 案件例
 
@@ -1332,12 +1053,6 @@ GitHub管理にしたくない場合、「`Code`」から「`Download ZIP`」を
   - <https://jp.linkedin.com/learning/javascript-essential-training-4>
 - `GitHub 入門 - LinkedInラーニング`
   - <https://jp.linkedin.com/learning/learning-github-2>
-
-### Laravel自己学習
-
-LaravelでのCRUD機能を作成出来るレベルまで学習しましょう。
-
-- [Laravel](./laravel/index.md)
 
 ### Docker自己学習
 
