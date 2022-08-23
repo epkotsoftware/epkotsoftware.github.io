@@ -218,7 +218,3 @@ bool(false)
 
 - あなたの読解力をテスト！読み解く力を鍛える方法とは？
   - <https://www.sokunousokudoku.net/media/?p=2802>
-
-## 研修
-
-- 入社後に [新人研修](./../../training/training.md) を進めていきます。
