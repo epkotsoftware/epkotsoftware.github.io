@@ -167,7 +167,7 @@ bool(false)
   - 設計やテストエビデンス等で、スクリーンショットを撮る事が多いです。
     - DevToolで 「Ctrl」 + 「Shift」を押しながら 「P」 を押すと、コマンドパレットが出るので  
       「screenshot」と打つと、いくつかのキャプチャ方法が出てきます。
-      - ![google_chrome_dev_tools](./../image/google_chrome_dev_tools.png)
+      - ![google_chrome_dev_tools](./../../image/google_chrome_dev_tools.png)
       - `Capture area screenshot` : 手動で選択範囲を指定してキャプチャ、画面上のカーソルが「+」になるのでドラッグして範囲を決める。
       - `Capture full size screenshot` : スクロールした分も含めてページ全体をキャプチャ
       - `Capture node screenshot` : 選択しているノードをキャプチャ
@@ -200,14 +200,14 @@ bool(false)
 現場等で使われる用語は  
 以下の資料にまとめています。
 
-- [用語集](./glossary.md)
+- [用語集](./../../training/glossary.md)
 
 ### プログラミング
 
 主に公式サイトやWikipediaのプログラミング関連のリンク等を載せています。  
 公式サイトでは難しく書かれているため、プログラミング経験者ではない方は、まだ見ないでおきましょう。  
 
-- [プログラミング](./programming/index.md)
+- [プログラミング](./../../training/programming/index.md)
 
 ## その他
 
