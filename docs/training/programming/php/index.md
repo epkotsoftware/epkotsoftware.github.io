@@ -10,6 +10,7 @@
 | 4 | [名前空間](./namespaces/index.md) |
 | 5 | [配列](./arrays/index.md) |
 | 6 | [ループ](./loops/index.md) |
+| 7 | [課題](./exercises/index.md) |
 
 ## 参考サイト
 
