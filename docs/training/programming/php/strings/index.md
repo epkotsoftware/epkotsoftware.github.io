@@ -17,8 +17,8 @@
 ## 文字列
 
 実務でも文字列操作は必ず行います。  
-本資料で紹介する標準関数は暗記する必要はないので、こういうことが出来るということを覚えておき  
-調べてすぐ使えるようになっておきましょう。
+本資料で紹介する関数は暗記する必要はないので、こういうことが出来るということを覚えておき  
+公式サイトで調べてすぐ使えるようになっておきましょう。
 
 - 動画
   - 文字列関数とは？【分かりやすい解説シリーズ #51】【プログラミング】
@@ -27,6 +27,10 @@
     - <https://youtu.be/MAi4cdq7EKY>
   - PHPマニュアルを一緒に読み解こう！#11「型：文字列（後編）」【プログラミング】
     - <https://youtu.be/P6OJzmCXSHk>
+- PHPマニュアルで検索
+  - <https://www.google.com/search?q=site:www.php.net+文字列>
+- Laravel公式で検索
+  - <https://www.google.com/search?q=site:readouble.com/laravel/9.x/ja+文字列>
 
 ## 結合
 
@@ -67,23 +71,32 @@ var_dump($result);
 
 - `trim`
   - <https://www.php.net/manual/ja/function.trim.php>
+- `Laravel - trim`
+  - <https://readouble.com/laravel/9.x/ja/helpers.html#method-fluent-str-trim>
 
 ## 取り出し
 
-substr関数で文字列から指定した部分の文字列を切り出します。
+mb_substr関数で文字列から指定した部分の文字列を切り出します。
 
 ```php
 <?php
 
-$str = 'abcdefg';
-// substr関数実行 3文字目から3文字切り出す。
-$result = substr($str, 2,3);
+$str = 'アイウエオカキクケコ';
+// mb_substr関数実行 3文字目から3文字切り出す。
+$result = mb_substr($str, 2, 3, 'UTF-8');
 var_dump($result);
-// 出力結果: string(3) "cde"
+// 出力結果: string(3) "ウエオ"
 ```
 
-- `PHP: substr`
-  - <https://www.php.net/manual/ja/function.substr.php>
+substr関数もありますが、日本語（マルチバイト）に対応していないため  
+日本語を考慮する場合、mb_substr関数を使うようにしましょう。  
+
+- `mb_substr`
+  - <https://www.php.net/manual/ja/function.mb-substr.php>
+- 検索ワード「`site:www.php.net 文字列 取り出し`」
+  - <https://www.google.com/search?q=site:www.php.net+文字列+取り出し>
+- `Laravel - Str::substr()`
+  - <https://readouble.com/laravel/9.x/ja/helpers.html#method-str-substr>
 
 ## 置換
 
@@ -106,6 +119,11 @@ PHPではsprintf(エスプリントエフ)を使います。
   - <https://www.php.net/manual/ja/function.str-replace.php>
 - `sprintf`
   - <https://www.php.net/manual/ja/function.sprintf.php>
+- 検索ワード「`site:www.php.net 文字列 置換`」
+  - <https://www.google.com/search?q=site:www.php.net+文字列+置換>
+  - ※ 他にも関数がヒットしますが、まずは`str_replace`の使用を検討し、細かい条件で置換したい場合に他の関数を調べましょう。
+- `Laravel - Str::replace()`
+  - <https://readouble.com/laravel/9.x/ja/helpers.html#method-str-replace>
 
 ## 配列を結合
 
@@ -126,6 +144,12 @@ var_dump($result);
 
 - `implode`
   - <https://www.php.net/manual/ja/function.implode.php>
+- 検索ワード「`site:www.php.net 配列 文字列 結合`」
+  - <https://www.google.com/search?q=site:www.php.net+配列+文字列+結合>
+- `Laravel - join`
+  - <https://readouble.com/laravel/9.x/ja/collections.html#method-join>
+- `Laravel - Arr::join()`
+  - <https://readouble.com/laravel/9.x/ja/helpers.html#method-array-join>
 
 ## 配列に分割
 
@@ -144,6 +168,10 @@ var_dump($result);
 
 - `explode`
   - <https://www.php.net/manual/ja/function.explode.php>
+- 検索ワード「`site:www.php.net 配列 文字列 分割`」
+  - <https://www.google.com/search?q=site:www.php.net+配列+文字列+分割>
+- `Laravel - explode`
+  - <https://readouble.com/laravel/9.x/ja/helpers.html#method-fluent-str-explode>
 
 ## エスケープシーケンス
 
@@ -168,6 +196,9 @@ PHPの場合、二重引用符（"）で括られた場合にエスケープシ�
 
 - `文字列 - 二重引用符`
   - <https://www.php.net/manual/ja/language.types.string.php#language.types.string.syntax.double>
+- 検索ワード「`site:www.php.net 文字列 二重引用符 エスケープ`」
+  - <https://www.google.com/search?q=site:www.php.net+文字列+二重引用符+エスケープ>
+  - ※ エスケープシーケンスというページもかかりますが「文字列」ではなく、「正規表現」のエスケープシーケンスなので異なるページになります。
 
 ```php
 <?php
