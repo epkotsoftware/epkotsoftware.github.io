@@ -315,11 +315,16 @@ console.log(result);
 
 $str = 'abcdefg';
 // substr関数実行 3文字目から3文字切り出す。
-$result = substr($str, 2,3);
+$result = mb_substr($str, 2, 3, 'UTF-8');
 var_dump($result);
 // 出力結果: string(3) "cde"
 ```
 
+substr関数もありますが、日本語（マルチバイト）に対応していないため  
+日本語を考慮する場合、mb_substr関数を使うようにしましょう。  
+
+- `PHP: mb_substr`
+  - <https://www.php.net/manual/ja/function.mb-substr.php>
 - `PHP: substr`
   - <https://www.php.net/manual/ja/function.substr.php>
 
