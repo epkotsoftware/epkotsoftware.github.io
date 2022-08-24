@@ -14,6 +14,21 @@ PHP・Laravelについては、ある程度理解している前提で進めて�
 - Bootstrap4
 - jQuery
 
+### 実行環境
+
+以下のテンプレートリポジトリを使うと  
+Dockerで簡単にLaravel9の開発環境が作れます。  
+テンプレートから自分のリポジトリを作ってみましょう。  
+（ダウンロードしてGit管理外で、学習用の環境を作ってもOK）
+
+- `Laravel9 テンプレートリポジトリ`
+  - <https://github.com/epkotsoftware/template-php8.1-jp>
+
+```txt
+■注意点
+　Git管理下のフォルダ内に clone しないようにしましょう。
+```
+
 ## 設計書
 
 以下を参照してください。

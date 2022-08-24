@@ -926,10 +926,12 @@ LaravelでのCRUD機能を作成出来るレベルまで学習しましょう。
 
 環境を簡単に構築できる、GitHubテンプレートリポジトリを用意しています。  
 「`Use this template`」ボタンで、テンプレートから新しくリポジトリを作成することが出来ます（Ownerは自分のアカウントにしてください）  
-GitHub管理にしたくない場合、「`Code`」から「`Download ZIP`」を選択するとダウンロードが可能です。
+GitHub管理にしたくない場合、「`Code`」から「`Download ZIP`」を選択するとダウンロードが可能です。  
 
 - PHP8.1 のテンプレートリポジトリ
   - <https://github.com/epkotsoftware/template-php8.1-jp>
+- Laravel9 のテンプレートリポジトリ
+  - <https://github.com/epkotsoftware/template-laravel9-jp>
 
 ### プログラミング編
 
