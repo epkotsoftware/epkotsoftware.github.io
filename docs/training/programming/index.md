@@ -314,7 +314,7 @@ console.log(result);
 <?php
 
 $str = 'abcdefg';
-// substr関数実行 3文字目から3文字切り出す。
+// mb_substr関数実行 3文字目から3文字切り出す。
 $result = mb_substr($str, 2, 3, 'UTF-8');
 var_dump($result);
 // 出力結果: string(3) "cde"
