@@ -814,62 +814,13 @@ Gitについて、より深く学んでいきます。
 
 - [Git編](./git/index.md)
 
-## プログラミング編
+## PHPプログラミング編
 
 プログラミングの基礎について、より深く学んでいきます。  
 別資料で用意していますので、以下を参照してください。  
+こちらは課題の提出はありません。
 
-- [プログラミング編](./programming/index.md)
-
-## コーディング規約編
-
-3時間を目安に学習してください。
-  
-現場に入ると、コーディング規約が設けられている事が多いです  
-一般的なコーディング規約のリンクをまとめました。  
-  
-現場ではベースになるコーディング規約 + α になることが多いかと思います。  
-現場が決まっていない場合は、PHPのコーディング規約を見て  
-わからないところが出てきたら調べてみましょう。
-  
-ベテランでも意味を理解していなかったり、違反する事が多いので  
-今は「こういうのがあるんだ」程度の理解で大丈夫です。
-
-- PHP
-  - PSR （Laravelが採用しているコーディング規約）
-    - PSR-1: Basic Coding Standard
-      - <https://www.php-fig.org/psr/psr-1/>
-    - PSR-4: Autoloader
-      - <https://www.php-fig.org/psr/psr-4/>
-    - PSR-12: Extended Coding Style
-      - <https://www.php-fig.org/psr/psr-12/>
-  - PSRは全て英語なので、日本語にしたい場合はブラウザの翻訳を使うか、翻訳しているサイトをご覧ください。
-    - 個人によるPSRの日本語訳
-      - <https://github.com/thatblue/fig-standards>
-- C#
-  - コーディングスタイル(Microsoft公式)
-    - 識別子名
-      - <https://docs.microsoft.com/ja-jp/dotnet/csharp/fundamentals/coding-style/identifier-names>
-    - C# のコーディング規則
-      - <https://docs.microsoft.com/ja-jp/dotnet/csharp/fundamentals/coding-style/coding-conventions>
-- Visual Basic(`VB.Net`)
-  - プログラム構造とコード規則(Microsoft公式)
-    - <https://docs.microsoft.com/ja-jp/dotnet/visual-basic/programming-guide/program-structure/program-structure-and-code-conventions>
-- Java
-  - Javaコーディング規約
-    - <https://future-architect.github.io/coding-standards/documents/forJava/Javaコーディング規約.html>
-- Swift
-  - Swift Style Guide(Google公式)
-    - <https://google.github.io/swift/>
-- JavaScript
-  - JavaScript guidelines - The MDN project | MDN
-    - <https://developer.mozilla.org/en-US/docs/MDN/Guidelines/Code_guidelines/JavaScript>
-  - Airbnb JavaScript Style Guide
-    - <https://github.com/airbnb/javascript>
-    - 日本語
-      - <https://github.com/mitsuruog/javascript-style-guide>
-  - JavaScript Standard Style
-    - <https://standardjs.com/>
+- [PHPプログラミング編](./programming/php/index.md)
 
 ## データベース編
 
@@ -981,6 +932,13 @@ GitHub管理にしたくない場合、「`Code`」から「`Download ZIP`」を
 - PHP8.1 のテンプレートリポジトリ
   - <https://github.com/epkotsoftware/template-php8.1-jp>
 
+### プログラミング編
+
+以前、必修となっていた「プログラミング編」です。  
+PHPプログラミング編と重複しているところがあります。  
+
+- [プログラミング編](./programming/index.md)
+
 ### 書籍
 
 おすすめの書籍がありましたら、追記しますので講師までご連絡ください。
@@ -1081,6 +1039,54 @@ CBC研修でもレスポンシブデザインについてありますが、フ�
   - サンプル
     - Dashboard・Checkout・Gridの学習をおすすめします。
     - <https://getbootstrap.jp/docs/5.0/examples/>
+
+### コーディング規約
+
+現場に入ると、コーディング規約が設けられている事が多いです  
+一般的なコーディング規約のリンクをまとめました。  
+  
+現場ではベースになるコーディング規約 + α になることが多いかと思います。  
+現場が決まっていない場合は、PHPのコーディング規約を見て  
+わからないところが出てきたら調べてみましょう。
+  
+ベテランでも意味を理解していなかったり、違反する事が多いので  
+今は「こういうのがあるんだ」程度の理解で大丈夫です。
+
+- PHP
+  - PSR （Laravelが採用しているコーディング規約）
+    - PSR-1: Basic Coding Standard
+      - <https://www.php-fig.org/psr/psr-1/>
+    - PSR-4: Autoloader
+      - <https://www.php-fig.org/psr/psr-4/>
+    - PSR-12: Extended Coding Style
+      - <https://www.php-fig.org/psr/psr-12/>
+  - PSRは全て英語なので、日本語にしたい場合はブラウザの翻訳を使うか、翻訳しているサイトをご覧ください。
+    - 個人によるPSRの日本語訳
+      - <https://github.com/thatblue/fig-standards>
+- C#
+  - コーディングスタイル(Microsoft公式)
+    - 識別子名
+      - <https://docs.microsoft.com/ja-jp/dotnet/csharp/fundamentals/coding-style/identifier-names>
+    - C# のコーディング規則
+      - <https://docs.microsoft.com/ja-jp/dotnet/csharp/fundamentals/coding-style/coding-conventions>
+- Visual Basic(`VB.Net`)
+  - プログラム構造とコード規則(Microsoft公式)
+    - <https://docs.microsoft.com/ja-jp/dotnet/visual-basic/programming-guide/program-structure/program-structure-and-code-conventions>
+- Java
+  - Javaコーディング規約
+    - <https://future-architect.github.io/coding-standards/documents/forJava/Javaコーディング規約.html>
+- Swift
+  - Swift Style Guide(Google公式)
+    - <https://google.github.io/swift/>
+- JavaScript
+  - JavaScript guidelines - The MDN project | MDN
+    - <https://developer.mozilla.org/en-US/docs/MDN/Guidelines/Code_guidelines/JavaScript>
+  - Airbnb JavaScript Style Guide
+    - <https://github.com/airbnb/javascript>
+    - 日本語
+      - <https://github.com/mitsuruog/javascript-style-guide>
+  - JavaScript Standard Style
+    - <https://standardjs.com/>
 
 ## 追加学習
 
