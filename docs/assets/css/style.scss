@@ -25,3 +25,12 @@ main > h4 {
     scroll-margin-top: 40px;
     background-color: #f4f4f4;
 }
+
+main > table {
+    background-color: #ffffff;
+    font-size: 1.0rem;
+}
+
+main > table > thead > tr {
+    background-color: #f5f5f5;
+}
