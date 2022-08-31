@@ -2,26 +2,26 @@
 
 ## カリキュラム
 
-| No. | 日数 | 内容 |
-| :---: | --- | --- |
-| 1 | - | [`はじめに`](#はじめに) |
-| 2 | - | [`準備`](#準備) |
-| 3 | - | [`コーダー編`](#コーダー編) |
-| 4 | - | [`マークアップエンジニア編`](#マークアップエンジニア編) |
-| 5 | - | [`フロントエンドエンジニア編`](#フロントエンドエンジニア編) |
-| 6 | 3.0 | [`Linux編`](#linux編) |
-| 7 | - | [`開発手法編`](#開発手法編) |
-| 8 | - | [`設計編`](#設計編) |
-| 9 | - | [`テスト編`](#テスト編) |
-| 10 | - | [`ファイル編`](#ファイル編) |
-| 11 | - | [`セキュリティ編`](#セキュリティ編) |
-| 12 | - | [`バックエンド編`](#バックエンド編) |
-| 13 | - | [`バージョン管理システム編`](#バージョン管理システム編) |
-| 14 | - | [`Git編`](#git編) |
-| 15 | - | [`PHPプログラミング編`](#phpプログラミング編) |
-| 16 | - | [`データベース編`](#データベース編) |
-| 17 | - | [`自己学習`](#自己学習) |
-| 18 | - | [`追加学習`](#追加学習) |
+| No. | 終了目安<br>(営業日数) | 開始月 | 内容 | 備考 |
+| :---: | ---: | ---: | --- | --- |
+| 1 | - | 0ヶ月 | [はじめに](#はじめに) |  |
+| 2 | 半日 | 0ヶ月 | [準備](#準備) |  |
+| 3 | 3日 | 0ヶ月 | [コーダー編](#コーダー編) |  |
+| 4 | 5日 | 0ヶ月 | [マークアップエンジニア編](#マークアップエンジニア編) |  |
+| 5 | 7日 | 0ヶ月 | [フロントエンドエンジニア編](#フロントエンドエンジニア編) |  |
+| 6 | 3日 | 0ヶ月 | [Linux編](#linux編) |  |
+| 7 | 1日 | 1ヶ月 | [開発手法編](#開発手法編) |  |
+| 8 | 5日 | 1ヶ月 | [設計編](#設計編) |  |
+| 9 | 3日 | 1ヶ月 | [テスト編](#テスト編) |  |
+| 10 | 1日 | 1ヶ月 | [ファイル編](#ファイル編) |  |
+| 11 | 1日 | 1ヶ月 | [セキュリティ編](#セキュリティ編) |  |
+| 12 | 10日 | 1ヶ月 | [バックエンド編](#バックエンド編) |  |
+| 13 | 1日 | 2ヶ月 | [バージョン管理システム編](#バージョン管理システム編) |  |
+| 14 | 2日 | 2ヶ月 | [Git編](#git編) |  |
+| 15 | 20日 | 2ヶ月 | [PHPプログラミング編](#phpプログラミング編) |  |
+| 16 | 2日 | 3ヶ月 | [1対1PG研修](#1対1pg研修) |  |
+| 17 | 15日 | 3ヶ月 | [データベース編](#データベース編) |  |
+| 18 | 20日以上 | 4ヶ月 | [カリキュラム終了](#カリキュラム終了) | 面談対策・自己学習等 |
 
 ## はじめに
 
@@ -821,6 +821,11 @@ Gitについて、より深く学んでいきます。
 
 - [PHPプログラミング編](./programming/php/index.md)
 
+## 1対1PG研修
+
+講師によるプログラミング研修です。  
+講師がスケジュール調整をしますので、次のカリキュラムに進んでください。
+
 ## データベース編
 
 フロントエンドエンジニア編等で使ったDocker環境に  
@@ -858,61 +863,37 @@ MySQL・phpMyAdmin環境が入っているので、練習してみましょう�
 - SQL練習問題 – 一覧まとめ
   - <https://tech.pjin.jp/blog/2016/12/05/sql練習問題-一覧まとめ/>
 
-## 自己学習
+## カリキュラム終了
 
 新人研修の必須科目としては以上となります。  
-自己学習に入る方は講師にご報告ください。  
-ここからは決められた研修や課題等はありませんので  
-各自で目標を決めて学習をしてください。  
+これからは面談対策・自己学習に入っていきます。
 
-※ **Laravel CRUDは必修化を予定しているので学習してください**  
+### 面談
 
-- これまで学習したことの復習、更に深い学習。
-- 伸ばしたいスキルの学習
-  - フロントエンド
-  - バックエンド
-  - フレームワーク (Laravel等)
-- 面談対策
-- 現場で求められる技術の学習（現場が決まった場合）
+#### 内部開発
 
-何を学習したら良いかわからないという場合、研修講師にご相談ください。  
-現場に入った後でもサポート致します。  
-
-### ソフトウェア
-
-筆者が実務で使用経験のあるソフトをまとめています。
-
-- [便利ソフト](./../preparation/index.md#便利ソフト)
-
-### Laravel自己学習
-
-LaravelでのCRUD機能を作成出来るレベルまで学習しましょう。
-
-- [Laravel](./laravel/index.md)
-
-### 内部開発
-
-以下を参照
+内部開発の資料は以下にまとめています。  
+アクセス出来ない場合は講師までお問い合わせください。  
 
 - <https://github.com/epkotsoftware/training#社内開発>
 
-### 面談対策
+#### 面談対策
 
 面談時に聞かれそうなことや、実際に聞かれたこと  
 用語等を資料にまとめました。
 
 - [面談](./interview.md)
 
-面談練習をしたい方は講師までお願いします。  
-開始前に以下の準備をお願いします。  
+以下、準備を進めましょう。
 
 - 面談資料について読み込んでおくこと
   - [開発手法編](#開発手法編)、[設計編](#設計編)も復習しておくこと（実際の面談でも聞かれることが多いため）
 - 経歴について説明できるようになっておくこと
-- 案件情報
-  - まだ、決まっていない方はPHP・Laravel等の現場を想定して行います。
 - スキルシート(ファイル)
   - 営業との作戦会議後の時点で紙媒体でしかもらっていない場合、社長・営業に問い合わせてください。
+
+面談練習をしたい方は講師・営業までお願いします。  
+面談を案件がまだ、決まっていない方はPHP・Laravel等の現場を想定して行います。
 
 #### 案件例
 
@@ -922,426 +903,23 @@ LaravelでのCRUD機能を作成出来るレベルまで学習しましょう。
 | 工程 | 開発、テスト |
 | 必要スキル | PHP、Laravelでの開発経験 |
 
-### プログラミング環境
+### Laravel CRUD
 
-環境を簡単に構築できる、GitHubテンプレートリポジトリを用意しています。  
-「`Use this template`」ボタンで、テンプレートから新しくリポジトリを作成することが出来ます（Ownerは自分のアカウントにしてください）  
-GitHub管理にしたくない場合、「`Code`」から「`Download ZIP`」を選択するとダウンロードが可能です。  
+LaravelでのCRUD機能を作成出来るレベルまで学習しましょう。  
+※ **作成中の部分もあるため、カリキュラム外となっていますが、今後カリキュラムに組み込み予定です。**
 
-- PHP8.1 のテンプレートリポジトリ
-  - <https://github.com/epkotsoftware/template-php8.1-jp>
-- Laravel9 のテンプレートリポジトリ
-  - <https://github.com/epkotsoftware/template-laravel9-jp>
+- [Laravel CRUD](./laravel/crud/index.md)
 
-### プログラミング編
+### 内部開発再現
 
-以前、必修となっていた「プログラミング編」です。  
-PHPプログラミング編と重複しているところがあります。  
+Laravelの学習を活かし  
+実際に設計書・画面イメージ等から再現しましょう。  
 
-- [プログラミング編](./programming/index.md)
+- <https://github.com/epkotsoftware/training#社内開発>
 
-### 書籍
+### 自己学習
 
-おすすめの書籍がありましたら、追記しますので講師までご連絡ください。
+ここまでのカリキュラムの復習をしたら  
+自己学習に進みましょう。
 
-- HTML・CSS
-  - `HTML&CSS全事典 改訂版 HTML Living Standard & CSS3/4対応`
-    - <https://www.amazon.co.jp/dp/4295008281>
-- DB
-  - `スッキリわかるSQL入門 第2版 ドリル222問付き! (スッキリわかる入門シリーズ)`
-    - <https://www.amazon.co.jp/dp/4295005096>
-    - わかりやすいと評判らしいです。
-    - dokoQL(DBはPostgreSQL)というのを使用しています（評判は良くない）。
-      - <https://dokoql.com/>
-  - `SQLアンチパターン 大型本 – 2013/1/26`
-    - <https://www.amazon.co.jp/dp/4873115892>
-    - [データベース編](#データベース編) の動画でも紹介されている書籍です。  
-      参考になる書籍になりますが古い書籍なので、情報が古いところもあったりします。  
-      この書籍のアンチパターンを使用するケースもあるので、状況に応じてどちらが良いか判断しましょう。
-- PHP
-  - **≪非推奨≫**`気づけばプロ並みPHP 改訂版--ゼロから作れる人になる!`
-    - <https://www.amazon.co.jp/dp/4865940650>
-    - 以前、研修で使用していた書籍です。
-    - 内容は初心者向けではあり、わかりやすい書籍です。  
-      しかし、現在では非推奨の機能を使用していたり、現場ではほぼ使うことのない`TeraPad`を使わせたりと  
-      古い情報が目立ち、学習後の知識のアップデートに時間がかかりそうなので研修外としています。  
-    - この書籍ではECサイトを作成しているので、Laravelで同じものを作ってみたりするのも良いかもしれません。
-  - `初心者からちゃんとしたプロになる PHP基礎入門〈PHP8対応〉`
-    - <https://www.amazon.co.jp/dp/4295201103>
-    - こちらは比較的内容も新しくVSCodeを使った学習となっています。
-    - 「変数」等のプログラミングの基礎を学んだあとに物を作っていくので入門書としては良さそうです。
-- JavaScript
-  - 確かな力が身につくJavaScript「超」入門 第2版
-    - <https://www.amazon.co.jp/dp/4815601577>
-- Linux
-  - `Ubuntuスタートアップバイブル`
-    - <https://www.amazon.co.jp/dp/4839964866>
-    - こちらは実際に読んだことはありませんが、評価が高そうなのでピックアップしました。
-    - 仮想環境にVirtualBoxを使用しています。
-    - Ubuntuデスクトップ（Windowsのような画面）の学習をするのに良さそうです。
-    - コマンドライン操作の基本と応用の学習も出来ます。
-    - 「Windows Subsystem for Linux(WSL)」について触れているので、Mac向けではないかもしれません。
-- Java
-  - `後悔しないためのSpring Boot 入門書：Spring 解体新書（第2版）: Spring Bootが丸分かり Spring解体新書`
-    - <https://www.amazon.co.jp/dp/4802092865>
-- テスト
-  - `SEC BOOKS：ソフトウェアテスト見積りガイドブック`
-    - <https://www.ipa.go.jp/sec/publish/tn08-003.html>
-    - こちらは販売が終了しており、PDF版が無料で見られるようです。
-    - 難しいですが、テストに必要な内容が盛り込まれています。  
-      70ページあたりからは、開発者も参考になる内容となっています。
-
-#### 書籍の購入
-
-読みたい書籍がある場合は、購入前に総務・マネージャーにお問い合わせください。  
-会社にない書籍については、会社負担で購入も可能です（会社負担での購入の場合も借用扱いになるので、返却すること）。
-
-### 動画自己学習
-
-カリキュラムとは別な動画を用意しました。
-
-- `プログラミングの基礎：基本 - LinkedInラーニング`
-  - <https://jp.linkedin.com/learning/programming-foundations-fundamentals-2>
-- `プログラミングの基礎：データベース - LinkedInラーニング`
-  - <https://jp.linkedin.com/learning/programming-foundations-databases-3>
-- `HTML5 基本講座 - LinkedInラーニング`
-  - <https://jp.linkedin.com/learning/html5-essential-training-2>
-- `CSS 基本講座 - LinkedInラーニング`
-  - <https://jp.linkedin.com/learning/css-essential-training-2>
-- `JavaScript 基本講座 - LinkedInラーニング`
-  - <https://jp.linkedin.com/learning/javascript-essential-training-4>
-- `GitHub 入門 - LinkedInラーニング`
-  - <https://jp.linkedin.com/learning/learning-github-2>
-
-### Docker自己学習
-
-現場でDockerについて深い知識が必要になるケースは稀ですが  
-様々な環境を構築出来るので興味がある方や、Dockerの使い方がよくわからない方は学習してみましょう。  
-現場ではDockerを使ってないなかったり、環境を0から作ることは  
-ほぼないため、利用出来れば十分です。
-
-- [Docker](./docker/index.md)
-
-### HTML・CSS
-
-- HTML&CSS入門 Webデザインをイチから学ぼう
-  - <https://saruwakakun.com/html-css/basic>
-
-### Bootstrap自己学習
-
-CSSフレームワークのBootstrapは日本語対応で、比較的学習しやすいのでおすすめです。  
-スターターテンプレートで、すぐに使用出来るようになります。  
-CBC研修でもレスポンシブデザインについてありますが、フレームワークを利用するのが一般的です。
-
-- Bootstrap
-  - <https://getbootstrap.jp/>
-  - スターターテンプレート
-    - <https://getbootstrap.jp/docs/5.0/getting-started/introduction/#スターターテンプレート>
-  - サンプル
-    - Dashboard・Checkout・Gridの学習をおすすめします。
-    - <https://getbootstrap.jp/docs/5.0/examples/>
-
-### コーディング規約
-
-現場に入ると、コーディング規約が設けられている事が多いです  
-一般的なコーディング規約のリンクをまとめました。  
-  
-現場ではベースになるコーディング規約 + α になることが多いかと思います。  
-現場が決まっていない場合は、PHPのコーディング規約を見て  
-わからないところが出てきたら調べてみましょう。
-  
-ベテランでも意味を理解していなかったり、違反する事が多いので  
-今は「こういうのがあるんだ」程度の理解で大丈夫です。
-
-- PHP
-  - PSR （Laravelが採用しているコーディング規約）
-    - PSR-1: Basic Coding Standard
-      - <https://www.php-fig.org/psr/psr-1/>
-    - PSR-4: Autoloader
-      - <https://www.php-fig.org/psr/psr-4/>
-    - PSR-12: Extended Coding Style
-      - <https://www.php-fig.org/psr/psr-12/>
-  - PSRは全て英語なので、日本語にしたい場合はブラウザの翻訳を使うか、翻訳しているサイトをご覧ください。
-    - 個人によるPSRの日本語訳
-      - <https://github.com/thatblue/fig-standards>
-- C#
-  - コーディングスタイル(Microsoft公式)
-    - 識別子名
-      - <https://docs.microsoft.com/ja-jp/dotnet/csharp/fundamentals/coding-style/identifier-names>
-    - C# のコーディング規則
-      - <https://docs.microsoft.com/ja-jp/dotnet/csharp/fundamentals/coding-style/coding-conventions>
-- Visual Basic(`VB.Net`)
-  - プログラム構造とコード規則(Microsoft公式)
-    - <https://docs.microsoft.com/ja-jp/dotnet/visual-basic/programming-guide/program-structure/program-structure-and-code-conventions>
-- Java
-  - Javaコーディング規約
-    - <https://future-architect.github.io/coding-standards/documents/forJava/Javaコーディング規約.html>
-- Swift
-  - Swift Style Guide(Google公式)
-    - <https://google.github.io/swift/>
-- JavaScript
-  - JavaScript guidelines - The MDN project | MDN
-    - <https://developer.mozilla.org/en-US/docs/MDN/Guidelines/Code_guidelines/JavaScript>
-  - Airbnb JavaScript Style Guide
-    - <https://github.com/airbnb/javascript>
-    - 日本語
-      - <https://github.com/mitsuruog/javascript-style-guide>
-  - JavaScript Standard Style
-    - <https://standardjs.com/>
-
-## 追加学習
-
-ここからは現場参画が決まっていたり、面談対策が出来ており  
-現場参画しても問題がない研修生向けの学習資料・リンクになります。  
-
-### 追加学習の前に
-
-追加学習の前に学習しておくことがないか  
-確認しておきましょう。  
-
-- 現場参画が決まっている（現場環境に合わせて学習）
-- 面談対策が出来ているか
-- カリキュラムの学習については復習済みか
-
-以下、実務でよく使うものをまとめました。  
-わからない場合は復習しましょう。
-
-- 設計
-  - UML
-  - 画面設計
-  - データベース設計(テーブル定義・ER図)
-  - 詳細設計
-- 開発
-  - HTML
-    - head
-      - title
-      - script
-      - link
-    - body
-      - header
-      - div
-      - table
-      - a
-      - form
-      - label
-      - input
-        - id
-        - name
-        - type (text, checkbox, radio, hidden, file, date, email, number, password等)
-        - value
-        - checked
-        - readonly
-        - disabled
-      - select
-      - textarea
-      - button
-  - CSS
-    - セレクタ全般
-    - 表示・非表示
-  - JavaScript
-    - 基礎(変数, if, ループ, 配列, 関数, DOM操作)
-    - WebAPI
-    - 非同期処理(async, await, Promise)
-  - PHP
-    - 基礎(変数, if, ループ, 配列, 関数, クラス)
-    - Laravel
-      - コントローラ
-      - HTTP Requests, HTTPレスポンス
-      - HTTPセッション
-      - バリデーション
-      - CSRF保護
-      - ルーティング
-      - ミドルウェア
-      - ビュー, Bladeテンプレート
-      - ペジネーション
-      - Eloquent
-      - UnitTest
-        - Feature
-        - Unit
-- テスト
-  - 単体テスト仕様書
-  - ブラックボックステスト
-  - ホワイトボックステスト
-  - PHPUnit
-- データベース
-  - データベース
-  - テーブル
-  - インデックス
-  - ユニーク
-  - トリガー
-  - SQL
-    - SELECT, INSERT, UPDATE, DELETE
-    - WHERE
-      - AND, OR, BETWEEN, LIKE, IN, NOT IN
-    - ON DUPLICATE KEY UPDATE (UPSERT)
-    - BEGIN(START TRANSACTION), COMMIT, ROLLBACK
-    - HAVING (WHEREとの違いを理解しておく)
-    - DISTINCT
-    - COUNT, MAX, MIN, SUM, AVG
-    - LIMIT
-    - UNION
-    - GROUP BY
-    - ORDER BY
-    - 副問合せ
-    - INNER JOIN, LEFT JOIN
-    - CREATE TABLE
-    - CREATE TRIGGER
-    - PRIMARY KEY
-    - INDEX
-    - UNIQUE
-    - AUTO_INCREMENT
-    - ALTER TABLE
-    - EXPLAIN
-- Linux
-  - cd
-  - ls
-  - 標準入力・出力
-  - vi
-  - grep
-  - tail
-  - シェル
-- Git
-  - ブランチ作成・切り替え
-  - コミット, マージ, フェッチ, プル, プッシュ
-  - コンフリクト解消
-- GitHub
-  - 基本的な使い方
-  - プルリクエスト
-- ファイル
-  - JSON, LOG, TXT, CSV, TSV, PNG, JPG, GIF, SVG
-- ウォーターフォール
-- コーディング規約
-
-### システム開発工程
-
-企画からテストまでを、徳田さんが動画にしているので参考にしてください。
-
-- 開発実況シリーズ
-  - <https://www.youtube.com/playlist?list=PLgx8xyH2m7OUtmSNw_RLOUDiBnZjhz0d8>
-
-### TypeScript
-
-案件が少ないかもしれませんが TypeScript をご紹介します。  
-
-TypeScriptは、大規模開発には向いていないJavaScriptに  
-静的型付けを出来るようにしたプログラミング言語です。  
-TypeScriptをコンパイルすると、JavaScriptが出来上がります。  
-
-Playground はTypeScriptをコンパイルし、実行できるサイトです。  
-
-- TypeScript超入門 覚えることは9個だけ！
-  - <https://youtu.be/FSTrSYwqhLg>
-- TypeScript
-  - <https://www.typescriptlang.org/>
-- `TypeScript: TS Playground`
-  - <https://www.typescriptlang.org/play>
-
-### JavaScriptフレームワーク
-
-2022年現在、日本では`Vue.js`, `React.js`の人気が高いです。  
-フロントエンドは入れ替わりが激しいため、廃れる事も想定して浅く学習しておきましょう。
-
-- Vue.js
-  - <https://jp.vuejs.org/index.html>
-- React
-  - <https://ja.reactjs.org/>
-- Vue.js 入門
-  - <https://jp.linkedin.com/learning/learning-vue-js-2>
-- React.js 入門
-  - <https://jp.linkedin.com/learning/learning-react-js>
-- 新・日本一わかりやすいReact入門【基礎編】
-  - <https://www.youtube.com/playlist?list=PLX8Rsrpnn3IWPoM7-1YPDksRRkamRY25k>
-- Angular 4 基本講座
-  - <https://jp.linkedin.com/learning/angular-4-essential-training>
-
-#### 新しいJavaScriptフレームワーク
-
-参考までに新しいフレームワークをご紹介します。  
-Vue.js、React.jsで採用されている仮想DOMを使用しないことにより  
-高速化を実現しています。
-
-- `Solid`
-  - <https://www.solidjs.com/>
-  - `2021/06/28 v1.0.0`
-    - <https://github.com/solidjs/solid/releases/tag/v1.0.0>
-  - チュートリアル
-    - <https://www.solidjs.com/tutorial/introduction_basics>
-- `Svelte`
-  - <https://svelte.jp/>
-  - `2016/11/30 v1.0.0`
-    - <https://github.com/sveltejs/svelte/releases/tag/v1.0.0>
-  - チュートリアル
-    - <https://svelte.jp/tutorial/basics>
-- `The State of JS 2021 - Front-end Frameworks`
-  - <https://2021.stateofjs.com/en-US/libraries/front-end-frameworks/>
-
-### CodeIgniter4
-
-PHPフレームワークのCodeIgniter4に関する資料です。  
-Laravelに非常に似ているため、参考までに。
-
-- [CodeIgniter4](./codeigniter4.md)
-
-### Java
-
-「Java」は古くからある言語で、大規模開発にも利用されており  
-オブジェクト指向言語の代表とも呼べる言語です。  
-PHPが動的型付け言語に対し、Javaは静的型付け言語のため  
-変数宣言時に型を明確にして宣言したり、引数の型も必須になります。  
-プログラミング学習においては、動的型付け言語はおすすめです。  
-
-IDEは、VSCodeはほとんど使われず、「eclipse」が多そうです。  
-
-- Java 入門
-  - <https://jp.linkedin.com/learning/learning-java?trk=learning-serp_learning-search-card_search-card&upsellOrderOrigin=default_guest_learning>
-
-### Python
-
-「Python」はライブラリが充実しており  
-Webやクライアントアプリ開発が可能です。  
-需要も上がってきており、将来性もある言語なので興味がある方は学習してください。  
-Python案件に参画している社員もいます。
-
-- Python
-  - <https://www.python.org/>
-- プログラミング言語 Python情報サイト
-  - <https://www.python.jp/>
-- DockerでPython実行環境を作ってみる
-  - <https://github.com/jhorikawa/Create-Docker-Container-for-Python-Environment-Handson>
-- `The State of the Octoverse | Top languages over the years`
-  - <https://octoverse.github.com/#top-languages-over-the-years>
-- 【動画】Python入門
-  - <https://www.youtube.com/playlist?list=PLiaZfx-34L5oK_8hLi_jbmFfZgZoGCqnr>
-
-### Tailwind CSS
-
-Laravelのスターターテンプレートにも組み込まれている、CSSフレームワークです。  
-ペジネーションのデフォルトも Tailwind CSS に互換性があるHTMLが生成されます。  
-書き方は、Bootstrapに似ていますので、必要になったら学習してください。
-
-- `Tailwind CSS`
-  - <https://tailwindcss.com/>
-- `Laravel 9.x Database：ペジネーション`
-  - <https://readouble.com/laravel/9.x/ja/pagination.html>
-
-### 資格
-
-エンジニアで取得が必須となる資格はありませんが  
-「基本情報技術者試験」の学習は、必要な基礎知識が身につきます。
-
-- `試験制度: 試験区分一覧`
-  - <https://www.jitec.ipa.go.jp/1_11seido/seido_gaiyo.html>
-- 基本情報技術者についてもっと詳しく知る！
-  - <https://www.foresight.jp/fe/column/>
-
-### 社外研修
-
-- mixi
-  - データベース研修【ミクシィ22新卒技術研修】
-    - <https://youtu.be/dseGQ2MZF1U>
-  - 設計・テスト研修講義【21新卒技術研修】
-    - <https://youtu.be/zfAo0DyIBJ0>
-  - Git研修講義【21新卒技術研修】
-    - <https://youtu.be/aZ90usArA6g>
-  - コンテナ研修【ミクシィ22新卒技術研修】
-    - <https://youtu.be/qYp8Vvevcok>
+- [自己学習](./../self-learning/index.md)
