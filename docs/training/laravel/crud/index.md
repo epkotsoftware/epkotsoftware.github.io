@@ -22,7 +22,7 @@ Dockerで簡単にLaravel9の開発環境が作れます。
 （ダウンロードしてGit管理外で、学習用の環境を作ってもOK）
 
 - `Laravel9 テンプレートリポジトリ`
-  - <https://github.com/epkotsoftware/template-php8.1-jp>
+  - <https://github.com/epkotsoftware/template-laravel9-jp>
 
 ```txt
 ■注意点
@@ -70,6 +70,7 @@ database/migrations/YYYY_MM_DD_hhmmss_create_jobs_table.php
     {
         $tableName = 'jobs';
         Schema::create($tableName, function (Blueprint $table) {
+            //            $table->bigIncrements('id')->comment('ID'); // id
             $table->id()->comment('ID'); // id
             $table->string('name')->comment('名称'); // name
             $table->softDeletes()->comment('削除日時'); // deleted_at
