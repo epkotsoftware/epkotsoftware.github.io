@@ -431,6 +431,8 @@ trainingリポジトリの [users/{★ユーザー名}/03_advanced/README.md](ht
 
 ## Linux編
 
+LPIC等のLinux資格をお持ちの方は、こちらの研修は免除となります。  
+
 Linuxコマンドについて学んでいきましょう。  
 フロントエンドエンジニア編で作成した環境の[WEB Server](https://github.com/epkotsoftware/training/blob/template/users/_template/03_advanced/README.md#web-server)へ入ると操作が出来ます（OSはDebian）。  
 [04_linux](https://github.com/epkotsoftware/training/tree/template/users/_template/04_linux) にUbuntu環境も用意しました（どちらもコマンドに大きい違いはありません）。
@@ -585,41 +587,23 @@ Linux技術者認定試験(LPIC)の一部にチャレンジしてみましょう
 
 ### 画面設計
 
-以下、参考程度にご覧ください。  
-特にiOSアプリはデザインで審査が通らなくなるケースもあるので  
-画面設計時は注意が必要です（実際に手戻りが発生した事がありました）。
+画面に使用する部品は覚えておきましょう。
 
 - 画面部品
   - [画面部品](./design/forms/forms.html)
-- 画面設計書のイメージ
-  - 発注者ビューガイドラインの公開
-    - <https://www.ipa.go.jp/sec/softwareengineering/reports/20080710_3.html>
-- iOS
-  - ユーザーインターフェイスのデザインのヒント
-    - <https://developer.apple.com/jp/design/tips/>
-  - Human Interface Guidelines
-    - <https://developer.apple.com/design/human-interface-guidelines/>
-- Android
-  - Android 向けのデザイン
-    - <https://developer.android.com/design?hl=ja>
-- マテリアルデザイン
-  - <https://material.io/design>
-  - <https://material.io/develop>
-- WEB
-  - ボタンやアラートの色は「Bootstrap」で学ぶと良いです。
-    - Laravelの標準が現在では「Tailwind CSS」となっているので情報を載せておきます。
-  - Bootstrap（ブートストラップ）
+
+CSSフレームワークは何かしら使われる現場が多いので  
+「Bootstrap」というフレームワークを紹介します。  
+スターターテンプレートを使うとすぐに使い始める事ができます。  
+
+- Bootstrap（ブートストラップ）
+  - スターターテンプレート
+    - <https://getbootstrap.jp/docs/5.0/getting-started/introduction/#スターターテンプレート>
+  - コンポーネント
     - Alerts (アラート) <https://getbootstrap.jp/docs/5.0/components/alerts/>
     - Buttons (ボタン) <https://getbootstrap.jp/docs/5.0/components/buttons/>
     - Forms (フォーム) <https://getbootstrap.jp/docs/5.0/forms/overview/>
-    - サンプル <https://getbootstrap.jp/docs/5.0/examples/>
-  - Tailwind CSS（テールウィンドCSS）
-    - Colors <https://tailwindcss.com/docs/customizing-colors>
-    - Alerts <https://v1.tailwindcss.com/components/alerts>
-    - Buttons <https://v1.tailwindcss.com/components/buttons>
-    - Forms <https://v1.tailwindcss.com/components/forms>
-    - Laravel で使える Dashboard template
-      - <https://github.com/tailwindcomponents/dashboard>
+  - サンプル <https://getbootstrap.jp/docs/5.0/examples/>
 
 ### 設計例
 
@@ -644,19 +628,15 @@ PHPUnit・Laravelに関しては、現場で採用されることもあります
     - `10:51` 【開発実況シリーズ】Web日報登録システムを作る #17 検証フェーズ編【プログラミング】
 - システム開発におけるテストとは？基本情報技術者試験の重要用語解説！
   - <https://www.foresight.jp/fe/column/conducting-test/>
-- PHPUnit
-  - <https://phpunit.readthedocs.io/ja/latest/>
-  - テストダブル
-    - <https://phpunit.readthedocs.io/ja/latest/test-doubles.html>
-- Laravel
-  - Laravel テスト
-    - <https://readouble.com/laravel/8.x/ja/>
-    - Laravel データベーステスト
-      - <https://readouble.com/laravel/8.x/ja/database-testing.html>
-    - Laravel モック
-      - <https://readouble.com/laravel/8.x/ja/mocking.html>
-  - Mockery
-    - <https://readouble.com/mockery/1.0/ja/>
+
+動画内でJavaの場合は「JUnit」を使っていますが  
+PHPでは「PHPUnit」を使用します。  
+
+以下の資料を流し読みして、イメージだけしておきましょう。  
+実践についてはカリキュラム終了後の自己学習でお願いします。  
+
+- 8時間耐久PHPUnitの教室
+  - <https://www.slideshare.net/yandod/8phpunit>
 
 ブラックボックステスト・ホワイトボックステストについては理解を深めておきましょう。
 
@@ -697,27 +677,6 @@ XML・CSV・JSON・画像(JPG・PNG・GIF・WEBP・SVG) について学習しま
     - `4:56` 公開鍵認証とは？【分かりやすい解説シリーズ #24】【プログラミング】
 - 基本情報技術者試験で問われる情報セキュリティの基本を解説！
   - <https://www.foresight.jp/fe/column/information-security/>
-- PHP
-  - PHPマニュアル 安全なパスワードハッシュ
-    - <https://www.php.net/manual/ja/faq.passwords.php>
-  - PHPマニュアル password_hash
-    - <https://www.php.net/manual/ja/function.password-hash.php>
-  - PHPマニュアル openssl_encrypt
-    - <https://www.php.net/manual/ja/function.openssl-encrypt.php>
-  - 参考コード
-    - [Illuminate\Hashing\BcryptHasher::make](https://github.com/illuminate/hashing/blob/master/BcryptHasher.php)
-    - [Illuminate\Encryption\Encrypter::encrypt](https://github.com/illuminate/encryption/blob/master/Encrypter.php)
-- Laravel
-  - Laravel 基礎、安全、データベース
-    - <https://readouble.com/laravel/8.x/ja/>
-    - Laravel ハッシュ
-      - <https://readouble.com/laravel/8.x/ja/hashing.html>
-    - Laravel 暗号化
-      - <https://readouble.com/laravel/8.x/ja/encryption.html>
-    - Laravel CSRF保護
-      - <https://readouble.com/laravel/8.x/ja/csrf.html>
-    - Laravel データベース：クエリビルダ
-      - <https://readouble.com/laravel/8.x/ja/queries.html>
 
 ## バックエンド編
 

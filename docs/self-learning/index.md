@@ -12,9 +12,12 @@
 | 6 | [Docker](#docker) |
 | 7 | [HTML](#html) |
 | 8 | [Bootstrap](#bootstrap) |
-| 9 | [書籍](#書籍) |
-| 10 | [その他](#その他) |
-| 11 | [追加学習](#追加学習) |
+| 9 | [画面設計](#画面設計) |
+| 10 | [UnitTest](#unittest) |
+| 11 | [セキュリティ](#セキュリティ) |
+| 12 | [書籍](#書籍) |
+| 13 | [その他](#その他) |
+| 14 | [追加学習](#追加学習) |
 
 ## はじめに
 
@@ -99,6 +102,115 @@ CBC研修でもレスポンシブデザインについてありますが、フ�
   - サンプル
     - Dashboard・Checkout・Gridの学習をおすすめします。
     - <https://getbootstrap.jp/docs/5.0/examples/>
+
+## 画面設計
+
+こちらは以前、設計編に含まれていた資料です。  
+
+以下、参考程度にご覧ください。  
+特にiOSアプリはデザインで審査が通らなくなるケースもあるので  
+画面設計時は注意が必要です（実際に手戻りが発生した事がありました）。
+
+- 画面部品
+  - [画面部品](./../training/design/forms/forms.html)
+- 画面設計書のイメージ
+  - 発注者ビューガイドラインの公開
+    - <https://www.ipa.go.jp/sec/softwareengineering/reports/20080710_3.html>
+- iOS
+  - ユーザーインターフェイスのデザインのヒント
+    - <https://developer.apple.com/jp/design/tips/>
+  - Human Interface Guidelines
+    - <https://developer.apple.com/design/human-interface-guidelines/>
+- Android
+  - Android 向けのデザイン
+    - <https://developer.android.com/design?hl=ja>
+- マテリアルデザイン
+  - <https://material.io/design>
+  - <https://material.io/develop>
+- WEB
+  - ボタンやアラートの色は「Bootstrap」で学ぶと良いです。
+    - Laravelの標準が現在では「Tailwind CSS」となっているので情報を載せておきます。
+  - Bootstrap（ブートストラップ）
+    - Alerts (アラート) <https://getbootstrap.jp/docs/5.0/components/alerts/>
+    - Buttons (ボタン) <https://getbootstrap.jp/docs/5.0/components/buttons/>
+    - Forms (フォーム) <https://getbootstrap.jp/docs/5.0/forms/overview/>
+    - サンプル <https://getbootstrap.jp/docs/5.0/examples/>
+  - Tailwind CSS（テールウィンドCSS）
+    - Colors <https://tailwindcss.com/docs/customizing-colors>
+    - Alerts <https://v1.tailwindcss.com/components/alerts>
+    - Buttons <https://v1.tailwindcss.com/components/buttons>
+    - Forms <https://v1.tailwindcss.com/components/forms>
+    - Laravel で使える Dashboard template
+      - <https://github.com/tailwindcomponents/dashboard>
+
+## UnitTest
+
+PHPUnitについて深く理解しておきましょう。
+
+PHPUnitはLaravelには標準で入っており  
+Laravelを使わない場合でも、Composerでインストールが可能です。  
+
+- PHPUnit
+  - <https://phpunit.readthedocs.io/ja/latest/>
+  - PHPUnit のインストール Composer
+    - <https://phpunit.readthedocs.io/ja/latest/installation.html#composer>
+  - データプロバイダ
+    - <https://phpunit.readthedocs.io/ja/latest/writing-tests-for-phpunit.html#writing-tests-for-phpunit-data-providers>
+  - テストダブル
+    - <https://phpunit.readthedocs.io/ja/latest/test-doubles.html>
+  - 8時間耐久PHPUnitの教室
+    - <https://www.slideshare.net/yandod/8phpunit>
+- Laravel
+  - Laravel テスト
+    - <https://readouble.com/laravel/9.x/ja/>
+    - Laravel データベーステスト
+      - <https://readouble.com/laravel/9.x/ja/database-testing.html>
+    - Laravel モック
+      - <https://readouble.com/laravel/9.x/ja/mocking.html>
+  - Mockery
+    - <https://readouble.com/mockery/1.0/ja/>
+
+## セキュリティ
+
+セキュリティ編で以前使われていた情報です。  
+
+セキュリティについて学習していきます。  
+いずれも開発で求められる知識になります。  
+
+参考コードとして載せている処理については、現場では既に用意されていたり  
+フレームワークを使用していることが多いので、参考程度に見ておきましょう。
+
+- 動画
+  - <https://youtube.com/playlist?list=PLCX3wwS3Gg4xfAHP_c5aGDzfO7r22u-ed>
+    - `6:21` バリデーションとは何なのか、現役エンジニアが解説【超入門編】
+    - `3:34` 【初心者向け】ハッシュ化と暗号化の違いとは？不可逆変換とは？
+    - `7:27` CSRFとは？ サイバー攻撃＆対策【分かりやすい解説シリーズ #58】【プログラミング】
+    - `8:03` SQLインジェクション【サイバー攻撃＆対策】【分かりやすい解説シリーズ #60】【プログラミング】
+    - `8:09` SSHとは？【分かりやすい解説シリーズ #65】【プログラミング】
+    - `4:56` 公開鍵認証とは？【分かりやすい解説シリーズ #24】【プログラミング】
+- 基本情報技術者試験で問われる情報セキュリティの基本を解説！
+  - <https://www.foresight.jp/fe/column/information-security/>
+- PHP
+  - PHPマニュアル 安全なパスワードハッシュ
+    - <https://www.php.net/manual/ja/faq.passwords.php>
+  - PHPマニュアル password_hash
+    - <https://www.php.net/manual/ja/function.password-hash.php>
+  - PHPマニュアル openssl_encrypt
+    - <https://www.php.net/manual/ja/function.openssl-encrypt.php>
+  - 参考コード
+    - [Illuminate\Hashing\BcryptHasher::make](https://github.com/illuminate/hashing/blob/master/BcryptHasher.php)
+    - [Illuminate\Encryption\Encrypter::encrypt](https://github.com/illuminate/encryption/blob/master/Encrypter.php)
+- Laravel
+  - Laravel 基礎、安全、データベース
+    - <https://readouble.com/laravel/8.x/ja/>
+    - Laravel ハッシュ
+      - <https://readouble.com/laravel/8.x/ja/hashing.html>
+    - Laravel 暗号化
+      - <https://readouble.com/laravel/8.x/ja/encryption.html>
+    - Laravel CSRF保護
+      - <https://readouble.com/laravel/8.x/ja/csrf.html>
+    - Laravel データベース：クエリビルダ
+      - <https://readouble.com/laravel/8.x/ja/queries.html>
 
 ## 書籍
 
