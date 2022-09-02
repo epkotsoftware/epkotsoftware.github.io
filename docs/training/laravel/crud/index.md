@@ -70,7 +70,7 @@ database/migrations/YYYY_MM_DD_hhmmss_create_jobs_table.php
     {
         $tableName = 'jobs';
         Schema::create($tableName, function (Blueprint $table) {
-            //            $table->bigIncrements('id')->comment('ID'); // id
+            // $table->id() は $table->bigIncrements('id') でも同じ
             $table->id()->comment('ID'); // id
             $table->string('name')->comment('名称'); // name
             $table->softDeletes()->comment('削除日時'); // deleted_at
@@ -231,12 +231,12 @@ routes/web.php
 
 ```php
 // admin
-Route::prefix('admin')->as('admin')->group(function () {
+Route::prefix('admin')->name('admin')->group(function () {
     // admin/
     Route::view('', 'admin.index')->name('.index');
     // admin/jobs    admin.jobs
     // App\Http\Controllers\JobController
-    Route::prefix('jobs')->as('.jobs')->controller(JobController::class)->group(function () {
+    Route::prefix('jobs')->name('.jobs')->controller(JobController::class)->group(function () {
         Route::get('', 'index')->name('.index');
         Route::post('', 'store')->name('.store');
         Route::get('create', 'create')->name('.create');
