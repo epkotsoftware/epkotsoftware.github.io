@@ -1,0 +1,206 @@
+# 株式会社エプコットソフトウェア ～ Laravel CRUD CSVダウンロード
+
+[Laravel CRUD](./../index.md) で作成したアプリの職業一覧画面に  
+職業一覧をCSVダウンロード出来る機能を追加してみましょう。
+
+## 目次
+
+| No. |  |
+| :---: | --- |
+| 1 | [Controllers](#controllers) |
+| 2 | [Routes](#routes) |
+| 3 | [Views](#views) |
+| 4 | [動作確認](#動作確認) |
+
+## Controllers
+
+`JobController`にCSVのストリームダウンロードを行う「`csv`」メソッドを追加します。  
+また、他の機能でも使い回しが出来るように「`streamDownloadCsv`」メソッドにダウンロード処理  
+「`getJobCsvRecords`」メソッドでレコード作成処理を切り出しています。  
+こうすることで、TSVダウンロード等の機能拡張が容易になります（区切り文字をTABに変えるだけ）。
+
+---
+
+```txt
+app/Http/Controllers/JobController.php
+```
+
+```php
+    public function csv()
+    {
+        // CSVダウンロード
+        //   CSVレコード配列取得
+        $csvRecords = self::getJobCsvRecords();
+
+        //   CSVストリームダウンロード
+        return self::streamDownloadCsv('jobs.csv', $csvRecords);
+    }
+
+    private static function getJobCsvRecords(): array
+    {
+        // id 降順で全レコード取得
+        $jobs = Job::orderByDesc('id')->get();
+
+        $csvRecords = [
+            ['ID', 'NAME'], // ヘッダー
+        ];
+        foreach ($jobs as $job) {
+            $csvRecords[] = [$job->id, $job->name]; // レコード
+        }
+        return $csvRecords;
+    }
+
+    private static function streamDownloadCsv(
+        string $name,
+        iterable $fieldsList,
+        string $separator = ',',
+        string $enclosure = '"',
+        string $escape = "\\",
+        string $eol = "\r\n"
+    ) {
+        $headers = ['Content-Type' => 'text/csv'];
+        return response()->streamDownload(function () use ($fieldsList, $separator, $enclosure, $escape, $eol) {
+            $stream = fopen('php://output', 'w');
+            foreach ($fieldsList as $fields) {
+                fputcsv($stream, $fields, $separator, $enclosure, $escape, $eol);
+            }
+            fclose($stream);
+        }, $name, $headers);
+    }
+```
+
+上記の例では「`getJobCsvRecords`」メソッドで、レコードを全件取得してきているため  
+テーブルに格納しているレコード数が多くなってくるとメモリ不足になることがあります。  
+
+それを解決する方法として、Laravelの「`lazyById`」等のメソッドや  
+PHPのジェネレーター(`Generator`)を使って対応することが出来ます。  
+下記のコードは上記の例と機能的には違いがありません。  
+
+```php
+    private static function getJobCsvRecords(): Generator
+    {
+        // id 降順で全レコード取得(1000件ずつ)
+        $jobs = Job::lazyByIdDesc(1000);
+
+        yield ['ID', 'NAME']; // ヘッダー
+        foreach ($jobs as $job) {
+            yield [$job->id, $job->name]; // レコード
+        }
+    }∑
+```
+
+「`yield`」キーワードを使うことで自動的に戻り値が`Generator`になり  
+配列と同様に`foreach`でループさせる事が出来、以下の実行結果のような順番で処理が実行されます。  
+配列にデータを格納する必要がなくなるので、メモリ効率が良くなります。
+
+```php
+<?php
+// Generatorテスト
+function getWords(): Generator
+{
+    echo 'A' . "\n";
+    yield 'a';
+    echo 'B' . "\n";
+    yield 'b';
+    echo 'C' . "\n";
+    yield 'c';
+}
+
+$words = getWords();
+echo "ループ開始\n";
+foreach ($words as $w) {
+    echo "Word: {$w}\n";
+}
+// ループ開始
+// A
+// Word: a
+// B
+// Word: b
+// C
+// Word: c
+```
+
+「`lazyByIdDesc`」メソッドもGeneratorの動作と同様に  
+ループする時に、必要になったら1000件ずつレコードを取ってきます。  
+クエリは、以下のようなイメージです(1万レコードあった場合)。
+
+```sql
+-- 1回目
+select * from `jobs` order by `id` desc limit 1000;
+-- 2回目 (前回の最終レコードのid=9001)
+select * from `jobs` where `id` < 9001 order by `id` desc limit 1000;
+-- 3回目 (前回の最終レコードのid=8001)
+select * from `jobs` where `id` < 8001 order by `id` desc limit 1000;
+```
+
+この1000件ずつ取ってくるテクニックはLaravel以外でも使える内容なので  
+覚えておきましょう。
+
+- 参考
+  - HTTPレスポンス  ストリームダウンロード
+    - <https://readouble.com/laravel/9.x/ja/responses.html#streamed-downloads>
+  - データベース：クエリビルダ  ルーズなストリーミング結果
+    - <https://readouble.com/laravel/9.x/ja/queries.html#streaming-results-lazily>
+  - PHP
+    - サポートするプロトコル/ラッパー (`php://`)
+      - <https://www.php.net/manual/ja/wrappers.php.php>
+    - fopen
+      - <https://www.php.net/manual/ja/function.fopen.php>
+    - fputcsv
+      - <https://www.php.net/manual/ja/function.fputcsv.php>
+    - fclose
+      - <https://www.php.net/manual/ja/function.fclose.php>
+    - ジェネレータ
+      - <https://www.php.net/manual/ja/language.generators.php>
+  - Comma-Separated Values
+    - <https://ja.wikipedia.org/wiki/Comma-Separated_Values>
+
+## Routes
+
+JobControllerのグループ内に csv のルートを追加しましょう。
+
+---
+
+```txt
+routes/web.php
+```
+
+```php
+Route::post('csv', 'csv')->name('.csv');
+```
+
+## Views
+
+職業一覧画面の任意の場所にCSVボタンを追加しましょう。
+
+---
+
+```txt
+resources/views/admin/jobs/index.blade.php
+```
+
+```html
+<form action="{{ route('admin.jobs.csv') }}" method="POST">
+  @csrf
+  <button type="submit" class="btn btn-primary">CSV</button>
+</form>
+```
+
+## 動作確認
+
+ここまででCSVダウンロードが可能になっているはずなので
+一覧画面のCSVボタンでダウンロードしてみましょう。
+
+以下のようなファイルがダウンロードされます。
+
+```csv
+ID,NAME
+100,JOB_0100
+99,JOB_0099
+98,JOB_0098
+97,JOB_0097
+96,JOB_0096
+  ・
+  ・
+  ・
+```
