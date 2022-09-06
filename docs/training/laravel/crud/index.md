@@ -61,6 +61,8 @@ php artisan make:model Job --all
 以下のような生成日時が入ったmigrationファイルが出来ているので`up`メソッドを編集します。  
 DB仕様通りに定義します。  
 
+---
+
 ```txt
 database/migrations/YYYY_MM_DD_hhmmss_create_jobs_table.php
 ```
@@ -99,6 +101,8 @@ php artisan migrate
 
 テスト用のテーブルレコードを生成する処理を定義します。  
 
+---
+
 ```txt
 database/factories/JobFactory.php
 ```
@@ -128,6 +132,8 @@ class JobFactory extends Factory
 Seederクラスを使って初期レコードやテスト用のレコードを追加します。  
 開発環境の場合のみ、JobFactoryクラスで生成したレコード100件を追加する処理を記述します。
 
+---
+
 ```txt
 database/seeders/JobSeeder.php
 ```
@@ -153,6 +159,8 @@ database/seeders/JobSeeder.php
 
 DatabaseSeederクラスのcallメソッドを使用して  
 JobSeederクラスを指定します。
+
+---
 
 ```txt
 database/seeders/DatabaseSeeder.php
@@ -182,6 +190,8 @@ php artisan db:seed
 
 Jobモデルクラスの設定を行います。  
 詳細については公式を参照してください。
+
+---
 
 ```txt
 app/Models/Job.php
@@ -224,6 +234,8 @@ HasFactoryをuseし、factoryメソッドを追加していて
 
 ルーティングを仕様通りに設定します。  
 `{id}`はあえて`{job}`としています。  
+
+---
 
 ```txt
 routes/web.php
@@ -280,12 +292,16 @@ root@training-laravel-web:/var/www/app#
 Viewに関しては割愛します。  
 以下からダウンロードして組み込んでください。  
 
+---
+
 ```txt
 public/css/dashboard.css
 ```
 
 - ダウンロード
   - [css.zip](./files/css.zip)
+
+---
 
 ```txt
 resources/views
@@ -329,6 +345,8 @@ resources/views
 CSSフレームワークにBootstrapを採用していて、ぺジネーションを使用する場合  
 以下の設定が必要になります。  
 
+---
+
 ```txt
 app/Providers/AppServiceProvider.php
 ```
@@ -353,6 +371,8 @@ app/Providers/AppServiceProvider.php
 ## Controllers
 
 confirmメソッドは元々入っていないので追加してください。
+
+---
 
 ```txt
 app/Http/Controllers/JobController.php
@@ -452,6 +472,8 @@ class JobController extends Controller
 
 ## Requests
 
+---
+
 ```txt
 app/Http/Requests/StoreJobRequest.php
 ```
@@ -486,6 +508,8 @@ class StoreJobRequest extends FormRequest
 }
 ```
 
+---
+
 ```txt
 app/Http/Requests/UpdateJobRequest.php
 ```
@@ -518,25 +542,39 @@ class UpdateJobRequest extends FormRequest
         ];
     }
 
+    /**
+     * 検証エラーでリダイレクトする URL を取得します。 (Get the URL to redirect to on a validation error.)
+     * @see https://github.com/laravel/framework/blob/v9.27.0/src/Illuminate/Foundation/Http/FormRequest.php#L143-L161
+     */
     protected function getRedirectUrl()
     {
         if (request()->routeIs('*.update')) {
             // 確認画面→更新バリデーションエラーの場合、編集画面に遷移。
             //   親クラスのgetRedirectUrlでは、パラメータつきURL生成に対応していないため、以下の方法をとる。
             $url = $this->redirector->getUrlGenerator();
+            // 編集画面のURLを取得
             return $url->route('admin.jobs.edit', ['job' => request()->route()->parameter('job')]);
         }
+        // 親クラス(Illuminate\Foundation\Http\FormRequest) の getRedirectUrl を実行
         return parent::getRedirectUrl();
     }
 }
 ```
 
+`getRedirectUrl`メソッドはバリデーションエラーの時に呼ばれるメソッドで  
+リダイレクト先を動的に変更するため、メソッドをオーバーライド(上書き)しています。  
+処理を細かく知る必要はなく、「リダイレクト先を変更できる」程度の理解で問題ありません。
+
 - 参考
   - バリデーション
     - <https://readouble.com/laravel/9.x/ja/validation.html>
+  - HTTPリクエスト
+    - <https://readouble.com/laravel/9.x/ja/requests.html>
   - GitHub(Laravel)
     - `Illuminate\Foundation\Http\FormRequest`
       - <https://github.com/laravel/framework/blob/9.x/src/Illuminate/Foundation/Http/FormRequest.php>
+    - `Illuminate\Routing\UrlGenerator`
+      - <https://github.com/laravel/framework/blob/9.x/src/Illuminate/Routing/UrlGenerator.php>
   - PHP
     - スコープ定義演算子
       - <https://www.php.net/manual/ja/language.oop5.paamayim-nekudotayim.php>
