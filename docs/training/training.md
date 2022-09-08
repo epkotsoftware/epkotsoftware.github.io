@@ -181,21 +181,16 @@ CSSの「`grid-template`」が、ほぼ全てのブラウザでサポートさ�
 
 ### コーダー編課題GitHubアップロード
 
-VSCodeでのアップ方法は以下を参考にしてください。
-
-- Gitクライアントはもういらない！ VSCodeで、Gitを使いこなそう (3:09～)
-  - <https://youtu.be/vMZ0C06soxA?t=189s>
-
 #### アップ先
 
 trainingリポジトリの [users/{★ユーザー名}/01_beginner/README.md](https://github.com/epkotsoftware/training/blob/template/users/_template/01_beginner/README.md) にアップ先が記載されています。  
 
-- アップ方法 (OR)
+- アップ方法
   - VSCodeで行う（コマンドと比べると簡単）。
   - `Git Bash` でコマンドで行う。
 - 禁止事項
   - 自分のユーザーディレクトリ以外のコミットを禁止（`users/_template` 内のファイル等）
-  - GitHub上でのアップロードは禁止します（Gitの学習を兼ねているため）
+  - GitHub上でのアップロードは禁止します（GitHubは現場で使われていない所もあり、Git学習も兼ねているため）
 
 Git・GitHubについては、「[バージョン管理システム編](#バージョン管理システム編)」で深く学習します。
 
