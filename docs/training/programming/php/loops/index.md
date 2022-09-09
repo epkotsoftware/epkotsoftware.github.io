@@ -6,8 +6,10 @@
 | :---: | --- |
 | 1 | [種類](#種類) |
 | 2 | [foreach](#foreach) |
-| 3 | [foreachの変数名のコツ](#foreachの変数名のコツ) |
-| 4 | [PHPマニュアル](#phpマニュアル) |
+| 3 | [多重ループ](#多重ループ) |
+| 4 | [初回ループ時に違う処理を行う](#初回ループ時に違う処理を行う) |
+| 5 | [foreachの変数名のコツ](#foreachの変数名のコツ) |
+| 6 | [PHPマニュアル](#phpマニュアル) |
 
 ## 種類
 
@@ -125,6 +127,127 @@ var_dump($result);
   - <https://www.php.net/manual/ja/control-structures.foreach.php>
 - `PHPマニュアル - Iterable`
   - <https://www.php.net/manual/ja/language.types.iterable.php>
+
+## 多重ループ
+
+ループ内にループを書く事が出来ます。  
+主に多次元配列等の処理等に使用します。  
+
+```php
+<?php
+
+$users = [
+    [
+        'id' => 1,
+        'name' => 'USER_NAME01',
+        'tweets' => [
+            [
+                'id' => '1001',
+                'text' => 'TWEET_1001',
+            ],
+            [
+                'id' => '1002',
+                'text' => 'TWEET_1002',
+            ],
+        ],
+    ],
+    [
+        'id' => 2,
+        'name' => 'USER_NAME02',
+        'tweets' => [
+            [
+                'id' => '1003',
+                'text' => 'TWEET_1003',
+            ],
+            [
+                'id' => '1004',
+                'text' => 'TWEET_1004',
+            ],
+        ],
+    ],
+];
+
+$result = '';
+foreach ($users as $user) {
+    $userId = $user['id'];
+    foreach ($user['tweets'] as $tweet) {
+        $tweetId = $tweet['id'];
+        $tweetText = $tweet['text'];
+        $result .= "UserID={$userId}  TweetID={$tweetId}  TweetText={$tweetText}\n";
+    }
+}
+var_dump($result);
+// string(180) "UserID=1  TweetID=1001  TweetText=TWEET_1001
+// UserID=1  TweetID=1002  TweetText=TWEET_1002
+// UserID=2  TweetID=1003  TweetText=TWEET_1003
+// UserID=2  TweetID=1004  TweetText=TWEET_1004
+// "
+```
+
+## 初回ループ時に違う処理を行う
+
+プログラミングでループを使う時に  
+初回ループの時だけ違う処理を行いたいということがあります。  
+
+他言語でも通用する方法としては bool 変数を使う方法です。  
+
+```php
+$first = true;
+foreach ($array as $value) {
+    if ($first) {
+        $first = false; // 以降のループで if 文に入らないようにするため
+        // 初回の処理
+    } else {
+        // 初回以外の処理
+    }
+}
+```
+
+上記の実装例です。
+
+```php
+<?php
+
+$names = ['NAME01', 'NAME02', 'NAME03'];
+
+$result = '';
+$first = true;
+foreach ($names as $i => $name) {
+    if ($first) {
+        $first = false; // 以降のループで if 文に入らないようにするため
+        // 初回の処理
+        $result .= "初回: {$name}";
+    } else {
+        // 初回以外の処理
+        $result .= "\ni={$i}: {$name}";
+    }
+}
+var_dump($result);
+// string(38) "初回: NAME01
+// i=1: NAME02
+// i=2: NAME03"
+```
+
+---
+
+【PHP限定】foreachのキーを使用する方法です。  
+「array_key_last」という関数もあるので、最後の要素の判定も出来ます。
+
+```php
+$firstKey = array_key_first($array);
+foreach ($array as $key => $value) {
+    if ($key === $firstKey) {
+        // 初回の処理
+    } else {
+        // 2回目以降の処理
+    }
+}
+```
+
+- array_key_first
+  - <https://www.php.net/manual/ja/function.array-key-first.php>
+- array_key_last
+  - <https://www.php.net/manual/ja/function.array-key-last.php>
 
 ## foreachの変数名のコツ
 
