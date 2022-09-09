@@ -111,7 +111,7 @@ Gitを扱うための拡張機能をご紹介します。
     - 以下をチェック
       - 「`Require a pull request before merging`」
         - ※ サブ項目のチェックは外す
-      - 「`Include administrators`」
+      - ~~「`Include administrators`」~~  2022/09現在項目がなくなっており、代わりの項目が見つからないためそのまま進めてください。
   - 「`Create`」ボタンをクリック
 
 ※ 今回は、学習のための保護設定にしてあります。  
