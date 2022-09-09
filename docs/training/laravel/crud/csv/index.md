@@ -7,10 +7,28 @@
 
 | No. |  |
 | :---: | --- |
-| 1 | [Controllers](#controllers) |
-| 2 | [Routes](#routes) |
-| 3 | [Views](#views) |
-| 4 | [動作確認](#動作確認) |
+| 1 | [仕様](#仕様) |
+| 2 | [Controllers](#controllers) |
+| 3 | [Routes](#routes) |
+| 4 | [Views](#views) |
+| 5 | [動作確認](#動作確認) |
+| 6 | [課題](#課題) |
+
+## 仕様
+
+「職業 一覧画面」にCSVボタンを追加し、一覧のCSVダウンロード機能を追加します。  
+一覧画面ではページングで数件ずつ表示されていますが、本機能では全件対象となります。  
+
+- 仕様
+  - カラム
+    - ID - jobs.id
+    - 名称 - jobs.name
+  - ヘッダー行あり
+  - ファイル名は「`jobs.csv`」
+
+| URI | HTTP<br>メソッド | 機能・画面コード | 種別 | 機能・画面名 | 備考 |
+| --- | --- | --- | --- | --- | --- |
+| admin/jobs/csv | POST   | admin.jobs.csv   | 機能 | 職業 CSVダウンロード |  |
 
 ## Controllers
 
@@ -42,7 +60,7 @@ app/Http/Controllers/JobController.php
         $jobs = Job::orderByDesc('id')->get();
 
         $csvRecords = [
-            ['ID', 'NAME'], // ヘッダー
+            ['ID', '名称'], // ヘッダー
         ];
         foreach ($jobs as $job) {
             $csvRecords[] = [$job->id, $job->name]; // レコード
@@ -58,7 +76,15 @@ app/Http/Controllers/JobController.php
         string $escape = "\\",
         string $eol = "\r\n"
     ) {
-        $headers = ['Content-Type' => 'text/csv'];
+        // Content-Type
+        $contentType = 'text/plain'; // テキストファイル
+        if ($separator === ',') {
+            $contentType = 'text/csv'; // CSVファイル
+        } elseif ($separator === "\t") {
+            $contentType = 'text/tab-separated-values'; // TSVファイル
+        }
+        $headers = ['Content-Type' => $contentType];
+
         return response()->streamDownload(function () use ($fieldsList, $separator, $enclosure, $escape, $eol) {
             $stream = fopen('php://output', 'w');
             foreach ($fieldsList as $fields) {
@@ -154,6 +180,10 @@ select * from `jobs` where `id` < 8001 order by `id` desc limit 1000;
       - <https://www.php.net/manual/ja/language.generators.php>
   - Comma-Separated Values
     - <https://ja.wikipedia.org/wiki/Comma-Separated_Values>
+  - Tab-Separated Values
+    - <https://ja.wikipedia.org/wiki/Tab-Separated_Values>
+  - MIME Content-Type 表
+    - <https://www.kyoto-su.ac.jp/ccinfo/use_web/mine_contenttype/index.html>
 
 ## Routes
 
@@ -194,7 +224,7 @@ resources/views/admin/jobs/index.blade.php
 以下のようなファイルがダウンロードされます。
 
 ```csv
-ID,NAME
+ID,名称
 100,JOB_0100
 99,JOB_0099
 98,JOB_0098
@@ -204,3 +234,36 @@ ID,NAME
   ・
   ・
 ```
+
+## 課題
+
+TSVファイルのダウンロード機能も追加しましょう。  
+
+- 仕様
+  - カラムはCSV同様
+  - ヘッダー行あり
+  - ファイル名は「`jobs.tsv`」
+- 開発メモ
+  - `getJobCsvRecords`メソッドは複製せず、そのまま流用しましょう。
+  - `streamDownloadCsv`メソッドは複製せず、そのまま流用しましょう。
+    - 呼び出す時の`$separator`引数をtab文字にするとTSVになります。  
+
+| URI | HTTP<br>メソッド | 機能・画面コード | 種別 | 機能・画面名 | 備考 |
+| --- | --- | --- | --- | --- | --- |
+| admin/jobs/tsv | POST   | admin.jobs.tsv   | 機能 | 職業 TSVダウンロード |  |
+
+TSVファイル例（項目間の空白はTab文字であること）
+
+```tsv
+ID	名称
+100	JOB_0100
+99	JOB_0099
+98	JOB_0098
+97	JOB_0097
+96	JOB_0096
+  ・
+  ・
+  ・
+```
+
+機能追加が確認できたら、CSVダウンロード機能に影響がないか再度テストしましょう。
