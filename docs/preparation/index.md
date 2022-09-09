@@ -14,6 +14,8 @@
 ## パソコン
 
 パソコンをお持ちではない方は準備をお願いします。  
+プログラミングに必要なものを多数インストールするため  
+容量を数十GBあけておきましょう。  
 
 ### パソコン推奨スペック
 
@@ -37,8 +39,10 @@ Windows の現場が多いため、慣れていなければ Windows 推奨です
 | Ｍicrosoft Office | 不要 | あれば便利ですが、研修や普段使いではなくてもOKです。<br>「[Office on the web](https://www.microsoft.com/ja-jp/microsoft-365/free-office-online-for-the-web)」で無料のOfficeが利用可能です（使える機能は少ない）。 |
 
 - Lenovo
-  - <https://www.lenovo.com/jp/ja/jpad/d/notebooks?from=splitter&sort=sortBy&resultsLayoutType=grid&visibleDatas=facet_Memory%3A16%20GB%3Bfacet_Memory%3A32%20GB%3Bfacet_Memory%3A8%20GB%3Bfacet_HardDriveSize%3A256GB%3Bfacet_HardDriveSize%3A512GB%3Bfacet_HardDriveSize%3A1TB>
+  - <https://www.lenovo.com/jp/members/ja/laptops/>
+  - <https://www.lenovo.com/jp/members/ja/laptops/results/?visibleDatas=2122%3A1%2520TB%2C512%2520GB%2C256%2520GB%3B2121%3A32%2520GB%2C16%2520GB%2C8%2520GB%3B2116%3AWindows%252011%2520Home%252064bit%2CWindows%252011%2520Pro%252064bit%3B2325%3A%25E3%2583%2593%25E3%2582%25B8%25E3%2583%258D%25E3%2582%25B9&groupId=jpad>
 - マウスコンピューター
+  - <https://www.mouse-jp.co.jp/store/goods/search.aspx?search=x>
   - <https://www.mouse-jp.co.jp/store/goods/search.aspx?fmt=json&limit=40&po%5B%5D=形状・タイプから探す%3Aノートパソコン&s4%5B%5D=8GB&s4%5B%5D=16GB&s4%5B%5D=32GB&s4o=1&s6%5B%5D=256GB&s6%5B%5D=512GB&s6%5B%5D=1TB&s6o=1&search=x&k_uid=a3932b4cff82a99fbc6d2d914bde6308&sort=price&style=D>
 
 #### Mac
