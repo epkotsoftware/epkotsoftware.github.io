@@ -64,23 +64,29 @@ echo "<br>";
 
 #### ER図
 
+テーブルの関連図です。
+
 - [PlantUML](https://www.plantuml.com/plantuml/umla/VSwn2eD0383XFKyH70k-G15nwjAbRr3Y6V3mSaekbehwxjKAfKFf5lx0brJ9I6sK0Arl69rN5_YOMGQRK5XgrWIfyt4W9S7W8ziqCFPgRG_0qRnDc56eHqaPpe1uyWsUqKV3ehXTot9FaOIt-21rBUbMOczxC7uQh1_6b5ptXtcVkNyjBh_z5Ow7bYNFbnaF5YgEpIZX1G00)  
   ![ER図](./images/er.svg)  
 
 #### TSV
 
-- TSVヘッダーは出力対象外
+TSVの仕様です。
+
+- TSVのヘッダー行は出力対象外
 - 改行コードは「LF」
 - 出力イメージは[出力例](#出力例)を参照。
 
-| No. | TSVカラム | レコードカラム | 備考 |
+| No. | TSVカラム | テーブルカラム | 備考 |
 | :---: | --- | --- | --- |
 | 1 | id | albums.id |  |
 | 2 | name | albums.name |  |
 | 3 | note | albums.note |  |
 | 4 | track_names | tracks.name | 「,」区切りで連結して出力する |
 
-#### レコード
+#### テーブルレコード
+
+テーブルから取得した配列の仕様です。
 
 - 連想配列内の順番は保障しない。
 - レコード配列のイメージ
@@ -88,6 +94,9 @@ echo "<br>";
   ![レコード](./images/array.svg)  
 
 ### kadai02.php
+
+Helperクラス・メソッドの使用例です。  
+動作確認にご利用ください。
 
 ```php
 <?php
@@ -140,6 +149,16 @@ echo $result;
 2	ALBUM02	NOTE02	TRACK0201
 3	ALBUM03	NOTE03	TRACK0301,TRACK0302,TRACK0303
 ```
+
+## 課題3
+
+課題2の仕様変更をしましょう。  
+仕様変更内容は以下です。
+
+| 項目 | 変更前 | 変更後 |
+| --- | --- | --- |
+| TSVヘッダー行 | なし | あり |
+| TSV改行コード | LF | CRLF |
 
 ## プログラミング力を身につけるには
 
