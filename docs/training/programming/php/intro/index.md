@@ -85,6 +85,8 @@ Dockerで簡単にPHPの開発環境が作れます。
 PHPの場合、現在ではコーディングスタイル（コーディング規約）として「`PSR`」が採用される事が多いので  
 インデント(字下げ)を半角スペース4つにする事は覚えておきましょう（Laravel・CodeIgniter4でも採用されている）。
 
+- インデントとは？
+  - <https://blog.senseshare.jp/indent.html>
 - フレームワークで使用されているコーディングスタイル
   - `Laravel 9.x 貢献ガイド コーディングスタイル`
     - <https://readouble.com/laravel/9.x/ja/contributions.html#coding-style>
