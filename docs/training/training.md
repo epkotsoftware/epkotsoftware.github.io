@@ -645,14 +645,9 @@ PHPでは「PHPUnit」を使用します。
 
 ## ファイル編
 
-XML・CSV・JSON・画像(JPG・PNG・GIF・WEBP・SVG) について学習しましょう。
+画像ファイルやCSV等のファイルについて学習します。
 
-- 動画
-  - <https://youtube.com/playlist?list=PLCX3wwS3Gg4yh-k4eOBoRq1Muco5ianO8>
-    - `8:07` XMLとは？8分でわかるXML形式データの使い方入門
-    - `11:48` CSVファイルとは？CSV形式の基本から作成方法を完全解説！
-    - `8:04` JSONとは？8分でわかるJSON形式データの使い方入門
-    - `20:10` Webやブログで重要なJPG・PNG・WEBPなどの【画像拡張子】の特徴や違い＆その使い方を徹底解説！
+- [ファイル編](./file/index.md)
 
 ## セキュリティ編
 
