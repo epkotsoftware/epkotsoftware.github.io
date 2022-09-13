@@ -185,8 +185,15 @@ VSCodeで出来あがった「`training_git`」フォルダを開きましょう
 開発者はあなたを含めて2名で、あなたはA機能を担当  
 もう1名はB機能を担当します。
 
-![git_flow_simple](./images/git_flow_simple.svg)
+#### 簡易図
+
+[Mermaid](https://mermaid.live/edit#pako:eNqFkMuKAjEQRX8l1GoEcXSbnSLMB8w2m-qkOh0mqTSxIor475NmVNR57Yr7OBT3BDY7Ag0-yFvBcTBsc0pBVHDaQOAgAaP60gwoQd_k_XKxMmC4K8h2UI72FPNo-Kb0hFILveITLo2RErGsp_a9I7STtXrpqu_DYTa5zR_IfuQqf_C7X_ibn_ibf_mJiqd7-KOA35nbS_URmDDwtXyBX5dbLZZTGObQ7JZzbfuTYaUab2i_G9DtdNRjjTIlzy2KVfL7kS1oKZXmUEeHQtuAvmAC3WPc0fkTGJKl_Q)  
+![git_flow_simple_for_mermaid](./images/git_flow_simple_for_mermaid.svg)  
+
+#### 詳細
+
 [PlantUML](https://www.plantuml.com/plantuml/umla/VP3DJiCm3CVlUGhJdHdRjGUq0-A6X10lu2nEQorEfjOjxErPb4hfOEAIoF-FdomVHiL19mdcGNiIWfdjW55Dpux0fwGsVHjpVQ1v9THfeCO0K5JM2pI-I4_O08xW4JPzqZF7qvsCBHbRCnGTLFmBpHJIUOrtYvIB3ZPT2kvNwGqvhXkIvnmNs0JkUXrF5nicgZKyAi-e16847fz1MewiZ06EIOJLn7GrXznjFx5hOTvjzoNgQjaPbnMFRQGlo2SxzjNrQ3mkFh2S0mb5NMbAeou4UvzWZRUBNmbLAuGoklRz8_z2GqV6qGq4_qzWsSAjLvARj1G91Wg48_qzptwxCmUARfBm0m00)  
+![git_flow_simple](./images/git_flow_simple.svg)  
 
 |  | Mainへのマージ | Developへのマージ | push | 概要 |
 | :---: | :---: | :---: | :---: | --- |
