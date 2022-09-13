@@ -684,18 +684,18 @@ trainingリポジトリの [users/{★ユーザー名}/05_laravel/README.md](htt
 ### CBC 実践（バックエンド Laravel）
 
 LaravelのバージョンがCBCと異なるため、一つ一つコードを理解して進めましょう。  
-  CBC → Laravel6  
-  EPKOT → Laravel8
+  CBC → Laravel6(2022/09/06にセキュリティ修正終了)  
+  EPKOT → Laravel9  
 
 - `#1`～`#3` は環境構築になりますがDockerで構築済みのため、読み込みだけ行います。
   - <https://cbc-study.com/training/backend/laravel1>
 - `#4`～`#9` は手順通り進めてみましょう。
   - 注意
-    - RoutingについてはLaravel8から手法が変わっているので、以下で学習し実装してください（「`#7 Laravelでデータベースのデータを表示する方法`」の手法が古いです）。
-      - <https://readouble.com/laravel/8.x/ja/routing.html>
+    - RoutingについてはLaravel6は手法が古いため、以下で学習し実装してください（「`#7 Laravelでデータベースのデータを表示する方法`」の手法が古いです）。
+      - <https://readouble.com/laravel/9.x/ja/routing.html>
     - ディレクトリ構成がCBCと違うので読み替えてください。
       - 「`CBC_Laravel/resources/views/`」の場合、「`05_laravel/app/resources/views/`」
-    - Laravel8では、Modelクラスが追加される個所が変わります。
+    - Laravel9では、Modelクラスが追加される個所が変わります。
       - 「`05_laravel/app/app/Models`」ディレクトリ内に追加され、名前空間(namespace)も変わります。
   - <https://cbc-study.com/training/backend/laravel2>
   - <https://cbc-study.com/training/backend/laravel3>
