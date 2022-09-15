@@ -80,6 +80,20 @@ Macに標準で入っている「ターミナル」アプリで
 git --version
 ```
 
+---
+
+上記とは別のインストール方法として  
+Homebrew(ホームブリュー)がインストール済みであれば  
+「brew install git」コマンドでもGitのインストールが可能です。
+
+```sh
+# 以下を打ち込んでEnterキー押下
+brew install git
+```
+
+- Git - Download for macOS
+  - <https://git-scm.com/download/mac>
+
 ## Git設定
 
 ※ **研修生・開発者向け**
