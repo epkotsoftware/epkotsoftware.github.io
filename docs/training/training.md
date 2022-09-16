@@ -91,9 +91,9 @@ Visual Studio Code(VSCode) で開きましょう。
 
 ## コーダー編
 
-| 課題 | 格納フォルダ・ファイル |
-| --- | --- |
-| [コーダー編課題](#コーダー編課題) (HTML・CSS等) | `users/自分のユーザー名/01_beginner/htdocs/index.html` |
+コーダー編は課題提出がありますので予めご確認下さい。
+
+- [研修課題提出](https://github.com/epkotsoftware/training/blob/template/docs/submission/index.md#研修課題提出)
 
 まずは動画で学習しましょう。
 
@@ -172,43 +172,11 @@ CSSの「`grid-template`」が、ほぼ全てのブラウザでサポートさ�
   - User agent string: 未入力
   - User agent type: Desktop
 
-#### コーダー編課題チェックリスト
+#### コーダー編課題提出
 
-- 要件通り作られていること
-  - 自分のユーザーディレクトリの「`01_beginner/htdocs/index.html`」をブラウザで開くと、作成したページが見れこと
-  - Google Chrome で見れること
-  - 横幅:`1024px` で表示が崩れないこと、横スクロールバーが出ないこと
+以下を参照してください。
 
-### コーダー編課題GitHubアップロード
-
-#### アップ先
-
-trainingリポジトリの [users/{★ユーザー名}/01_beginner/README.md](https://github.com/epkotsoftware/training/blob/template/users/_template/01_beginner/README.md) にアップ先が記載されています。  
-
-- アップ方法
-  - VSCodeで行う（コマンドと比べると簡単）。
-  - `Git Bash` でコマンドで行う。
-- 禁止事項
-  - 自分のユーザーディレクトリ以外のコミットを禁止（`users/_template` 内のファイル等）
-  - GitHub上でのアップロードは禁止します（GitHubは現場で使われていない所もあり、Git学習も兼ねているため）
-
-Git・GitHubについては、「[バージョン管理システム編](#バージョン管理システム編)」で深く学習します。
-
-#### 課題提出例
-
-VSCodeを使用した提出例です。
-
-1. 「`ソース管理`」アイコンをクリック
-1. 「`ツリーとして表示`」アイコンをクリックし、アップするファイルに間違いがないか確認する。
-1. コミット対象ファイル・フォルダの「`+`」アイコン(変更をステージ)をクリックし、ステージする。  
-  **※ 対象外のファイルはステージしないこと**
-1. コミットメッセージを入力
-1. 「`コミット`」アイコンをクリックし、ステージしたファイルをコミットする。
-1. 「`git push`」コマンドでコミットした内容をGitHubへ反映する。
-1. GitHubでコミットが反映されたか確認する  
-  <https://github.com/epkotsoftware/training/commits/>
-
-![git_commit_push.gif](../image/git_commit_push.gif)
+- [研修課題提出](https://github.com/epkotsoftware/training/blob/template/docs/submission/index.md#研修課題提出)
 
 ### Chrome DevTools
 
