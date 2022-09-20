@@ -193,11 +193,11 @@ CSSの「`grid-template`」が、ほぼ全てのブラウザでサポートさ�
 
 ## マークアップエンジニア編
 
-| 課題 | 格納フォルダ・ファイル |
-| --- | --- |
-| Excel(売上表・成績表) | `users/自分のユーザー名/02_basic/excel` |
-| jQuery(#7 簡単な機能をjQueryで実装しよう) | `users/自分のユーザー名/02_basic/htdocs/kadai_07.html` |
-| jQuery(#8 変数を使う 〜 #11 モーダルウィンドウを作ろう) | `users/自分のユーザー名/02_basic/htdocs/kadai_08.html` |
+マークアップエンジニア編は課題提出がありますので予めご確認下さい。
+
+- [研修課題提出](https://github.com/epkotsoftware/training/blob/template/docs/submission/index.md#研修課題提出)
+
+まずは動画で学習しましょう。
 
 - 動画
   - <https://youtube.com/playlist?list=PLCX3wwS3Gg4y99r2bSBpir2nmMv4rzfcL>
@@ -253,25 +253,17 @@ Googleマイドライブ → 「新規」 → 「ファイルのアップロー�
       見た目も`kadai_07.html`と似せましょう。
       → 「`02_basic/htdocs/kadai_08.html`」
 
-trainingリポジトリの [users/{★ユーザー名}/02_basic/README.md](https://github.com/epkotsoftware/training/tree/template/users/_template/02_basic/README.md) にアップ先が記載されています。
+#### マークアップエンジニア編課題提出
 
-#### マークアップエンジニア編課題チェックリスト
+以下を参照してください。
 
-- `css/common.css` にページ固有のスタイルが入っていないこと
-  - 例えばモーダル関連のスタイルや `#change_btn` 等
-- 全ページのデザインが統一されていること
-- `kadai_07.html` 用のJavaScriptおよびスタイルが他ページに適用されないこと
-- `kadai_08.html` 用のJavaScriptおよびスタイルが他ページに適用されないこと
-- TODOコメントが全て削除されていること
+- [研修課題提出](https://github.com/epkotsoftware/training/blob/template/docs/submission/index.md#研修課題提出)
 
 ## フロントエンドエンジニア編
 
-| 課題 | 格納フォルダ・ファイル |
-| --- | --- |
-| #1 PHPとjsで簡単なアプリを作ってみよう 〜 | `users/自分のユーザー名/03_advanced/htdocs/` |
-| #11 PHPでClassクラスを理解するための準備 | `users/自分のユーザー名/03_advanced/htdocs/sortable2/` |
-| #12 PHPアプリケーションをクラス化してみよう | `users/自分のユーザー名/03_advanced/htdocs/sortable3/` |
-| 任意課題 | `users/自分のユーザー名/03_advanced/htdocs/epkot/` |
+フロントエンドエンジニア編は課題提出がありますので予めご確認下さい。
+
+- [研修課題提出](https://github.com/epkotsoftware/training/blob/template/docs/submission/index.md#研修課題提出)
 
 フロントエンドエンジニア編ではCBCの応用コースをやっていきます。  
 開発環境については以下の仮想環境を構築します。
@@ -367,30 +359,11 @@ CBCと開発環境が異なるので、気を付けてください。
 
 - 「フロントエンドエンジニア編」で作成したファイル
 
-trainingリポジトリの [users/{★ユーザー名}/03_advanced/README.md](https://github.com/epkotsoftware/training/blob/template/users/_template/03_advanced/README.md) にアップ先が記載されています。  
+#### フロントエンドエンジニア編課題提出
 
-#### フロントエンドエンジニア編課題チェックリスト
+以下を参照してください。
 
-- `htdocs/index.php`
-  - 登録ボタン
-    - 男性での登録が可能なこと
-    - 女性での登録が可能なこと
-  - ドラッグ
-    - 移動することが出来、DBも更新されること
-- `htdocs/sortable2/index.php`
-  - 登録ボタン
-    - 男性での登録が可能なこと
-    - 女性での登録が可能なこと
-  - ドラッグ
-    - 移動することが出来、DBも更新されること
-- `htdocs/sortable3/index.php`
-  - 登録ボタン
-    - 男性での登録が可能なこと
-    - 女性での登録が可能なこと
-  - ドラッグ
-    - 移動することが出来、DBも更新されること
-
-**※ CBCのソースコードのコピーではうまくいかない部分もあるので、レビュー依頼前に自身でテストしましょう。**
+- [研修課題提出](https://github.com/epkotsoftware/training/blob/template/docs/submission/index.md#研修課題提出)  
 
 ## Linux編
 
@@ -638,9 +611,9 @@ PHPでは「PHPUnit」を使用します。
 
 ## バックエンド編
 
-| 課題 | 格納フォルダ・ファイル |
-| --- | --- |
-| Laravel | `users/自分のユーザー名/05_laravel/` |
+バックエンド編課題は課題提出がありますので予めご確認下さい。
+
+- [研修課題提出](https://github.com/epkotsoftware/training/blob/template/docs/submission/index.md#研修課題提出)
 
 バックエンド編ではCBCの実践（バックエンド Laravel）をやっていきます。  
 開発環境についてはフロントエンドエンジニア編と同様に以下、Dockerで構築します。
@@ -677,13 +650,14 @@ LaravelのバージョンがCBCと異なるため、一つ一つコードを理�
 
 ### バックエンド編課題
 
-- 「バックエンド編」で作成したファイル
-  - 対象ディレクトリ: `users/{★ユーザー名}/05_laravel/`
-  - 対象機能
-    - 移植した画面が動作していること
-    - 「タスク管理ツール」が動作していること
-- レビュー依頼
-  - [バージョン管理システム編](#バージョン管理システム編) にて、PR(Pull Request)の確認で行うため、そのまま次へお進みください。
+#### バックエンド編課題題提出
+
+以下を参照してください。
+
+- [研修課題提出](https://github.com/epkotsoftware/training/blob/template/docs/submission/index.md#研修課題提出)  
+
+この時点でのレビュー依頼は不要です。  
+[バージョン管理システム編](#バージョン管理システム編) にて、PR(Pull Request)の確認で行うため、そのまま次へお進みください。  
 
 ## バージョン管理システム編
 
