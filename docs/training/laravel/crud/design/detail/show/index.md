@@ -45,6 +45,9 @@
 
 Laravel機能を利用して行う。
 
+- Laravel 9.x コントローラ ～ リソースコントローラ
+  - <https://readouble.com/laravel/9.x/ja/controllers.html#resource-controllers>
+
 条件(AND)
 
 | 条件 | 備考 |
@@ -59,13 +62,17 @@ Laravel機能を利用して行う。
 | jobs.* |  |
 
 ```sql
--- SQL例: id=100 の場合
-select * from `jobs` where `id` = '100' and `deleted_at` is null
+-- SQL例
+select * from `jobs` where `id` = ? and `jobs`.`deleted_at` is null limit 1;
+-- パラメータ
+--   id例: 100
 ```
+
 
 ## 初期表示
 
-- 対象レコードの情報を画面表示する。
+- 対象レコードの情報を画面表示する。  
+  ![admin_jobs_show](./../../screens/images/admin_jobs_show.png)  
 
 ## 一覧へボタンクリック
 
@@ -85,7 +92,8 @@ select * from `jobs` where `id` = '100' and `deleted_at` is null
 
 ## 削除ボタンクリック
 
-- 「削除確認ダイアログ」を開く
+- 「削除確認ダイアログ」を開く  
+  ![admin_jobs_show](./../../screens/images/admin_jobs_show_delete.png)  
 
 ## 【削除確認ダイアログ】OKボタンクリック
 

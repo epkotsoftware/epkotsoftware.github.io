@@ -32,30 +32,7 @@ jobs テーブルの対象レコードを論理削除する。
 
 ## 対象レコード取得
 
-Laravel機能を利用して行う。
-
-- Laravel 9.x コントローラ ～ リソースコントローラ
-  - <https://readouble.com/laravel/9.x/ja/controllers.html#resource-controllers>
-
----
-
-条件(AND)
-
-| 条件 | 備考 |
-| --- | --- |
-| jobs.id = パラメータ.`{job}` |  |
-| jobs.deleted_at = NULL |  |
-
-取得カラム
-
-| 項目 | 備考 |
-| --- | --- |
-| jobs.* |  |
-
-```sql
--- SQL例: id=100 の場合
-select * from `jobs` where `id` = '100' and `deleted_at` is null
-```
+[詳細画面 対象レコード取得](./../show/index.md#対象レコード取得) と同様の処理  
 
 ## 対象レコード論理削除
 
@@ -78,6 +55,10 @@ Laravel機能を利用して行う。
 | jobs.updated_at | 現在日時 |  |
 
 ```sql
--- SQL例: id=100 現在日時=2022-07-20 23:58:59 の場合
-update `jobs` set `deleted_at` = '2022-07-20 23:58:59', `updated_at` = '2022-07-20 23:58:59' where `id` = 100
+-- SQL例
+update `jobs` set `deleted_at` = ?, `jobs`.`updated_at` = ? where `id` = ?
+-- パラメータ
+--   deleted_at例: 2022-12-31 23:58:59
+--   updated_at例: 2022-12-31 23:58:59
+--   id例: 100
 ```
