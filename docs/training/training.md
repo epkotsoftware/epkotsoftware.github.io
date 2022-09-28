@@ -208,6 +208,8 @@ CSSの「`grid-template`」が、ほぼ全てのブラウザでサポートさ�
     - `6:24` WEBサーバーの仕組み入門｜ApacheやNginxなどWEBサーバーの基本を初心者向けに解説
     - `16:19` 【超入門】初心者向け レスポンシブデザイン完全攻略！メディアクエリ等解説【HTML・CSS コーディング】
 
+### Excel
+
 [CBC](https://cbc-study.com/)の基礎コースをやっていきましょう。  
 Excelをお持ちでない方は、無料のOffice OnlineでもOKです。
 
@@ -231,6 +233,10 @@ Googleマイドライブ → 「新規」 → 「ファイルのアップロー�
   - <https://cbc-study.com/training/basic/page4>
   - <https://cbc-study.com/training/basic/page5>
   - `https://cbc-study.com/training/basic/page6` ※ page6はないようです。
+
+### jQuery
+
+- 基礎2（マークアップエンジニア 中級）#5 jQueryってなに？〜
   - <https://cbc-study.com/training/basic/page7>  
       → 「`02_basic/htdocs/kadai_07.html`」
   - <https://cbc-study.com/training/basic/page8>  
