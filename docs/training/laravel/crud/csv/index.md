@@ -202,6 +202,7 @@ Route::post('csv', 'csv')->name('.csv');
 ## Views
 
 職業一覧画面の任意の場所にCSVボタンを追加しましょう。
+送信先は「`{{ route('admin.jobs.csv') }}`」で取得できるURLを設定しましょう。
 
 ---
 
