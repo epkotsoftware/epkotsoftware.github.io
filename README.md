@@ -22,6 +22,10 @@
 - ページ追加・更新
   - docs 以下にMarkdownファイルを置くことで自動的にページが生成されます。
 
+`Jekyll`のテーマにはテンプレート言語の「`Liquid`」が採用されているため  
+例えばLaravelでよく書く「`{{ route(xxx) }}`」等がタグと認識されてしまうことがあります。  
+「`{% raw %}{{ route(xxx) }}{% endraw %}`」とすると表示が可能です。
+
 ## 注意点
 
 - 本リポジトリ及びページについては、公開されているため機密情報の取り扱いにはご注意ください。
@@ -40,3 +44,9 @@
     - <https://docs.github.com/ja/pages/getting-started-with-github-pages/about-github-pages#usage-limits>
   - 禁止される用途
     - <https://docs.github.com/ja/pages/getting-started-with-github-pages/about-github-pages#prohibited-uses>
+- GitHub PagesとJekyllについて
+  - <https://docs.github.com/ja/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll>
+- Liquid template language
+  - <https://shopify.github.io/liquid/>
+  - raw
+    - <https://shopify.github.io/liquid/tags/template/#raw>
