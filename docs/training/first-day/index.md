@@ -59,6 +59,10 @@ Windowsの場合、会社のメールアドレスでアカウントを作成し�
     - <https://www.google.co.jp/intl/ja/chrome/>
   - 【エディタ】`Visual Studio Code` (ビジュアル スタジオ コード)
     - <https://azure.microsoft.com/ja-jp/products/visual-studio-code/>
+  - Macをお使いの場合
+    - 必須ではないですが、Homebrewのインストールもおすすめします。
+    - `2022年版、プログラミング環境構築の方法【Macbook M1対応】 #Python #Node.js #Docker #Homebrew #VSCode`
+      - <https://youtu.be/2bLPTSaaJJo>
 - スマートフォンにインストール
   - Slack
     - iOS 版 Slack

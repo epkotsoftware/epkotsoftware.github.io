@@ -41,6 +41,11 @@ BIOS設定についてはパソコンのメーカーによってやり方が異�
 
 ## インストール準備(Mac)
 
+インストール方法については以下の動画が参考になります。
+
+- `2022年版、プログラミング環境構築の方法【Macbook M1対応】 #Python #Node.js #Docker #Homebrew #VSCode`
+  - <https://youtu.be/2bLPTSaaJJo?t=419s>
+
 Macでは特別な設定が不要ですが  
 Appleシリコン搭載Mac（M1チップ搭載のもの等）では「Rosetta 2」のインストールを推奨されています（筆者の`MacBook Air (M1, 2020)`ではなしで動作している）。  
 インストールは任意でお願いします。
@@ -51,6 +56,8 @@ softwareupdate --install-rosetta
 
 - Apple シリコン搭載の Mac コンピュータ
   - <https://support.apple.com/ja-jp/HT211814>
+- Docker Desktop for Apple silicon
+  - <https://docs.docker.com/desktop/mac/apple-silicon/>
 
 ## インストール
 
