@@ -33,6 +33,78 @@
   - [PlantUML](https://www.plantuml.com/plantuml/umla/bL9FJy8m5B_lKxnmKfFE3Q8G4Wd6YvmacdWlMs7LTgrR0OdotNrzcUj6k50Irlt-zFTUt-QruvNRQXKfiNRW35HoKpZ8PIKo9qqPHPPddtmZuCcKZijILF0J0MXkOI2-kRPAiBrOmPKo6LU5gTrqaYJfzG0Uto3p3Ea1df5QM7YOGJeSnmd-qXPVcifvnZiHF4Qd2VfGVwbkncYKZ9iCuYv9yTuMBBaM7jG7bgy8RHljwE-9UJN6BNbTxqsLDnwBhsShjeNL1vvhMVQk1bTJTX1ST4EuAEyO9hFG-4zdcDK7Zgqt60h39xB_-fVrMcQIg-0BJgngEedJUCWuoWj1TWHx8hfnb2NnS4820dgIqDrjs4xlyEGHEG9usisxKLjzlXsAOJiIq2axGhoRlhGRngXLlsViTqQ5PwGXZdPTeF5tPu5mjxYvAFEjLdy0)  
     ![コンテナ構成](./images/docker-conteiner.svg)  
 
+## IPアドレスとポートについて
+
+Dockerで多数の環境を構築していると、ポートが競合する事がよくあります。  
+ブラウザでWeb・phpMyAdminの画面を表示するには  
+IPアドレスとポート番号をURLに指定して表示します。  
+
+| 用語 | 住宅での例え |
+| --- | --- |
+| IPアドレス | 住所 |
+| ポート番号 | 部屋番号 |
+
+その為、同一IP・ポート（住宅に例えると同じ住所と部屋番号）が複数の環境に設定されてしまうと  
+どちらのことか分からなくなり、競合してしまい  
+Dockerの起動に失敗します。  
+
+DockerでWebアプリケーションにアクセスするには  
+IPアドレスに「ローカルループバックアドレス」という自分のパソコン自身のアドレスを設定します。  
+ループバックアドレスは、`127.0.0.1`～`127.255.255.254`の範囲で使用が可能で  
+よく見る「`localhost`」は「`127.0.0.1`」のホスト名になります。  
+
+複数環境のDockerを使う時は  
+ポート番号は固定にし、環境毎にIPアドレスを決めると管理がしやすくなります。  
+
+```txt
+■ポートで管理する例
+
+・環境A
+　・web 127.0.0.1:80
+　・db 127.0.0.1:3306
+　・phpmyadmin 127.0.0.1:8888
+・環境B
+　・web 127.0.0.1:81
+　・db 127.0.0.1:3307
+　・phpmyadmin 127.0.0.1:8889
+・環境C
+　・web 127.0.0.1:82
+　・db 127.0.0.1:3308
+　・phpmyadmin 127.0.0.1:8890
+```
+
+```txt
+■IPで管理する例
+
+・環境A (127.0.0.1)
+　・web 127.0.0.1:80
+　・db 127.0.0.1:3306
+　・phpmyadmin 127.0.0.1:8888
+・環境B (127.0.0.2)
+　・web 127.0.0.2:80
+　・db 127.0.0.2:3306
+　・phpmyadmin 127.0.0.2:8888
+・環境C (127.0.0.3)
+　・web 127.0.0.3:80
+　・db 127.0.0.3:3306
+　・phpmyadmin 127.0.0.3:8888
+```
+
+### macOSでの注意点
+
+macOSのデフォルトではループバックアドレスが`127.0.0.1`しか使えません。  
+以下のコマンドで追加が可能です。  
+
+```sh
+# ループバックアドレスに 127.0.0.2 を追加する
+sudo ifconfig lo0 alias 127.0.0.2
+# ループバックアドレスに 127.0.0.3 を追加する
+sudo ifconfig lo0 alias 127.0.0.3
+```
+
+パソコンを再起動するとリセットされてしまうので  
+再度実行してください。
+
 ## .env
 
 環境変数を定義します。  
