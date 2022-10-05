@@ -19,7 +19,8 @@
 | 11 | [template](#template) |
 | 12 | [JavaScript高速化について](#javascript高速化について) |
 | 13 | [WebAPI](#webapi) |
-| 14 | [JavaScript課題](#javascript課題) |
+| 14 | [コーディングスタイル](#コーディングスタイル) |
+| 15 | [JavaScript課題](#javascript課題) |
 
 ## はじめに
 
@@ -630,7 +631,6 @@ MDNでも推奨しています。
 最近では`for...of`の処理速度も向上してきています。
 
 - [Airbnb JavaScript Style Guide Iterators and Generators](https://github.com/airbnb/javascript#iterators-and-generators)
-
 
 ## JavaScript課題
 
