@@ -23,7 +23,7 @@
 
 ## はじめに
 
-JavaScriptは情報が多く出ており、誤った情報も多いため  
+JavaScriptは情報が多く出ており、誤った情報や古くなってしまった情報も多いため  
 Mozillaの公式ウェブサイト(MDN)をメインに学習していきます。  
 また、ライブラリ(jQuery等)・フレームワーク(Vue.js等)は本資料では学習対象外です。  
 見ることは少なそうですが、「HTML Living Standard」を策定しているWHATWGのリンクも載せておきます。  
@@ -39,9 +39,9 @@ Mozillaの公式ウェブサイト(MDN)をメインに学習していきます�
 
 ## Internet Explorer
 
-2022年6月16日にInternet Explorer(以下、IE)のサポート終了に伴い  
+2022年6月16日Internet Explorer(以下、IE)のサポート終了に伴い  
 IE非対応だった機能が使えるようになります。  
-しかし、既存のシステムでは古い手法が使われることが多いため
+しかし、既存のシステムでは古い手法が使われることが多いため注意が必要です。
 
 - Microsoft 社 Internet Explorer のサポート終了について
   - <https://www.ipa.go.jp/security/announce/ie_eos.html>
@@ -614,6 +614,24 @@ JavaScriptのFetchAPIで利用が可能です。
   - `Response`
     - <https://developer.mozilla.org/ja/docs/Web/API/Response>
 
+## コーディングスタイル
+
+筆者はJavaScriptにコーディングスタイルがあった現場は未経験（自社開発では独自のコーディングスタイルを自分で作成）  
+ですが、コーディングスタイルの「AirBnB」は理由等も書かれており、  
+納得できるものが多いので学習する上でも個人的にはおすすめです。  
+MDNでも推奨しています。
+
+- MDN JavaScript のコード例を整形するためのガイドライン
+  - <https://developer.mozilla.org/ja/docs/MDN/Writing_guidelines/Writing_style_guide/Code_style_guide/JavaScript>
+- [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript)
+
+`for...of`は「bad」で`forEach`が「good」になっていますが、`break`、`continue`、`return`を使う場合  
+`for...of`の方が良かったりするので、あくまでも記載されているケースの場合とお考えください。  
+最近では`for...of`の処理速度も向上してきています。
+
+- [Airbnb JavaScript Style Guide Iterators and Generators](https://github.com/airbnb/javascript#iterators-and-generators)
+
+
 ## JavaScript課題
 
-- [JavaScript課題1](./exercises/01/index.md)
+- [JavaScript課題](./exercises/index.md)
