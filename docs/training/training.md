@@ -640,6 +640,8 @@ LaravelのバージョンがCBCと異なるため、一つ一つコードを理�
   - 注意
     - RoutingについてはLaravel6は手法が古いため、以下で学習し実装してください（「`#7 Laravelでデータベースのデータを表示する方法`」の手法が古いです）。
       - <https://readouble.com/laravel/9.x/ja/routing.html>
+    - 「`Target class [SortableController] does not exist.`」のエラーが出る  
+      - [名前空間](./programming/php/namespaces/index.md) について学習して下さい、「use」を使用します。
     - ディレクトリ構成がCBCと違うので読み替えてください。
       - 「`CBC_Laravel/resources/views/`」の場合、「`05_laravel/app/resources/views/`」
     - Laravel9では、Modelクラスが追加される個所が変わります。
