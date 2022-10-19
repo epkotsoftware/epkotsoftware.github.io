@@ -5,8 +5,11 @@
 | No. |  |
 | :---: | --- |
 | 1 | [名前空間](#名前空間) |
-| 2 | [useの注意点](#useの注意点) |
-| 3 | [PHPマニュアル](#phpマニュアル) |
+| 2 | [例](#例) |
+| 3 | [PHP標準クラス](#php標準クラス) |
+| 4 | [Laravel参考ページ](#laravel参考ページ) |
+| 5 | [useの注意点](#useの注意点) |
+| 6 | [PHPマニュアル](#phpマニュアル) |
 
 ## 名前空間
 
@@ -22,7 +25,7 @@ Laravelで自分が作成したアプリケーションに`Str`という名前�
 
 例えば以下の8つのクラスは共存が可能です。  
 
-| 名前空間 | クラス名 | 完全修飾名 |
+| 名前空間<br>(namespace) | クラス名<br>(class) | 完全修飾名<br>（`\{名前空間}\{クラス名}`） |
 | --- | --- | --- |
 | `Illuminate\Support` | `Str` | `\Illuminate\Support\Str` |
 | `Illuminate\Support` | `Arr` | `\Illuminate\Support\Arr` |
@@ -64,7 +67,7 @@ $converted = \Illuminate\Support\Str::lower('LARAVEL');
 ```php
 // 構文1
 use 名前空間\クラス名 as 別名;
-// 構文2
+// 構文2（別名がクラス名になる）
 use 名前空間\クラス名;
 ```
 
@@ -108,6 +111,45 @@ class UserController
 }
 ```
 
+### 例
+
+クラス定義
+
+```php
+<?php
+
+namespace Helpers;
+
+class StringHelper
+{
+    public static function upper($value)
+    {
+        return mb_strtoupper($value, 'UTF-8');
+    }
+}
+```
+
+使用例
+
+```php
+<?php
+
+namespace App\Controllers;
+
+use Helpers\StringHelper;
+
+class UserController
+{
+    public function index()
+    {
+        $converted = StringHelper::upper('LARAVEL');
+        var_dump($converted);
+    }
+}
+```
+
+## PHP標準クラス
+
 名前空間が設定されているPHPファイルで、名前空間のないクラスを使う際も  
 useを忘れないようにしましょう（もしくは完全修飾名にする）。  
 「Exception」や「DateTime」等のPHP標準のクラスは名前空間が設定されていないので注意です。  
@@ -135,6 +177,8 @@ class UserController
 // 実行
 (new UserController())->index();
 ```
+
+## Laravel参考ページ
 
 - `Laravel 9.x ヘルパ`
   - <https://readouble.com/laravel/9.x/ja/helpers.html>
