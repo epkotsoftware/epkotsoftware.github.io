@@ -4,6 +4,10 @@
 
 - docker docs 〜 Logs and troubleshooting
   - <https://docs.docker.com/desktop/windows/troubleshoot/>
+- Docker Desktop for Windows 〜 Issues
+  - <https://github.com/docker/for-win/issues>
+- Docker Desktop for Mac 〜 Issues
+  - <https://github.com/docker/for-mac/issues>
 
 ## Docker Desktopインストール(Windows)
 
@@ -53,13 +57,13 @@ BIOS設定はWindowsでは行わないため、ブラウザを見ながら出来
 
 ## コンテナ起動
 
-### docker-compose が実行出来ない
+### docker-compose で「`command not found`」
 
 DockerDesktopは正常にインストール出来たが  
 docker-composeコマンド実行時に「command not found」のメッセージが出る場合  
 環境変数(Path)の設定に問題があります。
 
-- 対応方法1: 再起動する。
+- 対応方法1: PCを再起動する。
   - 再起動することで環境変数が設定されることがある。
   - 解決しなければ対応方法2へ
 - 対応方法2: 環境変数(Path)に設定
@@ -69,6 +73,17 @@ docker-composeコマンド実行時に「command not found」のメッセージ�
     - コントロールパネル → システム → システムの詳細設定 → 環境変数
     - システム環境変数の「Path」を選択して編集ボタン押下
     - 新規ボタンでディレクトリパスを追加する。
+
+### docker-compose で「`pywintypes.error: (5, 'CreateFile', 'アクセスが拒否されました。')`」
+
+- 対応方法1: PCを再起動する。
+  - Dockerが正常に立ち上がっていなかった場合、再起動で正常になることがある。
+  - 解決しなければ対応方法2へ
+- 対応方法2: 「Visual Studio Code」アプリを「管理者として実行」で開く
+  - VSCodeのターミナルを使っている場合、アクセス権の問題でエラーになっていることがある。
+  - 解決しなければ対応方法3へ
+- 対応方法3: 「Windows PowerShell（Git Bash）」アプリを「管理者として実行」で開く
+  - 直接ターミナルアプリを管理者として実行することで、
 
 ### failed: port is already allocated
 
@@ -91,6 +106,16 @@ docker-composeコマンド実行時に「command not found」のメッセージ�
         - <https://docs.docker.com/compose/compose-file/compose-file-v3/#short-syntax-1>
       - MacのApacheで127.0.0.1以外のIPアドレスを使用する
         - <https://qiita.com/HanaeKae/items/79d783521b83e350fa42>
+
+### WSL integration with distro Ubuntu unexpectedly stopped with exit code
+
+こちらについては解決方法がわかっていません。  
+
+![WSL integration with distro Ubuntu unexpectedly stopped with exit code](./images/docker-desktop-wsl-integration-with-distro-ubuntu-unexpectedly-stopped-with-exit-code.png)  
+
+以下の手順で再インストールしても駄目だったとのことです。  
+
+- <https://github.com/docker/for-win/issues/13020#issuecomment-1283055393>
 
 ## コンテナ起動（Mac）
 
