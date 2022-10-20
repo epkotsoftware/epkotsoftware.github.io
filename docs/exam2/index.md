@@ -9,5 +9,5 @@
 
 | No. | 試験 | 提出方法 |
 | --- | --- | --- |
-| 1 | [JavaScript試験](./js/index.md) | メール添付（ZIPファイル） |
-| 2 | [PHP試験](./php/index.md) | メール本文 |
+| 1 | [JavaScript試験](./../exam/js/index.md) | メール添付（ZIPファイル） |
+| 2 | [PHP試験](./../exam/php/index.md) | メール本文 |
