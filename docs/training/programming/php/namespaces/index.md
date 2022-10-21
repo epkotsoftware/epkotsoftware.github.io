@@ -17,7 +17,7 @@
 | 用語 | 解説 |
 | --- | --- |
 | メソッド | クラス内で定義した関数を「メソッド」と呼びます。 |
-| クラス | 処理をする機能をひとまとめにしたものを「クラス」と呼び<br>構成要素としてメソッド等を持ちます。 |
+| クラス | 処理をする機能をひとまとめにしたものを「クラス」と呼び<br>構成要素としてメソッドなどを持ちます。 |
 | 名前空間 | クラスをまとめたものを「名前空間」と呼びます。 |
 
 - [PlantUML](https://www.plantuml.com/plantuml/umla/SoWkIImgoStCIybDBE3IKdWweVTfP-_pbRjUJfjioAMbfV2uQVtZvfMFctO2UI1kyyB7JNiVDpS_Rkx453724356CSE863FGN654o1K4RN18pKk1-X00)  
@@ -211,7 +211,7 @@ LaravelのStrクラスの参考資料です。
 
 名前空間が設定されているPHPファイルで、名前空間のないクラスを使う際も  
 useを忘れないようにしましょう（もしくは完全修飾名にする）。  
-「Exception」や「DateTime」等のPHP標準のクラスは名前空間が設定されていないので注意です。  
+「Exception」や「DateTime」などのPHP標準のクラスは名前空間が設定されていないので注意です。  
 useを忘れた場合、現在の名前空間の相対クラスにアクセスしようとします。
 
 ```php
