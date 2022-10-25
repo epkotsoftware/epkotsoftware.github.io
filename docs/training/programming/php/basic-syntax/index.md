@@ -256,6 +256,10 @@ extract($data);
 </html>
 ```
 
+ブラウザで表示すると以下のように表示されます。
+
+<iframe title="例" src="./html/example/index.html"></iframe>
+
 ## PHPマニュアル
 
 資料作成で参考にしたPHPマニュアルのリンクです。
