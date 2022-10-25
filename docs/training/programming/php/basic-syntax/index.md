@@ -258,7 +258,7 @@ extract($data);
 
 ブラウザで表示すると以下のように表示されます。
 
-<iframe title="例" src="./html/example/index.html"></iframe>
+<iframe title="例" src="./html/example/index.html" style="height:300px;"></iframe>
 
 ## PHPマニュアル
 
