@@ -1,0 +1,58 @@
+<!-- ここからHTML -->
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- titleタグ内のサブタイトルにPHPの処理を埋め込む（$subtitle変数の中身） -->
+    <title>TEST - サブタイトル</title>
+</head>
+
+<body>
+    <header class="bg-dark">
+        <nav class="navbar navbar-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <!-- h1タグ内にPHPの処理を埋め込む（$h1変数の中身） -->
+                    <h1>見出し１</h1>
+                </a>
+            </div>
+        </nav>
+    </header>
+    <main class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>ID</th>
+                    <th>NAME</th>
+                    <th>ROLE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- tbodyタグ内にPHPの処理を埋め込む（$users変数の中身） -->
+                                    <tr>
+                        <td>1</td>
+                        <td>101</td>
+                        <td>NAME1</td>
+                        <td>
+                            <!-- 複雑なPHP処理を埋め込む -->
+                            ROLE1<br>ROLE2<br>                        </td>
+                    </tr>
+                                    <tr>
+                        <td>2</td>
+                        <td>102</td>
+                        <td>&lt;NAME2&gt;</td>
+                        <td>
+                            <!-- 複雑なPHP処理を埋め込む -->
+                            なし                        </td>
+                    </tr>
+                            </tbody>
+        </table>
+    </main>
+</body>
+
+</html>
