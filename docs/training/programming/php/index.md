@@ -12,6 +12,7 @@
 | 6 | [配列](./arrays/index.md) |
 | 7 | [ループ](./loops/index.md) |
 | 8 | [課題](./exercises/index.md) |
+| 9 | [基本的な構文](./basic-syntax/index.md) |
 
 ## 参考サイト
 
