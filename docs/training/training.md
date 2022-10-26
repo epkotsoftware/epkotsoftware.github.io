@@ -639,7 +639,7 @@ LaravelのバージョンがCBCと異なるため、一つ一つコードを理�
 - `#4`～`#9` は手順通り進めてみましょう。
   - 注意
     - RoutingについてはLaravel6は手法が古いため、以下で学習し実装してください（「`#7 Laravelでデータベースのデータを表示する方法`」の手法が古いです）。
-      - <https://readouble.com/laravel/9.x/ja/routing.html>
+      - [ルーティング](./laravel/routing/index.md)
     - 「`Target class [SortableController] does not exist.`」のエラーが出る  
       - [名前空間](./programming/php/namespaces/index.md) について学習して下さい、「use」を使用します。
     - ディレクトリ構成がCBCと違うので読み替えてください。

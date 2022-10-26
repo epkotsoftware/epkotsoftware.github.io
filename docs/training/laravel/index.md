@@ -246,6 +246,10 @@ php artisan make:controller ArtistExtendController --model=Artist --resource --r
 php artisan make:test Http/Controllers/ArtistExtendControllerTest --unit
 ```
 
+## ルーティング
+
+- [ルーティング](./routing/index.md)
+
 ## CRUD
 
 WEBサービスを作る際、管理者がデータ登録・閲覧するための管理画面(Admin)を作る事があります。  
