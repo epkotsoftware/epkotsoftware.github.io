@@ -300,8 +300,7 @@ root@training-laravel-web:/var/www/app#
 例えば`admin/jobs/12`と指定すると自動的にDBから`id=12`のレコードを取得し、Controllerの引数にModelがセットされます。  
 存在しないIDの場合、404ページに遷移します。
 
-- 参考: ルーティング
-  - <https://readouble.com/laravel/9.x/ja/routing.html>
+- 参考: [ルーティング](./../routing/index.md)
 
 ## Views
 
