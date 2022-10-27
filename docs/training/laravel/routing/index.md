@@ -8,6 +8,7 @@
 | 2 | [PHPフレームワークを使わない場合](#phpフレームワークを使わない場合) |
 | 3 | [Laravelルーティング](#laravelルーティング) |
 | 4 | [Laravel公式ページ](#laravel公式ページ) |
+| 5 | [PHPマニュアル](#phpマニュアル) |
 
 ## ルーティングとは
 
@@ -69,14 +70,14 @@ Controllerクラスのメソッドを指定することが出来ます。
 ---
 
 ```php
-// 処理を直接記述
+// 処理を直接記述（無名関数を指定）
 Route::HTTPメソッド('URI', function (Request $request) {
     // ...
 });
 ```
 
 ```php
-// Controllerクラスのメソッド
+// Controllerクラスのメソッド（配列でクラス名とメソッド名を指定）
 Route::HTTPメソッド('URI', [Controllerクラス::class, 'メソッド名']);
 ```
 
@@ -160,3 +161,10 @@ use App\Http\Controllers\RankingController;
 
 - `Laravel 9.x ルーティング`
   - <https://readouble.com/laravel/9.x/ja/routing.html>
+
+## PHPマニュアル
+
+資料作成で参考にしたPHPマニュアルのリンクです。
+
+- `無名関数`
+  - <https://www.php.net/manual/ja/functions.anonymous.php>
