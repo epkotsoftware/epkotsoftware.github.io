@@ -158,46 +158,6 @@ class UserController
 }
 ```
 
-### 例
-
-今度は独自のクラスを定義してみましょう。
-
-#### クラス定義
-
-```php
-<?php
-
-namespace Helpers;
-
-class StringHelper
-{
-    public static function upper($value)
-    {
-        return mb_strtoupper($value, 'UTF-8');
-    }
-}
-```
-
-#### 定義したクラスを使用
-
-```php
-<?php
-
-namespace App\Controllers;
-
-// use Helpers\StringHelper as StringHelper と同じ
-use Helpers\StringHelper;
-
-class UserController
-{
-    public function index()
-    {
-        $converted = StringHelper::upper('Laravel');
-        var_dump($converted);
-    }
-}
-```
-
 ## Laravel参考ページ
 
 LaravelのStrクラスの参考資料です。
