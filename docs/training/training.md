@@ -142,7 +142,9 @@ CSSの「`grid-template`」が、ほぼ全てのブラウザでサポートさ�
     - Google Chrome
   - 表示
     - 自分のユーザーディレクトリの「`01_beginner/htdocs/index.html`」をブラウザで開くと、作成したページが見れる。
-    - 横幅:`1024px` で表示が崩れないようにする（横スクロールバーが出ないようにする）
+    - 横幅:`1024px` で表示が崩れないようにする（確認方法は[横幅を指定した確認方法](#横幅を指定した確認方法)を参照）
+      - 横スクロールできないこと
+      - 文字・画像が切れていないこと
   - その他
     - 自分のユーザーディレクトリの「`01_beginner/htdocs/`」ディレクトリ内にHTML・CSSが入っていること
 - フリー素材  ***※ フリー素材を使用する際は、利用規約は確認してください。***
@@ -155,22 +157,23 @@ CSSの「`grid-template`」が、ほぼ全てのブラウザでサポートさ�
   - `かわいいフリー素材集 いらすとや`
     - <https://www.irasutoya.com/>
 
-横幅を指定した確認方法
+#### 横幅を指定した確認方法
 
 1. Google Chrome のDevToolsを開く(Windowsであれば「F12」キー)
 1. デバイスツールバーを開く
   ![google_chrome_dev_tools_device](./../image/google_chrome_dev_tools_device.png)
-1. デバイスを選択する（今回の場合`iPad Pro`の縦表示で横幅が1024pxになるのでちょうど良い）  
-  「`Responsive`」で自由にピクセル指定も可能です。
-  ![google_chrome_dev_tools_device_ipad_pro](./../image/google_chrome_dev_tools_device_ipad_pro.png)
+1. デバイスを選択する
+  ![google_chrome_dev_tools_device_desktop_test](./../image/google_chrome_dev_tools_device_desktop_test.png)  
 
-- Edit でデバイスを追加することも可能です、以下は入力例
-  - Device Name: Desktop Test
-  - Width: 1024
-  - Height: 620
-  - Device pixel ratio: 1
-  - User agent string: 未入力
-  - User agent type: Desktop
+- テスト用デバイス（Desktop Test）を作成
+  - 「Edit...」 でデバイスを追加することが可能です。  
+    スクリーンショットもこれで作成すると、ファイルサイズが抑えられ、GitHubに添付しても見やすくなります。
+    - Device Name: Desktop Test
+    - Width: 1024
+    - Height: 620
+    - Device pixel ratio: 1
+    - User agent string: 未入力
+    - User agent type: Desktop
 
 #### コーダー編課題提出
 
