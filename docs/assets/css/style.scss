@@ -21,7 +21,8 @@ body {
 
     h3, h4, h5, h6 {
         scroll-margin-top: 40px;
-        padding-left: 0.25rem;
+        padding-left: 4px;
+        padding-right: 8px;
         border-left: 4px solid #505050;
         border-radius: 8px;
     }
@@ -32,17 +33,25 @@ body {
     }
 
     h4 {
+        width: -moz-fit-content;
+        width: fit-content;
         background-color: #67CACA;
         color: #ffffff;
     }
 
     h5 {
+        width: -moz-fit-content;
+        width: fit-content;
+        margin-left: 8px;
         background-color: #8AD5D5;
         color: #000000;
     }
 
     h6 {
-        background-color: #8AD5D5;
+        width: -moz-fit-content;
+        width: fit-content;
+        margin-left: 16px;
+        background-color: #AFE3E3;
         color: #000000;
     }
 
