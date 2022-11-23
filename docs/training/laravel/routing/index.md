@@ -51,7 +51,7 @@ Laravelで、URLとControllerのメソッドを紐付けてみましょう。
 | 管理ログイン画面 | `https://example.com/admin/` | `AdminController::index` |
 | 商品一覧画面 | `https://example.com/admin/products/` | `ProductController::index` |
 | 商品新規画面 | `https://example.com/admin/products/create/` | `ProductController::create` |
-| 商品新規画面 | `https://example.com/ranking/` | `RankingController::index` |
+| ランキング画面 | `https://example.com/ranking/` | `RankingController::index` |
 
 ※ **URLはドメインが「`example.com`」の場合**
 
