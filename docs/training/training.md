@@ -91,9 +91,11 @@ Visual Studio Code(VSCode) で開きましょう。
 
 ## コーダー編
 
-コーダー編は課題提出がありますので予めご確認下さい。
+コーダー編は課題提出がありますので予めご確認下さい。  
+つまずいたら質問する前に[トラブルシューティング](./troubleshoot/index.md)を参照してください。
 
 - [研修課題提出](https://github.com/epkotsoftware/training/blob/template/docs/submission/index.md#研修課題提出)
+- [トラブルシューティング](./troubleshoot/index.md)
 
 まずは動画で学習しましょう。
 
@@ -196,9 +198,11 @@ CSSの「`grid-template`」が、ほぼ全てのブラウザでサポートさ�
 
 ## マークアップエンジニア編
 
-マークアップエンジニア編は課題提出がありますので予めご確認下さい。
+マークアップエンジニア編は課題提出がありますので予めご確認下さい。  
+つまずいたら質問する前に[トラブルシューティング](./troubleshoot/index.md)を参照してください。
 
 - [研修課題提出](https://github.com/epkotsoftware/training/blob/template/docs/submission/index.md#研修課題提出)
+- [トラブルシューティング](./troubleshoot/index.md)
 
 まずは動画で学習しましょう。
 
@@ -270,9 +274,11 @@ Googleマイドライブ → 「新規」 → 「ファイルのアップロー�
 
 ## フロントエンドエンジニア編
 
-フロントエンドエンジニア編は課題提出がありますので予めご確認下さい。
+フロントエンドエンジニア編は課題提出がありますので予めご確認下さい。  
+つまずいたら質問する前に[トラブルシューティング](./troubleshoot/index.md)を参照してください。
 
 - [研修課題提出](https://github.com/epkotsoftware/training/blob/template/docs/submission/index.md#研修課題提出)
+- [トラブルシューティング](./troubleshoot/index.md)
 
 フロントエンドエンジニア編ではCBCの応用コースをやっていきます。  
 開発環境については以下の仮想環境を構築します。
@@ -620,9 +626,11 @@ PHPでは「PHPUnit」を使用します。
 
 ## バックエンド編
 
-バックエンド編課題は課題提出がありますので予めご確認下さい。
+バックエンド編課題は課題提出がありますので予めご確認下さい。  
+つまずいたら質問する前に[トラブルシューティング](./troubleshoot/index.md)を参照してください。
 
 - [研修課題提出](https://github.com/epkotsoftware/training/blob/template/docs/submission/index.md#研修課題提出)
+- [トラブルシューティング](./troubleshoot/index.md)
 
 バックエンド編ではCBCの実践（バックエンド Laravel）をやっていきます。  
 開発環境についてはフロントエンドエンジニア編と同様に以下、Dockerで構築します。
