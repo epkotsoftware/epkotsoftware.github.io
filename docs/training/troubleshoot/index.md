@@ -42,14 +42,69 @@ php artisan view:clear
 
 ## フロントエンドエンジニア編
 
+### phpMyAdminが開かない
+
+> 「[#9 データベース（DB）を作る](https://cbc-study.com/training/advanced/page4#s9)」で  
+> `http://localhost:8888/phpMyAdmin/` でphpMyAdminが開かない。  
+
+開発環境構築時に既に確認しているはずです。  
+CBCと環境が違うので注意しましょう。
+
+- [trainingリポジトリ 03_advanced/README.md 〜 確認](https://github.com/epkotsoftware/training/tree/template/users/_template/03_advanced#確認)
+
+### No such file or directory
+
+> 「[#3 データベースに接続する](https://cbc-study.com/training/advanced/page5#pl-9)」などで  
+> 以下のエラーメッセージが出る
+>
+> SQLSTATE[HY000] [2002] No such file or directory
+
+データベース接続に失敗している場合に出るエラーメッセージです。  
+CBCとはデータベースの接続情報が異なりますので以下を参照してください。
+
+- [trainingリポジトリ 03_advanced/README.md 〜 PHP](https://github.com/epkotsoftware/training/tree/template/users/_template/03_advanced#php)
+
+### #9 作ったプログラムを拡張してみる
+
+> [#9 作ったプログラムを拡張してみる](https://cbc-study.com/training/advanced/page7#s9)にて  
+> phpMyAdminでテーブルを作成する際、「正しい長さを入力してください！」のエラーが出る。  
+
+`varchar(11)`の`11`が長さを表します。
+
+### Undefined property
+
+> 「[#12 PHPアプリケーションをクラス化してみよう](https://>cbc-study.com/training/advanced/class1#s12)」にて
+> 以下のメッセージが画面上に出る。
+>
+> Warning: Undefined property: PDOException::$getMessage in /var/www/html/sortable3/Controller/Connect.php
+> エラー
+
+2022/11現在、CBCのConnect.phpのコードの誤りで上記のエラーが出ることがあります。  
+以下の様に「`()`」をつけると正しいエラーメッセージが出力されます。  
+
+```txt
+× echo 'エラー '.$e->getMessage;
+◯ echo 'エラー '.$e->getMessage();
+```
+
+原因としてはデータベース接続エラーなので  
+「[No such file or directory](#no-such-file-or-directory)」のエラーメッセージが出ている可能性が高いです。  
+データベース接続情報をよく確認しましょう。
+
 ## バックエンド編
 
 ### コマンドでエラーになる
+
+> `php artisan xxxx` のようなコマンドを打つとエラーになる
 
 Webサーバーで入力していない可能性が高いので確認しましょう。  
 環境構築時のREADME.mdに記載されています。
 
 ### タスク登録できない
+
+> タスク登録機能がうまく動作しない
+
+いくつか原因が考えられます。
 
 - [全般](#全般)のキャッシュなどを確認しておく
 - Sortableのルーティングと重複している可能性があるので確認しておく
