@@ -57,6 +57,11 @@ BIOS設定はWindowsでは行わないため、ブラウザを見ながら出来
 
 ## コンテナ起動
 
+### docker-compose で「`unknown docker command`」
+
+コマンドに誤りがある場合に表示されます。  
+スペルミスや、必要な半角スペースがない事が考えられます。  
+
 ### docker-compose で「`command not found`」
 
 DockerDesktopは正常にインストール出来たが  

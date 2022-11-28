@@ -5,7 +5,7 @@
 | No. |  |
 | :---: | --- |
 | 1 | [はじめに](#はじめに) |
-| 2 | [全般](#全般)<br>└ [キャッシュ](#キャッシュ) |
+| 2 | [全般](#全般)<br>└ [キャッシュ](#キャッシュ)<br>└ [Git](#git)<br>└ [Docker](#docker) |
 | 3 | [コーダー編](#コーダー編) |
 | 4 | [マークアップエンジニア編](#マークアップエンジニア編) |
 | 5 | [フロントエンドエンジニア編](#フロントエンドエンジニア編) |
@@ -26,6 +26,9 @@
 - 【Webデザイナー・プログラマーになりたい皆さんへ】Web業界の常識シリーズ10選！知らないままではマズいです… キャッシュ/スーパーリロード/アクセス制限の方法etc【初心者必見】
   - <https://youtu.be/XAeLmi6E4-g>
 
+クライアント側（ブラウザ）でのキャッシュ対策としては  
+常にブラウザの「**シークレットウィンドウ**」を使うことです。  
+
 また、バックエンド編などでLaravelを使っている場合は  
 以下のコマンドで、Laravelのキャッシュも削除しておきましょう。
 
@@ -36,11 +39,43 @@ php artisan route:clear
 php artisan view:clear
 ```
 
+### Git
+
+#### コミットでフリーズ
+
+> VSCodeでのコミットでフリーズしてしまう
+
+2022/11現在、コミットコメントが未入力の場合にフリーズしてしまうようです。  
+VSCodeを再起動し、もう一度試してみましょう。
+
+### Docker
+
+フロントエンドエンジニア編以降で使う  
+「Docker」のトラブルシューティングについては  
+以下にまとめています。
+
+- [Docker トラブルシューティング](./../docker/troubleshoot.md)
+
 ## コーダー編
+
+キャッシュによるトラブルが多いので  
+以下をチェックしておきましょう。
+
+- [全般](#全般)
 
 ## マークアップエンジニア編
 
+キャッシュによるトラブルが多いので  
+以下をチェックしておきましょう。
+
+- [全般](#全般)
+
 ## フロントエンドエンジニア編
+
+キャッシュ・Dockerによるトラブルが多いので  
+以下をチェックしておきましょう。
+
+- [全般](#全般)
 
 ### phpMyAdminが開かない
 
@@ -64,7 +99,7 @@ CBCとはデータベースの接続情報が異なりますので以下を参�
 
 - [trainingリポジトリ 03_advanced/README.md 〜 PHP](https://github.com/epkotsoftware/training/tree/template/users/_template/03_advanced#php)
 
-### #9 作ったプログラムを拡張してみる
+### phpMyAdmin 正しい長さを入力してください
 
 > [#9 作ったプログラムを拡張してみる](https://cbc-study.com/training/advanced/page7#s9)にて  
 > phpMyAdminでテーブルを作成する際、「正しい長さを入力してください！」のエラーが出る。  
@@ -76,7 +111,7 @@ CBCとはデータベースの接続情報が異なりますので以下を参�
 > 「[#12 PHPアプリケーションをクラス化してみよう](https://>cbc-study.com/training/advanced/class1#s12)」にて
 > 以下のメッセージが画面上に出る。
 >
-> Warning: Undefined property: PDOException::$getMessage in /var/www/html/sortable3/Controller/Connect.php
+> Warning: Undefined property: PDOException::$getMessage in /var/www/html/sortable3/Controller/Connect.php  
 > エラー
 
 2022/11現在、CBCのConnect.phpのコードの誤りで上記のエラーが出ることがあります。  
@@ -93,12 +128,35 @@ CBCとはデータベースの接続情報が異なりますので以下を参�
 
 ## バックエンド編
 
+キャッシュによるトラブルが多いので  
+以下をチェックしておきましょう。
+
+- [全般](#全般)
+
 ### コマンドでエラーになる
 
 > `php artisan xxxx` のようなコマンドを打つとエラーになる
 
 Webサーバーで入力していない可能性が高いので確認しましょう。  
 環境構築時のREADME.mdに記載されています。
+
+### Target class xxxxxx does not exist
+
+> 「[#7 Laravelでデータベースのデータを表示する方法](https://cbc-study.com/training/backend/laravel3#pl-2)」で  
+> 以下のエラーメッセージが出る
+>
+> Target class [SortableController] does not exist.
+
+名前空間のないSortableControllerクラスにアクセスしようとしているため  
+クラスが存在しないのでエラーになっています。  
+
+Laravel ルーティングにも書かれている  
+名前空間について学習が必要です。
+
+- [Laravel ルーティング](./../laravel/routing/index.md)
+
+名前空間の「namespace」・「use」はPHPの実務において、ほぼ確実に使うため  
+この機会にしっかり学習しておきましょう。  
 
 ### タスク登録できない
 
