@@ -4,4 +4,5 @@
 
 | No. |  |
 | :---: | --- |
-| 1 | [課題(tweets)](./tweets/index.md) |
+| 1 | [課題(median)](./median/index.md) |
+| 2 | [課題(tweets)](./tweets/index.md) |
