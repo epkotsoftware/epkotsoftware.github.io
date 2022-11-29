@@ -9,20 +9,20 @@ class Math
 {
     public static function median(array $numbers)
     {
-        $count = count($numbers); // 要素数を取得
+        $count = count($numbers); // 要素数（データ数）を取得
         if ($count === 0) {
-            return null; // 要素数が0の場合、nullを返す
+            return null; // データ数が0の場合、nullを返す
         }
 
-        $i = (int)floor($count / 2); // 要素数を割る2して、端数を切り捨て
-        sort($numbers); // numbersを昇順ソート
-        // 要素数の奇数・偶数判定
+        $i = (int)floor($count / 2); // データ中央のインデックスを算出
+        sort($numbers); // データを昇順ソート
+        // データ数の奇数・偶数判定
         if ($count % 2 === 1) {
-            // 要素数が奇数
-            return $numbers[$i]; // 真ん中の要素を返す
+            // データ数が奇数
+            return $numbers[$i]; // 中央順位の値を返す
         }
-        // 要素数が偶数
-        return ($numbers[$i - 1] + $numbers[$i]) / 2; // 真ん中2要素を足して、割る2して返す
+        // データ数が偶数
+        return ($numbers[$i - 1] + $numbers[$i]) / 2; // 中央順位2個の値の平均値を返す
     }
 }
 ```
