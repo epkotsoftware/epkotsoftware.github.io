@@ -9,7 +9,7 @@
 
 - クラス名: `Math`
 - メソッド名: (static) `median`
-- パラメータ(引数): (array)`$numbers` - ツイートのレスポンス情報
+- パラメータ(引数): (array)`$numbers` - 数値配列
 - 戻り値: (mixed)中央値
 
 ```php
@@ -38,7 +38,10 @@ var_dump($result); // 20
 ### 戻り値
 
 中央値を返してください。  
-データ数が偶数と奇数で違うことに注意しましょう。
+
+- 引数が空配列（[]）の場合、nullを返す。
+- データ数が奇数の場合、中央順位の値を返す。
+- データ数が偶数の場合、中央順位2個の値の平均値を返す。
 
 #### 中央値とは
 
@@ -136,9 +139,12 @@ class PhpFunctionTest
     {
         if ($value === null) {
             return 'null';
+        } elseif (is_int($value)) {
+            return '(int)' . var_export($value, true);
+        } elseif (is_bool($value)) {
+            return '(bool)' . var_export($value, true);
         }
-        $type = str_replace(['integer', 'boolean'], ['int', 'bool'], gettype($value));
-        return '(' . $type . ')' . var_export($value, true);
+        return '(' . gettype($value) . ')' . var_export($value, true);
     }
 }
 // ↑↑↑テスト用クラス
