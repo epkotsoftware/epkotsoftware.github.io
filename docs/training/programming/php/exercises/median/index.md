@@ -1,5 +1,25 @@
 # 株式会社エプコットソフトウェア ～ PHPプログラミング編 課題(median)
 
+## はじめに
+
+よくある処理のため、検索するとすぐ出てきてしまいます。  
+「中央値」、「median」などの検索はしないで作りましょう。  
+
+- 使用するもの
+  - [関数](./../../functions/index.md)
+  - if文
+  - [演算子](./../../operators/index.md)
+  - [インデックス付き配列](./../../arrays/index.md)
+  - 関数
+    - count
+      - <https://www.php.net/manual/ja/function.count.php>
+    - floor
+      - <https://www.php.net/manual/ja/function.floor.php>
+    - sort
+      - <https://www.php.net/manual/ja/function.sort.php>
+  - 中央値
+    - <https://ja.wikipedia.org/wiki/中央値>
+
 ## 課題
 
 数字配列から中央値を返す  
