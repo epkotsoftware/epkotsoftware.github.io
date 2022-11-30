@@ -6,9 +6,11 @@
 | :---: | --- |
 | 1 | [はじめに](#はじめに) |
 | 2 | [HTML](#html) |
-| 3 | [PHP](#php) |
-| 4 | [PHPフレームワーク Laravel](#phpフレームワーク-laravel) |
-| 5 | [データベース MySQL](#データベース-mysql) |
+| 3 | [CSS](#css) |
+| 4 | [JavaScript](#javascript) |
+| 5 | [PHP](#php) |
+| 6 | [PHPフレームワーク Laravel](#phpフレームワーク-laravel) |
+| 7 | [データベース MySQL](#データベース-mysql) |
 
 ## はじめに
 
@@ -25,7 +27,7 @@
 | HTML Living Standard | 2021/01/29 |
 
 HTML5とHTML Living Standardはほぼ同等のものです。  
-HTML4.01とHTML5.0以降とは大きく異なり、HTML文書ではDOCTYPE宣言で見分けることが出来ます。  
+HTML4.01とHTML5.0以降とは大きく異なり、HTML文書では先頭のDOCTYPE宣言で見分けることが出来ます。  
 
 - HTML4.01（strict）
 
@@ -61,6 +63,14 @@ HTML4.01とHTML5.0以降とは大きく異なり、HTML文書ではDOCTYPE宣言
   - 翻訳
     - <https://github.com/whatwg/html/wiki/Translations>
 
+## CSS
+
+TODO
+
+## JavaScript
+
+TODO
+
 ## PHP
 
 | PHPバージョン | 初回リリース | アクティブサポート終了 | セキュリティサポート終了 | 備考 |
@@ -69,6 +79,10 @@ HTML4.01とHTML5.0以降とは大きく異なり、HTML文書ではDOCTYPE宣言
 | 7.4 | 2019/11/28 | 2021/11/28 | 2022/11/28 | サポート切れ |
 | 8.0 | 2020/11/26 | 2022/11/26 | 2023/11/26 |  |
 | 8.1 | 2021/11/25 | 2023/11/25 | 2024/11/25 |  |
+
+PHP6は存在しません。  
+5と7は大きく異なり、機能追加・廃止がかなり多いです。  
+7と8については、5と7ほどの大きい変更点はないです。  
 
 最新の情報は公式を参照してください。  
 変更点についてはPHPマニュアルの「付録」を参照してください。  
@@ -88,17 +102,9 @@ HTML4.01とHTML5.0以降とは大きく異なり、HTML文書ではDOCTYPE宣言
 | 9 | 8.0 - 8.1 | 2022/02/08 | 2023/08/08 | 2024/02/08 |  |
 | 10 | 8.1 | 2023/02/07 | 2024/08/07 | 2025/02/07 |  |
 
-最新の情報は公式を参照してください。  
-変更点については公式の「アップグレードガイド」を参照してください。  
+詳細については以下を参照
 
-- Laravel Release Notes
-  - <https://laravel.com/docs/releases>
-- Laravel 7.x アップグレードガイド
-  - <https://readouble.com/laravel/7.x/ja/upgrade.html>
-- Laravel 8.x アップグレードガイド
-  - <https://readouble.com/laravel/8.x/ja/upgrade.html>
-- Laravel 9.x アップグレードガイド
-  - <https://readouble.com/laravel/9.x/ja/upgrade.html>
+- [Laravelバージョン](./laravel/index.md)
 
 ## データベース MySQL
 
@@ -112,7 +118,6 @@ GA(General Availability)は正式リリースを指します。
 
 上記のExtended Supportが切れた後に、任意期間で「Sustaining Support」がありますがリリースは行われません。  
 その為、5.6に関しては`2021/01`を最後にリリースは止まっています。  
-現場で採用されているMySQLは、2022/12現在では`5.7` or `8.0`になりそうです。  
 
 - MySQL テクニカル・サポート
   - <https://www.mysql.com/jp/support/>
