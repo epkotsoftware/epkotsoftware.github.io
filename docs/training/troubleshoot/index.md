@@ -158,6 +158,14 @@ Laravel ルーティングにも書かれている
 名前空間の「namespace」・「use」はPHPの実務において、ほぼ確実に使うため  
 この機会にしっかり学習しておきましょう。  
 
+### ドラッグ時にDBが更新されない
+
+[#9 LaravelでAjaxのデータを登録する方法](https://cbc-study.com/training/backend/laravel4#pl-6)をよく確認しましょう。  
+[キャッシュ](#キャッシュ)やCSRFトークンが正しく設定されていないことが原因になっていることが多いです。
+
+- `Laravel 9.x CSRF保護 - X-CSRF-TOKEN`
+  - <https://readouble.com/laravel/9.x/ja/csrf.html#csrf-x-csrf-token>
+
 ### タスク登録できない
 
 > タスク登録機能がうまく動作しない
