@@ -212,13 +212,39 @@ Laravelを使わない場合でも、Composerでインストールが可能で�
     - Laravel データベース：クエリビルダ
       - <https://readouble.com/laravel/8.x/ja/queries.html>
 
+### 脆弱性情報データベース
+
+以下に該当する方は知っておきましょう。  
+特に以下に該当する方は必要です。  
+
+- システム開発の会社を立ち上げたい
+- 個人でシステムを作りたい方
+- 上流工程を目指す方
+- ホワイトハッカーになりたい方
+
+- `脆弱性情報データベース - Wikipedia`
+  - <https://ja.wikipedia.org/wiki/脆弱性情報データベース>
+- `JVN iPedia - 脆弱性対策情報データベース`
+  - <https://jvndb.jvn.jp/>
+
 ## 書籍
 
-おすすめの書籍がありましたら、追記しますので講師までご連絡ください。
+おすすめの書籍がありましたら、追記しますので講師までご連絡ください。  
+レビューの悪い評価も目を通した上で購入するのが良いかと思います。  
+「試し読み」も可能です。  
 
 - HTML・CSS
+  - `1冊ですべて身につくHTML & CSSとWebデザイン入門講座`
+    - <https://www.amazon.co.jp/dp/4797398892/>
+  - `ほんの一手間で劇的に変わるHTML & CSSとWebデザイン実践講座`
+    - <https://www.amazon.co.jp/dp/4815606145/>
   - `HTML&CSS全事典 改訂版 HTML Living Standard & CSS3/4対応`
     - <https://www.amazon.co.jp/dp/4295008281>
+  - `Web制作者のためのCSS設計の教科書 モダンWeb開発に欠かせない「修正しやすいCSS」の設計手法`
+    - <https://www.amazon.co.jp/dp/4844336355>
+- Sass
+  - `Web制作者のためのSassの教科書 改訂2版 Webデザインの現場で必須のCSSプリプロセッサ`
+    - <https://www.amazon.co.jp/dp/4295002356>
 - DB
   - `スッキリわかるSQL入門 第2版 ドリル222問付き! (スッキリわかる入門シリーズ)`
     - <https://www.amazon.co.jp/dp/4295005096>
@@ -243,8 +269,13 @@ Laravelを使わない場合でも、Composerでインストールが可能で�
     - こちらは比較的内容も新しくVSCodeを使った学習となっています。
     - 「変数」等のプログラミングの基礎を学んだあとに物を作っていくので入門書としては良さそうです。
 - JavaScript
-  - 確かな力が身につくJavaScript「超」入門 第2版
+  - `改訂新版JavaScript本格入門 ~モダンスタイルによる基礎から現場での応用まで`
+    - <https://www.amazon.co.jp/dp/477418411X>
+  - `確かな力が身につくJavaScript「超」入門 第2版`
     - <https://www.amazon.co.jp/dp/4815601577>
+- TypeScript
+  - `プログラミングTypeScript ―スケールするJavaScriptアプリケーション開発`
+    - <https://www.amazon.co.jp/dp/4873119049>
 - Linux
   - `Ubuntuスタートアップバイブル`
     - <https://www.amazon.co.jp/dp/4839964866>

@@ -166,6 +166,8 @@ IDEである「Visual Studio Community」は個人利用であれば無償で使
   - <https://docs.microsoft.com/ja-jp/visualstudio/mac/unity-walkthrough>
 - `YouTubeチャンネル - dotNET`
   - <https://www.youtube.com/c/dotNET>
+- `C# 入門講座`
+  - <https://www.umayadia.com/CSNyumon/CSNyumonToc.htm>
 
 ## Tailwind CSS
 
