@@ -5,7 +5,7 @@
 | No. |  |
 | :---: | --- |
 | 1 | [はじめに](#はじめに) |
-| 2 | [全般](#全般)<br>└ [キャッシュ](#キャッシュ)<br>└ [Git](#git)<br>└ [Docker](#docker) |
+| 2 | [全般](#全般)<br>└ [キャッシュ](#キャッシュ)<br>└ [ブラウザのエラー確認](#ブラウザのエラー確認)<br>└ [Git](#git)<br>└ [Docker](#docker) |
 | 3 | [コーダー編](#コーダー編) |
 | 4 | [マークアップエンジニア編](#マークアップエンジニア編) |
 | 5 | [フロントエンドエンジニア編](#フロントエンドエンジニア編) |
@@ -20,6 +20,7 @@
 
 ### キャッシュ
 
+Webページ表示などに問題があった場合  
 キャッシュされたCSS・JavaScriptが使われている可能性があるので確認しておきましょう。  
 何のことかわからない方は、コーダー編でもやった以下を復習してください。
 
@@ -38,6 +39,11 @@ php artisan config:clear
 php artisan route:clear
 php artisan view:clear
 ```
+
+### ブラウザのエラー確認
+
+Webページ表示などに問題があった場合  
+GoogleChromeの「Console」にエラーが出ていることがあるので確認しましょう。
 
 ### Git
 
@@ -58,10 +64,27 @@ VSCodeを再起動し、もう一度試してみましょう。
 
 ## コーダー編
 
-キャッシュによるトラブルが多いので  
-以下をチェックしておきましょう。
+### CSSを変えても画面に反映されない
 
-- [全般](#全般)
+まず、ファイルが保存されているか確認しましょう。  
+ファイル保存後に画面の更新を行いましょう。
+
+### CSS・画像が読み込まれない
+
+パスについて学習しましょう。  
+今回の場合、相対パスを使用します。  
+パスはエンジニアにとって必須の知識になります。  
+
+- `【Web業界の常識】「パス」の書き方、説明できますか？Webデザイナー・プログラマー志望の皆さんへ 初心者向け【HTML・CSS コーディング】`
+  - <https://youtu.be/R7tNviqrMzo>
+
+CSSのurl関数で画像を表示しようとしている場合、CSSファイルからの相対パスとなりますので注意してください。  
+MDNにもそのように記載があります。  
+
+> 相対 URL が使用された場合は、スタイルシートの URL からの相対となります (ウェブページの URL からではありません)。
+
+- `url() - CSS: カスケーディングスタイルシート | MDN`
+  - <https://developer.mozilla.org/ja/docs/Web/CSS/url>
 
 ## マークアップエンジニア編
 
@@ -140,6 +163,24 @@ CBCとはデータベースの接続情報が異なりますので以下を参�
 Webサーバーで入力していない可能性が高いので確認しましょう。  
 環境構築時のREADME.mdに記載されています。
 
+### Permissionエラー
+
+> 以下のエラーが出る。
+>
+> UnexpectedValueException
+>
+> The stream or file "/var/www/app/storage/logs/laravel.log" could not be opened in append mode: Failed to open stream: Permission denied The exception occurred while attempting to log: The stream or file...
+
+```bash
+# ■ WEBサーバーで入力
+cd /var/www/app
+# storage ディレクトリに読み取り・書き込み権限を与える（storage内に書き込み（ログ出力時等）に「Permission denied」のエラーが発生する）
+chmod -R 777 storage/
+```
+
+- Linuxの権限確認と変更(chmod)（超初心者向け）
+  - <https://qiita.com/shisama/items/5f4c4fa768642aad9e06>
+
 ### Target class xxxxxx does not exist
 
 > 「[#7 Laravelでデータベースのデータを表示する方法](https://cbc-study.com/training/backend/laravel3#pl-2)」で  
@@ -157,6 +198,34 @@ Laravel ルーティングにも書かれている
 
 名前空間の「namespace」・「use」はPHPの実務において、ほぼ確実に使うため  
 この機会にしっかり学習しておきましょう。  
+
+### Class xxxxxx not found
+
+> 「[#7 Laravelでデータベースのデータを表示する方法](https://cbc-study.com/training/backend/laravel3#pl-2)」で  
+> 以下のエラーメッセージが出る
+>
+> Error
+>
+> Class "App\Sortable" not found
+
+Laravelのバージョン違いにより、名前空間が異なるため  
+SortableControllerをコピペしただけではうまくいきません。  
+
+名前空間の「namespace」・「use」はPHPの実務において、ほぼ確実に使うため  
+この機会にしっかり学習しておきましょう。  
+
+- [名前空間](./../programming/php/namespaces/index.md)
+
+### drags.blade.phpでエラーが発生する
+
+> 「[#7 Laravelでデータベースのデータを表示する方法](https://cbc-study.com/training/backend/laravel3#pl-5)」で  
+> drags.blade.phpのエラーが出る。
+
+2022年現在、VSCodeがBladeの構文チェックに対応していないため  
+エラーが出てきますが、問題ないためそのまま進めてください。  
+
+どうしても気になる場合、Bladeに対応した拡張機能がありそうなので  
+自己責任にはなりますが、自身で調べ導入して見てください。
 
 ### ドラッグ時にDBが更新されない
 
