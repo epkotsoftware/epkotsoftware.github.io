@@ -171,6 +171,10 @@ Webサーバーで入力していない可能性が高いので確認しまし�
 >
 > The stream or file "/var/www/app/storage/logs/laravel.log" could not be opened in append mode: Failed to open stream: Permission denied The exception occurred while attempting to log: The stream or file...
 
+ログファイル(`storage/logs/laravel.log`)への書き込み権限がなくエラーになっています。
+開発環境構築時に権限設定が漏れているかもしれません。  
+以下で設定しておきましょう。
+
 ```bash
 # ■ WEBサーバーで入力
 cd /var/www/app
@@ -181,25 +185,33 @@ chmod -R 777 storage/
 - Linuxの権限確認と変更(chmod)（超初心者向け）
   - <https://qiita.com/shisama/items/5f4c4fa768642aad9e06>
 
-### Target class xxxxxx does not exist
+### クラスが見つからない
+
+まずはクラス名のスペルミスの確認を行い、問題なければ  
+ルーティング、名前空間（完全修飾名・namespace・use）の理解をしましょう。  
+
+名前空間の「namespace」・「use」はPHPの実務において、ほぼ確実に使うため  
+この機会にしっかり学習しておきましょう。  
+
+- [Laravel ルーティング](./../laravel/routing/index.md)
+- [名前空間](./../programming/php/namespaces/index.md)
+  - 以下を人に説明できるレベルになっておくことが必要です。
+    - 完全修飾名
+    - namespace
+    - use
+
+#### Target class [SortableController] does not exist
 
 > 「[#7 Laravelでデータベースのデータを表示する方法](https://cbc-study.com/training/backend/laravel3#pl-2)」で  
 > 以下のエラーメッセージが出る
 >
 > Target class [SortableController] does not exist.
 
-名前空間のないSortableControllerクラスにアクセスしようとしているため  
-クラスが存在しないのでエラーになっています。  
+web.phpの記載に誤りがある可能性が高いです。  
+Controllerを使ったルート設定は、Laravel6のルート設定では出来なくなっています  
+[ルーティング](./../laravel/routing/index.md)・[名前空間](./../programming/php/namespaces/index.md)について学習しましょう。
 
-Laravel ルーティングにも書かれている  
-名前空間について学習が必要です。
-
-- [Laravel ルーティング](./../laravel/routing/index.md)
-
-名前空間の「namespace」・「use」はPHPの実務において、ほぼ確実に使うため  
-この機会にしっかり学習しておきましょう。  
-
-### Class xxxxxx not found
+#### Class "App\Sortable" not found
 
 > 「[#7 Laravelでデータベースのデータを表示する方法](https://cbc-study.com/training/backend/laravel3#pl-2)」で  
 > 以下のエラーメッセージが出る
@@ -208,13 +220,26 @@ Laravel ルーティングにも書かれている
 >
 > Class "App\Sortable" not found
 
-Laravelのバージョン違いにより、名前空間が異なるため  
-SortableControllerをコピペしただけではうまくいきません。  
+SortableControllerで存在しない「`\App\Sortable`」クラスを使おうとしている可能性が高いです。  
+Laravel6と最新バージョンでは名前空間が異なるため、確認しましょう。  
+よくわからなければ、[名前空間](./../programming/php/namespaces/index.md)について学習しましょう。
 
-名前空間の「namespace」・「use」はPHPの実務において、ほぼ確実に使うため  
-この機会にしっかり学習しておきましょう。  
+#### Class "App\Http\Controllers\Sortable" not found
 
-- [名前空間](./../programming/php/namespaces/index.md)
+> 「[#7 Laravelでデータベースのデータを表示する方法](https://cbc-study.com/training/backend/laravel3#pl-2)」で  
+> 以下のエラーメッセージが出る
+>
+> Error
+>
+> Class "App\Http\Controllers\Sortable" not found
+
+`SortableController`クラスで use が使われていない可能性が高いです。  
+例えば use の指定なしで `Sortable::orderBy('id', 'asc')->get();` のような処理があった場合  
+`SortableController`クラスの名前空間内の `Sortable` クラスにアクセスするため  
+完全修飾名が「`\App\Http\Controllers\Sortable`」クラスにアクセスします。  
+
+使いたい`Sortable`クラスの完全修飾名を確認しましょう。  
+よくわからなければ、[名前空間](./../programming/php/namespaces/index.md)について学習しましょう。
 
 ### drags.blade.phpでエラーが発生する
 
@@ -225,7 +250,7 @@ SortableControllerをコピペしただけではうまくいきません。
 エラーが出てきますが、問題ないためそのまま進めてください。  
 
 どうしても気になる場合、Bladeに対応した拡張機能がありそうなので  
-自己責任にはなりますが、自身で調べ導入して見てください。
+自己責任にはなりますが、自身で調べ導入してください。
 
 ### ドラッグ時にDBが更新されない
 
