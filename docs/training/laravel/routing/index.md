@@ -166,12 +166,57 @@ use App\Http\Controllers\RankingController;
 
 - [PHPプログラミング編 名前空間](./../../programming/php/namespaces/index.md)
 
+### HTTPメソッド
+
+```php
+Route::get('URI', アクション); // GET or HEAD
+Route::post('URI', アクション); // POST
+Route::put('URI', アクション); // PUT
+Route::patch('URI', アクション); // PATCH
+Route::delete('URI', アクション); // DELETE
+Route::options('URI', アクション); // OPTIONS
+```
+
+- 公式
+  - <https://readouble.com/laravel/9.x/ja/routing.html#available-router-methods>
+  - `\Illuminate\Routing\Router`
+    - <https://github.com/illuminate/routing/blob/9.x/Router.php>
+
+#### 疑似フォームメソッド
+
+HTMLの`<form>`は、`GET`、`POST`以外のメソッドをサポートしていません。  
+疑似フォームメソッドを使用します。  
+
+以下の例のようにDELETEメソッドで送信したい場合、  
+form要素のmethod属性を`POST`にして  
+`_method`パラメータに`DELETE`を設定して送信します。  
+
+```php
+Route::delete('/example', アクション); // DELETE
+```
+
+```html
+<form action="/example" method="POST">
+    @method('DELETE') <!-- <input type="hidden" name="_method" value="DELETE"> と同じ -->
+    @csrf <!-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> と同じ -->
+</form>
+```
+
+- `<form>: フォーム要素 - HTML: HyperText Markup Language | MDN`
+  - <https://developer.mozilla.org/ja/docs/Web/HTML/Element/form#attr-method>
+- `Laravel 9.x ルーティング　〜　疑似フォームメソッド`
+  - <https://readouble.com/laravel/9.x/ja/routing.html#form-method-spoofing>
+
 ## Laravel公式ページ
 
 資料作成で参考にしたLaravel公式ページのリンクです。
 
 - `Laravel 9.x ルーティング`
   - <https://readouble.com/laravel/9.x/ja/routing.html>
+- `Laravel 9.x URL生成`
+  - <https://readouble.com/laravel/9.x/ja/urls.html>
+- `Laravel 9.x CSRF保護`
+  - <https://readouble.com/laravel/9.x/ja/csrf.html>
 
 ## PHPマニュアル
 
