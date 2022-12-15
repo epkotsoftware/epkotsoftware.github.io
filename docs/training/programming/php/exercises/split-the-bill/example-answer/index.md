@@ -21,7 +21,7 @@ class PaymentHelper
 }
 ```
 
-- [演算子](./../../operators/index.md)
+- [演算子](./../../../operators/index.md)
 - floor
   - <https://www.php.net/manual/ja/function.floor.php>
 - array_fill
