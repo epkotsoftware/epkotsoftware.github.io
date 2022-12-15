@@ -2,6 +2,30 @@
 
 ## 例1
 
+PHPは配列操作の関数が充実しており、array_column関数を使うと  
+カラムの値が簡単に抽出ができます。  
+今回の課題の場合、Null合体演算子を組み合わせる事で1行で書けます。
+
+```php
+<?php
+// クラス・メソッド
+class S3Helper
+{
+    public static function extractKeysFromListObjectsV2Response(array $listObjectsV2Response): array
+    {
+        return array_column($listObjectsV2Response['Contents'] ?? [], 'Key');
+    }
+}
+```
+
+- [Null合体演算子（??）](./../../../operators/index.md)
+- array_column
+  - <https://www.php.net/manual/ja/function.array-column.php>
+
+## 例2
+
+foreachを使った例です。
+
 ```php
 <?php
 // クラス・メソッド
@@ -20,7 +44,7 @@ class S3Helper
 
 - [Null合体演算子（??）](./../../../operators/index.md)
 
-## 例2
+## 例3
 
 PHP5ではNull合体演算子が使えないため、古いバージョンではissetを使います。  
 
@@ -47,7 +71,7 @@ class S3Helper
 - isset
   - <https://www.php.net/manual/ja/function.isset.php>
 
-## 例3
+## 例4
 
 array_key_exists関数を使う方法です。  
 issetと似ていますが、issetは関数ではなく、array_key_existsは関数になり、動作も少し異なるところがあります。  
