@@ -77,10 +77,11 @@ array_key_exists関数を使う方法です。
 issetと似ていますが、issetは関数ではなく、array_key_existsは関数になり、動作も少し異なるところがあります。  
 詳しい説明は割愛しますが、プログラミングでは関数の呼び出し回数が多いと処理速度が低下するため  
 issetの方がパフォーマンスが良いです。  
-また、issetでは対象のキーにnullが入っていた場合、falseになってしまうため  
-キーの存在チェックを行いたい場合、array_key_exists関数を使うようにしましょう。  
+仕様的にも異なる所があり、PHPマニュアルのarray_key_exists関数の説明に以下の記載があります。
 
-今回の課題の場合、どちらでもOKです。
+> isset() は null 値を持つ配列キーに対して true を返しません。一方、array_key_exists() は true を返します。
+
+今回の課題の場合、どちらを使ってもOKです。
 
 ```php
 <?php
@@ -100,3 +101,7 @@ class S3Helper
     }
 }
 ```
+
+- [演算子（!）](./../../../operators/index.md)
+- array_key_exists
+  - <https://www.php.net/manual/ja/function.array-key-exists.php>
