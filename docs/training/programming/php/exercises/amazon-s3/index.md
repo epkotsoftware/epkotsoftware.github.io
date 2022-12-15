@@ -82,7 +82,11 @@ $cases = [
     ['code' => '\S3Helper::extractKeysFromListObjectsV2Response([])', 'expected' => []],
     ['code' => '\S3Helper::extractKeysFromListObjectsV2Response(["IsTruncated" => false, "Name" => "x"])', 'expected' => []],
     [
-        'code' => '\S3Helper::extractKeysFromListObjectsV2Response(["Contents" => [["Key" => "1.txt"], ["Key" => "2.txt"], ["Key" => "3.txt"]])',
+        'code' => '\S3Helper::extractKeysFromListObjectsV2Response(["Contents" => [["Key" => "1.txt"]]])',
+        'expected' => ['1.txt'],
+    ],
+    [
+        'code' => '\S3Helper::extractKeysFromListObjectsV2Response(["Contents" => [["Key" => "1.txt"], ["Key" => "2.txt"], ["Key" => "3.txt"]]])',
         'expected' => ['1.txt', '2.txt', '3.txt'],
     ],
     [
