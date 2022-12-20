@@ -18,15 +18,14 @@
 
 - 名前空間: `App\Helpers`
 - クラス名: `DateTimeHelper`
-- メソッド名: (static)
-ymd_slash_format_string
-  - `toHMString`
-  - `toHMSString`
-  - `toYMDString`
-  - `toYMDSlashString`
-  - `toYMDHMSSlashString`
-  - `toYMDHMSFFFSlashString`
-  - `toYMDHMSFFFFFFSlashString`
+- メソッド名:
+  - (static)`toHMString`
+  - (static)`toHMSString`
+  - (static)`toYMDString`
+  - (static)`toYMDSlashString`
+  - (static)`toYMDHMSSlashString`
+  - (static)`toYMDHMSFFFSlashString`
+  - (static)`toYMDHMSFFFFFFSlashString`
 - パラメータ(引数): (DateTimeInterface)`$datetime` - 日時オブジェクト
 - 戻り値: (string)メソッドに対応した文字列
 
