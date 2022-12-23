@@ -1,4 +1,4 @@
-# 株式会社エプコットソフトウェア ～ JavaScript課題1
+# JavaScript課題1
 
 ## 課題
 

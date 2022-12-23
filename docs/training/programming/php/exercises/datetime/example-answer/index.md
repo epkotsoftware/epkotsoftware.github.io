@@ -1,4 +1,4 @@
-# 株式会社エプコットソフトウェア ～ PHP課題(datetime) 解答例
+# PHP課題(datetime) 解答例
 
 ## 例
 

@@ -1,4 +1,4 @@
-# 株式会社エプコットソフトウェア ～ Laravel CRUD CSVダウンロード
+# Laravel CRUD CSVダウンロード
 
 [Laravel CRUD](./../index.md) で作成したアプリの職業一覧画面に  
 職業一覧をCSVダウンロード出来る機能を追加してみましょう。

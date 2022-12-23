@@ -1,4 +1,4 @@
-# 株式会社エプコットソフトウェア ～ PlantUML
+# PlantUML
 
 - PlantUML
   - <https://plantuml.com/ja/>

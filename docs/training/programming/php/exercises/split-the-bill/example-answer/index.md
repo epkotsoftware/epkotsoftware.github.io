@@ -1,4 +1,4 @@
-# 株式会社エプコットソフトウェア ～ PHPプログラミング編 課題(Split the bill)解答例
+# PHPプログラミング編 課題(Split the bill)解答例
 
 ## 例
 

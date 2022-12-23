@@ -1,4 +1,4 @@
-# 株式会社エプコットソフトウェア ～ Laravel CRUD
+# Laravel CRUD
 
 `TODO: 【作成中】この資料は作成中です。`  
 

@@ -1,4 +1,4 @@
-# 株式会社エプコットソフトウェア ～ Laravel CRUD 設計
+# Laravel CRUD 設計
 
 ## 開発
 

@@ -1,4 +1,4 @@
-# 株式会社エプコットソフトウェア ～ CodeIgniter4
+# CodeIgniter4
 
 ## これから新規開発をする場合
 

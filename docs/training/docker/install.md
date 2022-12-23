@@ -1,4 +1,4 @@
-# 株式会社エプコットソフトウェア ～ Docker Desktopインストール
+# Docker Desktopインストール
 
 ## 公式
 

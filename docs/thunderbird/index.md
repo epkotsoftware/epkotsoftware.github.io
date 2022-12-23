@@ -1,4 +1,4 @@
-# 株式会社エプコットソフトウェア ～ Thunderbird設定
+# Thunderbird設定
 
 ## 概要
 
