@@ -79,6 +79,7 @@ TODO
 | 7.4 | 2019/11/28 | 2021/11/28 | 2022/11/28 | サポート切れ |
 | 8.0 | 2020/11/26 | 2022/11/26 | 2023/11/26 |  |
 | 8.1 | 2021/11/25 | 2023/11/25 | 2024/11/25 |  |
+| 8.2 | 2022/12/08 | 2024/12/08 | 2025/12/08 |  |
 
 PHP6は存在しません。  
 5と7は大きく異なり、機能追加・廃止がかなり多いです。  
@@ -88,6 +89,12 @@ PHP6は存在しません。
 変更点についてはPHPマニュアルの「付録」を参照してください。  
 
 - PHPマニュアル
+  - PHP 8.0 Released!（恐らくサポート終了するとリンク切れ）
+    - <https://www.php.net/releases/8.0/ja.php>
+  - PHP 8.1 Released!（恐らくサポート終了するとリンク切れ）
+    - <https://www.php.net/releases/8.1/ja.php>
+  - PHP 8.2 Released!（恐らくサポート終了するとリンク切れ）
+    - <https://www.php.net/releases/8.2/ja.php>
   - Supported Versions
     - <https://www.php.net/supported-versions.php>
   - 付録
