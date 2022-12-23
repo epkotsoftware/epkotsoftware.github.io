@@ -8,7 +8,12 @@ body {
     color: #505050;
 }
 
+.page-header {
+    padding: 1rem 0rem;
+}
+
 .main-content {
+    padding: 0;
     h1 {
         display: none;
     }
