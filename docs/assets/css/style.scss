@@ -9,6 +9,10 @@ body {
 }
 
 .main-content {
+    h1 {
+        display: none;
+    }
+
     h2 {
         position: -webkit-sticky;
         position: sticky;
