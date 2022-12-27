@@ -11,10 +11,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     {% include head-custom.html %}
+    <script defer src="/assets/js/util-nav.js"></script>
   </head>
   <body>
-    <a id="skip-to-content" href="#content">Skip to the content.</a>
-
     <header class="page-header" role="banner">
       <h1 class="project-name">株式会社エプコットソフトウェア</h1>
       <h2>{{ page.title | default: site.title | default: site.github.repository_name }}</h2>
@@ -26,7 +25,11 @@
         <a href="{{ site.github.tar_url }}" class="btn">Download .tar.gz</a>
       {% endif %}
     </header>
-
+    <aside>
+        <nav>
+            <ul id="ulSidebarMenuItems"></ul>
+        </nav>
+    </aside>
     <main id="content" class="main-content" role="main">
       {{ content }}
 
