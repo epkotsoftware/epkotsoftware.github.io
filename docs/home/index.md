@@ -4,6 +4,10 @@
 
 - <https://epkotsoftware.co.jp/>
 
+## 会社メール設定
+
+- [Thunderbird設定](./../thunderbird/index.md)
+
 ## GitHub
 
 - 組織アカウント
