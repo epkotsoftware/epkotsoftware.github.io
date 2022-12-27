@@ -16,6 +16,17 @@
 よくある質問をまとめた資料です。  
 質問する前にこちらを確認しましょう。  
 
+## エラーの対処方法
+
+### エラーメッセージを読む
+
+エラーメッセージは英語で出力されるので  
+読めなければ部分的に翻訳しましょう（ページ上の全てを翻訳してしまうと読みづらくなることがある）。  
+Google Chromeの拡張機能「Google翻訳」を使うと部分的な翻訳ができるようになります。  
+
+- `Google 翻訳 - Chrome ウェブストア`
+  - <https://chrome.google.com/webstore/detail/google-translate/aapbdbdomjkkjkaonfhkkikfgjllcleb/related>
+
 ## 全般
 
 ### キャッシュ
@@ -122,6 +133,39 @@ CBCとはデータベースの接続情報が異なりますので以下を参�
 
 - [trainingリポジトリ 03_advanced/README.md 〜 PHP](https://github.com/epkotsoftware/training/tree/template/users/_template/03_advanced#php)
 
+### フィールド「left_x」にデフォルト値がない
+
+> データベースにアクセスできません！SQLSTATE[HY000]: General error: 1364 Field 'left_x' doesn't have a default value
+
+「Field '{カラム名}' doesn't have a default value（フィールド「{カラム名}」にはデフォルト値がありません）」  のメッセージは  
+NULLが許容されていないカラムに対して、値が省略された時に発生します。  
+
+恐らくテーブル設定の誤りで、「[#9 データベース（DB）を作る 〜 ②テーブルの作成](https://cbc-study.com/training/advanced/page4#pl-12)」の  
+動画通り作ると誤りになります。  
+よく読みテーブルのカラム設定を行いましょう。  
+
+### 答えのコードに「?」がある
+
+> 「[#9 作ったプログラムを拡張してみる](https://cbc-study.com/training/advanced/page7#pl-10)」の答えのコードに
+> 「?」が書かれていてよくわからない。
+
+```php
+$checked = ($val['id'] == 1) ? ' checked="checked"' : ''; /* 男性にチェックを入れる */
+```
+
+三項演算子というものを使っています。  
+以下は三項演算子の使用例です。
+
+```php
+<?php
+$value = 1;
+$result = ($value === 1) ? 'valueは1' : 'valueは1以外';
+var_dump($result); // 「valueは1」がresultに入る、valueに1以外の値が入ると「valueは1以外」がresultに入る
+```
+
+- 三項演算子
+  - <https://www.php.net/manual/ja/language.operators.comparison.php#language.operators.comparison.ternary>
+
 ### phpMyAdmin 正しい長さを入力してください
 
 > [#9 作ったプログラムを拡張してみる](https://cbc-study.com/training/advanced/page7#s9)にて  
@@ -184,6 +228,15 @@ chmod -R 777 storage/
 
 - Linuxの権限確認と変更(chmod)（超初心者向け）
   - <https://qiita.com/shisama/items/5f4c4fa768642aad9e06>
+
+### POSTメソッドがサポートされていない
+
+> 以下のエラーが出る。
+>
+> The POST method is not supported for this route. Supported methods: GET, HEAD.
+> 訳：このルートでは POST メソッドはサポートされていません。サポートされているメソッド: GET、HEAD。
+
+- [Laravel ルーティング](./../laravel/routing/index.md)
 
 ### クラスが見つからない
 
@@ -251,6 +304,13 @@ Laravel6と最新バージョンでは名前空間が異なるため、確認し
 
 どうしても気になる場合、Bladeに対応した拡張機能がありそうなので  
 自己責任にはなりますが、自身で調べ導入してください。
+
+### syntax error, unexpected token "foreach"
+
+> 「[#7 Laravelでデータベースのデータを表示する方法](https://cbc-study.com/training/backend/laravel3#pl-5)」で  
+> drags.blade.phpで「syntax error, unexpected token "foreach"」のエラーが出る。
+
+bladeではPHPの開始タグ「`<?php`」は不要なので削除しましょう。
 
 ### ドラッグ時にDBが更新されない
 
