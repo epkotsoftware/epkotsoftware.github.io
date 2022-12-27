@@ -29,6 +29,7 @@ GitHubのテンプレートリポジトリをまとめています。
 
 | リポジトリ | 説明 |
 | :---: | --- |
+| [PHP8.2環境(template-php8.2-jp)](https://github.com/epkotsoftware/template-php8.2-jp) |  |
 | [PHP8.1環境(template-php8.1-jp)](https://github.com/epkotsoftware/template-php8.1-jp) |  |
 | [PHP7.4環境(template-php7.4-jp)](https://github.com/epkotsoftware/template-php7.4-jp) | PHP7は2022/11/28にサポートが切れている |
 
