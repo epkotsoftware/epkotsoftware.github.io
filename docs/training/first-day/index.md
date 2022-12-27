@@ -63,6 +63,9 @@ Windowsの場合、会社のメールアドレスでアカウントを作成し�
     - 必須ではないですが、Homebrewのインストールもおすすめします。
     - `2022年版、プログラミング環境構築の方法【Macbook M1対応】 #Python #Node.js #Docker #Homebrew #VSCode`
       - <https://youtu.be/2bLPTSaaJJo>
+  - メールソフト
+    - Microsoft Outlook（有料）または、Thunderbird（無料）をインストールし、エプコットのメール設定を行なってください。
+    - [Thunderbird設定](./../../thunderbird/index.md)
 - スマートフォンにインストール
   - Slack
     - iOS 版 Slack

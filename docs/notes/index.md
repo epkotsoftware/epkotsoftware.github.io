@@ -5,4 +5,5 @@
 | No. |  |
 | :---: | --- |
 | 1 | [ウイルス対策](./antivirus/index.md) |
-| 2 | [バージョン](./versions/index.md) |
+| 2 | [Web検索](./websearch/index.md) |
+| 3 | [バージョン](./versions/index.md) |

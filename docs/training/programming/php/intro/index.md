@@ -28,17 +28,9 @@ PHPマニュアルも見る癖をつけましょう。
 
 ## 検索方法
 
-以下のようにGoogle検索をすると、PHPマニュアルのページで検索することが出来ます。  
+エンジニアに必要な検索方法についてまとめています。
 
-- 検索ワード「`site:www.php.net {キーワード}`」
-  - PHPマニュアルで「文字列」を検索
-    - <https://www.google.com/search?q=site:www.php.net+文字列>
-  - PHPマニュアルで「配列」を検索
-    - <https://www.google.com/search?q=site:www.php.net+配列>
-  - PHPマニュアルで「演算子」を検索
-    - <https://www.google.com/search?q=site:www.php.net+演算子>
-  - PHPマニュアルで「配列 ループ」を検索
-    - <https://www.google.com/search?q=site:www.php.net+配列+ループ>
+- [Web検索](./../../../../notes/websearch/index.md)
 
 ## 学習方法
 
