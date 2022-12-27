@@ -59,12 +59,14 @@
 現場でGit経験がない方は学習をおすすめします。
 
 - [新人研修 Git編](./../training/git/index.md)
+- [社外研修資料](./../self-learning/deep/index.md#社外研修)
 
 ## データベース
 
 エンジニア必須の知識です。
 
 - [新人研修 データベース編](./../training/training.md#データベース編)
+- [社外研修資料](./../self-learning/deep/index.md#社外研修)
 
 ## 雑記
 
