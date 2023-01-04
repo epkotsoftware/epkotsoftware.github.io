@@ -1,4 +1,4 @@
-# URL
+# URL設計詳細
 
 ## はじめに
 
@@ -175,6 +175,63 @@ var_export(compact('value', 'encodedValue', 'decodedValue'));
 //   'encodedValue' => '%E3%83%91%E3%82%B9',
 //   'decodedValue' => 'パス',
 // )
+```
+
+## クリーンURL
+
+Laravelを使っている場合、意識する必要はほとんどありませんが  
+HTMLファイルを使った静的サイトや、フレームワークを使わないPHPの場合  
+意識するようにしましょう。
+
+- `Clean URL - Wikipedia`
+  - <https://en.wikipedia.org/wiki/Clean_URL>
+
+| Original URL | Clean URL |
+| --- | --- |
+| `http://example.com/about.html` | `http://example.com/about` |
+| `http://example.com/user.php?id=1` | `http://example.com/user/1` |
+| `http://example.com/index.php?page=name` | `http://example.com/name` |
+| `http://example.com/kb/index.php?cat=1&id=23` | `http://example.com/kb/1/23` |
+| <http://en.wikipedia.org/w/index.php?title=Clean_URL> | <http://en.wikipedia.org/wiki/Clean_URL> |
+
+### 実現方法
+
+基本的に `xxx.php` や `xxx.html` などのファイル名は見えないようにすると良いでしょう。  
+WebサーバーソフトウェアのApacheでは、`index.php` や `index.html` というファイル名であれば省略が可能です。  
+よって `/about.html` を `/about/index.html` にすると `/about` でアクセス出来るようになります。  
+
+id等のパラメータをパスに含める方法としてはApacheの `.htaccess` ファイルをうまく使います。  
+Apache + PHPの環境を使って以下を作ってみます。  
+
+- `show.php`
+
+```php
+<?php
+// /users/show.php
+$id = $_GET['id'] ?? 'null';
+echo htmlspecialchars("idは {$id} です。");
+```
+
+- `.htaccess`
+
+```xml
+# /users/.htaccess
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^([0-9]+)$ show.php?id=$1 [QSA,L]
+</IfModule>
+```
+
+上記2ファイルを`/users`ディレクトリに格納し、下記のURIでアクセスすると同じページが開けるようになります。  
+使うことが少ないため詳細については割愛します、`.htaccess` ファイルを使うとこういうことが出来ると覚えておきましょう。  
+
+- URI
+  - `/users/show.php?id=100`
+  - `/users/100`
+- 結果
+
+```txt
+idは 100 です。
 ```
 
 ## 参考
