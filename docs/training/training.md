@@ -556,6 +556,12 @@ CSSフレームワークは何かしら使われる現場が多いので
     - Forms (フォーム) <https://getbootstrap.jp/docs/5.0/forms/overview/>
   - サンプル <https://getbootstrap.jp/docs/5.0/examples/>
 
+### URL設計
+
+こちらを参照してください。
+
+- [URL設計](./design/url/index.md)
+
 ### 設計例
 
 こちらを参考にしてください。
