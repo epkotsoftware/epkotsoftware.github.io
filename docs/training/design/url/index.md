@@ -114,20 +114,20 @@ PHPフレームワークLaravelでCRUD(クラッド Create Read Update Delete �
 | --- | --- | --- | --- |
 | / | GET | トップ画面 |  |
 | /admin | GET | システム管理トップ画面 |  |
-| /admin/products           | GET    | 商品 一覧画面 | Product::index |
-| /admin/products/create    | GET    | 商品 新規画面 | Product::create |
-| /admin/products           | POST   | 商品 新規     | Product::store |
-| /admin/products/{id}      | GET    | 商品 詳細画面 | Product::show `{id}`は対象テーブルのid |
-| /admin/products/{id}/edit | GET    | 商品 編集画面 | Product::edit `{id}`は対象テーブルのid |
-| /admin/products/{id}      | PATCH  | 商品 更新     | Product::update `{id}`は対象テーブルのid |
-| /admin/products/{id}      | DELETE | 商品 削除     | Product::destroy `{id}`は対象テーブルのid |
-| /admin/product-categories           | GET    | 商品カテゴリ 一覧画面 | ProductCategory::index |
-| /admin/product-categories/create    | GET    | 商品カテゴリ 新規画面 | ProductCategory::create |
-| /admin/product-categories           | POST   | 商品カテゴリ 新規     | ProductCategory::store |
-| /admin/product-categories/{id}      | GET    | 商品カテゴリ 詳細画面 | ProductCategory::show `{id}`は対象テーブルのid |
-| /admin/product-categories/{id}/edit | GET    | 商品カテゴリ 編集画面 | ProductCategory::edit `{id}`は対象テーブルのid |
-| /admin/product-categories/{id}      | PATCH  | 商品カテゴリ 更新     | ProductCategory::update `{id}`は対象テーブルのid |
-| /admin/product-categories/{id}      | DELETE | 商品カテゴリ 削除     | ProductCategory::destroy `{id}`は対象テーブルのid |
+| /admin/products           | GET    | 商品 一覧画面 | ProductController::index |
+| /admin/products/create    | GET    | 商品 新規画面 | ProductController::create |
+| /admin/products           | POST   | 商品 新規     | ProductController::store |
+| /admin/products/{id}      | GET    | 商品 詳細画面 | ProductController::show `{id}`は対象テーブルのid |
+| /admin/products/{id}/edit | GET    | 商品 編集画面 | ProductController::edit `{id}`は対象テーブルのid |
+| /admin/products/{id}      | PATCH  | 商品 更新     | ProductController::update `{id}`は対象テーブルのid |
+| /admin/products/{id}      | DELETE | 商品 削除     | ProductController::destroy `{id}`は対象テーブルのid |
+| /admin/product-categories           | GET    | 商品カテゴリ 一覧画面 | ProductCategoryController::index |
+| /admin/product-categories/create    | GET    | 商品カテゴリ 新規画面 | ProductCategoryController::create |
+| /admin/product-categories           | POST   | 商品カテゴリ 新規     | ProductCategoryController::store |
+| /admin/product-categories/{id}      | GET    | 商品カテゴリ 詳細画面 | ProductCategoryController::show `{id}`は対象テーブルのid |
+| /admin/product-categories/{id}/edit | GET    | 商品カテゴリ 編集画面 | ProductCategoryController::edit `{id}`は対象テーブルのid |
+| /admin/product-categories/{id}      | PATCH  | 商品カテゴリ 更新     | ProductCategoryController::update `{id}`は対象テーブルのid |
+| /admin/product-categories/{id}      | DELETE | 商品カテゴリ 削除     | ProductCategoryController::destroy `{id}`は対象テーブルのid |
 
 他の例については以下を参照してください。  
 
@@ -154,6 +154,8 @@ HTMLファイルを使った静的サイトや、フレームワークを使わ�
 | `http://example.com/index.php?page=name` | `http://example.com/name` |
 | `http://example.com/kb/index.php?cat=1&id=23` | `http://example.com/kb/1/23` |
 | <http://en.wikipedia.org/w/index.php?title=Clean_URL> | <http://en.wikipedia.org/wiki/Clean_URL> |
+
+### 実現方法
 
 基本的に `xxx.php` や `xxx.html` などのファイル名は見えないようにすると良いでしょう。  
 WebサーバーソフトウェアのApacheでは、`index.php` や `index.html` というファイル名であれば省略が可能です。  
