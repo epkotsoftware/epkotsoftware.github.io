@@ -129,23 +129,23 @@ PHP標準での設計例です。
 | / | トップ画面 |  |
 | /admin/index.php | システム管理トップ画面 |  |
 | /admin/products/index.php              | 商品 一覧画面 |  |
-| /admin/products/create/index.php       | 商品 新規画面 |  |
+| /admin/products/create/index.php       | 商品 登録画面 |  |
 | /admin/products/store.php              | 商品 登録     |  |
 | /admin/products/show/index.php?id={id} | 商品 詳細画面 | `{id}`は対象テーブルのid |
-| /admin/products/edit/index.php?id={id} | 商品 編集画面 | `{id}`は対象テーブルのid |
+| /admin/products/edit/index.php?id={id} | 商品 更新画面 | `{id}`は対象テーブルのid |
 | /admin/products/update.php             | 商品 更新     |  |
 | /admin/products/destroy.php            | 商品 削除     |  |
 | /admin/product-categories/index.php              | 商品カテゴリ 一覧画面 |  |
-| /admin/product-categories/create/index.php       | 商品カテゴリ 新規画面 |  |
-| /admin/product-categories/store.php              | 商品カテゴリ 新規     |  |
+| /admin/product-categories/create/index.php       | 商品カテゴリ 登録画面 |  |
+| /admin/product-categories/store.php              | 商品カテゴリ 登録     |  |
 | /admin/product-categories/show/index.php?id={id} | 商品カテゴリ 詳細画面 | `{id}`は対象テーブルのid |
-| /admin/product-categories/edit/index.php?id={id} | 商品カテゴリ 編集画面 | `{id}`は対象テーブルのid |
+| /admin/product-categories/edit/index.php?id={id} | 商品カテゴリ 更新画面 | `{id}`は対象テーブルのid |
 | /admin/product-categories/update.php             | 商品カテゴリ 更新     |  |
 | /admin/product-categories/destroy.php            | 商品カテゴリ 削除     |  |
 
 ※ アクセスする際、**index.phpは省略可**
 
-### Laravel設計例
+### Laravel設計例1
 
 フレームワークを使う場合、フレームワークの特性も考慮して設計する必要があります。  
 PHPフレームワークLaravelでCRUD(クラッド Create Read Update Delete の略)を実装する際の例です。  
@@ -164,25 +164,23 @@ PHPフレームワークLaravelでCRUD(クラッド Create Read Update Delete �
 | /admin/products/create    | GET    | 商品 新規画面 | ProductController::create |
 | /admin/products           | POST   | 商品 登録     | ProductController::store |
 | /admin/products/{id}      | GET    | 商品 詳細画面 | ProductController::show `{id}`は対象テーブルのid |
-| /admin/products/{id}/edit | GET    | 商品 編集画面 | ProductController::edit `{id}`は対象テーブルのid |
+| /admin/products/{id}/edit | GET    | 商品 更新画面 | ProductController::edit `{id}`は対象テーブルのid |
 | /admin/products/{id}      | PATCH  | 商品 更新     | ProductController::update `{id}`は対象テーブルのid |
 | /admin/products/{id}      | DELETE | 商品 削除     | ProductController::destroy `{id}`は対象テーブルのid |
 | /admin/product-categories           | GET    | 商品カテゴリ 一覧画面 | ProductCategoryController::index |
-| /admin/product-categories/create    | GET    | 商品カテゴリ 新規画面 | ProductCategoryController::create |
+| /admin/product-categories/create    | GET    | 商品カテゴリ 登録画面 | ProductCategoryController::create |
 | /admin/product-categories           | POST   | 商品カテゴリ 登録     | ProductCategoryController::store |
 | /admin/product-categories/{id}      | GET    | 商品カテゴリ 詳細画面 | ProductCategoryController::show `{id}`は対象テーブルのid |
-| /admin/product-categories/{id}/edit | GET    | 商品カテゴリ 編集画面 | ProductCategoryController::edit `{id}`は対象テーブルのid |
+| /admin/product-categories/{id}/edit | GET    | 商品カテゴリ 更新画面 | ProductCategoryController::edit `{id}`は対象テーブルのid |
 | /admin/product-categories/{id}      | PATCH  | 商品カテゴリ 更新     | ProductCategoryController::update `{id}`は対象テーブルのid |
 | /admin/product-categories/{id}      | DELETE | 商品カテゴリ 削除     | ProductCategoryController::destroy `{id}`は対象テーブルのid |
 
-他の例については以下を参照してください。  
+### Laravel設計例2
+
+以下を参照してください。  
 
 - [Laravel CRUD 設計 〜 機能一覧](./../../laravel/crud/design/index.md#機能一覧)
-
-詳細はLaravelのリソースコントローラに書かれています。
-
-- `Laravel 9.x コントローラ　〜　リソースコントローラ`
-  - <https://readouble.com/laravel/9.x/ja/controllers.html#resource-controllers>
+- [Laravel CRUD 設計 〜 画面設計](./../../laravel/crud/design/screens/index.md)
 
 ## 詳細
 
