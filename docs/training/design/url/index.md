@@ -99,7 +99,53 @@ URL(URI)設計について考えていきましょう。
 - [PlantUML](https://www.plantuml.com/plantuml/umla/SoWkIImgoStCIybDBE0goIp9ILK81_BoouiVDwvxt3prSTFAnysh7pStF6vQyhXvuUFcFO-RTd1fApXRSMbhAuGMfnOLSsa3MPM9kOafYK0caEsVb-fIb5cM2kI1k8-RsnytxNpSjFvnSyVZvkR7pTFX4fsFczO-RbuADdWpK1gYtoM_F2ydFp45ON9LOdOcoBw0elpqeiHS1RVCdDHYBeVKl1Ieqm40)  
   ![windows.svg](./images/windows.svg)  
 
-### Laravel
+### PHP設計例1
+
+PHP標準での設計例です。
+
+- [PlantUML](https://www.plantuml.com/plantuml/umla/SoWkIImgoStCIybDBE0goIp9ILK83V9viMBjYnKTNDeAZvix7ZStFswU_hXvrkFcFO-RTiJaQUXhScbhApnREVz5yrv783-jD2-v93C_JpSHA86GGMX-FcNtoxcB53I0rgHMw1La5A2gUpvpzykUJGeQnINvHQcOqizcRtasROE2Hcb1Ic89L1ukxOHiVnAoHYSYxNT2jHzJ-cbdrykPInGqKbABIuhoAz4Su8piW6HadSvu7U2GcfS23NS0)  
+  ![url-design.svg](./images/url-design.svg)  
+
+| URI | 機能・画面名 | 備考 |
+| --- | --- | --- |
+| / | トップページ |  |
+| /function-a/index.php | 機能A トップ画面 |  |
+| /function-a/store.php | 機能A 登録 |  |
+| /function-a/update.php | 機能A 更新 |  |
+| /function-b/index.php | 機能B トップ画面 |  |
+| /function-b/store.php | 機能B 登録 |  |
+| /function-b/destroy.php | 機能B 削除 |  |
+| /function-c/index.php | 機能C トップ画面 |  |
+
+### PHP設計例2
+
+商品と商品カテゴリテーブルの登録・表示・更新・削除を行うシステムの例です。  
+
+- [PlantUML](https://www.plantuml.com/plantuml/uml/SoWkIImgoStCIybDBE0goIp9ILK8y0ZWqbPutDpnkBdvSVFqvrDslvoxA2PFGn-eAhL2ho2ZG9DB6wYWQVlZffsFcziUDozulcxXymbjc5eIKu16e-W3QdmwjUtfvCQOF0MDWgBybDBaacAWE492uScEXXVBbaFCK42p5Q7g-SpTBtismLKb5wKcbgJYLmnKLboINvIAAVzYvURdMpR03IlEo2z766MVcM9RdPbIYwhbsUmjpwOXjAIcP9OGfmMekBGW9R44YpEUTdQzdBa4g20bjRYaAByIFSmUDwq6XNVJbiVDgv32JpSPQ5fwVb5cAYmaCPKJ2bLC7VX2cB16H6ZZLKjIo6Dg9n0BXBLZnWXEnJXYno4rBmMQVm00)  
+  ![php.svg](./images/php.svg)  
+
+| URI | 機能・画面名 | 備考 |
+| --- | --- | --- |
+| / | トップ画面 |  |
+| /admin/index.php | システム管理トップ画面 |  |
+| /admin/products/index.php              | 商品 一覧画面 |  |
+| /admin/products/create/index.php       | 商品 新規画面 |  |
+| /admin/products/store.php              | 商品 登録     |  |
+| /admin/products/show/index.php?id={id} | 商品 詳細画面 | `{id}`は対象テーブルのid |
+| /admin/products/edit/index.php?id={id} | 商品 編集画面 | `{id}`は対象テーブルのid |
+| /admin/products/update.php             | 商品 更新     |  |
+| /admin/products/destroy.php            | 商品 削除     |  |
+| /admin/product-categories/index.php              | 商品カテゴリ 一覧画面 |  |
+| /admin/product-categories/create/index.php       | 商品カテゴリ 新規画面 |  |
+| /admin/product-categories/store.php              | 商品カテゴリ 新規     |  |
+| /admin/product-categories/show/index.php?id={id} | 商品カテゴリ 詳細画面 | `{id}`は対象テーブルのid |
+| /admin/product-categories/edit/index.php?id={id} | 商品カテゴリ 編集画面 | `{id}`は対象テーブルのid |
+| /admin/product-categories/update.php             | 商品カテゴリ 更新     |  |
+| /admin/product-categories/destroy.php            | 商品カテゴリ 削除     |  |
+
+※ アクセスする際、**index.phpは省略可**
+
+### Laravel設計例
 
 フレームワークを使う場合、フレームワークの特性も考慮して設計する必要があります。  
 PHPフレームワークLaravelでCRUD(クラッド Create Read Update Delete の略)を実装する際の例です。  
@@ -116,14 +162,14 @@ PHPフレームワークLaravelでCRUD(クラッド Create Read Update Delete �
 | /admin | GET | システム管理トップ画面 |  |
 | /admin/products           | GET    | 商品 一覧画面 | ProductController::index |
 | /admin/products/create    | GET    | 商品 新規画面 | ProductController::create |
-| /admin/products           | POST   | 商品 新規     | ProductController::store |
+| /admin/products           | POST   | 商品 登録     | ProductController::store |
 | /admin/products/{id}      | GET    | 商品 詳細画面 | ProductController::show `{id}`は対象テーブルのid |
 | /admin/products/{id}/edit | GET    | 商品 編集画面 | ProductController::edit `{id}`は対象テーブルのid |
 | /admin/products/{id}      | PATCH  | 商品 更新     | ProductController::update `{id}`は対象テーブルのid |
 | /admin/products/{id}      | DELETE | 商品 削除     | ProductController::destroy `{id}`は対象テーブルのid |
 | /admin/product-categories           | GET    | 商品カテゴリ 一覧画面 | ProductCategoryController::index |
 | /admin/product-categories/create    | GET    | 商品カテゴリ 新規画面 | ProductCategoryController::create |
-| /admin/product-categories           | POST   | 商品カテゴリ 新規     | ProductCategoryController::store |
+| /admin/product-categories           | POST   | 商品カテゴリ 登録     | ProductCategoryController::store |
 | /admin/product-categories/{id}      | GET    | 商品カテゴリ 詳細画面 | ProductCategoryController::show `{id}`は対象テーブルのid |
 | /admin/product-categories/{id}/edit | GET    | 商品カテゴリ 編集画面 | ProductCategoryController::edit `{id}`は対象テーブルのid |
 | /admin/product-categories/{id}      | PATCH  | 商品カテゴリ 更新     | ProductCategoryController::update `{id}`は対象テーブルのid |

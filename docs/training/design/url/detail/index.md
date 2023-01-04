@@ -209,7 +209,7 @@ Apache + PHPの環境を使って以下を作ってみます。
 <?php
 // /users/show.php
 $id = $_GET['id'] ?? 'null';
-echo htmlspecialchars("idは {$id} です。");
+echo "idは {$id} です。";
 ```
 
 - `.htaccess`
