@@ -1,14 +1,8 @@
 # URL設計
 
-## 目次
+## はじめに
 
-| No. |  |
-| :---: | --- |
-| 1 | [URLとは](#urlとは) |
-| 2 | [URLとURI](#urlとuri) |
-| 3 | [パス](#パス) |
-| 4 | [設計](#設計) |
-| 5 | [詳細](#詳細) |
+URLについて詳しく
 
 ## URLとは
 
@@ -103,9 +97,48 @@ ArrayのjoinメソッドのURIを辿っていきましょう。
 | [/docs/Web/JavaScript/Reference/Global_Objects/Array](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array) | Array |  |
 | [/docs/Web/JavaScript/Reference/Global_Objects/Array/join](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/join) | Array.prototype.join() |  |
 
+### Laravelの例
+
+フレームワークを使う場合、フレームワークの特性も考慮して設計する必要があります。  
+PHPフレームワークLaravelでCRUD(クラッド Create Read Update Delete の略)を実装する際の例です。  
+
+同一URIが存在しますが、LaravelではURIとHTTPメソッドの組み合わせでルートを決定しているため  
+問題なく動作します。
+
+- [PlantUML](https://www.plantuml.com/plantuml/uml/SoWkIImgoStCIybDBE0goIp9ILNmIInAB4lDuT9MUDpSyRYv-N7pzETJTh-SkoWcpzqrH453NvDB6oZNjFrnqyx7pMsFcnSyNxVm-OGsxAeJKu2c0tK0jJoTslPqScDCde96GL5-IcboIJ5G726Xy6H7mujboo6w5H1M8HGydxdxPSyc50N9HQc99QdOb2a4-0TZ6l5YvURdMpQW656TcLABgkZPx2tFfc4gqazDoIp1fb8Xm374sGEhKKyxkrxENABWukhZ6k8ALu5GyBXfDIWCcxOyRbw553AwoK1VfUSNPQR2mWXJEPxmmbHCEEmmjI324Q_H1C8KKmFUyCMd2n7MXAp04UvS3gbvAT3K3W00)  
+  ![laravel.svg](./images/laravel.svg)  
+
+| URI | HTTP<br>メソッド | 機能・画面名 | 備考 |
+| --- | --- | --- | --- |
+| / | GET | トップ画面 |  |
+| /admin | GET | システム管理トップ画面 |  |
+| /admin/products           | GET    | 商品 一覧画面 | Product::index |
+| /admin/products/create    | GET    | 商品 新規画面 | Product::create |
+| /admin/products           | POST   | 商品 新規     | Product::store |
+| /admin/products/{id}      | GET    | 商品 詳細画面 | Product::show `{id}`は対象テーブルのid |
+| /admin/products/{id}/edit | GET    | 商品 編集画面 | Product::edit `{id}`は対象テーブルのid |
+| /admin/products/{id}      | PATCH  | 商品 更新     | Product::update `{id}`は対象テーブルのid |
+| /admin/products/{id}      | DELETE | 商品 削除     | Product::destroy `{id}`は対象テーブルのid |
+| /admin/product-categories           | GET    | 商品カテゴリ 一覧画面 | ProductCategory::index |
+| /admin/product-categories/create    | GET    | 商品カテゴリ 新規画面 | ProductCategory::create |
+| /admin/product-categories           | POST   | 商品カテゴリ 新規     | ProductCategory::store |
+| /admin/product-categories/{id}      | GET    | 商品カテゴリ 詳細画面 | ProductCategory::show `{id}`は対象テーブルのid |
+| /admin/product-categories/{id}/edit | GET    | 商品カテゴリ 編集画面 | ProductCategory::edit `{id}`は対象テーブルのid |
+| /admin/product-categories/{id}      | PATCH  | 商品カテゴリ 更新     | ProductCategory::update `{id}`は対象テーブルのid |
+| /admin/product-categories/{id}      | DELETE | 商品カテゴリ 削除     | ProductCategory::destroy `{id}`は対象テーブルのid |
+
+他の例については以下を参照してください。  
+
+- [Laravel CRUD 設計 〜 機能一覧](./../../laravel/crud/design/index.md#機能一覧)
+
+詳細はLaravelのリソースコントローラに書かれています。
+
+- `Laravel 9.x コントローラ　〜　リソースコントローラ`
+  - <https://readouble.com/laravel/9.x/ja/controllers.html#resource-controllers>
+
 ## 詳細
 
-URL(URI)の詳細について、詳しく学習したい場合は  
+URL(URI)を深く学習したい場合は  
 以下を参照してください。
 
 - [詳細](./detail/index.md)

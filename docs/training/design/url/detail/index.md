@@ -1,15 +1,5 @@
 # URL
 
-## 目次
-
-| No. |  |
-| :---: | --- |
-| 1 | [はじめに](#はじめに) |
-| 3 | [URLとURI](#urlとuri) |
-| 4 | [URI](#uri) |
-| 6 | [パーセントエンコーディング](#パーセントエンコーディング) |
-| 8 | [参考](#参考) |
-
 ## はじめに
 
 実務において、全てを理解する必要はありません。  
@@ -55,7 +45,7 @@ Web の検索結果 でも URL の方が優位にある。
 | スキーム<br>(scheme) | `https`<br>`http` | 最初のうちは`https`または`http`を使うことを覚えておきましょう。 |
 | ホスト<br>(host) | `www.example.com`<br>`localhost`<br>`127.0.0.1` | WebサイトのFQDN（完全修飾ドメイン名）、IPアドレスを記述します。<br>サーバー名or住所を記述すると覚えておきましょう。<br>開発時は「`localhost`」や「`127.0.0.1`」をよく使います。 |
 | ポート<br>(port) | `:443`<br>`:80` | 【省略可】`:`の後ろにポート番号を記述します。<br>HTTPSは443、HTTPは80が標準ポートになり省略可能になっています。<br>それ以外のポートを使う場合に必須です。 |
-| パス<br>(path) | `/admin/index.php` | 対象へのルートパス（`/`から始める）を記述します。<br>詳細については「[パス](#パス)」参照 |
+| パス<br>(path) | `/admin/index.php` | 対象へのルートパス（`/`から始める）を記述します。 |
 | クエリ<br>(query) | `?k1=v1&k2=v2` | 【省略可】引数(Parameters)とも呼ばれます。<br>`?`の後ろにクエリを記述します。<br>クエリはKeyとValueのペアを`&`で区切ることで複数のパラメータを設定できます。<br>用途としては、検索ワードやページ番号などのユーザーに見られても問題ない情報を設定します。 |
 | フラグメント<br>(fragment) | `#a` | 【省略可】アンカー(Anchor)とも呼ばれます。<br>`#`の後ろにフラグメントを記述します。<br>主にページ内リンクなどに使われます。 |
 
@@ -207,3 +197,5 @@ var_export(compact('value', 'encodedValue', 'decodedValue'));
   - <https://danielmiessler.com/study/difference-between-uri-url/>
 - `URL Standard`
   - <https://url.spec.whatwg.org/>
+- `Laravel 9.x コントローラ　〜　リソースコントローラ`
+  - <https://readouble.com/laravel/9.x/ja/controllers.html#resource-controllers>
