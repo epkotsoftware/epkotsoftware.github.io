@@ -20,7 +20,7 @@ Laravelのルーティングは簡単に言うと
 
 URL(URI)・ルートパスについては理解しておきましょう。
 
-- [URL](./../../url/index.md)
+- [URL設計](./../../design/url/index.md)
 
 ## PHPフレームワークを使わない場合
 
@@ -206,6 +206,14 @@ Route::delete('/example', アクション); // DELETE
   - <https://developer.mozilla.org/ja/docs/Web/HTML/Element/form#attr-method>
 - `Laravel 9.x ルーティング　〜　疑似フォームメソッド`
   - <https://readouble.com/laravel/9.x/ja/routing.html#form-method-spoofing>
+
+## URL生成
+
+### url関数
+
+url関数（urlヘルパ）を使って
+
+
 
 ## Laravel公式ページ
 
