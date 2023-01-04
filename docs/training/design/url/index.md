@@ -2,7 +2,7 @@
 
 ## はじめに
 
-URLについて詳しく
+URL設計についてまとめた資料です。
 
 ## URLとは
 
@@ -41,21 +41,12 @@ URNについては実務でも、ほとんど使われることがないため
 | ルートパス | `/css/common.css` | ルートディレクトリから、目的のファイルまでの道筋を全部書く。<br>同一サイトで使用可、「`/`」から始まる。 |
 | 相対パス | 現在位置がルートの場合<br>`css/common.css`<br><br>現在位置が`/admin`の場合<br>`../css/common.css` | 現在の位置から、目的のファイルまでの道筋を全部書く。<br>同一サイトで使用可。 |
 
-## 設計
-
-URL(URI)設計について考えていきましょう。  
-現実世界の住所やパソコンのファイルシステム（ファイル・フォルダ）の考え方と同じで  
-大項目→中項目→小項目と言ったように階層で考えます。  
-
-- [PlantUML](https://www.plantuml.com/plantuml/umla/SoWkIImgoStCIybDBE0goIp9ILLuihV_MMV3uyPrZvkMF6vU-BXvp-Ec7LpQ2i-cBtqsPmsNjhR2ywNpdYxjUBfzxlCvFI3-qzxc5nCxePndSpS-sRNcPVDUBcqWxycEjK-Nh7lQimlCUx6nw-dcRM0UHBBhsSO5BnPrGxWlbkw7So46GRbWtexrG7rWspPkVBPe1Spg-NkUzu6jTaZDIu5w1000)  
-  ![address.svg](./images/address.svg)  
-- [PlantUML](https://www.plantuml.com/plantuml/umla/SoWkIImgoStCIybDBE0goIp9ILK81_BoouiVDwvxt3prSTFAnysh7pStF6vQyhXvuUFcFO-RTd1fApXRSMbhAuGMfnOLSsa3MPM9kOafYK0caEsVb-fIb5cM2kI1k8-RsnytxNpSjFvnSyVZvkR7pTFX4fsFczO-RbuADdWpK1gYtoM_F2ydFp45ON9LOdOcoBw0elpqeiHS1RVCdDHYBeVKl1Ieqm40)  
-  ![windows.svg](./images/windows.svg)  
+## 実サイトの例
 
 ### 松屋フーズの例
 
 実際に「松屋フーズ(<https://www.matsuyafoods.co.jp/>)」のサイトを例に見ていきます。  
-**※ 2022/12時点のリンクのため、サイト更新などでリンク切れになることも考えられます**
+**※ 2023/01時点のリンクのため、サイト更新などでリンク切れになることも考えられます**
 
 - [PlantUML](https://www.plantuml.com/plantuml/uml/bP8zIyD06CVtV8gEbeBMY7kNZdOHSH52Q0uJo5rBSg5al3k7QfU2gDGNEYW8hHGSH17nopmqqc_XdpG1hOYu_lultFCyruYb6qaU28-xNKi6CcILxEPz_ZWWSqRcZVHhXVGJwJio_Un-aFM7LctLSI3MDgfMBUUaPgIFGBWhuqHqKhTKa2Xn3a5RpVrTi9uFA5Xl2NUQhJr0paII0uIlnulpqyLeE9zTGWa37aZc5UB7yHLfHUe2oc6QS1Rx0QHVDSVlEhPTtwxRwxxaOMabDIPrI-gPz0aPjHni9U-qVSPYLZPiRNvfm9QcP1wGWxUTH54ANWWJCXFIBsJGFFtcYrAd4_thITZltuNbGt_sedI4UN0EkEC4-yWFKhKQJ7Z5D_W4)  
   ![matsuyafoods.svg](./images/matsuyafoods.svg)  
@@ -97,7 +88,18 @@ ArrayのjoinメソッドのURIを辿っていきましょう。
 | [/docs/Web/JavaScript/Reference/Global_Objects/Array](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array) | Array |  |
 | [/docs/Web/JavaScript/Reference/Global_Objects/Array/join](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/join) | Array.prototype.join() |  |
 
-### Laravelの例
+## 設計
+
+URL(URI)設計について考えていきましょう。  
+現実世界の住所やパソコンのファイルシステム（ファイル・フォルダ）の考え方と同じで  
+大項目→中項目→小項目と言ったように階層で考えます。  
+
+- [PlantUML](https://www.plantuml.com/plantuml/umla/SoWkIImgoStCIybDBE0goIp9ILLuihV_MMV3uyPrZvkMF6vU-BXvp-Ec7LpQ2i-cBtqsPmsNjhR2ywNpdYxjUBfzxlCvFI3-qzxc5nCxePndSpS-sRNcPVDUBcqWxycEjK-Nh7lQimlCUx6nw-dcRM0UHBBhsSO5BnPrGxWlbkw7So46GRbWtexrG7rWspPkVBPe1Spg-NkUzu6jTaZDIu5w1000)  
+  ![address.svg](./images/address.svg)  
+- [PlantUML](https://www.plantuml.com/plantuml/umla/SoWkIImgoStCIybDBE0goIp9ILK81_BoouiVDwvxt3prSTFAnysh7pStF6vQyhXvuUFcFO-RTd1fApXRSMbhAuGMfnOLSsa3MPM9kOafYK0caEsVb-fIb5cM2kI1k8-RsnytxNpSjFvnSyVZvkR7pTFX4fsFczO-RbuADdWpK1gYtoM_F2ydFp45ON9LOdOcoBw0elpqeiHS1RVCdDHYBeVKl1Ieqm40)  
+  ![windows.svg](./images/windows.svg)  
+
+### Laravel
 
 フレームワークを使う場合、フレームワークの特性も考慮して設計する必要があります。  
 PHPフレームワークLaravelでCRUD(クラッド Create Read Update Delete の略)を実装する際の例です。  
@@ -135,6 +137,61 @@ PHPフレームワークLaravelでCRUD(クラッド Create Read Update Delete �
 
 - `Laravel 9.x コントローラ　〜　リソースコントローラ`
   - <https://readouble.com/laravel/9.x/ja/controllers.html#resource-controllers>
+
+## クリーンURL
+
+Laravelを使っている場合、意識する必要はほとんどありませんが  
+HTMLファイルを使った静的サイトや、フレームワークを使わないPHPの場合  
+意識するようにしましょう。
+
+- `Clean URL - Wikipedia`
+  - <https://en.wikipedia.org/wiki/Clean_URL>
+
+| Original URL | Clean URL |
+| --- | --- |
+| `http://example.com/about.html` | `http://example.com/about` |
+| `http://example.com/user.php?id=1` | `http://example.com/user/1` |
+| `http://example.com/index.php?page=name` | `http://example.com/name` |
+| `http://example.com/kb/index.php?cat=1&id=23` | `http://example.com/kb/1/23` |
+| <http://en.wikipedia.org/w/index.php?title=Clean_URL> | <http://en.wikipedia.org/wiki/Clean_URL> |
+
+基本的に `xxx.php` や `xxx.html` などのファイル名は見えないようにすると良いでしょう。  
+WebサーバーソフトウェアのApacheでは、`index.php` や `index.html` というファイル名であれば省略が可能です。  
+よって `/about.html` を `/about/index.html` にすると `/about` でアクセス出来るようになります。  
+
+id等のパラメータをパスに含める方法としてはApacheの `.htaccess` ファイルをうまく使います。  
+Apache + PHPの環境を使って以下を作ってみます。  
+
+- `show.php`
+
+```php
+<?php
+// /users/show.php
+$id = $_GET['id'] ?? 'null';
+echo htmlspecialchars("idは {$id} です。");
+```
+
+- `.htaccess`
+
+```xml
+# /users/.htaccess
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^([0-9]+)$ show.php?id=$1 [QSA,L]
+</IfModule>
+```
+
+上記2ファイルを`/users`ディレクトリに格納し、下記のURIでアクセスすると同じページが開けるようになります。  
+使うことが少ないため詳細については割愛します、`.htaccess` ファイルを使うとこういうことが出来ると覚えておきましょう。  
+
+- URI
+  - `/users/show.php?id=100`
+  - `/users/100`
+- 結果
+
+```txt
+idは 100 です。
+```
 
 ## 詳細
 
