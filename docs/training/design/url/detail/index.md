@@ -59,7 +59,7 @@ URIの例です。
 | `https://www.example.com` | `https` | `www.example.com` | - | - | - | - |
 | `http://localhost` | `http` | `localhost` | - | - | - | - |
 | <https://www.google.com/search?q=url+uri&tbm=isch> | `https` | `www.google.com` | - | `/search` | `q=url+uri&tbm=isch` | - |
-| <https://epkotsoftware.github.io/training/url/#パス> | `https` | `epkotsoftware.github.io` | - | `/training/url/` | - | `パス` |
+| <https://epkotsoftware.github.io/training/design/url/#パス> | `https` | `epkotsoftware.github.io` | - | `/training/design/url/` | - | `パス` |
 | `https://www.example.com:8080/admin/index.php?key1=value1&key2=value2#contents` | `https` | `www.example.com` | `8080` | `/admin/index.php` | `key1=value1&key2=value2` | `contents` |
 
 JavaScriptの[URL API](https://developer.mozilla.org/ja/docs/Web/API/URL_API)で生成したオブジェクトを  
