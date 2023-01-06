@@ -49,19 +49,25 @@ Apacheサーバーであれば「`.htaccess`」ファイルの設定でカスタ
 
 [PHPフレームワークを使わない場合](#phpフレームワークを使わない場合)では、ファイルの格納場所に応じてURLが決まっていましたが  
 Laravelではファイル格納場所ではなく、URLと処理を紐づけていきます。  
+以下、ルーティングのイメージです。
 
-Laravelで、URLとControllerのメソッドを紐付けてみましょう。  
-予めControllerは用意されているものとします。
+- [PlantUML](https://www.plantuml.com/plantuml/umla/hL9TQnGn57tFhmXKQ0kb8sAXPCjI5R65Wh9idrmVihDtTWSoIKmoTg6x3oOWzW_uNXJn0rGeY0NzDVUFc9tTOQqkxJoOft1pxZttv9nzwxXnPI68ovq0UiGDVm42msSCFp6yGlyMmmNwR-ZVOJYV5VqFCbdBujczFRa_mV06mqVqxz5_Z_L-1dUpR78qMGmY9688E-Xsds3uXFuh-W_eBp6yxiczL0bbs6F3vH0wC6W_UjZTIwfYcuwSqvOb2OnveGLifwfOu4r49gK5OvFK07TGzxG8YSH4SnErv4hIjS5kTcTdXnfLEh392VItzKZJqtgVS_I_C0GCPunUjmmvxXmoUZCzGtzHVTjPYqZbW9fyE78aWklclYYXVK_hta6KrtkWf3DAY3Yh7jAhWKQToFPnf5c2baITcI36_jbv2Au6RQpVjE_w5dtQW8snL71hjsWzS6W0PFklMSysMmJaWCvaaobPOGBNEfcfJlvGdLobhDrPLc9WgdHTCjhxdrz8Lb3Wooyh8r7hRUIrv0LOpTFcZhUgV1mAKHQvZ1HpO0UUbs1TYrIVJnj8eZ1sqG5Bbq_abD1uTDaNUKgpKgQL8xaSm7XZitgR8wQhSDVfRz1jdJAmiT11RvdvvMhVT9cP_NWh2_4R)
+  ![routing](./images/routing.svg)  
+
+例を交えて、URLとControllerのメソッドを紐付けていきます。  
 
 ### 仕様
 
-| 画面名 | URL(※) | Controller名::メソッド名 |
-| --- | --- | --- |
-| ホーム画面 | `https://example.com/` | `HomeController::index` |
-| 管理ログイン画面 | `https://example.com/admin/` | `AdminController::index` |
-| 商品一覧画面 | `https://example.com/admin/products/` | `ProductController::index` |
-| 商品新規画面 | `https://example.com/admin/products/create/` | `ProductController::create` |
-| ランキング画面 | `https://example.com/ranking/` | `RankingController::index` |
+例としてURLと紐付けたいController・メソッドの一覧です。  
+HomeController・AdminController・ProductController・RankingControllerは既にあるものとします。  
+
+| 画面名 | URL(※) | URI | Controller名::メソッド名 |
+| --- | --- | --- | --- |
+| ホーム画面 | `https://example.com/` | `/` | `HomeController::index` |
+| 管理ログイン画面 | `https://example.com/admin/` | `/admin` | `AdminController::index` |
+| 商品一覧画面 | `https://example.com/admin/products/` | `/products` | `ProductController::index` |
+| 商品新規画面 | `https://example.com/admin/products/create/` | `/products/create` | `ProductController::create` |
+| ランキング画面 | `https://example.com/ranking/` | `/ranking` | `RankingController::index` |
 
 ※ **URLはドメインが「`example.com`」の場合**
 
@@ -209,11 +215,48 @@ Route::delete('/example', アクション); // DELETE
 
 ## URL生成
 
-### url関数
+web.phpで作成したルートへアクセスするためのURLを作成したい場合は  
 
-url関数（urlヘルパ）を使って
+### urlヘルパ関数
 
+urlヘルパ関数は
 
+```php
+// web.php
+Route::get('/users/create', [UserController::class, 'create']);
+```
+
+```php
+<!-- *.blade.php -->
+<a href="{{ url('/users/create') }}">新規登録</a>
+```
+
+　↓ HTML出力
+
+```html
+<a href="https://example.com/users/create">新規登録</a>
+```
+
+### routeヘルパ関数
+
+routeヘルパ関数は、ルート名を指定してURLを生成します。  
+ルート名を付けるには、ルート設定時にnameメソッドを使って設定します。
+
+```php
+// web.php
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+```
+
+```php
+<!-- *.blade.php -->
+<a href="{{ route('users.create') }}">新規登録</a>
+```
+
+　↓ HTML出力
+
+```html
+<a href="https://example.com/users/create">新規登録</a>
+```
 
 ## Laravel公式ページ
 
