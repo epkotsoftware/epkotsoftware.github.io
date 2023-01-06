@@ -228,7 +228,7 @@ Route::get('/users/create', [UserController::class, 'create']);
 
 ```php
 <!-- *.blade.php -->
-<a href="{{ url('/users/create') }}">新規登録</a>
+<a href="{% raw %}{{ url('/users/create') }}{% endraw %}">新規登録</a>
 ```
 
 　↓ HTML出力
@@ -249,7 +249,7 @@ Route::get('/users/create', [UserController::class, 'create'])->name('users.crea
 
 ```php
 <!-- *.blade.php -->
-<a href="{{ route('users.create') }}">新規登録</a>
+<a href="{% raw %}{{ route('users.create') }}{% endraw %}">新規登録</a>
 ```
 
 　↓ HTML出力
