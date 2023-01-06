@@ -216,10 +216,11 @@ Route::delete('/example', アクション); // DELETE
 ## URL生成
 
 web.phpで作成したルートへアクセスするためのURLを作成したい場合は  
+urlヘルパ関数・routeヘルパ関数を使います。  
 
 ### urlヘルパ関数
 
-urlヘルパ関数は
+urlヘルパ関数は指定したパスへのURLを生成します。
 
 ```php
 // web.php
@@ -268,6 +269,8 @@ Route::get('/users/create', [UserController::class, 'create'])->name('users.crea
   - <https://readouble.com/laravel/9.x/ja/urls.html>
 - `Laravel 9.x CSRF保護`
   - <https://readouble.com/laravel/9.x/ja/csrf.html>
+- `Laravel 9.x ヘルパ`
+  - <https://readouble.com/laravel/9.x/ja/helpers.html>
 
 ## PHPマニュアル
 
