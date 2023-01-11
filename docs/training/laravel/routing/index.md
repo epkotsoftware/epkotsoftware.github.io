@@ -1,16 +1,5 @@
 # Laravel ルーティング
 
-## 目次
-
-| No. |  |
-| :---: | --- |
-| 1 | [ルーティングとは](#ルーティングとは) |
-| 2 | [URL](#url) |
-| 3 | [PHPフレームワークを使わない場合](#phpフレームワークを使わない場合) |
-| 4 | [Laravelルーティング](#laravelルーティング) |
-| 5 | [Laravel公式ページ](#laravel公式ページ) |
-| 6 | [PHPマニュアル](#phpマニュアル) |
-
 ## ルーティングとは
 
 Laravelのルーティングは簡単に言うと  
@@ -48,38 +37,39 @@ Apacheサーバーであれば「`.htaccess`」ファイルの設定でカスタ
 ## Laravelルーティング
 
 [PHPフレームワークを使わない場合](#phpフレームワークを使わない場合)では、ファイルの格納場所に応じてURLが決まっていましたが  
-Laravelではファイル格納場所ではなく、URLと処理を紐づけていきます。  
-以下、ルーティングのイメージです。
+Laravelではファイル格納場所ではなく、web.phpにURLと処理を紐づけるルート設定を行なっていきます。  
+
+### ルーティングイメージ
 
 - [PlantUML](https://www.plantuml.com/plantuml/umla/hLBVInL157wVlsB0m2k86v4WeroiY1I4ug9FRGzpzvwzBipEJhEpANXzk3DG-X9KKFHeHVG3iX0Yo_fd3aP_HdDNbzMyw7redvOptpdVzvtppUU6QrEaWfZ42A1BNFC78D1zH7U0xY7Qr-Zsq7v6-mRTpg1elv7UMEo_cSkzwprqpz6zH_iMxLTVRyTmDOvxIxtZGOHu364Boyjtq7r0kuls7TfzT5kXd8ioaMbsMtFPXHPqchTkBiy5PR59LurHEGi2MEUf4Z0LPUanNdjaKEIWyo3Im0rKFRE4U6AYkFPUaapIiSvCV6LwckgiC907Qz2UKgkARbHwTj3-HEVGRJDwdXYoqbfaz69wcHcWEkck6aQn_mpxdwezRg5z-llnA-o_90pjNbdR3cNZSFVNdoyxMA4cJiuWdgGYROi2cjUK2XUCKU6DJ1gT2U4rLEHX1TJPccokU7arg1RO6Yo2iJDUks0gK6Fy8f_Za_Jk26oCHOBd-IIj1dOrW6p-C-kUjmooGmUs2Qkd-AIKiTfdDFoVEo13AFoTXcIX4ZpAaUjcV-V39mVOtpjyz1txByWc6P97hbGmC16SC16Srbi5zMnOQjdknqdcqzcHF8LSyMZq1CsMULiKeaWJoGqS0Ljmlu3Sp9Boc7I43LDODo0xEQsVo0QX_bD5MoGHZGiPbUj8P0VM6nFbsn5YSoZkd7ECq9sRJ4FZs0Uzf8z-JlTjrXcSztz5Alu2kot)
   ![routing](./images/routing.svg)  
 
-例を交えて、URLとControllerのメソッドを紐付けていきます。  
+### ルート設定(web.php)
 
-### 仕様
-
-例としてURLと紐付けたいController・メソッドの一覧です。  
-HomeController・AdminController・ProductController・RankingControllerは既にあるものとします。  
-
-| 画面名 | URL(※) | URI | Controller名::メソッド名 |
-| --- | --- | --- | --- |
-| ホーム画面 | `https://example.com/` | `/` | `HomeController::index` |
-| 管理ログイン画面 | `https://example.com/admin/` | `/admin` | `AdminController::index` |
-| 商品一覧画面 | `https://example.com/admin/products/` | `/products` | `ProductController::index` |
-| 商品新規画面 | `https://example.com/admin/products/create/` | `/products/create` | `ProductController::create` |
-| ランキング画面 | `https://example.com/ranking/` | `/ranking` | `RankingController::index` |
-
-※ **URLはドメインが「`example.com`」の場合**
-
-### ルート設定
-
-`routes/web.php`ファイルにルートを設定していきます。  
-ルート設定を行う方法は、以下のように行います。  
+`routes/web.php`ファイルのルート設定方法です。  
 URIにはルートパスを入れます。
 
 ```php
 Route::HTTPメソッド('URI', アクション);
 ```
+
+#### HTTPメソッド
+
+Routeクラスのメソッドが  
+そのままHTTPメソッドになります。  
+
+```php
+Route::get('URI', アクション); // GET or HEAD
+Route::post('URI', アクション); // POST
+Route::put('URI', アクション); // PUT
+Route::patch('URI', アクション); // PATCH
+Route::delete('URI', アクション); // DELETE
+Route::options('URI', アクション); // OPTIONS
+```
+
+**※ メソッド名は小文字で記載する必要があります。**
+
+#### アクション
 
 `アクション`には関数を指定し、処理を直接記述したり  
 Controllerクラスのメソッドを指定することが出来ます。
@@ -98,9 +88,160 @@ Route::HTTPメソッド('URI', function (Request $request) {
 Route::HTTPメソッド('URI', [Controllerクラス::class, 'メソッド名']);
 ```
 
----
+Controllerクラスは完全修飾名にするかuseを使ってエイリアス（別名）を作成する必要があります。  
+よくわからなければ名前空間の学習をしましょう。
 
-[仕様](#仕様)通りにルート設定を行います。  
+- [PHPプログラミング編 名前空間](./../../programming/php/namespaces/index.md)
+
+#### ルート確認
+
+ルート設定が終わったら「`php artisan route:list`」コマンドで、設定の確認ができます。
+
+```bash
+php artisan route:list
+```
+
+正常に設定できていれば以下のようにコマンドの実行結果が表示されます（Laravel9での出力例）。
+
+```bash
+  {HTTPメソッド}   {URI} ................................................................................................. {Controllerクラス名}@{メソッド名}
+```
+
+## URL生成
+
+web.phpで作成したルートへアクセスするためのURLを作成したい場合は  
+urlヘルパ関数・routeヘルパ関数を使います。  
+
+### urlヘルパ関数
+
+urlヘルパ関数は指定したパスへのURLを生成します。
+
+```php
+// web.php
+Route::get('/users/create', [UserController::class, 'create']);
+```
+
+```php
+<!-- *.blade.php -->
+<a href="{% raw %}{{ url('/users/create') }}{% endraw %}">新規登録</a>
+```
+
+　↓ HTML出力
+
+```html
+<a href="https://example.com/users/create">新規登録</a>
+```
+
+### routeヘルパ関数
+
+routeヘルパ関数は、ルート名を指定してURLを生成します。  
+ルート名を付けるには、ルート設定時にnameメソッドを使って設定します。
+
+```php
+// web.php
+Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+```
+
+```php
+<!-- *.blade.php -->
+<a href="{% raw %}{{ route('users.create') }}{% endraw %}">新規登録</a>
+```
+
+　↓ HTML出力
+
+```html
+<a href="https://example.com/users/create">新規登録</a>
+```
+
+### 疑似フォームメソッド
+
+HTMLの`<form>`は、`GET`、`POST`以外のメソッドをサポートしていません。  
+疑似フォームメソッドを使用します。  
+
+以下の例のようにDELETEメソッドで送信したい場合、  
+form要素のmethod属性を`POST`にして  
+`_method`パラメータに`DELETE`を設定して送信します。  
+
+```php
+Route::delete('/example', アクション); // DELETE
+```
+
+```html
+<form action="{% raw %}{{ url('/example') }}{% endraw %}" method="POST">
+    @method('DELETE') <!-- <input type="hidden" name="_method" value="DELETE"> と同じ -->
+    @csrf <!-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> と同じ -->
+    <input type="submit" value="送信" /><!-- 送信ボタン -->
+</form>
+```
+
+- `<form>: フォーム要素 - HTML: HyperText Markup Language | MDN`
+  - <https://developer.mozilla.org/ja/docs/Web/HTML/Element/form#attr-method>
+- `Laravel 9.x ルーティング　〜　疑似フォームメソッド`
+  - <https://readouble.com/laravel/9.x/ja/routing.html#form-method-spoofing>
+
+## Laravelルーティングの例
+
+URLとControllerのメソッドを紐付けていきます。  
+
+### 画面一覧
+
+URLと紐付けたいController・メソッドの一覧です。  
+
+| 画面名 | URL(※) | URI | Controller名::メソッド名 |
+| --- | --- | --- | --- |
+| ホーム画面 | `https://example.com/` | `/` | `HomeController::index` |
+| 管理ログイン画面 | `https://example.com/admin/` | `/admin` | `AdminController::index` |
+| 商品一覧画面 | `https://example.com/admin/products/` | `/products` | `ProductController::index` |
+| 商品新規画面 | `https://example.com/admin/products/create/` | `/products/create` | `ProductController::create` |
+| ランキング画面 | `https://example.com/ranking/` | `/ranking` | `RankingController::index` |
+
+※ **URLはドメインが「`example.com`」の場合**
+
+### Controller
+
+以下、コマンドで対象のControllerクラスを作成します。
+
+```bash
+php artisan make:controller Controllerクラス名
+```
+
+ProductControllerクラスを作成する場合は以下のコマンドになります。
+
+```bash
+# app/Http/Controllers/ProductController.php にProductControllerクラスを作成
+php artisan make:controller ProductController
+```
+
+上記コマンドではクラスしかできないため、メソッドを定義していきます。  
+ProductControllerクラスのindex・createメソッド定義例です。  
+
+```php
+<?php
+// 名前空間
+namespace App\Http\Controllers;
+/** ProductControllerクラス */
+class ProductController extends Controller
+{
+    /** ProductControllerクラス indexメソッド */
+    public function index()
+    {
+        // ...
+    }
+
+    /** ProductControllerクラス createメソッド */
+    public function create()
+    {
+        // ...
+    }
+}
+```
+
+ここではルーティング説明のみのため、処理は省略します。  
+HomeController・AdminController・RankingControllerも同様に作られているものとします。
+
+### web.php
+
+[画面一覧](#画面一覧)通りにルート設定を行います。  
 今回は、全てGETメソッドなのでRouteクラスの「`get`」メソッドを使います。
 
 ```php
@@ -171,93 +312,6 @@ use App\Http\Controllers\RankingController;
 実務では必須となってくるので、しっかり理解しておきましょう。
 
 - [PHPプログラミング編 名前空間](./../../programming/php/namespaces/index.md)
-
-### HTTPメソッド
-
-```php
-Route::get('URI', アクション); // GET or HEAD
-Route::post('URI', アクション); // POST
-Route::put('URI', アクション); // PUT
-Route::patch('URI', アクション); // PATCH
-Route::delete('URI', アクション); // DELETE
-Route::options('URI', アクション); // OPTIONS
-```
-
-- 公式
-  - <https://readouble.com/laravel/9.x/ja/routing.html#available-router-methods>
-  - `\Illuminate\Routing\Router`
-    - <https://github.com/illuminate/routing/blob/9.x/Router.php>
-
-#### 疑似フォームメソッド
-
-HTMLの`<form>`は、`GET`、`POST`以外のメソッドをサポートしていません。  
-疑似フォームメソッドを使用します。  
-
-以下の例のようにDELETEメソッドで送信したい場合、  
-form要素のmethod属性を`POST`にして  
-`_method`パラメータに`DELETE`を設定して送信します。  
-
-```php
-Route::delete('/example', アクション); // DELETE
-```
-
-```html
-<form action="/example" method="POST">
-    @method('DELETE') <!-- <input type="hidden" name="_method" value="DELETE"> と同じ -->
-    @csrf <!-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> と同じ -->
-</form>
-```
-
-- `<form>: フォーム要素 - HTML: HyperText Markup Language | MDN`
-  - <https://developer.mozilla.org/ja/docs/Web/HTML/Element/form#attr-method>
-- `Laravel 9.x ルーティング　〜　疑似フォームメソッド`
-  - <https://readouble.com/laravel/9.x/ja/routing.html#form-method-spoofing>
-
-## URL生成
-
-web.phpで作成したルートへアクセスするためのURLを作成したい場合は  
-urlヘルパ関数・routeヘルパ関数を使います。  
-
-### urlヘルパ関数
-
-urlヘルパ関数は指定したパスへのURLを生成します。
-
-```php
-// web.php
-Route::get('/users/create', [UserController::class, 'create']);
-```
-
-```php
-<!-- *.blade.php -->
-<a href="{% raw %}{{ url('/users/create') }}{% endraw %}">新規登録</a>
-```
-
-　↓ HTML出力
-
-```html
-<a href="https://example.com/users/create">新規登録</a>
-```
-
-### routeヘルパ関数
-
-routeヘルパ関数は、ルート名を指定してURLを生成します。  
-ルート名を付けるには、ルート設定時にnameメソッドを使って設定します。
-
-```php
-// web.php
-Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
-```
-
-```php
-<!-- *.blade.php -->
-<a href="{% raw %}{{ route('users.create') }}{% endraw %}">新規登録</a>
-```
-
-　↓ HTML出力
-
-```html
-<a href="https://example.com/users/create">新規登録</a>
-```
 
 ## Laravel公式ページ
 
