@@ -1,17 +1,19 @@
 # PlantUML
 
+## 公式
+
 - PlantUML
   - <https://plantuml.com/ja/>
 
 ## ガントチャート
 
-- [ガントチャート](https://www.plantuml.com/plantuml/umla/fPJFYXD14CRlzHG5ikmfsDDZDaIMPN4bNZnuyBPuA6QQCBkTxgMx1maX1sSk7lMqPn5F2Xx4Wx3WmxJu7FOqwKr26n0C1BxvgkfNt_oPERUEZ6iN4k3KkgKKPp0dvTpJXkQ65hW2H4VsEWh49rHTFpEwLVM5bjhW0yPcCyPYxNcZnBqxPT5TXtybjHNr8S1iTX5-crOoHh_6LOuRriIUDPm-tEG4IMhUqbpW5S6DQPIp5Kc1DJLo2QvnGVlkY--_-Vwjxz_u_gFlxmRTVO_chUy_0y3nhxltlsy_WINNcfgMI4PiGeDjrU3WhiSPBqO57_4fEetXY8zOCM8bDZQr9BDWEoOS--wdxtxuxYjStilGz0h9ukLB5gLMkFBzXnZmNSXRh56ITHPFC2InIAeUc0LZHrZfnOqKJjHxFBxbyPp74-_Hl_BAn8ioo_TuoeuISxB7nF419j-USvGvimZC_yjTRdSCSZCytXi-EChJw22plTael33wIbGEuyjaCJqXnHWmtTYiDaardjTEKgtCQdoomnoTfMku0ylDCfdbtqqUp3IJTIOpTPuBLG_VYpy0)
+- [ガントチャート](https://www.plantuml.com/plantuml/umla/fPI_YXH14CRpUee2EIuQxEbnRravZiEJDJ4mC3iCYfbccRkvxgEx5rcM3Pn933MwMCH8mK0CX0CVfiNdSBROtZ-q0u8RVVrLrQ--dJzpxZnPFoFjFPmwlsZK6V3fQKqpIpUu14HFxfe5uXCghvzPCzVLXMcCnGT2JAT2SErvhTNMdGXsLu1ODiQfQWWmdLxqlqqhMMjUupB5hTTmpmfE7svoGaDwDgUPmYk2Mrjhxqfg55PKDmlmjUzrQB-4xbleteRkJUW-Xkv-hTllRDw5xZC07F-wV__xxXCuydDRqGB9gareS7EzTd3VaqBcMIupEK5li3_9JEIPAB1siIMQkTWpuJYqFqFx8xHVuN8h-wPNI0ulNmgMHkCoT1yuuBi-Rxx2XfntU89z4eUagpKp5-88ItDpsoYlgWEUtF5aofEHz-XVUKNaiKpoFPw8eyWS7p1nDC2Kk__CCcNcFVF_SXUx7Inv64S7muEZCewoZ7i7H-65DLUgzCXlayFuXEGZm7XZazeurcHQEucr8gd9yHupEulNS0-McaKqYx-RaasUIJkZ6JlFbQxu4_47)
   - スケジュール・進捗管理等で使用しました。
 
-![ガントチャート](./../image/plantuml-gantt-chart.svg)
+![ガントチャート](./images/plantuml-gantt-chart.svg)
 
 ```plantuml
-@startuml
+@startgantt
 <style>
 ganttDiagram {
   task {
@@ -56,7 +58,7 @@ Project starts 2021-12-15
   [T01-3] -> [T03-2]
   [T02-1] -> [T03-1]
   [T02-1] -> [T03-2]
-@enduml
+@endgantt
 ```
 
 ## クラス図
@@ -64,7 +66,7 @@ Project starts 2021-12-15
 - [PlantUML クラス図](https://www.plantuml.com/plantuml/umla/lP5FIyH03CNlyoa2Ur7y4WlYGT3RuaKyP6TYTt3-b2IhAzBlRaFRqIBYPJ5G2B_toijhjwB8Uip9nQB4p-W9TWUkRxXF11zkS8SOlgDCUKyiplc48d33N1bYxXDbAYghbm4seXnB1vb4i2CZOmxu6co_cjMEz7uoN5mQDil8hcimCBIiawTUOot_bBTxxsdgHoUb4fQsPm-wgrtqhLrBQ-ISYJtwbr65svIEEHRKwSCj-05J3DX20QOBl_1VPzfiPdjbU5ssHVhH0c3T1E3NDZRhHcl_unEG_I6PXS7PCxWjbN3CwHC0)
         - 実装前のクラス設計が必須の現場で使用しました。
 
-![クラス図](./../image/plantuml-class-diagram.svg)
+![クラス図](./images/plantuml-class-diagram.svg)
 
 ```plantuml
 @startuml
@@ -120,7 +122,7 @@ package Illuminate {
 - [PlantUML シーケンス図](https://www.plantuml.com/plantuml/umla/TPEzRXGn4CTxFyLeUrxW2XIID7G896XeRA-BbOxroTxTa18RH2AAkoA4Adn44Hm82Q5883u43pFQE_8MZ6rqwopGdApv-VznS-Sjst3JjFUcJEZxKDnH0eJHUrQPWW5msMW31VhNwB-Z-qIV1N0BBJ6XsxhaPX-AzT6tYvFJ20HJTGbaDTYHLPVSPfHKoMh6wmQAsvNQYvAEYDHrO_GKYfrqc2eJcHohRf5P9LM4TWnlgfcs5JNUZznSxhAxdLKfUSC5jogCu-NoykMTgMxBlphtPySNVddjnlKeuHi9Q-7ALH0m0NIdw3wW-up-3Vfp9WAG0VXt4IpHVK5_m6hTAD3K1cI0Jz6z3Ilspz5xudThz8kWyOzfFFZ9u6UZNm8_-_bn_-CPim4O0hlRA_-eV_anpRCSCu7KW6pNHozM1mjcWgYCRk_HdSS2Xt-4PJGSiQImMSmGJ6lvV_Bews_QvqNuFzR4inPnT49ReCEco12R1Te9z8k7QOmFdg0x70V6rZBVOrfjbuyonsu2g_cS_kYis_pKeqOYW9P0UWw_NYtNPr_PbgfBUbs_0G00)
   - 業務フロー・基本設計・詳細設計等、様々な用途に使われます。
 
-![シーケンス図](./../image/plantuml-sequence-diagram.svg)
+![シーケンス図](./images/plantuml-sequence-diagram.svg)
 
 ```plantuml
 @startuml
@@ -169,7 +171,7 @@ b -> u : 画面表示
 - [PlantUML アクティビティ図](https://www.plantuml.com/plantuml/umla/hLJFQnD16BtFNp6abmHqDpruIH0gGZtc89H0N6H8fzbeEhlipYOHANHciAP4i4Yjn4iG2z7ues114QlzOpxJfF-5aqbgXzgq8CrXoSpttZVllVcOXPYJY2UhDMJ-85GgpO7Q0jK7zHJK0SXle7gWzZqlT-v-tb3ASHtKIv1lGEw2-Z3gVm9nEFfreB-QUFlkqgng7h60KnnLApxFuS7dxkZjawEE1B5NAlcSXt7ETHkDXXFweSCeTrS9IqZDVK3S6c6LX5IeKw6CHeG7KUm4THhLgzJ0yPsJVSy3-UBtpyFXzZiGhs1Tp8Fw279_R4DjWdWDOlTKarn7A5Vs4_OmnZSnYIBowBvPfi_Oi9kCSv7VGRMkuVbiDflvJrkKkIi9A_Dgm1npydLpih5ZAT66H4_t0j47yVmUkzAeH6_GsXXiVW7H0Tb6A2GHhuuLuTHA455IzjEJT38f_1XXtF2hDOhJqngU5Z69JH9sI9aCmlfd9sD1hCiOTduSFpiHO3XcAYtOp0cz19EVjBCyWMg1UgzB8B-2tFkBJE6vnSLRDx9PO_AixiiI3vS3XqU4nSHSPcnIddMKvnbL4vkpGCSxxK6lRJnU1CXRhPhD9gWDayQEdjT9ghf3iLZyTzyc1a5mBh5GA5nCDE5tGIajKkFjvHIsfh-KBPkXGMlcxLZIKpZSxXwrjZJbTA49CGz2jA3X-dtw0m00)
   - 機能単位で詳細設計に使用しました。
 
-![アクティビティ図](./../image/plantuml-activity-diagram.svg)
+![アクティビティ図](./images/plantuml-activity-diagram.svg)
 
 ```plantuml
 @startuml

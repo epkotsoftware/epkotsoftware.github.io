@@ -534,7 +534,7 @@ Linux技術者認定試験(LPIC)の一部にチャレンジしてみましょう
       - SVG形式で出力することで、リンクも使用でき。Markdownでの設計書作成時に使われる事がある。
     - <https://plantuml.com/ja/>
     - サンプル: 別ページに現場で使用経験のあるものを集めました。
-      - [PlantUML](./training_plantuml.md)
+      - [PlantUML](./plantuml/index.md)
 
 ### 画面設計
 

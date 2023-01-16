@@ -279,7 +279,7 @@
       - <https://youtu.be/BYNE0suKDZI>
     - 【動画】UMLとは？クラス図・シーケンス図など種類や書き方、ツールを解説！【統一モデリング言語】UML入門
       - <https://youtu.be/EvO_BvCJUCA>
-      - 実業務で [PlantUML](./training_plantuml.md) を用いて書いていたこともありました。
+      - 実業務で [PlantUML](./plantuml/index.md) を用いて書いていたこともありました。
     - 詳細設計における成果物一覧と書き方（詳細設計書サンプルあり）
       - <https://pm-rasinban.com/dd-write>
   - 【動画】開発実況シリーズ
