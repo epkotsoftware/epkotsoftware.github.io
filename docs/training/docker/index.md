@@ -23,6 +23,8 @@
 
 ## 動画
 
+- Docker最初の1歩 Webアプリの開発環境を構築してみよう！【初心者向け】【プログラミング】
+  - <https://youtu.be/s1FVLHSDIZE>
 - 【2021年最新】Docker環境構築入門｜14分でdocker-composeまで完全解説！【windows/mac対応】Dockerの使い方
   - <https://youtu.be/VIzLh4BgKck>
 - Docker超入門講座 合併版 | ゼロから実践する4時間のフルコース

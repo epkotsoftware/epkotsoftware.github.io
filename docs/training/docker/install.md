@@ -2,6 +2,8 @@
 
 ## 公式
 
+- Docker: Accelerated, Containerized Application Development
+  - <https://www.docker.com/>
 - Docker Desktop overview
   - <https://docs.docker.com/desktop/>
 
@@ -41,11 +43,6 @@ BIOS設定についてはパソコンのメーカーによってやり方が異�
 
 ## インストール準備(Mac)
 
-インストール方法については以下の動画が参考になります。
-
-- `2022年版、プログラミング環境構築の方法【Macbook M1対応】 #Python #Node.js #Docker #Homebrew #VSCode`
-  - <https://youtu.be/2bLPTSaaJJo?t=419s>
-
 Macでは特別な設定が不要ですが  
 Appleシリコン搭載Mac（M1チップ搭載のもの等）では「Rosetta 2」のインストールを推奨されています（筆者の`MacBook Air (M1, 2020)`ではなしで動作している）。  
 インストールは任意でお願いします。
@@ -62,7 +59,7 @@ softwareupdate --install-rosetta
 ## インストール
 
 - `Docker Desktop`
-  - <https://www.docker.com/products/docker-desktop>
+  - <https://www.docker.com/>
 - インストール完了後のチュートリアルはスキップしてください。
 - インストールがうまくいかなかったらトラブルシューティングをご覧ください。
   - [Docker トラブルシューティング](./troubleshoot.md)
@@ -70,3 +67,11 @@ softwareupdate --install-rosetta
 以下の画面が確認できればインストール完了です。
 
 ![Docker Desktop](./images/docker-desktop.png)  
+
+### 動画
+
+以下、動画のインストールが参考になります。  
+Docker起動からチュートリアルのスキップまで進めましょう。
+
+- Docker最初の1歩 Webアプリの開発環境を構築してみよう！【初心者向け】【プログラミング】
+  - <https://youtu.be/s1FVLHSDIZE?t=233s> （Docker起動）
