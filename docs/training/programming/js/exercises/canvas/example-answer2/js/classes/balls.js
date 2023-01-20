@@ -66,7 +66,7 @@ class RedBall extends Ball {
     super.update(timestamp);
 
     // _currentXを更新して横に動かす、壁にあたったら逆方向に移動
-    const width = this._context.canvas.width;
+    const width = this._context.canvas.clientWidth;
     if (0 < this._stepX && width <= this._currentX) {
       this._stepX = -this._step;
     } else if (this._stepX < 0 && this._currentX <= 0) {

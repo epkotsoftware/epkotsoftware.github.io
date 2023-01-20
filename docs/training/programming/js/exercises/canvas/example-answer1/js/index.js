@@ -12,8 +12,8 @@
         // 画面を初期化
         ctx.clearRect(0, 0, canvasBall.clientWidth, canvasBall.clientHeight);
 
-        // _currentXを更新して横に動かす、壁にあたったら逆方向に移動
-        const width = canvasBall.width;
+        // xを更新して横に動かす、壁にあたったら逆方向に移動
+        const width = canvasBall.clientWidth;
         if (0 < stepX && width <= x) {
             stepX = -step;
         } else if (stepX < 0 && x <= 0) {
