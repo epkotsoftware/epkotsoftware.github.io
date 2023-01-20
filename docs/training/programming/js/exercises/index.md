@@ -1,7 +1,8 @@
-# プログラミング編 課題
+# JavaScriptプログラミング編 課題
 
 ## 課題
 
-| No. |  |  |
-| :---: | --- | --- |
-| 1 | [JavaScript課題1](./01/index.md) | Geocoding APIを使った課題 |
+| No. |  |
+| :---: | --- |
+| 1 | [課題(canvas)](./canvas/index.md) |
+| 2 | [課題(Geocoding API)](./01/index.md) |
