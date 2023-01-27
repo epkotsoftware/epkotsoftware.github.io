@@ -1,5 +1,7 @@
 # 試験
 
+## 試験内容
+
 「`helper.js`」ファイルを新規作成し、仕様を満たす[same関数](#same関数)を定義してください。  
 初めての方は、[参考資料](#参考資料)に学習用の動画・サイトのリンクがあります。  
 また、[禁止事項](#禁止事項)には目を通すようお願いいたします。  
@@ -13,17 +15,6 @@
     - same関数の動作確認用HTMLファイル
   - helper.js
     - same関数を定義したJavaScriptファイル（確認対象）
-
-## インデックス
-
-| No. |  |
-| --- | --- |
-| 1 | [動作確認用HTMLファイル](#動作確認用htmlファイル) |
-| 2 | [same関数](#same関数) |
-| 3 | [例](#例) |
-| 4 | [提出について](#提出について) |
-| 5 | [参考資料](#参考資料) |
-| 6 | [禁止事項](#禁止事項) |
 
 ## 動作確認用HTMLファイル
 
@@ -133,18 +124,11 @@ iCloudファイル共有を利用して、リンクを送信してください�
 
 ![result.png](./images/result.png)
 
-### よくある質問
-
-- 全てNGになってしまいます。  
-  → なぜNGになるかを考えましょう。実行結果の値があなたの想定通りになっているでしょうか？  
-- 「`same(1, '1')`」のパターンがNGになってしまいます。  
-  → 「等価演算子」について学習しましょう。  
-
 ## 参考資料
 
 ### エディタ
 
-JavaScriptを書くには「メモ帳」等のアプリでも可能ですが  
+JavaScriptを書くには「メモ帳」などのアプリでも可能ですが  
 「Visual Studio Code」がおすすめで、HTML講座動画内でも使われています。  
 サブのエディタとして「サクラエディタ」等も良いです。  
 
@@ -155,19 +139,16 @@ JavaScriptを書くには「メモ帳」等のアプリでも可能ですが
 
 ### サイト
 
-- JavaScript入門
-  - <https://www.javadrive.jp/javascript/>
-  - JavaScriptのコードを別のファイルに記述する
-    - <https://www.javadrive.jp/javascript/before/index4.html>
-  - 関数を定義する
-    - <https://www.javadrive.jp/javascript/function/index2.html>
-  - 等価演算子
-    - <https://www.javadrive.jp/javascript/ope/index12.html>
-  - 論理値
-    - <https://www.javadrive.jp/javascript/ini/index6.html#section3_4>
-- 検索
-  - 「ZIP圧縮」
-    - <https://www.google.com/search?q=ZIP圧縮>
+- `現代の JavaScript チュートリアル`
+  - <https://ja.javascript.info/>
+- `HTML: HyperText Markup Language | MDN`
+  - <https://developer.mozilla.org/ja/docs/Web/HTML>
+- `JavaScript | MDN`
+  - <https://developer.mozilla.org/ja/docs/Web/JavaScript>
+  - `式と演算子 - JavaScript | MDN`
+    - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators>
+  - `関数 - JavaScript | MDN`
+    - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Functions>
 
 ### 動画
 
