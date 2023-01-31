@@ -16,6 +16,11 @@
   - helper.js
     - same関数を定義したJavaScriptファイル（確認対象）
 
+## 禁止事項
+
+- 第三者に本ページのURL・スクリーンショット・記載内容を見せることを禁止する。
+- 第三者に本課題の協力を求めることを禁止する。 ※ 研修は本課題のスキルがある前提で進むため。
+
 ## 動作確認用HTMLファイル
 
 - 以下のZIPファイルを解凍してお使いください。
@@ -27,7 +32,7 @@ same関数の仕様は以下になります。
 
 ### 説明
 
-指定された2つの値が等しいかどうかを判断します。
+指定された3つの値が等しいかどうかを判断します。
 
 ### 関数名
 
@@ -39,55 +44,38 @@ same関数の仕様は以下になります。
   - 比較する最初の値。
 - `value2`
   - 比較する2番目の値。
+- `value3`
+  - 比較する3番目の値。
 
 ### 戻り値(返り値)
 
-指定した2つの値が完全一致した場合は `true(boolean)`、 そうでなければ `false(boolean)` を返します。
+指定した3つの値が完全一致した場合は `true(boolean)`、 そうでなければ `false(boolean)` を返します。
 
 ## 例
 
 以下は、same関数の使用例です。
 
-### value1 = 1、value2 = 1、戻り値 = true
+### 戻り値がtrueになるパターン
 
 ```js
-// same関数を実行
-let result = same(1, 1);
-// result変数には true が入る
+console.log(same(0, 0, 0));
+console.log(same(1, 1, 1));
+console.log(same('0', '0', '0'));
+console.log(same('a', 'a', 'a'));
 ```
 
-### value1 = 2、value2 = 2、戻り値 = true
+### 戻り値がfalseになるパターン
 
 ```js
-// same関数を実行
-let result = same(2, 2);
-// result変数には true が入る
-```
-
-### value1 = '1'、value2 = '1'、戻り値 = true
-
-```js
-// same関数を実行
-let result = same('1', '1');
-// result変数には true が入る
-```
-
-### value1 = 1、value2 = 2、戻り値 = false
-
-```js
-// same関数を実行
-let result = same(1, 2);
-// result変数には false が入る
-```
-
-### value1 = 1、value2 = '1'、戻り値 = false
-
-※ 以下のパターンは、型が違うため不一致とします。
-
-```js
-// same関数を実行
-let result = same(1, '1');
-// result変数には false が入る
+console.log(same(0, 0, 1));
+console.log(same(0, 1, 0));
+console.log(same(1, 0, 0));
+console.log(same(0, 0, '0'));
+console.log(same(0, '0', 0));
+console.log(same('0', 0, 0));
+console.log(same('a', 'a', 'b'));
+console.log(same('a', 'b', 'a'));
+console.log(same('b', 'a', 'a'));
 ```
 
 ## 提出について
@@ -145,10 +133,14 @@ JavaScriptを書くには「メモ帳」などのアプリでも可能ですが
   - <https://developer.mozilla.org/ja/docs/Web/HTML>
 - `JavaScript | MDN`
   - <https://developer.mozilla.org/ja/docs/Web/JavaScript>
+  - `入門編 - JavaScript | MDN`
+    - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Introduction>
+  - `文法とデータ型 - JavaScript | MDN`
+    - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Grammar_and_Types>
+  - `関数 - JavaScript | MDN`
+    - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Functions>
   - `式と演算子 - JavaScript | MDN`
     - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators>
-  - `関数 - JavaScript | MDN`
-    - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Functions>
 
 ### 動画
 
@@ -156,11 +148,6 @@ JavaScriptを書くには「メモ帳」などのアプリでも可能ですが
   - <https://www.youtube.com/playlist?list=PLwM1-TnN_NN457PTxsvNXxVxN8fkbYHKU>
 - JavaScript講座
   - <https://www.youtube.com/playlist?list=PLwM1-TnN_NN7-zdRV8YsGUB82VVhfYiWW>
-
-## 禁止事項
-
-- 第三者に本ページのURL・スクリーンショット・記載内容を見せることを禁止する。
-- 第三者に本課題の協力を求めることを禁止する。 ※ 研修は本課題のスキルがある前提で進むため。
 
 ## 試験資料について
 
