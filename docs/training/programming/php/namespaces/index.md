@@ -2,7 +2,7 @@
 
 ## はじめに
 
-namespace(名前空間)、useについて学習します。
+namespace(名前空間)、useについて学習します。  
 
 ![top.png](./images/top.png)  
 
@@ -157,6 +157,10 @@ class UserController
 
 #### クラス定義
 
+| 名前空間<br>(namespace) | クラス名<br>(class) | 完全修飾名<br>（`\{名前空間}\{クラス名}`） |
+| --- | --- | --- |
+| `Helpers` | `StringHelper` | `\Helpers\StringHelper` |
+
 ```php
 <?php
 
@@ -172,6 +176,8 @@ class StringHelper
 ```
 
 #### 定義したクラスを使用
+
+完全修飾名が「`\Helpers\StringHelper`」のクラスを使う。
 
 ```php
 <?php
