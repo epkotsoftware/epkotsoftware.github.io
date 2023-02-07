@@ -1,16 +1,10 @@
 # PHPプログラミング編 名前空間
 
-## 目次
+## はじめに
 
-| No. |  |
-| :---: | --- |
-| 1 | [用語](#用語) |
-| 2 | [名前空間とは](#名前空間とは) |
-| 3 | [名前空間・クラス・メソッドの定義](#名前空間クラスメソッドの定義) |
-| 4 | [Laravel参考ページ](#laravel参考ページ) |
-| 5 | [PHP標準クラス](#php標準クラス) |
-| 6 | [useの注意点](#useの注意点) |
-| 7 | [PHPマニュアル](#phpマニュアル) |
+namespace(名前空間)、useについて学習します。
+
+![top.png](./images/top.png)  
 
 ## 用語
 
@@ -19,6 +13,7 @@
 | メソッド | クラス内で定義した関数を「メソッド」と呼びます。 |
 | クラス | 処理をする機能をひとまとめにしたものを「クラス」と呼び<br>構成要素としてメソッドなどを持ちます。 |
 | 名前空間 | クラスをまとめたものを「名前空間」と呼びます。 |
+| エイリアス | 別名です。PHPではuseを使ってクラスの別名を作成します。 |
 
 - [PlantUML](https://www.plantuml.com/plantuml/umla/SoWkIImgoStCIybDBE3IKdWweVTfP-_pbRjUJfjioAMbfV2uQVtZvfMFctO2UI1kyyB7JNiVDpS_Rkx453724356CSE863FGN654o1K4RN18pKk1-X00)  
   ![diagram](./images/diagram.svg)
