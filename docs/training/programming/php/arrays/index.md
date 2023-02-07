@@ -54,6 +54,9 @@ var_dump($sports);
 //}
 ```
 
+- [PlantUML](https://www.plantuml.com/plantuml/umla/TO-zIWGn483xFCMmPw4WXrg88CAXZs0f5d4pjnSkFs6IAmwvPbDe9VS0li5L5XQ2RvD2V0kpQ-GyT5DbVhxvPYO-S0eBhPZ2QO1WWMGp2o0aOHsaDSpFfN6Sk0R7wpbly3ei5OAn0jbC2eHQKgtA7xKBIz2exv3yNnJk6UHtcQE6xCA8AwiimMZQFxRwHKoj4aX301VY34ypm4fVjUUTfU0hu1vSZ_quEH5VmaW8qQUtXQCI0zIAUm_LlWyaJNC0gNrDCQPsa-9xrVUiTiZZGVBpuUbZ7VzZJePjSPtQjzI-TCxucE9prgQusKvPTPSQ6x2xph1oArp0JTzIxUnx-9qhcvHeo97hj-SCZUYcC-PWFCw2IKuijFe2)  
+  ![indexed-arrays](./images/indexed-arrays.svg)  
+
 要素数が増えてくると読みにくくなるので改行しても問題ありません。  
 最後の値の後ろに「,」をつけてもエラーにはなりません。
 
@@ -118,6 +121,9 @@ var_dump($sports);
 //   string(24) "バスケットボール"
 // }
 ```
+
+- [PlantUML](https://www.plantuml.com/plantuml/umla/TO_1IWCn48RlUOfXArH1UXH1AaKVmQDuI9FfDZIRB9FqKAINpK5FqWVm3Nhou47mRN8Gty9iDzQARav9vl_ccvaupyalAyqqpZnu2wJAkGUf28LNrZ2tKARcn2kekLZm4c_yIYCOAv7DbKGGYeJETwnglu8AgocI-ul2FODqhjAh9BiqyjfgIp2OxGvR7n0pgoLI7y2bFCUp1B2SAuvSRScx0hY3kiNsJax4Lp2GKkPk-q9-0mZDdOFYs7bIfZo1sBp646ApZU6zs6NMlyXfB_dvyFIn2VynejyMDh5vYyrBwmoFCJmdRGpRdoxhTbDZFRRR6PPtXJ7SxY85Bs1y2SF3iOUdNMdQbRgvlZz5plU8K-pkWg6HhPAn6aQZP9saZsMblm00)  
+  ![associative-arrays](./images/associative-arrays.svg)  
 
 配列と同様に改行しても問題ありません。
 
@@ -191,6 +197,9 @@ var_dump($records);
 //   }
 // }
 ```
+
+- [PlantUML](https://www.plantuml.com/plantuml/umla/hPBFIiD048Vl-nH3AiH2AMq28aYbAXxruh7qi6QcwTBz4sQtXo9vTvEOI3KrA7KkoUnylzqFTfS-I0vxeuMcJO3WW5M-3O2AAGlAMU5toXQIfO52PZkPqqiuQ0BhaCHM8K6cEDFjFvaY7C2GUINs_IYy2QZglkfoTdkB3quxXj6cAL4U9JPE8_5F0ObuJLTLGBHSTC6KEKOVWVHGDBdkKCai3p12n7QxRZ1h-m7qUAZQnROoBRs7w5BPC8RvR1vzpifUr4f39yC-iBBv69xldXxxMtJVyelsV4Zxpzx9-Tx9xxoJV_LEp_TEXxpB-dLP5mYa1okwzmKBM3NCAbOOm-Aslle9nFM9JHj_N6Myddp7aZwMdC3IFfRMsFf6aCNQI8W2fbEmObajx8r-1m00)  
+  ![multidimensional-arrays](./images/multidimensional-arrays.svg)  
 
 上記の場合、変数 `records` は連想配列と思われがちですが  
 実際は連想配列の配列になります。  
