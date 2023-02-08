@@ -198,7 +198,7 @@ var_dump($records);
 // }
 ```
 
-- [PlantUML](https://www.plantuml.com/plantuml/umla/hPBFIiD048Vl-nH3AiH2AMq28aYbAXxruh7qi6QcwTBz4sQtXo9vTvEOI3KrA7KkoUnylzqFTfS-I0vxeuMcJO3WW5M-3O2AAGlAMU5toXQIfO52PZkPqqiuQ0BhaCHM8K6cEDFjFvaY7C2GUINs_IYy2QZglkfoTdkB3quxXj6cAL4U9JPE8_5F0ObuJLTLGBHSTC6KEKOVWVHGDBdkKCai3p12n7QxRZ1h-m7qUAZQnROoBRs7w5BPC8RvR1vzpifUr4f39yC-iBBv69xldXxxMtJVyelsV4Zxpzx9-Tx9xxoJV_LEp_TEXxpB-dLP5mYa1okwzmKBM3NCAbOOm-Aslle9nFM9JHj_N6Myddp7aZwMdC3IFfRMsFf6aCNQI8W2fbEmObajx8r-1m00)  
+- [PlantUML](https://www.plantuml.com/plantuml/umla/hPBFIiD048Vl-nH3AiH2Mve4H91ALJpgnMFfOSrCqwNx9ynk3qNoxYQnrTRKejIz9BFp_NO_s9dw83ciZHQQ5W620rR5CW0gfZmePuLVALjAbWPAcQzaGIzXemciGn9BXGIvubnl_ycKOGE6p2knxqRXJK2zxkkgOBUs-E2qO-WjsYMglSJ2QIJ-AI0Hh-cg3eWj5rtKlexHHo0zb6rkTwbabXle8MAx_TKOR-iJw7vJxMy2v5fw3z6big4FoJY9FdjL9sgbeQDX7rZPeW_FTq-FtIDst-f0Epcb_MVlz7plz7VUwRzwP-TxPwUygsQwh0lK39GLk_c22SnQPXOhZ65osppz0EBcnhQCFvuodW--OsaNIuzWMHVB6cn-8yXYOoJ6C1pEbWgHxBoEYEIWJaK9en5OCQtvjT7l)  
   ![multidimensional-arrays](./images/multidimensional-arrays.svg)  
 
 上記の場合、変数 `records` は連想配列と思われがちですが  
