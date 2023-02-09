@@ -101,6 +101,9 @@ foreach (配列 as $バリュー変数) {}
 
 $result = '';
 foreach (['a', 'b', 'c'] as $i => $str) {
+    // 1回目 $i = 0; $str = 'a';
+    // 2回目 $i = 1; $str = 'b';
+    // 3回目 $i = 2; $str = 'c';
     $result .= "i={$i} str={$str}, ";
 }
 var_dump($result);
@@ -117,6 +120,31 @@ $str2 = 'b';
 $str3 = 'c';
 $result = '';
 foreach ([$str1, $str2, $str3] as $i => $str) {
+    // 1回目 $i = 0; $str = 'a';
+    // 2回目 $i = 1; $str = 'b';
+    // 3回目 $i = 2; $str = 'c';
+    $result .= "i={$i} str={$str}, ";
+}
+var_dump($result);
+// string(36) "i=0 str=a, i=1 str=b, i=2 str=c, "
+```
+
+以下は関数の戻り値をそのまま指定する例です。  
+メソッドでも同じことが可能です。  
+
+```php
+<?php
+
+function getArray()
+{
+    return ['a', 'b', 'c'];
+}
+
+$result = '';
+foreach (getArray() as $i => $str) {
+    // 1回目 $i = 0; $str = 'a';
+    // 2回目 $i = 1; $str = 'b';
+    // 3回目 $i = 2; $str = 'c';
     $result .= "i={$i} str={$str}, ";
 }
 var_dump($result);
@@ -169,8 +197,14 @@ $users = [
 
 $result = '';
 foreach ($users as $user) {
+    // 【$users 1回目】 $user = ['id' => 1, 'name' => 'USER_NAME01', 'tweets' => [...]]; ※ tweetsは記載を省略
+    // 【$users 2回目】 $user = ['id' => 2, 'name' => 'USER_NAME02', 'tweets' => [...]]; ※ tweetsは記載を省略
     $userId = $user['id'];
     foreach ($user['tweets'] as $tweet) {
+        // 【$users 1回目】【tweets 1回目】 $tweet = ['id' => 1001, 'text' => 'TWEET_1001'];
+        // 【$users 1回目】【tweets 2回目】 $tweet = ['id' => 1002, 'text' => 'TWEET_1002'];
+        // 【$users 2回目】【tweets 1回目】 $tweet = ['id' => 1003, 'text' => 'TWEET_1003'];
+        // 【$users 2回目】【tweets 2回目】 $tweet = ['id' => 1004, 'text' => 'TWEET_1004'];
         $tweetId = $tweet['id'];
         $tweetText = $tweet['text'];
         $result .= "UserID={$userId}  TweetID={$tweetId}  TweetText={$tweetText}\n";
