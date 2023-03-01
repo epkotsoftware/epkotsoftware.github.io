@@ -1,20 +1,5 @@
 # 自己学習
 
-## 目次
-
-| No. |  |
-| :---: | --- |
-| 1 | [システム開発工程](#システム開発工程) |
-| 2 | [TypeScript](#typescript) |
-| 3 | [Javascriptフレームワーク](#javascriptフレームワーク) |
-| 4 | [Codeigniter4](#codeigniter4) |
-| 5 | [Java](#java) |
-| 6 | [Python](#python) |
-| 7 | [C\# / VB.NET](#c--vbnet) |
-| 8 | [Tailwind CSS](#tailwind-css) |
-| 9 | [資格](#資格) |
-| 10 | [社外研修](#社外研修)) |
-
 ## システム開発工程
 
 企画からテストまでを、徳田さんが動画にしているので参考にしてください。
@@ -28,7 +13,7 @@
 
 TypeScriptは、大規模開発には向いていないJavaScriptに  
 静的型付けを出来るようにしたプログラミング言語です。  
-TypeScriptをコンパイルすると、JavaScriptが出来上がります。  
+TypeScriptをコンパイルすると、ブラウザ上で動作可能なJavaScriptが出来上がります。  
 
 Playground はTypeScriptをコンパイルし、実行できるサイトです。  
 
@@ -41,7 +26,19 @@ Playground はTypeScriptをコンパイルし、実行できるサイトです�
 
 ## JavaScriptフレームワーク
 
+### 人気のフレームワーク
+
+The State of JS
+
+- `The State of JS 2021 - Front-end Frameworks`
+  - <https://2021.stateofjs.com/en-US/libraries/front-end-frameworks/>
+- `The State of JS 2022: フロントエンドフレームワーク`
+  - <https://2022.stateofjs.com/ja-JP/libraries/front-end-frameworks/>
+
 2022年現在、日本では`Vue.js`, `React.js`の人気が高いです。  
+Angularも利用率は高いですが、少しずつ減ってきており  
+毎年、満足度が低いため、新規案件では採用されにくく  
+将来的に他のフレームワークに抜かれる可能性が高いです。  
 フロントエンドは入れ替わりが激しいため、廃れる事も想定して浅く学習しておきましょう。
 
 - Vue.js
@@ -61,7 +58,10 @@ Playground はTypeScriptをコンパイルし、実行できるサイトです�
 
 参考までに新しいフレームワークをご紹介します。  
 Vue.js、React.jsで採用されている仮想DOMを使用しないことにより  
-高速化を実現しています。
+高速化を実現しています。  
+
+2022年現在、日本ではSolidがあまり知られていない気がするので  
+Svelteの方が注目されているのかもしれません。
 
 - `Solid`
   - <https://www.solidjs.com/>
@@ -75,8 +75,6 @@ Vue.js、React.jsで採用されている仮想DOMを使用しないことによ
     - <https://github.com/sveltejs/svelte/releases/tag/v1.0.0>
   - チュートリアル
     - <https://svelte.jp/tutorial/basics>
-- `The State of JS 2021 - Front-end Frameworks`
-  - <https://2021.stateofjs.com/en-US/libraries/front-end-frameworks/>
 
 ## CodeIgniter4
 
@@ -183,12 +181,23 @@ Laravelのスターターテンプレートにも組み込まれている、CSS�
 ## 資格
 
 エンジニアで取得が必須となる資格はありませんが  
-「基本情報技術者試験」の学習は、必要な基礎知識が身につきます。
+「基本情報技術者試験」、「JSTQB FL試験」の学習は、必要な基礎知識が身につきます。  
 
-- `試験制度: 試験区分一覧`
-  - <https://www.jitec.ipa.go.jp/1_11seido/seido_gaiyo.html>
-- 基本情報技術者についてもっと詳しく知る！
-  - <https://www.foresight.jp/fe/column/>
+- `基本情報技術者試験`
+  - `試験制度: 試験区分一覧`
+    - <https://www.jitec.ipa.go.jp/1_11seido/seido_gaiyo.html>
+  - `基本情報技術者についてもっと詳しく知る！`
+    - <https://www.foresight.jp/fe/column/>
+- `JSTQB認定テスト技術者資格 Foundation Level試験`
+  - `JSTQB認定テスト技術者資格-JSTQB認定テスト技術者資格試験実施要領-`
+    - <https://jstqb.jp/attribute.html>
+  - `Foundation Level シラバス`
+    - <https://jstqb.jp/dl/JSTQB-SyllabusFoundation_Version2018V31.J03.pdf>
+  - `ソフトウェアテスト教科書 JSTQB Foundation 第4版 シラバス2018対応`
+    - <https://www.amazon.co.jp/dp/4798160660>
+  - 動画
+    - `JSTQB - YouTube`
+      - <https://www.youtube.com/playlist?list=PLx75ljgfSa715O9xHOEVO_yoncSafKwyZ>
 
 ## 社外研修
 
