@@ -35,6 +35,8 @@ Helperクラス・メソッドの使用例です。
 
 ```php
 <?php
+error_reporting(-1); // 全ての PHP エラーを表示する
+
 require_once(__DIR__ . '/app/Helper.php');
 
 use App\Helper;
@@ -154,6 +156,8 @@ Helperクラス・メソッドの使用例です。
 
 ```php
 <?php
+error_reporting(-1); // 全ての PHP エラーを表示する
+
 require_once(__DIR__ . '/app/AlbumHelper.php');
 
 // 多次元配列
@@ -213,6 +217,16 @@ if (($_REQUEST['tsv'] ?? '') === 'true') {
     exit(0); // ここで処理終了
 }
 
+// 改行コードチェック
+$newLine = '-';
+$crlfCount = substr_count($result, "\r\n");
+$lfCount = substr_count($result, "\n");
+if (0 < $crlfCount) {
+    $newLine = ($crlfCount === $lfCount) ? 'CRLF' : 'CRLF と LFが混在しています。';
+} elseif(0 < $lfCount) {
+    $newLine = 'LF';
+}
+
 // 画面表示処理
 $urlTsvDownload = $_SERVER['PHP_SELF'] . '?tsv=true';
 if ($isError) {
@@ -269,7 +283,8 @@ if ($isError) {
 
     <section>
         <h2>TSV出力結果</h2>
-        <pre><?= $result ?></pre>
+        <p>改行コード: <?= htmlspecialchars($newLine) ?></p>
+        <pre><?= htmlspecialchars($result) ?></pre>
         <?php if (!empty($urlTsvDownload)) { ?>
             <a href="<?= $urlTsvDownload ?>">TSVダウンロード</a>
         <?php } ?>
