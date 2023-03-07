@@ -121,7 +121,7 @@ $outContents = ob_get_clean(); // 出力バッファ取得・出力バッファ�
 テーブルの関連図です。
 
 - [Mermaid](https://mermaid.live/edit#pako:eNrVks1Kw0AUhV9lmHXrA2QdhCKC4DZQbjPXdjCTlMmNIEk2zUYFISul6EJEceGmC7c-TTTiWziTn9aCiFvvrGbON1zO4aTcjwRyh6N2JUw1KC9kZiCYJCpmWTYcZikjDf5xzBzmcXPCLSRtb3YmcipDYlKwgz2DjlwL9-IJaH8GmoWg0Ijv5eXH0-o7QFJhTKDmTGCAhGIMZMHzi8_lQ339WC8XP-O-Rljjb6-39Vn5G57MxQavb17qq9U2nvcOO9t_ddiJTS5jg-xapFrcV8VzVZRVcTdynTa0HSn-bTR8wBVqBVKY1jTReJxmqNDjth8CjyAJyH7IDQoJRYenoc8d0gkOeLuhq1r_iEJSpPfbIjZ9zL8AUA_yMA)  
-  ![ER図](./images/er.svg)  
+  ![ER図](./images/er.png)  
 
 #### TSV
 
