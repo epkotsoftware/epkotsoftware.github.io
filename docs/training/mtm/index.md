@@ -74,6 +74,7 @@ $outContents = ob_get_clean(); // 出力バッファ取得・出力バッファ�
     <style>
         pre {
             border: 1px solid black;
+            padding: 6px;
         }
     </style>
 </head>
@@ -217,17 +218,8 @@ if (($_REQUEST['tsv'] ?? '') === 'true') {
     exit(0); // ここで処理終了
 }
 
-// 改行コードチェック
-$newLine = '-';
-$crlfCount = substr_count($result, "\r\n");
-$lfCount = substr_count($result, "\n");
-if (0 < $crlfCount) {
-    $newLine = ($crlfCount === $lfCount) ? 'CRLF' : 'CRLF と LFが混在しています。';
-} elseif(0 < $lfCount) {
-    $newLine = 'LF';
-}
-
 // 画面表示処理
+$newLine = '-';
 $urlTsvDownload = $_SERVER['PHP_SELF'] . '?tsv=true';
 if ($isError) {
     $urlTsvDownload = null;
@@ -235,6 +227,15 @@ if ($isError) {
     ob_start();
     var_dump($result);
     $result = "エラー: 戻り値が不正です。\r\n\r\n" . ob_get_clean();
+} else {
+    // 改行コードチェック
+    $crlfCount = substr_count($result, "\r\n");
+    $lfCount = substr_count($result, "\n");
+    if (0 < $crlfCount) {
+        $newLine = ($crlfCount === $lfCount) ? 'CRLF' : 'CRLF と LFが混在しています。';
+    } elseif(0 < $lfCount) {
+        $newLine = 'LF';
+    }
 }
 
 ?>
@@ -249,6 +250,7 @@ if ($isError) {
     <style>
         pre {
             border: 1px solid black;
+            padding: 6px;
         }
 
         /** Bootstrapっぽいボタン */
