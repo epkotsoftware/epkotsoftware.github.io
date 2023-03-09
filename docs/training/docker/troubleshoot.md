@@ -122,6 +122,14 @@ docker-composeコマンド実行時に「command not found」のメッセージ�
 
 - <https://github.com/docker/for-win/issues/13020#issuecomment-1283055393>
 
+### その他コンテナ起動時のトラブル(Windows)
+
+最新にアップデートしたり、逆に古いバージョンをインストールすることで解決するケースもあります。  
+トラブルは問題(Issue)として、公式GitHubに投稿される事もありますので参考までに
+
+- `Issues · docker/for-win`
+  - <https://github.com/docker/for-win/issues>
+
 ## コンテナ起動（Mac）
 
 - docker-compose で 「`docker: no matching manifest for linux/arm64/v8 in the manifest list entries.`」が出る
@@ -130,3 +138,11 @@ docker-composeコマンド実行時に「command not found」のメッセージ�
 - docker-compose で File Sharing に関するエラーが出る
   - Macの場合、以下の「File sharing」タブで現在使用しているディレクトリを追加する（今回であればリポジトリのディレクトリ「training」が設定されていればOK）
     - <https://matsuand.github.io/docs.docker.jp.onthefly/desktop/mac/>
+
+### その他コンテナ起動時のトラブル(Mac)
+
+最新にアップデートしたり、逆に古いバージョンをインストールすることで解決するケースもあります。  
+トラブルは問題(Issue)として、公式GitHubに投稿される事もありますので参考までに
+
+- `Issues · docker/for-mac`
+  - <https://github.com/docker/for-mac/issues>
