@@ -55,7 +55,7 @@ BIOS設定はWindowsでは行わないため、ブラウザを見ながら出来
 - Windows でローカルのユーザー アカウントまたは管理者アカウントを作成する
   - <https://support.microsoft.com/ja-jp/windows/windows-でローカルのユーザー-アカウントまたは管理者アカウントを作成する-20de74e0-ac7f-3502-a866-32915af2a34d>
 
-## コンテナ起動
+## コンテナ起動(Windows)
 
 ### docker-compose で「`unknown docker command`」
 
@@ -132,12 +132,59 @@ docker-composeコマンド実行時に「command not found」のメッセージ�
 
 ## コンテナ起動（Mac）
 
-- docker-compose で 「`docker: no matching manifest for linux/arm64/v8 in the manifest list entries.`」が出る
-  - MacのM1チップ搭載のものでエラーが出ることがある。以下のようにymlファイルを編集することで解決可能
-    - <https://ryotarch.com/docker/no-matching-manifest-for-linux-arm64-v8-on-m1-mac/>
-- docker-compose で File Sharing に関するエラーが出る
-  - Macの場合、以下の「File sharing」タブで現在使用しているディレクトリを追加する（今回であればリポジトリのディレクトリ「training」が設定されていればOK）
-    - <https://matsuand.github.io/docs.docker.jp.onthefly/desktop/mac/>
+### docker-compose で 「`docker: no matching manifest for linux/arm64/v8 in the manifest list entries.`」
+
+MySQLの公式イメージを使用する際に  
+Appleシリコン搭載PC（M1、M2等）でエラーが出ることがある。  
+docker-compose.ymlファイルに以下を追記すると解決する。  
+
+```yml
+# docker-compose.yml
+platform: linux/x86_64
+```
+
+- `docker-compose.yml （Laravel10環境）`
+  - <https://github.com/epkotsoftware/template-laravel10-jp/blob/v10.3.3/docker-compose.yml#L24>
+
+コマンドの場合
+
+```bash
+# コマンド
+docker run -d --rm --platform linux/x86_64 -e MYSQL_ROOT_PASSWORD=password mysql:8.0.32
+```
+
+Dockerfileに追記する場合
+
+```bash
+# Dockerfile
+FROM --platform=linux/x86_64 mysql:8.0.32
+```
+
+### docker-compose で File Sharing に関するエラーが出る
+
+- 以下の「File sharing」タブで現在使用しているディレクトリを追加する
+  - <https://matsuand.github.io/docs.docker.jp.onthefly/desktop/mac/>
+
+### docker-compose で「`can't assign requested address`」
+
+```txt
+Error response from daemon: Ports are not available: exposing port TCP 127.0.0.2:3306 -> 0.0.0.0:0: listen tcp 127.0.0.2:3306: bind: can't assign requested address
+
+デーモンからのエラー応答: ポートが利用できません: ポート TCP 127.0.0.2:3306 を公開しています -> 0.0.0.0:0: リッスン tcp 127.0.0.2:3306: バインド: 要求されたアドレスを割り当てることができません
+```
+
+Macの場合、デフォルト設定ではローカルループバックアドレスは「`127.0.0.1`」しか使用出来ないため  
+ifconfigコマンドで設定する必要がある。  
+「`127.0.0.2`」を使いたい場合は以下のコマンドで設定する。  
+
+```bash
+sudo ifconfig lo0 alias 127.0.0.2
+```
+
+- `ループバックアドレス（127.0.0.1 / ::1）とは - 意味をわかりやすく - IT用語辞典 e-Words`
+  - <https://e-words.jp/w/ループバックアドレス.html>
+- `dockerのコンテナを複数、同じポートを使って立ち上げたい`
+  - <https://www.key-p.com/blog/staff/archives/107891>
 
 ### その他コンテナ起動時のトラブル(Mac)
 
