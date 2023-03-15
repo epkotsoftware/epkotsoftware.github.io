@@ -258,9 +258,9 @@ A機能のテストをします。
 - UnitTestが通るか
   - UnitTestについては以下を参照
     - PHPUnit マニュアル
-      - <https://phpunit.readthedocs.io/ja/latest/>
-    - Laravel 8.x Testing
-      - <https://readouble.com/laravel/8.x/ja/testing.html>
+      - <https://phpunit.de/documentation.html>
+    - Laravel 10.x Testing
+      - <https://readouble.com/laravel/10.x/ja/testing.html>
 
 ### A機能コミット
 

@@ -27,11 +27,6 @@ GitHub管理にしたくない場合、「`Code`」から「`Download ZIP`」を
 - PHP7.4 のテンプレートリポジトリ
   - <https://github.com/epkotsoftware/template-php7.4-jp>
 
-ちょっとしたプログラムの実行なら「`paiza.io`」がおすすめです。
-
-- `paiza.io`
-  - <https://paiza.io/ja/projects/new>
-
 ## プログラミング編
 
 以前、必修となっていた「プログラミング編」です。  
@@ -134,11 +129,14 @@ Laravelを使わない場合でも、Composerでインストールが可能で�
 - PHPUnit
   - <https://phpunit.readthedocs.io/ja/latest/>
   - PHPUnit のインストール Composer
-    - <https://phpunit.readthedocs.io/ja/latest/installation.html#composer>
-  - データプロバイダ
-    - <https://phpunit.readthedocs.io/ja/latest/writing-tests-for-phpunit.html#writing-tests-for-phpunit-data-providers>
+    - `10.0:` <https://docs.phpunit.de/en/10.0/installation.html#composer>
+    - `9.6:` <https://docs.phpunit.de/en/9.6/installation.html#composer>
+  - データプロバイダ（10.0から方法が変わっています）
+    - `10.0:` <https://docs.phpunit.de/en/10.0/writing-tests-for-phpunit.html#data-providers>
+    - `9.6:` <https://docs.phpunit.de/en/9.6/writing-tests-for-phpunit.html#data-providers>
   - テストダブル
-    - <https://phpunit.readthedocs.io/ja/latest/test-doubles.html>
+    - `10.0:` <https://docs.phpunit.de/en/10.0/test-doubles.html>
+    - `9.6:` <https://docs.phpunit.de/en/9.6/test-doubles.html>
   - 8時間耐久PHPUnitの教室
     - <https://www.slideshare.net/yandod/8phpunit>
 - Laravel
