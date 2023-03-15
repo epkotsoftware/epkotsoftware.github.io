@@ -61,7 +61,17 @@ Dockerで簡単にLaravel9の開発環境が作れます。
 php artisan make:model Job --all
 ```
 
-「`app/Policies/JobPolicy.php`」も生成されますが  
+以下でも作成が可能です。
+
+```bash
+# コマンド
+## Model・Factory・Migration・Seederを作成
+php artisan make:model Job -mfs
+## Controller・Requestを作成
+php artisan make:controller JobController --model=Job -rR
+```
+
+`--all`で作成した場合、「`app/Policies/JobPolicy.php`」も生成されますが  
 本研修では単純なCRUDの学習としているため、使用しないので削除してください。  
 現場で使用する可能性は高いので、公式ページの「認可」で必要になったら学習しておきましょう。
 
@@ -300,7 +310,11 @@ root@training-laravel-web:/var/www/app#
 例えば`admin/jobs/12`と指定すると自動的にDBから`id=12`のレコードを取得し、Controllerの引数にModelがセットされます。  
 存在しないIDの場合、404ページに遷移します。
 
-- 参考: [ルーティング](./../routing/index.md)
+- 参考
+  - Laravel
+    - [ルーティング](./../routing/index.md)
+    - ビュー
+      - <https://readouble.com/laravel/9.x/ja/views.html>
 
 ## Views
 
@@ -335,6 +349,8 @@ resources/views
     - Null 合体演算子
       - <https://www.php.net/manual/ja/language.operators.comparison.php#language.operators.comparison.coalesce>
   - Laravel
+    - ビュー
+      - <https://readouble.com/laravel/9.x/ja/views.html>
     - Bladeテンプレート
       - <https://readouble.com/laravel/9.x/ja/blade.html>
     - Database：ペジネーション
