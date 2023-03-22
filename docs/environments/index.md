@@ -5,11 +5,19 @@
 | No. |  |
 | :---: | --- |
 | 1 | [はじめに](#はじめに) |
-| 2 | [PHP](#php)<br>└ [PHPテンプレートリポジトリ](#phpテンプレートリポジトリ)<br>└ [Laravelフレームワークテンプレートリポジトリ](#laravelフレームワークテンプレートリポジトリ) |
+| 2 | [共通](#共通) |
+| 3 | [PHP](#php)<br>└ [PHPテンプレートリポジトリ](#phpテンプレートリポジトリ)<br>└ [Laravelフレームワークテンプレートリポジトリ](#laravelフレームワークテンプレートリポジトリ) |
 
 ## はじめに
 
 本資料は開発環境をまとめた資料です。
+
+## 共通
+
+標準関数の動作確認など、ちょっとしたプログラムの実行なら「`paiza.io`」がおすすめです。
+
+- `paiza.io`
+  - <https://paiza.io/ja/projects/new>
 
 ## PHP
 
@@ -33,11 +41,19 @@ GitHubのテンプレートリポジトリをまとめています。
 | [PHP8.1環境(template-php8.1-jp)](https://github.com/epkotsoftware/template-php8.1-jp) |  |
 | [PHP7.4環境(template-php7.4-jp)](https://github.com/epkotsoftware/template-php7.4-jp) | PHP7は2022/11/28にサポートが切れている |
 
+- バージョン
+  - [PHP](./../notes/versions/index.md#php)
+
 ### Laravelフレームワークテンプレートリポジトリ
 
 PHPフレームワークのLaravelのテンプレートです。
 
 | リポジトリ | 説明 |
 | :---: | --- |
+| [Laravel10環境(template-laravel10-jp)](https://github.com/epkotsoftware/template-laravel10-jp) |  |
 | [Laravel9環境(template-laravel9-jp)](https://github.com/epkotsoftware/template-laravel9-jp) |  |
 | [Laravel6環境(template-laravel6-jp)](https://github.com/epkotsoftware/template-laravel6-jp) | Laravel6は2022/09/03にサポートが切れている |
+
+- バージョン
+  - [PHP](./../notes/versions/index.md#php)
+  - [Laravel](./../notes/versions/index.md#phpフレームワーク-laravel)
