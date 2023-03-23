@@ -50,6 +50,11 @@
   - メールソフト
     - Microsoft Outlook（有料）または、Thunderbird（無料）をインストールし、エプコットのメール設定を行なってください。
     - [Thunderbird設定](./../../thunderbird/index.md)
+  - Slack
+    - Windows
+      - <https://slack.com/intl/ja-jp/downloads/windows>
+    - Mac
+      - <https://slack.com/intl/ja-jp/downloads/mac>
 - スマートフォンにインストール
   - Slack
     - iOS 版 Slack
@@ -124,6 +129,8 @@ Visual Studio Code(VSCode) が初めての方へ
     - <https://marketplace.visualstudio.com/items?itemName=shardulm94.trailing-spaces>
   - 「`markdownlint`」 Markdown(`.md`)ファイルのスタイルチェックをしてくれる機能です。
     - <https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint>
+  - 「`Markdown Preview Mermaid Support`」Markdown(`.md`)ファイルでMermaidのプレビュー表示ができるようになります。
+    - <https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid>
   - 「`Code Spell Checker`」 スペルミスを検出してくれる機能です（名詞等はかかりやすいので ignoreWords に設定）
     - <https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker>
   - 「`Rainbow CSV`」 CSV・TSVファイルが見やすくなる機能です。
@@ -203,11 +210,9 @@ VSCodeの細かい設定を行います。
 
 ## 入社初日の予習
 
-まず、ここまでで忘れていることがないかチェックしておきましょう。
+まず、ここまでで忘れていることがないかチェックしておきましょう。  
 
-- [目次](#目次)
-
-研修ではパソコンの使用は慣れている前提で話が進みます。
+研修ではパソコンの使用は慣れている前提で話が進みます。  
 
 - 「[予習](./../../preparation/lesson/index.md)」を行ってください。
   - 「[パソコンが不慣れな方へ](./../../preparation/lesson/index.md#パソコンが不慣れな方へ))」は必須知識になります（時間が足りない場合はご相談ください）。
