@@ -178,6 +178,19 @@ Laravelのスターターテンプレートにも組み込まれている、CSS�
 - `Laravel 9.x Database：ペジネーション`
   - <https://readouble.com/laravel/9.x/ja/pagination.html>
 
+## AI
+
+今後、設計資料作りや簡単なAIを使うことが前提になって来そうです。  
+機密情報の送信等に気をつけ利用しましょう。  
+
+- ChatGPT
+  - <https://chat.openai.com/>
+- GitHub Copilot
+  - `Visual Studio Code で GitHub Copilot の使用を開始する`
+    - <https://docs.github.com/ja/copilot/getting-started-with-github-copilot/getting-started-with-github-copilot-in-visual-studio-code>
+  - `GitHub Copilot - Visual Studio Marketplace`
+    - <https://marketplace.visualstudio.com/items?itemName=GitHub.copilot>
+
 ## 資格
 
 エンジニアで取得が必須となる資格はありませんが  
