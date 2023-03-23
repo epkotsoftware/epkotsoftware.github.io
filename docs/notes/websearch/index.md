@@ -4,6 +4,13 @@
 
 本資料はWeb検索（主にGoogle）方法をまとめた資料です。
 
+## 動画
+
+- 8割の人が知らない検索術・ググり方【知らないと損】
+  - <https://youtu.be/T6qcKQ-vEUA>
+- エンジニアは検索力が大事。プログラミングスキル向上にググり力は必須です。
+  - <https://youtu.be/kNiD4rfNkFA>
+
 ## セキュリティ
 
 ```txt
@@ -115,8 +122,10 @@ URLのドメイン部分「`www.php.net`」を取って
 - 【SAMURAI ENGINEER】検索ワード「`site:www.sejuku.net {キーワード}`」
   - SAMURAI ENGINEERで「JavaScript 配列」を検索
     - [site:www.sejuku.net JavaScript 配列](https://www.google.com/search?q=site:www.sejuku.net+JavaScript+配列)
+- 画像検索も便利です。以下は「MVC」を画像検索した例
+  - <https://www.google.com/search?q=mvc&tbm=isch>
 
-### その他の検索方法
+### その他のGoogle検索
 
 Google公式で出している検索方法は以下になります。
 
@@ -131,3 +140,8 @@ Google公式で出している検索方法は以下になります。
 
 - [PHPに関する検索](./google-case-php/index.md)
 - [Dockerに関する検索](./google-case-docker/index.md)
+
+## その他の検索方法
+
+- リアルタイム検索は障害情報等を確認する時に便利、以下は「AWS」を検索した例
+  - <https://search.yahoo.co.jp/realtime/search?p=aws>

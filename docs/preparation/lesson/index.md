@@ -134,6 +134,12 @@ bool(false)
 bool(false)
 ```
 
+### 検索
+
+エンジニアのWeb検索方法については以下にまとめています。  
+
+- [Web検索](./../../notes/websearch/index.md)
+
 ### 学習方法について
 
 - FAQ
@@ -163,10 +169,6 @@ bool(false)
   - <https://www.youtube.com/watch?v=aC4O0thuTyw>
 - Webプログラミングの始め方
   - <https://www.youtube.com/watch?v=zxX8YMTxvyI>
-- 8割の人が知らない検索術・ググり方【知らないと損】
-  - <https://youtu.be/T6qcKQ-vEUA>
-- エンジニアは検索力が大事。プログラミングスキル向上にググり力は必須です。
-  - <https://youtu.be/kNiD4rfNkFA>
 - Chrome DevToolsの使い方を徹底解説！Chrome Developer Toolsを使いこなすと開発効率が上がる！
   - <https://youtu.be/awRkFcv51r4>
   - 設計やテストエビデンス等で、スクリーンショットを撮る事が多いです。
