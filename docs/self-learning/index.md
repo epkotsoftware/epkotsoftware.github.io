@@ -18,19 +18,13 @@
 「`Use this template`」ボタンで、テンプレートから新しくリポジトリを作成することが出来ます（Ownerは自分のアカウントにしてください）  
 GitHub管理にしたくない場合、「`Code`」から「`Download ZIP`」を選択するとダウンロードが可能です。  
 
-- PHP8.1 のテンプレートリポジトリ
-  - <https://github.com/epkotsoftware/template-php8.1-jp>
-- Laravel9 のテンプレートリポジトリ
-  - <https://github.com/epkotsoftware/template-laravel9-jp>
-- Laravel6 のテンプレートリポジトリ
-  - <https://github.com/epkotsoftware/template-laravel6-jp>
-- PHP7.4 のテンプレートリポジトリ
-  - <https://github.com/epkotsoftware/template-php7.4-jp>
+- [開発環境](./../environments/index.md)
 
 ## プログラミング編
 
 以前、必修となっていた「プログラミング編」です。  
 PHPプログラミング編と重複しているところがあります。  
+JavaScriptの学習・課題もあります。
 
 - [プログラミング編](./../training/programming/index.md)
 
