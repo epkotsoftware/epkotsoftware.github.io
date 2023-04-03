@@ -90,8 +90,7 @@ CBC研修でもレスポンシブデザインについてありますが、フ�
 - 画面部品
   - [画面部品](./../training/design/forms/forms.html)
 - 画面設計書のイメージ
-  - 発注者ビューガイドラインの公開
-    - <https://www.ipa.go.jp/sec/softwareengineering/reports/20080710_3.html>
+  - [画面レイアウト設計](./../training/laravel/crud/design/screens/index.md)
 - iOS
   - ユーザーインターフェイスのデザインのヒント
     - <https://developer.apple.com/jp/design/tips/>
@@ -211,11 +210,7 @@ Laravelを使わない場合でも、Composerでインストールが可能で�
 資格取得は必須ではありませんが  
 基本情報技術者試験の学習は実務でも必要な、知識が身につきます。
 
-### 基本情報技術者試験
-
-資格取得は必須ではありませんが、学習は推奨します。
-
-- [基本情報技術者試験](./../certifications/index.md#基本情報技術者試験)
+- [資格](./../certifications/index.md)
 
 ## 書籍
 
@@ -278,11 +273,6 @@ Laravelを使わない場合でも、Composerでインストールが可能で�
   - `後悔しないためのSpring Boot 入門書：Spring 解体新書（第2版）: Spring Bootが丸分かり Spring解体新書`
     - <https://www.amazon.co.jp/dp/4802092865>
 - テスト
-  - `SEC BOOKS：ソフトウェアテスト見積りガイドブック`
-    - <https://www.ipa.go.jp/sec/publish/tn08-003.html>
-    - こちらは販売が終了しており、PDF版が無料で見られるようです。
-    - 難しいですが、テストに必要な内容が盛り込まれています。  
-      70ページあたりからは、開発者も参考になる内容となっています。
   - `JSTQB認定テスト技術者資格 Foundation Level試験`
     - `ソフトウェアテスト教科書 JSTQB Foundation 第4版 シラバス2018対応`
       - <https://www.amazon.co.jp/dp/4798160660>

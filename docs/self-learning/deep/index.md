@@ -191,29 +191,6 @@ Laravelのスターターテンプレートにも組み込まれている、CSS�
   - `GitHub Copilot - Visual Studio Marketplace`
     - <https://marketplace.visualstudio.com/items?itemName=GitHub.copilot>
 
-## 資格
-
-エンジニアで取得が必須となる資格はありませんが  
-「基本情報技術者試験」、「JSTQB FL試験」の学習は、必要な基礎知識が身につきます。  
-
-- `基本情報技術者試験`
-  - `試験制度: 試験区分一覧`
-    - <https://www.jitec.ipa.go.jp/1_11seido/seido_gaiyo.html>
-  - `基本情報技術者についてもっと詳しく知る！`
-    - <https://www.foresight.jp/fe/column/>
-  - `IPA 独立行政法人 情報処理推進機構：情報処理技術者試験における出題範囲・シラバス等の変更内容の公表について（基本情報技術者試験、情報セキュリティマネジメント試験の通年試験化）`
-    - <https://www.jitec.ipa.go.jp/1_00topic/topic_20220425.html>
-- `JSTQB認定テスト技術者資格 Foundation Level試験`
-  - `JSTQB認定テスト技術者資格-JSTQB認定テスト技術者資格試験実施要領-`
-    - <https://jstqb.jp/attribute.html>
-  - `Foundation Level シラバス`
-    - <https://jstqb.jp/dl/JSTQB-SyllabusFoundation_Version2018V31.J03.pdf>
-  - `ソフトウェアテスト教科書 JSTQB Foundation 第4版 シラバス2018対応`
-    - <https://www.amazon.co.jp/dp/4798160660>
-  - 動画
-    - `JSTQB - YouTube`
-      - <https://www.youtube.com/playlist?list=PLx75ljgfSa715O9xHOEVO_yoncSafKwyZ>
-
 ## 社外研修
 
 - mixi
