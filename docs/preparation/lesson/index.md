@@ -221,20 +221,7 @@ bool(false)
 資格取得は必須ではありませんが  
 基本情報技術者試験の学習は実務でも必要な、知識が身につきます。
 
-- `IPA 独立行政法人 情報処理推進機構：情報処理技術者試験における出題範囲・シラバス等の変更内容の公表について（基本情報技術者試験、情報セキュリティマネジメント試験の通年試験化）`
-  - <https://www.jitec.ipa.go.jp/1_00topic/topic_20220425.html>
-  - `「基本情報技術者試験（レベル2）」シラバス（Ver.8.0）`
-    - <https://www.jitec.ipa.go.jp/1_13download/syllabus_fe_ver8_0.pdf>
-  - `基本情報技術者試験（科目A試験）サンプル問題（60問）`
-    - 問題
-      - <https://www.jitec.ipa.go.jp/1_13download/fe_kamoku_a_set_sample_qs.pdf>
-    - 解答
-      - <https://www.jitec.ipa.go.jp/1_13download/fe_kamoku_a_set_sample_ans.pdf>
-  - `基本情報技術者試験（科目B試験）サンプル問題（20問）`
-    - 問題
-      - <https://www.jitec.ipa.go.jp/1_13download/fe_kamoku_b_set_sample_qs.pdf>
-    - 解答
-      - <https://www.jitec.ipa.go.jp/1_13download/fe_kamoku_b_set_sample_ans.pdf>
+- [基本情報技術者試験](./../../certifications/index.md#基本情報技術者試験)
 
 ## その他
 
