@@ -51,6 +51,10 @@ IDやパスワードを抜き取るということが実際に可能なようで
 こういったことから、自宅やオフィス以外での  
 ネットワーク接続を禁止している現場もあります。  
 
+- `クエリストリングから情報が漏れる`
+  - <https://warp.da.ndl.go.jp/collections/info:ndljp/pid/11440710/www.ipa.go.jp/security/awareness/vendor/programmingv1/pdf/a01_04.pdf>
+- `第5章 暴露対策 コンテンツ間パラメータ対策`
+  - <https://warp.da.ndl.go.jp/info:ndljp/pid/8328423/www.ipa.go.jp/security/awareness/vendor/programmingv2/contents/403.html>
 - `スマートフォン・サイバー攻撃対策ガイド`
   - <https://www.jssec.org/column/20210521.html>
 - `被害事故事例（WiFi)`
