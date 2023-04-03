@@ -178,6 +178,12 @@ Laravelのスターターテンプレートにも組み込まれている、CSS�
 - `Laravel 9.x Database：ペジネーション`
   - <https://readouble.com/laravel/9.x/ja/pagination.html>
 
+## テクニカルライティング
+
+- テクニカルライティング 2022年開運研修
+  - 資料: <https://speakerdeck.com/naohiro_nakata/technicalwriting>
+  - 動画: <https://youtu.be/HlJtCNo1rTQ>
+
 ## AI
 
 今後、設計資料作りや簡単なAIを使うことが前提になって来そうです。  

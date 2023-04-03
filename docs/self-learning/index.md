@@ -18,6 +18,18 @@
 
 - [便利ソフト](./../preparation/index.md#便利ソフト)
 
+## Webアプリケーション
+
+- `Webアプリケーション基礎【サイボウズ開運研修2021】`
+  - 資料: <https://speakerdeck.com/cybozuinsideout/web-application-overview-2021>
+  - 動画: <https://youtu.be/lJZMnzWZSlY>
+
+## Google Chrome Developer Tools
+
+- `Chrome Developer Toolsの使い方【サイボウズ開運研修2021】`
+  - 資料: <https://speakerdeck.com/cybozuinsideout/chrome-developer-tools>
+  - 動画: <https://youtu.be/aL9OarYImm0>
+
 ## プログラミング環境
 
 環境を簡単に構築できる、GitHubテンプレートリポジトリを用意しています。  
