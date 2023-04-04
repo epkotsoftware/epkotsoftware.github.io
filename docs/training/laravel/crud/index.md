@@ -126,6 +126,8 @@ php artisan migrate
 ### Factories
 
 テスト用のテーブルレコードを生成する処理を定義します。  
+後述の`\App\Models\Job::factory()`メソッドを使うために必要なクラスです。  
+JobSeederクラスの方でレコード定義を行うため、今回は編集を行いません。
 
 ---
 
@@ -133,25 +135,11 @@ php artisan migrate
 database/factories/JobFactory.php
 ```
 
-```php
-class JobFactory extends Factory
-{
-    private int $i = 1;
-
-    public function definition()
-    {
-        return [
-            'name' => sprintf('JOB_%04d', $this->i++),
-            'deleted_at' => null,
-            'created_at' => '2021-12-30 11:22:33',
-            'updated_at' => '2021-12-31 23:58:59',
-        ];
-    }
-}
-```
-
-- 参考: データベーステスト
-  - <https://readouble.com/laravel/9.x/ja/database-testing.html>
+- 参考
+  - Eloquent:ファクトリ
+    - <https://readouble.com/laravel/9.x/ja/eloquent-factories.html>
+  - データベーステスト
+    - <https://readouble.com/laravel/9.x/ja/database-testing.html>
 
 ### Seeders
 
@@ -170,11 +158,17 @@ database/seeders/JobSeeder.php
         // 開発環境のみ100レコードを追加する。
         if (app()->isLocal()) {
             // App\Models\Job
-            // 全件削除
-            Job::truncate();
-            // JobFactoryクラスを使って100件追加
             Job::factory()
-                ->count(100)
+                ->count(100) // 100レコード追加
+                ->sequence(function ($sequence) {
+                    // 追加レコード定義
+                    return [
+                        'name' => sprintf('JOB_%04d', $sequence->index + 1),
+                        'deleted_at' => null,
+                        'created_at' => '2022-12-30 11:22:33',
+                        'updated_at' => '2022-12-31 23:58:59',
+                    ];
+                })
                 ->create();
         }
     }
@@ -209,8 +203,26 @@ database/seeders/DatabaseSeeder.php
 php artisan db:seed
 ```
 
-- 参考: データベース：シーディング
-  - <https://readouble.com/laravel/9.x/ja/seeding.html>
+- 参考
+  - データベース：シーディング
+    - <https://readouble.com/laravel/9.x/ja/seeding.html>
+    - 連続データ
+      - <https://readouble.com/laravel/9.x/ja/eloquent-factories.html#sequences>
+
+## テーブル初期化
+
+ここまでの手順でレコードが複数入ってしまったり  
+余計なテーブルを作ってしまった場合  
+以下のコマンドで初期化ができます。  
+
+```bash
+# 全テーブル初期化（全テーブル削除、マイグレーション・シーダー再実行）
+php artisan migrate:fresh --seed
+```
+
+- 参考
+  - データベース：シーディング - シーダの実行
+    - <https://readouble.com/laravel/9.x/ja/seeding.html#running-seeders>
 
 ## Model
 
