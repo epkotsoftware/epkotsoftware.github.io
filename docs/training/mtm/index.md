@@ -356,4 +356,4 @@ JavaScriptを身につけるには、競技プログラミングは向いてい�
 
 ## キャリアパス
 
-- [キャリアパス](./../career-paths/index.md)
+- [キャリアパス](./../../career-paths/index.md)
