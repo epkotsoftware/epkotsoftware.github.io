@@ -2,10 +2,10 @@
 
 `TODO: 【作成中】この資料は作成中です。`  
 
-実際にCRUDを作っていきましょう。  
-PHP・Laravelについては、ある程度理解している前提で進めていきます。  
-特に名前空間に関して理解していないと動作させることも出来ないので  
-しっかり学習しておきましょう。
+実際にCRUDを作成していきましょう。
+PHP・Laravelについては、ある程度の理解があることを前提に進めます。
+特に名前空間に関しては、理解していないと正しく動作させることができませんので、
+十分に学習しておくことをお勧めします。
 
 ## 目次
 
@@ -32,17 +32,17 @@ PHP・Laravelについては、ある程度理解している前提で進めて�
 
 ### 実行環境
 
-以下のテンプレートリポジトリを使うと  
-Dockerで簡単にLaravel9の開発環境が作れます。  
-テンプレートから自分のリポジトリを作ってみましょう。  
-（ダウンロードしてGit管理外で、学習用の環境を作ってもOK）
+以下のテンプレートリポジトリを使用することで、
+Docker上で手軽にLaravel9の開発環境を構築することができます。
+テンプレートから自身のリポジトリを作成してみましょう。
+（ダウンロードしてGit管理外で、学習用の環境を作成することも可能です。）
 
 - `Laravel9 テンプレートリポジトリ`
   - <https://github.com/epkotsoftware/template-laravel9-jp>
 
 ```txt
 ■注意点
-　Git管理下のフォルダ内に clone しないようにしましょう。
+　Git管理下のフォルダ内にクローンする場合を避けるよう、お気をつけください。
 ```
 
 ## 設計書
@@ -71,9 +71,10 @@ php artisan make:model Job -mfs
 php artisan make:controller JobController --model=Job -rR
 ```
 
-`--all`で作成した場合、「`app/Policies/JobPolicy.php`」も生成されますが  
-本研修では単純なCRUDの学習としているため、使用しないので削除してください。  
-現場で使用する可能性は高いので、公式ページの「認可」で必要になったら学習しておきましょう。
+`--all`オプションを使用してModelクラス及び関連クラスを作成した場合、  
+「`app/Policies/JobPolicy.php`」も一緒に生成されますが  
+今回は単純なCRUDの学習ということで、使用しないので削除しましょう。  
+将来的に実務で使用する可能性があるため、必要に応じて公式ページの「認可」を学習することをお勧めします。  
 
 - 参考:Eloquentの準備
   - <https://readouble.com/laravel/9.x/ja/eloquent.html>
@@ -84,8 +85,8 @@ php artisan make:controller JobController --model=Job -rR
 
 ### Migrations
 
-以下のような生成日時が入ったmigrationファイルが出来ているので`up`メソッドを編集します。  
-DB仕様通りに定義します。  
+以下のような生成日時が記載されたmigrationファイルが作成されているため、  
+`up`メソッドを編集して、DBの仕様に従って定義します。
 
 ---
 
@@ -111,9 +112,9 @@ database/migrations/YYYY_MM_DD_hhmmss_create_jobs_table.php
     }
 ```
 
-commentメソッドを使うことで、テーブル・カラムにコメントを追加することが出来ます。  
-基本的には論理名（日本語名）を入れることが多いです。  
-編集が終わったら、migrationを実行してテーブルを作成しましょう。
+`comment`メソッドを用いることによって、テーブルやカラムにコメントを追加することが可能です。  
+通常は、論理名（日本語名）を入力します。  
+編集が完了したら、以下のコマンドを使ってmigrationファイルを実行し、テーブルを作成してください。
 
 ```bash
 # コマンド
@@ -126,10 +127,8 @@ php artisan migrate
 ### Factories
 
 テスト用のテーブルレコードを生成する処理を定義します。  
-後述の`\App\Models\Job::factory()`メソッドを使うために必要なクラスです。  
-JobSeederクラスの方でレコード定義を行うため、今回は編集を行いません。
-
----
+後述の`\App\Models\Job::factory()`メソッドを使用するために必要なクラスです。  
+今回は、`JobSeeder`クラスでレコードの定義を行うため、ここでは編集を行いません。
 
 ```txt
 database/factories/JobFactory.php
@@ -143,8 +142,8 @@ database/factories/JobFactory.php
 
 ### Seeders
 
-Seederクラスを使って初期レコードやテスト用のレコードを追加します。  
-開発環境の場合のみ、JobFactoryクラスで生成したレコード100件を追加する処理を記述します。
+初期レコードやテスト用レコードを追加するために、Seederクラスを使用します。  
+開発環境の場合に限り、JobFactoryクラスで生成したレコード100件を追加する処理を記述します。
 
 ---
 
@@ -174,11 +173,10 @@ database/seeders/JobSeeder.php
     }
 ```
 
-開発環境の判定については`isLocal`メソッドを使います。  
-`.env`ファイルの`APP_ENV`に「`local`」が設定されていた場合、trueとなります。  
+開発環境の判定については、`isLocal`メソッドをご利用ください。  
+`.env`ファイルの`APP_ENV`に「`local`」と設定されている場合にtrueとなります。  
 
-DatabaseSeederクラスのcallメソッドを使用して  
-JobSeederクラスを指定します。
+`DatabaseSeeder`クラスの`call`メソッドを使用し、`JobSeeder`クラスを指定します。
 
 ---
 
@@ -196,7 +194,7 @@ database/seeders/DatabaseSeeder.php
 
 ```
 
-編集が終わったら、Seederを実行してレコードを追加しましょう。
+編集が終わったら、レコードを追加するためにSeederを実行してみましょう。
 
 ```bash
 # コマンド
@@ -211,9 +209,9 @@ php artisan db:seed
 
 ## テーブル初期化
 
-ここまでの手順でレコードが複数入ってしまったり  
-余計なテーブルを作ってしまった場合  
-以下のコマンドで初期化ができます。  
+ここまでの手順でレコードが複数登録されてしまったり、  
+余計なテーブルが作成されてしまった場合は、  
+以下のコマンドによって初期化を行うことができます。
 
 ```bash
 # 全テーブル初期化（全テーブル削除、マイグレーション・シーダー再実行）
@@ -227,7 +225,7 @@ php artisan migrate:fresh --seed
 ## Model
 
 Jobモデルクラスの設定を行います。  
-詳細については公式を参照してください。
+詳細につきましては、公式サイトをご参照ください。
 
 ---
 
@@ -251,11 +249,9 @@ class Job extends Model
 }
 ```
 
-HasFactory, SoftDeletes はclassではなくtraitになり  
-useを使うことでメソッドを追加しています。  
-
-HasFactoryをuseし、factoryメソッドを追加していて  
-今回、JobSeederクラスで使用しています。
+「HasFactory」と「SoftDeletes」は、クラスではなくトレイトとして提供されており、  
+useキーワードを利用することでメソッドを追加することができます。  
+今回の場合、「HasFactory」をuseし、factoryメソッドを追加しており、JobSeederクラスで使用されています。
 
 - 参考
   - Eloquentの準備 〜 複数代入
@@ -270,8 +266,8 @@ HasFactoryをuseし、factoryメソッドを追加していて
 
 ## Routes
 
-ルーティングを仕様通りに設定します。  
-`{id}`はあえて`{job}`としています。  
+ルーティングを仕様通りに設定しましょう。  
+また、`{id}`につきましては、Modelクラス名に合わせて`{job}`という名前に変更しています。
 
 ---
 
@@ -299,7 +295,7 @@ Route::prefix('admin')->name('admin')->group(function () {
 });
 ```
 
-上記の設定を行うと下記のルーティングになります。
+上記の設定を行うと、下記の通りのルーティングになります。
 
 ```bash
 root@training-laravel-web:/var/www/app# # コマンド　（出力結果は抜粋）
@@ -318,9 +314,10 @@ root@training-laravel-web:/var/www/app# php artisan route:list
 root@training-laravel-web:/var/www/app# 
 ```
 
-`{job}`には`jobs`テーブルの`id`が入ります。  
-例えば`admin/jobs/12`と指定すると自動的にDBから`id=12`のレコードを取得し、Controllerの引数にModelがセットされます。  
-存在しないIDの場合、404ページに遷移します。
+「`{job}`」には、「`jobs`」テーブルの「`id`」が入ります。  
+例えば、「`admin/jobs/12`」と指定すると、自動的にDBから「`jobs.id = 12`」のレコードを取得し、  
+Controllerの引数にModelがセットされます。  
+もし存在しないIDの場合は、404ページに遷移します。
 
 - 参考
   - Laravel
@@ -331,7 +328,7 @@ root@training-laravel-web:/var/www/app#
 ## Views
 
 Viewに関しては割愛します。  
-以下からダウンロードして組み込んでください。  
+以下のリンクからダウンロードして、組み込んでください。  
 
 ---
 
@@ -413,7 +410,7 @@ app/Providers/AppServiceProvider.php
 
 ## Controllers
 
-confirmメソッドは元々入っていないので追加してください。
+confirmメソッドは元々含まれていないので、追加する必要があります。
 
 ---
 
@@ -604,9 +601,9 @@ class UpdateJobRequest extends FormRequest
 }
 ```
 
-`getRedirectUrl`メソッドはバリデーションエラーの時に呼ばれるメソッドで  
-リダイレクト先を動的に変更するため、メソッドをオーバーライド(上書き)しています。  
-処理を細かく知る必要はなく、「リダイレクト先を変更できる」程度の理解で問題ありません。
+`getRedirectUrl`メソッドは、バリデーションエラーが発生した場合に呼び出されるメソッドであり、  
+リダイレクト先を動的に変更するためにオーバーライド（上書き）しています。  
+詳細な処理の理解は必要ないので、「リダイレクト先を変更できる」という程度の理解で問題ありません。
 
 - 参考
   - バリデーション
@@ -626,7 +623,7 @@ class UpdateJobRequest extends FormRequest
 
 ## 機能拡張
 
-以上の手順で動作出来るようになっています。  
+上記の手順で、正常に動作できるようになっています。
 ここからは機能拡張をしてみましょう。
 
 - [職業一覧画面 CSVダウンロード機能](./csv/index.md)
