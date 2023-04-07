@@ -1,5 +1,20 @@
 # PHP課題(median) 解答例
 
+## AIに最適化してもらう
+
+まず、自身の解答をAIにチェックしてもらいましょう。
+下記のメッセージの後に、適度に改行を入れて作成したコードを貼り付けてください。
+
+```txt
+以下のPHPコードを最適化し、PSR-12形式に修正してください。
+```
+
+- [AI（初めての利用の場合、こちらを参照）](./../../../../../../ai/index.md)
+- ChatGPT
+  - <https://chat.openai.com/chat>
+- BingAI（Microsoft Edge）
+  - <https://www.bing.com/search?q=Bing+AI&showconv=1&FORM=hpcodx>
+
 ## 例
 
 ```php

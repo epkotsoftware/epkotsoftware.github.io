@@ -1,5 +1,20 @@
 # PHP課題(tweets) 解答例
 
+## AIに最適化してもらう
+
+まず、自身の解答をAIにチェックしてもらいましょう。
+下記のメッセージの後に、適度に改行を入れて作成したコードを貼り付けてください。
+
+```txt
+以下のPHPコードを最適化し、PSR-12形式に修正してください。
+```
+
+- [AI（初めての利用の場合、こちらを参照）](./../../../../../../ai/index.md)
+- ChatGPT
+  - <https://chat.openai.com/chat>
+- BingAI（Microsoft Edge）
+  - <https://www.bing.com/search?q=Bing+AI&showconv=1&FORM=hpcodx>
+
 ## 例1
 
 ```php
@@ -32,17 +47,7 @@ class Helper
 }
 ```
 
-tweet情報とuser情報を紐付けるため、連想配列の変数(`$idUserMap`)を用意し  
-キーにユーザーID、値にuser情報を格納しています。これはLaravelコレクションの`keyBy()`メソッドと同様の処理です。  
-tweetのループでは、ユーザーIDが入っている`author_id`を`$idUserMap`連想配列のキーに指定し  
-ユーザー情報を取得していて、こうすることでtweetループ内で、高速にユーザー情報を取得することが出来ます。
-
-Null合体演算子(`??`)を使うことで、キーが存在しない場合にエラーが発生しない作りになっています。
-
-- `Laravel 9.x コレクション - keyBy()`
-  - <https://readouble.com/laravel/9.x/ja/collections.html#method-keyby>
-- `PHP7.0 新機能 Null 合体演算子`
-  - <https://www.php.net/manual/ja/migration70.new-features.php#migration70.new-features.null-coalesce-op>
+- [解説](./detail1/index.md)
 
 ## 例2
 
@@ -82,9 +87,7 @@ class Helper
 }
 ```
 
-[例1](#例1)をprivateメソッドで分割した例です。  
-今回の課題のような規模であれば分割する必要はなさそうですが  
-規模が大きくなってきたら、このように分割を検討しましょう。
+- [解説](./detail2/index.md)
 
 ## 例3
 
@@ -121,5 +124,4 @@ class Helper
 }
 ```
 
-[例1](#例1)とは違い、tweetループの中にuserを探すループが入ったパターンです。  
-tweet・user数が増えると、user検索処理を何度も行うためパフォーマンスが落ちます。  
+- [解説](./detail3/index.md)

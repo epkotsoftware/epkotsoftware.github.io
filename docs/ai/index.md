@@ -20,7 +20,12 @@ AI利用方法についてまとめました。
 (Translation: Please don't share any sensitive information in your conversations.)
 ```
 
-## ChatGPTをはじめる
+## Bing AI
+
+- Bing AI（Microsoft Edgeで開くこと）
+  - <https://www.bing.com/search?q=Bing+AI&showconv=1&FORM=hpcodx>
+
+## ChatGPT
 
 ChatGPTは、以下のサイトで利用できます。
 なお、利用にはOpenAIアカウントが必要となりますので、  

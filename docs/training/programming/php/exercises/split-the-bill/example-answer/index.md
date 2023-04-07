@@ -1,6 +1,21 @@
-# PHPプログラミング編 課題(Split the bill)解答例
+# PHP課題(Split the bill)解答例
 
-## 例
+## AIに最適化してもらう
+
+まず、自身の解答をAIにチェックしてもらいましょう。
+下記のメッセージの後に、適度に改行を入れて作成したコードを貼り付けてください。
+
+```txt
+以下のPHPコードを最適化し、PSR-12形式に修正してください。
+```
+
+- [AI（初めての利用の場合、こちらを参照）](./../../../../../../ai/index.md)
+- ChatGPT
+  - <https://chat.openai.com/chat>
+- BingAI（Microsoft Edge）
+  - <https://www.bing.com/search?q=Bing+AI&showconv=1&FORM=hpcodx>
+
+## 例1
 
 ```php
 <?php
@@ -21,11 +36,7 @@ class PaymentHelper
 }
 ```
 
-- [演算子](./../../../operators/index.md)
-- floor
-  - <https://www.php.net/manual/ja/function.floor.php>
-- array_fill
-  - <https://www.php.net/manual/ja/function.array-fill.php>
+- [解説](./detail1/index.md)
 
 ## 例2
 
@@ -49,3 +60,5 @@ class PaymentHelper
     }
 }
 ```
+
+- [解説](./detail2/index.md)
