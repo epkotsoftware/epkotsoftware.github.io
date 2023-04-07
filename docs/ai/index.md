@@ -114,7 +114,7 @@ ChatGPTは、質問に答えるだけでなく、必要に応じて情報を追�
 ## VSCode拡張機能（ChatGPT - Genie AI）
 
 VSCode上でChatGPTを利用することができ、  
-コードの自動生成も可能です。をファイルに出力することも可能です。
+コードの自動生成も可能です。
 
 - `ChatGPT - Genie AI`
   - <https://marketplace.visualstudio.com/items?itemName=genieai.chatgpt-vscode>
