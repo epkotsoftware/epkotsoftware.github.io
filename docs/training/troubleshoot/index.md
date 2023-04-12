@@ -111,6 +111,25 @@ MDNにもそのように記載があります。
 
 - [全般](#全般)
 
+### The system cannot find the path specified
+
+> 環境構築の docker-compose〜 のコマンドで「CreateFile {ディレクトリパス}docker-compose-dev.yml: The system cannot find the path specified.」のエラーが出る
+
+パスに誤りがあるか、カレントディレクトリがtrainingではないのが原因です。  
+VSCodeの開き方自体に問題がある可能性が高いので、まずVSCodeでtrainingディレクトリを開き直しましょう。  
+ユーザーディレクトリ作成時と同様の開き方で、trainingディレクトリの中で作業します。  
+
+```txt
+VSCodeメニューバー「ファイル」→「フォルダーを開く」→「training」フォルダーを選択
+```
+
+ターミナルを表示し、pwdコマンドを打つと  
+カレントディレクトリのパスが表示されますので、末尾が「training」になっていることを確認してください。  
+もし、「training」になっていなければ、「+」アイコンで新しいターミナルを開くと  
+「training」がカレントディレクトリになっているはずです。  
+
+この状態で docker-compose〜 のコマンドを打ち直すとうまくいくはずです。
+
 ### phpMyAdminが開かない
 
 > 「[#9 データベース（DB）を作る](https://cbc-study.com/training/advanced/page4#s9)」で  

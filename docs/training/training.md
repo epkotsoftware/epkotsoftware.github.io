@@ -298,6 +298,19 @@ Docker Desktop をインストールしてください。
 
 - [Docker Desktopインストール](./docker/install.md)
 
+##### VSCodeの確認
+
+ここまでで、VSCodeが正しく開かれていない方が多いので再度確認しましょう。  
+下図のように、左のエクスプローラーの所に「`TRAINING`」と表示されていることを確認してください。  
+
+![vscode_training](./../image/vscode_training.png)
+
+「`TRAINING`」が表示されていなければ、VSCodeを開き直しましょう。
+
+```txt
+メニューバー「ファイル」→「フォルダーを開く」→「training」フォルダーを選択  
+```
+
 ##### 構築手順
 
 trainingリポジトリの [users/{★ユーザー名}/03_advanced/README.md](https://github.com/epkotsoftware/training/blob/template/users/_template/03_advanced/README.md) をご覧ください。
