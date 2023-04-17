@@ -4,6 +4,8 @@
 
 - docker docs 〜 Logs and troubleshooting
   - <https://docs.docker.com/desktop/windows/troubleshoot/>
+- Docker Desktop release notes
+  - <https://docs.docker.com/desktop/release-notes/>
 - Docker Desktop for Windows 〜 Issues
   - <https://github.com/docker/for-win/issues>
 - Docker Desktop for Mac 〜 Issues
@@ -130,6 +132,11 @@ docker-composeコマンド実行時に「command not found」のメッセージ�
 - `Issues · docker/for-win`
   - <https://github.com/docker/for-win/issues>
 
+古いバージョンをインストールする場合、リリースノートから可能です。  
+
+- `Docker Desktop release notes`
+  - <https://docs.docker.com/desktop/release-notes/>
+
 ## コンテナ起動（Mac）
 
 ### docker-compose で 「`docker: no matching manifest for linux/arm64/v8 in the manifest list entries.`」
@@ -193,3 +200,8 @@ sudo ifconfig lo0 alias 127.0.0.2
 
 - `Issues · docker/for-mac`
   - <https://github.com/docker/for-mac/issues>
+
+古いバージョンをインストールする場合、リリースノートから可能です。  
+
+- `Docker Desktop release notes`
+  - <https://docs.docker.com/desktop/release-notes/>
