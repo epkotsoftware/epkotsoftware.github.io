@@ -616,11 +616,21 @@ class Math
 }
 ```
 
+VSCodeの拡張機能を使うと、自動でPHPDocを生成できます。
+
+- `VSCode拡張機能 - PHP DocBlocker`
+  - 関数等のメンバーの上で「`/**`」を入力してEnterキーを押すだけで、自動的にPHPDocが生成されます。
+  - <https://marketplace.visualstudio.com/items?itemName=neilbrayfield.php-docblocker>
+
+詳しいコメント方法についてはリファレンスを参照してください。
+
 - 参考
   - `phpDocumentor`
     - <https://www.phpdoc.org/>
     - `phpDocumentor - PHPDoc reference`
       - <https://docs.phpdoc.org/3.0/guide/references/phpdoc/index.html>
+  - PHPDocリファレンス
+    - <https://zonuexe.github.io/phpDocumentor2-ja/references/phpdoc/index.html>
   - `PSR-5: PHPDoc`
     - <https://github.com/php-fig/fig-standards/blob/master/proposed/phpdoc.md>
 
