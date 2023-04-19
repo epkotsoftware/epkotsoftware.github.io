@@ -811,6 +811,13 @@ LaravelでのCRUD機能を作成出来るレベルまで学習しましょう。
 
 - [Laravel CRUD](./laravel/crud/index.md)
 
+### 内部開発チーム
+
+内部開発チームに加入する際、以下の資料を読んでおいてください。
+
+- 内部開発
+  - <https://github.com/epkotsoftware/dev-proposal/tree/main/documents/dev>
+
 ### 面談準備・内部開発再現
 
 面談に関する情報や、内部開発の資料は以下にまとめています。  
