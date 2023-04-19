@@ -1,15 +1,5 @@
 # PHPプログラミング編 関数
 
-## 目次
-
-| No. |  |
-| :---: | --- |
-| 1 | [関数](#関数) |
-| 2 | [メソッド](#メソッド) |
-| 3 | [メソッド例](#メソッド例) |
-| 4 | [戻り値](#戻り値) |
-| 5 | [PHPマニュアル](#phpマニュアル) |
-
 ## 関数
 
 実務では関数は必ず使うので、しっかり学習しましょう。
@@ -38,10 +28,10 @@ function 関数名($引数1, $引数2, ...$引数n)
 $戻り値 = 関数名($引数1, $引数2, ...$引数n);
 ```
 
----
+### 例1
 
 指定した値をインクリメント（+1）して返す関数の例です。  
-「`increment`」という名前で定義してみます。  
+「`increment`」という関数名で定義してみます。  
 
 ```php
 <?php
@@ -70,6 +60,36 @@ var_dump($result1, $result2, $result3, $result4);
 // int(101)
 ```
 
+### 例2
+
+指定した2つの値を足して返す関数の例です。  
+「`add`」という関数名で定義してみます。  
+
+```php
+<?php
+
+// increment関数定義
+//   引数1: $num1 数値
+//   引数2: $num2 数値
+function add($num1, $num2) {
+  $result = $num1 + $num2;
+  return $result;
+}
+
+// 関数実行
+$result1 = add(0, 1); // 戻り値: 1
+$result2 = add(0, 2); // 戻り値: 2
+$result3 = add(1, 2); // 戻り値: 3
+$result4 = add(4, 3); // 戻り値: 7
+
+// 関数実行結果出力
+var_dump($result1, $result2, $result3, $result4);
+// int(1)
+// int(2)
+// int(3)
+// int(7)
+```
+
 ## メソッド
 
 PHPの実務では、関数をそのまま定義することはほぼありません  
@@ -90,7 +110,7 @@ class クラス名
 }
 ```
 
-increment関数を「`Math`」という名前のクラス内で定義してみましょう。  
+increment関数、add関数を「`Math`」という名前のクラス内で定義してみましょう。  
 
 ```php
 <?php
@@ -106,6 +126,12 @@ class Math
         // 結果を返す
         return $result;
     }
+
+    // addメソッド
+    public static function add($num1, $num2) {
+      $result = $num1 + $num2;
+      return $result;
+    }
 }
 
 // メソッド実行
@@ -114,12 +140,22 @@ $result2 = Math::increment(2); // 戻り値: 3
 $result3 = Math::increment(10); // 戻り値: 11
 $result4 = Math::increment(100); // 戻り値: 101
 
+$result5 = Math::add(0, 1); // 戻り値: 1
+$result6 = Math::add(0, 2); // 戻り値: 2
+$result7 = Math::add(1, 2); // 戻り値: 3
+$result8 = Math::add(4, 3); // 戻り値: 7
+
 // 関数実行結果出力
 var_dump($result1, $result2, $result3, $result4);
 // int(1)
 // int(3)
 // int(11)
 // int(101)
+var_dump($result5, $result6, $result7, $result8);
+// int(1)
+// int(2)
+// int(3)
+// int(7)
 ```
 
 - `public`
@@ -535,6 +571,58 @@ var_dump($result1, $result2);
 ```
 
 ---
+
+## PHPDoc
+
+メソッドの上に変わった記述のコメントを見たことがあるかと思います。  
+PHPでは「PHPDoc」と呼ばれるもので、PHPDocを記載したクラスやメソッドを使う時に  
+記載した説明が表示されるようになります。  
+
+![vscode-phpdoc](./images/vscode-phpdoc.png)  
+
+「phpDocumentor」を使うことでPHPDocからドキュメントを生成することも出来ます。  
+以下はPHPDocを記述した例です。
+
+```php
+<?php
+
+/**
+ * Mathクラス  ← ここにクラスの説明
+ */
+class Math
+{
+    /**
+     * 指定された数値に1を足して返す。　← ここにメソッドの説明
+     *
+     * @param int $num 数値  ← ここに引数の説明
+     * @return int 数値に1足した結果  ← ここに戻り値の説明
+     */
+    public static function increment(int $num): int
+    {
+        return $num + 1;
+    }
+
+    /**
+     * 指定された2つの数値を足して返す。
+     *
+     * @param int $num1 数値1
+     * @param int $num2 数値2
+     * @return int 2つの数値を足した結果
+     */
+    public static function add(int $num1, int $num2): int
+    {
+        return $num1 + $num2;
+    }
+}
+```
+
+- 参考
+  - `phpDocumentor`
+    - <https://www.phpdoc.org/>
+    - `phpDocumentor - PHPDoc reference`
+      - <https://docs.phpdoc.org/3.0/guide/references/phpdoc/index.html>
+  - `PSR-5: PHPDoc`
+    - <https://github.com/php-fig/fig-standards/blob/master/proposed/phpdoc.md>
 
 ## PHPマニュアル
 
