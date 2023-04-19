@@ -296,8 +296,10 @@ LaravelのModelについて
 
 ## Routes
 
-ルーティングを仕様通りに設定しましょう。  
+ルーティングを「機能一覧」に書かれている通りに設定しましょう。  
 また、`{id}`につきましては、Modelクラス名に合わせて`{job}`という名前に変更しています。
+
+- [機能一覧](./design/index.md#機能一覧)
 
 ---
 
@@ -457,7 +459,10 @@ app/Providers/AppServiceProvider.php
 
 ## Controllers
 
-confirmメソッドは元々含まれていないので、追加する必要があります。
+詳細設計通りにControllerに処理を実装します（設計書未作成のものもあり）。  
+confirmメソッドは元々含まれていないので、追加する必要があります。  
+
+- [設計](./design/index.md#設計)
 
 ---
 
