@@ -634,11 +634,14 @@ Update README.md
 ### 現場でのコミットメッセージ
 
 現場・プロジェクトによってメッセージのルールが異なるため  
+自身で確認する必要があります。
 
 - コミットルールのドキュメントを確認する。
   - 現場で用意されている所が多いので確認する。
 - 対象リポジトリの過去のコミットメッセージを確認する。
-  - 例えばLaravel公式のリポジトリの場合は、以下で確認が出来ます。
+  - `git log -n10 --oneline`などのコマンドでログを確認したり  
+    GitHub上で確認します。  
+    例えばLaravel公式のGitHub上のリポジトリの場合は、以下で確認が出来ます。
     - <https://github.com/laravel/laravel/commits/>
 
 ### Gitコミットメッセージの例1
@@ -668,8 +671,8 @@ Fix typo(#12)
 
 ### Gitコミットメッセージの例2
 
-上記の例では、文字を使ったprefix（接頭辞）でしたが  
-以下は絵文字を使った
+上記の例では、文字を使ったPrefix（接頭辞）でしたが  
+以下は絵文字を使ったPrefixです。  
 
 - ConventionalCommitsEmoji
   - <https://gist.github.com/parmentf/359667bf23e08a1bd8241fbf47ecdef0>
@@ -677,6 +680,8 @@ Fix typo(#12)
   - <https://github.com/dannyfritz/commit-message-emoji>
 
 ### Gitコミットメッセージ実務でのルール
+
+筆者が経験したルールや、実際のプロジェクトに適用されているルールです。
 
 #### Redmine
 
