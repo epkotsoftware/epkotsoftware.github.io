@@ -46,6 +46,15 @@ ChatGPTは、以下のサイトで利用できます。
 
 ***※ 注意点： 生成された API キーは他人に見られないようにしましょう。***
 
+### OpenAI API Usage
+
+APIキーを使用する際の注意点として、使用量の上限があります。  
+期限付きの無料クレジットが付与されます。  
+計画的にAPIを利用するようにしましょう。
+
+- `Usage - OpenAI API`
+  - <https://platform.openai.com/account/usage>
+
 ## AI利用方法
 
 AIは、通常の検索とは異なり、対話形式で行います。  
