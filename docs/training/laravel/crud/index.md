@@ -7,21 +7,11 @@ PHP・Laravelについては、ある程度の理解があることを前提に�
 特に名前空間に関しては、理解していないと正しく動作させることができませんので、
 十分に学習しておくことをお勧めします。
 
-## 目次
+## AI
 
-| No. |  |
-| :---: | --- |
-| 1 | [環境](#環境) |
-| 2 | [設計書](#設計書) |
-| 3 | [各ファイルを生成](#各ファイルを生成) |
-| 4 | [Database](#database) |
-| 5 | [Model](#model) |
-| 6 | [Routes](#routes) |
-| 7 | [Views](#views) |
-| 8 | [Providers](#providers) |
-| 9 | [Controllers](#controllers) |
-| 10 | [Requests](#requests) |
-| 11 | [機能拡張](#機能拡張) |
+わからない所は、AIに聞いてみましょう。
+
+- [AI](./../../../ai/index.md)
 
 ## 環境
 
@@ -83,10 +73,22 @@ php artisan make:controller JobController --model=Job -rR
 
 ## Database
 
+データベースの環境を作っていきます。  
+先ほどのコマンド実行で、必要なファイルが既に出来ているので  
+編集し、コマンドを実行して構築していきます。
+
+| 作成するファイル | 説明 |
+| --- | --- |
+| Migration | PHPコードでデータベースの構造を定義し、コマンドで実行することで、データベースにテーブル作成・変更を行う。 |
+| Factory | デフォルトのレコードを生成するクラス |
+| Seeder | Factoryを使って、対象テーブルに初期データやテストデータを挿入するためのクラス |
+
 ### Migrations
 
 以下のような生成日時が記載されたmigrationファイルが作成されているため、  
 `up`メソッドを編集して、DBの仕様に従って定義します。
+
+- [テーブル定義書](./design/db/tables/laravel.jobs.html)
 
 ---
 
@@ -114,6 +116,11 @@ database/migrations/YYYY_MM_DD_hhmmss_create_jobs_table.php
 
 `comment`メソッドを用いることによって、テーブルやカラムにコメントを追加することが可能です。  
 通常は、論理名（日本語名）を入力します。  
+
+SQLクライアントに`A5:SQL Mk-2`を使っている場合、`[論理名]:[コメント]`のルールになっているので  
+予め設定しておくとテーブル定義書の自動出力時に便利です。  
+例えばコメントを「`ユーザーID:FK:users.id`」とすると、論理名が「`ユーザーID`」、コメントが「`FK:users.id`」になります。  
+
 編集が完了したら、以下のコマンドを使ってmigrationファイルを実行し、テーブルを作成してください。
 
 ```bash
@@ -156,7 +163,7 @@ database/seeders/JobSeeder.php
     {
         // 開発環境のみ100レコードを追加する。
         if (app()->isLocal()) {
-            // App\Models\Job
+            // \App\Models\Job
             Job::factory()
                 ->count(100) // 100レコード追加
                 ->sequence(function ($sequence) {
@@ -207,7 +214,7 @@ php artisan db:seed
     - 連続データ
       - <https://readouble.com/laravel/9.x/ja/eloquent-factories.html#sequences>
 
-## テーブル初期化
+### テーブル初期化
 
 ここまでの手順でレコードが複数登録されてしまったり、  
 余計なテーブルが作成されてしまった場合は、  
@@ -221,6 +228,20 @@ php artisan migrate:fresh --seed
 - 参考
   - データベース：シーディング - シーダの実行
     - <https://readouble.com/laravel/9.x/ja/seeding.html#running-seeders>
+
+### データベースについてAIに聞く
+
+本ページや公式資料がわかりにくい場合、AIに聞いてみましょう。
+
+```txt
+Laravelの「Migration」、「Factory」、「Seeder」について
+例を挙げて説明してください。
+```
+
+## MVCイメージ
+
+- [Mermaid](https://mermaid.live/edit#pako:eNp9VF1LG0EU_SvDPlVIhApS2AehKrRQY0FFCm4eJtkxLmx2083EpIhgdtAk9aFp68dDK00klWhLRSyF2m36Y6abxCf_QudjY8wmNizh7sy55545d_ZuKElbR4qqRKNRzcIGNpEKNGUOOnAdmZqiWWIji17mkJVEswZMOTCtWZoF2C9hF4CTSjyYmJyMAPH3cOLRGKDuOSWn1G1Q95iSS0rKEg6T2HbAtGPns8gBjxcBJQcCeELdHxKCLF0GIwow7qBAT57AZKCDjaSRgRYGC3YOG1aKc68EcTyPEuOZtcwweMa2sGObptSy0n-NvygUCv3X4cxlA-VFDg_iDFwYT5hQR6PrLHDzsliKkrGoEMTDCTHWElPARSTAIgp51HNHGNPrwRiYnR6mXIIJE3FKzkXJDiWeMP_LHUoZztsYAXudmRIYGBGlVRBbnpGIoIHRqakAobJGnvGmu03q_rxtd7DLcH0vVeCft7oX9f4KLX6jpE7d35QQSir-W48WL_3SFS0ehgXdpaFkn7qn4hi1UHW_dNKp7sjkfgqXKw1nGrY_-68_tMm2X7tg9duNj92mR913f1tH1zUvUC_BIfUS-vzZjVeef8JS_dp3v1qmW8Vu6czf3edKyBa_-eSr-ArKN17lv8covhfPLnUrA55Imwacue9YQX8oKXE73D_-mwO_dRg6jgAxsLgIQ2CJEXsjCAcZBrswABmQxb8NFTxdis119j61y9WQIL4dYuPYEUTBfbu737-Ct5udvV_XR8fderPTuJIgJaKkkZOGhs7m2wZf0xS8htJIU_iM09EqzJmYz7hNBoU5bC--spKKip0ciii5jA5xb-Ap6io0s2wV6QabYTE5M8Xo3PwHV4svyQ)  
+  ![laravel-mvc](./images/laravel-mvc.png)
 
 ## Model
 
@@ -264,6 +285,15 @@ useキーワードを利用することでメソッドを追加することが�
     - トレイト
       - <https://www.php.net/manual/ja/language.oop5.traits.php>
 
+### ModelについてAIに聞く
+
+本ページや公式資料がわかりにくい場合、AIに聞いてみましょう。
+
+```txt
+LaravelのModelについて
+例を挙げて説明してください。
+```
+
 ## Routes
 
 ルーティングを仕様通りに設定しましょう。  
@@ -276,21 +306,20 @@ routes/web.php
 ```
 
 ```php
-// admin
 Route::prefix('admin')->name('admin')->group(function () {
-    // admin/
-    Route::view('', 'admin.index')->name('.index');
-    // admin/jobs    admin.jobs
-    // App\Http\Controllers\JobController
+    // admin    admin
+    Route::view('', 'admin.index')->name('.index'); // admin    admin.index
+    // \App\Http\Controllers\JobController
     Route::prefix('jobs')->name('.jobs')->controller(JobController::class)->group(function () {
-        Route::get('', 'index')->name('.index');
-        Route::post('', 'store')->name('.store');
-        Route::get('create', 'create')->name('.create');
-        Route::get('{job}', 'show')->name('.show');
-        Route::patch('{job}', 'update')->name('.update');
-        Route::delete('{job}', 'destroy')->name('.destroy');
-        Route::get('{job}/edit', 'edit')->name('.edit');
-        Route::post('{job}/confirm', 'confirm')->name('.confirm');
+        // admin/jobs    admin.jobs
+        Route::get('', 'index')->name('.index'); // admin/jobs    admin.jobs.index › JobController@index
+        Route::post('', 'store')->name('.store'); // admin/jobs    admin.jobs.store › JobController@store
+        Route::get('create', 'create')->name('.create'); // admin/jobs/create    admin.jobs.create › JobController@create
+        Route::get('{job}', 'show')->name('.show'); // admin/jobs/{job}    admin.jobs.show › JobController@show
+        Route::patch('{job}', 'update')->name('.update'); // admin/jobs/{job}    admin.jobs.update › JobController@update
+        Route::delete('{job}', 'destroy')->name('.destroy'); // admin/jobs/{job}    admin.jobs.destroy › JobController@destroy
+        Route::get('{job}/edit', 'edit')->name('.edit'); // admin/jobs/{job}/edit    admin.jobs.edit › JobController@edit
+        Route::post('{job}/confirm', 'confirm')->name('.confirm'); // admin/jobs/{job}/confirm    admin.jobs.confirm › JobController@confirm
     });
 });
 ```
@@ -324,6 +353,15 @@ Controllerの引数にModelがセットされます。
     - [ルーティング](./../routing/index.md)
     - ビュー
       - <https://readouble.com/laravel/9.x/ja/views.html>
+
+### ルーティングについてAIに聞く
+
+本ページや公式資料がわかりにくい場合、AIに聞いてみましょう。
+
+```txt
+Laravelのルーティングの「prefix」メソッドや「group」メソッドについて
+例を挙げて説明してください。
+```
 
 ## Views
 
@@ -379,6 +417,15 @@ resources/views
       - <https://getbootstrap.jp/docs/4.3/components/modal/>
   - Feather (アイコン)
     - <https://feathericons.com/>
+
+### Blade についてAIに聞く
+
+本ページや公式資料がわかりにくい場合、AIに聞いてみましょう。
+
+```txt
+LaravelのBladeテンプレートの「@extends」ディレクティブについて
+例を挙げて説明してください。
+```
 
 ## Providers
 
@@ -510,7 +557,20 @@ class JobController extends Controller
   - Database：ペジネーション
     - <https://readouble.com/laravel/9.x/ja/pagination.html>
 
+### Controller についてAIに聞く
+
+本ページや公式資料がわかりにくい場合、AIに聞いてみましょう。
+
+```txt
+LaravelのControllerについて
+例を挙げて説明してください。
+```
+
 ## Requests
+
+フォームリクエストは、リクエストデータのバリデーション（検証）を担当するクラスです。  
+コントローラーのメソッドに対して引数として渡すことで、リクエストデータのバリデーションを行い、  
+バリデーションエラーがある場合は自動的にリダイレクトさせることができます。
 
 ---
 
@@ -620,6 +680,15 @@ class UpdateJobRequest extends FormRequest
       - <https://www.php.net/manual/ja/language.oop5.paamayim-nekudotayim.php>
     - オブジェクトの継承
       - <https://www.php.net/manual/ja/language.oop5.inheritance.php>
+
+### フォームリクエストについてAIに聞く
+
+本ページや公式資料がわかりにくい場合、AIに聞いてみましょう。
+
+```txt
+Laravelのフォームリクエストについて
+例を挙げて説明してください。
+```
 
 ## 機能拡張
 

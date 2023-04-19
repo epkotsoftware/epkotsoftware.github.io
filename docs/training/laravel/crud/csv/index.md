@@ -3,17 +3,6 @@
 [Laravel CRUD](./../index.md) で作成したアプリの職業一覧画面に  
 職業一覧をCSVダウンロード出来る機能を追加してみましょう。
 
-## 目次
-
-| No. |  |
-| :---: | --- |
-| 1 | [仕様](#仕様) |
-| 2 | [Controllers](#controllers) |
-| 3 | [Routes](#routes) |
-| 4 | [Views](#views) |
-| 5 | [動作確認](#動作確認) |
-| 6 | [課題](#課題) |
-
 ## 仕様
 
 「職業 一覧画面」にCSVボタンを追加し、一覧のCSVダウンロード機能を追加します。  
@@ -29,6 +18,12 @@
 | URI | HTTP<br>メソッド | 機能・画面コード | 種別 | 機能・画面名 | 備考 |
 | --- | --- | --- | --- | --- | --- |
 | admin/jobs/csv | POST   | admin.jobs.csv   | 機能 | 職業 CSVダウンロード |  |
+
+## CSVについて
+
+ファイル編を復習しましょう。
+
+- [ファイル編](./../../../file/index.md)
 
 ## Controllers
 
@@ -95,7 +90,12 @@ app/Http/Controllers/JobController.php
     }
 ```
 
-上記の例では「`getJobCsvRecords`」メソッドで、レコードを全件取得してきているため  
+上記の例ではresponseの`streamDownload`メソッドを使って  
+CSVのダウンロード機能を実装しています。  
+`streamDownload`メソッドの第一引数には、コールバック関数を指定する必要があり  
+今回は、PHPの「無名関数」を使用しています。  
+
+「`getJobCsvRecords`」メソッドで、レコードを全件取得してきているため  
 テーブルに格納しているレコード数が多くなってくるとメモリ不足になることがあります。  
 
 それを解決する方法として、Laravelの「`lazyById`」等のメソッドや  
@@ -165,6 +165,8 @@ select * from `jobs` where `id` < 8001 order by `id` desc limit 1000;
 - 参考
   - HTTPレスポンス  ストリームダウンロード
     - <https://readouble.com/laravel/9.x/ja/responses.html#streamed-downloads>
+  - streamDownloadメソッド
+    - <https://laravel.com/api/9.x/Illuminate/Contracts/Routing/ResponseFactory.html#method_streamDownload>
   - データベース：クエリビルダ  ルーズなストリーミング結果
     - <https://readouble.com/laravel/9.x/ja/queries.html#streaming-results-lazily>
   - PHP
@@ -178,6 +180,8 @@ select * from `jobs` where `id` < 8001 order by `id` desc limit 1000;
       - <https://www.php.net/manual/ja/function.fclose.php>
     - ジェネレータ
       - <https://www.php.net/manual/ja/language.generators.php>
+    - 無名関数
+      - <https://www.php.net/manual/ja/functions.anonymous.php>
   - Comma-Separated Values
     - <https://ja.wikipedia.org/wiki/Comma-Separated_Values>
   - Tab-Separated Values
