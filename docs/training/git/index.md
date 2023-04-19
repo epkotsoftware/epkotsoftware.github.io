@@ -2,7 +2,8 @@
 
 ## はじめる前に
 
-以下、学習しておきましょう。
+Git(ギット)について学習していきます。
+まずは、以下の動画で仕組みについて学習しましょう。
 
 - 動画
   - GitHubとは？【分かりやすい解説シリーズ #14】【プログラミング】
@@ -284,7 +285,7 @@ git add htdocs/a.html
 git commit -m ":sparkles: htdocs/a.html"
 ```
 
-※ コミットコメントの「`:sparkles:`」は絵文字を表します。  
+※ コミットメッセージの「`:sparkles:`」は絵文字を表します。  
 ※ この時点ではGitHubには反映されません。  
 
 ## B機能
@@ -604,6 +605,113 @@ GitHubで解消することも出来ます。
 - コマンド ラインを使用してマージ コンフリクトを解決する
   - <https://docs.github.com/ja/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-using-the-command-line>
 
+## Gitコミットメッセージ
+
+最後にコミットメッセージについて、深く学習しておきましょう。
+
+### Gitコミットメッセージフォーマット
+
+基本的には以下のフォーマットでコミットメッセージを作成します。
+
+```txt
+<summary>
+
+<description>
+```
+
+- summary（サマリー、概要）はコミットメッセージの1行目に記載します。
+- description（ディスクリプション、説明）は3行目以降に記載します。  
+  descriptionは、summaryやファイル差分を見るだけで、どういった目的の変更か明らかな場合は省略が可能です。
+
+例えば以下のようなイメージです。
+
+```txt
+Update README.md
+
+・〇〇ディレクトリ構成の変更に伴い、README.mdのリンクを修正
+```
+
+### 現場でのコミットメッセージ
+
+現場・プロジェクトによってメッセージのルールが異なるため  
+
+- コミットルールのドキュメントを確認する。
+  - 現場で用意されている所が多いので確認する。
+- 対象リポジトリの過去のコミットメッセージを確認する。
+  - 例えばLaravel公式のリポジトリの場合は、以下で確認が出来ます。
+    - <https://github.com/laravel/laravel/commits/>
+
+### Gitコミットメッセージの例1
+
+プロジェクトによってルールが異なるため、参考として一つの例を挙げます。  
+
+Gitに限らず、その他のバージョン管理システムも同様ですが  
+summaryには後で検索しやすいように動詞を先頭に持っていくルールが多いです。  
+例では英語ですが、「Add ◯◯機能」、「Fix タイポ」など日本語のメッセージも可能です。
+
+| 動詞 | 読み方 / 意味 | 説明 | 例 |
+| --- | --- | --- | --- |
+| Add | アッド / 追加する | コード追加 | `Add default value to Helper::exec method.` |
+| Update | アップデート / 更新する | 更新 | `Update CHANGELOG` |
+| Remove | リムーブ / 除去する | コードを削除（ファイルの削除、1行削除した場合など） | `Remove lang directory by default` |
+| Move | ムーブ / 移動する | コードを移動 | `Move middleware.` |
+| Fix | フィックス / 修理する | バグ修正、typo（タイプミス）の修正等 | `Fix conflicts`<br>`Fix typo` |
+| Rename | リネーム / 改名する | 名称変更（ファイル名、変数名等） | `Rename property 'name' -> 'userName'` |
+
+また、以下のように`#12`をメッセージに含めると、GitHub上でPRの12番のリンクが自動的に追加されます。  
+PRでの指摘対応の際に使用することができ、修正理由が明確になります。  
+そのため、担当者が変わった場合でも、コミットメッセージからコミットした経緯の追跡ができます。
+
+```txt
+Fix typo(#12)
+```
+
+### Gitコミットメッセージの例2
+
+上記の例では、文字を使ったprefix（接頭辞）でしたが  
+以下は絵文字を使った
+
+- ConventionalCommitsEmoji
+  - <https://gist.github.com/parmentf/359667bf23e08a1bd8241fbf47ecdef0>
+- Commit Message Emoji
+  - <https://github.com/dannyfritz/commit-message-emoji>
+
+### Gitコミットメッセージ実務でのルール
+
+#### Redmine
+
+プロジェクト管理ツールのRedmineと組み合わせている場合  
+`refs`キーワードを使ってチケットと紐付けを行うことがあります。
+
+```txt
+refs #1234 : ◯◯追加
+```
+
+- Redmineとバージョン管理システムの連携
+  - <https://redmine.jp/tech_note/subversion/>
+
+#### Angular
+
+下記は、実際のAngularプロジェクトで運用されているルールです。
+
+```txt
+<type>(<scope>): <short summary>`
+```
+
+- `Contributing to Angular - Commit Message Header`
+  - <https://github.com/angular/angular/blob/main/CONTRIBUTING.md#commit-message-header>
+- `Commits · angular/angular`
+  - <https://github.com/angular/angular/commits/main>
+
+### Gitコミットメッセージの参考資料
+
+- `Contributing to Angular`
+  - <https://github.com/angular/angular/blob/main/CONTRIBUTING.md>
+- `Commits · angular/angular`
+  - <https://github.com/angular/angular/compare/15.0.0...15.2.7>
+- `Commits · laravel/laravel`
+  - <https://github.com/laravel/laravel/compare/v9.5.2...v10.0.7>
+
 ## おわり
 
 以上でGit研修は終わりです。  
@@ -639,6 +747,11 @@ GitHubで解消することも出来ます。
 | `git branch -D "★ブランチ名"` | ローカルブランチ削除（`-D` は `--delete –force` の省略） |
 | `git stash` | 操作が複雑なので以下を参照<br><https://qiita.com/chihiro/items/f373873d5c2dfbd03250> |
 
+## Gitチートシート
+
+- `GitHub Git チートシート - GitHub Cheatsheets`
+  - <https://training.github.com/downloads/ja/github-git-cheat-sheet/>
+
 ## 参考
 
 - サイト
@@ -648,6 +761,8 @@ GitHubで解消することも出来ます。
     - <https://www.atlassian.com/ja/git/tutorials>
   - サル先生のGit入門
     - <https://backlog.com/ja/git-tutorial/>
+  - GitHub Cheat Sheet
+    - <https://github.com/tiimgreen/github-cheat-sheet>
 - git help
   - `git help` コマンドでブラウザでヘルプを見れます。
     - 例: `git help checkout`
