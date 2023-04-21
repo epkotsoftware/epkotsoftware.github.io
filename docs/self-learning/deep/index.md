@@ -1,5 +1,15 @@
 # 自己学習
 
+## コーディング
+
+- `サイバーエージェント - 良いコードとは何か - エンジニア新卒研修 スライド公開`
+  - <https://speakerdeck.com/moriatsushi/liang-ikodotohahe-ka-enziniaxin-zu-yan-xiu-suraidogong-kai>
+
+## テスト
+
+- `設計・テスト研修講義【21新卒技術研修】`
+  - <https://youtu.be/zfAo0DyIBJ0>
+
 ## システム開発工程
 
 企画からテストまでを、徳田さんが動画にしているので参考にしてください。
@@ -21,6 +31,8 @@ Playground はTypeScriptをコンパイルし、実行できるサイトです�
   - <https://youtu.be/FSTrSYwqhLg>
 - TypeScript
   - <https://www.typescriptlang.org/>
+- `リクルート - TypeScript`
+  - <https://speakerdeck.com/recruitengineers/typescript>
 - `TypeScript: TS Playground`
   - <https://www.typescriptlang.org/play>
 
@@ -133,7 +145,7 @@ IDEである「Visual Studio Community」は個人利用であれば無償で使
 | Windows Forms App | Windowsアプリ | 画面作成が簡単で案件が多い印象、WinFormsと略される |
 | WPF | Windowsアプリ | WinFormsより大規模開発向け |
 | UWP | Windowsアプリ | Microsoft Storeのアプリ |
-| ASP.NET | Webアプリ | 手法がたくさんあり学習が難しい |
+| ASP.NET | Webアプリ | 手法がたくさんあり学習が難しい、現在ではMVCが主流か？ |
 | Xamarin | マルチプラットフォームアプリ | 大した事が出来ず案件は少ない、「.NET MAUI」が主流になると思われる |
 | .NET MAUI | マルチプラットフォームアプリ | 2022/5/23 リリース、将来性がある |
 | Unity | マルチプラットフォームアプリ | 主に3Dゲーム開発に使われる。<br>VBは使えない（VBで作ったクラスライブラリを組み込む事は恐らく可能） |
@@ -164,8 +176,18 @@ IDEである「Visual Studio Community」は個人利用であれば無償で使
   - <https://docs.microsoft.com/ja-jp/visualstudio/mac/unity-walkthrough>
 - `YouTubeチャンネル - dotNET`
   - <https://www.youtube.com/c/dotNET>
-- `C# 入門講座`
+- `C# 入門講座`（Windows Form）
   - <https://www.umayadia.com/CSNyumon/CSNyumonToc.htm>
+- `++C++; // 未確認飛行 C`（WPF、ASP.NET）
+  - <https://ufcpp.net/>
+- `連載：マイクロソフト技術による標準化志向Web開発ことはじめ - ＠IT`
+  - <https://atmarkit.itmedia.co.jp/fdotnet/introwebstandard/index/index.html>
+- `ASP.NET MVC入門 - ＠IT`（ASP.NET MVC）
+  - <https://atmarkit.itmedia.co.jp/ait/subtop/features/dotnet/aspnetmvc_index.html>
+- `連載：ASP.NET MVC入門【バージョン3対応】 - ＠IT`（ASP.NET MVC3）
+  - <https://atmarkit.itmedia.co.jp/fdotnet/aspnetmvc3/index/index.html>
+- `はじめての ASP.NET MVC4 アプリケーション(C#) - C#でプログラミングあれこれ`（ASP.NET MVC4）
+  - <https://fkmt5.hatenadiary.org/entry/20130110/1357829943>
 
 ## Tailwind CSS
 
@@ -197,14 +219,27 @@ Laravelのスターターテンプレートにも組み込まれている、CSS�
   - `GitHub Copilot - Visual Studio Marketplace`
     - <https://marketplace.visualstudio.com/items?itemName=GitHub.copilot>
 
+## データベース
+
+- `データベース研修【ミクシィ22新卒技術研修】`
+  - <https://youtu.be/dseGQ2MZF1U>
+- `AI Shift - SQL Training 2021`
+  - <https://speakerdeck.com/ymiyake/sql-training-2021>
+- `【図解】NoSQLとは？注目される背景や種類をわかりやすく解説`
+  - <https://www.kagoya.jp/howto/it-glossary/server/nosql/>
+
 ## 社外研修
 
-- mixi
-  - データベース研修【ミクシィ22新卒技術研修】
-    - <https://youtu.be/dseGQ2MZF1U>
-  - 設計・テスト研修講義【21新卒技術研修】
-    - <https://youtu.be/zfAo0DyIBJ0>
-  - Git研修講義【21新卒技術研修】
-    - <https://youtu.be/aZ90usArA6g>
-  - コンテナ研修【ミクシィ22新卒技術研修】
-    - <https://youtu.be/qYp8Vvevcok>
+- `mixi`
+  - `MIXI TECH TALK - 21新卒技術研修`
+    - <https://www.youtube.com/playlist?list=PLSy1zuVb8HVkOnKaDSbtykClIqS0Radfs>
+  - `MIXI TECH TALK - 22新卒技術研修`
+    - <https://www.youtube.com/playlist?list=PLSy1zuVb8HVnCQNRMXrDnT_MO2FuOnogx>
+- `クックパッド - 総合職・デザイナー向け技術基礎研修 2018`
+  - <https://techlife.cookpad.com/entry/2018/05/09/080000>
+- `サイバーエージェント - 新卒エンジニア研修の講義資料を公開！技術力も圧倒的に成長するチーム開発研修とは`
+  - <https://developers.cyberagent.co.jp/blog/archives/30024/>
+- `株式会社リクルート　エンジニアコース新人研修の内容を公開します！（2021年度版）`
+  - <https://blog.recruit.co.jp/rtc/2021/08/20/recruit-bootcamp-2021/>
+  - `リクルート - JavaScript Bootcamp 2021`
+    - <https://speakerdeck.com/recruitengineers/javascript>
