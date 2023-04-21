@@ -1,14 +1,45 @@
 # 自己学習（追加）
 
+## はじめに
+
+新人研修カリキュラム及び、自己学習を終え、  
+現場経験を積んだエンジニア向けの資料をまとめています。
+
+- [新人研修カリキュラム](./../../training/training.md)
+- [自己学習](./../index.md)
+
+## データベース
+
+主に外部の新人研修資料を集めました。  
+また、`NoSQL`についても今後触れる可能性があるため  
+把握しておきましょう。
+
+- `データベース研修【ミクシィ22新卒技術研修】`
+  - <https://youtu.be/dseGQ2MZF1U>
+- `AI Shift - SQL Training 2021`
+  - <https://speakerdeck.com/ymiyake/sql-training-2021>
+- `【図解】NoSQLとは？注目される背景や種類をわかりやすく解説`
+  - <https://www.kagoya.jp/howto/it-glossary/server/nosql/>
+
+## データベース パフォーマンスチューニング
+
+インデックスや実行計画を見るための「`EXPLAIN`」などの解説です。
+
+- `データベース入門講座`
+  - <https://www.youtube.com/playlist?list=PL-1KBX2gDRujQaRgEByueezHBiqHP8KDD>
+  - `データベースのインデクスとは？DBチューニングに必須のインデクスを徹底解説！`
+    - <https://youtu.be/iIoq-3veMYk>
+  - `【保存版】DBパフォーマンス・チューニング講座｜遅いデータベースを速くする方法とは`
+    - <https://youtu.be/UWSWKUMd71Q>
+  - `SQLの実行計画とは？DBのオプティマイザ とEXPLAINを解説！`
+    - <https://youtu.be/_xjoj1-DfkE>
+- `MySQL :: MySQL 8.0 リファレンスマニュアル :: 8 最適化`
+  - <https://dev.mysql.com/doc/refman/8.0/ja/optimization.html>
+
 ## コーディング
 
 - `サイバーエージェント - 良いコードとは何か - エンジニア新卒研修 スライド公開`
   - <https://speakerdeck.com/moriatsushi/liang-ikodotohahe-ka-enziniaxin-zu-yan-xiu-suraidogong-kai>
-
-## テスト
-
-- `設計・テスト研修講義【21新卒技術研修】`
-  - <https://youtu.be/zfAo0DyIBJ0>
 
 ## システム開発工程
 
@@ -218,15 +249,6 @@ Laravelのスターターテンプレートにも組み込まれている、CSS�
     - <https://docs.github.com/ja/copilot/getting-started-with-github-copilot/getting-started-with-github-copilot-in-visual-studio-code>
   - `GitHub Copilot - Visual Studio Marketplace`
     - <https://marketplace.visualstudio.com/items?itemName=GitHub.copilot>
-
-## データベース
-
-- `データベース研修【ミクシィ22新卒技術研修】`
-  - <https://youtu.be/dseGQ2MZF1U>
-- `AI Shift - SQL Training 2021`
-  - <https://speakerdeck.com/ymiyake/sql-training-2021>
-- `【図解】NoSQLとは？注目される背景や種類をわかりやすく解説`
-  - <https://www.kagoya.jp/howto/it-glossary/server/nosql/>
 
 ## 社外研修
 
