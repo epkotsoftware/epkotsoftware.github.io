@@ -856,6 +856,7 @@ LaravelでのCRUD機能を作成出来るレベルまで学習しましょう。
 
 - 面談準備
   - <https://github.com/epkotsoftware/dev-proposal/tree/main/documents/training/interview>
+- [面談対策](./interview/index.md)
 
 ### 自己学習
 
