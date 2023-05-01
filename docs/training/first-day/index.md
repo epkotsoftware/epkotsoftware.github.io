@@ -4,87 +4,18 @@
 
 初日のみ9:30にSlackのダイレクトメッセージで、講師に業務開始連絡をお願いします。
 
-## エプコット用PCユーザー作成
+## EPKOT用PCユーザー作成
 
-プライベートのユーザーアカウントと  
-仕事で使用するユーザーアカウントは分けることを推奨します。  
-分けなかった場合、実際に問題が起きたことがあります。  
+- [EPKOT用PCユーザー作成](./../../preparation/epkot-user/index.md)
 
-- 誤って情報を流出してしまった。
-- 画面共有でプライベートの見られたくないものを見られてしまった。
-  - 相手が自分のPCを遠隔で操作することもあります。
-- プライベートのGitHubアカウントでコミットしてしまった（アカウントを分けている場合）。
-- 成果物のテストのため、ブラウザの履歴情報を削除する必要が出てしまった（プライベートで、サイトに入力した情報が削除されてしまう）。
-
-また、退職した際にパソコン内のソースコードや設計書などの情報を削除する必要があるため  
-ユーザーアカウントを作っておくと削除が容易になります。  
-
-- **注意点**
-  - 追加したユーザーは、「**管理者**」にすることを忘れないでください。
-- 参考
-  - 【Windows 10】ユーザーアカウントを追加して仕事とプライベートなどを分ける
-    - <https://atmarkit.itmedia.co.jp/ait/articles/2010/08/news033.html>
-  - リモートで仕事するならPC（Mac）に仕事とプライベートのログインアカウントをそれぞれ設定し、使い分けよう
-    - <https://20ro.diary.to/archives/27810909.html>
-  - Windows 11 標準ユーザーの制限と管理者に変更する
-    - <https://www.tipsfound.com/windows11/02012>
-  - Macのユーザ、ゲスト、およびグループを設定する
-    - <https://support.apple.com/ja-jp/guide/mac-help/mtusr001/mac>
-
-## エプコット用PCユーザーログイン
+## EPKOT用PCユーザーログイン
 
 作成したユーザーアカウントでログインしましょう。  
 研修中はこのユーザーアカウントで進めていきます。
 
 ## インストール
 
-- パソコンにインストール
-  - 【ブラウザ】`Google Chrome` (クローム)
-    - <https://www.google.co.jp/intl/ja/chrome/>
-  - 【エディタ】`Visual Studio Code` (ビジュアル スタジオ コード)
-    - <https://azure.microsoft.com/ja-jp/products/visual-studio-code/>
-  - Macをお使いの場合
-    - 必須ではないですが、Homebrewのインストールもおすすめします。
-    - `2022年版、プログラミング環境構築の方法【Macbook M1対応】 #Python #Node.js #Docker #Homebrew #VSCode`
-      - <https://youtu.be/2bLPTSaaJJo>
-  - メールソフト
-    - Microsoft Outlook（有料）または、Thunderbird（無料）をインストールし、エプコットのメール設定を行なってください。
-    - [Thunderbird設定](./../../thunderbird/index.md)
-  - Slack
-    - Windows
-      - <https://slack.com/intl/ja-jp/downloads/windows>
-    - Mac
-      - <https://slack.com/intl/ja-jp/downloads/mac>
-- スマートフォンにインストール
-  - Slack
-    - iOS 版 Slack
-      - <https://slack.com/intl/ja-jp/downloads/ios>
-    - Android 版 Slack
-      - <https://slack.com/intl/ja-jp/downloads/android>
-
-### Chrome設定
-
-インストールした「Google Chrome」を既定（きてい）のブラウザにしましょう（任意）  
-研修中は「Google Chrome」を使う前提で進みます。
-
-- Chrome を既定のブラウザにする
-  - <https://support.google.com/chrome/answer/95417>
-
-### Chromeの便利な使い方
-
-本資料はブラウザで参照します。  
-リンクが多いため、そのまま開くと面倒な時があります  
-開く時に以下の操作で別タブでページを開く事ができます。
-
-- Windowsの場合
-  - `Ctrl`を押しながらリンクをクリック
-- Macの場合
-  - `command`を押しながらリンクをクリック
-
-その他便利な使い方は以下を参照してください。
-
-- Google Chromeの便利な使い方15選
-  - <https://www.e-conne.co.jp/blog/1584>
+- [インストール](./../../preparation/install/index.md)
 
 ## GitHub組織アカウントへの参加
 
