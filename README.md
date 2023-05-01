@@ -1,4 +1,4 @@
-# 株式会社エプコットソフトウェア GitHub Pages README
+# EPKOT GitHub Pages README
 
 <https://epkotsoftware.github.io/>
 

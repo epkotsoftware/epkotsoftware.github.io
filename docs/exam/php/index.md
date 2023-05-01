@@ -12,7 +12,7 @@
 
 学習用のリンクです。
 
-- [PHP名前空間の学習](./namespaces/index.md)（株式会社エプコットソフトウェア研修資料の一部）
+- [PHP名前空間の学習](./namespaces/index.md)（EPKOT研修資料の一部）
 
 ## 試験
 
