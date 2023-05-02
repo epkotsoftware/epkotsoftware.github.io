@@ -73,9 +73,11 @@ Visual Studio Code(VSCode) が初めての方へ
 
 VSCodeの細かい設定を行います。
 
-- `setting.json` の開き方
-  - メニューバー「表示」→「コマンドパレット」で「`Open Settings (JSON)`」
-  - `setting.json` の以下の設定は任意で
+- `settings.json` の開き方
+  - メニューバー「表示」→「コマンドパレット」で「`Open User Settings (JSON)`」
+    - JSONフォーマットについては以下を参照
+      - <https://www.sejuku.net/blog/80855>
+  - `settings.json` の以下の設定は任意で
 
 ```json
 {
