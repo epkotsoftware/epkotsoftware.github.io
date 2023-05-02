@@ -52,11 +52,11 @@ MIMEタイプはファイルダウンロード機能開発時に
 
 ## HEIF
 
-HEIFファイルはJPEGの代替となる新しい画像形式です。  
+HEIF（HEIC）ファイルはJPEGの代替となる新しい画像形式です。  
 少ないファイルサイズで鮮明な写真を格納できます。  
 
-- HEIFファイル
-  - <https://www.adobe.com/jp/creativecloud/file-types/image/raster/heif-file.html>
+- HEICファイル
+  - <https://www.adobe.com/jp/creativecloud/file-types/image/raster/heic-file.html>
 - Apple 製のデバイスで HEIF／HEVC メディアを扱う
   - <https://support.apple.com/ja-jp/HT207022>
 
