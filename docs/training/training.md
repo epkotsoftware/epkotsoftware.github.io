@@ -59,22 +59,27 @@ VDT症候群予防の観点から、1時間連続でPC上で作業した場合�
 [GitHub ～ Git設定確認](./../github/index.md#git設定確認) の設定が漏れていると  
 コミットが失敗しますので再度ご確認ください。
 
+### ブラウザの自動翻訳設定を解除
+
+GitHubを開く時に Microsoft Edge を使用している場合、変に自動翻訳されることがあるので翻訳を解除してください。  
+URLの右の方に「`aあ`」のアイコンがあり、翻訳設定が可能です。
+
 ### ユーザーディレクトリ作成
 
 開発環境を構築し、プログラムファイルを格納するための  
 ブランチ(`feature/{★ユーザー名}`)及び、個人フォルダー（ディレクトリ）を作成します。  
-詳しくは [研修用リポジトリ(training)](https://github.com/epkotsoftware/training) のREADMEをご覧ください。  
+作成方法については以下をご確認ください。
 
-  ※ GitHubを開く時に Microsoft Edge を使用している場合、自動翻訳されることがあるので翻訳を解除してください。  
-    URLの右の方に「`aあ`」のアイコンがあり、翻訳設定が可能です。  
-  ※ [研修用リポジトリ(training)](https://github.com/epkotsoftware/training)の権限がないと失敗します。リポジトリが見えない方は管理者にご連絡ください。  
+- [研修用リポジトリ(training)利用方法](https://github.com/epkotsoftware/training-docs/blob/main/training/README.md)
+
+### VSCodeでtrainingフォルダを開く
 
 上記の手順でGitHub上には「`feature/{★ユーザー名}`」ブランチにユーザーディレクトリが出来ていて  
 ローカルには「`training`」ディレクトリが出来ているので  
 Visual Studio Code(VSCode) で開きましょう。  
 メニューバー「ファイル」→「フォルダーを開く」→「`training`」フォルダーを選択  
 
-![vscode_training](./../image/vscode_training.png)
+![vscode_training](./../image/vscode_training.png)  
 
 ターミナルが表示されていない場合は  
 メニューバー「表示」→「ターミナル」を押下してください。  
