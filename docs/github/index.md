@@ -176,13 +176,13 @@ Gitでクローンやプッシュをする際に必要になります。
   - Git使用時にパスワードの代わりとしてトークンを使用します。  
     **※ 作成は必要になった時で問題ありません。**
   - 作成方法
-    - 「Generate new token」をクリック
+    - 「Generate new token」をクリックし、「Generate new token (classic)」をクリック
     - 以下を入力
       - Note: 目的を設定します。
       - Expiration: 有効期限を設定します（`No expiration` は無期限）。
       - Select scopes: プライベートリポジトリの操作のため `repo` をチェックします。  
         それ以外は任意です。
-    - 「Generate token」をクリック
+    - 「Generate token」ボタンをクリック
     - トークンが表示されます（2度と表示されないので、忘れたらもう一度作成すること）。  
       ![github_token_generated](./images/github_token_generated.png)  
 
