@@ -99,7 +99,7 @@ Visual Studio Code(VSCode) で開きましょう。
 コーダー編は課題提出がありますので予めご確認下さい。  
 つまずいたら質問する前に[トラブルシューティング](./troubleshoot/index.md)を参照してください。
 
-- [研修課題提出](https://github.com/epkotsoftware/training/blob/template/docs/submission/index.md#研修課題提出)
+- [研修課題提出](https://github.com/epkotsoftware/training-docs/blob/main/submission/README.md#研修課題提出)
 - [トラブルシューティング](./troubleshoot/index.md)
 
 まずは動画で学習しましょう。
@@ -178,7 +178,7 @@ CSSの「`grid-template`」が、ほぼ全てのブラウザでサポートさ�
 
 以下を参照してください。
 
-- [研修課題提出](https://github.com/epkotsoftware/training/blob/template/docs/submission/index.md#研修課題提出)
+- [研修課題提出](https://github.com/epkotsoftware/training-docs/blob/main/submission/README.md#研修課題提出)
 
 ### Chrome DevTools
 
@@ -198,7 +198,7 @@ CSSの「`grid-template`」が、ほぼ全てのブラウザでサポートさ�
 マークアップエンジニア編は課題提出がありますので予めご確認下さい。  
 つまずいたら質問する前に[トラブルシューティング](./troubleshoot/index.md)を参照してください。
 
-- [研修課題提出](https://github.com/epkotsoftware/training/blob/template/docs/submission/index.md#研修課題提出)
+- [研修課題提出](https://github.com/epkotsoftware/training-docs/blob/main/submission/README.md#研修課題提出)
 - [トラブルシューティング](./troubleshoot/index.md)
 
 まずは動画で学習しましょう。
@@ -267,14 +267,14 @@ Googleマイドライブ → 「新規」 → 「ファイルのアップロー�
 
 以下を参照してください。
 
-- [研修課題提出](https://github.com/epkotsoftware/training/blob/template/docs/submission/index.md#研修課題提出)
+- [研修課題提出](https://github.com/epkotsoftware/training-docs/blob/main/submission/README.md#研修課題提出)
 
 ## フロントエンドエンジニア編
 
 フロントエンドエンジニア編は課題提出がありますので予めご確認下さい。  
 つまずいたら質問する前に[トラブルシューティング](./troubleshoot/index.md)を参照してください。
 
-- [研修課題提出](https://github.com/epkotsoftware/training/blob/template/docs/submission/index.md#研修課題提出)
+- [研修課題提出](https://github.com/epkotsoftware/training-docs/blob/main/submission/README.md#研修課題提出)
 - [トラブルシューティング](./troubleshoot/index.md)
 
 フロントエンドエンジニア編ではCBCの応用コースをやっていきます。  
@@ -388,7 +388,7 @@ CBCと開発環境が異なるので、気を付けてください。
 
 以下を参照してください。
 
-- [研修課題提出](https://github.com/epkotsoftware/training/blob/template/docs/submission/index.md#研修課題提出)  
+- [研修課題提出](https://github.com/epkotsoftware/training-docs/blob/main/submission/README.md#研修課題提出)  
 
 ## Linux編
 
@@ -645,7 +645,7 @@ PHPでは「PHPUnit」を使用します。
 バックエンド編課題は課題提出がありますので予めご確認下さい。  
 つまずいたら質問する前に[トラブルシューティング](./troubleshoot/index.md)を参照してください。
 
-- [研修課題提出](https://github.com/epkotsoftware/training/blob/template/docs/submission/index.md#研修課題提出)
+- [研修課題提出](https://github.com/epkotsoftware/training-docs/blob/main/submission/README.md#研修課題提出)
 - [トラブルシューティング](./troubleshoot/index.md)
 
 バックエンド編ではCBCの実践（バックエンド Laravel）をやっていきます。  
@@ -689,7 +689,7 @@ LaravelのバージョンがCBCと異なるため、一つ一つコードを理�
 
 以下を参照してください。
 
-- [研修課題提出](https://github.com/epkotsoftware/training/blob/template/docs/submission/index.md#研修課題提出)  
+- [研修課題提出](https://github.com/epkotsoftware/training-docs/blob/main/submission/README.md#研修課題提出)  
 
 この時点でのレビュー依頼は不要です。  
 [バージョン管理システム編](#バージョン管理システム編) にて、PR(Pull Request)の確認で行うため、そのまま次へお進みください。  
