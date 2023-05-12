@@ -318,7 +318,7 @@ Docker Desktop をインストールしてください。
 
 ##### 構築手順
 
-trainingリポジトリの [users/{★ユーザー名}/03_advanced/README.md](https://github.com/epkotsoftware/training/blob/template/users/_template/03_advanced/README.md) をご覧ください。
+[構築手順](https://github.com/epkotsoftware/training-docs/blob/main/training/03_advanced/README.md) をご覧ください。
 
 - コンテナ起動がうまくいかなかったらご連絡ください。
   - [Docker トラブルシューティング](./docker/troubleshoot.md)
@@ -653,7 +653,7 @@ PHPでは「PHPUnit」を使用します。
 
 ### Laravel開発環境構築
 
-trainingリポジトリの [users/{★ユーザー名}/05_laravel/README.md](https://github.com/epkotsoftware/training/blob/template/users/_template/05_laravel/README.md) をご覧ください。
+[構築手順](https://github.com/epkotsoftware/training-docs/blob/main/training/03_advanced/README.md) をご覧ください。
 
 ### CBC 実践（バックエンド Laravel）
 
