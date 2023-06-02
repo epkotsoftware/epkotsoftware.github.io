@@ -74,23 +74,6 @@ JavaScriptの学習・課題もあります。
 
 - [プログラミング編](./../training/programming/index.md)
 
-## 動画学習
-
-カリキュラムとは別な動画を用意しました。
-
-- `プログラミングの基礎：基本 - LinkedInラーニング`
-  - <https://jp.linkedin.com/learning/programming-foundations-fundamentals-2>
-- `プログラミングの基礎：データベース - LinkedInラーニング`
-  - <https://jp.linkedin.com/learning/programming-foundations-databases-3>
-- `HTML5 基本講座 - LinkedInラーニング`
-  - <https://jp.linkedin.com/learning/html5-essential-training-2>
-- `CSS 基本講座 - LinkedInラーニング`
-  - <https://jp.linkedin.com/learning/css-essential-training-2>
-- `JavaScript 基本講座 - LinkedInラーニング`
-  - <https://jp.linkedin.com/learning/javascript-essential-training-4>
-- `GitHub 入門 - LinkedInラーニング`
-  - <https://jp.linkedin.com/learning/learning-github-2>
-
 ## Docker
 
 現場でDockerについて深い知識が必要になるケースは稀ですが  
