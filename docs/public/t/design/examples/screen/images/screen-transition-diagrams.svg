@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="417px" preserveAspectRatio="none" style="width:430px;height:417px;background:#FFFFFF;" version="1.1" viewBox="0 0 430 417" width="430px" zoomAndPan="magnify"><defs/><g><rect fill="#F1F1F1" height="404.2969" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="416" x="7" y="7"/><rect fill="#FFFFFF" height="376" rx="12.5" ry="12.5" style="stroke:#FFFFFF;stroke-width:1.0;" width="414" x="8" y="34.2969"/><line style="stroke:#181818;stroke-width:0.5;" x1="7" x2="423" y1="33.2969" y2="33.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="28" x="201" y="24.9951">職業</text><g id="職業.index"><rect fill="#F1F1F1" height="101.4844" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="132" x="87" y="101.2969"/><line style="stroke:#181818;stroke-width:0.5;" x1="87" x2="219" y1="127.5938" y2="127.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="56" x="125" y="119.292">一覧画面</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70" x="92" y="145.5889">新規ボタン</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="57" x="92" y="161.8857">明細：ID</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70" x="92" y="178.1826">明細：名称</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="112" x="92" y="194.4795">明細：削除ボタン</text></g><rect fill="#FFFF00" height="40" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="50" x="345" y="131.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="28" x="356" y="156.6436">新規</text><g id="職業.create"><rect fill="#F1F1F1" height="52.5938" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="90" x="237" y="125.2969"/><line style="stroke:#181818;stroke-width:0.5;" x1="237" x2="327" y1="151.5938" y2="151.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="56" x="254" y="143.292">新規画面</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70" x="242" y="169.5889">登録ボタン</text></g><g id="職業.show"><rect fill="#F1F1F1" height="68.8906" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="90" x="108" y="255.2969"/><line style="stroke:#181818;stroke-width:0.5;" x1="108" x2="198" y1="281.5938" y2="281.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="56" x="125" y="273.292">詳細画面</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70" x="113" y="299.5889">編集ボタン</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70" x="113" y="315.8857">削除ボタン</text></g><rect fill="#FFFF00" height="40" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="50" x="259" y="361.2969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="28" x="270" y="386.1436">更新</text><rect fill="#FFFF00" height="40" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="50" x="19" y="131.7969"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="28" x="30" y="156.6436">削除</text><g id="職業.edit"><rect fill="#F1F1F1" height="52.5938" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="90" x="216" y="263.2969"/><line style="stroke:#181818;stroke-width:0.5;" x1="216" x2="306" y1="289.5938" y2="289.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="56" x="233" y="281.292">編集画面</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70" x="221" y="307.5889">確認ボタン</text></g><g id="職業.confirm"><rect fill="#F1F1F1" height="52.5938" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="90" x="324" y="263.2969"/><line style="stroke:#181818;stroke-width:0.5;" x1="324" x2="414" y1="289.5938" y2="289.5938"/><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="56" x="341" y="281.292">確認画面</text><text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="70" x="329" y="307.5889">更新ボタン</text></g><ellipse cx="153" cy="54.2969" fill="#222222" rx="10" ry="10" style="stroke:none;stroke-width:1.0;"/><!--MD5=[28e5ca18cb31eccb7b63beacfe3fec1f]
+link *start*職業 to index--><g id="link_*start*職業_index"><path d="M153,64.4539 C153,72.0519 153,83.5439 153,95.6859 " fill="none" id="*start*職業-to-index" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="153,100.9209,157,91.9209,153,95.9209,149,91.9209,153,100.9209" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[7ca35f37c842b1d7f4e0e434ff58c5b4]
+link index to create--><g id="link_index_create"><path d="M219.012,151.7969 C223.164,151.7969 227.316,151.7969 231.468,151.7969 " fill="none" id="index-to-create" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="236.727,151.7969,227.727,147.7969,231.727,151.7969,227.727,155.7969,236.727,151.7969" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[d60135a85fe9e8d8fe27515af6f095ad]
+link index to show--><g id="link_index_show"><path d="M153,202.6659 C153,218.1949 153,235.0849 153,249.7609 " fill="none" id="index-to-show" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="153,255.0619,157,246.0619,153,250.0619,149,246.0619,153,255.0619" style="stroke:#181818;stroke-width:1.0;"/><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="78" x="154" y="233.3638">名称クリック</text></g><!--MD5=[fe5938552f392d5b48eb837079c6153f]
+reverse link destroy to index--><g id="link_destroy_index"><path d="M74.0973,163.7899 C78.3363,164.8349 82.5753,165.6069 86.8143,166.1069 " fill="none" id="destroy-backto-index" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="69.1211,162.4379,76.7581,168.6568,73.9463,163.7483,78.8548,160.9365,69.1211,162.4379" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[a30d11f1d4720de402bd066efcc3c2c2]
+link destroy to index--><g id="link_destroy_index"><path d="M69.1211,141.1559 C73.3601,139.8979 77.5991,138.9119 81.8381,138.1989 " fill="none" id="destroy-to-index" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="86.8143,137.4869,77.3382,134.8028,81.8648,138.1955,78.4721,142.7221,86.8143,137.4869" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[2430f987ad0488068c61273094e4419c]
+link create to store--><g id="link_create_store"><path d="M327.031,151.7969 C331.294,151.7969 335.556,151.7969 339.819,151.7969 " fill="none" id="create-to-store" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="344.823,151.7969,335.823,147.7969,339.823,151.7969,335.823,155.7969,344.823,151.7969" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[f02e52ea99558c0642516a0ad9a344a6]
+link store to show--><g id="link_store_show"><path d="M360.225,172.2279 C354.349,182.3069 346.057,194.1739 336,202.2969 C287.779,241.2419 262.191,227.0849 207,255.2969 C205.526,256.0499 204.04,256.8299 202.548,257.6309 " fill="none" id="store-to-show" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="198.059,260.0919,207.8738,259.2741,202.4437,257.6888,204.0289,252.2586,198.059,260.0919" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[a082e9757ae4660c97e501779ee2e4b7]
+link show to destroy--><g id="link_show_destroy"><path d="M122.164,255.0269 C108.2467,239.3379 91.8582,220.2239 78,202.2969 C71.6515,194.0849 65.0984,184.7729 59.46,176.4589 " fill="none" id="show-to-destroy" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="56.4289,171.9559,58.1354,181.6558,59.2206,176.104,64.7724,177.1891,56.4289,171.9559" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[67b163640921ddbe283f831a1812f1ac]
+link show to edit--><g id="link_show_edit"><path d="M198.141,289.7969 C202.284,289.7969 206.428,289.7969 210.571,289.7969 " fill="none" id="show-to-edit" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="215.82,289.7969,206.82,285.7969,210.82,289.7969,206.82,293.7969,215.82,289.7969" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[691e74575f6f8d308346e650958f608b]
+link edit to confirm--><g id="link_edit_confirm"><path d="M306.141,289.7969 C310.284,289.7969 314.428,289.7969 318.571,289.7969 " fill="none" id="edit-to-confirm" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="323.82,289.7969,314.82,285.7969,318.82,289.7969,314.82,293.7969,323.82,289.7969" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[6f552c901282ca2f47b177bbcf71997a]
+link confirm to update--><g id="link_confirm_update"><path d="M344.414,316.684 C332.151,329.5971 317.451,345.0751 305.622,357.5302 " fill="none" id="confirm-to-update" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="302.049,361.2923,311.1471,357.5208,305.4921,357.6667,305.3462,352.0117,302.049,361.2923" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[da2c6c2635dcdc2374da3b555af23763]
+link update to show--><g id="link_update_show"><path d="M258.71,363.0189 C242.749,352.114 221.592,337.6592 202.4,324.5475 " fill="none" id="update-to-show" style="stroke:#181818;stroke-width:1.0;"/><polygon fill="#181818" points="198.083,321.5977,203.2586,329.977,202.2117,324.4179,207.7709,323.3711,198.083,321.5977" style="stroke:#181818;stroke-width:1.0;"/></g><!--MD5=[1faf0300a3f70e482ce1ab73443b02c3]
+@startuml
+hide empty description
+state 職業 {
+
+state "一覧画面" as index
+index:新規ボタン
+index:明細：ID
+index:明細：名称
+index:明細：削除ボタン
+
+state "新規"  as store #FFFF00
+
+state "新規画面" as create
+create:登録ボタン
+
+state "詳細画面" as show
+show:編集ボタン
+show:削除ボタン
+
+state "更新" as update #FFFF00
+state "削除" as destroy #FFFF00
+state "編集画面" as edit
+edit:確認ボタン
+
+state "確認画面" as confirm
+confirm:更新ボタン
+
+[*] - -> index
+index -> create
+index - -> show: 名称クリック
+index -left-> destroy
+destroy -> index
+create -> store
+store - -> show
+show -> destroy
+show -> edit
+edit -> confirm
+confirm - -> update
+update- ->show
+
+}
+@enduml
+
+PlantUML version 1.2022.4beta2(Unknown compile time)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: US
+--></g></svg>

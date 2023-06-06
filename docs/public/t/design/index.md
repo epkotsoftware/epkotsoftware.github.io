@@ -1,0 +1,76 @@
+# 設計編
+
+## システム設計
+
+- システム設計の流れ｜基本設計と詳細設計の違いや、設計書の書き方を解説！
+  - <https://youtu.be/OXJtc_aBm9M>
+- システム設計とは？基本情報技術者試験の重要用語解説！
+  - <https://www.foresight.jp/fe/column/system-design/>
+
+## データベース設計
+
+- データベース入門講座
+  - <https://www.youtube.com/playlist?list=PL-1KBX2gDRujQaRgEByueezHBiqHP8KDD>
+- 基本情報技術者試験の鬼門であるデータベースの正規化について解説
+  - <https://www.foresight.jp/fe/column/normalization/>
+
+### ER図
+
+- `ER図を簡単に作成してみよう【DB設計】【Mermaid】`
+  - <https://zenn.dev/seiya0/articles/tech-mermaid-erd>
+
+### テーブル定義書
+
+- テーブル定義書サンプル
+  - SQLクライアントソフトの「`A5:SQL Mk-2`」を使い、データベースからテーブル定義書を自動出力したサンプルです。  
+    - [テーブル定義書.xlsx](./files/テーブル定義書.xlsx)
+    - [テーブル定義書.pdf](./files/テーブル定義書.pdf) （ExcelをPDF変換したもの）
+
+## UML
+
+- UMLとは？クラス図・シーケンス図など種類や書き方、ツールを解説！【統一モデリング言語】UML入門
+  - <https://youtu.be/EvO_BvCJUCA>
+- diagrams.net（Draw.io）
+  - こちらで無料で図の作成が可能です。
+  - <https://app.diagrams.net/>
+- Mermaid
+  - こちらでもシーケンス図やER図等の作成が可能です。
+    - GitHubで正式にサポートされているため、以下のように図として表示されます。
+      - [ER図](https://gist.github.com/seiya0-g/395d650594ed425a05033956a419e5df)
+      - [ER図 Raw（テキスト）](https://gist.githubusercontent.com/seiya0-g/395d650594ed425a05033956a419e5df/raw/41d9da5d3e6b0088457653fb23112e4a5d0c7bda/erd.md)
+    - コードを書いて作成するため、細かいレイアウト調整は難しいですが、簡易的な図を作成する場合に有用です。
+    - SVG形式で出力することで、リンクも使用でき。Markdownでの設計書作成時に使われる事がある。
+- PlantUML
+  - こちらでもシーケンス図やER図等の作成が可能です。
+    - 書式は違いますがMermaidと同様にUMLの作成が可能です。
+  - <https://plantuml.com/ja/>
+  - サンプル: 別ページに現場で使用経験のあるものを集めました。
+    - [PlantUML](./plantuml/index.md)
+
+## 設計書テンプレート
+
+- テンプレートが多くありますが現場で使うのは「基本設計」・「詳細設計書」になります。  
+  基本設計では「テーブル定義書」「画面レイアウト」は、ほぼ確実に現場で見ることになります。
+- 設計書仕様書テンプレート PocketDOC
+  - <https://pocket9.net/pocketdoc>
+
+## 設計例
+
+- [設計例](./examples/index.md)
+
+## 用語
+
+以下の用語は覚えておきましょう。
+
+- [外部設計（基本設計）](https://e-words.jp/w/%E5%A4%96%E9%83%A8%E8%A8%AD%E8%A8%88.html)
+  - [画面設計（画面レイアウト）](https://e-words.jp/w/%E7%94%BB%E9%9D%A2%E3%83%AC%E3%82%A4%E3%82%A2%E3%82%A6%E3%83%88.html)
+  - [帳票](https://e-words.jp/w/%E5%B8%B3%E7%A5%A8.html)設計
+  - データベース設計
+    - [ER図](https://e-words.jp/w/ER%E5%9B%B3.html)
+    - テーブル定義書（例: [PDF](./files/%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%E5%AE%9A%E7%BE%A9%E6%9B%B8.pdf)、[Excel](./files/%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%E5%AE%9A%E7%BE%A9%E6%9B%B8.xlsx)）
+    - データベース用語
+      - [リレーションシップ](https://e-words.jp/w/%E3%83%AA%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%B7%E3%83%83%E3%83%97.html)
+      - [リレーショナルデータベース](https://e-words.jp/w/%E3%83%AA%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9.html)
+      - [テーブル](https://e-words.jp/w/%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB.html)
+      - [カラム（列）](https://e-words.jp/w/%E5%88%97.html)
+      - [レコード（行）](https://e-words.jp/w/%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89.html)
