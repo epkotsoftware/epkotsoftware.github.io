@@ -9,7 +9,7 @@ Laravelのルーティングは簡単に言うと
 
 URL(URI)・ルートパスについては理解しておきましょう。
 
-- [URL設計](./../../design/url/index.md)
+- [URL設計](./../../../public/t/design/url/index.md)
 
 ## PHPフレームワークを使わない場合
 
@@ -92,6 +92,27 @@ Controllerクラスは完全修飾名にするかuseを使ってエイリアス�
 よくわからなければ名前空間の学習をしましょう。
 
 - [PHPプログラミング編 名前空間](./../../programming/php/namespaces/index.md)
+
+##### Laravel8以前のアクション記述方法
+
+現場では古いバージョンのLaravelが使われているケースがあるため  
+バージョンに合わせた記述をしてください。  
+
+- 旧：Laravel8以前
+  - <https://readouble.com/laravel/7.x/ja/routing.html>
+
+```php
+Route::get('/user', 'UserController@index');
+```
+
+- 新：Laravel8以上
+  - <https://readouble.com/laravel/8.x/ja/routing.html>
+
+```php
+use App\Http\Controllers\UserController;
+
+Route::get('/user', [UserController::class, 'index']);
+```
 
 #### ルート確認
 

@@ -54,6 +54,32 @@
 - 設計書仕様書テンプレート PocketDOC
   - <https://pocket9.net/pocketdoc>
 
+## 画面設計
+
+画面に使用する部品は覚えておきましょう。
+
+- 画面部品
+  - [画面部品](./forms/forms.html)
+
+CSSフレームワークは何かしら使われる現場が多いので  
+「Bootstrap」というフレームワークを紹介します。  
+スターターテンプレートを使うとすぐに使い始める事ができます。  
+
+- Bootstrap（ブートストラップ）
+  - スターターテンプレート
+    - <https://getbootstrap.jp/docs/5.0/getting-started/introduction/#スターターテンプレート>
+  - コンポーネント
+    - Alerts (アラート) <https://getbootstrap.jp/docs/5.0/components/alerts/>
+    - Buttons (ボタン) <https://getbootstrap.jp/docs/5.0/components/buttons/>
+    - Forms (フォーム) <https://getbootstrap.jp/docs/5.0/forms/overview/>
+  - サンプル <https://getbootstrap.jp/docs/5.0/examples/>
+
+## URL設計
+
+こちらを参照してください。
+
+- [URL設計](./url/index.md)
+
 ## 設計例
 
 - [設計例](./examples/index.md)

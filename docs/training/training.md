@@ -503,82 +503,11 @@ Linux技術者認定試験(LPIC)の一部にチャレンジしてみましょう
 
 ## 開発手法編
 
-- 動画
-  - ウォーターフォール型の開発手法とは？要件定義・基本設計などシステム開発の進め方を解説！
-    - <https://youtu.be/qVsRGd2bvcU>
-  - アジャイル開発入門！スクラムで実践するアジャイル開発のやり方と勉強法とは
-    - <https://youtu.be/Jm3I6QXzjXw>
-- 基本情報技術者試験で問われるシステム開発手法の解説！
-  - <https://www.foresight.jp/fe/column/system-development-method/>
+- [開発手法編](./../public/t/development-methods/index.md)
 
 ## 設計編
 
-- システム設計の流れ｜基本設計と詳細設計の違いや、設計書の書き方を解説！
-  - <https://youtu.be/OXJtc_aBm9M>
-- システム設計とは？基本情報技術者試験の重要用語解説！
-  - <https://www.foresight.jp/fe/column/system-design/>
-- DB設計
-  - データベース入門講座
-    - <https://www.youtube.com/playlist?list=PL-1KBX2gDRujQaRgEByueezHBiqHP8KDD>
-  - テーブル定義書サンプル
-    - SQLクライアントソフトの「`A5:SQL Mk-2`」を使い、データベースからテーブル定義書を自動出力したサンプルです。  
-      フロントエンドエンジニア編で作成したテーブルの定義書になります。
-      - [テーブル定義書.xlsx](./files/テーブル定義書.xlsx)
-      - [テーブル定義書.pdf](./files/テーブル定義書.pdf) （ExcelをPDF変換したもの）
-  - 基本情報技術者試験の鬼門であるデータベースの正規化について解説
-    - <https://www.foresight.jp/fe/column/normalization/>
-- 設計書テンプレート
-  - テンプレートが多くありますが現場で使うのは「基本設計」・「詳細設計書」になります。  
-    基本設計では「テーブル定義書」「画面レイアウト」は、ほぼ確実に現場で見ることになります。
-  - 設計書仕様書テンプレート PocketDOC
-    - <https://pocket9.net/pocketdoc>
-- UML
-  - UMLとは？クラス図・シーケンス図など種類や書き方、ツールを解説！【統一モデリング言語】UML入門
-    - <https://youtu.be/EvO_BvCJUCA>
-  - diagrams.net（Draw.io）
-    - こちらで無料で図の作成が可能です。
-    - <https://app.diagrams.net/>
-  - PlantUML
-    - こちらでもシーケンス図やER図等の作成が可能です。
-      - コードを書いて作成するため、細かいレイアウト調整は難しいですが、簡易的な図を作成する場合に有用です。
-      - SVG形式で出力することで、リンクも使用でき。Markdownでの設計書作成時に使われる事がある。
-    - <https://plantuml.com/ja/>
-    - サンプル: 別ページに現場で使用経験のあるものを集めました。
-      - [PlantUML](./plantuml/index.md)
-
-### 画面設計
-
-画面に使用する部品は覚えておきましょう。
-
-- 画面部品
-  - [画面部品](./design/forms/forms.html)
-
-CSSフレームワークは何かしら使われる現場が多いので  
-「Bootstrap」というフレームワークを紹介します。  
-スターターテンプレートを使うとすぐに使い始める事ができます。  
-
-- Bootstrap（ブートストラップ）
-  - スターターテンプレート
-    - <https://getbootstrap.jp/docs/5.0/getting-started/introduction/#スターターテンプレート>
-  - コンポーネント
-    - Alerts (アラート) <https://getbootstrap.jp/docs/5.0/components/alerts/>
-    - Buttons (ボタン) <https://getbootstrap.jp/docs/5.0/components/buttons/>
-    - Forms (フォーム) <https://getbootstrap.jp/docs/5.0/forms/overview/>
-  - サンプル <https://getbootstrap.jp/docs/5.0/examples/>
-
-### URL設計
-
-こちらを参照してください。
-
-- [URL設計](./design/url/index.md)
-
-### 設計例
-
-こちらを参考にしてください。
-
-- [Laravel CRUD 設計](./laravel/crud/design/index.md)
-
-※ Laravel CRUDの開発は今後の学習で行いますので、飛ばしてください。
+- [設計編](./../public/t/design/index.md)
 
 ## テスト編
 
@@ -743,7 +672,10 @@ Gitについて、より深く学んでいきます。
 
 プログラミングの基礎について、より深く学んでいきます。  
 別資料で用意していますので、以下を参照してください。  
-こちらは課題の提出はありません。
+こちらは課題の提出はありません。  
+
+1対1PG研修を受ける方は、***「paiza.io」は使用せず、DockerでPHP環境を構築してください。***  
+詳しくは「PHPプログラミング編」の「入門」を参照してください。
 
 - [PHPプログラミング編](./programming/php/index.md)
 
