@@ -109,10 +109,20 @@ CSSフレームワークは何かしら使われる現場が多いので
   - [帳票](https://e-words.jp/w/%E5%B8%B3%E7%A5%A8.html)設計
   - データベース設計
     - [ER図](https://e-words.jp/w/ER%E5%9B%B3.html)
-    - テーブル定義書（例: [PDF](./files/%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%E5%AE%9A%E7%BE%A9%E6%9B%B8.pdf)、[Excel](./files/%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%E5%AE%9A%E7%BE%A9%E6%9B%B8.xlsx)）
+    - テーブル定義書
     - データベース用語
       - [リレーションシップ](https://e-words.jp/w/%E3%83%AA%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%82%B7%E3%83%83%E3%83%97.html)
       - [リレーショナルデータベース](https://e-words.jp/w/%E3%83%AA%E3%83%AC%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%8A%E3%83%AB%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9.html)
       - [テーブル](https://e-words.jp/w/%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB.html)
       - [カラム（列）](https://e-words.jp/w/%E5%88%97.html)
       - [レコード（行）](https://e-words.jp/w/%E3%83%AC%E3%82%B3%E3%83%BC%E3%83%89.html)
+      - [PK（主キー）](https://e-words.jp/w/%E4%B8%BB%E3%82%AD%E3%83%BC.html)
+      - [FK（外部キー）](https://e-words.jp/w/%E5%A4%96%E9%83%A8%E3%82%AD%E3%83%BC.html)
+      - [UK（一意キー）](https://e-words.jp/w/%E4%B8%80%E6%84%8F%E5%88%B6%E7%B4%84.html)
+  - [UML](https://e-words.jp/w/UML.html)
+    - [ユースケース図](https://e-words.jp/w/%E3%83%A6%E3%83%BC%E3%82%B9%E3%82%B1%E3%83%BC%E3%82%B9%E5%9B%B3.html)
+    - [シーケンス図](https://e-words.jp/w/%E3%82%B7%E3%83%BC%E3%82%B1%E3%83%B3%E3%82%B9%E5%9B%B3.html)
+  - [ユーザーインターフェース](https://e-words.jp/w/%E3%83%A6%E3%83%BC%E3%82%B6%E3%83%BC%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%BC%E3%83%95%E3%82%A7%E3%83%BC%E3%82%B9.html)
+    - 各ウィジェット
+- [URL](https://e-words.jp/w/URL.html)
+- [URI](https://e-words.jp/w/URI.html)
