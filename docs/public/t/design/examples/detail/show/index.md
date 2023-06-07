@@ -18,9 +18,9 @@
 
 ## 画面
 
-![admin_jobs_show](./../../screens/images/admin_jobs_show.png)  
+![admin_jobs_show](./../../screen/images/admin_jobs_show.png)  
 
-- その他レイアウトについて [画面レイアウト(詳細画面)](./../../screens/index.md#詳細画面) 参照
+- その他レイアウトについて [画面レイアウト(詳細画面)](./../../screen/index.md#詳細画面) 参照
 
 ## コントロール定義
 
@@ -68,11 +68,10 @@ select * from `jobs` where `id` = ? and `jobs`.`deleted_at` is null limit 1;
 --   id例: 100
 ```
 
-
 ## 初期表示
 
 - 対象レコードの情報を画面表示する。  
-  ![admin_jobs_show](./../../screens/images/admin_jobs_show.png)  
+  ![admin_jobs_show](./../../screen/images/admin_jobs_show.png)  
 
 ## 一覧へボタンクリック
 
@@ -93,7 +92,7 @@ select * from `jobs` where `id` = ? and `jobs`.`deleted_at` is null limit 1;
 ## 削除ボタンクリック
 
 - 「削除確認ダイアログ」を開く  
-  ![admin_jobs_show](./../../screens/images/admin_jobs_show_delete.png)  
+  ![admin_jobs_show](./../../screen/images/admin_jobs_show_delete.png)  
 
 ## 【削除確認ダイアログ】OKボタンクリック
 
