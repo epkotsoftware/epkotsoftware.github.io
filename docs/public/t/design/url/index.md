@@ -171,8 +171,8 @@ PHPフレームワークLaravelでCRUD(クラッド Create Read Update Delete �
 
 以下を参照してください。  
 
-- [Laravel CRUD 設計 〜 機能一覧](./../../laravel/crud/design/index.md#機能一覧)
-- [Laravel CRUD 設計 〜 画面設計](./../../laravel/crud/design/screens/index.md)
+- [機能一覧](./../examples/feature-list/index.md)
+- [画面設計](./../examples/screen/index.md)
 
 ## 詳細
 
