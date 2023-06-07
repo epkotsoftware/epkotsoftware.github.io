@@ -1,6 +1,14 @@
 # 設計編
 
+## はじめに
+
+- 計30時間を目安に学習しましょう。
+- 内容を全て暗記する必要はありません。
+- 「URL設計詳細」については真面目に読み込むと時間がかかるので1時間読む程度でOKです。
+
 ## システム設計
+
+動画については、「開発手法編」で閲覧したものと同一のものなので飛ばしても問題ありません。
 
 - システム設計の流れ｜基本設計と詳細設計の違いや、設計書の書き方を解説！
   - <https://youtu.be/OXJtc_aBm9M>
@@ -16,8 +24,16 @@
 
 ### ER図
 
+ER図はプログラマーも修正することの多い資料なので  
+Mermaidを使って、適当なテーブルを追加したり、カラムを追加したり編集してみましょう。  
+「Mermaid Live Editor」でテキストを更新することで
+図が更新されURLが変わり、URL内に変更した内容が保持されるので、URLを残しておくと  
+誰でも途中から再編集が可能になります。
+
 - `ER図を簡単に作成してみよう【DB設計】【Mermaid】`
   - <https://zenn.dev/seiya0/articles/tech-mermaid-erd>
+- 例
+  - [Mermaid Live Editor](https://mermaid.live/edit#pako:eNrNk0FLwzAUgP9KyHn1B_Q8hDEEwWthxOa5BdZ0pK-KdLu0Hqag7KQOPU6F6WEH9TTxx1Sr_guTrNMJRTyaQyB533uB770k1A85UJc6juNJFNgFl3g0T5_zdJJnwzy79agnbRRUXbC2YoEniV5xBCoi_b7jhAnBPQCMiMk1_CqRLA5mbYu2kEgEJ5tNTTbqhl0Gd5nyO0wRyQLQwdfR8dvNrAowZUsoz67zbJ6nj3rXCVU0h8hXoocilDrhfXpXnJ-scigCiJAFPU12AYG3GJrnD48-xpPi7KoYp9W4r4B94S9Pl8Vw9Bse9_g3XlzcF6ezn_hgqa10-VdvZZDF2AlVSzPrTdvBqTXzoPdG3bWtWBO8ypB9z8o8sE2f677_T0O0RgNQARNcT6z141HsQAAeNZPHYYfFXTS4QbWRcGtf-tRFFUONLuqXM7y8BC4wVBuLT2D_wuATLSEnZQ) ※ 自由に編集が可能です
 
 ### テーブル定義書
 
