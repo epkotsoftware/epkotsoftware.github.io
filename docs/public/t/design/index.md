@@ -61,7 +61,7 @@ Mermaidを使って、適当なテーブルを追加したり、カラムを追�
     - 書式は違いますがMermaidと同様にUMLの作成が可能です。
   - <https://plantuml.com/ja/>
   - サンプル: 別ページに現場で使用経験のあるものを集めました。
-    - [PlantUML](./plantuml/index.md)
+    - [PlantUML](./../plantuml/index.md)
 
 ## 設計書テンプレート
 
