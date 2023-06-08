@@ -23,7 +23,7 @@
 
 ファイル編を復習しましょう。
 
-- [ファイル編](./../../../file/index.md)
+- [ファイル編](./../../../../public/t/file/index.md)
 
 ## Controllers
 

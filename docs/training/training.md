@@ -548,7 +548,7 @@ PHPでは「PHPUnit」を使用します。
 
 画像ファイルやCSV等のファイルについて学習します。
 
-- [ファイル編](./file/index.md)
+- [ファイル編](./../public/t/file/index.md)
 
 ## セキュリティ編
 
