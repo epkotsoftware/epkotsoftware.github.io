@@ -2,26 +2,6 @@
 
 他言語のプログラミング基礎が出来ていて、HTML・CSSの知識がある方を対象とした資料です。
 
-## 目次
-
-| No. |  |
-| :---: | --- |
-| 1 | [はじめに](#はじめに) |
-| 2 | [Internet Explorer](#internet-explorer) |
-| 3 | [動画](#動画) |
-| 4 | [JavaScriptガイド](#javascriptガイド) |
-| 5 | [要素を取得する](#要素を取得する) |
-| 6 | [window](#window) |
-| 7 | [即時実行関数式](#即時実行関数式) |
-| 8 | [タイマー](#タイマー) |
-| 9 | [イベント](#イベント) |
-| 10 | [API](#api) |
-| 11 | [template](#template) |
-| 12 | [JavaScript高速化について](#javascript高速化について) |
-| 13 | [WebAPI](#webapi) |
-| 14 | [コーディングスタイル](#コーディングスタイル) |
-| 15 | [JavaScript課題](#javascript課題) |
-
 ## はじめに
 
 JavaScriptは情報が多く出ており、誤った情報や古くなってしまった情報も多いため  
@@ -44,9 +24,6 @@ Mozillaの公式ウェブサイト(MDN)をメインに学習していきます�
 IE非対応だった機能が使えるようになります。  
 しかし、既存のシステムでは古い手法が使われることが多いため注意が必要です。
 
-- Microsoft 社 Internet Explorer のサポート終了について
-  - <https://www.ipa.go.jp/security/announce/ie_eos.html>
-
 以下、IEで使えない機能の一部です。
 
 - [`let`](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/let) の挙動が異なる（IE11以前は使えない）
@@ -67,6 +44,20 @@ IE非対応だった機能が使えるようになります。
   - <https://www.youtube.com/playlist?list=PLwM1-TnN_NN7-zdRV8YsGUB82VVhfYiWW>
 - 【JavaScript超入門講座】わずか50分で知識ゼロから基礎をマスター！
   - <https://youtu.be/QCjFPSO96RU>
+
+## チュートリアル
+
+以下がおすすめです。
+
+- `現代の JavaScript チュートリアル`
+  - <https://ja.javascript.info/>
+
+## サンプルコード
+
+Zennにサンプルコードをアップしています。
+
+- `【JavaScript】<template>を使って、データを<table>に反映する`
+  - <https://zenn.dev/seiya0/articles/tech-js-data-to-table>
 
 ## JavaScriptガイド
 
@@ -209,10 +200,17 @@ array1.forEach(function(element) {
 - オブジェクトモデルの詳細
   - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Details_of_the_Object_Model>
 
+### JavaScriptモジュール
+
+2021年頃までは、生のJavaScriptを使用している現場で、モジュールを使用している所はありませんでしたが  
+TypeScriptやJavaScriptフレームワークの利用も視野に入れる場合、こちらも学習しましょう。  
+
+- JavaScript モジュール
+  - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Modules>
+
 ### 学習対象外
 
-現場ではあまり使われないため、学習対象外です。  
-IEに対応していなかったり、ライブラリを使用していたりであまり使われない機能です。
+こちらは優先度が低いので必要になったら学習をしましょう。
 
 - プロミスの使用
   - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Using_promises>
@@ -220,8 +218,6 @@ IEに対応していなかったり、ライブラリを使用していたりで
   - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Iterators_and_Generators>
 - メタプログラミング
   - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Meta_programming>
-- JavaScript モジュール
-  - <https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Modules>
 
 ## 要素を取得する
 
@@ -256,6 +252,12 @@ ID指定での取得の場合、`getElementById`を使用する方が2〜3倍ほ
     </script>
 </body>
 ```
+
+- 動画
+  - `【初心者向け】JavaScriptのメソッドを使ってみよう！DOM操作の基本解説 クリックイベントの設定・クラス操作のやり方 【プログラミング入門】`
+    - <https://youtu.be/6L7RmLIlkjs>
+  - `【JavaScript基礎・初心者向け】便利なDOM操作をやってみよう！メソッドの紹介 / 簡単な実装例を解説【プログラミング入門】`
+    - <https://youtu.be/Axy55VP3DSY>
 
 ## window
 
