@@ -582,7 +582,7 @@ PHPでは「PHPUnit」を使用します。
 
 ### Laravel開発環境構築
 
-[構築手順](https://github.com/epkotsoftware/training-docs/blob/main/training/03_advanced/README.md) をご覧ください。
+[構築手順](https://github.com/epkotsoftware/training-docs/blob/main/training/05_laravel/README.md) をご覧ください。
 
 ### CBC 実践（バックエンド Laravel）
 
