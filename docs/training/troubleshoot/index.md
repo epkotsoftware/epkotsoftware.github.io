@@ -219,12 +219,23 @@ var_dump($result); // 「valueは1」がresultに入る、valueに1以外の値�
 
 - [全般](#全般)
 
-### コマンドでエラーになる
+### artisan関連コマンドでエラーになる
 
 > `php artisan xxxx` のようなコマンドを打つとエラーになる
 
 Webサーバーで入力していない可能性が高いので確認しましょう。  
 環境構築時のREADME.mdに記載されています。
+
+### composer installでExceptionが発生する
+
+> composer install コマンドで途中でExceptionのエラーメッセージが出て失敗する
+
+回線速度やPCスペックの問題で、途中でタイムアウトしている可能性があるので  
+vendor内のフォルダ・ファイルを削除後に、以下のコマンドでインストールを試みてください。
+
+```sh
+COMPOSER_PROCESS_TIMEOUT=0 composer install
+```
 
 ### Permissionエラー
 
