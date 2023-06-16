@@ -8,6 +8,9 @@ namespace(名前空間)、useについて学習します。
 
 ## 名前空間
 
+別資料に解説と課題を用意しているので  
+以下を参照してください。
+
 - 【PHP】namespace（名前空間）、use の解説
   - <https://zenn.dev/seiya0/articles/tech-php-namespace>
 
