@@ -259,6 +259,17 @@ chmod -R 777 storage/
 - Linuxの権限確認と変更(chmod)（超初心者向け）
   - <https://qiita.com/shisama/items/5f4c4fa768642aad9e06>
 
+### could not find driver
+
+> [#5 Laravelでブラウザに表示されるかを確認する](https://cbc-study.com/training/backend/laravel2#pl-8) にて
+> 以下のメッセージが表示される
+>
+> could not find driver
+
+PDOのデータベース設定に誤りがあるため、表示されるエラーです。  
+そもそもバックエンド編でPDOは使うことはありませんので  
+研修資料に記載のあるコードで進めてください。  
+
 ### POSTメソッドがサポートされていない
 
 > 以下のエラーが出る。
