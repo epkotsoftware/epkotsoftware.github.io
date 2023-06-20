@@ -237,6 +237,13 @@ vendor内のフォルダ・ファイルを削除後に、以下のコマンド�
 COMPOSER_PROCESS_TIMEOUT=0 composer install
 ```
 
+### php artisan migration で失敗する
+
+> php artisan migration で「No such file or directory」のエラーが発生する。
+
+「[#3 Laravelの環境構築](https://cbc-study.com/training/backend/laravel1#pl-9)」の手順が行われていると失敗します。  
+`.env`ファイルと`config/database.php`ファイルの修正は元に戻して、再度実行してみましょう。
+
 ### Permissionエラー
 
 > 以下のエラーが出る。
