@@ -2,10 +2,12 @@
 
 ## はじめに
 
-[EPKOT用PCユーザー作成](./../install/index.md)が終わったら  
+[EPKOT用PCユーザー作成](./../epkot-user/index.md)が終わったら  
 作成したアカウントにログインし、インストールを進めましょう。  
 
 ## パソコンにインストール
+
+Slackは招待が来るまでインストールだけ済ませておきましょう。
 
 - 【ブラウザ】`Google Chrome` (クローム)
   - <https://www.google.co.jp/intl/ja/chrome/>
@@ -26,11 +28,20 @@
 
 ## スマートフォンにインストール
 
+Slackは招待が来るまでインストールだけ済ませておきましょう。
+
 - Slack
   - iOS 版 Slack
     - <https://slack.com/intl/ja-jp/downloads/ios>
   - Android 版 Slack
     - <https://slack.com/intl/ja-jp/downloads/android>
+
+## Slack
+
+セキュリティの観点から、入社日が近くなってからワークスペースに招待されます。  
+社用メールアドレスに招待メールが来ます。
+
+- [Slack ワークスペースに参加する - 招待を承諾する](https://slack.com/intl/ja-jp/help/articles/212675257-Slack-%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B9%E3%83%9A%E3%83%BC%E3%82%B9%E3%81%AB%E5%8F%82%E5%8A%A0%E3%81%99%E3%82%8B#u25307u24453u12434u25215u35582u12377u12427)
 
 ## Chrome設定
 
@@ -42,7 +53,7 @@
 
 ## Chromeの便利な使い方
 
-本資料はブラウザで参照します。  
+研修資料はブラウザで参照します。  
 リンクが多いため、そのまま開くと面倒な時があります  
 開く時に以下の操作で別タブでページを開く事ができます。
 
