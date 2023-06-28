@@ -98,22 +98,25 @@ Gitを扱うための拡張機能をご紹介します。
 
 #### ブランチ設定
 
-- リポジトリのメインページに移動
-- 「`Settings`」タブをクリック
-- 「`Branches`」をクリック
-- Default branch ～ デフォルトブランチをdevelopに変更
-  - 切り替えアイコンをクリック  
-    ![github_switch_branch](./images/github_switch_branch.png)
-  - 「`develop`」を選択して、「`Update`」ボタンをクリック
-  - 「`I understand, update the default branch.`」ボタンをクリック
-- Branch protection rules ～ ブランチ保護ルール追加
-  - 「`Add rule`」ボタンをクリック
-    - Branch name pattern: `*[main|develop]*` （mainとdevelopに適用）
-    - 以下をチェック
-      - 「`Require a pull request before merging`」
-        - ※ サブ項目のチェックは外す
-      - ~~「`Include administrators`」~~  2022/09現在項目がなくなっており、代わりの項目が見つからないためそのまま進めてください。
-  - 「`Create`」ボタンをクリック
+- デフォルトブランチをdevelopに変更
+  - リポジトリのメインページに移動
+  - 「`Settings`」タブをクリック
+  - Default branch
+    - 切り替えアイコンをクリック  
+      ![github_switch_branch](./images/github_switch_branch.png)
+    - 「`develop`」を選択して、「`Update`」ボタンをクリック
+    - 「`I understand, update the default branch.`」ボタンをクリック
+- ブランチ保護ルール追加
+  - リポジトリのメインページに移動
+  - 「`Settings`」タブをクリック
+  - サイドメニューの「`Branches`」をクリック
+    - Branch protection rules
+      - 「`Add rule`」ボタンをクリック
+        - Branch name pattern: `*[main|develop]*` （mainとdevelopに適用）
+        - 以下をチェック
+          - 「`Require a pull request before merging`」
+            - ※ サブ項目のチェックは外す
+      - 「`Create`」ボタンをクリック
 
 ※ 今回は、学習のための保護設定にしてあります。  
 　学習外にはなりますが、その他のブランチルールについては公式を参照してください。  
@@ -123,8 +126,34 @@ Gitを扱うための拡張機能をご紹介します。
 
 今回は不要ですが、開発準備が完了した時点（Laravelだとインストール直後のソースコード等）でタグの作成を行います。  
 タグに関しては、管理者が行うことが多いので学習外とし詳細説明を割愛します。  
-初回だと「`v0.1`」、リリース時は「`v1.0`」のようなタグが多いでしょうか。  
 コマンドでつける場合、「`git tag`」コマンドで行います。  
+GitHub公式では、以下のような案内があります。
+
+```txt
+Tagging suggestions
+It’s common practice to prefix your version names with the letter v. Some good tag names might be v1.0.0 or v2.3.4.
+
+If the tag isn’t meant for production use, add a pre-release version after the version name. Some good pre-release versions might be v0.2.0-alpha or v5.9-beta.3.
+
+Semantic versioning
+If you’re new to releasing software, we highly recommend to learn more about semantic versioning.
+
+A newly published release will automatically be labeled as the latest release for this repository.
+
+If 'Set as the latest release' is unchecked, the latest release will be determined by higher semantic version and creation date. Learn more about release settings.
+
+タグの付け方
+v1.0.0やv2.3.4といったタグ名が良いでしょう。
+
+もし、そのタグが本番用でない場合、バージョン名の後にプレリリースバージョンを追加してください。プレリリースのバージョンには、v0.2.0-alphaやv5.9-beta.3などがあります。
+
+意味論的バージョニング
+もしあなたがソフトウェアのリリースに慣れていないのであれば、セマンティック・バージョニングについて学ぶことを強くお勧めします。
+
+新しく公開されたリリースは、自動的にこのリポジトリの最新リリースとしてラベル付けされます。
+
+最新リリースとして設定する」のチェックが外れている場合、最新リリースはより高いセマンティックバージョンと作成日付によって決定されます。リリース設定の詳細については、こちらをご覧ください。
+```
 
 - GitHub Managing releases in a repository
   - <https://docs.github.com/ja/repositories/releasing-projects-on-github/managing-releases-in-a-repository>
