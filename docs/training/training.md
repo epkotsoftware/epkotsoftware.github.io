@@ -511,7 +511,7 @@ Linux技術者認定試験(LPIC)の一部にチャレンジしてみましょう
 
 ## テスト編
 
-- [設計編](./../public/t/test/index.md)
+- [テスト編](./../public/t/test/index.md)
 
 ## ファイル編
 
