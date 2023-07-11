@@ -392,114 +392,12 @@ CBCと開発環境が異なるので、気を付けてください。
 
 ## Linux編
 
-LPIC等のLinux資格をお持ちの方は、こちらの研修は免除となります。  
+LPIC（エルピック）、LinuC（リナック）等のLinux資格をお持ちの方は、こちらの研修は免除となります。  
 
-Linuxコマンドについて学んでいきましょう。  
 フロントエンドエンジニア編で作成した環境の[WEB Server](https://github.com/epkotsoftware/training/blob/template/users/_template/03_advanced/README.md#web-server)へ入ると操作が出来ます（OSはDebian）。  
 [04_linux](https://github.com/epkotsoftware/training/tree/template/users/_template/04_linux) にUbuntu環境も用意しました（どちらもコマンドに大きい違いはありません）。
-情報量が多く全て覚えるのは難しいので、「[vi](#vi)」までを2日、「[Linux模擬問題](#linux模擬問題)」を1日の計3日を目安としてください。
 
-- Linux OS
-  - Ubuntu
-    - <https://www.ubuntulinux.jp/ubuntu>
-  - Debian
-    - <https://www.debian.or.jp/using/>
-  - CentOS
-    - <<https://www.centos.org/>
-    - 「CentOS Linux」は開発終了となり、今後は「CentOS Stream」に移行。
-    - Comparing Centos Linux and CentOS Stream
-      - <https://www.centos.org/cl-vs-cs/>
-    - 「CentOS Stream 9」、ダウンロード提供が開始
-      - <https://japan.zdnet.com/article/35180408/>
-  - 12月Webサイト向けLinuxシェア、Ubuntuの増加傾向続く
-    - <https://news.mynavi.jp/techplus/article/20211203-2211480/>
-- 動画
-  - <https://youtube.com/playlist?list=PLCX3wwS3Gg4zOMS9ezkea4tDt5U7s2yRa>
-    - `13:03` Linuxコマンドの使い方入門｜CUIとGUIの違いやシェルについて解説！【プログラマー必須スキル】
-    - `6:31` シェルスクリプトとは？【分かりやすい解説シリーズ #68】【プログラミング】
-    - `7:47` CRONとは？【分かりやすい解説シリーズ #64】【プログラミング】
-- 初心者マークのUNIX/Linux
-  - <https://www.creatology.jp/unix/>
-  - UNIX/Linux コマンド「超」基本操作
-    - <https://www.creatology.jp/unix/beginner.html>
-  - UNIX/Linux 設定「超」基本知識
-    - <https://www.creatology.jp/unix/settei.html>
-  - 図解：標準入力、標準出力、標準エラー出力、パイプとは ?
-    - <https://www.creatology.jp/unix/outin.html>
-- 【bash入門】bashシェルスクリプトの書き方
-  - <https://tech-blog.rakus.co.jp/entry/20210525/shellscript>
-  - bashの実行例
-
-```bash
-root@training-web:/var/www/html# # hoge.sh を作成
-root@training-web:/var/www/html# cat << 'EOF' > hoge.sh
-> #!/bin/bash
->
-> NUM=8
-> MESSAGE=Hello_bash
->
-> echo $NUM
-> echo $MESSAGE
-> EOF
-root@training-web:/var/www/html# # hoge.sh をテキスト表示
-root@training-web:/var/www/html# cat hoge.sh
-#!/bin/bash
-
-NUM=8
-MESSAGE=Hello_bash
-
-echo $NUM
-echo $MESSAGE
-root@training-web:/var/www/html# # hoge.sh を実行
-root@training-web:/var/www/html# bash hoge.sh
-8
-Hello_bash
-root@training-web:/var/www/html# 
-```
-
-- 初心者必見！よく使うLinuxコマンド一覧表【全33種】
-  - <https://www.sejuku.net/blog/5465>
-- ターミナルソフト（今の所、研修では使用しない）
-  - RLogin
-    - <https://kmiya-culti.github.io/RLogin/>
-  - Tera Term
-    - <https://forest.watch.impress.co.jp/library/software/utf8teraterm/>
-  - ターミナルソフトはTeratermよりRLoginがおすすめの理由
-    - <https://infrasenavi.com/mibunrui/361>
-
-### シェル実行の注意点
-
-UbuntuやDebianでシェルを実行する際に「`sh "ファイル名"`」で実行すると「`bash`」ではなく「`Debian Almquist shell(dash)`」で実行されます。  
-「`#!/bin/bash`」の記載があるシェルを実行する際は、「`bash "ファイル名"`」で実行します。  
-
-```bash
-bash hoge.sh
-```
-
-Debian(Ubuntu)の「`/bin/sh`」のシンボリックリンクが「`/bin/dash`」になっているため  
-このようなことが発生します。  
-
-### vi
-
-vi（ヴィーアイ）はLinuxのテキストエディタです。  
-サーバー上のcronやコンフィグファイル等の修正を行うことがあるので  
-適当なテキストファイルを配置し、実際に編集してみましょう。
-
-- Linuxの標準エディタvi(vim)の超基本的な使い方！動画で初心者にもわかりやすく解説！
-  - <https://blog.proglus.jp/4194/>
-
-### Linux模擬問題
-
-Linux技術者認定試験(LPIC)の一部にチャレンジしてみましょう。  
-問題数が多く、現場ではほぼ使用しないものもあるため1日で出来る範囲でOKです。  
-全問正解する必要はありませんが、答えの解説はしっかり確認してください。
-
-- LPIC模擬問題
-  - <https://lpic-study.com/>
-    - LPIC102 シェル、スクリプト、およびデータ管理の問題
-      - <https://lpic-study.com/exam/LPIC+102-no_1-next.php>
-    - LPIC101 GNUとUnixのコマンド **※ 問題数が多いため出来るところまで**
-      - <https://lpic-study.com/exam/LPIC+101-GNUとUnixのコマンド-no_1-next.php>
+- [Linux編](./../public/t/linux/index.md)
 
 ## 開発手法編
 
