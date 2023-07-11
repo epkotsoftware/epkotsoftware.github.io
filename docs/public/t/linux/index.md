@@ -133,7 +133,7 @@ vi（ブイアイ）はLinuxのテキストエディタです。
   - [sed (セド)](https://e-words.jp/w/sed.html)
   - [curl (カール / シーユーアールエル)](https://e-words.jp/w/CURL.html)
   - [echo (エコー)](https://e-words.jp/w/%E3%82%A8%E3%82%B3%E3%83%BC.html)
-  - [| (パイプ)](https://e-words.jp/w/%E3%83%91%E3%82%A4%E3%83%97.html)
+  - [&#124; (パイプ)](https://e-words.jp/w/%E3%83%91%E3%82%A4%E3%83%97.html)
   - リダイレクト [Google検索](https://www.google.com/search?q=Linux+リダイレクト)
     - `<` (標準入力)
     - `>` (標準出力)
