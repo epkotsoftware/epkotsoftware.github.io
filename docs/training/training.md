@@ -449,7 +449,7 @@ LaravelのバージョンがCBCと異なるため、一つ一つコードを理�
     - RoutingについてはLaravel6は手法が古いため、以下で学習し実装してください（「`#7 Laravelでデータベースのデータを表示する方法`」の手法が古いです）。
       - [ルーティング](./laravel/routing/index.md)
     - 「`Target class [SortableController] does not exist.`」のエラーが出る  
-      - [名前空間](./programming/php/namespaces/index.md) について学習して下さい、「use」を使用します。
+      - [名前空間](./../public/t/php/namespaces/index.md) について学習して下さい、「use」を使用します。
     - ディレクトリ構成がCBCと違うので読み替えてください。
       - 「`CBC_Laravel/resources/views/`」の場合、「`05_laravel/app/resources/views/`」
     - Laravel9では、Modelクラスが追加される個所が変わります。
@@ -529,7 +529,7 @@ Gitについて、より深く学んでいきます。
 1対1PG研修を受ける方は、***「paiza.io」は使用せず、DockerでPHP環境を構築してください。***  
 詳しくは「PHPプログラミング編」の「入門」を参照してください。
 
-- [PHPプログラミング編](./programming/php/index.md)
+- [PHPプログラミング編](./../public/t/php/index.md)
 
 ## 1対1PG研修
 

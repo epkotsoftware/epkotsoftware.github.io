@@ -305,7 +305,7 @@ PDOのデータベース設定に誤りがあるため、表示されるエラ�
 この機会にしっかり学習しておきましょう。  
 
 - [Laravel ルーティング](./../laravel/routing/index.md)
-- [名前空間](./../programming/php/namespaces/index.md)
+- [名前空間](./../../public/t/php/namespaces/index.md)
   - 以下を人に説明できるレベルになっておくことが必要です。
     - 完全修飾名
     - namespace
@@ -320,7 +320,7 @@ PDOのデータベース設定に誤りがあるため、表示されるエラ�
 
 web.phpの記載に誤りがある可能性が高いです。  
 Controllerを使ったルート設定は、Laravel6のルート設定では出来なくなっています  
-[ルーティング](./../laravel/routing/index.md)・[名前空間](./../programming/php/namespaces/index.md)について学習しましょう。
+[ルーティング](./../laravel/routing/index.md)・[名前空間](./../../public/t/php/namespaces/index.md)について学習しましょう。
 
 #### Cannot declare class App\Http\Controllers\SortableController, because the name is already in use
 
@@ -342,7 +342,7 @@ Controllerを使ったルート設定は、Laravel6のルート設定では出�
 
 SortableControllerで存在しない「`\App\Sortable`」クラスを使おうとしている可能性が高いです。  
 Laravel6と最新バージョンでは名前空間が異なるため、確認しましょう。  
-よくわからなければ、[名前空間](./../programming/php/namespaces/index.md)について学習しましょう。
+よくわからなければ、[名前空間](./../../public/t/php/namespaces/index.md)について学習しましょう。
 
 #### Class "App\Http\Controllers\Sortable" not found
 
@@ -359,7 +359,7 @@ Laravel6と最新バージョンでは名前空間が異なるため、確認し
 完全修飾名が「`\App\Http\Controllers\Sortable`」クラスにアクセスします。  
 
 使いたい`Sortable`クラスの完全修飾名を確認しましょう。  
-よくわからなければ、[名前空間](./../programming/php/namespaces/index.md)について学習しましょう。
+よくわからなければ、[名前空間](./../../public/t/php/namespaces/index.md)について学習しましょう。
 
 ### drags.blade.phpでエラーが発生する
 

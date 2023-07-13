@@ -91,7 +91,7 @@ Route::HTTPメソッド('URI', [Controllerクラス::class, 'メソッド名']);
 Controllerクラスは完全修飾名にするかuseを使ってエイリアス（別名）を作成する必要があります。  
 よくわからなければ名前空間の学習をしましょう。
 
-- [PHPプログラミング編 名前空間](./../../programming/php/namespaces/index.md)
+- [PHPプログラミング編 名前空間](./../../../public/t/php/namespaces/index.md)
 
 ##### Laravel8以前のアクション記述方法
 
@@ -326,7 +326,7 @@ use App\Http\Controllers\RankingController;
 名前空間に関しては、他のプログラミング言語にもあり  
 実務では必須となってくるので、しっかり理解しておきましょう。
 
-- [PHPプログラミング編 名前空間](./../../programming/php/namespaces/index.md)
+- [PHPプログラミング編 名前空間](./../../../public/t/php/namespaces/index.md)
 
 ## Laravel公式ページ
 
