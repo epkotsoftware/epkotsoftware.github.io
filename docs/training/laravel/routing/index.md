@@ -101,12 +101,16 @@ Controllerクラスは完全修飾名にするかuseを使ってエイリアス�
 - 旧：Laravel8以前
   - <https://readouble.com/laravel/7.x/ja/routing.html>
 
+旧方式では、アクションに**文字列記法**を使っています。
+
 ```php
 Route::get('/user', 'UserController@index');
 ```
 
 - 新：Laravel8以上
   - <https://readouble.com/laravel/8.x/ja/routing.html>
+
+新方式では、アクションに**配列（callable記法）**を使っています。
 
 ```php
 use App\Http\Controllers\UserController;
