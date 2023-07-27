@@ -14,6 +14,13 @@
 | 8 | [課題](./exercises/index.md) |
 | 9 | [基本的な構文](./basic-syntax/index.md) |
 
+## 参考書籍
+
+- `スラスラわかるPHP 第2版 単行本（ソフトカバー） – 2021/6/21`
+  - <https://amzn.to/3O7Td5A>
+- `独習PHP 第4版 単行本（ソフトカバー） – 2021/6/14`
+  - <https://amzn.to/3WXfMhn>
+
 ## 参考サイト
 
 - PHPマニュアル
