@@ -32,3 +32,21 @@ PHPUnitに関しては資料を流し読みして、イメージだけしてお�
 
 - 「ブラックボックステスト」と「ホワイトボックステスト」の違い
   - <https://medium-company.com/ブラックボックス-ホワイトボックス-違い/>
+
+## 用語
+
+以下の用語は覚えておきましょう。  
+
+- [ブラックボックステスト](https://e-words.jp/w/ブラックボックステスト.html)
+  - [境界値分析 (きょうかいちぶんせき) (限界値分析)](https://e-words.jp/w/境界値分析.html)
+  - [同値分割 (どうちぶんかつ) (同値分析)](https://e-words.jp/w/同値分割.html)
+- [ホワイトボックステスト](https://e-words.jp/w/ホワイトボックステスト.html)
+- [モンキーテスト](https://e-words.jp/w/モンキーテスト.html)
+- [テストケース](https://e-words.jp/w/テストケース.html)
+  - [正常系テスト (せいじょうけいテスト)](https://e-words.jp/w/正常系テスト.html)
+  - [異常系テスト (いじょうけいテスト)](https://e-words.jp/w/異常系テスト.html)
+- [単体テスト (たんたいテスト) (UT)](https://e-words.jp/w/単体テスト.html)
+- [結合テスト (けつごうテスト) (IT)](https://e-words.jp/w/結合テスト.html)
+  - [ITa (アイティーエー) (内部結合テスト)](https://e-words.jp/w/ITa.html)
+  - [ITb (アイティービー) (外部結合テスト)](https://e-words.jp/w/ITb.html)
+- [システムテスト (ST) (PT)](https://e-words.jp/w/システムテスト.html)
