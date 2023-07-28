@@ -13,9 +13,19 @@
 ## EPKOTメールアドレス
 
 EPKOTのメールアドレスができたら  
+アカウント作成を済ませておきましょう。
+
+### PCユーザー
+
 研修に使うPCのアカウント作成を行います。  
 
 - [EPKOT用PCユーザー作成](./epkot-user/index.md)
+
+### GitHubアカウント作成
+
+研修で使用するGitHubのアカウント作成を行います。  
+
+- [GitHub](./../public/preparation/github/index.md)
 
 ## 便利ソフト
 
