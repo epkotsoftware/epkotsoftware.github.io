@@ -61,19 +61,6 @@ Dropbox等、共有しているファイルの扱いには注意しましょう�
 
 ### ショートカットキー
 
-ショートカットキーを覚えると便利です。
-
-- パソコンで初心者が覚えるべき基本テクニック集【保存版】
-  - <https://youtu.be/WWphrRjWyAQ>
-- 【絶対に覚えておきたい！】MacBookの生産性を上げる便利なショートカットキー21選！【入門編】
-  - <https://youtu.be/WaW2IMMsijk>
-- Windows 10 スクリーンショットを撮る4つの方法
-  - <https://www.pc-koubou.jp/magazine/35994>
-- Mac でスクリーンショットを撮る
-  - <https://support.apple.com/ja-jp/HT201361>
-
-その他ショートカットキーは以下にまとめています。
-
 - [未経験エンジニア必見！ショートカットキー （Windows・macOS・Chrome・VSCode）](https://zenn.dev/seiya0/articles/idea-keyboard-shortcuts)
 
 ### タイピング
