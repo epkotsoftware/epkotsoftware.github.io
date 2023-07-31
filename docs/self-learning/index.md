@@ -12,6 +12,13 @@
 
 - [キャリアパス](./../career-paths/index.md)
 
+## 正規表現
+
+エンジニアになると正規表現を使うことが出てくるので覚えておきましょう。
+
+- `【正規表現】入門`
+  - <https://zenn.dev/seiya0/articles/tech-regular-expression>
+
 ## データベース
 
 新人研修でもデータベースの学習をしていますが  
