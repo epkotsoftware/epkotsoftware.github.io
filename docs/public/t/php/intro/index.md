@@ -24,7 +24,7 @@ PHPマニュアルも見る癖をつけましょう。
 
 一般的なショートカット・VSCodeのショートカットキーをまとめています。
 
-- [ショートカットキー](./../../../shortcutkey/index.html)
+- [未経験エンジニア必見！ショートカットキー （Windows・macOS・Chrome・VSCode）](https://zenn.dev/seiya0/articles/idea-keyboard-shortcuts)
 
 ## 検索方法
 

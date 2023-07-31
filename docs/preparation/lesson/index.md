@@ -74,7 +74,7 @@ Dropbox等、共有しているファイルの扱いには注意しましょう�
 
 その他ショートカットキーは以下にまとめています。
 
-- [ショートカットキー一覧](./../../training/shortcutkey/index.html)
+- [未経験エンジニア必見！ショートカットキー （Windows・macOS・Chrome・VSCode）](https://zenn.dev/seiya0/articles/idea-keyboard-shortcuts)
 
 ### タイピング
 
