@@ -19,6 +19,25 @@
 - `【正規表現】入門`
   - <https://zenn.dev/seiya0/articles/tech-regular-expression>
 
+## Linux
+
+- コマンド
+  - `【Linux演習問題】初心者向けLinuxの基本操作編`
+    - <https://eng-entrance.com/linux-placetice-basic>
+  - `Linux入門編2:ファイル検索コマンドfindを使おう | プログラミング学習サイト【paizaラーニング】`
+    - <https://paiza.jp/works/linux/primer/beginner-linux2/22200>
+  - `Linux入門編2:テキスト検索コマンドgrepを使おう | プログラミング学習サイト【paizaラーニング】`
+    - <https://paiza.jp/works/linux/primer/beginner-linux2/22201>
+- シェル
+  - `シェルスクリプト 練習 ドリル`
+    - <https://www.seplus.jp/dokushuzemi/blog/2021/09/shellscript_practices.html>
+  - `サーバーエンジニアの研修に使える！シェルスクリプト問題集`
+    - <https://qiita.com/p_s_m_t/items/d6eaa8ba49c1fbf85735>
+  - `【Shellスクリプト】演算子「算術演算子」「比較演算子」について！`
+    - <https://www.pmi-sfbac.org/arithmetic-comparison/>
+  - `【初心者向け】Linux演習問題：シェルスクリプト編`
+    - <https://eng-entrance.com/linux-plactice-shellscript>
+
 ## データベース
 
 新人研修でもデータベースの学習をしていますが  
