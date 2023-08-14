@@ -58,18 +58,15 @@ softwareupdate --install-rosetta
 
 ## インストール
 
-- `Docker Desktop`
-  - <https://www.docker.com/>
-- インストール完了後のチュートリアルはスキップしてください。
-- インストールがうまくいかなかったらトラブルシューティングをご覧ください。
+- Windows
+  - <https://zenn.dev/seiya0/articles/tech-docker-desktop-for-win-install>
+- Mac
+  - <https://docs.docker.com/desktop/install/mac-install/>
   - [Docker トラブルシューティング](./troubleshoot.md)
-
-以下の画面が確認できればインストール完了です。
-
-![Docker Desktop](./images/docker-desktop.png)  
 
 ### 動画
 
+古いバージョンのDockerですが  
 以下、動画のインストールが参考になります。  
 Docker起動からチュートリアルのスキップまで進めましょう。
 
