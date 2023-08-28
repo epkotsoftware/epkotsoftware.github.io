@@ -121,6 +121,13 @@ SQLクライアントに`A5:SQL Mk-2`を使っている場合、`[論理名]:[�
 予め設定しておくとテーブル定義書の自動出力時に便利です。  
 例えばコメントを「`ユーザーID:FK:users.id`」とすると、論理名が「`ユーザーID`」、コメントが「`FK:users.id`」になります。  
 
+- ***※ 注意***
+  - MySQLのtimestamp型では、`2038-01-19`までの日時しか持てないため、それ以降は登録時にエラーが発生します。  
+    実際の開発でMySQLを使う場合、datetime型への変更を検討しましょう。
+  - `Laravel + MySQL timestamp型の2038年問題対策`
+    - <https://zenn.dev/seiya0/articles/tech-laravel-mysql-2038-year-problem-solutions>
+
+
 編集が完了したら、以下のコマンドを使ってmigrationファイルを実行し、テーブルを作成してください。
 
 ```bash
