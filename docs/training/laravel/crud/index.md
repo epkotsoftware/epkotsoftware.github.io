@@ -70,6 +70,11 @@ php artisan make:controller JobController --model=Job -rR
   - <https://readouble.com/laravel/9.x/ja/eloquent.html>
 - 参考:認可
   - <https://readouble.com/laravel/9.x/ja/authorization.html>
+- 参考
+  - `\Illuminate\Foundation\Console\ModelMakeCommand`
+    - <https://github.com/laravel/framework/blob/10.x/src/Illuminate/Foundation/Console/ModelMakeCommand.php>
+  - `src/Illuminate/Foundation/Console/stubs/model.stub`
+    - <https://github.com/laravel/framework/blob/10.x/src/Illuminate/Foundation/Console/stubs/model.stub>
 
 ## Database
 
