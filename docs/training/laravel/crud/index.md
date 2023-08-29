@@ -127,7 +127,6 @@ SQLクライアントに`A5:SQL Mk-2`を使っている場合、`[論理名]:[�
   - `Laravel + MySQL timestamp型の2038年問題対策`
     - <https://zenn.dev/seiya0/articles/tech-laravel-mysql-2038-year-problem-solutions>
 
-
 編集が完了したら、以下のコマンドを使ってmigrationファイルを実行し、テーブルを作成してください。
 
 ```bash
