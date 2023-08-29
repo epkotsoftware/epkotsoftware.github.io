@@ -5,14 +5,15 @@
 | No. |  |
 | :---: | --- |
 | 1 | [入門](./intro/index.md) |
-| 2 | [演算子](./operators/index.md) |
-| 3 | [文字列](./strings/index.md) |
-| 4 | [関数](./functions/index.md) |
-| 5 | [名前空間](./namespaces/index.md) |
-| 6 | [配列](./arrays/index.md) |
-| 7 | [ループ](./loops/index.md) |
-| 8 | [課題](./exercises/index.md) |
-| 9 | [基本的な構文](./basic-syntax/index.md) |
+| 2 | [データ型](./datatypes/index.md) |
+| 3 | [演算子](./operators/index.md) |
+| 4 | [文字列](./strings/index.md) |
+| 5 | [関数](./functions/index.md) |
+| 6 | [名前空間](./namespaces/index.md) |
+| 7 | [配列](./arrays/index.md) |
+| 8 | [ループ](./loops/index.md) |
+| 9 | [課題](./exercises/index.md) |
+| 10 | [基本的な構文](./basic-syntax/index.md) |
 
 ## 参考書籍
 
