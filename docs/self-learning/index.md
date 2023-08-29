@@ -61,6 +61,101 @@
         通常問題はありませんが、テーブルに大きい変更の必要がある際に外部キーを設定していたことにより  
         対象外のレコードを更新する必要が出たりと手間・時間がかかることがあります。  
 
+### データベース設計
+
+#### 文字列型
+
+データベースの文字列型には主にCHAR型、VARCHAR型、TEXT型の3つがありますが、基本的にはVARCHAR型の使用をおすすめします。  
+未検証ですが、昔はCHAR型は処理効率が良いと言われていましたが、現在では変わらないという話を聞きます。
+
+| 型 | 説明 | 用途 |
+| --- | --- | --- |
+| CHAR型   | 固定長の文字列を格納するための型。空白でパディングされる可能性あり。 | 桁数が固定されているデータ（例: 郵便番号）の格納に適しています。 |
+| VARCHAR型 | 可変長の文字列を格納するための型。メモリ使用効率がCHAR型より高い。 | 一般的なテキストデータの格納に適しており、データ長が変動する場合に適切です。 |
+| TEXT型    | 非常に大きなテキストデータを格納するための型。 | 長文や改行を含むデータ、またはリッチテキストの保存に適しています。 |
+
+- `MySQL :: MySQL 8.0 リファレンスマニュアル :: 11.3.2 CHAR および VARCHAR 型`
+  - <https://dev.mysql.com/doc/refman/8.0/ja/char.html>
+
+#### 整数型
+
+MySQLの整数型の一覧です。  
+`unsigned`は「[符号なし整数型](https://e-words.jp/w/%E7%AC%A6%E5%8F%B7%E3%81%AA%E3%81%97%E6%95%B4%E6%95%B0%E5%9E%8B.html)」のことでマイナス(-)がない事を表します。  
+以下、MySQLの整数型です。
+
+| 型 | ストレージ<br>(Bytes) | 最小値 | 最大値 |
+| --- | :---: | ---: | ---: |
+| tinyint | 1 | -128 | 127 |
+| tinyint unsigned | 1 | 0 | 255 |
+| smallint | 2 | -32,768 | 32,767 |
+| smallint unsigned | 2 | 0 | 65535 |
+| mediumint | 3 | -8388608 | 8388607<br>（838万） |
+| mediumint unsigned  | 3 | 0 | 16777215<br>（1677万） |
+| int | 4 | -2147483648 | 2147483647<br>（21億） |
+| int unsigned | 4 | 0 | 4294967295<br>（42億） |
+| bigint | 8 | -9223372036854775808 | 9223372036854775807<br>（922京） |
+| bigint unsigned | 8 | 0 | 18446744073709551615<br>（1844京） |
+
+現在では、プライマリーキー（PK）のidカラムの限界値に達する問題が増えており、プロジェクトでは`bigint unsigned`を設定することが一般的です。  
+Laravelなどのフレームワークでも、デフォルトで`bigint unsigned`が使用されています。  
+特別な要件がない限り、`bigint unsigned`を採用することをおすすめします。  
+
+- `MySQL :: MySQL 8.0 リファレンスマニュアル :: 11.1.2 整数型 (真数値) - INTEGER、INT、SMALLINT、TINYINT、MEDIUMINT、BIGINT`
+  - <https://dev.mysql.com/doc/refman/8.0/ja/integer-types.html>
+
+#### 日時型
+
+2023/8現在、`MySQL`の`timestamp`型について注意が必要です。  
+2038/1/19を超えるデータは持てなくなるため、`datetime`型の利用をおすすめします。  
+
+- `PostgreSQL 8.0.4 文書 日付/時刻データ型`
+  - <https://www.postgresql.jp/document/8.0/html/datatype-datetime.html>
+- `MySQL :: MySQL 8.0 リファレンスマニュアル :: 11.2 日時データ型`
+  - <https://dev.mysql.com/doc/refman/8.0/ja/date-and-time-types.html>
+- `Laravel + MySQL timestamp型の2038年問題対策`
+  - <https://zenn.dev/seiya0/articles/tech-laravel-mysql-2038-year-problem-solutions>
+
+#### 論理削除
+
+- `論理削除（ソフトデリート）とは - 意味をわかりやすく - IT用語辞典 e-Words`
+  - <https://e-words.jp/w/論理削除.html>
+
+| 特徴 | 物理削除 | 論理削除 |
+| --- | --- | --- |
+| レコード削除 | SQLのDELETE文で削除<br>データが永久に削除される | SQLのUPDATE文で削除<br>削除扱いになり、レコードは保持される |
+| レコード復元 | 不可 | SQLのUPDATE文で復元可 |
+| 関連レコード | 関連レコードも削除 | 関連レコードは保持される |
+| データベースのサイズ | 削除されたデータの領域が解放される | 削除されたデータの領域は解放されない<br>論理削除用のカラムのサイズが追加される。 |
+| パフォーマンス | インデックス再計算による影響あり | インデックス再計算の影響が少ない可能性あり|
+
+以下は、論理削除カラムの例です。
+
+| カラム名の例 | データ型 | 解説 | 使用方法 |
+| --- | :---: | --- | --- |
+| `deleted_at` | TIMESTAMP<br>or<br>DATETIME | Laravel等のフレームワークで利用され<br>削除日時がわかるメリットがあります。 | 未削除: `null`<br>削除: 削除日時 |
+| `is_deleted`<br>`is_delete`<br>`delete_flag`<br>`delete_flg` | TINYINT<br>or<br>BOOLEAN<br>or<br>BIT | 削除日時が不要な場合に利用され<br>容量が少なくて済むのがメリットです。<br>レコード数の多いプロジェクトや、古いプロジェクトで利用されることが多いです。 | 未削除: `0`<br>削除: `0`以外（基本は`1`） |
+
+以下はMySQLのCREATE TABLEの例です。  
+
+```sql
+CREATE TABLE `<テーブル名>` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+)
+```
+
+```sql
+CREATE TABLE `<テーブル名>` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `deleted_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+```
+
+- `Laravel 10.x Eloquentの準備 ソフトデリート`
+  - <https://readouble.com/laravel/10.x/ja/eloquent.html#soft-deleting>
+
 ## テスト
 
 - `設計・テスト研修講義【21新卒技術研修】`
