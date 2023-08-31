@@ -425,9 +425,6 @@ CBCと開発環境が異なるので、気を付けてください。
 
 LPIC（エルピック）、LinuC（リナック）等のLinux資格をお持ちの方は、こちらの研修は免除となります。  
 
-フロントエンドエンジニア編で作成した環境の[WEB Server](https://github.com/epkotsoftware/training/blob/template/users/_template/03_advanced/README.md#web-server)へ入ると操作が出来ます（OSはDebian）。  
-[04_linux](https://github.com/epkotsoftware/training/tree/template/users/_template/04_linux) にUbuntu環境も用意しました（どちらもコマンドに大きい違いはありません）。
-
 - [Linux編](./../public/t/linux/index.md)
 
 ## 開発手法編
