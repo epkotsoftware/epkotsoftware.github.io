@@ -357,10 +357,11 @@ A機能と平行で進めていると仮定します。
 </html>
 ```
 
-- 任意のコミットメッセージを入力
-- 「`Commit new file`」ボタンで「`feature/b`」ブランチにコミット
+- ![github_commit_changes_button](./images/github_commit_changes_button.png) ボタンでダイアログを出す
+  - 任意のコミットメッセージを入力
+  - 「`Commit changes`」ボタンで「`feature/b`」ブランチにコミット
 
-![github_commit_new_file](./images/github_commit_new_file.png)
+![github_commit_changes](./images/github_commit_changes.png)  
 
 上記の要領で「`htdocs/index.html`」もコミットしてください。  
 ファイル内容は以下にしてください。
