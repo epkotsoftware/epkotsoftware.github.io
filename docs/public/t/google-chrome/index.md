@@ -35,8 +35,8 @@
 
 - 設計やテストエビデンス等で、スクリーンショットを撮る事が多いです。
   - DevToolで 「Ctrl」 + 「Shift」を押しながら 「P」 を押すと、コマンドパレットが出るので  
-    「screenshot」と打つと、いくつかのキャプチャ方法が出てきます。
-    - ![google_chrome_dev_tools](./images/google_chrome_dev_tools.png)
+    「screenshot」と打つと、いくつかのキャプチャ方法が出てきます。  
+    ![google_chrome_dev_tools](./images/google_chrome_dev_tools.png)  
     - `Capture area screenshot` : 手動で選択範囲を指定してキャプチャ、画面上のカーソルが「+」になるのでドラッグして範囲を決める。
     - `Capture full size screenshot` : スクロールした分も含めてページ全体をキャプチャ
     - `Capture node screenshot` : 選択しているノードをキャプチャ
@@ -45,9 +45,9 @@
 ### 横幅を指定した確認方法
 
 1. Google Chrome のDevToolsを開く(Windowsであれば「F12」キー)
-1. デバイスツールバーを開く
+1. デバイスツールバーを開く  
   ![google_chrome_dev_tools_device](./images/google_chrome_dev_tools_device.png)
-1. デバイスを選択する
+1. デバイスを選択する  
   ![google_chrome_dev_tools_device_desktop_test](./images/google_chrome_dev_tools_device_desktop_test.png)  
 
 - テスト用デバイス（Desktop Test）を作成
@@ -71,3 +71,8 @@
 - `Chrome Developer Toolsの使い方【サイボウズ開運研修2021】`
   - 資料: <https://speakerdeck.com/cybozuinsideout/chrome-developer-tools>
   - 動画: <https://youtu.be/aL9OarYImm0>
+
+## 参考資料
+
+- `Desktop Screen Resolution Stats Japan - Statcounter Global Stats`
+  - <https://gs.statcounter.com/screen-resolution-stats/desktop/japan>
