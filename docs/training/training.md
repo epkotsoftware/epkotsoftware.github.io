@@ -608,7 +608,7 @@ LaravelでのCRUD機能を作成出来るレベルまで学習しましょう。
 内部開発チームに加入する際、以下の資料を読んでおいてください。
 
 - 内部開発
-  - <https://github.com/epkotsoftware/dev-proposal/tree/main/documents/dev>
+  - <https://github.com/epkotsoftware/dev-docs/blob/main/developers.md>
 
 ### 面談準備・内部開発再現
 
