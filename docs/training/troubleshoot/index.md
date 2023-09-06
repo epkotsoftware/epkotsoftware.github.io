@@ -73,6 +73,14 @@ VSCodeを再起動し、もう一度試してみましょう。
 
 - [Docker トラブルシューティング](./../docker/troubleshoot.md)
 
+### CBC
+
+> CBCの研修資料を開くと以下のエラーが出る。
+> The website encountered an unexpected error. Please try again later.
+
+[CBC](https://cbc-study.com/)は外部サイトで、EPKOTが作成している資料ではないので復旧を待つしかありません、  
+過去数回ありますが大体1日程度で復旧するため、先のカリキュラムの動画学習や[入社前研修](./../../public/t/index.md)等の復習をしましょう。
+
 ## コーダー編
 
 ### CSSを変えても画面に反映されない
