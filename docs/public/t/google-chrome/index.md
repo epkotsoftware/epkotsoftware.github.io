@@ -53,12 +53,24 @@
 - テスト用デバイス（Desktop Test）を作成
   - 「Edit...」 でデバイスを追加することが可能です。  
     スクリーンショットもこれで作成すると、ファイルサイズが抑えられ、GitHubに添付しても見やすくなります。  
-    - Device Name: Desktop Test
-    - Width: 1024
-    - Height: 768
-    - Device pixel ratio: 1
+  - デバイス1 〜 2023年時点で最も多い画面サイズ  
+    ![google_chrome_dev_tools_device_desktop_edit](./images/google_chrome_dev_tools_device_desktop_edit.png)  
+    - Device Name: Desktop Test (1920x1080)
+    - Width: `1920`
+    - Height: `1080`
+    - Device pixel ratio: `1`
     - User agent string: 未入力
-    - User agent type: Desktop
+    - User agent type: `Desktop`
+  - デバイス2 〜 デバイス1の横幅の約半分（Windowを並べて閲覧することを想定）
+    - Device Name: Desktop Test (950x1080)
+    - Width: `950`
+    - Height: `1080`
+    - その他設定はデバイス1と同じ
+  - デバイス3 〜 スクリーンショット用
+    - Device Name: Desktop Test (1280x720)
+    - Width: `1280`
+    - Height: `720`
+    - その他設定はデバイス1と同じ
 
 ### その他
 
