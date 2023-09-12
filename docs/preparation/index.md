@@ -24,6 +24,7 @@ EPKOTのメールアドレスができたら
 ### GitHubアカウント作成
 
 研修で使用するGitHubのアカウント作成を行います。  
+組織アカウントに参加する必要があるため、入社後にアカウント情報（Username）を担当に伝えて下さい。  
 
 - [GitHub](./../public/preparation/github/index.md)
 
@@ -63,10 +64,3 @@ GitやVSCode等、主要のソフトは除いています。
 - Office 〜 ブラウザでOfficeを無料で使う
   - 【Win・Mac】 Office on the web
     - <https://www.office.com/>
-
-## 予習
-
-入社前に学習したい方は以下の予習を行なってください。  
-研修ではパソコンの使用は慣れている前提で話が進みます。
-
-- [予習](./lesson/index.md)
