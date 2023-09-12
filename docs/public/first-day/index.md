@@ -128,7 +128,22 @@ VSCodeの細かい設定を行います。
     },
     // 拡張機能: markdownlint 設定
     "markdownlint.config": {
-        "MD033": false // html: Markdown のテーブル内改行で<br>を使うことがあるため
+        "MD010": {
+            // [MD010:no-hard-tabs] 設定
+            "code_blocks": false // コードブロック内のタブ文字はチェック対象外
+        },
+        "MD024": {
+            // [MD024:no-duplicate-heading]  設定
+            "siblings_only": true // 兄弟の見出しのみ重複チェックをする
+        },
+        "MD033": {
+            // [MD033:no-inline-html] 設定
+            "allowed_elements": [
+                "br", //  Markdown のテーブル内改行で<br>を使うことがあるため許可
+                "details", // 折りたたみセクション許可 https://docs.github.com/ja/enterprise-cloud@latest/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-collapsed-sections
+                "summary", // 折りたたみセクション許可 https://docs.github.com/ja/enterprise-cloud@latest/get-started/writing-on-github/working-with-advanced-formatting/organizing-information-with-collapsed-sections
+            ]
+        },
     },
     // 拡張機能: Code Spell Checker 設定
     "cSpell.ignoreWords": [
