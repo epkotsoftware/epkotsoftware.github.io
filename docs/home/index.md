@@ -4,6 +4,10 @@
 
 - <https://epkotsoftware.co.jp/>
 
+## PC貸与
+
+- [PC貸与](./../rules/pc-loan/index.md)
+
 ## 会社メール設定
 
 - [Thunderbird設定](./../thunderbird/index.md)
@@ -19,10 +23,4 @@
 
 新人研修のページです。
 
-- [新人研修に参加する方へ](../training/index.md)
-
-## 学習
-
-EPKOTで現場経験がある方向けのページです。
-
-- [学習](./../learning/index.md)
+- [新人研修に参加する方へ](./../public/top/index.md)
