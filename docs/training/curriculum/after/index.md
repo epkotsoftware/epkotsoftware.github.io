@@ -1,0 +1,37 @@
+# 新人研修　〜　カリキュラム終了
+
+## はじめに
+
+新人研修の必須科目としては以上となります。  
+これからは面談対策・自己学習に入っていきます。
+
+## Laravel CRUD
+
+LaravelでのCRUD機能を作成出来るレベルまで学習しましょう。  
+※ **作成中の部分もあるため、カリキュラム外となっていますが、今後カリキュラムに組み込み予定です。**
+
+- [Laravel CRUD](./../../laravel/crud/index.md)
+
+## 内部開発チーム
+
+内部開発チームに加入する際、以下の資料を読んでおいてください。
+
+- 内部開発
+  - <https://github.com/epkotsoftware/dev-docs/blob/main/developers.md>
+
+## 面談準備・内部開発再現
+
+面談に関する情報や、内部開発の資料は以下にまとめています。  
+アクセス出来ない場合は講師までお問い合わせください。  
+
+- 面談準備
+  - <https://github.com/epkotsoftware/dev-proposal/tree/main/documents/training/interview>
+- [面談対策](./../../interview/index.md)
+
+## 自己学習
+
+ここまでのカリキュラムの復習をしたら  
+自己学習に進みましょう。  
+書籍一覧や、HTML・JavaScript資料及び課題もあります。
+
+- [自己学習](./../../../self-learning/index.md)
