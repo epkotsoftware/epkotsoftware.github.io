@@ -89,4 +89,4 @@
 
 ## 用語集
 
-- [用語集](./../glossary.md) 参照
+- [用語集](./../../public/glossary/index.md) 参照
