@@ -72,7 +72,7 @@ Dropbox等、共有しているファイルの扱いには注意しましょう�
 
 エンジニアのWeb検索方法については以下にまとめています。  
 
-- [Web検索](./../../notes/websearch/index.md)
+- [Web検索](./../../../notes/websearch/index.md)
 
 ## 学習方法
 
