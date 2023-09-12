@@ -2,8 +2,7 @@
 
 ## はじめに
 
-入社前に予習をしたいという声が多かったため、このページを用意しました。  
-入社前ですので強制はしませんが、新人研修ではパソコンが扱える前提で話が進みますので  
+新人研修ではパソコンが扱える前提で話が進みますので  
 「[パソコンが不慣れな方へ](#パソコンが不慣れな方へ)」は予め確認しておくことをおすすめします。
 
 ## パソコンが不慣れな方へ
@@ -61,12 +60,19 @@ Dropbox等、共有しているファイルの扱いには注意しましょう�
 
 ### ショートカットキー
 
-- [未経験エンジニア必見！ショートカットキー （Windows・macOS・Chrome・VSCode）](https://zenn.dev/seiya0/articles/idea-keyboard-shortcuts)
+- `未経験エンジニア必見！ショートカットキー （Windows・macOS・Chrome・VSCode）`
+  - <https://zenn.dev/seiya0/articles/idea-keyboard-shortcuts>
 
 ### タイピング
 
 - 高速タイピング練習のコツ｜3日でマスター！タッチタイピング（ブラインドタッチ）【初心者向け入門講座】
   - <https://youtu.be/XiFZnCZEG1E>
+
+## 検索
+
+エンジニアのWeb検索方法については以下にまとめています。  
+
+- [Web検索](./../../notes/websearch/index.md)
 
 ## 学習方法
 
@@ -84,50 +90,7 @@ Dropbox等、共有しているファイルの扱いには注意しましょう�
   - プログラミングにはやってはいけない勉強法がある！？爆速で成長する王道のプログラミング学習法を紹介！
     - <https://youtu.be/ZJqVQJwvwNI>
 
-## 予習
-
-実践については研修時に行います。  
-まずは実際に動かしてみたり動画を見て必要な知識や  
-プログラミングはどういうものなのかをイメージをつかみましょう。
-
-### プログラムを動かしてみる
-
-以下のサイトでコードを動かすことができます。
-
-- `paiza.io`
-  - <https://paiza.io/ja/projects/new>
-
-「PHP」という言語を選択して以下のコードを実行してみましょう。
-
-```php
-<?php
-
-function same($value1, $value2) {
-    return $value1 === $value2;
-}
-
-$result1 = same(1, 1);
-$result2 = same(1, 2);
-$result3 = same(1, '1');
-
-var_dump($result1, $result2, $result3);
-```
-
-以下のように出力されます。
-
-```txt
-bool(true)
-bool(false)
-bool(false)
-```
-
-### 検索
-
-エンジニアのWeb検索方法については以下にまとめています。  
-
-- [Web検索](./../../notes/websearch/index.md)
-
-### 学習方法について
+## 学習方法について
 
 - FAQ
   - ★動画学習の時に、話すのが早すぎてついていけない。
@@ -149,66 +112,3 @@ bool(false)
         - <https://www.google.com/search?q=mvc&tbm=isch>
       - リアルタイム検索は障害情報等を確認する時に便利、以下は「AWS」を検索した例
         - <https://search.yahoo.co.jp/realtime/search?p=aws>
-
-### 動画
-
-- Webアプリケーションを作るために学ぶべき技術
-  - <https://www.youtube.com/watch?v=aC4O0thuTyw>
-- Webプログラミングの始め方
-  - <https://www.youtube.com/watch?v=zxX8YMTxvyI>
-- Chrome DevToolsの使い方を徹底解説！Chrome Developer Toolsを使いこなすと開発効率が上がる！
-  - <https://youtu.be/awRkFcv51r4>
-  - 設計やテストエビデンス等で、スクリーンショットを撮る事が多いです。
-    - DevToolで 「Ctrl」 + 「Shift」を押しながら 「P」 を押すと、コマンドパレットが出るので  
-      「screenshot」と打つと、いくつかのキャプチャ方法が出てきます。
-      - ![google_chrome_dev_tools](./../../image/google_chrome_dev_tools.png)
-      - `Capture area screenshot` : 手動で選択範囲を指定してキャプチャ、画面上のカーソルが「+」になるのでドラッグして範囲を決める。
-      - `Capture full size screenshot` : スクロールした分も含めてページ全体をキャプチャ
-      - `Capture node screenshot` : 選択しているノードをキャプチャ
-      - `Capture screenshot` : iPhone等のフレームも含めてキャプチャ、顧客向けの資料作成に便利。
-- HTML講座
-  - <https://www.youtube.com/playlist?list=PLwM1-TnN_NN457PTxsvNXxVxN8fkbYHKU>
-- CSS講座
-  - <https://www.youtube.com/playlist?list=PLwM1-TnN_NN5jWN09yjtxWng2XZa88ate>
-- JavaScript講座
-  - <https://www.youtube.com/playlist?list=PLwM1-TnN_NN7-zdRV8YsGUB82VVhfYiWW>
-- PHPプログラミング入門講座🔰【初心者でも1時間で学べるPHP入門！フル字幕】
-  - <https://youtu.be/J_pASVQXElA>
-- 【基本知識】GitHubとは？できることや基礎用語を解説！
-  - <https://youtu.be/yzNPC_QzgFM>
-- 【Git入門】Git + Github使い方入門講座
-  - <https://youtu.be/LDOR5HfI_sQ>
-
-### サイト
-
-- HTML&CSS入門 Webデザインをイチから学ぼう
-  - <https://saruwakakun.com/html-css/basic>
-  - HTML・CSSの基礎について分かりやすく解説があります。
-- JavaScript入門
-  - <https://www.javadrive.jp/javascript/>
-  - 変数・配列・関数は、PHP等の他の言語でも存在するものになります。  
-    しっかり学んでおくと、今後の学習がスムーズに進みます。
-
-### 用語集
-
-現場等で使われる用語は  
-以下の資料にまとめています。
-
-- [用語集](./../../training/glossary.md)
-
-### 基本情報技術者試験
-
-資格取得は必須ではありませんが  
-基本情報技術者試験の学習は実務でも必要な、知識が身につきます。
-
-- [基本情報技術者試験](./../../certifications/index.md#基本情報技術者試験)
-
-## その他
-
-### 読解力
-
-この業界では仕様書・設計書・説明資料等、ドキュメントを読む機会が非常に多く  
-文章を読めるだけではなく、適切に解釈し、要約するスキルが求められます。  
-
-- あなたの読解力をテスト！読み解く力を鍛える方法とは？
-  - <https://www.sokunousokudoku.net/media/?p=2802>
