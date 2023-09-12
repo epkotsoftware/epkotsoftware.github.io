@@ -34,6 +34,11 @@ IPAの資料は以下になります。
     - 解答
       - <https://www.ipa.go.jp/news/2022/shiken/gmcbt80000007cfs-att/fe_kamoku_b_set_sample_ans.pdf>
 
+## 応用情報技術者試験
+
+- `応用情報技術者試験まとめ（申し込み・資料・書籍・過去問）`
+  - <https://zenn.dev/seiya0/articles/idea-applied-information-technology-engineer-exam>
+
 ## JSTQB認定テスト技術者資格
 
 - `YouTube: JSTQB`
