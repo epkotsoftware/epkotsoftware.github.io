@@ -347,41 +347,7 @@ LaravelのバージョンがCBCと異なるため、一つ一つコードを理�
 
 ## バージョン管理システム編
 
-ここまでバージョン管理システムとしてGit + GitHubを使用してきました。  
-他にもSubversion（SVN）等があり、現在でも使われている現場が多いです。  
-運用方法についても現場によって様々ですが、一般的なgit flow等の動画も紹介します。
-
-- 動画
-  - バージョン管理ツールの2大勢力！Git VS SVN
-    - <https://youtu.be/jOFSn59q6IY>
-  - 【Git入門】Git + Github使い方入門講座🐒Gitの仕組みや使い方を完全解説！パーフェクトGit入門！
-    - <https://youtu.be/LDOR5HfI_sQ>
-  - イケてるgitのブランチ運用｜git flowとgithub flowとは！？
-    - <https://youtu.be/0ge7ZJQvYLw>
-
-Git で `master` という名称のブランチが使われていることが多いですが  
-現在では `main` がデフォルトとなっています。
-
-- Twitter、コードやドキュメント内の用語「Whitelist/Blacklist」「Master/Slave」「Dummy value」などを好ましい用語へ置き換え、具体例も発表
-  - <https://www.publickey1.jp/blog/20/twitterwhitelistblacklistmasterslavedummy_value.html>
-
-### バージョン管理システム編課題
-
-ここまで課題をアップしてきた自分のFeatureブランチを  
-`main` ブランチへマージするPR(Pull Request)を出しましょう。
-
-- 「Compare changes」画面
-  1. <https://github.com/epkotsoftware/training/compare/main...feature/{user}>
-  1. ブランチを `base: main ← compare: feature/{★ユーザー名}` に設定してください。
-  1. 「Create pull request」ボタンを押下してください。「Open a pull request」画面に遷移します。
-- 「Open a pull request」画面
-  1. 「Title」を「【バージョン管理システム編課題】」等、適当に入力してください。
-  1. 「Reviewers」講師を選択しましょう。
-  1. 「Assignees」に自分を選択しましょう。
-  1. 「Create pull request」ボタンを押下してください。
-- 研修講師へ、レビュー依頼をしてください。
-- 問題なければ研修講師がマージ＆Featureブランチを削除します。
-  - 今後もtrainingリポジトリの自分のユーザーディレクトリを使用したい場合は`main`ブランチをお使いください。
+- [バージョン管理システム編](./curriculum/vcs/index.md)
 
 ## Git編
 
