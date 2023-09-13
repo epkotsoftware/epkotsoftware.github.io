@@ -44,14 +44,14 @@ PR一覧画面を出しましょう。
 #### PR作成
 
 PRを作成していきましょう。  
-途中で問題が発生した場合、
+途中で問題が発生した場合、講師に連絡してください。
 
 - PR一覧画面
   - 「`New pull request`」ボタンをクリックし、「`Compare changes`」画面を出し  
     ブランチを「`base: main` ← `compare: feature/{★ユーザー名}`」に設定してください。  
     下部に出てくる差分を確認し、問題なければ  「`Create pull request`」ボタンでPR作成画面を出します。  
     ![github-pull-requests](./images/github-comparing-changes.png)  
-- PR作成画面
+- PR作成画面  
     ![github-open-a-pull-request](./images/github-open-a-pull-request.png)  
   1. 「Title」を「【バージョン管理システム編課題】」等、適当に入力してください。
   1. 「Reviewers」講師を選択しましょう。
