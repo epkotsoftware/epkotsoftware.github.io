@@ -56,173 +56,15 @@
 
 ## はじめに
 
-前提として、全てを理解する必要はありません。  
-研修では広く浅く楽しみながら学び、分からない所は  
-研修担当者に聞いたり、後で調べるためのワードだけ覚えておき  
-必要になった時、時間が出来た時に深く学習していきましょう。  
-
-まずは、Webプログラミングのイメージをつかみましょう。  
-課題の提出は「GitHub」を使うので何をするものか確認してください  
-提出の仕方については、提出時にお教えします。  
-また、エンジニアになると検索することが多くなりますので検索力も身につけましょう。
-
-- 動画
-  - <https://youtube.com/playlist?list=PLCX3wwS3Gg4x7RMa9JE5uelCqvzmdmVfA>
-    - `4:57` 【初心者向け】Webエンジニアとして独り立ちするために学ぶべきスキルマップ【プログラミング】
-    - `6:56` 【初心者向け】Webプログラミングの始め方 スキル0⇒1のためにやるべき具体的な手順
-    - `11:02` GitHubとは？【分かりやすい解説シリーズ #14】【プログラミング】
-    - `12:30` 8割の人が知らない検索術・ググり方【知らないと損】
-    - `23:25` エンジニアは検索力が大事。プログラミングスキル向上にググり力は必須です。
-    - `14:39` プログラミングにおける正しい質問の仕方とは？おすすめ質問サイトも紹介
-
-### 休止時間
-
-ほぼ全てがPCを使った研修となるため  
-VDT症候群予防の観点から、1時間連続でPC上で作業した場合、10分程度の休止時間(ディスプレイを見ない時間)を設けましょう。  
-休止時間の使い方はお任せします（情報整理、書籍での学習、小休憩、運動等）  
-
-上記の休止時間を考慮して、1日の研修時間は**8.0h**ではなく**6.5h**程度が目安です。
+- [はじめに](./curriculum/introduction/index.md)
 
 ## 準備
 
-### Git設定確認
-
-[GitHub ～ Git設定確認](./../github/index.md#git設定確認) の設定が漏れていると  
-コミットが失敗しますので再度ご確認ください。
-
-### ブラウザの自動翻訳設定を解除
-
-GitHubを開く時に Microsoft Edge を使用している場合、変に自動翻訳されることがあるので翻訳を解除してください。  
-URLの右の方に「`aあ`」のアイコンがあり、翻訳設定が可能です。
-
-### ユーザーディレクトリ作成
-
-開発環境を構築し、プログラムファイルを格納するための  
-ブランチ(`feature/{★ユーザー名}`)及び、個人フォルダー（ディレクトリ）を作成します。  
-作成方法については以下をご確認ください。
-
-- [研修用リポジトリ(training)利用方法](https://github.com/epkotsoftware/training-docs/blob/main/training/README.md)
-
-### VSCodeでtrainingフォルダを開く
-
-上記の手順でGitHub上には「`feature/{★ユーザー名}`」ブランチにユーザーディレクトリが出来ていて  
-ローカルには「`training`」ディレクトリが出来ているので  
-Visual Studio Code(VSCode) で開きましょう。  
-メニューバー「ファイル」→「フォルダーを開く」→「`training`」フォルダーを選択  
-
-![vscode_training](./../image/vscode_training.png)  
-
-ターミナルが表示されていない場合は  
-メニューバー「表示」→「ターミナル」を押下してください。  
-
-ターミナルの種類はお好みで良いですが「Git Bash」がおすすめです。  
-ターミナルの「`+`」のすぐ横にあるアイコンで選択可能です。
-
-#### ユーザーディレクトリ作成報告
-
-研修担当者にユーザーディレクトリを作成した旨、報告をお願いします。  
-正しく出来ているか確認します。  
-
-**※ 以降は自分のユーザーディレクトリ内で作業をお願いします。**
+- [準備](./curriculum/preparation/index.md)
 
 ## コーダー編
 
-コーダー編は課題提出がありますので予めご確認下さい。  
-つまずいたら質問する前に[トラブルシューティング](./troubleshoot/index.md)を参照してください。
-
-- [研修課題提出](https://github.com/epkotsoftware/training-docs/blob/main/submission/README.md#研修課題提出)
-- [トラブルシューティング](./troubleshoot/index.md)
-
-まずは動画で学習しましょう。
-
-- 動画
-  - <https://youtube.com/playlist?list=PLCX3wwS3Gg4wQs1w27nhrURdByT3cSNBp>
-    - `10:17` 【2021年最新】HTML入門🔰初心者向けにHTMLの基礎を解説！
-    - `11:33` 【CSS入門講座🔰】HTMLとCSSの基本を解説！WEBデザインの言語CSSを理解しよう
-      - ※ 動画内で`<header>`タグが出てきますが`<head>`タグの間違いです。`<header>`タグは別の用途で使用します。
-    - `11:25` 【Web業界の常識】「パス」の書き方、説明できますか？Webデザイナー・プログラマー志望の皆さんへ 初心者向け【HTML・CSS コーディング】
-    - `14:24` 【Webデザイナー・プログラマーになりたい皆さんへ】Web業界の常識シリーズ10選！知らないままではマズいです… キャッシュ/スーパーリロード/アクセス制限の方法etc【初心者必見】
-    - `8:22` HTML入門講座 #02：初めてのHTMLページを作ろう／ファイル名の付け方
-  - VSCode フォルダ・ファイル追加方法  
-    ![vscode_add_dir_and_file.gif](./../image/vscode_add_dir_and_file.gif)
-
-動画を見終わったら、[CBC](https://cbc-study.com/)の入門コースをやっていきましょう。
-
-- 入門1（コーダー 初級）
-  - <https://cbc-study.com/training/beginner/page1>
-  - <https://cbc-study.com/training/beginner/page2>
-  - <https://cbc-study.com/training/beginner/page3>
-  - <https://cbc-study.com/training/beginner/page4>
-- 入門2（コーダー 中級）
-  - <https://cbc-study.com/training/beginner/page5>
-  - <https://cbc-study.com/training/beginner/page6>
-  - <https://cbc-study.com/training/beginner/page7>
-- 入門3（コーダー 上級）
-  - <https://cbc-study.com/training/beginner/page8>
-  - **注意: [「8. 枠が完成！」](https://cbc-study.com/training/beginner/page8#pl-12) の「このようになります。」のリンクをクリックすると誤ったサンプルが出てきますので無視してください。**
-
-2022/6/15でブラウザの「`Internet Explorer(IE)`」が廃止されることにより  
-CSSの「`grid-template`」が、ほぼ全てのブラウザでサポートされます。  
-今後、使われる事が増えそうなので以下も覚えておきましょう。
-
-- 動画
-  - 【HTML/CSSレイアウト】Gridを使うとFlexboxより簡単に複雑なレイアウトを組めます
-    - <https://youtu.be/cwkkD0ejX8Q>
-
-### コーダー編課題
-
-1日で出来る範囲で、自由にページを作成しましょう。  
-思いつかなければ「実践を踏まえたコーディング」で作ったページのレイアウト変更でもOKです。  
-課題提出についてはGitHubで行います。
-
-- 要件
-  - 対応ブラウザ
-    - Google Chrome
-  - 表示
-    - 自分のユーザーディレクトリの「`01_beginner/htdocs/index.html`」をブラウザで開くと、作成したページが見れる。
-    - 横幅:`1024px` で表示が崩れないようにする（確認方法は[横幅を指定した確認方法](#横幅を指定した確認方法)を参照）
-      - 横スクロールできないこと
-      - 文字・画像が切れていないこと
-  - その他
-    - 自分のユーザーディレクトリの「`01_beginner/htdocs/`」ディレクトリ内にHTML・CSSが入っていること
-- [フリー素材](./../free-materials/index.md)
-
-#### 横幅を指定した確認方法
-
-1. Google Chrome のDevToolsを開く(Windowsであれば「F12」キー)
-1. デバイスツールバーを開く
-  ![google_chrome_dev_tools_device](./../image/google_chrome_dev_tools_device.png)
-1. デバイスを選択する
-  ![google_chrome_dev_tools_device_desktop_test](./../image/google_chrome_dev_tools_device_desktop_test.png)  
-
-- テスト用デバイス（Desktop Test）を作成
-  - 「Edit...」 でデバイスを追加することが可能です。  
-    スクリーンショットもこれで作成すると、ファイルサイズが抑えられ、GitHubに添付しても見やすくなります。
-    - Device Name: Desktop Test
-    - Width: 1024
-    - Height: 620
-    - Device pixel ratio: 1
-    - User agent string: 未入力
-    - User agent type: Desktop
-
-#### コーダー編課題提出
-
-以下を参照してください。
-
-- [研修課題提出](https://github.com/epkotsoftware/training-docs/blob/main/submission/README.md#研修課題提出)
-
-### Chrome DevTools
-
-- Chrome DevToolsの使い方を徹底解説！Chrome Developer Toolsを使いこなすと開発効率が上がる！
-  - <https://youtu.be/awRkFcv51r4>
-  - 設計やテストエビデンス等で、スクリーンショットを撮る事が多いです。
-    - DevToolで 「Ctrl」 + 「Shift」を押しながら 「P」 を押すと、コマンドパレットが出るので  
-      「screenshot」と打つと、いくつかのキャプチャ方法が出てきます。
-      - ![google_chrome_dev_tools](./../image/google_chrome_dev_tools.png)
-      - `Capture area screenshot` : 手動で選択範囲を指定してキャプチャ、画面上のカーソルが「+」になるのでドラッグして範囲を決める。
-      - `Capture full size screenshot` : スクロールした分も含めてページ全体をキャプチャ
-      - `Capture node screenshot` : 選択しているノードをキャプチャ
-      - `Capture screenshot` : iPhone等のフレームも含めてキャプチャ、顧客向けの資料作成に便利。
+- [コーダー編](./cbc/beginner/index.md)
 
 ## マークアップエンジニア編
 
@@ -339,7 +181,7 @@ Docker Desktop をインストールしてください。
 ここまでで、VSCodeが正しく開かれていない方が多いので再度確認しましょう。  
 下図のように、左のエクスプローラーの所に「`TRAINING`」と表示されていることを確認してください。  
 
-![vscode_training](./../image/vscode_training.png)
+![vscode_training](./curriculum/preparation/images/vscode_training.png)
 
 「`TRAINING`」が表示されていなければ、VSCodeを開き直しましょう。
 
@@ -575,17 +417,7 @@ Gitについて、より深く学んでいきます。
 
 ## 1対1PG研修
 
-講師によるプログラミング研修です。  
-講師がスケジュール調整をしますので、次のカリキュラムに進んでください。  
-
-```txt
-■事前に準備するもの
-・PHP実行環境（paiza.io不可）
-　・index.php以外のPHPファイルを置いて、動作確認が出来るまで
-・Slackハドルミーティング環境
-　・マイク・スピーカーが使えること
-　・画面共有を行うため、デスクトップの整理など
-```
+- [1対1PG研修](./curriculum/individual-pg-training/index.md)
 
 ## データベース編
 
