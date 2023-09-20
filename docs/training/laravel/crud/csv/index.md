@@ -17,7 +17,7 @@
 
 | URI | HTTP<br>メソッド | 機能・画面コード | 種別 | 機能・画面名 | 備考 |
 | --- | --- | --- | --- | --- | --- |
-| admin/jobs/csv | POST   | admin.jobs.csv   | 機能 | 職業 CSVダウンロード |  |
+| admin/jobs/csv | POST   | admin.jobs.csv   | 機能 | 職業 CSVダウンロード | Controllerメソッド名は「`downloadCsv`」 |
 
 ## CSVについて
 
@@ -27,7 +27,7 @@
 
 ## Controllers
 
-`JobController`にCSVのストリームダウンロードを行う「`csv`」メソッドを追加します。  
+`JobController`にCSVのストリームダウンロードを行う「`downloadCsv`」メソッドを追加します。  
 また、他の機能でも使い回しが出来るように「`streamDownloadCsv`」メソッドにダウンロード処理  
 「`getJobCsvRecords`」メソッドでレコード作成処理を切り出しています。  
 こうすることで、TSVダウンロード等の機能拡張が容易になります（区切り文字をTABに変えるだけ）。
@@ -39,7 +39,7 @@ app/Http/Controllers/JobController.php
 ```
 
 ```php
-    public function csv()
+    public function downloadCsv()
     {
         // CSVダウンロード
         //   CSVレコード配列取得
@@ -200,7 +200,7 @@ routes/web.php
 ```
 
 ```php
-Route::post('csv', 'csv')->name('.csv');
+Route::post('csv', 'downloadCsv')->name('.csv');
 ```
 
 ## Views
