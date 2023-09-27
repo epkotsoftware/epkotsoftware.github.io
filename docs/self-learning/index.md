@@ -2,9 +2,15 @@
 
 ## はじめに
 
-[新人研修](./../training/training.md)カリキュラムが終わったら自己学習に入ります。  
+新人研修カリキュラムが終わったら自己学習に入ります。  
 不安なところがあれば新人研修カリキュラムに戻り復習しても良いです。  
 現場参画が決まった場合、現場で求められる技術の学習をしましょう。  
+
+## 新人研修
+
+- [新人研修に参加する方へ](./../public/top/index.md)
+  - [入社前研修](./../public/t/index.md)
+- [新人研修](./../training/curriculum/index.md)
 
 ## キャリアパス
 
@@ -70,8 +76,8 @@
 
 | 型 | 説明 | 用途 |
 | --- | --- | --- |
-| CHAR型   | 固定長の文字列を格納するための型。空白でパディングされる可能性あり。 | 桁数が固定されているデータ（例: 郵便番号）の格納に適しています。 |
-| VARCHAR型 | 可変長の文字列を格納するための型。メモリ使用効率がCHAR型より高い。 | 一般的なテキストデータの格納に適しており、データ長が変動する場合に適切です。 |
+| CHAR型   | 固定長の文字列を格納するための型。<br>空白でパディングされる可能性あり。 | 桁数が固定されているデータ（例: 郵便番号）の格納に適しています。 |
+| VARCHAR型 | 可変長の文字列を格納するための型。<br>メモリ使用効率がCHAR型より高い。 | 一般的なテキストデータの格納に適しており、データ長が変動する場合に適切です。 |
 | TEXT型    | 非常に大きなテキストデータを格納するための型。 | 長文や改行を含むデータ、またはリッチテキストの保存に適しています。 |
 
 - `MySQL :: MySQL 8.0 リファレンスマニュアル :: 11.3.2 CHAR および VARCHAR 型`
@@ -113,47 +119,6 @@ Laravelなどのフレームワークでも、デフォルトで`bigint unsigned
   - <https://dev.mysql.com/doc/refman/8.0/ja/date-and-time-types.html>
 - `Laravel + MySQL timestamp型の2038年問題対策`
   - <https://zenn.dev/seiya0/articles/tech-laravel-mysql-2038-year-problem-solutions>
-
-#### 論理削除
-
-- `論理削除（ソフトデリート）とは - 意味をわかりやすく - IT用語辞典 e-Words`
-  - <https://e-words.jp/w/論理削除.html>
-
-| 特徴 | 物理削除 | 論理削除 |
-| --- | --- | --- |
-| レコード削除 | SQLのDELETE文で削除<br>データが永久に削除される | SQLのUPDATE文で削除<br>削除扱いになり、レコードは保持される |
-| レコード復元 | 不可 | SQLのUPDATE文で復元可 |
-| 関連レコード | 関連レコードも削除 | 関連レコードは保持される |
-| データベースのサイズ | 削除されたデータの領域が解放される | 削除されたデータの領域は解放されない<br>論理削除用のカラムのサイズが追加される。 |
-| パフォーマンス | インデックス再計算による影響あり | インデックス再計算の影響が少ない可能性あり|
-
-以下は、論理削除カラムの例です。
-
-| カラム名の例 | データ型 | 解説 | 使用方法 |
-| --- | :---: | --- | --- |
-| `deleted_at` | TIMESTAMP<br>or<br>DATETIME | Laravel等のフレームワークで利用され<br>削除日時がわかるメリットがあります。 | 未削除: `null`<br>削除: 削除日時 |
-| `is_deleted`<br>`is_delete`<br>`delete_flag`<br>`delete_flg` | TINYINT<br>or<br>BOOLEAN<br>or<br>BIT | 削除日時が不要な場合に利用され<br>容量が少なくて済むのがメリットです。<br>レコード数の多いプロジェクトや、古いプロジェクトで利用されることが多いです。 | 未削除: `0`<br>削除: `0`以外（基本は`1`） |
-
-以下はMySQLのCREATE TABLEの例です。  
-
-```sql
-CREATE TABLE `<テーブル名>` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
-)
-```
-
-```sql
-CREATE TABLE `<テーブル名>` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `deleted_at` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-);
-```
-
-- `Laravel 10.x Eloquentの準備 ソフトデリート`
-  - <https://readouble.com/laravel/10.x/ja/eloquent.html#soft-deleting>
 
 ## テスト
 
