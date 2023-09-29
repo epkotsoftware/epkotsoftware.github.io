@@ -87,8 +87,8 @@ CBCと開発環境が異なるので、気を付けてください。
   - <https://cbc-study.com/training/advanced/page2>
   - <https://cbc-study.com/training/advanced/page3>
   - <https://cbc-study.com/training/advanced/page4>
-    - **[②テーブルの作成](https://cbc-study.com/training/advanced/page4#pl-12) でアニメーションGifでは「`left_x`」、「`top_y`」カラムの NULL にチェックを入れ忘れているのでご注意ください（CREATE文で作成した場合は問題なし）。**
-      ![cbc_sortable.png](./../image/cbc_sortable.png)  
+    - **[②テーブルの作成](https://cbc-study.com/training/advanced/page4#pl-12) でアニメーションGifでは「`left_x`」、「`top_y`」カラムの NULL にチェックを入れ忘れているのでご注意ください（CREATE文で作成した場合は問題なし）。**  
+      ![cbc_sortable.png](./images/cbc_sortable.png)  
 - 応用2（フロントエンドエンジニア 中級1）
   - <https://cbc-study.com/training/advanced/page5>
     - PDO(DB_DNS)設定について
