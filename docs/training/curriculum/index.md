@@ -14,7 +14,7 @@
 | 4 | 1〜4日 | 0ヶ月 | [マークアップエンジニア編](./../cbc/basic/index.md) |  |
 | 5 | 1〜5日 | 0ヶ月 | [フロントエンドエンジニア編](./../cbc/advanced/index.md) |  |
 | 6 | 0〜3日 | 0ヶ月 | [Linux編](./../../public/t/linux/index.md) |  |
-| 7 | 2〜10日 | 0ヶ月 | [バックエンド編](./../../public/) |  |
+| 7 | 2〜10日 | 0ヶ月 | [バックエンド編](./../cbc/backend/index.md) |  |
 | 8 | 半日〜1日 | 1ヶ月 | [バージョン管理システム編](./vcs/index.md) |  |
 | 9 | 1 〜 2日 | 1ヶ月 | [Git編](./../git/index.md) |  |
 | 10 | 1 〜 2日 | 1ヶ月 | [1対1PG研修](./individual-pg-training/index.md) |  |
