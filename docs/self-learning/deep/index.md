@@ -5,7 +5,8 @@
 新人研修カリキュラム及び、自己学習を終え、  
 現場経験を積んだエンジニア向けの資料をまとめています。
 
-- [新人研修カリキュラム](./../../training/training.md)
+- [入社前研修](./../public/t/index.md)
+- [新人研修](./../training/curriculum/index.md)
 - [自己学習](./../index.md)
 
 ## データベース
