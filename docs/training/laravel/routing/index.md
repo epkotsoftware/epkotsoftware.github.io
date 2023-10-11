@@ -28,7 +28,7 @@ URLは以下になります。
 | `admin/index.php` | 管理ログイン画面 | `https://example.com/admin/index.php` |
 | `admin/products/index.php` | 商品一覧画面 | `https://example.com/admin/products/index.php` |
 | `admin/products/create.php` | 商品新規画面 | `https://example.com/admin/products/create.php` |
-| `admin/ranking/index.php` | ランキング画面 | `https://example.com/ranking/index.php` |
+| `ranking/index.php` | ランキング画面 | `https://example.com/ranking/index.php` |
 
 ※ **URLの`index.php`は省略可**  
 
@@ -317,13 +317,13 @@ Controllerクラスはデフォルトで「`App\Http\Controllers`」という名
 今回の場合は`routes/web.php`ファイルの上部に、以下を追記する必要があります。  
 
 ```php
-// 「\App\Http\Controllers\AdminController」クラスに「AdminController」という名前でアクセス出来るようにする。
+// 「\App\Http\Controllers\AdminController」クラスに「AdminController」という名前でアクセスできるようにする。
 use App\Http\Controllers\AdminController;
-// 「\App\Http\Controllers\HomeController」クラスに「HomeController」という名前でアクセス出来るようにする。
+// 「\App\Http\Controllers\HomeController」クラスに「HomeController」という名前でアクセスできるようにする。
 use App\Http\Controllers\HomeController;
-// 「\App\Http\Controllers\ProductController」クラスに「ProductController」という名前でアクセス出来るようにする。
+// 「\App\Http\Controllers\ProductController」クラスに「ProductController」という名前でアクセスできるようにする。
 use App\Http\Controllers\ProductController;
-// 「\App\Http\Controllers\RankingController」クラスに「RankingController」という名前でアクセス出来るようにする。
+// 「\App\Http\Controllers\RankingController」クラスに「RankingController」という名前でアクセスできるようにする。
 use App\Http\Controllers\RankingController;
 ```
 
