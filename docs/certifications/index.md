@@ -33,6 +33,8 @@ IPAの資料は以下になります。
       - <https://www.ipa.go.jp/news/2022/shiken/gmcbt80000007cfs-att/fe_kamoku_b_set_sample_qs.pdf>
     - 解答
       - <https://www.ipa.go.jp/news/2022/shiken/gmcbt80000007cfs-att/fe_kamoku_b_set_sample_ans.pdf>
+- `問題冊子・解答例（2023年度、令和5年度）`
+  - <https://www.ipa.go.jp/shiken/mondai-kaiotu/sg_fe/koukai/2023r05.html>
 
 ## 応用情報技術者試験
 
