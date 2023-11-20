@@ -20,9 +20,17 @@ LaravelでのCRUD機能を作成出来るレベルまで学習しましょう。
 
 - [Laravel CRUD](./../../laravel/crud/index.md)
 
+## eラーニングシステム確認
+
+LaravelCRUDを復習しながら、実際に開発しているeラーニングシステムの設計やコード、動作の確認をしましょう。  
+アクセス出来ない場合は講師までお問い合わせください。  
+
+- eラーニングシステム
+  - <https://github.com/epkotsoftware/dev-docs/blob/main/repositories/dev-laravel-learning/README.md>
+
 ## 内部開発チーム
 
-内部開発チームに加入する際、以下の資料を読んでおいてください。
+講師から内部開発チームに加入を命じられた場合、以下の資料を読んでおいてください。
 
 - 内部開発
   - <https://github.com/epkotsoftware/dev-docs/blob/main/developers.md>
@@ -33,7 +41,7 @@ LaravelでのCRUD機能を作成出来るレベルまで学習しましょう。
 アクセス出来ない場合は講師までお問い合わせください。  
 
 - 面談準備
-  - <https://github.com/epkotsoftware/dev-proposal/tree/main/documents/training/interview>
+  - <https://github.com/epkotsoftware/training-docs/tree/main/interview>
 - [面談対策](./../../interview/index.md)
 
 ## 自己学習
