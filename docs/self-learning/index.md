@@ -27,6 +27,8 @@
 
 ## Linux
 
+- 新人研修
+  - [Linux編](./../public/t/linux/index.md)
 - コマンド
   - `【Linux演習問題】初心者向けLinuxの基本操作編`
     - <https://eng-entrance.com/linux-placetice-basic>
@@ -49,6 +51,12 @@
 新人研修でもデータベースの学習をしていますが  
 設計よりの学習をしましょう。
 
+- 新人研修
+  - [データベース編](./../public/t/database/index.md)
+  - [設計編 〜 データベース設計](./../public/t/design/index.md#データベース設計)
+- 内部開発設計例
+  - [ER図](https://github.com/epkotsoftware/dev-docs/blob/main/repositories/dev-laravel-learning/40_%E5%86%85%E9%83%A8/02_%E5%9F%BA%E6%9C%AC%E8%A8%AD%E8%A8%88/DB/ERD/ERD.md)
+  - [テーブル定義](https://github.com/epkotsoftware/dev-docs/tree/main/repositories/dev-laravel-learning/40_%E5%86%85%E9%83%A8/02_%E5%9F%BA%E6%9C%AC%E8%A8%AD%E8%A8%88/DB/tables)
 - `データベース入門講座`
   - <https://www.youtube.com/playlist?list=PL-1KBX2gDRujQaRgEByueezHBiqHP8KDD>
 - `こんな設計してない？ダメな理由を知って良い設計にしていこう！DB設計・SQLアンチパターン`
@@ -122,6 +130,8 @@ Laravelなどのフレームワークでも、デフォルトで`bigint unsigned
 
 ## テスト
 
+- 新人研修
+  - [テスト編](./../public/t/test/index.md)
 - `設計・テスト研修講義【21新卒技術研修】`
   - <https://youtu.be/zfAo0DyIBJ0>
 
@@ -158,6 +168,8 @@ PHPプログラミング編と重複しているところがあります。
 JavaScriptの学習・課題もあります。
 
 - [プログラミング編](./../training/programming/index.md)
+- 新人研修
+  - [PHPプログラミング編](./../public/t/php/index.md)
 
 ## Docker
 
@@ -195,10 +207,11 @@ CBC研修でもレスポンシブデザインについてありますが、フ�
 特にiOSアプリはデザインで審査が通らなくなるケースもあるので  
 画面設計時は注意が必要です（実際に手戻りが発生した事がありました）。
 
-- 画面部品
-  - [画面部品](./../training/design/forms/forms.html)
-- 画面設計書のイメージ
-  - [画面レイアウト設計](./../training/laravel/crud/design/screens/index.md)
+- 新人研修
+  - [設計編 〜 画面設計](./../public/t/design/index.md#画面設計)
+  - [Laravel CRUD 〜 画面レイアウト設計](./../training/laravel/crud/design/screens/index.md)
+- 内部開発設計例
+  - [画面設計](https://github.com/epkotsoftware/dev-docs/tree/main/repositories/dev-laravel-learning/40_%E5%86%85%E9%83%A8/02_%E5%9F%BA%E6%9C%AC%E8%A8%AD%E8%A8%88/%E7%94%BB%E9%9D%A2)
 - iOS
   - ユーザーインターフェイスのデザインのヒント
     - <https://developer.apple.com/jp/design/tips/>
@@ -255,6 +268,19 @@ Laravelを使わない場合でも、Composerでインストールが可能で�
       - <https://readouble.com/laravel/9.x/ja/mocking.html>
   - Mockery
     - <https://readouble.com/mockery/1.0/ja/>
+
+## アジャイル開発
+
+- アジャイル開発入門！スクラムで実践するアジャイル開発のやり方と勉強法とは
+  - <https://youtu.be/Jm3I6QXzjXw>
+- Scrum Guides
+  - <https://scrumguides.org/>
+  - スクラムガイド（日本語）
+    - <https://scrumguides.org/docs/scrumguide/v2020/2020-Scrum-Guide-Japanese.pdf>
+- アジャイル開発の進め方
+  - <https://www.ipa.go.jp/jinzai/skill-standard/plus-it-ui/itssplus/ps6vr70000001i7c-att/000065606.pdf>
+- 基本情報技術者試験で問われるシステム開発手法の解説！
+  - <https://www.foresight.jp/fe/column/system-development-method/>
 
 ## セキュリティ
 
