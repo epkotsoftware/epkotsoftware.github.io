@@ -178,8 +178,8 @@ IDEである「Visual Studio Community」は個人利用であれば無償で使
 | WPF | Windowsアプリ | WinFormsより大規模開発向け |
 | UWP | Windowsアプリ | Microsoft Storeのアプリ |
 | ASP.NET | Webアプリ | 手法がたくさんあり学習が難しい、現在ではMVCが主流か？ |
-| Xamarin | マルチプラットフォームアプリ | 大した事が出来ず案件は少ない、「.NET MAUI」が主流になると思われる |
-| .NET MAUI | マルチプラットフォームアプリ | 2022/5/23 リリース、将来性がある |
+| Xamarin | マルチプラットフォームアプリ | [2024/5/1 サポート終了](https://dotnet.microsoft.com/ja-jp/platform/support/policy/xamarin) 大した事が出来ず案件は少ない |
+| .NET MAUI | マルチプラットフォームアプリ | 2022/5/23 リリース |
 | Unity | マルチプラットフォームアプリ | 主に3Dゲーム開発に使われる。<br>VBは使えない（VBで作ったクラスライブラリを組み込む事は恐らく可能） |
 
 - `.NETアプリ`
@@ -202,13 +202,11 @@ IDEである「Visual Studio Community」は個人利用であれば無償で使
     - <https://visualstudio.microsoft.com/ja/vs/express/>
 - `DOBON.NET`
   - <https://dobon.net/>
-- `Xamarin とは`
-  - <https://docs.microsoft.com/ja-jp/xamarin/get-started/what-is-xamarin>
 - `Unity を使用した Visual Studio for Mac でのゲーム作成の概要`
   - <https://docs.microsoft.com/ja-jp/visualstudio/mac/unity-walkthrough>
 - `YouTubeチャンネル - dotNET`
   - <https://www.youtube.com/c/dotNET>
-- `C# 入門講座`（Windows Form）
+- `C# 入門講座`（Windows Forms App）
   - <https://www.umayadia.com/CSNyumon/CSNyumonToc.htm>
 - `++C++; // 未確認飛行 C`（WPF、ASP.NET）
   - <https://ufcpp.net/>
@@ -220,6 +218,8 @@ IDEである「Visual Studio Community」は個人利用であれば無償で使
   - <https://atmarkit.itmedia.co.jp/fdotnet/aspnetmvc3/index/index.html>
 - `はじめての ASP.NET MVC4 アプリケーション(C#) - C#でプログラミングあれこれ`（ASP.NET MVC4）
   - <https://fkmt5.hatenadiary.org/entry/20130110/1357829943>
+- `C# Visual Studio 初心者向けプログラミング講座` (Windows Forms App)
+  - <https://www.youtube.com/playlist?list=PLZV2kwgJ0MJH8z3ia7fDXmb6kNsqFot12>
 
 ## Tailwind CSS
 
