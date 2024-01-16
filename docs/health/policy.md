@@ -61,7 +61,6 @@
 - 企業コード：Slackの♯Generalのトピックを見てください。
 - 使用方法：「[専門医へのメール相談窓口「ケアーズLite」利用マニュアル](./files/cares-lite-user-manual.pdf)」ご参照
 
-
 ##### ハラスメントホットライン（社労士への相談窓口）
 
 - URL：<https://h-hotline.elpis.life/for-user/>
