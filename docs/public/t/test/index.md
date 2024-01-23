@@ -14,6 +14,14 @@
     - <https://youtu.be/05iyTsuhahk>
   - ホワイトボックステストとは？ブラックボックステストとの違い
     - <https://youtu.be/H__gN5Jpuvk>
+  - JSTQB <https://www.youtube.com/playlist?list=PLx75ljgfSa715O9xHOEVO_yoncSafKwyZ> （ソフトウェアテスト資格）
+    - `4:00` JSTQBとは　勉強方法
+    - `12:15` JSTQB 1章 テストの基礎
+    - `11:58` JSTQB 2章 ソフトウェア開発ライフサイクル全体を通してのテスト
+    - `10:47` JSTQB 3章 静的テスト
+    - `10:02` JSTQB 4章 テスト技法
+    - `21:06` JSTQB 5章 テストマネジメント
+    - `10:36` JSTQB 6章 テスト支援ツール
 
 動画内でJavaの場合は「JUnit」を使っていますが  
 PHPでは「PHPUnit」を使用します。  
