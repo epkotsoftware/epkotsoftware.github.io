@@ -378,7 +378,7 @@ if ($isError) {
     不備等がないか確認して下さい。
   - 作戦会議までに、面談対策資料や内部開発案件の内容には  
     目を通しておきましょう。
-    - [面談準備](https://github.com/epkotsoftware/dev-proposal/tree/main/documents/training/interview)
+    - [面談準備](https://github.com/epkotsoftware/training-docs/blob/main/interview/README.md)
 - 作戦会議
   - 社長・営業・講師を含め会議を行い  
     スキルシートの修正を行います。
