@@ -26,7 +26,7 @@ LaravelCRUDを復習しながら、実際に開発しているeラーニング�
 アクセス出来ない場合は講師までお問い合わせください。  
 
 - eラーニングシステム
-  - <https://github.com/epkotsoftware/dev-docs/blob/main/repositories/dev-laravel-learning/README.md>
+  - <https://github.com/epkotsoftware/training-docs/blob/main/e-learning/README.md>
 
 ## 内部開発チーム
 
