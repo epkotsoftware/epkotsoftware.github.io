@@ -23,14 +23,14 @@ LaravelでのCRUD機能を作成出来るレベルまで学習しましょう。
 ## eラーニングシステム確認
 
 LaravelCRUDを復習しながら、実際に開発しているeラーニングシステムの設計やコード、動作の確認をしましょう。  
-アクセス出来ない場合は講師までお問い合わせください。  
+アクセス出来ない場合は、総務・内部開発担当までお問い合わせください。  
 
 - eラーニングシステム
   - <https://github.com/epkotsoftware/training-docs/blob/main/e-learning/README.md>
 
 ## 内部開発チーム
 
-講師から内部開発チームに加入を命じられた場合、以下の資料を読んでおいてください。
+内部開発チームに加入を命じられた場合、以下の資料を読んでおいてください。
 
 - 内部開発
   - <https://github.com/epkotsoftware/dev-docs/blob/main/developers.md>
@@ -38,7 +38,7 @@ LaravelCRUDを復習しながら、実際に開発しているeラーニング�
 ## 面談準備・内部開発再現
 
 面談に関する情報や、内部開発の資料は以下にまとめています。  
-アクセス出来ない場合は講師までお問い合わせください。  
+アクセス出来ない場合は、総務・内部開発担当までお問い合わせください。  
 
 - 面談準備
   - <https://github.com/epkotsoftware/training-docs/tree/main/interview>
