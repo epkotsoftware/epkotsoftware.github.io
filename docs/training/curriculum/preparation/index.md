@@ -35,7 +35,8 @@ Visual Studio Code(VSCode) で開きましょう。
 
 ### ユーザーディレクトリ作成報告
 
-研修担当者にユーザーディレクトリを作成した旨、報告をお願いします。  
-正しく出来ているか確認します。  
+「研修進捗」資料の更新をお願いします。
+
+- [研修進捗](https://github.com/epkotsoftware/training-docs/blob/main/training/progress/README.md)
 
 **※ 以降は自分のユーザーディレクトリ内で作業をお願いします。**

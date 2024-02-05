@@ -111,12 +111,14 @@ CBCと開発環境が異なるので、気を付けてください。
   - フレームワークとは？プログラミングに必須のフレームワークを初心者向けに解説！
     - <https://youtu.be/eTCjvTo5KgQ>
 
-## フロントエンドエンジニア編課題
-
-- 「フロントエンドエンジニア編」で作成したファイル
-
-### フロントエンドエンジニア編課題提出
+## 課題提出
 
 以下を参照してください。
 
-- [研修課題提出](https://github.com/epkotsoftware/training-docs/blob/main/submission/README.md#研修課題提出)  
+- [研修課題提出](https://github.com/epkotsoftware/training-docs/blob/main/submission/README.md#研修課題提出)
+
+## 研修進捗資料の更新
+
+課題提出した日付で「研修進捗」資料の更新をお願いします。
+
+- [研修進捗](https://github.com/epkotsoftware/training-docs/blob/main/training/progress/README.md)

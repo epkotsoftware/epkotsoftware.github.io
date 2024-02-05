@@ -43,13 +43,14 @@ LaravelのバージョンがCBCと異なるため、一つ一つコードを理�
   - Routingについては以下で「タスク管理ツール」にアクセスできるようにしてください。
     - <http://localhost:8026/task>
 
-## バックエンド編課題
-
-### バックエンド編課題題提出
+## 課題提出
 
 以下を参照してください。
 
-- [研修課題提出](https://github.com/epkotsoftware/training-docs/blob/main/submission/README.md#研修課題提出)  
+- [研修課題提出](https://github.com/epkotsoftware/training-docs/blob/main/submission/README.md#研修課題提出)
 
-この時点でのレビュー依頼は不要です。  
-バージョン管理システム編にて、PR(Pull Request)の確認で行うため、そのまま次へお進みください。  
+## 研修進捗資料の更新
+
+課題提出した日付で「研修進捗」資料の更新をお願いします。
+
+- [研修進捗](https://github.com/epkotsoftware/training-docs/blob/main/training/progress/README.md)

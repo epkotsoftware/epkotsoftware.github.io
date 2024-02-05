@@ -68,3 +68,9 @@ CSSの「`grid-template`」が、ほぼ全てのブラウザでサポートさ�
 以下を参照してください。
 
 - [研修課題提出](https://github.com/epkotsoftware/training-docs/blob/main/submission/README.md#研修課題提出)
+
+## 研修進捗資料の更新
+
+課題提出した日付で「研修進捗」資料の更新をお願いします。
+
+- [研修進捗](https://github.com/epkotsoftware/training-docs/blob/main/training/progress/README.md)

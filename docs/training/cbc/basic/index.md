@@ -53,7 +53,7 @@ Excelをお持ちでない方は、無料のOffice OnlineでもOKです。
 **※ `css/common.css` はindex.htmlにも使われているCSSファイルで、共通で使うスタイルを想定しています。**  
 　**ページ固有のスタイルは入れないように注意しましょう（よくあるのが #change_btn 等のスタイルを入れてしまっている）。**
 
-## マークアップエンジニア編課題
+## 課題
 
 - 作成したエクセルファイル
   - 必須: 「`#2 エクセル関数（売上票を作る）`」、「`#3 エクセル関数（成績表を作る）`」
@@ -66,8 +66,14 @@ Excelをお持ちでない方は、無料のOffice OnlineでもOKです。
       見た目も`kadai_07.html`と似せましょう。
       → 「`02_basic/htdocs/kadai_08.html`」
 
-### マークアップエンジニア編課題提出
+## 課題提出
 
 以下を参照してください。
 
 - [研修課題提出](https://github.com/epkotsoftware/training-docs/blob/main/submission/README.md#研修課題提出)
+
+## 研修進捗資料の更新
+
+課題提出した日付で「研修進捗」資料の更新をお願いします。
+
+- [研修進捗](https://github.com/epkotsoftware/training-docs/blob/main/training/progress/README.md)
