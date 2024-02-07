@@ -11,7 +11,7 @@
 まずは、スキルシートの必要情報をまとめ、スキルシート作成依頼を出してください。  
 その後、必要な学習や準備を進めていきましょう。  
 
-- [面談準備](https://github.com/epkotsoftware/training-docs/tree/main/interview)
+- [面談準備](https://github.com/epkotsoftware/training-docs/blob/main/interview/README.md)
 
 ## 内部開発チーム
 
