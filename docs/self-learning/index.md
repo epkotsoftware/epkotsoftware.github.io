@@ -11,6 +11,7 @@
 - [新人研修に参加する方へ](./../public/top/index.md)
   - [入社前研修](./../public/t/index.md)
 - [新人研修](./../training/curriculum/index.md)
+- [Laravel CRUD](./../training/laravel/crud/index.md)
 
 ## キャリアパス
 
