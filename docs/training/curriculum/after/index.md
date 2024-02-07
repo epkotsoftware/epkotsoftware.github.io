@@ -7,9 +7,7 @@
 
 ## 面談準備
 
-面談準備をお願いします。  
-まずは、スキルシートの必要情報をまとめ、スキルシート作成依頼を出してください。  
-その後、必要な学習や準備を進めていきましょう。  
+必要な学習や準備を進めていきましょう。  
 
 - [面談準備](https://github.com/epkotsoftware/training-docs/blob/main/interview/README.md)
 
