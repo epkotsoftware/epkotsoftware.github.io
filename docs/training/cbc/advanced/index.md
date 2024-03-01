@@ -92,7 +92,7 @@ CBCと開発環境が異なるので、気を付けてください。
 - 応用2（フロントエンドエンジニア 中級1）
   - <https://cbc-study.com/training/advanced/page5>
     - PDO(DB_DNS)設定について
-      - CBCの設定(host)と異なりますのでご注意ください。[詳しくは03_advanced/README.md ～ PHP 参照](https://github.com/epkotsoftware/training/blob/template/users/_template/03_advanced/README.md#php)
+      - CBCの設定(host)と異なりますのでご注意ください。詳しくは[フロントエンドエンジニア編課題資料 ～ PHP](https://github.com/epkotsoftware/training-docs/blob/main/training/03_advanced/README.md#php)を参照
         - `define('DB_DNS', 'mysql:host=mysql; dbname=cri_sortable; charset=utf8');`
   - <https://cbc-study.com/training/advanced/page6>
   - <https://cbc-study.com/training/advanced/page7>

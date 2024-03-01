@@ -148,7 +148,7 @@ VSCodeメニューバー「ファイル」→「フォルダーを開く」→�
 開発環境構築時に既に確認しているはずです。  
 CBCと環境が違うので注意しましょう。
 
-- [trainingリポジトリ 03_advanced/README.md 〜 確認](https://github.com/epkotsoftware/training/tree/template/users/_template/03_advanced#確認)
+- [フロントエンドエンジニア編課題資料 ～ PHP開発環境 〜 確認](https://github.com/epkotsoftware/training-docs/blob/main/training/03_advanced/README.md#確認)
 
 ### No such file or directory
 
@@ -160,7 +160,7 @@ CBCと環境が違うので注意しましょう。
 データベース接続に失敗している場合に出るエラーメッセージです。  
 CBCとはデータベースの接続情報が異なりますので以下を参照してください。
 
-- [trainingリポジトリ 03_advanced/README.md 〜 PHP](https://github.com/epkotsoftware/training/tree/template/users/_template/03_advanced#php)
+- [フロントエンドエンジニア編課題資料 ～ PHP](https://github.com/epkotsoftware/training-docs/blob/main/training/03_advanced/README.md#php)
 
 ### フィールド「left_x」にデフォルト値がない
 
