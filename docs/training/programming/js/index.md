@@ -534,7 +534,12 @@ textContent を使用することでXSS対策が出来、Reflow抑制もでき�
 
 ## WebAPI
 
-無料で使えるWebAPIです。  
+WebAPIがよくわからなければ動画で学習しましょう。
+
+- `【YouTube】小学生でもわかるWebAPI入門。ゼロからWebAPIを作ってみよう`
+  - <https://youtu.be/6_zIN-bByB4>
+
+以下、無料で使えるWebAPIです。  
 JavaScriptのFetchAPIで利用が可能です。
 
 - `【Open-Meteo】 Geocoding API`
