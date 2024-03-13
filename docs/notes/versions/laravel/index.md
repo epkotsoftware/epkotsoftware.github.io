@@ -15,6 +15,8 @@
   - <https://readouble.com/laravel/8.x/ja/upgrade.html>
 - Laravel 9.x アップグレードガイド
   - <https://readouble.com/laravel/9.x/ja/upgrade.html>
+- Laravel 10.x アップグレードガイド
+  - <https://readouble.com/laravel/10.x/ja/upgrade.html>
 
 ## バージョンの選択
 
