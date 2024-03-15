@@ -37,12 +37,18 @@ Macの場合、以下の通知設定をしておきましょう。
 
 ### パソコン
 
-ファイル名拡張子を表示する設定にしておきましょう。  
+拡張子の表示設定等を行います。  
+Windowsの場合は、エクスプローラーの「フォルダオプション」から以下の設定を行なってください。  
 
-- Windows の一般的なファイル名拡張子
-  - <https://support.microsoft.com/ja-jp/windows/windows-の一般的なファイル名拡張子-da4a4430-8e76-89c5-59f7-1cdbbc75cb01>
-- Macでファイル名拡張子を表示する/非表示にする
-  - <https://support.apple.com/ja-jp/guide/mac-help/mchlp2304/mac>
+- `ファイルおよびフォルダー`
+  - `タイトルバーに完全なパスを表示する` にチェック
+  - `ファイルとフォルダーの表示`
+    - `隠しファイル、隠しフォルダー、および隠しドライブを表示する` にチェック
+  - `登録されている拡張子は表示しない` のチェックを外す
+
+参考: [Windows11 – エクスプローラーでタイトルバーにフルパスを表示する方法 (https://setup-lab.net/windows11-explorer-full-path-title-bar/)](https://setup-lab.net/windows11-explorer-full-path-title-bar/)  
+参考: [Windows の一般的なファイル名拡張子 (https://support.microsoft.com/ja-jp/windows/windows-の一般的なファイル名拡張子-da4a4430-8e76-89c5-59f7-1cdbbc75cb01)](https://support.microsoft.com/ja-jp/windows/windows-の一般的なファイル名拡張子-da4a4430-8e76-89c5-59f7-1cdbbc75cb01)  
+参考: [Macでファイル名拡張子を表示する/非表示にする (https://support.apple.com/ja-jp/guide/mac-help/mchlp2304/mac)](https://support.apple.com/ja-jp/guide/mac-help/mchlp2304/mac)  
 
 ### VSCode
 
