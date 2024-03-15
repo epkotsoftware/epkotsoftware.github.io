@@ -51,10 +51,9 @@
 
 - MacBook Air (134,800円～)
   - <https://www.apple.com/jp/shop/buy-mac/macbook-air>
-  - 講師が使用しているパソコン（MacBook Airの一番安いモデル）
-    - 研修は問題なく進められます。
-    - 機種 ID：MacBookAir10,1
-      - <https://support.apple.com/kb/SP825>
+  - 機種 ID：MacBookAir10,1
+    - こちらのスペックでも、研修は問題なく進められます。
+    - MacBook Air (M1, 2020) 技術仕様 <https://support.apple.com/kb/SP825>
 - MacBook Pro (【14インチ】288,800円～)
   - <https://www.apple.com/jp/shop/buy-mac/macbook-pro>
   - 13インチについてはAirと比べスペックの大きい違いがない
