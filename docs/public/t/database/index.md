@@ -3,7 +3,7 @@
 ## データベース入門
 
 - 動画
-  - <https://www.youtube.com/playlist?list=PLCX3wwS3Gg4ziH0gDrCPBzO7Y5Qrz1Pmz> (2024.6.12現在、プレイリストが削除されています。暫定対応として、下記動画の直接リンクを示します)
+  - <https://www.youtube.com/watch?v=oSDd3RIJKWU&list=PLgx8xyH2m7OXK1GZK1DFVmyifWtoYb2kq> (2024.6.12リンク修正)
     - `6:16` データベースとは？【分かりやすい解説シリーズ #5】【プログラミング】 <https://youtu.be/mYOAY-xF5wk?si=3pbWGXly-wEmLumB>
     - `7:07` SELECT文とは？【分かりやすい解説シリーズ #39】【プログラミング】 <https://youtu.be/0tfRqG_FlhI?si=Q5UdlcVeDPTKM_F3>
     - `4:40` INSERT文とは？【分かりやすい解説シリーズ #41】【プログラミング】 <https://youtu.be/BLOVHYq4i88?si=0BFE-qAGFg4fYZfL>
