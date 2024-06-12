@@ -3,13 +3,13 @@
 ## データベース入門
 
 - 動画
-  - <https://www.youtube.com/playlist?list=PLCX3wwS3Gg4ziH0gDrCPBzO7Y5Qrz1Pmz>
-    - `6:16` データベースとは？【分かりやすい解説シリーズ #5】【プログラミング】
-    - `7:07` SELECT文とは？【分かりやすい解説シリーズ #39】【プログラミング】
-    - `4:40` INSERT文とは？【分かりやすい解説シリーズ #41】【プログラミング】
-    - `4:15` UPDATE文とは？【分かりやすい解説シリーズ #43】【プログラミング】
-    - `5:20` DELETE文／TRUNCATE文とは？【分かりやすい解説シリーズ #44】【プログラミング】
-    - `4:17` トランザクション管理とは？【分かりやすい解説シリーズ #25】【プログラミング】
+  - <https://www.youtube.com/playlist?list=PLCX3wwS3Gg4ziH0gDrCPBzO7Y5Qrz1Pmz> (2024.6.12現在、プレイリストが削除されています。暫定対応として、下記動画の直接リンクを示します)
+    - `6:16` データベースとは？【分かりやすい解説シリーズ #5】【プログラミング】 <https://youtu.be/mYOAY-xF5wk?si=3pbWGXly-wEmLumB>
+    - `7:07` SELECT文とは？【分かりやすい解説シリーズ #39】【プログラミング】 <https://youtu.be/0tfRqG_FlhI?si=Q5UdlcVeDPTKM_F3>
+    - `4:40` INSERT文とは？【分かりやすい解説シリーズ #41】【プログラミング】 <https://youtu.be/BLOVHYq4i88?si=0BFE-qAGFg4fYZfL>
+    - `4:15` UPDATE文とは？【分かりやすい解説シリーズ #43】【プログラミング】 <https://youtu.be/_ng47wPVwW4?si=1YVo4DQx2fELkSiv>
+    - `5:20` DELETE文／TRUNCATE文とは？【分かりやすい解説シリーズ #44】【プログラミング】 <https://youtu.be/KOsmN_Ab2pY?si=IxY-yCAfnhTbYP7A>
+    - `4:17` トランザクション管理とは？【分かりやすい解説シリーズ #25】【プログラミング】 <https://youtu.be/KKOxIuwCjcQ?si=tYVwseDyZf4_MXj->
 - 記事
   - データベースの基礎知識【実例を交えて説明】 <https://blog.senseshare.jp/whats-database.html>
   - データベース操作の基礎を学ぼう！SELECT編 <https://blog.senseshare.jp/select.html>
