@@ -390,7 +390,7 @@ Laravelを使わない場合でも、Composerでインストールが可能で�
     - こちらは比較的内容も新しくVSCodeを使った学習となっています。
     - 「変数」等のプログラミングの基礎を学んだあとに物を作っていくので入門書としては良さそうです。
 - JavaScript
-  - `改訂新版JavaScript本格入門 ~モダンスタイルによる基礎から現場での応用まで`
+  - `改訂3版JavaScript本格入門　～モダンスタイルによる基礎から現場での応用まで`
     - <https://www.amazon.co.jp/dp/477418411X>
   - `確かな力が身につくJavaScript「超」入門 第2版`
     - <https://www.amazon.co.jp/dp/4815601577>
@@ -409,6 +409,9 @@ Laravelを使わない場合でも、Composerでインストールが可能で�
   - `後悔しないためのSpring Boot 入門書：Spring 解体新書（第2版）: Spring Bootが丸分かり Spring解体新書`
     - <https://www.amazon.co.jp/dp/4802092865>
 - テスト
+  - `【この1冊でよくわかる】 ソフトウェアテストの教科書 [増補改訂 第2版]`
+    - <https://www.amazon.co.jp/dp/481560875X>
+    - はじめてテスト案件に関わる方、テストの概要を一通り学びたい方におすすめです
   - `JSTQB認定テスト技術者資格 Foundation Level試験`
     - `ソフトウェアテスト教科書 JSTQB Foundation 第4版 シラバス2018対応`
       - <https://www.amazon.co.jp/dp/4798160660>
