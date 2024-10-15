@@ -390,8 +390,12 @@ Laravelを使わない場合でも、Composerでインストールが可能で�
     - こちらは比較的内容も新しくVSCodeを使った学習となっています。
     - 「変数」等のプログラミングの基礎を学んだあとに物を作っていくので入門書としては良さそうです。
 - JavaScript
+  - `JavaScript Primer 改訂2版 迷わないための入門書`
+    - <https://www.amazon.co.jp/dp/4048931105>
+    - web版もあります。体系的にまとまっていておすすめです
+    - <https://jsprimer.net/>     
   - `改訂3版JavaScript本格入門　～モダンスタイルによる基礎から現場での応用まで`
-    - <https://www.amazon.co.jp/dp/477418411X>
+    - <https://www.amazon.co.jp/dp/4297132885>
   - `確かな力が身につくJavaScript「超」入門 第2版`
     - <https://www.amazon.co.jp/dp/4815601577>
 - TypeScript
