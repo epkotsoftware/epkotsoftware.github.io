@@ -14,7 +14,7 @@
     - <https://youtu.be/05iyTsuhahk>
   - ホワイトボックステストとは？ブラックボックステストとの違い
     - <https://youtu.be/H__gN5Jpuvk>
-  - JSTQB <https://www.youtube.com/playlist?list=PLx75ljgfSa715O9xHOEVO_yoncSafKwyZ> （ソフトウェアテスト資格）
+  - JSTQB （ソフトウェアテスト資格）
     - `4:00` JSTQBとは　勉強方法 <削除されているようです>
     - `12:15` JSTQB 1章 テストの基礎 <https://www.youtube.com/watch?v=2yGfVpAvwJ0>
     - `11:58` JSTQB 2章 ソフトウェア開発ライフサイクル全体を通してのテスト <https://www.youtube.com/watch?v=fUCjXxAOxlc>
