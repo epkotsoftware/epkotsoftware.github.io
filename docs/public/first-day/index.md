@@ -30,7 +30,7 @@ GitHubの管理者は総務になりますので
 メール・Slackは、すぐに反応できるようにしてください。  
 Macの場合、以下の通知設定をしておきましょう。  
 
-- 【Mac】通知設定について解説
+- 【Mac】通知設定について解説　※現在URL先開けないため、通知設定がうまくいかない場合総務部へご連絡ください
   - <https://macblog.site/system-preferences-notification/>
 
 ## その他設定
