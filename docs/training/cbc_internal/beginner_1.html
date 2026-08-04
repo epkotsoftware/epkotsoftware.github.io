@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>簡単なWEBサイト制作 1</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "YuGothic", "Segoe UI", sans-serif;
+      background: #f4f6f9;
+      color: #222;
+      line-height: 1.9;
+      letter-spacing: 0.02em;
+    }
+
+    a {
+      color: #2563eb;
+    }
+
+    header {
+      background: #202938;
+      color: #fff;
+      padding: 42px 24px;
+    }
+
+    .header-inner,
+    main {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.25;
+    }
+
+    header p {
+      margin: 0;
+      color: #d7dde8;
+      font-size: 15px;
+    }
+
+    main {
+      padding: 34px 0 80px;
+    }
+
+    section {
+      background: #fff;
+      border-radius: 18px;
+      padding: 34px;
+      margin-bottom: 28px;
+      box-shadow: 0 8px 26px rgba(15, 23, 42, 0.07);
+    }
+
+    h2 {
+      margin: 0 0 22px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #e5e7eb;
+      font-size: 28px;
+      color: #111827;
+      line-height: 1.35;
+    }
+
+    h3 {
+      margin: 32px 0 12px;
+      font-size: 21px;
+      color: #1f2937;
+      line-height: 1.45;
+    }
+
+    h4 {
+      margin: 24px 0 8px;
+      font-size: 17px;
+      color: #374151;
+    }
+
+    p {
+      margin: 0 0 14px;
+    }
+
+    ul,
+    ol {
+      margin: 12px 0 18px 1.4em;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .toc {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+    }
+
+    .toc ol {
+      columns: 2;
+      column-gap: 40px;
+    }
+
+    .lead {
+      font-size: 17px;
+    }
+
+    .note,
+    .point,
+    .exercise,
+    .instructor,
+    .caution {
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin: 20px 0;
+    }
+
+    .point {
+      background: #eff6ff;
+      border-left: 5px solid #2563eb;
+    }
+
+    .note {
+      background: #f8fafc;
+      border-left: 5px solid #64748b;
+    }
+
+    .exercise {
+      background: #fffbeb;
+      border-left: 5px solid #d97706;
+    }
+
+    .instructor {
+      background: #f0fdf4;
+      border-left: 5px solid #16a34a;
+    }
+
+    .caution {
+      background: #fef2f2;
+      border-left: 5px solid #dc2626;
+    }
+
+    .label {
+      display: inline-block;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #475569;
+      letter-spacing: 0.04em;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0 22px;
+      font-size: 15px;
+    }
+
+    th,
+    td {
+      border: 1px solid #d1d5db;
+      padding: 13px 14px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f3f4f6;
+      color: #111827;
+      font-weight: 700;
+    }
+
+    code {
+      background: #eef2f7;
+      color: #111827;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 0.95em;
+    }
+
+    pre {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 20px;
+      border-radius: 12px;
+      overflow-x: auto;
+      margin: 16px 0 20px;
+      line-height: 1.65;
+      tab-size: 2;
+    }
+
+    pre code {
+      background: transparent;
+      color: #f8fafc;
+      padding: 0;
+      border-radius: 0;
+      display: block;
+      white-space: pre;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin: 18px 0;
+    }
+
+    .card {
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 18px;
+      background: #fff;
+    }
+
+    .card h4 {
+      margin-top: 0;
+    }
+
+    .figure-box {
+      border: 2px dashed #cbd5e1;
+      background: #f8fafc;
+      color: #64748b;
+      border-radius: 14px;
+      padding: 24px;
+      margin: 18px 0;
+      text-align: center;
+    }
+
+    .mock-browser {
+      border: 1px solid #d1d5db;
+      border-radius: 14px;
+      overflow: hidden;
+      margin: 18px 0;
+      background: white;
+    }
+
+    .mock-browser-bar {
+      background: #e5e7eb;
+      padding: 8px 12px;
+      color: #6b7280;
+      font-size: 13px;
+    }
+
+    .mock-browser-body {
+      padding: 18px;
+      min-height: 70px;
+      background: #fff;
+    }
+
+    .sample-div {
+      height: 70px;
+      background: #d9e021;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+
+    .sample-p {
+      width: 70%;
+      height: 50px;
+      background: #f9b9d5;
+      text-align: center;
+      padding-top: 8px;
+      margin: 0 0 12px;
+    }
+
+    .sample-span {
+      border: 1px dotted #f9b9d5;
+      font-family: serif;
+      padding: 2px 4px;
+    }
+
+    footer {
+      text-align: center;
+      color: #6b7280;
+      padding: 36px 20px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 780px) {
+      .toc ol,
+      .grid-2 {
+        columns: 1;
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>WEBサイト制作1</h1>
+  </div>
+</header>
+
+<main>
+
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol>
+      <li><a href="#chapter1">Webサイトを作る準備</a></li>
+      <li><a href="#chapter2">ブラウザとテキストエディタ</a></li>
+      <li><a href="#chapter3">Visual Studio Codeの準備</a></li>
+      <li><a href="#chapter4">最初のHTMLファイルを作る</a></li>
+      <li><a href="#chapter5">HTMLとCSSの役割</a></li>
+      <li><a href="#chapter6">HTMLとCSSの決まりごと</a></li>
+      <li><a href="#chapter7">HTMLは枠の組み合わせ</a></li>
+      <li><a href="#chapter8">基本のタグ</a></li>
+      <li><a href="#chapter9">タグの使い方と表示の違い</a></li>
+      <li><a href="#chapter10">CSSでデザインしてみる</a></li>
+      <li><a href="#chapter11">CSSプロパティ一覧</a></li>
+    </ol>
+  </section>
+
+  <section id="chapter1">
+    <h2>1. Webサイトを作る準備</h2>
+
+    <h3>プログラムとは何か</h3>
+    <p>
+      「プログラム」という言葉は、コンピューターだけのものではありません。運動会や音楽会の進行表のように、「何を、どの順番で行うか」を決めたものもプログラムです。
+    </p>
+    <p>
+      コンピューターでのプログラミングも、基本的な考え方は同じです。たとえば「写真を表示する」「ボタンを押したら反応する」「削除されたら表示を変える」といった処理を、コンピューターにわかる形で順番に書いていきます。
+    </p>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      プログラミングは、コンピューターに対して「何を、どの順番でしてほしいか」を文章のように書く作業です。
+    </div>
+
+    <h3>Webサイト制作で使うもの</h3>
+    <p>
+      入門レベルのWebサイト制作で必要なものは、大きく分けて2つです。
+    </p>
+
+    <table>
+      <tr>
+        <th>必要なもの</th>
+        <th>役割</th>
+        <th>例</th>
+      </tr>
+      <tr>
+        <td>ブラウザ</td>
+        <td>作ったWebページを表示するためのアプリケーション</td>
+        <td>Chrome、Safari、Firefox</td>
+      </tr>
+      <tr>
+        <td>テキストエディタ</td>
+        <td>HTMLやCSSなどのコードを書くためのアプリケーション</td>
+        <td>Visual Studio Code</td>
+      </tr>
+    </table>
+
+    <h3>プログラミング言語とマークアップ言語</h3>
+    <p>
+      初めてのWebサイト制作では、いきなり本格的なプログラミング言語を使うわけではありません。まずはHTMLというマークアップ言語を使います。
+    </p>
+    <p>
+      マークアップ言語は、文章や画像に「これは見出し」「これは段落」「これは画像」といった意味を付けるための言語です。計算や条件分岐を中心に扱うプログラミング言語とは役割が違います。
+    </p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h4>マークアップ言語</h4>
+        <p>文章や画像などに役割を与え、Webページの構造を作ります。</p>
+        <p>例：HTML</p>
+      </div>
+      <div class="card">
+        <h4>プログラミング言語</h4>
+        <p>計算、条件分岐、データ処理など、動きのある処理を作ります。</p>
+        <p>例：JavaScript、PHP、Python</p>
+      </div>
+    </div>
+
+    <h3>コーディングとは</h3>
+    <p>
+      テキストエディタにHTMLやCSSなどを書く作業は、一般的に「コーディング」と呼ばれます。コードライティングと呼ばれることもあります。
+    </p>
+    <p>
+      実務では広い意味で「プログラミング」とまとめて呼ばれることもありますが、まずは「コードを書く作業」と理解しておけば問題ありません。
+    </p>
+  </section>
+
+  <section id="chapter2">
+    <h2>2. ブラウザとテキストエディタ</h2>
+
+    <h3>ブラウザについて</h3>
+    <p>
+      ブラウザは、Webページを見るためのアプリケーションです。Chrome、Firefox、Safariなどがあります。
+    </p>
+    <p>
+      研修では、表示確認の基準を揃えるためにChromeを使う想定にします。
+    </p>
+
+
+    <h3>テキストエディタについて</h3>
+    <p>
+      テキストエディタは、HTMLやCSSを書くためのアプリケーションです。現在はVisual Studio Codeが広く使われています。
+    </p>
+    <p>
+      Visual Studio Codeは、単なるメモ帳ではなく、コードを見やすくしたり、入力を補助したり、拡張機能を追加したりできます。
+    </p>
+
+    <div class="caution">
+      <span class="label">注意</span><br>
+      「Visual Studio」と「Visual Studio Code」は別物です。研修では青いアイコンの「Visual Studio Code」を使います。
+    </div>
+  </section>
+
+  <section id="chapter3">
+    <h2>3. Visual Studio Codeの準備</h2>
+
+    <h3>推奨する拡張機能</h3>
+    <p>
+      Visual Studio Codeでは、拡張機能を追加することで、HTML/CSSの学習やコーディングをしやすくできます。
+    </p>
+
+    <table>
+      <tr>
+        <th>拡張機能</th>
+        <th>役割</th>
+      </tr>
+      <tr>
+        <td>Japanese Language Pack for VS Code</td>
+        <td>Visual Studio Codeのメニュー表示を日本語化します。</td>
+      </tr>
+      <tr>
+        <td>Auto Close Tag</td>
+        <td>開始タグを書いたとき、終了タグの入力を補助します。</td>
+      </tr>
+      <tr>
+        <td>Auto Rename Tag</td>
+        <td>開始タグを変更したとき、対応する終了タグも変更しやすくします。</td>
+      </tr>
+      <tr>
+        <td>Bracket Pair Colorizer</td>
+        <td>括弧の対応関係を色で見やすくします。</td>
+      </tr>
+      <tr>
+        <td>Color info</td>
+        <td>CSSの色指定を確認しやすくします。</td>
+      </tr>
+      <tr>
+        <td>Highlight Matching Tag</td>
+        <td>開始タグと終了タグの対応を確認しやすくします。</td>
+      </tr>
+    </table>
+
+    <h3>拡張機能の入れ方</h3>
+    <ol>
+      <li>Visual Studio Codeを開く</li>
+      <li>左側の「拡張機能」アイコンを押す</li>
+      <li>検索欄に拡張機能名を入力する</li>
+      <li>対象の拡張機能を選び、インストールする</li>
+    </ol>
+
+    <h3>Hover表示の設定</h3>
+    <p>
+      学習中にポップアップ説明が邪魔になる場合は、設定からHover表示を無効化できます。
+    </p>
+    <ol>
+      <li>左下の歯車アイコンを押す</li>
+      <li>「設定」を開く</li>
+      <li>検索欄に <code>editor.hover</code> と入力する</li>
+      <li><code>Editor &gt; Hover: Enabled</code> のチェックを外す</li>
+    </ol>
+  </section>
+
+  <section id="chapter4">
+    <h2>4. 最初のHTMLファイルを作る</h2>
+
+    <h3>テキストを入力する</h3>
+    <p>
+      まずは難しい構造を使わず、テキストだけを入力してブラウザで表示してみます。
+    </p>
+
+    <pre><code>あいうえお</code></pre>
+
+    <h3>ファイル名と拡張子</h3>
+    <p>
+      Webページとして扱うファイルには、<code>.html</code> という拡張子を付けます。たとえば、最初のファイル名は <code>index.html</code> とします。
+    </p>
+
+    <table>
+      <tr>
+        <th>例</th>
+        <th>意味</th>
+      </tr>
+      <tr>
+        <td><code>index.html</code></td>
+        <td>HTMLファイル。ブラウザでWebページとして表示できます。</td>
+      </tr>
+      <tr>
+        <td><code>sample.txt</code></td>
+        <td>テキストファイル。通常のメモとして扱われます。</td>
+      </tr>
+      <tr>
+        <td><code>photo.jpg</code></td>
+        <td>画像ファイル。</td>
+      </tr>
+    </table>
+
+    <p>
+      拡張子は、ファイルの種類をコンピューターに伝えるための目印です。
+    </p>
+
+    <h3>ブラウザで確認する</h3>
+    <ol>
+      <li>Visual Studio Codeで新規ファイルを作る</li>
+      <li><code>あいうえお</code> と入力する</li>
+      <li><code>index.html</code> という名前でデスクトップなどに保存する</li>
+      <li>保存したファイルをChromeにドラッグ＆ドロップする</li>
+      <li>ブラウザに文字が表示されることを確認する</li>
+    </ol>
+
+    <div class="mock-browser">
+      <div class="mock-browser-bar">Chrome 表示イメージ</div>
+      <div class="mock-browser-body">あいうえお</div>
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      自分のパソコン内で作っている段階では、HTMLファイルをブラウザに直接読み込ませて表示確認できます。この状態をローカル環境での確認と呼びます。
+    </div>
+  </section>
+
+  <section id="chapter5">
+    <h2>5. HTMLとCSSの役割</h2>
+
+    <h3>HTMLは構造、CSSは装飾</h3>
+    <p>
+      Webページは、主にHTMLとCSSを組み合わせて作ります。
+    </p>
+
+    <table>
+      <tr>
+        <th>ファイル</th>
+        <th>担当する内容</th>
+        <th>例</th>
+      </tr>
+      <tr>
+        <td>HTML</td>
+        <td>見出し、文章、画像、表など、ページの構造を作る</td>
+        <td>文章を段落にする、画像を置く、表を作る</td>
+      </tr>
+      <tr>
+        <td>CSS</td>
+        <td>色、幅、高さ、余白、文字サイズなど、見た目を整える</td>
+        <td>背景色を変える、文字を中央寄せする、枠線を付ける</td>
+      </tr>
+    </table>
+
+    <p>
+      HTMLで作った要素に対して、CSSで「どのように見せるか」を指定します。
+    </p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h4>HTMLの例</h4>
+        <pre><code>&lt;p&gt;こんにちは&lt;/p&gt;</code></pre>
+        <p>文章のまとまりを作っています。</p>
+      </div>
+      <div class="card">
+        <h4>CSSの例</h4>
+        <pre><code>p {
+  color: #ffff00;
+  background-color: #0000ff;
+}</code></pre>
+        <p>段落の文字色や背景色を指定しています。</p>
+      </div>
+    </div>
+
+    <h3>CSSファイル</h3>
+    <p>
+      CSSは、<code>style.css</code> のようなファイル名で保存することが多いです。HTML側からCSSファイルを読み込むことで、デザイン指定が反映されます。
+    </p>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      CSSは「Cascading Style Sheets」の略です。HTMLに対してスタイルを指定するための言語です。
+    </div>
+  </section>
+
+  <section id="chapter6">
+    <h2>6. HTMLとCSSの決まりごと</h2>
+
+    <h3>HTMLのタグ</h3>
+    <p>
+      HTMLでは、<code>&lt;p&gt;</code> や <code>&lt;div&gt;</code> のようなタグを使って、文字や画像に役割を与えます。
+    </p>
+
+    <pre><code>&lt;p&gt;こんにちは&lt;/p&gt;</code></pre>
+
+    <p>
+      多くのタグは、開始タグと終了タグで内容を囲みます。ただし、画像を表示する <code>&lt;img&gt;</code> や改行を表す <code>&lt;br&gt;</code> のように、終了タグを持たないタグもあります。
+    </p>
+
+    <h3>改行の扱い</h3>
+    <p>
+      HTMLファイル上で改行しても、ブラウザ上ではそのまま改行されないことがあります。
+    </p>
+
+    <h4>コード上の改行だけの場合</h4>
+    <pre><code>あいうえお
+かきくけこ</code></pre>
+
+    <p>
+      このように書いても、ブラウザでは1行にまとまって表示される場合があります。
+    </p>
+
+    <h4><code>&lt;br&gt;</code> を使う場合</h4>
+    <pre><code>あいうえお&lt;br&gt;
+かきくけこ</code></pre>
+
+    <p>
+      <code>&lt;br&gt;</code> は、ブラウザに対して「ここで改行する」と伝えるタグです。
+    </p>
+
+    <h3>CSSの基本文法</h3>
+    <p>
+      CSSでは、どのHTML要素に、どのような見た目を指定するかを書きます。
+    </p>
+
+    <pre><code>p {
+  color: #333333;
+  font-size: 16px;
+}</code></pre>
+
+    <table>
+      <tr>
+        <th>名称</th>
+        <th>説明</th>
+        <th>上の例</th>
+      </tr>
+      <tr>
+        <td>セレクタ</td>
+        <td>どの要素に指定するかを表す</td>
+        <td><code>p</code></td>
+      </tr>
+      <tr>
+        <td>プロパティ</td>
+        <td>何を変更するかを表す</td>
+        <td><code>color</code>、<code>font-size</code></td>
+      </tr>
+      <tr>
+        <td>値</td>
+        <td>どのように変更するかを表す</td>
+        <td><code>#333333</code>、<code>16px</code></td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">CSSの書き方</span><br>
+      プロパティと値の間は <code>:</code> で区切り、指定の最後には <code>;</code> を付けます。
+    </div>
+  </section>
+
+  <section id="chapter7">
+    <h2>7. HTMLは枠の組み合わせ</h2>
+
+    <h3>枠でページを作る</h3>
+    <p>
+      HTMLでは、文章や画像などを「枠」に入れていく感覚でページを作ります。枠を縦に積んだり、横に並べたり、別の枠の中に入れたりして、画面全体の構造を作ります。
+    </p>
+
+    <div class="figure-box">
+      <img
+  src="../img/beginner"
+  style="max-width: 100%; height: auto; display: block;"
+      >
+    </div>
+
+    <h3>必ず使う基本構造</h3>
+    <p>
+      HTMLファイルには、基本的に以下のような大きな枠があります。
+    </p>
+
+    <pre><code>&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;練習&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    画面に表示する内容
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+    <table>
+      <tr>
+        <th>タグ</th>
+        <th>役割</th>
+      </tr>
+      <tr>
+        <td><code>&lt;html&gt; 〜 &lt;/html&gt;</code></td>
+        <td>HTML文書全体を囲む一番外側の枠です。</td>
+      </tr>
+      <tr>
+        <td><code>&lt;head&gt; 〜 &lt;/head&gt;</code></td>
+        <td>画面には直接表示されない設定情報を入れる場所です。タイトルやCSS読み込みなどを書きます。</td>
+      </tr>
+      <tr>
+        <td><code>&lt;body&gt; 〜 &lt;/body&gt;</code></td>
+        <td>ブラウザ上に表示される内容を入れる場所です。</td>
+      </tr>
+    </table>
+    <img
+      src="../img/beginner1_2.png"
+      style="max-width: 100%; height: auto; display: block;"
+    >
+  </section>
+
+  <section id="chapter8">
+    <h2>8. 基本のタグ</h2>
+
+    <p>
+      HTMLには多くのタグがありますが、最初からすべてを覚える必要はありません。まずは頻繁に使うタグから理解します。
+    </p>
+
+    <table>
+      <tr>
+        <th>タグ</th>
+        <th>読み方・意味</th>
+        <th>用途</th>
+      </tr>
+      <tr>
+        <td><code>&lt;div&gt; 〜 &lt;/div&gt;</code></td>
+        <td>division</td>
+        <td>特別な意味を持たない汎用的な枠として使います。</td>
+      </tr>
+      <tr>
+        <td><code>&lt;p&gt; 〜 &lt;/p&gt;</code></td>
+        <td>paragraph</td>
+        <td>文章の段落を表します。</td>
+      </tr>
+      <tr>
+        <td><code>&lt;span&gt; 〜 &lt;/span&gt;</code></td>
+        <td>span</td>
+        <td>文章の一部分を囲むときによく使います。</td>
+      </tr>
+      <tr>
+        <td><code>&lt;h1&gt; 〜 &lt;/h1&gt;</code> 〜 <code>&lt;h6&gt; 〜 &lt;/h6&gt;</code></td>
+        <td>heading</td>
+        <td>見出しを表します。<code>h1</code> が最も大きな見出しで、<code>h6</code> に向かって階層が下がります。</td>
+      </tr>
+      <tr>
+        <td><code>&lt;table&gt; 〜 &lt;/table&gt;</code></td>
+        <td>table</td>
+        <td>表を作るときに使います。</td>
+      </tr>
+      <tr>
+        <td><code>&lt;img&gt;</code></td>
+        <td>image</td>
+        <td>画像を表示するときに使います。終了タグはありません。</td>
+      </tr>
+      <tr>
+        <td><code>&lt;br&gt;</code></td>
+        <td>break</td>
+        <td>改行を入れるときに使います。終了タグはありません。</td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      タグは「画面上の部品に役割を与える名前」です。最初はよく使う20〜30個程度を使いながら覚えれば十分です。
+    </div>
+  </section>
+
+  <section id="chapter9">
+    <h2>9. タグの使い方と表示の違い</h2>
+
+    <h3>基本構造を書いてみる</h3>
+    <p>
+      <code>index.html</code> を以下のように書き換え、ブラウザで表示を確認します。
+    </p>
+
+    <pre><code>&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;練習&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div&gt;
+      あいうえお
+    &lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+    <div>
+          <img
+          src="../img/beginner1_3.png"
+          style="max-width: 100%; height: auto; display: block;"
+        >
+    </div>
+        <div>
+          <img
+          src="../img/beginner1_4.png"
+          style="max-width: 100%; height: auto; display: block;"
+        >
+    </div>
+
+    <h3>複数のタグを使ってみる</h3>
+    <p>
+      次に、<code>div</code>、<code>p</code>、<code>span</code> を同時に使って表示の違いを確認します。
+    </p>
+
+    <pre><code>&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;練習&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div&gt;
+      おはよう
+    &lt;/div&gt;
+    &lt;p&gt;
+      こんにちは
+    &lt;/p&gt;
+    &lt;span&gt;
+      さようなら
+    &lt;/span&gt;
+    &lt;span&gt;おやすみ&lt;/span&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+    <table>
+      <tr>
+        <th>タグ</th>
+        <th>表示の特徴</th>
+      </tr>
+      <tr>
+        <td><code>div</code></td>
+        <td>基本的に横幅いっぱいの領域を持ち、次の要素は下に配置されます。</td>
+      </tr>
+      <tr>
+        <td><code>p</code></td>
+        <td>段落として扱われ、基本的に下に積まれます。</td>
+      </tr>
+      <tr>
+        <td><code>span</code></td>
+        <td>中身に必要な分だけの幅を持ち、横に並びやすい要素です。</td>
+      </tr>
+    </table>
+
+    </div>
+    <div>
+          <img
+          src="../img/beginner1_5.png"
+          style="max-width: 100%; height: auto; display: block;"
+        >
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      この段階では、「タグの種類によって、使う幅や並び方が変わる」と理解できれば十分です。
+    </div>
+  </section>
+
+  <section id="chapter10">
+    <h2>10. CSSでデザインしてみる</h2>
+
+    <h3>フォルダ構成</h3>
+    <p>
+      HTMLとCSSを分けて管理するために、以下のような構成にします。
+    </p>
+
+    <pre><code>test/
+├── index.html
+└── css/
+    └── style.css</code></pre>
+
+    <h3>HTMLからCSSを読み込む</h3>
+    <p>
+      <code>index.html</code> の <code>&lt;head&gt;</code> 内に、CSSを読み込むための <code>&lt;link&gt;</code> タグを書きます。
+    </p>
+
+    <pre><code>&lt;link href="css/style.css" rel="stylesheet"&gt;</code></pre>
+
+    <table>
+      <tr>
+        <th>部分</th>
+        <th>意味</th>
+      </tr>
+      <tr>
+        <td><code>link</code></td>
+        <td>外部ファイルをHTMLに関連付けるためのタグです。</td>
+      </tr>
+      <tr>
+        <td><code>href</code></td>
+        <td>読み込むファイルの場所を指定します。ここでは <code>css/style.css</code> を指定しています。</td>
+      </tr>
+      <tr>
+        <td><code>rel</code></td>
+        <td>HTMLと読み込むファイルの関係を指定します。CSSの場合は <code>stylesheet</code> と書きます。</td>
+      </tr>
+    </table>
+
+    <h3>index.html</h3>
+    <pre><code>&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;練習&lt;/title&gt;
+    &lt;link href="css/style.css" rel="stylesheet"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;div&gt;
+      おはよう
+    &lt;/div&gt;
+    &lt;p&gt;
+      こんにちは
+    &lt;/p&gt;
+    &lt;span&gt;
+      さようなら
+    &lt;/span&gt;
+    &lt;span&gt;おやすみ&lt;/span&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+    <h3>css/style.css</h3>
+    <pre><code>div {
+  height: 100px;
+  background-color: #d9e021;
+}
+
+p {
+  width: 70%;
+  height: 50px;
+  background-color: #f9b9d5;
+  text-align: center;
+}
+
+span {
+  border: 1px dotted #f9b9d5;
+  font-family: serif;
+}</code></pre>
+
+    <div>
+          <img
+          src="../img/beginner1_6.png"
+          style="max-width: 100%; height: auto; display: block;"
+        >
+    </div>
+        <div>
+          <img
+          src="../img/beginner1_7.png"
+          style="max-width: 100%; height: auto; display: block;"
+        >
+    </div>
+
+    <h3>単位について</h3>
+    <p>
+      CSSの値には、用途に応じて単位を付けます。
+    </p>
+
+    <table>
+      <tr>
+        <th>単位</th>
+        <th>意味</th>
+      </tr>
+      <tr>
+        <td><code>px</code></td>
+        <td>ピクセル。画面上の大きさを指定するときによく使います。</td>
+      </tr>
+      <tr>
+        <td><code>%</code></td>
+        <td>親要素などを基準にした割合で指定します。</td>
+      </tr>
+      <tr>
+        <td><code>rem</code></td>
+        <td>基準となる文字サイズに対する倍率で指定します。</td>
+      </tr>
+      <tr>
+        <td><code>vw</code></td>
+        <td>画面幅を基準にした単位です。</td>
+      </tr>
+      <tr>
+        <td><code>vh</code></td>
+        <td>画面高さを基準にした単位です。</td>
+      </tr>
+    </table>
+
+    <h3>カラーコード</h3>
+    <p>
+      CSSでは、色を <code>#FF0000</code> のような6桁のカラーコードで指定できます。<code>#</code> の後に数字やアルファベットを組み合わせて色を表します。
+    </p>
+
+    <pre><code>#FF0000  赤
+#000000  黒
+#00FF00  緑
+#CCCCDD  薄い青紫
+#9932CC  紫</code></pre>
+  </section>
+
+  <section id="chapter11">
+    <h2>11. CSSプロパティ一覧</h2>
+
+    <p>
+      ここでは、枠や文字を装飾するときによく使うCSSプロパティを確認します。最初からすべて暗記する必要はありません。「こういう指定ができる」と知っておけば十分です。
+    </p>
+
+    </div>
+        <div>
+          <img
+          src="../img/beginner1_8.png"
+          style="max-width: 100%; height: auto; display: block;"
+        >
+    </div>
+
+    </div>
+        <div>
+          <img
+          src="../img/beginner1_9.png"
+          style="max-width: 100%; height: auto; display: block;"
+        >
+    </div>
+
+    </div>
+        <div>
+          <img
+          src="../img/beginner1_10.png"
+          style="max-width: 100%; height: auto; display: block;"
+        >
+    </div>
+
+    </div>
+        <div>
+          <img
+          src="../img/beginner1_11.png"
+          style="max-width: 100%; height: auto; display: block;"
+        >
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      CSSプロパティは数が多いので、暗記よりも「調べて使える」状態を目指してください。研修初期では、幅・高さ・背景色・余白・文字色・文字サイズ・中央寄せを使えれば十分です。
+    </div>
+  </section>
+
+</main>
+
+<footer>
+</footer>
+
+</body>
+</html>

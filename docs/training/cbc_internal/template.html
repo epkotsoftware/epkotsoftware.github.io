@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ▼ ページごとに変更 -->
+  <title>ページタイトル</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "YuGothic", "Segoe UI", sans-serif;
+      background: #f4f6f9;
+      color: #222;
+      line-height: 1.9;
+      letter-spacing: 0.02em;
+    }
+
+    a {
+      color: #2563eb;
+    }
+
+    header {
+      background: #202938;
+      color: #fff;
+      padding: 42px 24px;
+    }
+
+    .header-inner,
+    main {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.25;
+    }
+
+    header p {
+      margin: 0;
+      color: #d7dde8;
+      font-size: 15px;
+    }
+
+    main {
+      padding: 34px 0 80px;
+    }
+
+    section {
+      background: #fff;
+      border-radius: 18px;
+      padding: 34px;
+      margin-bottom: 28px;
+      box-shadow: 0 8px 26px rgba(15, 23, 42, 0.07);
+    }
+
+    h2 {
+      margin: 0 0 22px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #e5e7eb;
+      font-size: 28px;
+      color: #111827;
+      line-height: 1.35;
+    }
+
+    h3 {
+      margin: 32px 0 12px;
+      font-size: 21px;
+      color: #1f2937;
+      line-height: 1.45;
+    }
+
+    h4 {
+      margin: 24px 0 8px;
+      font-size: 17px;
+      color: #374151;
+    }
+
+    p {
+      margin: 0 0 14px;
+    }
+
+    ul,
+    ol {
+      margin: 12px 0 18px 1.4em;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    .toc {
+      background: #f8fafc;
+      border: 1px solid #e5e7eb;
+    }
+
+    .toc ol {
+      columns: 2;
+      column-gap: 40px;
+    }
+
+    .lead {
+      font-size: 17px;
+    }
+
+    .note,
+    .point,
+    .exercise,
+    .instructor,
+    .caution {
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin: 20px 0;
+    }
+
+    .point {
+      background: #eff6ff;
+      border-left: 5px solid #2563eb;
+    }
+
+    .note {
+      background: #f8fafc;
+      border-left: 5px solid #64748b;
+    }
+
+    .exercise {
+      background: #fffbeb;
+      border-left: 5px solid #d97706;
+    }
+
+    .instructor {
+      background: #f0fdf4;
+      border-left: 5px solid #16a34a;
+    }
+
+    .caution {
+      background: #fef2f2;
+      border-left: 5px solid #dc2626;
+    }
+
+    .label {
+      display: inline-block;
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #475569;
+      letter-spacing: 0.04em;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0 22px;
+      font-size: 15px;
+    }
+
+    th,
+    td {
+      border: 1px solid #d1d5db;
+      padding: 13px 14px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f3f4f6;
+      color: #111827;
+      font-weight: 700;
+    }
+
+    code {
+      background: #eef2f7;
+      color: #111827;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 0.95em;
+    }
+
+    pre {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 20px;
+      border-radius: 12px;
+      overflow-x: auto;
+      margin: 16px 0 20px;
+      line-height: 1.65;
+      tab-size: 2;
+    }
+
+    pre code {
+      background: transparent;
+      color: #f8fafc;
+      padding: 0;
+      border-radius: 0;
+      display: block;
+      white-space: pre;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin: 18px 0;
+    }
+
+    .card {
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 18px;
+      background: #fff;
+    }
+
+    .card h4 {
+      margin-top: 0;
+    }
+
+    .figure-box {
+      border: 2px dashed #cbd5e1;
+      background: #f8fafc;
+      color: #64748b;
+      border-radius: 14px;
+      padding: 24px;
+      margin: 18px 0;
+      text-align: center;
+    }
+
+    .mock-browser {
+      border: 1px solid #d1d5db;
+      border-radius: 14px;
+      overflow: hidden;
+      margin: 18px 0;
+      background: white;
+    }
+
+    .mock-browser-bar {
+      background: #e5e7eb;
+      padding: 8px 12px;
+      color: #6b7280;
+      font-size: 13px;
+    }
+
+    .mock-browser-body {
+      padding: 18px;
+      min-height: 70px;
+      background: #fff;
+    }
+
+    .sample-div {
+      height: 70px;
+      background: #d9e021;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+
+    .sample-p {
+      width: 70%;
+      height: 50px;
+      background: #f9b9d5;
+      text-align: center;
+      padding-top: 8px;
+      margin: 0 0 12px;
+    }
+
+    .sample-span {
+      border: 1px dotted #f9b9d5;
+      font-family: serif;
+      padding: 2px 4px;
+    }
+
+    footer {
+      text-align: center;
+      color: #6b7280;
+      padding: 36px 20px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 780px) {
+      .toc ol,
+      .grid-2 {
+        columns: 1;
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     ヘッダー
+     h1 はページ見出し。補足を出す場合は <p> を追加する。
+     ============================================================ -->
+<header>
+  <div class="header-inner">
+    <h1>ページ見出し</h1>
+    <!-- <p>サブタイトルや補足説明</p> -->
+  </div>
+</header>
+
+<main>
+
+  <!-- ============================================================
+       目次
+       各 <li> の href は、対応する <section> の id と合わせる。
+       2カラム表示（780px 以下で自動的に1カラム）。
+       ============================================================ -->
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol>
+      <li><a href="#chapter1">章タイトル1</a></li>
+      <li><a href="#chapter2">章タイトル2</a></li>
+      <li><a href="#chapter3">章タイトル3</a></li>
+    </ol>
+  </section>
+
+
+  <!-- ============================================================
+       章セクション
+       <section id="chapterN"> を章の数だけ複製して使う。
+       以下は各パーツの見本。不要なものは削除する。
+       ============================================================ -->
+  <section id="chapter1">
+    <h2>1. 章タイトル</h2>
+
+    <!-- ---------- 見出しと本文 ---------- -->
+    <h3>中見出し（h3）</h3>
+    <p>
+      本文をここに書きます。1段落＝1トピックを目安にすると読みやすくなります。
+    </p>
+    <p class="lead">
+      導入文を少し大きく見せたい場合は <code>class="lead"</code> を付けます。
+    </p>
+
+    <h4>小見出し（h4）</h4>
+    <p>
+      h3 の中をさらに区切りたいときに使います。
+    </p>
+
+    <!-- ---------- 箇条書き・手順 ---------- -->
+    <ul>
+      <li>順序が関係ない項目は ul</li>
+      <li>並列に並べたい要素に使う</li>
+    </ul>
+
+    <ol>
+      <li>手順の1つ目</li>
+      <li>手順の2つ目</li>
+      <li>手順の3つ目</li>
+    </ol>
+
+    <!-- ---------- 表 ---------- -->
+    <table>
+      <tr>
+        <th>見出し列1</th>
+        <th>見出し列2</th>
+        <th>見出し列3</th>
+      </tr>
+      <tr>
+        <td>内容1</td>
+        <td>内容2</td>
+        <td>内容3</td>
+      </tr>
+      <tr>
+        <td>内容1</td>
+        <td>内容2</td>
+        <td>内容3</td>
+      </tr>
+    </table>
+
+    <!-- ---------- 注釈ボックス（5種） ---------- -->
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      青。受講者に必ず押さえてほしい要点を書きます。
+    </div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      グレー。知っておくと良い程度の情報や用語の補足を書きます。
+    </div>
+
+    <div class="caution">
+      <span class="label">注意</span><br>
+      赤。間違えやすい点や、やってはいけないことを書きます。
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習</span><br>
+      オレンジ。受講者に手を動かしてもらう課題を書きます。
+    </div>
+
+    <div class="instructor">
+      <span class="label">講師向け</span><br>
+      緑。進行の補足など、講師向けの情報を書きます。
+    </div>
+
+    <!-- ---------- 2カラムカード ---------- -->
+    <div class="grid-2">
+      <div class="card">
+        <h4>カード見出し1</h4>
+        <p>2つの概念を対比させるときに使います。</p>
+      </div>
+      <div class="card">
+        <h4>カード見出し2</h4>
+        <p>780px 以下では自動的に縦並びになります。</p>
+      </div>
+    </div>
+
+    <!-- ---------- コード表示 ----------
+         HTMLタグを表示するときは &lt; &gt; にエスケープする。
+         pre の中はインデントがそのまま表示されるので、
+         行頭を詰めて書く。
+    -->
+    <pre><code>&lt;p&gt;こんにちは&lt;/p&gt;</code></pre>
+
+    <pre><code>p {
+  color: #333333;
+  font-size: 16px;
+}</code></pre>
+
+    <!-- ---------- ブラウザ表示イメージ ---------- -->
+    <div class="mock-browser">
+      <div class="mock-browser-bar">Chrome 表示イメージ</div>
+      <div class="mock-browser-body">
+        ここにブラウザ上での見え方を書きます。
+      </div>
+    </div>
+
+    <!-- ---------- 表示サンプル（div / p / span の違いなど） ---------- -->
+    <div class="mock-browser">
+      <div class="mock-browser-bar">Chrome 表示イメージ</div>
+      <div class="mock-browser-body">
+        <div class="sample-div">div の表示例</div>
+        <p class="sample-p">p の表示例</p>
+        <span class="sample-span">span の表示例</span>
+      </div>
+    </div>
+
+    <!-- ---------- 画像 ----------
+         src はこのHTMLファイルからの相対パス。
+         docs/training/cbc_internal/ に置く場合は ../img/xxx.png
+    -->
+    <img
+      src="../img/sample.png"
+      alt="画像の説明"
+      style="max-width: 100%; height: auto; display: block;"
+    >
+
+    <!-- ---------- 画像や図の差し込み待ち枠 ---------- -->
+    <div class="figure-box">
+      図版をここに挿入
+    </div>
+  </section>
+
+
+  <section id="chapter2">
+    <h2>2. 章タイトル</h2>
+
+    <p>
+      章を追加するときは、この section を複製し、<code>id</code> と <code>h2</code> を書き換え、目次にも1行追加します。
+    </p>
+  </section>
+
+
+  <section id="chapter3">
+    <h2>3. 章タイトル</h2>
+
+    <p>
+      本文
+    </p>
+  </section>
+
+</main>
+
+<footer>
+</footer>
+
+</body>
+</html>
