@@ -156,15 +156,36 @@
     });
   }
 
-  document.querySelectorAll('pre').forEach(function (pre) {
+  // コピー対象を集める。
+  //   1. <pre> はすべて対象
+  //   2. <code> のうち、ブロック表示で改行が保持されているもの
+  //      （見本ごとに置いているコード枠。文中の <code> は対象外）
+  var blocks = [];
+
+  document.querySelectorAll('pre').forEach(function (el) {
+    blocks.push(el);
+  });
+
+  document.querySelectorAll('code').forEach(function (el) {
+    // <pre> の中の <code> は、親の <pre> 側で対応済み
+    if (el.closest('pre')) {
+      return;
+    }
+    var style = window.getComputedStyle(el);
+    if (style.display === 'block' && style.whiteSpace.indexOf('pre') === 0) {
+      blocks.push(el);
+    }
+  });
+
+  blocks.forEach(function (code) {
     // VS Code 風の枠は枠全体を基準にする。それ以外は包む要素を作る
-    var host = pre.closest('.vscode');
+    var host = code.closest('.vscode');
 
     if (!host) {
       host = document.createElement('div');
       host.className = 'code-block';
-      pre.parentNode.insertBefore(host, pre);
-      host.appendChild(pre);
+      code.parentNode.insertBefore(host, code);
+      host.appendChild(code);
     }
 
     var button = document.createElement('button');
@@ -175,7 +196,7 @@
     host.appendChild(button);
 
     button.addEventListener('click', function () {
-      copyText(pre.innerText).then(
+      copyText(code.innerText).then(
         function () {
           button.classList.add('is-copied');
           button.innerHTML = label('コピーしました');

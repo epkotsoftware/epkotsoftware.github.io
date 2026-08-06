@@ -261,8 +261,10 @@
     .zi-set .zi-box3 { z-index: 2; }
 
     @media (max-width: 780px) {
+      /* 1fr だけだと中身の最小幅まで広がり、長いコード行が画面をはみ出す。
+         minmax(0, …) を付けて、親の幅で止める */
       .el-samples {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
       }
     }
   </style>
