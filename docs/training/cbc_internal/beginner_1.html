@@ -5,6 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>コーダー初級#1</title>
   <link rel="stylesheet" href="../css/training.css">
+
+  <!-- ▼ このページ専用のスタイル -->
+  <style>
+    /* カラーコードの見本。表の中に実際の色を出す */
+    .color-chip {
+      display: inline-block;
+      width: 46px;
+      height: 22px;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      vertical-align: middle;
+    }
+  </style>
 </head>
 <body>
 
@@ -77,7 +90,7 @@
       </tr>
     </table>
 
-    <h3>プログラミング言語とマークアップ言語</h3>
+    <h3>マークアップ言語とプログラミング言語</h3>
     <p>
       初めてのWebサイト制作では、いきなり本格的なプログラミング言語を使うわけではありません。<br>
       まずはHTMLというマークアップ言語を使います。
@@ -281,14 +294,15 @@
     <div class="grid-2">
       <div class="card">
         <h4>HTMLの例</h4>
-        <pre><code>&lt;p&gt;こんにちは&lt;/p&gt;</code></pre>
+        <pre><code>&lt;<span class="sy-tag">p</span>&gt;こんにちは&lt;/<span class="sy-tag">p</span>&gt;</code></pre>
         <p>文章のまとまりを作っています。</p>
+
       </div>
       <div class="card">
         <h4>CSSの例</h4>
-        <pre><code>p {
-  color: #ffff00;
-  background-color: #0000ff;
+        <pre><code><span class="sy-sel">p</span> {
+  <span class="sy-attr">color</span>: <span class="sy-str">#ffff00</span>;
+  <span class="sy-attr">background-color</span>: <span class="sy-str">#0000ff</span>;
 }</code></pre>
         <p>段落の文字色や背景色を指定しています。</p>
       </div>
@@ -313,7 +327,7 @@
       HTMLでは、<code>&lt;p&gt;</code> や <code>&lt;div&gt;</code> のようなタグを使って、文字や画像に役割を与えます。
     </p>
 
-    <pre><code>&lt;p&gt;こんにちは&lt;/p&gt;</code></pre>
+    <pre><code>&lt;<span class="sy-tag">p</span>&gt;こんにちは&lt;/<span class="sy-tag">p</span>&gt;</code></pre>
 
     <p>
       多くのタグは、開始タグと終了タグで内容を囲みます。ただし、画像を表示する <code>&lt;img&gt;</code> や改行を表す <code>&lt;br&gt;</code> のように、終了タグを持たないタグもあります。
@@ -333,7 +347,7 @@
     </p>
 
     <h4><code>&lt;br&gt;</code> を使う場合</h4>
-    <pre><code>あいうえお&lt;br&gt;
+    <pre><code>あいうえお&lt;<span class="sy-tag">br</span>&gt;
 かきくけこ</code></pre>
 
     <p>
@@ -441,14 +455,14 @@
       HTMLファイルには、基本的に以下のような大きな枠があります。
     </p>
 
-    <pre><code>&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;練習&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
+    <pre><code>&lt;<span class="sy-tag">html</span>&gt;
+  &lt;<span class="sy-tag">head</span>&gt;
+    &lt;<span class="sy-tag">title</span>&gt;練習&lt;/<span class="sy-tag">title</span>&gt;
+  &lt;/<span class="sy-tag">head</span>&gt;
+  &lt;<span class="sy-tag">body</span>&gt;
     画面に表示する内容
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre>
+  &lt;/<span class="sy-tag">body</span>&gt;
+&lt;/<span class="sy-tag">html</span>&gt;</code></pre>
 
     <table>
       <tr>
@@ -754,7 +768,7 @@
       <code>index.html</code> の <code>&lt;head&gt;</code> 内に、CSSを読み込むための <code>&lt;link&gt;</code> タグを書きます。
     </p>
 
-    <pre><code>&lt;link href="css/style.css" rel="stylesheet"&gt;</code></pre>
+    <pre><code>&lt;<span class="sy-tag">link</span> <span class="sy-attr">href</span>=<span class="sy-str">"css/style.css"</span> <span class="sy-attr">rel</span>=<span class="sy-str">"stylesheet"</span>&gt;</code></pre>
 
     <table>
       <tr>
@@ -783,41 +797,41 @@
     </div>
 
     <h3>index.html</h3>
-    <pre><code>&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;練習&lt;/title&gt;
-    &lt;link href="css/style.css" rel="stylesheet"&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;div&gt;
+    <pre><code>&lt;<span class="sy-tag">html</span>&gt;
+  &lt;<span class="sy-tag">head</span>&gt;
+    &lt;<span class="sy-tag">title</span>&gt;練習&lt;/<span class="sy-tag">title</span>&gt;
+    &lt;<span class="sy-tag">link</span> <span class="sy-attr">href</span>=<span class="sy-str">"css/style.css"</span> <span class="sy-attr">rel</span>=<span class="sy-str">"stylesheet"</span>&gt;
+  &lt;/<span class="sy-tag">head</span>&gt;
+  &lt;<span class="sy-tag">body</span>&gt;
+    &lt;<span class="sy-tag">div</span>&gt;
       おはよう
-    &lt;/div&gt;
-    &lt;p&gt;
+    &lt;/<span class="sy-tag">div</span>&gt;
+    &lt;<span class="sy-tag">p</span>&gt;
       こんにちは
-    &lt;/p&gt;
-    &lt;span&gt;
+    &lt;/<span class="sy-tag">p</span>&gt;
+    &lt;<span class="sy-tag">span</span>&gt;
       さようなら
-    &lt;/span&gt;
-    &lt;span&gt;おやすみ&lt;/span&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre>
+    &lt;/<span class="sy-tag">span</span>&gt;
+    &lt;<span class="sy-tag">span</span>&gt;おやすみ&lt;/<span class="sy-tag">span</span>&gt;
+  &lt;/<span class="sy-tag">body</span>&gt;
+&lt;/<span class="sy-tag">html</span>&gt;</code></pre>
 
     <h3>css/style.css</h3>
-    <pre><code>div {
-  height: 100px;
-  background-color: #d9e021;
+    <pre><code><span class="sy-sel">div</span> {
+  <span class="sy-attr">height</span>: <span class="sy-num">100px</span>;
+  <span class="sy-attr">background-color</span>: <span class="sy-str">#d9e021</span>;
 }
 
-p {
-  width: 70%;
-  height: 50px;
-  background-color: #f9b9d5;
-  text-align: center;
+<span class="sy-sel">p</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">70%</span>;
+  <span class="sy-attr">height</span>: <span class="sy-num">50px</span>;
+  <span class="sy-attr">background-color</span>: <span class="sy-str">#f9b9d5</span>;
+  <span class="sy-attr">text-align</span>: <span class="sy-str">center</span>;
 }
 
-span {
-  border: 1px dotted #f9b9d5;
-  font-family: serif;
+<span class="sy-sel">span</span> {
+  <span class="sy-attr">border</span>: <span class="sy-num">1px</span> <span class="sy-str">dotted</span> <span class="sy-str">#f9b9d5</span>;
+  <span class="sy-attr">font-family</span>: <span class="sy-str">serif</span>;
 }</code></pre>
 
     <h3>読み込んだ結果</h3>
@@ -932,11 +946,44 @@ span {
       CSSでは、色を <code>#FF0000</code> のような6桁のカラーコードで指定できます。<code>#</code> の後に数字やアルファベットを組み合わせて色を表します。
     </p>
 
-    <pre><code>#FF0000  赤
-#000000  黒
-#00FF00  緑
-#CCCCDD  薄い青紫
-#9932CC  紫</code></pre>
+    <table>
+      <tr>
+        <th>カラーコード</th>
+        <th>色</th>
+        <th>見本</th>
+      </tr>
+      <tr>
+        <td><code>#FF0000</code></td>
+        <td>赤</td>
+        <td><span class="color-chip" style="background: #FF0000;"></span></td>
+      </tr>
+      <tr>
+        <td><code>#000000</code></td>
+        <td>黒</td>
+        <td><span class="color-chip" style="background: #000000;"></span></td>
+      </tr>
+      <tr>
+        <td><code>#00FF00</code></td>
+        <td>緑</td>
+        <td><span class="color-chip" style="background: #00FF00;"></span></td>
+      </tr>
+      <tr>
+        <td><code>#CCCCDD</code></td>
+        <td>薄い青紫</td>
+        <td><span class="color-chip" style="background: #CCCCDD;"></span></td>
+      </tr>
+      <tr>
+        <td><code>#9932CC</code></td>
+        <td>紫</td>
+        <td><span class="color-chip" style="background: #9932CC;"></span></td>
+      </tr>
+    </table>
+
+    <div class="note">
+      <span class="label">6桁の意味</span><br>
+      6桁は<strong>2桁ずつ3つ</strong>に分かれていて、順に<strong>赤・緑・青</strong>の強さを表しています。<code>#FF0000</code> なら「赤が最大、緑と青はゼロ」なので赤になります。<br>
+      いまは仕組みを覚えなくて大丈夫です。<strong>色は自分で考えず、デザインで指定されたコードをそのまま使います。</strong>
+    </div>
   </section>
 
   <section id="chapter11">
@@ -952,7 +999,7 @@ span {
     </div>
 
     <div class="prop-group">
-      <h4>★ 枠のかたちに関するプロパティ</h4>
+      <h3>★ 枠のかたちに関するプロパティ</h3>
       <table class="prop-table">
         <tr>
           <th class="prop-name">プロパティ</th>
@@ -1009,7 +1056,7 @@ span {
     </div>
 
     <div class="prop-group">
-      <h4>★ 枠の余白に関するプロパティ</h4>
+      <h3>★ 枠の余白に関するプロパティ</h3>
       <table class="prop-table">
         <tr>
           <th class="prop-name">プロパティ</th>
@@ -1057,7 +1104,7 @@ span {
     </div>
 
     <div class="prop-group">
-      <h4>★ 枠の中の文字に関するプロパティ</h4>
+      <h3>★ 枠の中の文字に関するプロパティ</h3>
       <table class="prop-table">
         <tr>
           <th class="prop-name">プロパティ</th>
@@ -1121,7 +1168,7 @@ span {
     </div>
 
     <div class="prop-group">
-      <h4>★★★ 配置（レイアウト）に関するプロパティ</h4>
+      <h3>★★★ 配置（レイアウト）に関するプロパティ</h3>
       <table class="prop-table">
         <tr>
           <th class="prop-name">プロパティ</th>

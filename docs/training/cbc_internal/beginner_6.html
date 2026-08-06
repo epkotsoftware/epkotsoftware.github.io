@@ -442,15 +442,15 @@
       もうひとつ決まりがあります。<strong>インライン要素の中に、ブロックレベル要素を入れてはいけません。</strong>
     </p>
 
-    <pre><code>&lt;!-- ✕ してはいけない書き方 --&gt;
-&lt;span&gt;
-  &lt;div&gt;この書き方は避ける&lt;/div&gt;
-&lt;/span&gt;
+    <pre><code><span class="sy-com">&lt;!-- ✕ してはいけない書き方 --&gt;</span>
+&lt;<span class="sy-tag">span</span>&gt;
+  &lt;<span class="sy-tag">div</span>&gt;この書き方は避ける&lt;/<span class="sy-tag">div</span>&gt;
+&lt;/<span class="sy-tag">span</span>&gt;
 
-&lt;!-- ○ 正しい書き方 --&gt;
-&lt;div&gt;
-  &lt;span&gt;こちらは問題ない&lt;/span&gt;
-&lt;/div&gt;</code></pre>
+<span class="sy-com">&lt;!-- ○ 正しい書き方 --&gt;</span>
+&lt;<span class="sy-tag">div</span>&gt;
+  &lt;<span class="sy-tag">span</span>&gt;こちらは問題ない&lt;/<span class="sy-tag">span</span>&gt;
+&lt;/<span class="sy-tag">div</span>&gt;</code></pre>
 
     <div class="note">
       <span class="label">補足</span><br>

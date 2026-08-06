@@ -793,9 +793,9 @@
       子要素を並べる向きを決めます。何も書かないと <code>row</code>（左から右）になります。
     </p>
 
-    <pre><code>.container {
-  display: flex;
-  flex-direction: row;   /* ← ここの値を変える */
+    <pre><code><span class="sy-sel">.container</span> {
+  <span class="sy-attr">display</span>: <span class="sy-str">flex</span>;
+  <span class="sy-attr">flex-direction</span>: <span class="sy-str">row</span>;   <span class="sy-com">/* ← ここの値を変える */</span>
 }</code></pre>
 
     <div class="fx-samples">
@@ -843,13 +843,13 @@
       子要素が親の幅に収まらないとき、どうするかを決めます。1行に押し込めるか、次の行へ送るか。何も書かないと <code>nowrap</code>（折り返さない）になります。
     </p>
 
-    <pre><code>.container {
-  display: flex;
-  flex-wrap: wrap;   /* ← nowrap / wrap */
+    <pre><code><span class="sy-sel">.container</span> {
+  <span class="sy-attr">display</span>: <span class="sy-str">flex</span>;
+  <span class="sy-attr">flex-wrap</span>: <span class="sy-str">wrap</span>;   <span class="sy-com">/* ← nowrap / wrap */</span>
 }
 
-.item {
-  flex-basis: 40%;   /* 4つで160%になり、収まらなくなる */
+<span class="sy-sel">.item</span> {
+  <span class="sy-attr">flex-basis</span>: <span class="sy-num">40</span><span class="sy-str">%</span>;   <span class="sy-com">/* 4つで160%になり、収まらなくなる */</span>
 }</code></pre>
 
     <div class="fx-samples">
@@ -884,17 +884,17 @@
       <code>flex-direction</code> と <code>flex-wrap</code> は、<code>flex-flow</code> で1行にまとめられます。
     </p>
 
-    <pre><code>/* この書き方を */
-.container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+    <pre><code><span class="sy-com">/* この書き方を */</span>
+<span class="sy-sel">.container</span> {
+  <span class="sy-attr">display</span>: <span class="sy-str">flex</span>;
+  <span class="sy-attr">flex-direction</span>: <span class="sy-str">row</span>;
+  <span class="sy-attr">flex-wrap</span>: <span class="sy-str">wrap</span>;
 }
 
-/* こうまとめられる */
-.container {
-  display: flex;
-  flex-flow: row wrap;
+<span class="sy-com">/* こうまとめられる */</span>
+<span class="sy-sel">.container</span> {
+  <span class="sy-attr">display</span>: <span class="sy-str">flex</span>;
+  <span class="sy-attr">flex-flow</span>: <span class="sy-str">row wrap</span>;
 }</code></pre>
 
     <h3>justify-content ― 並んでいる方向の位置</h3>
@@ -902,9 +902,9 @@
       <strong>並んでいる方向</strong>のどこに寄せるかを決めます。横並びなら、左・中央・右のどこに置くかという話です。
     </p>
 
-    <pre><code>.container {
-  display: flex;
-  justify-content: center;   /* ← ここの値を変える */
+    <pre><code><span class="sy-sel">.container</span> {
+  <span class="sy-attr">display</span>: <span class="sy-str">flex</span>;
+  <span class="sy-attr">justify-content</span>: <span class="sy-str">center</span>;   <span class="sy-com">/* ← ここの値を変える */</span>
 }</code></pre>
 
     <div class="fx-samples">
@@ -969,10 +969,10 @@
       何も書かないと <code>stretch</code>（親の高さぴったりに伸びる）になります。ただし伸びるのは、子に <code>height</code> を書いていないときだけです。
     </p>
 
-    <pre><code>.container {
-  display: flex;
-  height: 108px;          /* 高さがないと違いが出ない */
-  align-items: center;    /* ← ここの値を変える */
+    <pre><code><span class="sy-sel">.container</span> {
+  <span class="sy-attr">display</span>: <span class="sy-str">flex</span>;
+  <span class="sy-attr">height</span>: <span class="sy-num">108px</span>;          <span class="sy-com">/* 高さがないと違いが出ない */</span>
+  <span class="sy-attr">align-items</span>: <span class="sy-str">center</span>;    <span class="sy-com">/* ← ここの値を変える */</span>
 }</code></pre>
 
     <div class="fx-samples">
@@ -1016,15 +1016,15 @@
       2行以上になったとき、<strong>行のかたまり全体</strong>を縦のどこに置くかを決めます。1つずつの要素ではなく、行そのものを動かすイメージです。
     </p>
 
-    <pre><code>.container {
-  display: flex;
-  flex-wrap: wrap;         /* これがないと効かない */
-  height: 240px;           /* 高さがないと動かせる余白がない */
-  align-content: center;   /* ← ここの値を変える */
+    <pre><code><span class="sy-sel">.container</span> {
+  <span class="sy-attr">display</span>: <span class="sy-str">flex</span>;
+  <span class="sy-attr">flex-wrap</span>: <span class="sy-str">wrap</span>;         <span class="sy-com">/* これがないと効かない */</span>
+  <span class="sy-attr">height</span>: <span class="sy-num">240px</span>;           <span class="sy-com">/* 高さがないと動かせる余白がない */</span>
+  <span class="sy-attr">align-content</span>: <span class="sy-str">center</span>;   <span class="sy-com">/* ← ここの値を変える */</span>
 }
 
-.item {
-  flex: 0 0 40%;           /* 2行に折り返させるため */
+<span class="sy-sel">.item</span> {
+  <span class="sy-attr">flex</span>: <span class="sy-num">0</span> <span class="sy-num">0</span> <span class="sy-num">40</span><span class="sy-str">%</span>;           <span class="sy-com">/* 2行に折り返させるため */</span>
 }</code></pre>
 
     <div class="note">
@@ -1331,21 +1331,21 @@
       <code>flex-grow</code>、<code>flex-shrink</code>、<code>flex-basis</code> は <code>flex</code> で1行にまとめられます。実務ではこちらのほうがよく使われます。
     </p>
 
-    <pre><code>/* この書き方を */
-.item {
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 0%;
+    <pre><code><span class="sy-com">/* この書き方を */</span>
+<span class="sy-sel">.item</span> {
+  <span class="sy-attr">flex-grow</span>: <span class="sy-num">1</span>;
+  <span class="sy-attr">flex-shrink</span>: <span class="sy-num">1</span>;
+  <span class="sy-attr">flex-basis</span>: <span class="sy-num">0</span><span class="sy-str">%</span>;
 }
 
-/* 1行にまとめられる */
-.item {
-  flex: 1 1 0%;
+<span class="sy-com">/* 1行にまとめられる */</span>
+<span class="sy-sel">.item</span> {
+  <span class="sy-attr">flex</span>: <span class="sy-num">1</span> <span class="sy-num">1</span> <span class="sy-num">0</span><span class="sy-str">%</span>;
 }
 
-/* さらに省略できる（同じ意味） */
-.item {
-  flex: 1;
+<span class="sy-com">/* さらに省略できる（同じ意味） */</span>
+<span class="sy-sel">.item</span> {
+  <span class="sy-attr">flex</span>: <span class="sy-num">1</span>;
 }</code></pre>
 
     <p>
@@ -1445,23 +1445,23 @@
       <code>justify-content</code> と <code>align-items</code> の両方を <code>center</code> にします。flexが登場する前は面倒だった中央寄せが、2行で片付きます。
     </p>
 
-    <pre><code>.container {
-  /* ここがflexの指定 */
-  display: flex;
-  justify-content: center;  /* 左右の中央 */
-  align-items: center;      /* 上下の中央 */
+    <pre><code><span class="sy-sel">.container</span> {
+  <span class="sy-com">/* ここがflexの指定 */</span>
+  <span class="sy-attr">display</span>: <span class="sy-str">flex</span>;
+  <span class="sy-attr">justify-content</span>: <span class="sy-str">center</span>;  <span class="sy-com">/* 左右の中央 */</span>
+  <span class="sy-attr">align-items</span>: <span class="sy-str">center</span>;      <span class="sy-com">/* 上下の中央 */</span>
 
-  /* ここから下は見た目を整えるだけ */
-  height: 150px;
-  background-color: #f1f5f9;
-  border: 2px dashed #94a3b8;
+  <span class="sy-com">/* ここから下は見た目を整えるだけ */</span>
+  <span class="sy-attr">height</span>: <span class="sy-num">150px</span>;
+  <span class="sy-attr">background-color</span>: <span class="sy-str">#f1f5f9</span>;
+  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> <span class="sy-str">dashed #94a3b8</span>;
 }
 
-.item {
-  padding: 12px 16px;
-  background-color: #bfdbfe;
-  border: 1px solid #60a5fa;
-  border-radius: 5px;
+<span class="sy-sel">.item</span> {
+  <span class="sy-attr">padding</span>: <span class="sy-num">12px</span> <span class="sy-num">16px</span>;
+  <span class="sy-attr">background-color</span>: <span class="sy-str">#bfdbfe</span>;
+  <span class="sy-attr">border</span>: <span class="sy-num">1px</span> <span class="sy-str">solid #60a5fa</span>;
+  <span class="sy-attr">border-radius</span>: <span class="sy-num">5px</span>;
 }</code></pre>
 
     <div class="fx-demo fx-center-demo">
@@ -1473,14 +1473,14 @@
       「左に2つ、右に1つ」のように分けたいときは、右に送りたい要素へ <code>margin-left: auto;</code> を付けます。余った空間をすべてその左側の余白が吸い取るので、要素が右端まで押し出されます。
     </p>
 
-    <pre><code>.container {
-  display: flex;
-  gap: 8px;
+    <pre><code><span class="sy-sel">.container</span> {
+  <span class="sy-attr">display</span>: <span class="sy-str">flex</span>;
+  <span class="sy-attr">gap</span>: <span class="sy-num">8px</span>;
 }
 
-/* 右端へ送りたい要素にだけ書く */
-.login {
-  margin-left: auto;
+<span class="sy-com">/* 右端へ送りたい要素にだけ書く */</span>
+<span class="sy-sel">.login</span> {
+  <span class="sy-attr">margin-left</span>: <span class="sy-str">auto</span>;
 }</code></pre>
 
     <div class="fx-demo">
@@ -1761,20 +1761,20 @@
       サイドバーは幅を固定し、メインは残り全部を使う形です。サイドバーに <code>flex: 0 0 110px;</code>（伸びず縮まず110px）、メインに <code>flex: 1;</code>（余りを全部もらう）を指定します。
     </p>
 
-    <pre><code>.container {
-  display: flex;
-  gap: 8px;
-  height: 150px;
+    <pre><code><span class="sy-sel">.container</span> {
+  <span class="sy-attr">display</span>: <span class="sy-str">flex</span>;
+  <span class="sy-attr">gap</span>: <span class="sy-num">8px</span>;
+  <span class="sy-attr">height</span>: <span class="sy-num">150px</span>;
 }
 
-.side {
-  flex: 0 0 110px;           /* 幅を110pxで固定 */
-  background-color: #fde68a; /* 見た目だけ */
+<span class="sy-sel">.side</span> {
+  <span class="sy-attr">flex</span>: <span class="sy-num">0</span> <span class="sy-num">0</span> <span class="sy-num">110px</span>;           <span class="sy-com">/* 幅を110pxで固定 */</span>
+  <span class="sy-attr">background-color</span>: <span class="sy-str">#fde68a</span>; <span class="sy-com">/* 見た目だけ */</span>
 }
 
-.main {
-  flex: 1;                   /* 残りを全部使う */
-  background-color: #bfdbfe; /* 見た目だけ */
+<span class="sy-sel">.main</span> {
+  <span class="sy-attr">flex</span>: <span class="sy-num">1</span>;                   <span class="sy-com">/* 残りを全部使う */</span>
+  <span class="sy-attr">background-color</span>: <span class="sy-str">#bfdbfe</span>; <span class="sy-com">/* 見た目だけ */</span>
 }</code></pre>
 
     <div class="fx-demo fx-layout-demo">
@@ -1792,19 +1792,19 @@
       すべての子要素に <code>flex: 1;</code> を付けると、幅が均等になります。中身の文字数が違っても揃います。
     </p>
 
-    <pre><code>.container {
-  display: flex;
-  gap: 8px;
+    <pre><code><span class="sy-sel">.container</span> {
+  <span class="sy-attr">display</span>: <span class="sy-str">flex</span>;
+  <span class="sy-attr">gap</span>: <span class="sy-num">8px</span>;
 }
 
-.card {
-  flex: 1;                   /* ここだけがflexの指定 */
+<span class="sy-sel">.card</span> {
+  <span class="sy-attr">flex</span>: <span class="sy-num">1</span>;                   <span class="sy-com">/* ここだけがflexの指定 */</span>
 
-  /* ここから下は見た目を整えるだけ */
-  padding: 12px;
-  background-color: #bfdbfe;
-  border-radius: 5px;
-  text-align: center;
+  <span class="sy-com">/* ここから下は見た目を整えるだけ */</span>
+  <span class="sy-attr">padding</span>: <span class="sy-num">12px</span>;
+  <span class="sy-attr">background-color</span>: <span class="sy-str">#bfdbfe</span>;
+  <span class="sy-attr">border-radius</span>: <span class="sy-num">5px</span>;
+  <span class="sy-attr">text-align</span>: <span class="sy-str">center</span>;
 }</code></pre>
 
     <div class="fx-demo fx-cards-demo">
