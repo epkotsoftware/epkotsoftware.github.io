@@ -1,0 +1,1865 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>コーダー初級#5</title>
+  <link rel="stylesheet" href="../css/training.css">
+
+  <!-- ▼ このページ専用のスタイル（flexの実演） -->
+  <style>
+    /* --- 1〜2章：親子関係の実演 --- */
+    .fx-parent-demo {
+      position: relative;
+      padding: 27px 10px 10px;
+      border: 2px dashed #94a3b8;
+      background: #f1f5f9;
+    }
+
+    .fx-parent-demo > .fx-item {
+      margin-bottom: 8px;
+    }
+
+    .fx-parent-demo > .fx-item:last-child {
+      margin-bottom: 0;
+    }
+
+    /* 親に display:flex を付けた状態 */
+    .fx-parent-demo.fx-flex {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .fx-parent-demo.fx-flex > .fx-item {
+      margin-bottom: 0;
+    }
+
+    .fx-tag-label {
+      position: absolute;
+      top: 5px;
+      left: 9px;
+      color: #64748b;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 11.5px;
+    }
+
+    /* 子のほうに display:flex を書いた場合。親の並びは変わらない */
+    .fx-wrong-demo > .fx-item {
+      display: flex;
+    }
+
+    .fx-label-ng { color: #b91c1c; }
+    .fx-label-ok { color: #15803d; }
+
+    /* 2章：クラスを付けた要素だけに効くことを見せる */
+    .fx-plain,
+    .fx-class-on {
+      padding: 9px 12px;
+      margin-bottom: 6px;
+    }
+
+    .fx-class-on {
+      background-color: #f9b9d5;
+    }
+
+    /* 実演の外枠。点線がflexを指定した親要素 */
+    .fx-demo {
+      display: flex;
+      /* 既定は上寄せ。align-items の節だけ個別に上書きする */
+      align-items: flex-start;
+      gap: 8px;
+      padding: 10px;
+      border: 2px dashed #94a3b8;
+      background: #f1f5f9;
+      min-height: 108px;
+    }
+
+    .fx-item {
+      padding: 12px 16px;
+      border: 1px solid #60a5fa;
+      border-radius: 5px;
+      background: #bfdbfe;
+      color: #1e3a8a;
+      font-size: 14px;
+      font-weight: 700;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    /* 高さの違いを見せたいとき用 */
+    .fx-item.tall {
+      padding-top: 30px;
+      padding-bottom: 30px;
+    }
+
+    /* 値ごとの見本を並べる */
+    .fx-samples {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin: 20px 0 26px;
+    }
+
+    .fx-sample-label {
+      display: block;
+      margin-bottom: 7px;
+      color: #1e3a8a;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    /* 見本ごとの、実際に書くコード。セレクタまで含めて見せる */
+    .fx-sample-code {
+      display: block;
+      margin-bottom: 8px;
+      padding: 9px 12px;
+      border-radius: 6px;
+      background: #1e293b;
+      color: #e2e8f0;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    .fx-sample-code .c { color: #6a9955; }
+    .fx-sample-code .s { color: #d7ba7d; }
+    .fx-sample-code .p { color: #9cdcfe; }
+    .fx-sample-code .v { color: #ce9178; }
+    .fx-sample-code .n { color: #b5cea8; }
+
+    /* --- flex-direction --- */
+    .fx-dir-row { flex-direction: row; }
+    .fx-dir-row-rev { flex-direction: row-reverse; }
+    .fx-dir-col { flex-direction: column; }
+    .fx-dir-col-rev { flex-direction: column-reverse; }
+
+    /* --- flex-wrap --- */
+    .fx-wrap-no { flex-wrap: nowrap; }
+    .fx-wrap-yes { flex-wrap: wrap; }
+
+    /* 折り返しを起こすため、あえて幅を広げた子要素。
+       shrink を 1 のままにして、nowrap のときは縮んで収まるようにする */
+    .fx-wide .fx-item { flex: 1 1 40%; }
+
+    /* --- justify-content（横方向の配置） --- */
+    .fx-jc-start { justify-content: flex-start; }
+    .fx-jc-center { justify-content: center; }
+    .fx-jc-end { justify-content: flex-end; }
+    .fx-jc-between { justify-content: space-between; }
+    .fx-jc-around { justify-content: space-around; }
+    .fx-jc-evenly { justify-content: space-evenly; }
+
+    /* --- align-items（縦方向の配置） --- */
+    .fx-ai-stretch { align-items: stretch; }
+    .fx-ai-start { align-items: flex-start; }
+    .fx-ai-center { align-items: center; }
+    .fx-ai-end { align-items: flex-end; }
+
+    /* stretch を見せるときは子の高さ指定を外す */
+    .fx-ai-stretch .fx-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* --- align-content（複数行の縦方向の配置） --- */
+    /* 2クラス指定にして、後段のメディアクエリの .fx-demo に負けないようにする */
+    .fx-demo.fx-ac-demo {
+      flex-wrap: wrap;
+      /* 行を動かせる余白がないと値の違いが見えないため、高めに取る */
+      min-height: 240px;
+    }
+
+    .fx-ac-demo .fx-item { flex: 0 0 40%; }
+
+    .fx-ac-start { align-content: flex-start; }
+    .fx-ac-center { align-content: center; }
+    .fx-ac-end { align-content: flex-end; }
+    .fx-ac-between { align-content: space-between; }
+
+    /* ========== 4章：子要素に指定するプロパティ ========== */
+
+    /* 指定した子だけ色を変えて目立たせる */
+    .fx-item.mark {
+      border-color: #f59e0b;
+      background: #fde68a;
+      color: #92400e;
+    }
+
+    /* --- order --- */
+    .fx-order-3 { order: 3; }
+
+    /* --- flex-grow --- */
+    .fx-grow-1 { flex-grow: 1; }
+    .fx-grow-all .fx-item { flex-grow: 1; }
+    /* 上の .fx-grow-all .fx-item と詳細度を揃えないと上書きできない */
+    .fx-item.fx-grow-2 { flex-grow: 2; }
+    /* flex-basis を 0 にすると、幅そのものが比率どおりになる */
+    .fx-basis0 .fx-item { flex: 1 1 0%; }
+    .fx-basis0 .fx-item.fx-grow-2 { flex: 2 1 0%; }
+
+    /* --- flex-shrink --- */
+    /* 合計が親を超える幅を与えて、縮み方の違いを見せる */
+    .fx-shrink-demo .fx-item { flex-basis: 45%; }
+    .fx-shrink-0 { flex-shrink: 0; }
+
+    /* --- flex-basis --- */
+    .fx-basis-50 { flex-basis: 50%; }
+
+    /* --- align-self --- */
+    .fx-self-center { align-self: center; }
+    .fx-self-end { align-self: flex-end; }
+    .fx-self-stretch {
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ========== 5章：組み合わせて作るレイアウト ========== */
+
+    /* 上下左右の中央寄せ */
+    .fx-demo.fx-center-demo {
+      justify-content: center;
+      align-items: center;
+      min-height: 150px;
+    }
+
+    /* 特定の要素だけ右へ送る */
+    .fx-push-right { margin-left: auto; }
+
+    /* ヘッダーの例。3段階に分けて、flexが二重になる様子を見せる */
+    .fx-header-step {
+      margin: 14px 0 20px;
+      padding: 14px 18px;
+      border-radius: 6px;
+      background: #1e293b;
+    }
+
+    /* ブラウザ枠の中に置くときは、枠側の余白に任せる */
+    .chrome-viewport .fx-header-step {
+      margin: 0;
+    }
+
+    /* 段階2・3：ヘッダー自体をflexにする */
+    .fx-header-step.step2,
+    .fx-header-step.step3 {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* 段階3：メニュー側もflexにする */
+    .fx-header-step.step3 .fx-nav {
+      display: flex;
+      gap: 18px;
+    }
+
+    .fx-logo {
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .fx-nav > div {
+      color: #cbd5e1;
+      font-size: 13px;
+    }
+
+    /* サイドバー＋メインの例 */
+    .fx-demo.fx-layout-demo {
+      align-items: stretch;
+      min-height: 150px;
+    }
+
+    .fx-side {
+      flex: 0 0 110px;
+      border-color: #f59e0b;
+      background: #fde68a;
+      color: #92400e;
+    }
+
+    .fx-main { flex: 1; }
+
+    /* カードを均等に並べる例 */
+    .fx-cards-demo .fx-item { flex: 1; }
+
+    /* 中身を上下中央に置くための共通指定 */
+    .fx-side,
+    .fx-main,
+    .fx-cards-demo .fx-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      white-space: normal;
+      text-align: center;
+    }
+
+    @media (max-width: 780px) {
+      .fx-samples {
+        grid-template-columns: 1fr;
+      }
+
+      .fx-demo {
+        min-height: 96px;
+      }
+
+      .fx-demo.fx-ac-demo {
+        min-height: 210px;
+      }
+
+      .fx-item {
+        padding: 10px 12px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>コーダー初級#5</h1>
+    <p>要素を横に並べる ― flexboxの基本</p>
+  </div>
+</header>
+
+<main>
+
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol>
+      <li><a href="#chapter1">枠のことを「要素」と呼ぶ</a></li>
+      <li><a href="#chapter2">flexで横に並べる</a></li>
+      <li><a href="#chapter3">親に指定するプロパティ</a></li>
+      <li><a href="#chapter4">子に指定するプロパティ</a></li>
+      <li><a href="#chapter5">組み合わせてレイアウトを作る</a></li>
+    </ol>
+
+    <div class="note">
+      <span class="label">読む前に</span><br>
+      このページには12個のプロパティが出てきます。ただし、<strong>いま全部を覚えきる必要はありません。</strong><br>
+      実務でも、必要になったときに調べて使えれば十分です。まずは「flexにはこういう指定がある」と知っておくことを目標にしてください。<br>
+      迷ったら、このページに戻ってきて見比べれば大丈夫です。
+    </div>
+  </section>
+
+  <section id="chapter1">
+    <h2>1. 枠のことを「要素」と呼ぶ</h2>
+
+    <p>
+      ここまで「枠」と呼んでいたものを、これ以降は<strong>要素</strong>と呼びます。実務の現場でも、調べもので出てくる解説サイトでも、この呼び方が使われます。
+    </p>
+
+    <p>
+      要素とは、HTMLのタグで作られたもの全部を指します。<code>&lt;div&gt;</code> のような箱も、<code>&lt;p&gt;</code> の中の文章も、<code>&lt;img&gt;</code> の画像も、すべて要素です。
+    </p>
+
+    <table>
+      <tr>
+        <th>書いたもの</th>
+        <th>呼び方</th>
+      </tr>
+      <tr>
+        <td><code>&lt;div&gt;〜&lt;/div&gt;</code></td>
+        <td>div要素</td>
+      </tr>
+      <tr>
+        <td><code>&lt;p&gt;〜&lt;/p&gt;</code></td>
+        <td>p要素</td>
+      </tr>
+      <tr>
+        <td><code>&lt;img&gt;</code></td>
+        <td>img要素</td>
+      </tr>
+    </table>
+
+    <p>
+      このように、<strong>タグ名 + 要素</strong>という呼び方をします。「divタグ」と言うこともありますが、正確には<strong>タグは目印、要素はタグで作られたもの全体</strong>を指します。
+    </p>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      タグで囲んで作ったものは、見た目が箱でも文字でも画像でも、まとめて「要素」と呼びます。
+    </div>
+
+    <h3>親要素と子要素</h3>
+    <p>
+      要素の中に別の要素を入れたとき、外側を<strong>親要素</strong>、内側を<strong>子要素</strong>と呼びます。この章から先は、この2つの言葉が何度も出てきます。
+    </p>
+
+    <div class="nest nest-html">
+      <span class="nest-tag">&lt;div&gt;<span class="nest-note">中の要素から見れば「親要素」</span></span>
+
+      <div class="nest nest-head">
+        <span class="nest-tag">&lt;div&gt;<span class="nest-note">外の要素から見れば「子要素」</span></span>
+        <div class="nest-content">文章</div>
+        <span class="nest-tag">&lt;/div&gt;</span>
+      </div>
+
+      <span class="nest-tag">&lt;/div&gt;</span>
+    </div>
+
+    <div class="caution">
+      <span class="label">注意</span><br>
+      親・子は<strong>その要素の性質ではなく、関係を表す言葉</strong>です。3段の入れ子になっていれば、真ん中の要素は「上から見れば子、下から見れば親」になります。「誰から見た話か」を意識してください。
+    </div>
+
+    <p>
+      実際に書くと、こうなります。外側の <code>div</code> が親、中の3つが子です。
+    </p>
+
+    <div class="pair">
+      <div class="vscode">
+        <div class="vscode-titlebar">
+          <span class="win-dot red"></span>
+          <span class="win-dot yellow"></span>
+          <span class="win-dot green"></span>
+          <span class="vscode-title">index.html — Visual Studio Code</span>
+        </div>
+        <div class="vscode-tabs">
+          <div class="vscode-tab is-active">index.html</div>
+        </div>
+        <div class="vscode-body">
+          <div class="vscode-gutter">1
+2
+3
+4
+5</div>
+          <pre class="vscode-code">&lt;<span class="sy-tag">div</span>&gt;
+  &lt;<span class="sy-tag">div</span>&gt;子1&lt;/<span class="sy-tag">div</span>&gt;
+  &lt;<span class="sy-tag">div</span>&gt;子2&lt;/<span class="sy-tag">div</span>&gt;
+  &lt;<span class="sy-tag">div</span>&gt;子3&lt;/<span class="sy-tag">div</span>&gt;
+&lt;/<span class="sy-tag">div</span>&gt;</pre>
+        </div>
+      </div>
+
+      <div class="chrome">
+        <div class="chrome-tabbar">
+          <span class="win-dot red"></span>
+          <span class="win-dot yellow"></span>
+          <span class="win-dot green"></span>
+          <div class="chrome-tab">練習</div>
+        </div>
+        <div class="chrome-toolbar">
+          <span class="chrome-nav">←　→　⟳</span>
+          <div class="chrome-url">file:///C:/Users/自分のユーザー名/Desktop/index.html</div>
+        </div>
+        <div class="chrome-viewport">
+          <div class="fx-parent-demo">
+            <span class="fx-tag-label">親要素</span>
+            <div class="fx-item">子1</div>
+            <div class="fx-item">子2</div>
+            <div class="fx-item">子3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      いま3つの子要素は<strong>縦に積まれています</strong>。<code>div</code> は横幅いっぱいを使う要素なので、何もしなければ下へ下へと並びます。<br>
+      これを横並びにするのが、次の章の <code>flex</code> です。
+    </div>
+  </section>
+
+  <section id="chapter2">
+    <h2>2. flexで横に並べる</h2>
+
+    <h3>その前に ― クラスで指定する</h3>
+    <p>
+      ここまでの教材では、<code>div { ... }</code> のように<strong>タグ名</strong>で指定してきました。ただしこの書き方には問題があります。<strong>ページ中のすべての <code>div</code> に効いてしまう</strong>のです。
+    </p>
+    <p>
+      特定の要素だけに指定したいときは、HTML側で<strong>名前を付けて</strong>、CSS側で<strong>その名前を呼びます</strong>。この名前を <strong>クラス</strong> と呼びます。
+    </p>
+
+    <p>
+      まずHTML側です。1つ目の <code>div</code> にだけ <code>box</code> という名前を付けました。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.html — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.html</div>
+        <div class="vscode-tab">style.css</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3</div>
+        <pre class="vscode-code">&lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"box"</span>&gt;ここだけ色が付く&lt;/<span class="sy-tag">div</span>&gt;
+&lt;<span class="sy-tag">div</span>&gt;ここは何も変わらない&lt;/<span class="sy-tag">div</span>&gt;
+&lt;<span class="sy-tag">div</span>&gt;ここも何も変わらない&lt;/<span class="sy-tag">div</span>&gt;</pre>
+      </div>
+    </div>
+
+    <p>
+      次にCSS側です。<code>.box</code> と書くと、<strong>その名前が付いた要素だけ</strong>を狙えます。
+    </p>
+
+    <div class="pair">
+      <div class="vscode">
+        <div class="vscode-titlebar">
+          <span class="win-dot red"></span>
+          <span class="win-dot yellow"></span>
+          <span class="win-dot green"></span>
+          <span class="vscode-title">style.css — Visual Studio Code</span>
+        </div>
+        <div class="vscode-tabs">
+          <div class="vscode-tab">index.html</div>
+          <div class="vscode-tab is-active">style.css</div>
+        </div>
+        <div class="vscode-body">
+          <div class="vscode-gutter">1
+2
+3</div>
+          <pre class="vscode-code"><span class="sy-sel">.box</span> {
+  <span class="sy-attr">background-color</span>: <span class="sy-str">#f9b9d5</span>;
+}</pre>
+        </div>
+      </div>
+
+      <div class="chrome">
+        <div class="chrome-tabbar">
+          <span class="win-dot red"></span>
+          <span class="win-dot yellow"></span>
+          <span class="win-dot green"></span>
+          <div class="chrome-tab">練習</div>
+        </div>
+        <div class="chrome-toolbar">
+          <span class="chrome-nav">←　→　⟳</span>
+          <div class="chrome-url">file:///C:/Users/自分のユーザー名/Desktop/index.html</div>
+        </div>
+        <div class="chrome-viewport">
+          <div class="fx-class-on">ここだけ色が付く</div>
+          <div class="fx-plain">ここは何も変わらない</div>
+          <div class="fx-plain">ここも何も変わらない</div>
+        </div>
+      </div>
+    </div>
+
+    <p>
+      3つとも同じ <code>div</code> なのに、<strong>名前を付けた1つ目だけ</strong>にピンクの背景が付きました。
+    </p>
+
+    <table>
+      <tr>
+        <th>書く場所</th>
+        <th>書き方</th>
+        <th>ピリオド</th>
+      </tr>
+      <tr>
+        <td>HTML</td>
+        <td><code>class="box"</code></td>
+        <td><strong>付けない</strong></td>
+      </tr>
+      <tr>
+        <td>CSS</td>
+        <td><code>.box { ... }</code></td>
+        <td><strong>先頭に付ける</strong></td>
+      </tr>
+    </table>
+
+    <div class="caution">
+      <span class="label">注意</span><br>
+      CSS側の先頭のピリオドを<strong>忘れると別の意味になります</strong>。<code>.box</code> は「boxというクラスが付いた要素」ですが、ピリオドなしの <code>box</code> は「boxというタグ」を探しに行きます。そんなタグは存在しないので、何も起きません。
+    </div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      クラス名は自由に決められます。実務では <code>header</code> <code>nav</code> <code>card</code> のように、<strong>英語でその役割を表す名前</strong>を付けるのが一般的です。同じクラス名を複数の要素に付けてもかまいません。むしろ「同じ見た目にしたいものをまとめる」のがクラスの役目です。
+    </div>
+
+    <h3>親要素に1行書くだけ</h3>
+
+    <div class="note">
+      <span class="label">名前について</span><br>
+      これから使う仕組みは、正式には <strong>flexbox（フレックスボックス）</strong> といいます。ただしCSSに書くときは <code>flex</code> の3文字なので、現場では<strong>どちらの呼び方もします</strong>。このページでは短く「flex」と書きます。
+    </div>
+
+    <p>
+      1章で見たHTMLに、クラスを付けます。親に <code>container</code>、子に <code>item</code> と名前を付けました。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.html — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.html</div>
+        <div class="vscode-tab">style.css</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5</div>
+        <pre class="vscode-code">&lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"container"</span>&gt;
+  &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"item"</span>&gt;子1&lt;/<span class="sy-tag">div</span>&gt;
+  &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"item"</span>&gt;子2&lt;/<span class="sy-tag">div</span>&gt;
+  &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"item"</span>&gt;子3&lt;/<span class="sy-tag">div</span>&gt;
+&lt;/<span class="sy-tag">div</span>&gt;</pre>
+      </div>
+    </div>
+
+    <p>
+      これで CSS 側から <code>.container</code> と呼べるようになりました。<strong>横に並べたいときは、この親に <code>display: flex;</code> と書きます。</strong>子要素側には何も書きません。
+    </p>
+
+    <div class="pair">
+      <div class="vscode">
+        <div class="vscode-titlebar">
+          <span class="win-dot red"></span>
+          <span class="win-dot yellow"></span>
+          <span class="win-dot green"></span>
+          <span class="vscode-title">style.css — Visual Studio Code</span>
+        </div>
+        <div class="vscode-tabs">
+          <div class="vscode-tab">index.html</div>
+          <div class="vscode-tab is-active">style.css</div>
+        </div>
+        <div class="vscode-body">
+          <div class="vscode-gutter">1
+2
+3</div>
+          <pre class="vscode-code"><span class="sy-sel">.container</span> {
+  <span class="sy-attr">display</span>: <span class="sy-str">flex</span>;
+}</pre>
+        </div>
+      </div>
+
+      <div class="chrome">
+        <div class="chrome-tabbar">
+          <span class="win-dot red"></span>
+          <span class="win-dot yellow"></span>
+          <span class="win-dot green"></span>
+          <div class="chrome-tab">練習</div>
+        </div>
+        <div class="chrome-toolbar">
+          <span class="chrome-nav">←　→　⟳</span>
+          <div class="chrome-url">file:///C:/Users/自分のユーザー名/Desktop/index.html</div>
+        </div>
+        <div class="chrome-viewport">
+          <div class="fx-parent-demo fx-flex">
+            <span class="fx-tag-label">親要素</span>
+            <div class="fx-item">子1</div>
+            <div class="fx-item">子2</div>
+            <div class="fx-item">子3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      HTMLは1文字も変えていません。<strong>親要素にCSSを1行足しただけ</strong>で、縦並びが横並びになりました。<br>
+      flexは「子要素の並べ方を、親がまとめて決める」仕組みです。
+    </div>
+
+    <h3>用語 ― flexコンテナとflexアイテム</h3>
+    <p>
+      <code>display: flex;</code> を書いた親要素を <strong>flexコンテナ</strong>、その中に並ぶ子要素を <strong>flexアイテム</strong> と呼びます。調べものをするときに必ず出てくる言葉です。
+    </p>
+
+    <table>
+      <tr>
+        <th>呼び方</th>
+        <th>指すもの</th>
+        <th>プロパティを書く章</th>
+      </tr>
+      <tr>
+        <td>flexコンテナ</td>
+        <td><code>display: flex;</code> を書いた<strong>親</strong></td>
+        <td>3章</td>
+      </tr>
+      <tr>
+        <td>flexアイテム</td>
+        <td>その<strong>直接の子</strong></td>
+        <td>4章</td>
+      </tr>
+    </table>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      flexアイテムになるのは<strong>直接の子だけ</strong>です。子の中にさらに要素を入れても（孫要素）、そこには効きません。<br>
+      孫も並べたければ、子のほうにも <code>display: flex;</code> を書きます。
+    </div>
+
+    <h3>指定する場所を間違えない</h3>
+    <p>
+      いちばん多い間違いが、<strong>並べたい要素そのもの</strong>に <code>display: flex;</code> を書いてしまうことです。実際に並べてみると、何も起きないことが分かります。
+    </p>
+
+    <div class="fx-samples">
+      <div>
+        <span class="fx-sample-label fx-label-ng">✕ 子要素に display: flex</span>
+        <div class="fx-parent-demo fx-wrong-demo">
+          <span class="fx-tag-label">親（指定なし）</span>
+          <div class="fx-item">子1</div>
+          <div class="fx-item">子2</div>
+          <div class="fx-item">子3</div>
+        </div>
+      </div>
+      <div>
+        <span class="fx-sample-label fx-label-ok">○ 親要素に display: flex</span>
+        <div class="fx-parent-demo fx-flex">
+          <span class="fx-tag-label">親（flex）</span>
+          <div class="fx-item">子1</div>
+          <div class="fx-item">子2</div>
+          <div class="fx-item">子3</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">注意</span><br>
+      左の見本は、3つの子要素すべてに <code>display: flex;</code> を書いた状態です。<strong>縦に積まれたまま変わりません</strong>。並べ方を決めるのは親の役割だからです。<br>
+      横並びにしたいときは、<strong>「並べたい要素たちを囲んでいる親は誰か」</strong>を先に確認してください。
+    </div>
+  </section>
+
+  <section id="chapter3">
+    <h2>3. 親に指定するプロパティ</h2>
+
+    <p>
+      ここから紹介するプロパティは、すべて<strong>親要素</strong>に書きます。子の並び方を、親がまとめて決めるためのものです。
+    </p>
+    <p>
+      6つありますが、<strong>いま全部覚えなくて大丈夫です</strong>。「こういう指定ができる」と知っておいて、必要になったら見に戻ってくれば十分です。
+    </p>
+
+    <table>
+      <tr>
+        <th>プロパティ</th>
+        <th>決めること</th>
+      </tr>
+      <tr>
+        <td><code>flex-direction</code></td>
+        <td>子要素が並ぶ<strong>向き</strong></td>
+      </tr>
+      <tr>
+        <td><code>flex-wrap</code></td>
+        <td>収まらないときに<strong>折り返すか</strong></td>
+      </tr>
+      <tr>
+        <td><code>flex-flow</code></td>
+        <td>上の2つをまとめて書く</td>
+      </tr>
+      <tr>
+        <td><code>justify-content</code></td>
+        <td>並んでいる<strong>方向</strong>の位置</td>
+      </tr>
+      <tr>
+        <td><code>align-items</code></td>
+        <td>並びと<strong>直角の方向</strong>の位置</td>
+      </tr>
+      <tr>
+        <td><code>align-content</code></td>
+        <td>折り返して複数行になったときの、行全体の位置</td>
+      </tr>
+    </table>
+
+    <div class="note">
+      <span class="label">見方</span><br>
+      以降の見本は画像ではなく、<strong>実際にそのプロパティを効かせて表示しています</strong>。点線の枠が <code>display: flex;</code> を書いた親要素、青い箱が子要素です。<br>
+      <strong>色・枠線・余白は、どこが親でどこが子か見分けるために付けているだけ</strong>です。flexの動きとは関係ないので、コードには載せていません。
+    </div>
+
+    <h3>flex-direction ― 並ぶ向きを決める</h3>
+    <p>
+      子要素を並べる向きを決めます。何も書かないと <code>row</code>（左から右）になります。
+    </p>
+
+    <pre><code>.container {
+  display: flex;
+  flex-direction: row;   /* ← ここの値を変える */
+}</code></pre>
+
+    <div class="fx-samples">
+      <div>
+        <span class="fx-sample-label">row（既定値）</span>
+        <div class="fx-demo fx-dir-row">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+          <div class="fx-item">3</div>
+        </div>
+      </div>
+      <div>
+        <span class="fx-sample-label">row-reverse</span>
+        <div class="fx-demo fx-dir-row-rev">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+          <div class="fx-item">3</div>
+        </div>
+      </div>
+      <div>
+        <span class="fx-sample-label">column</span>
+        <div class="fx-demo fx-dir-col">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+          <div class="fx-item">3</div>
+        </div>
+      </div>
+      <div>
+        <span class="fx-sample-label">column-reverse</span>
+        <div class="fx-demo fx-dir-col-rev">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+          <div class="fx-item">3</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      <code>reverse</code> が付くと、<strong>数字の順番はそのままで、並ぶ向きだけ逆</strong>になります。HTMLの書き順を変えたわけではありません。
+    </div>
+
+    <h3>flex-wrap ― 収まらないときの折り返し</h3>
+    <p>
+      子要素が親の幅に収まらないとき、どうするかを決めます。1行に押し込めるか、次の行へ送るか。何も書かないと <code>nowrap</code>（折り返さない）になります。
+    </p>
+
+    <pre><code>.container {
+  display: flex;
+  flex-wrap: wrap;   /* ← nowrap / wrap */
+}
+
+.item {
+  flex-basis: 40%;   /* 4つで160%になり、収まらなくなる */
+}</code></pre>
+
+    <div class="fx-samples">
+      <div>
+        <span class="fx-sample-label">nowrap（既定値）</span>
+        <div class="fx-demo fx-wrap-no fx-wide">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+          <div class="fx-item">3</div>
+          <div class="fx-item">4</div>
+        </div>
+      </div>
+      <div>
+        <span class="fx-sample-label">wrap</span>
+        <div class="fx-demo fx-wrap-yes fx-wide">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+          <div class="fx-item">3</div>
+          <div class="fx-item">4</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      <code>nowrap</code> では、収まらない子要素が<strong>縮められて</strong>1行に押し込まれます。消えるわけではありません。<br>
+      <code>wrap</code> にすると、縮まずに次の行へ送られます。
+    </div>
+
+    <h3>flex-flow ― 2つをまとめて書く</h3>
+    <p>
+      <code>flex-direction</code> と <code>flex-wrap</code> は、<code>flex-flow</code> で1行にまとめられます。
+    </p>
+
+    <pre><code>/* この書き方を */
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/* こうまとめられる */
+.container {
+  display: flex;
+  flex-flow: row wrap;
+}</code></pre>
+
+    <h3>justify-content ― 並んでいる方向の位置</h3>
+    <p>
+      <strong>並んでいる方向</strong>のどこに寄せるかを決めます。横並びなら、左・中央・右のどこに置くかという話です。
+    </p>
+
+    <pre><code>.container {
+  display: flex;
+  justify-content: center;   /* ← ここの値を変える */
+}</code></pre>
+
+    <div class="fx-samples">
+      <div>
+        <span class="fx-sample-label">flex-start（既定値）</span>
+        <div class="fx-demo fx-jc-start">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+        </div>
+      </div>
+      <div>
+        <span class="fx-sample-label">center</span>
+        <div class="fx-demo fx-jc-center">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+        </div>
+      </div>
+      <div>
+        <span class="fx-sample-label">flex-end</span>
+        <div class="fx-demo fx-jc-end">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+        </div>
+      </div>
+      <div>
+        <span class="fx-sample-label">space-between</span>
+        <div class="fx-demo fx-jc-between">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+          <div class="fx-item">3</div>
+        </div>
+      </div>
+      <div>
+        <span class="fx-sample-label">space-around</span>
+        <div class="fx-demo fx-jc-around">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+          <div class="fx-item">3</div>
+        </div>
+      </div>
+      <div>
+        <span class="fx-sample-label">space-evenly</span>
+        <div class="fx-demo fx-jc-evenly">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+          <div class="fx-item">3</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      余白の配り方が3種類あります。見分けにくいので、<strong>両端がどうなっているか</strong>を見てください。<br>
+      <code>space-between</code> は<strong>両端をぴったり詰めて</strong>、間だけを空けます。<br>
+      <code>space-around</code> は<strong>要素1つずつの左右に同じ余白</strong>を付けます。要素どうしの間では余白が2つ分重なるので、<strong>両端が狭く見えます</strong>。<br>
+      <code>space-evenly</code> は<strong>すべての隙間を同じ幅</strong>にします。両端も間も等しくなります。
+    </div>
+
+    <h3>align-items ― 並びと直角の方向の位置</h3>
+    <p>
+      今度は<strong>縦方向</strong>です。横並びのとき、上・中央・下のどこに置くかを決めます。<br>
+      何も書かないと <code>stretch</code>（親の高さぴったりに伸びる）になります。ただし伸びるのは、子に <code>height</code> を書いていないときだけです。
+    </p>
+
+    <pre><code>.container {
+  display: flex;
+  height: 108px;          /* 高さがないと違いが出ない */
+  align-items: center;    /* ← ここの値を変える */
+}</code></pre>
+
+    <div class="fx-samples">
+      <div>
+        <span class="fx-sample-label">stretch（既定値）</span>
+        <div class="fx-demo fx-ai-stretch">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+        </div>
+      </div>
+      <div>
+        <span class="fx-sample-label">flex-start</span>
+        <div class="fx-demo fx-ai-start">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+        </div>
+      </div>
+      <div>
+        <span class="fx-sample-label">center</span>
+        <div class="fx-demo fx-ai-center">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+        </div>
+      </div>
+      <div>
+        <span class="fx-sample-label">flex-end</span>
+        <div class="fx-demo fx-ai-end">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      <code>justify-content</code> は<strong>並んでいる方向</strong>、<code>align-items</code> は<strong>それと直角の方向</strong>です。横並びなら前者が左右、後者が上下。この2つを組み合わせると、<strong>上下左右の中央寄せ</strong>ができます。
+    </div>
+
+    <h3>align-content ― 複数行になったときの位置</h3>
+    <p>
+      2行以上になったとき、<strong>行のかたまり全体</strong>を縦のどこに置くかを決めます。1つずつの要素ではなく、行そのものを動かすイメージです。
+    </p>
+
+    <pre><code>.container {
+  display: flex;
+  flex-wrap: wrap;         /* これがないと効かない */
+  height: 240px;           /* 高さがないと動かせる余白がない */
+  align-content: center;   /* ← ここの値を変える */
+}
+
+.item {
+  flex: 0 0 40%;           /* 2行に折り返させるため */
+}</code></pre>
+
+    <div class="note">
+      <span class="label">見本の作り</span><br>
+      <code>align-content</code> は<strong>複数行でなければ効果が出ません</strong>。そのため以降の見本では、子要素に <code>flex: 0 0 40%;</code> を与えて幅を広げ、<strong>わざと2行に折り返させています</strong>。指定がなければ、4つの要素はそのまま横一列に並びます。
+    </div>
+
+    <div class="fx-samples">
+      <div>
+        <span class="fx-sample-label">flex-start</span>
+        <div class="fx-demo fx-ac-demo fx-ac-start">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+          <div class="fx-item">3</div>
+          <div class="fx-item">4</div>
+        </div>
+      </div>
+      <div>
+        <span class="fx-sample-label">center</span>
+        <div class="fx-demo fx-ac-demo fx-ac-center">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+          <div class="fx-item">3</div>
+          <div class="fx-item">4</div>
+        </div>
+      </div>
+      <div>
+        <span class="fx-sample-label">flex-end</span>
+        <div class="fx-demo fx-ac-demo fx-ac-end">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+          <div class="fx-item">3</div>
+          <div class="fx-item">4</div>
+        </div>
+      </div>
+      <div>
+        <span class="fx-sample-label">space-between</span>
+        <div class="fx-demo fx-ac-demo fx-ac-between">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+          <div class="fx-item">3</div>
+          <div class="fx-item">4</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">注意</span><br>
+      <code>align-content</code> は、<strong><code>flex-wrap: wrap;</code> が指定されていて、かつ実際に複数行になっているとき</strong>にしか効きません。1行しかない状態でいくら書いても、何も変わりません。
+    </div>
+  </section>
+
+  <section id="chapter4">
+    <h2>4. 子に指定するプロパティ</h2>
+
+    <p>
+      次は<strong>子要素</strong>に書くプロパティです。3章が「全体をどう並べるか」だったのに対して、こちらは「並んだうちの、<strong>この要素だけ</strong>どうするか」を決めます。
+    </p>
+    <p>
+      こちらも6つありますが、実際によく使うのは <code>flex</code> と <code>flex-grow</code> のあたりです。まずは雰囲気をつかんでください。
+    </p>
+
+    <table>
+      <tr>
+        <th>プロパティ</th>
+        <th>決めること</th>
+        <th>既定値</th>
+      </tr>
+      <tr>
+        <td><code>order</code></td>
+        <td>表示される<strong>順番</strong></td>
+        <td><code>0</code></td>
+      </tr>
+      <tr>
+        <td><code>flex-grow</code></td>
+        <td>余った空間を<strong>どれだけもらうか</strong></td>
+        <td><code>0</code></td>
+      </tr>
+      <tr>
+        <td><code>flex-shrink</code></td>
+        <td>足りないとき<strong>どれだけ縮むか</strong></td>
+        <td><code>1</code></td>
+      </tr>
+      <tr>
+        <td><code>flex-basis</code></td>
+        <td>伸び縮みする前の<strong>基準の大きさ</strong></td>
+        <td><code>auto</code></td>
+      </tr>
+      <tr>
+        <td><code>flex</code></td>
+        <td>上の3つをまとめて書く</td>
+        <td><code>0 1 auto</code></td>
+      </tr>
+      <tr>
+        <td><code>align-self</code></td>
+        <td><strong>その要素だけ</strong>の縦方向の位置</td>
+        <td><code>auto</code></td>
+      </tr>
+    </table>
+
+    <div class="note">
+      <span class="label">見方</span><br>
+      以降の見本では、<strong>プロパティを指定した子要素だけオレンジ色</strong>にしてあります。青は何も指定していない子要素です。<br>
+      この色分けは<strong>説明のためのもの</strong>で、コードには載せていません。載せているのは、その見本で実際に効いているflexの指定だけです。
+    </div>
+
+    <h3>order ― 表示の順番を変える</h3>
+    <p>
+      数字が小さいものから順に表示されます。何も書かないと全部 <code>0</code> なので、大きい数字を付けた要素だけが後ろへ回ります。
+    </p>
+
+    <div class="fx-samples">
+      <div>
+        <span class="fx-sample-label">指定なし</span>
+        <code class="fx-sample-code"><span class="c">/* 何も書かない = 全部 order: 0 */</span></code>
+        <div class="fx-demo">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+          <div class="fx-item">3</div>
+        </div>
+      </div>
+      <div>
+        <span class="fx-sample-label">1番目だけ後ろへ</span>
+        <code class="fx-sample-code"><span class="s">.item:first-child</span> { <span class="p">order</span>: <span class="n">3</span>; }</code>
+        <div class="fx-demo">
+          <div class="fx-item mark fx-order-3">1</div>
+          <div class="fx-item">2</div>
+          <div class="fx-item">3</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">注意</span><br>
+      変わるのは<strong>画面上の見た目だけ</strong>です。HTMLの書き順は変わっていません。読み上げソフトやキーボード操作は<strong>HTMLの順番どおり</strong>に進むので、見た目と操作の順序がずれます。多用は避けてください。
+    </div>
+
+    <h3>flex-grow ― 余った空間をもらう</h3>
+    <p>
+      子要素を並べたあと、右側に空間が余ることがあります。その余りを<strong>どの要素がもらうか</strong>を決めるのがこれです。<br>
+      何も書かないと <code>0</code>（もらわない）なので、余りはそのまま空いたまま残ります。
+    </p>
+
+    <div class="fx-samples">
+      <div>
+        <span class="fx-sample-label">指定なし（余白が右に残る）</span>
+        <code class="fx-sample-code"><span class="c">/* 何も書かない */</span></code>
+        <div class="fx-demo">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+          <div class="fx-item">3</div>
+        </div>
+      </div>
+      <div>
+        <span class="fx-sample-label">1番目だけ</span>
+        <code class="fx-sample-code"><span class="s">.item:first-child</span> { <span class="p">flex-grow</span>: <span class="n">1</span>; }
+<span class="c">/* 2番目と3番目は指定なし = 0 のまま */</span></code>
+        <div class="fx-demo">
+          <div class="fx-item mark fx-grow-1">1</div>
+          <div class="fx-item">2</div>
+          <div class="fx-item">3</div>
+        </div>
+      </div>
+      <div>
+        <span class="fx-sample-label">全部（均等になる）</span>
+        <code class="fx-sample-code"><span class="s">.item</span> { <span class="p">flex-grow</span>: <span class="n">1</span>; }</code>
+        <div class="fx-demo fx-grow-all">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+          <div class="fx-item">3</div>
+        </div>
+      </div>
+      <div>
+        <span class="fx-sample-label">全部に1、2番目だけ2</span>
+        <code class="fx-sample-code"><span class="s">.item</span> { <span class="p">flex-grow</span>: <span class="n">1</span>; }
+<span class="s">.item:nth-child(2)</span> { <span class="p">flex-grow</span>: <span class="n">2</span>; }</code>
+        <div class="fx-demo fx-grow-all">
+          <div class="fx-item">1</div>
+          <div class="fx-item mark fx-grow-2">2</div>
+          <div class="fx-item">3</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">セレクタの読み方</span><br>
+      <code>:first-child</code> は「最初の子」、<code>:nth-child(2)</code> は「2番目の子」を指します。<strong>クラス名だけを書けば全部に効き、これらを付けると特定の1つだけに効きます</strong>。上の2つ目と3つ目は、書いているプロパティは同じで<strong>セレクタだけが違います</strong>。
+    </div>
+
+    <div class="point">
+      <span class="label">なぜ見本ごとに幅が変わるのか</span><br>
+      余白を分け合うのは、<code>flex-grow</code> を<strong>1以上にした要素だけ</strong>です。既定値の <code>0</code> は「余白をもらわない」という意味なので、指定していない要素は文字ぶんの幅のまま残ります。<br>
+      「1番目だけ」の見本は、余白を受け取る要素が<strong>1個しかないので、その1個が全部を独占</strong>します。だからあれほど大きく広がります。<br>
+      「全部に1」の見本は<strong>3個で分け合う</strong>ので、1個あたりの取り分は3分の1になります。同じ <code>flex-grow: 1</code> でも、<strong>他にいくつ指定されているかで結果が変わります</strong>。
+    </div>
+
+    <div class="caution">
+      <span class="label">よくある誤解</span><br>
+      <code>flex-grow: 2</code> にしても、<strong>その要素の幅が2倍になるわけではありません</strong>。2倍になるのは<strong>余った空間の取り分</strong>だけです。<br>
+      上の見本でも、2番目は1番目のちょうど2倍にはなっていません。もともとの文字の幅に、余白の分配ぶんが足されるからです。
+    </div>
+
+    <h4>幅そのものを比率どおりにしたいとき</h4>
+    <p>
+      <code>flex-basis</code> を <code>0</code> にすると、もともとの中身の幅が計算から外れ、<strong>余白だけで分け合う</strong>ようになります。結果、幅が正確に比率どおりになります。
+    </p>
+
+    <pre><code>/* 幅が 1 : 2 : 1 になる */
+.item {
+  flex: 1 1 0%;
+}
+
+.item:nth-child(2) {
+  flex: 2 1 0%;
+}</code></pre>
+
+    <div class="fx-samples">
+      <div>
+        <span class="fx-sample-label">flex-grow だけ（幅は比率にならない）</span>
+        <code class="fx-sample-code"><span class="s">.item</span> { <span class="p">flex-grow</span>: <span class="n">1</span>; }
+<span class="s">.item:nth-child(2)</span> { <span class="p">flex-grow</span>: <span class="n">2</span>; }</code>
+        <div class="fx-demo fx-grow-all">
+          <div class="fx-item">1</div>
+          <div class="fx-item mark fx-grow-2">2</div>
+          <div class="fx-item">3</div>
+        </div>
+      </div>
+      <div>
+        <span class="fx-sample-label">flex-basis: 0 も指定（幅が 1:2:1）</span>
+        <code class="fx-sample-code"><span class="s">.item</span> { <span class="p">flex</span>: <span class="n">1</span> <span class="n">1</span> <span class="n">0%</span>; }
+<span class="s">.item:nth-child(2)</span> { <span class="p">flex</span>: <span class="n">2</span> <span class="n">1</span> <span class="n">0%</span>; }</code>
+        <div class="fx-demo fx-grow-all fx-basis0">
+          <div class="fx-item">1</div>
+          <div class="fx-item mark fx-grow-2">2</div>
+          <div class="fx-item">3</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      数字は<strong>比率</strong>です。大きさそのものではありません。<br>
+      幅をきっちり2倍にしたいときは <code>flex: 2</code> と書きます。これなら <code>flex-basis: 0</code> も一緒に指定されます。
+    </div>
+
+    <h3>flex-shrink ― 足りないときの縮み方</h3>
+    <p>
+      さっきの逆です。幅が足りないとき、<strong>どれだけ縮むか</strong>を決めます。<br>
+      何も書かないと <code>1</code>（縮む）です。<code>0</code> にすると、その要素だけ縮まなくなります。「ここは絶対に細くしたくない」という部分に使います。
+    </p>
+
+    <div class="fx-samples">
+      <div>
+        <span class="fx-sample-label">全部が縮む（既定値）</span>
+        <code class="fx-sample-code"><span class="s">.item</span> { <span class="p">flex-basis</span>: <span class="n">45%</span>; }
+<span class="c">/* shrink は既定の 1 のまま */</span></code>
+        <div class="fx-demo fx-shrink-demo">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+          <div class="fx-item">3</div>
+        </div>
+      </div>
+      <div>
+        <span class="fx-sample-label">1番目だけ縮ませない</span>
+        <code class="fx-sample-code"><span class="s">.item</span> { <span class="p">flex-basis</span>: <span class="n">45%</span>; }
+<span class="s">.item:first-child</span> { <span class="p">flex-shrink</span>: <span class="n">0</span>; }</code>
+        <div class="fx-demo fx-shrink-demo">
+          <div class="fx-item mark fx-shrink-0">1</div>
+          <div class="fx-item">2</div>
+          <div class="fx-item">3</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      どちらも子要素に <code>flex-basis: 45%</code> を与えているので、3つで135%になり親に収まりません。左は全員が少しずつ縮みますが、右はオレンジの要素だけ45%を保ち、<strong>その分ほかの2つが余計に縮んでいます</strong>。
+    </div>
+
+    <h3>flex-basis ― 伸び縮みする前の基準</h3>
+    <p>
+      伸びたり縮んだりする<strong>前の大きさ</strong>です。ここを出発点にして、余れば伸び、足りなければ縮みます。<br>
+      何も書かないと <code>auto</code>（中身に必要な分だけ）になります。
+    </p>
+
+    <div class="fx-samples">
+      <div>
+        <span class="fx-sample-label">指定なし（auto）</span>
+        <code class="fx-sample-code"><span class="c">/* 何も書かない = 中身の幅 */</span></code>
+        <div class="fx-demo">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+        </div>
+      </div>
+      <div>
+        <span class="fx-sample-label">1番目だけ基準を50%に</span>
+        <code class="fx-sample-code"><span class="s">.item:first-child</span> { <span class="p">flex-basis</span>: <span class="n">50%</span>; }</code>
+        <div class="fx-demo">
+          <div class="fx-item mark fx-basis-50">1</div>
+          <div class="fx-item">2</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      横並びのときは <code>width</code> と似た働きになりますが、<code>flex-direction: column</code> にすると<strong>高さの基準</strong>に変わります。並んでいる方向に対しての大きさ、と覚えてください。
+    </div>
+
+    <h3>flex ― 3つをまとめて書く</h3>
+    <p>
+      <code>flex-grow</code>、<code>flex-shrink</code>、<code>flex-basis</code> は <code>flex</code> で1行にまとめられます。実務ではこちらのほうがよく使われます。
+    </p>
+
+    <pre><code>/* この書き方を */
+.item {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0%;
+}
+
+/* 1行にまとめられる */
+.item {
+  flex: 1 1 0%;
+}
+
+/* さらに省略できる（同じ意味） */
+.item {
+  flex: 1;
+}</code></pre>
+
+    <p>
+      <code>flex: 1;</code> は「余った空間を分け合って、均等に広がる」という意味になります。横並びの要素を等分したいときの定番です。
+    </p>
+
+    <div class="fx-samples">
+      <div>
+        <span class="fx-sample-label">指定なし</span>
+        <code class="fx-sample-code"><span class="c">/* 何も書かない */</span></code>
+        <div class="fx-demo">
+          <div class="fx-item">メニュー</div>
+          <div class="fx-item">記事</div>
+        </div>
+      </div>
+      <div>
+        <span class="fx-sample-label">両方に flex: 1</span>
+        <code class="fx-sample-code"><span class="s">.item</span> { <span class="p">flex</span>: <span class="n">1</span>; }</code>
+        <div class="fx-demo fx-grow-all">
+          <div class="fx-item">メニュー</div>
+          <div class="fx-item">記事</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>align-self ― その要素だけ縦位置を変える</h3>
+    <p>
+      親に <code>align-items</code> を書くと、子は全部そのルールに従います。<br>
+      でも「1つだけ違う位置に置きたい」ことがあります。そのときに、その子だけルールを打ち消すのがこれです。
+    </p>
+
+    <div class="fx-samples">
+      <div>
+        <span class="fx-sample-label">親の指定だけ（全部が上寄せ）</span>
+        <code class="fx-sample-code"><span class="s">.container</span> { <span class="p">align-items</span>: <span class="v">flex-start</span>; }</code>
+        <div class="fx-demo fx-ai-start">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+          <div class="fx-item">3</div>
+        </div>
+      </div>
+      <div>
+        <span class="fx-sample-label">2番目だけ中央へ</span>
+        <code class="fx-sample-code"><span class="s">.container</span> { <span class="p">align-items</span>: <span class="v">flex-start</span>; }
+<span class="s">.item:nth-child(2)</span> { <span class="p">align-self</span>: <span class="v">center</span>; }</code>
+        <div class="fx-demo fx-ai-start">
+          <div class="fx-item">1</div>
+          <div class="fx-item mark fx-self-center">2</div>
+          <div class="fx-item">3</div>
+        </div>
+      </div>
+      <div>
+        <span class="fx-sample-label">3番目だけ下へ</span>
+        <code class="fx-sample-code"><span class="s">.container</span> { <span class="p">align-items</span>: <span class="v">flex-start</span>; }
+<span class="s">.item:nth-child(3)</span> { <span class="p">align-self</span>: <span class="v">flex-end</span>; }</code>
+        <div class="fx-demo fx-ai-start">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+          <div class="fx-item mark fx-self-end">3</div>
+        </div>
+      </div>
+      <div>
+        <span class="fx-sample-label">2番目だけ縦に伸ばす</span>
+        <code class="fx-sample-code"><span class="s">.container</span> { <span class="p">align-items</span>: <span class="v">flex-start</span>; }
+<span class="s">.item:nth-child(2)</span> { <span class="p">align-self</span>: <span class="v">stretch</span>; }</code>
+        <div class="fx-demo fx-ai-start">
+          <div class="fx-item">1</div>
+          <div class="fx-item mark fx-self-stretch">2</div>
+          <div class="fx-item">3</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      <code>align-items</code>（親）が全体のルール、<code>align-self</code>（子）が個別の例外です。「基本は上寄せだけど、この1つだけ中央に置きたい」というときに使います。
+    </div>
+  </section>
+
+  <section id="chapter5">
+    <h2>5. 組み合わせてレイアウトを作る</h2>
+
+    <p>
+      ここまでのプロパティを組み合わせると、実際のWebサイトでよく見る形が作れます。どれも<strong>数行のCSS</strong>で済みます。
+    </p>
+    <p>
+      ここが一番おもしろいところです。3章と4章で見たものが、どう組み合わさって画面になるのかを見ていきましょう。
+    </p>
+
+    <h3>上下左右の中央に置く</h3>
+    <p>
+      <code>justify-content</code> と <code>align-items</code> の両方を <code>center</code> にします。flexが登場する前は面倒だった中央寄せが、2行で片付きます。
+    </p>
+
+    <pre><code>.container {
+  /* ここがflexの指定 */
+  display: flex;
+  justify-content: center;  /* 左右の中央 */
+  align-items: center;      /* 上下の中央 */
+
+  /* ここから下は見た目を整えるだけ */
+  height: 150px;
+  background-color: #f1f5f9;
+  border: 2px dashed #94a3b8;
+}
+
+.item {
+  padding: 12px 16px;
+  background-color: #bfdbfe;
+  border: 1px solid #60a5fa;
+  border-radius: 5px;
+}</code></pre>
+
+    <div class="fx-demo fx-center-demo">
+      <div class="fx-item">中央</div>
+    </div>
+
+    <h3>ひとつだけ右に寄せる</h3>
+    <p>
+      「左に2つ、右に1つ」のように分けたいときは、右に送りたい要素へ <code>margin-left: auto;</code> を付けます。余った空間をすべてその左側の余白が吸い取るので、要素が右端まで押し出されます。
+    </p>
+
+    <pre><code>.container {
+  display: flex;
+  gap: 8px;
+}
+
+/* 右端へ送りたい要素にだけ書く */
+.login {
+  margin-left: auto;
+}</code></pre>
+
+    <div class="fx-demo">
+      <div class="fx-item">ホーム</div>
+      <div class="fx-item">記事</div>
+      <div class="fx-item mark fx-push-right">ログイン</div>
+    </div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      <code>justify-content: space-between;</code> でも似たことができますが、あちらは<strong>全体の配り方</strong>を変えるので、要素が3つ以上あると間隔が均等に開きます。「この要素だけ右端へ」を狙うなら <code>margin-left: auto;</code> のほうが確実です。
+    </div>
+
+    <h3>ヘッダーを作る</h3>
+    <p>
+      ロゴを左、メニューを右に置く形です。ここでは <strong>flexを2箇所に書きます</strong>。なぜ2箇所必要になるのか、順を追って見ていきます。
+    </p>
+
+    <h4>まずHTMLの構造</h4>
+    <p>
+      入れ子が2段になっています。<code>header</code> の中に <code>logo</code> と <code>nav</code> があり、さらに <code>nav</code> の中に項目が4つ入っています。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.html — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.html</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9</div>
+        <pre class="vscode-code">&lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"header"</span>&gt;
+  &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"logo"</span>&gt;MY SITE&lt;/<span class="sy-tag">div</span>&gt;
+  &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"nav"</span>&gt;
+    &lt;<span class="sy-tag">div</span>&gt;ホーム&lt;/<span class="sy-tag">div</span>&gt;
+    &lt;<span class="sy-tag">div</span>&gt;サービス&lt;/<span class="sy-tag">div</span>&gt;
+    &lt;<span class="sy-tag">div</span>&gt;会社概要&lt;/<span class="sy-tag">div</span>&gt;
+    &lt;<span class="sy-tag">div</span>&gt;お問い合わせ&lt;/<span class="sy-tag">div</span>&gt;
+  &lt;/<span class="sy-tag">div</span>&gt;
+&lt;/<span class="sy-tag">div</span>&gt;</pre>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">親子関係の確認</span><br>
+      <code>.header</code> から見た子は <strong><code>.logo</code> と <code>.nav</code> の2つだけ</strong>です。メニューの4項目は <code>.nav</code> の子であって、<code>.header</code> にとっては孫にあたります。2章で触れたとおり、<strong>flexは直接の子にしか効きません</strong>。
+    </div>
+
+    <h4>段階1：CSSを何も書かない状態</h4>
+    <p>
+      <code>div</code> は横幅いっぱいを使うので、6つすべてが縦に積まれます。
+    </p>
+
+    <div class="chrome">
+      <div class="chrome-tabbar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <div class="chrome-tab">練習</div>
+      </div>
+      <div class="chrome-toolbar">
+        <span class="chrome-nav">←　→　⟳</span>
+        <div class="chrome-url">file:///C:/Users/自分のユーザー名/Desktop/index.html</div>
+      </div>
+      <div class="chrome-viewport">
+        <div class="fx-header-step">
+          <div class="fx-logo">MY SITE</div>
+          <div class="fx-nav">
+            <div>ホーム</div>
+            <div>サービス</div>
+            <div>会社概要</div>
+            <div>お問い合わせ</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h4>段階2：.header だけに flex を書く</h4>
+
+    <div class="pair">
+      <div class="vscode">
+        <div class="vscode-titlebar">
+          <span class="win-dot red"></span>
+          <span class="win-dot yellow"></span>
+          <span class="win-dot green"></span>
+          <span class="vscode-title">style.css — Visual Studio Code</span>
+        </div>
+        <div class="vscode-tabs">
+          <div class="vscode-tab">index.html</div>
+          <div class="vscode-tab is-active">style.css</div>
+        </div>
+        <div class="vscode-body">
+          <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16</div>
+          <pre class="vscode-code"><span class="sy-sel">.header</span> {
+  <span class="sy-com">/* ここがflexの指定 */</span>
+  <span class="sy-attr">display</span>: <span class="sy-str">flex</span>;
+  <span class="sy-attr">justify-content</span>: <span class="sy-str">space-between</span>;
+  <span class="sy-attr">align-items</span>: <span class="sy-str">center</span>;
+
+  <span class="sy-com">/* ここから下は見た目を整えるだけ */</span>
+  <span class="sy-attr">padding</span>: <span class="sy-num">14px</span> <span class="sy-num">18px</span>;
+  <span class="sy-attr">background-color</span>: <span class="sy-str">#1e293b</span>;
+  <span class="sy-attr">border-radius</span>: <span class="sy-num">6px</span>;
+}
+
+<span class="sy-sel">.logo</span> {
+  <span class="sy-attr">color</span>: <span class="sy-str">#ffffff</span>;
+  <span class="sy-attr">font-weight</span>: <span class="sy-str">bold</span>;
+}</pre>
+        </div>
+      </div>
+
+      <div class="chrome">
+        <div class="chrome-tabbar">
+          <span class="win-dot red"></span>
+          <span class="win-dot yellow"></span>
+          <span class="win-dot green"></span>
+          <div class="chrome-tab">練習</div>
+        </div>
+        <div class="chrome-toolbar">
+          <span class="chrome-nav">←　→　⟳</span>
+          <div class="chrome-url">file:///C:/Users/自分のユーザー名/Desktop/index.html</div>
+        </div>
+        <div class="chrome-viewport">
+          <div class="fx-header-step step2">
+            <div class="fx-logo">MY SITE</div>
+            <div class="fx-nav">
+              <div>ホーム</div>
+              <div>サービス</div>
+              <div>会社概要</div>
+              <div>お問い合わせ</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>
+      ロゴとメニューが<strong>左右に分かれました</strong>。<code>.header</code> の子である <code>.logo</code> と <code>.nav</code> が横に並んだからです。
+    </p>
+    <p>
+      ただし、<strong>メニューの4項目は縦に積まれたまま</strong>です。これらは <code>.nav</code> の子なので、<code>.header</code> に書いた flex は届きません。
+    </p>
+
+    <h4>段階3：.nav にも flex を書く</h4>
+
+    <div class="pair">
+      <div class="vscode">
+        <div class="vscode-titlebar">
+          <span class="win-dot red"></span>
+          <span class="win-dot yellow"></span>
+          <span class="win-dot green"></span>
+          <span class="vscode-title">style.css — Visual Studio Code</span>
+        </div>
+        <div class="vscode-tabs">
+          <div class="vscode-tab">index.html</div>
+          <div class="vscode-tab is-active">style.css</div>
+        </div>
+        <div class="vscode-body">
+          <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</div>
+          <pre class="vscode-code"><span class="sy-sel">.header</span> {
+  <span class="sy-attr">display</span>: <span class="sy-str">flex</span>;
+  <span class="sy-attr">justify-content</span>: <span class="sy-str">space-between</span>;
+  <span class="sy-attr">align-items</span>: <span class="sy-str">center</span>;
+  <span class="sy-attr">padding</span>: <span class="sy-num">14px</span> <span class="sy-num">18px</span>;
+  <span class="sy-attr">background-color</span>: <span class="sy-str">#1e293b</span>;
+  <span class="sy-attr">border-radius</span>: <span class="sy-num">6px</span>;
+}
+
+<span class="sy-sel">.logo</span> {
+  <span class="sy-attr">color</span>: <span class="sy-str">#ffffff</span>;
+  <span class="sy-attr">font-weight</span>: <span class="sy-str">bold</span>;
+}
+
+<span class="sy-com">/* ↓ ここを追加した */</span>
+<span class="sy-sel">.nav</span> {
+  <span class="sy-attr">display</span>: <span class="sy-str">flex</span>;
+  <span class="sy-attr">gap</span>: <span class="sy-num">18px</span>;
+}
+
+<span class="sy-sel">.nav div</span> {
+  <span class="sy-attr">color</span>: <span class="sy-str">#cbd5e1</span>;
+}</pre>
+        </div>
+      </div>
+
+      <div class="chrome">
+        <div class="chrome-tabbar">
+          <span class="win-dot red"></span>
+          <span class="win-dot yellow"></span>
+          <span class="win-dot green"></span>
+          <div class="chrome-tab">練習</div>
+        </div>
+        <div class="chrome-toolbar">
+          <span class="chrome-nav">←　→　⟳</span>
+          <div class="chrome-url">file:///C:/Users/自分のユーザー名/Desktop/index.html</div>
+        </div>
+        <div class="chrome-viewport">
+          <div class="fx-header-step step3">
+            <div class="fx-logo">MY SITE</div>
+            <div class="fx-nav">
+              <div>ホーム</div>
+              <div>サービス</div>
+              <div>会社概要</div>
+              <div>お問い合わせ</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>
+      メニューの項目も横に並び、ヘッダーの形になりました。<code>gap: 18px;</code> は項目どうしの間隔です。
+    </p>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      <strong>flexは1階層ぶんしか効きません</strong>。だから入れ子が2段あるヘッダーでは、flexも2箇所に書くことになります。<br>
+      <code>.header</code> の flex → ロゴとメニューを左右に分ける。<code>.nav</code> の flex → メニューの項目を横に並べる。それぞれ別の仕事をしています。
+    </div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      「flexの中にflex」は特殊な書き方ではなく、<strong>実務ではごく普通</strong>です。ページ全体をflexで組むと、入れ子の数だけflexが出てきます。
+    </div>
+
+    <h3>サイドバーとメインに分ける</h3>
+    <p>
+      サイドバーは幅を固定し、メインは残り全部を使う形です。サイドバーに <code>flex: 0 0 110px;</code>（伸びず縮まず110px）、メインに <code>flex: 1;</code>（余りを全部もらう）を指定します。
+    </p>
+
+    <pre><code>.container {
+  display: flex;
+  gap: 8px;
+  height: 150px;
+}
+
+.side {
+  flex: 0 0 110px;           /* 幅を110pxで固定 */
+  background-color: #fde68a; /* 見た目だけ */
+}
+
+.main {
+  flex: 1;                   /* 残りを全部使う */
+  background-color: #bfdbfe; /* 見た目だけ */
+}</code></pre>
+
+    <div class="fx-demo fx-layout-demo">
+      <div class="fx-item fx-side">サイド<br>バー</div>
+      <div class="fx-item fx-main">メインコンテンツ</div>
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      幅は <code>width</code> でも指定できますが、<code>flex</code> の3つ目の値（<code>flex-basis</code>）で書くと、<strong>伸びる・縮む・基準の幅を1行にまとめられます</strong>。どちらの書き方でも、メイン側が自動で伸び縮みして隙間やはみ出しは出ません。
+    </div>
+
+    <h3>カードを均等に並べる</h3>
+    <p>
+      すべての子要素に <code>flex: 1;</code> を付けると、幅が均等になります。中身の文字数が違っても揃います。
+    </p>
+
+    <pre><code>.container {
+  display: flex;
+  gap: 8px;
+}
+
+.card {
+  flex: 1;                   /* ここだけがflexの指定 */
+
+  /* ここから下は見た目を整えるだけ */
+  padding: 12px;
+  background-color: #bfdbfe;
+  border-radius: 5px;
+  text-align: center;
+}</code></pre>
+
+    <div class="fx-demo fx-cards-demo">
+      <div class="fx-item">プラン</div>
+      <div class="fx-item">おすすめプラン</div>
+      <div class="fx-item">エンタープライズ向けプラン</div>
+    </div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      文字数が大きく違っても幅が揃うのは、<code>flex: 1</code> が <code>flex-basis: 0%</code> を含んでいるからです。「中身の大きさを無視して、余白を等分する」という意味になります。中身の大きさを基準にしたいときは <code>flex: 1 1 auto;</code> と書きます。
+    </div>
+
+    <h3>まとめ</h3>
+    <table>
+      <tr>
+        <th>やりたいこと</th>
+        <th>書くもの</th>
+      </tr>
+      <tr>
+        <td>横に並べる</td>
+        <td>親に <code>display: flex;</code></td>
+      </tr>
+      <tr>
+        <td>上下左右の中央に置く</td>
+        <td>親に <code>justify-content: center;</code> と <code>align-items: center;</code></td>
+      </tr>
+      <tr>
+        <td>両端に分ける</td>
+        <td>親に <code>justify-content: space-between;</code></td>
+      </tr>
+      <tr>
+        <td>ひとつだけ右端へ</td>
+        <td>その子に <code>margin-left: auto;</code></td>
+      </tr>
+      <tr>
+        <td>幅を固定する</td>
+        <td>その子に <code>flex: 0 0 幅;</code></td>
+      </tr>
+      <tr>
+        <td>残りを全部使う</td>
+        <td>その子に <code>flex: 1;</code></td>
+      </tr>
+      <tr>
+        <td>均等に並べる</td>
+        <td>すべての子に <code>flex: 1;</code></td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      プロパティは12個ありますが、実務で使う頻度はかたよっています。まずは <code>display: flex</code>、<code>justify-content</code>、<code>align-items</code>、<code>flex: 1</code> の4つを確実に使えるようにしてください。これだけで大半のレイアウトが組めます。<br>
+      残りは<strong>覚えなくて大丈夫です</strong>。「そういえばそんな指定があったな」と思い出して、ここに戻って調べられれば、それで十分に仕事になります。
+    </div>
+  </section>
+
+</main>
+
+<footer>
+</footer>
+
+<script src="../js/training.js"></script>
+
+</body>
+</html>
