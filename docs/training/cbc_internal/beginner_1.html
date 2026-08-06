@@ -345,10 +345,38 @@
       CSSでは、どのHTML要素に、どのような見た目を指定するかを書きます。
     </p>
 
-    <pre><code>p {
-  color: #333333;
-  font-size: 16px;
-}</code></pre>
+    <p>
+      HTML側で書いたタグを、CSS側から名前で呼び出します。下の図は、その対応と各部分の名称です。
+    </p>
+
+    <div class="css-anatomy">
+      <div>
+        <span class="ca-title">HTML（index.html）</span>
+        <div class="ca-panel">&lt;<span class="ca-tag">p</span>&gt;あいうえお&lt;/<span class="ca-tag">p</span>&gt;</div>
+      </div>
+
+      <div class="ca-arrow">→</div>
+
+      <div>
+        <span class="ca-title">CSS（style.css）</span>
+        <div class="ca-panel"><span class="ca-sel">p</span> {
+  <span class="ca-prop">color</span>: <span class="ca-val">#FF0000</span>;
+  <span class="ca-prop">width</span>: <span class="ca-val">200px</span>;
+  <span class="ca-prop">background-color</span>: <span class="ca-val">#0000FF</span>;
+}</div>
+      </div>
+    </div>
+
+    <div class="ca-legend">
+      <span><span class="ca-key sel"></span>セレクタ</span>
+      <span><span class="ca-key prop"></span>プロパティ</span>
+      <span><span class="ca-key val"></span>値</span>
+    </div>
+
+    <div class="point">
+      <span class="label">対応関係</span><br>
+      HTMLで書いた <code>&lt;p&gt;</code> の <strong>p</strong> と、CSSの先頭にある <strong>p</strong> は<strong>同じもの</strong>を指しています。CSS側の <code>p</code> が「どの要素に指定するか」を表しているので、これを<strong>セレクタ</strong>と呼びます。
+    </div>
 
     <table>
       <tr>
@@ -484,40 +512,46 @@
       </tr>
       <tr>
         <td><code>&lt;div&gt; 〜 &lt;/div&gt;</code></td>
-        <td>division</td>
+        <td>division<br><strong>区分</strong></td>
         <td>特別な意味を持たない汎用的な枠として使います。</td>
       </tr>
       <tr>
         <td><code>&lt;p&gt; 〜 &lt;/p&gt;</code></td>
-        <td>paragraph</td>
+        <td>paragraph<br><strong>段落</strong></td>
         <td>文章の段落を表します。</td>
       </tr>
       <tr>
         <td><code>&lt;span&gt; 〜 &lt;/span&gt;</code></td>
-        <td>span（ひと続きの範囲）</td>
+        <td>span<br><strong>範囲</strong></td>
         <td>文章の一部分を囲むときによく使います。</td>
       </tr>
       <tr>
         <td><code>&lt;h1&gt; 〜 &lt;/h1&gt;</code> 〜 <code>&lt;h6&gt; 〜 &lt;/h6&gt;</code></td>
-        <td>heading</td>
+        <td>heading<br><strong>見出し</strong></td>
         <td>見出しを表します。<code>h1</code> が最も大きな見出しで、<code>h6</code> に向かって階層が下がります。</td>
       </tr>
       <tr>
         <td><code>&lt;table&gt; 〜 &lt;/table&gt;</code></td>
-        <td>table</td>
+        <td>table<br><strong>表</strong></td>
         <td>表を作るときに使います。</td>
       </tr>
       <tr>
         <td><code>&lt;img&gt;</code></td>
-        <td>image</td>
+        <td>image<br><strong>画像</strong></td>
         <td>画像を表示するときに使います。終了タグはありません。</td>
       </tr>
       <tr>
         <td><code>&lt;br&gt;</code></td>
-        <td>break</td>
+        <td>break<br><strong>改行</strong></td>
         <td>改行を入れるときに使います。終了タグはありません。</td>
       </tr>
     </table>
+
+    <div class="note">
+      <span class="label">覚え方</span><br>
+      タグ名は<strong>英単語の略</strong>です。日本語の意味と一緒に覚えると、記号ではなく言葉として頭に入ります。<br>
+      <code>&lt;p&gt;</code> は「パラグラフ＝段落」、<code>&lt;div&gt;</code> は「ディビジョン＝区分」。そう考えると、なぜそのタグを使うのかが自然に分かります。
+    </div>
 
     <div class="point">
       <span class="label">理解ポイント</span><br>
@@ -728,18 +762,25 @@
         <th>意味</th>
       </tr>
       <tr>
-        <td><code>link</code></td>
+        <td><code>link</code><br><strong>つなぐ</strong></td>
         <td>外部ファイルをHTMLに関連付けるためのタグです。</td>
       </tr>
       <tr>
-        <td><code>href</code></td>
-        <td>読み込むファイルの場所を指定します。ここでは <code>css/style.css</code> を指定しています。</td>
+        <td><code>href</code><br><small>hypertext reference</small><br><strong>参照先</strong></td>
+        <td>読み込むファイルの<strong>場所</strong>を指定します。ここでは <code>css/style.css</code> を指定しています。</td>
       </tr>
       <tr>
-        <td><code>rel</code></td>
-        <td>HTMLと読み込むファイルの関係を指定します。CSSの場合は <code>stylesheet</code> と書きます。</td>
+        <td><code>rel</code><br><small>relation</small><br><strong>関係</strong></td>
+        <td>HTMLと読み込むファイルの<strong>関係</strong>を指定します。CSSの場合は <code>stylesheet</code> と書きます。</td>
       </tr>
     </table>
+
+    <div class="note">
+      <span class="label">略語の意味</span><br>
+      <code>href</code> は <strong>hypertext reference（ハイパーテキスト参照）</strong> の略で、「他のファイルを参照する」という意味です。<br>
+      <code>rel</code> は <strong>relation（関係）</strong> の略です。「読み込むファイルが、このHTMLにとって何なのか」を伝えています。<br>
+      どちらも<strong>この先ずっと使い続ける</strong>ものです。意味を知っておくと、書き間違いが減ります。
+    </div>
 
     <h3>index.html</h3>
     <pre><code>&lt;html&gt;

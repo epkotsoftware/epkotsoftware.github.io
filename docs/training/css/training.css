@@ -21,9 +21,91 @@ a {
 }
 
 header {
-  background: #202938;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    #0c4f52 0%,
+    #123f6e 38%,
+    #2a1f5c 72%,
+    #1a0f33 100%
+  );
   color: #fff;
-  padding: 42px 24px;
+  padding: 26px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ▼ ぼかした光の玉を2つ浮かべ、ゆっくり漂わせる。
+   backdrop-filter は負荷が高いので使わず、
+   動かすのは transform だけにしてGPUで処理させる */
+header::before,
+header::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.36;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* 1枚目：光そのもの。
+   中心を白くし、外へ向かって暖色になる「光源」の構造にする。
+   暖色だけを黒に重ねると濁って土色に見えるため、芯の白が要る。
+   screen で重ねるので、黒の上では加算されて明るく灯る */
+header::before {
+  width: 320px;
+  height: 320px;
+  top: -170px;
+  left: -60px;
+  background: #1ac6d6;
+  animation: aurora-a 13s ease-in-out infinite;
+}
+
+/* 2枚目：小さめの光を逆向きに流し、明滅のゆらぎを作る */
+header::after {
+  width: 260px;
+  height: 260px;
+  bottom: -150px;
+  right: -50px;
+  background: #7b4bd8;
+  animation: aurora-b 16s ease-in-out infinite;
+}
+
+/* 拡縮させると blur の再計算が走るため、移動と回転だけにとどめる */
+/* 光の玉が漂う動き。移動距離を伸ばして流れを感じやすくする */
+@keyframes aurora-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(210px, 48px, 0);
+  }
+}
+
+@keyframes aurora-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-180px, -42px, 0);
+  }
+}
+
+/* ヘッダーが画面外にあるときは動きを止める（スクリプトが付与） */
+header.is-offscreen::before,
+header.is-offscreen::after {
+  animation-play-state: paused;
+}
+
+/* 動きを減らす設定にしている人には止める */
+@media (prefers-reduced-motion: reduce) {
+  header::before,
+  header::after {
+    animation: none;
+  }
 }
 
 .header-inner,
@@ -32,9 +114,15 @@ main {
   margin: 0 auto;
 }
 
+/* ガラスより前面に文字を置く */
+.header-inner {
+  position: relative;
+  z-index: 2;
+}
+
 header h1 {
-  margin: 0 0 8px;
-  font-size: clamp(28px, 4vw, 42px);
+  margin: 0 0 4px;
+  font-size: clamp(24px, 3.2vw, 34px);
   line-height: 1.25;
 }
 
@@ -58,23 +146,25 @@ section {
 
 h2 {
   margin: 0 0 22px;
-  padding-bottom: 12px;
-  border-bottom: 2px solid #e5e7eb;
-  font-size: 28px;
-  color: #111827;
-  line-height: 1.35;
+  padding: 12px 16px;
+  border-left: 4px solid #2563eb;
+  border-radius: 0 7px 7px 0;
+  background: linear-gradient(90deg, #e8f0fd 0%, #f7f9fc 100%);
+  font-size: 20px;
+  color: #1e293b;
+  line-height: 1.4;
 }
 
 h3 {
-  margin: 32px 0 12px;
-  font-size: 21px;
+  margin: 28px 0 10px;
+  font-size: 17px;
   color: #1f2937;
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 h4 {
-  margin: 24px 0 8px;
-  font-size: 17px;
+  margin: 22px 0 8px;
+  font-size: 15.5px;
   color: #374151;
 }
 
@@ -1108,6 +1198,104 @@ td code {
 }
 
 /* ============================================================
+   セレクタ・プロパティ・値の対応図
+   HTMLとCSSを左右に並べ、CSS側を色分けして名称を示す
+   ============================================================ */
+.css-anatomy {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 14px;
+  margin: 20px 0 14px;
+}
+
+.ca-title {
+  display: block;
+  margin-bottom: 7px;
+  color: #64748b;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.ca-panel {
+  padding: 14px 16px;
+  border-radius: 8px;
+  background: #1e293b;
+  color: #d4d4d4;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 13.5px;
+  line-height: 1.85;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.ca-arrow {
+  color: #94a3b8;
+  font-size: 22px;
+  text-align: center;
+}
+
+.ca-tag {
+  color: #569cd6;
+}
+
+.ca-sel {
+  color: #d7ba7d;
+}
+
+.ca-prop {
+  color: #9cdcfe;
+}
+
+.ca-val {
+  color: #ce9178;
+}
+
+.ca-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin: 0 0 22px;
+  color: #475569;
+  font-size: 14px;
+}
+
+.ca-legend > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.ca-key {
+  width: 15px;
+  height: 15px;
+  border-radius: 3px;
+}
+
+.ca-key.sel {
+  background: #d7ba7d;
+}
+
+.ca-key.prop {
+  background: #9cdcfe;
+}
+
+.ca-key.val {
+  background: #ce9178;
+}
+
+@media (max-width: 780px) {
+  .css-anatomy {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .ca-arrow {
+    transform: rotate(90deg);
+  }
+}
+
+/* ============================================================
    章ナビゲーション（スクロールに追従する目次）
    HTMLは書かない。読み込み時にスクリプトが見出しから自動生成する
    ============================================================ */
@@ -1120,27 +1308,43 @@ td code {
   border-bottom: 1px solid #cbd5e1;
 }
 
+/* 普段は1行に畳み、ボタンを押したときだけ全章を開く。
+   常時2〜3行あると画面上部を圧迫するため */
+/* 文字を小さくしたぶん、折り返して全章を常時見せる。
+   中途半端に切れないよう max-height は使わない */
 .chapter-nav-inner {
   display: flex;
-  gap: 7px;
+  flex-wrap: wrap;
+  gap: 5px;
   width: min(1000px, calc(100% - 40px));
   margin: 0 auto;
-  padding: 10px 0;
-  overflow-x: auto;
-  scrollbar-width: thin;
+  padding: 12px 0;
 }
+
 
 .chapter-nav a {
   flex: none;
-  padding: 6px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px;
   border: 1px solid #d7dee8;
   border-radius: 999px;
   background: #ffffff;
-  color: #475569;
-  font-size: 13px;
+  color: #64748b;
+  font-size: 9px;
   text-decoration: none;
   white-space: nowrap;
   transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.cn-num {
+  font-weight: 700;
+  opacity: 0.75;
+}
+
+.chapter-nav a.is-current .cn-num {
+  opacity: 1;
 }
 
 .chapter-nav a:hover {
@@ -1156,9 +1360,78 @@ td code {
   color: #ffffff;
 }
 
-/* アンカーで飛んだとき、見出しがナビの下に隠れないようにする */
+/* ============================================================
+   広い画面では、本文の左の余白に縦のサイドバーとして出す。
+   上部を圧迫せず、章名も全部見える
+   ============================================================ */
+@media (min-width: 1420px) {
+  /* 主役は本文。ナビは枠も背景も影も持たせず、脇に静かに置く */
+  .chapter-nav {
+    position: fixed;
+    top: 50%;
+    left: calc((100% - 1000px) / 2 - 206px);
+    transform: translateY(-50%);
+    width: 190px;
+    max-height: 78vh;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    overflow-y: auto;
+  }
+
+  .chapter-nav-inner {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 1px;
+    width: 100%;
+    max-height: none;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .chapter-nav a {
+    width: 100%;
+    padding: 5px 10px;
+    border: none;
+    border-left: 2px solid transparent;
+    border-radius: 0;
+    background: transparent;
+    color: #9aa6b6;
+    font-size: 12px;
+    white-space: normal;
+    line-height: 1.5;
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .chapter-nav a:hover {
+    background: transparent;
+    color: #475569;
+  }
+
+  /* 現在地は塗りつぶさず、左の線と文字の濃さだけで示す */
+  .chapter-nav a.is-current {
+    border-left-color: #2563eb;
+    background: transparent;
+    color: #1e293b;
+    font-weight: 700;
+  }
+
+  .chapter-nav a .cn-num {
+    opacity: 0.6;
+  }
+
+  main section[id] {
+    scroll-margin-top: 24px;
+  }
+}
+
+/* アンカーで飛んだとき、見出しがナビの下に隠れないようにする
+   （折り返しで2段になるぶん、余裕を多めに取る） */
 main section[id] {
-  scroll-margin-top: 62px;
+  scroll-margin-top: 84px;
 }
 
 /* ============================================================
@@ -1206,19 +1479,34 @@ main section[id] {
 }
 
 @media (max-width: 780px) {
+  /* 狭い画面で全タイトルを並べると高さを取りすぎるため、
+     ここだけ番号のみにして1行に収め、現在地だけ章名を出す */
   .chapter-nav-inner {
     width: calc(100% - 24px);
-    gap: 6px;
+    flex-wrap: nowrap;
+    gap: 5px;
     padding: 8px 0;
+    overflow-x: auto;
+    scrollbar-width: thin;
   }
 
   .chapter-nav a {
-    padding: 5px 11px;
+    justify-content: center;
+    min-width: 32px;
+    padding: 5px 10px;
     font-size: 12px;
   }
 
+  .cn-label {
+    display: none;
+  }
+
+  .chapter-nav a.is-current .cn-label {
+    display: inline;
+  }
+
   main section[id] {
-    scroll-margin-top: 54px;
+    scroll-margin-top: 56px;
   }
 
   .to-top {

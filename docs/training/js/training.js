@@ -37,10 +37,35 @@
     if (!heading) {
       return;
     }
+    var text = heading.textContent.trim();
     var link = document.createElement('a');
     link.href = '#' + section.id;
-    link.textContent = heading.textContent.trim();
     link.setAttribute('data-target', section.id);
+    // ホバーで全文が出るようにしておく
+    link.title = text;
+
+    // 「1. タイトル」を番号と本文に分ける。
+    // 番号は常に表示し、本文は現在地のときだけ見せる
+    var parts = text.match(/^(\d+)[.．]\s*(.+)$/);
+
+    if (parts) {
+      var num = document.createElement('span');
+      num.className = 'cn-num';
+      num.textContent = parts[1];
+
+      var label = document.createElement('span');
+      label.className = 'cn-label';
+      label.textContent = parts[2];
+
+      link.appendChild(num);
+      link.appendChild(label);
+    } else {
+      var only = document.createElement('span');
+      only.className = 'cn-label is-always';
+      only.textContent = text;
+      link.appendChild(only);
+    }
+
     inner.appendChild(link);
     links.push(link);
   });
@@ -171,7 +196,28 @@
 })();
 
 /* ------------------------------------------------------------
-   3. 先頭へ戻るボタンを右下に置く
+   3. ヘッダーが画面外にあるとき、背景の動きを止める
+   読んでいる間ずっと裏で描画し続けるのを避け、
+   低スペック機での負荷とバッテリー消費を減らす
+   ------------------------------------------------------------ */
+(function () {
+  var header = document.querySelector('header');
+  if (!header || !('IntersectionObserver' in window)) {
+    return;
+  }
+
+  var observer = new IntersectionObserver(
+    function (entries) {
+      header.classList.toggle('is-offscreen', !entries[0].isIntersecting);
+    },
+    { threshold: 0 }
+  );
+
+  observer.observe(header);
+})();
+
+/* ------------------------------------------------------------
+   4. 先頭へ戻るボタンを右下に置く
    ------------------------------------------------------------ */
 (function () {
   var ARROW =
