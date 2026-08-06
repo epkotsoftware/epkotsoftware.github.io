@@ -142,8 +142,8 @@
     .fx-wrap-yes { flex-wrap: wrap; }
 
     /* 折り返しを起こすため、あえて幅を広げた子要素。
-       shrink を 1 のままにして、nowrap のときは縮んで収まるようにする */
-    .fx-wide .fx-item { flex: 1 1 40%; }
+       shrink は既定の 1 のままなので、nowrap のときは縮んで収まる */
+    .fx-wide .fx-item { flex-basis: 40%; }
 
     /* --- justify-content（横方向の配置） --- */
     .fx-jc-start { justify-content: flex-start; }
@@ -198,9 +198,15 @@
     .fx-grow-all .fx-item { flex-grow: 1; }
     /* 上の .fx-grow-all .fx-item と詳細度を揃えないと上書きできない */
     .fx-item.fx-grow-2 { flex-grow: 2; }
-    /* flex-basis を 0 にすると、幅そのものが比率どおりになる */
-    .fx-basis0 .fx-item { flex: 1 1 0%; }
-    .fx-basis0 .fx-item.fx-grow-2 { flex: 2 1 0%; }
+
+    /* flex: 1 の見本。flex-basis: 0 まで含むので、中身の幅に関係なく等分になる。
+       .fx-grow-all（flex-grow だけ）とは結果が変わるので、別クラスにしてある */
+    .fx-flex1 .fx-item { flex: 1 1 0%; }
+
+    /* 文字数の違いを見せる見本。
+       .fx-item の nowrap を解除しないと、狭い画面で長い文字が縮まず幅が揃わない */
+    .fx-textdemo .fx-item { white-space: normal; }
+
 
     /* --- flex-shrink --- */
     /* 合計が親を超える幅を与えて、縮み方の違いを見せる */
@@ -1216,50 +1222,42 @@
     <div class="caution">
       <span class="label">よくある誤解</span><br>
       <code>flex-grow: 2</code> にしても、<strong>その要素の幅が2倍になるわけではありません</strong>。2倍になるのは<strong>余った空間の取り分</strong>だけです。<br>
-      上の見本でも、2番目は1番目のちょうど2倍にはなっていません。もともとの文字の幅に、余白の分配ぶんが足されるからです。
+      上の見本でも、2番目は1番目のちょうど2倍にはなっていません。もとから持っている箱の幅（文字と内側の余白の分）に、取り分が足されるからです。
     </div>
 
-    <h4>幅そのものを比率どおりにしたいとき</h4>
+    <h4>中身の文字数に影響されないようにする</h4>
     <p>
-      <code>flex-basis</code> を <code>0</code> にすると、もともとの中身の幅が計算から外れ、<strong>余白だけで分け合う</strong>ようになります。結果、幅が正確に比率どおりになります。
+      ここまでの見本は、どれも中身が「1」「2」「3」で<strong>同じ幅</strong>でした。中身の文字数が違うと、<code>flex-grow</code> だけでは<strong>幅が揃いません</strong>。もともとの中身の幅が残ったまま、余りを分け合うからです。
     </p>
-
-    <pre><code>/* 幅が 1 : 2 : 1 になる */
-.item {
-  flex: 1 1 0%;
-}
-
-.item:nth-child(2) {
-  flex: 2 1 0%;
-}</code></pre>
+    <p>
+      <code>flex-basis</code> を <code>0</code> にすると、<strong>もともとの中身の幅が計算から外れます</strong>。文字数が違っても、同じ幅で並ぶようになります。
+    </p>
 
     <div class="fx-samples">
       <div>
-        <span class="fx-sample-label">flex-grow だけ（幅は比率にならない）</span>
-        <code class="fx-sample-code"><span class="s">.item</span> { <span class="p">flex-grow</span>: <span class="n">1</span>; }
-<span class="s">.item:nth-child(2)</span> { <span class="p">flex-grow</span>: <span class="n">2</span>; }</code>
-        <div class="fx-demo fx-grow-all">
-          <div class="fx-item">1</div>
-          <div class="fx-item mark fx-grow-2">2</div>
-          <div class="fx-item">3</div>
+        <span class="fx-sample-label">flex-grow だけ（幅が揃わない）</span>
+        <code class="fx-sample-code"><span class="s">.item</span> { <span class="p">flex-grow</span>: <span class="n">1</span>; }</code>
+        <div class="fx-demo fx-textdemo fx-grow-all">
+          <div class="fx-item">短い</div>
+          <div class="fx-item">中くらい</div>
+          <div class="fx-item">長いテキスト</div>
         </div>
       </div>
       <div>
-        <span class="fx-sample-label">flex-basis: 0 も指定（幅が 1:2:1）</span>
-        <code class="fx-sample-code"><span class="s">.item</span> { <span class="p">flex</span>: <span class="n">1</span> <span class="n">1</span> <span class="n">0%</span>; }
-<span class="s">.item:nth-child(2)</span> { <span class="p">flex</span>: <span class="n">2</span> <span class="n">1</span> <span class="n">0%</span>; }</code>
-        <div class="fx-demo fx-grow-all fx-basis0">
-          <div class="fx-item">1</div>
-          <div class="fx-item mark fx-grow-2">2</div>
-          <div class="fx-item">3</div>
+        <span class="fx-sample-label">flex-basis: 0 も指定（幅が揃う）</span>
+        <code class="fx-sample-code"><span class="s">.item</span> { <span class="p">flex</span>: <span class="n">1</span> <span class="n">1</span> <span class="n">0%</span>; }</code>
+        <div class="fx-demo fx-textdemo fx-flex1">
+          <div class="fx-item">短い</div>
+          <div class="fx-item">中くらい</div>
+          <div class="fx-item">長いテキスト</div>
         </div>
       </div>
     </div>
 
     <div class="point">
       <span class="label">理解ポイント</span><br>
-      数字は<strong>比率</strong>です。大きさそのものではありません。<br>
-      幅をきっちり2倍にしたいときは <code>flex: 2</code> と書きます。これなら <code>flex-basis: 0</code> も一緒に指定されます。
+      左は<strong>文字数の多い箱ほど広い</strong>まま、右は<strong>3つとも同じ幅</strong>になっています。書いている数字はどちらも <code>1</code> で同じです。<br>
+      違うのは <code>flex-basis</code> だけ。<strong>出発点を中身の幅にするか、0にするか</strong>で結果が変わります。
     </div>
 
     <h3>flex-shrink ― 足りないときの縮み方</h3>
@@ -1349,7 +1347,7 @@
 }</code></pre>
 
     <p>
-      <code>flex: 1;</code> は「余った空間を分け合って、均等に広がる」という意味になります。横並びの要素を等分したいときの定番です。
+      <code>flex: 1;</code> は「<strong>中身の文字数に関係なく、同じ幅にする</strong>」という意味になります。横並びの要素を等分したいときの定番です。
     </p>
 
     <div class="fx-samples">
@@ -1364,11 +1362,16 @@
       <div>
         <span class="fx-sample-label">両方に flex: 1</span>
         <code class="fx-sample-code"><span class="s">.item</span> { <span class="p">flex</span>: <span class="n">1</span>; }</code>
-        <div class="fx-demo fx-grow-all">
+        <div class="fx-demo fx-flex1">
           <div class="fx-item">メニュー</div>
           <div class="fx-item">記事</div>
         </div>
       </div>
+    </div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      左は文字数のぶんだけ「メニュー」のほうが広く、右は<strong>2つとも同じ幅</strong>になっています。<code>flex: 1</code> には <code>flex-basis: 0</code> が含まれているので、中身の文字数に関係なく等分されます。
     </div>
 
     <h3>align-self ― その要素だけ縦位置を変える</h3>
@@ -1682,7 +1685,9 @@
 18
 19
 20
-21</div>
+21
+22
+23</div>
           <pre class="vscode-code"><span class="sy-sel">.header</span> {
   <span class="sy-attr">display</span>: <span class="sy-str">flex</span>;
   <span class="sy-attr">justify-content</span>: <span class="sy-str">space-between</span>;
