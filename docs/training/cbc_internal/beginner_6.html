@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>コーダー初級#6</title>
+  <link rel="stylesheet" href="../css/training.css">
+
+  <!-- ▼ このページ専用のスタイル（display と position の実演） -->
+  <style>
+    /* ============================================================
+       共通の実演枠
+       ============================================================ */
+    .el-demo {
+      margin: 16px 0 22px;
+      padding: 12px;
+      border: 2px dashed #94a3b8;
+      background: #f1f5f9;
+    }
+
+    /* ブロックレベル要素の見本（青） */
+    .el-block {
+      display: block;
+      padding: 9px 12px;
+      border: 1px solid #60a5fa;
+      background: #bfdbfe;
+      color: #1e3a8a;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    /* インライン要素の見本（オレンジ） */
+    .el-inline {
+      display: inline;
+      padding: 9px 12px;
+      border: 1px solid #f59e0b;
+      background: #fde68a;
+      color: #92400e;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    /* inline-block の見本（緑） */
+    .el-inline-block {
+      display: inline-block;
+      padding: 9px 12px;
+      border: 1px solid #16a34a;
+      background: #bbf7d0;
+      color: #14532d;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    /* 見本を左右に並べる */
+    .el-samples {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin: 20px 0 26px;
+    }
+
+    .el-label {
+      display: block;
+      margin-bottom: 7px;
+      color: #1e3a8a;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    /* 見本ごとの、実際に書くコード */
+    .el-code {
+      display: block;
+      margin-bottom: 8px;
+      padding: 9px 12px;
+      border-radius: 6px;
+      background: #1e293b;
+      color: #e2e8f0;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    .el-code .c { color: #6a9955; }
+    .el-code .s { color: #d7ba7d; }
+    .el-code .p { color: #9cdcfe; }
+    .el-code .v { color: #ce9178; }
+    .el-code .n { color: #b5cea8; }
+
+    /* --- 幅・高さが効くかどうかの見本 --- */
+    .el-sized {
+      width: 200px;
+      height: 60px;
+    }
+
+    /* --- 上下の余白が効くかどうかの見本 --- */
+    .el-spaced {
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+
+    /* 余白の位置を見えるようにする外枠 */
+    .el-space-frame {
+      background: repeating-linear-gradient(45deg, #fcd34d, #fcd34d 3px, #fef3c7 3px, #fef3c7 7px);
+    }
+
+    /* ============================================================
+       2章：display の実演（リストを使う）
+       ============================================================ */
+    .el-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    /* 上下の余白を入れてあるのは、inline のときだけ効かないことを見せるため */
+    .el-list li {
+      margin: 12px 4px;
+      padding: 9px 14px;
+      border: 1px solid #60a5fa;
+      background: #bfdbfe;
+      color: #1e3a8a;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .el-list-inline li {
+      display: inline;
+    }
+
+    .el-list-ib li {
+      display: inline-block;
+    }
+
+    /* inline-block に幅を与えた見本 */
+    .el-list-ib-sized li {
+      display: inline-block;
+      width: 110px;
+      text-align: center;
+    }
+
+    /* ============================================================
+       3章：position の実演
+       ============================================================ */
+    /* 実演の舞台。ここが「親要素」にあたる */
+    .ps-stage {
+      position: relative;
+      height: 160px;
+      padding: 12px;
+      border: 2px dashed #94a3b8;
+      background: #f1f5f9;
+    }
+
+    /* 舞台の左上に「親要素」と表示する */
+    .ps-stage::before {
+      content: "親要素";
+      position: absolute;
+      top: 4px;
+      left: 8px;
+      color: #64748b;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 11.5px;
+    }
+
+    .ps-box {
+      width: 96px;
+      padding: 10px 0;
+      border: 1px solid #60a5fa;
+      border-radius: 5px;
+      background: #bfdbfe;
+      color: #1e3a8a;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .ps-box + .ps-box {
+      margin-top: 8px;
+    }
+
+    /* 動かす対象の箱だけ色を変える */
+    .ps-box.mark {
+      border-color: #f59e0b;
+      background: #fde68a;
+      color: #92400e;
+    }
+
+    /* もといた場所からずらす */
+    .ps-relative {
+      position: relative;
+      top: 22px;
+      left: 40px;
+    }
+
+    /* 親（.ps-stage）を基準に右上へ置く */
+    .ps-absolute {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+    }
+
+    /* ============================================================
+       4章：z-index の実演
+       ============================================================ */
+    .zi-stage {
+      position: relative;
+      height: 180px;
+      margin: 16px 0 22px;
+      border: 2px dashed #94a3b8;
+      background: #f1f5f9;
+    }
+
+    /* 3つを少しずつずらして、必ず重なるように置く */
+    .zi-box {
+      position: absolute;
+      width: 150px;
+      padding: 18px 0;
+      border-radius: 5px;
+      font-size: 14px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .zi-box1 {
+      top: 24px;
+      left: 30px;
+      border: 1px solid #60a5fa;
+      background: #bfdbfe;
+      color: #1e3a8a;
+    }
+
+    .zi-box2 {
+      top: 52px;
+      left: 110px;
+      border: 1px solid #f59e0b;
+      background: #fde68a;
+      color: #92400e;
+    }
+
+    .zi-box3 {
+      top: 80px;
+      left: 190px;
+      border: 1px solid #16a34a;
+      background: #bbf7d0;
+      color: #14532d;
+    }
+
+    /* 狭い画面では横に並べきれないので、ずらし幅を詰める */
+    @media (max-width: 560px) {
+      .zi-box { width: 116px; }
+      .zi-box1 { left: 14px; }
+      .zi-box2 { left: 64px; }
+      .zi-box3 { left: 114px; }
+    }
+
+    /* z-index を指定した見本。数字が大きいほど手前に出る */
+    .zi-set .zi-box1 { z-index: 1; }
+    .zi-set .zi-box2 { z-index: 10; }
+    .zi-set .zi-box3 { z-index: 2; }
+
+    @media (max-width: 780px) {
+      /* 1fr だけだと中身の最小幅まで広がり、長いコード行が画面をはみ出す。
+         minmax(0, …) を付けて、親の幅で止める */
+      .el-samples {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>コーダー初級#6</h1>
+    <p>要素の性質と位置 ― display と position</p>
+  </div>
+</header>
+
+<main>
+
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol>
+      <li><a href="#chapter1">要素には2つの性質がある</a></li>
+      <li><a href="#chapter2">displayで性質を変える</a></li>
+      <li><a href="#chapter3">positionで位置を調整する</a></li>
+      <li><a href="#chapter4">z-indexで重なりの順番を決める</a></li>
+    </ol>
+
+    <div class="note">
+      <span class="label">読む前に</span><br>
+      このページで扱うのは <code>display</code> と <code>position</code> の2つです。どちらも<strong>最初は理屈が飲み込みにくい</strong>プロパティなので、<strong>いま完全に理解できなくて大丈夫です。</strong><br>
+      「こういう動きをする」と見て覚えて、必要になったらここに戻ってきてください。
+    </div>
+  </section>
+
+  <section id="chapter1">
+    <h2>1. 要素には2つの性質がある</h2>
+
+    <p>
+      同じ <code>div</code> や <code>span</code> でも、<strong>並び方や大きさの決まり方が違います</strong>。これは書いた人が決めたのではなく、タグごとに<strong>最初から性質が決まっている</strong>からです。
+    </p>
+
+    <p>
+      その性質は大きく2種類あります。
+    </p>
+
+    <table>
+      <tr>
+        <th>性質</th>
+        <th>どう並ぶか</th>
+        <th>代表的なタグ</th>
+      </tr>
+      <tr>
+        <td><strong>ブロックレベル要素</strong></td>
+        <td>親の幅いっぱいまで広がり、<strong>下へ積まれる</strong></td>
+        <td><code>div</code>　<code>p</code>　<code>h1</code>〜<code>h6</code>　<code>ul</code>　<code>li</code></td>
+      </tr>
+      <tr>
+        <td><strong>インライン要素</strong></td>
+        <td>中身の幅しか持たず、<strong>横に並ぶ</strong></td>
+        <td><code>span</code>　<code>a</code>　<code>strong</code>　<code>em</code></td>
+      </tr>
+    </table>
+
+    <div class="note">
+      <span class="label">見方</span><br>
+      以降の見本では、<strong>ブロックレベル要素を青、インライン要素をオレンジ</strong>で表示しています。色は見分けるためのもので、動きとは関係ありません。
+    </div>
+
+    <h3>並び方が違う</h3>
+    <p>
+      まず、いちばん分かりやすい違いです。同じ3つを置いても、並び方がまったく違います。
+    </p>
+
+    <div class="el-samples">
+      <div>
+        <span class="el-label">ブロックレベル要素（div）</span>
+        <code class="el-code"><span class="c">/* 何も指定しない状態 */</span></code>
+        <div class="el-demo">
+          <div class="el-block">1つ目</div>
+          <div class="el-block">2つ目</div>
+          <div class="el-block">3つ目</div>
+        </div>
+      </div>
+      <div>
+        <span class="el-label">インライン要素（span）</span>
+        <code class="el-code"><span class="c">/* 何も指定しない状態 */</span></code>
+        <div class="el-demo">
+          <span class="el-inline">1つ目</span>
+          <span class="el-inline">2つ目</span>
+          <span class="el-inline">3つ目</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      <code>div</code> を並べると縦に積まれ、<code>span</code> を並べると横に流れます。<strong>CSSを1行も書いていないのに、この差が出ます。</strong>タグそのものが性質を持っているからです。
+    </div>
+
+    <h3>幅と高さが効くかどうか</h3>
+    <p>
+      ここからが、つまずきやすいところです。<strong>インライン要素には、幅と高さの指定が効きません。</strong>
+    </p>
+
+    <div class="el-samples">
+      <div>
+        <span class="el-label">ブロックレベル要素</span>
+        <code class="el-code"><span class="s">.box</span> {
+  <span class="p">width</span>: <span class="n">200px</span>;
+  <span class="p">height</span>: <span class="n">60px</span>;
+}</code>
+        <div class="el-demo">
+          <div class="el-block el-sized">指定が効く</div>
+        </div>
+      </div>
+      <div>
+        <span class="el-label">インライン要素</span>
+        <code class="el-code"><span class="s">.box</span> {
+  <span class="p">width</span>: <span class="n">200px</span>;
+  <span class="p">height</span>: <span class="n">60px</span>;
+}</code>
+        <div class="el-demo">
+          <span class="el-inline el-sized">効かない</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">注意</span><br>
+      右の見本は、左とまったく同じCSSを書いています。それでも<strong>大きさが変わりません</strong>。<br>
+      「幅を指定したのに効かない」というつまずきは、この性質が原因のことがほとんどです。
+    </div>
+
+    <div class="note">
+      <span class="label">例外</span><br>
+      画像の <code>img</code> はインライン要素の仲間ですが、<strong>これだけは幅と高さが効きます</strong>。画像そのものに元のサイズがあるためです。<br>
+      「インラインだから効かない」が当てはまらない数少ない例なので、覚えておいてください。
+    </div>
+
+    <h3>上下の余白が効くかどうか</h3>
+    <p>
+      余白にも同じ制限があります。インライン要素は<strong>左右の余白は効きますが、上下は効きません</strong>。
+    </p>
+
+    <div class="el-samples">
+      <div>
+        <span class="el-label">ブロックレベル要素</span>
+        <code class="el-code"><span class="s">.box</span> {
+  <span class="p">margin-top</span>: <span class="n">30px</span>;
+  <span class="p">margin-bottom</span>: <span class="n">30px</span>;
+}</code>
+        <div class="el-demo el-space-frame">
+          <div class="el-block el-spaced">上下に余白ができる</div>
+        </div>
+      </div>
+      <div>
+        <span class="el-label">インライン要素</span>
+        <code class="el-code"><span class="s">.box</span> {
+  <span class="p">margin-top</span>: <span class="n">30px</span>;
+  <span class="p">margin-bottom</span>: <span class="n">30px</span>;
+}</code>
+        <div class="el-demo el-space-frame">
+          <span class="el-inline el-spaced">上下に余白ができない</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      黄色い斜線は、<strong>箱の外側にできた余白</strong>が見えるようにしたものです。<br>
+      左は箱の上下に<strong>斜線が広く出ています</strong>。指定した30pxの余白ができた証拠です。<br>
+      右は同じ指定をしているのに、<strong>上下の斜線がほとんどありません</strong>。余白が増えていないということです。
+    </div>
+
+    <h3>入れ子のルール</h3>
+    <p>
+      もうひとつ決まりがあります。<strong>インライン要素の中に、ブロックレベル要素を入れてはいけません。</strong>
+    </p>
+
+    <pre><code><span class="sy-com">&lt;!-- ✕ してはいけない書き方 --&gt;</span>
+&lt;<span class="sy-tag">span</span>&gt;
+  &lt;<span class="sy-tag">div</span>&gt;この書き方は避ける&lt;/<span class="sy-tag">div</span>&gt;
+&lt;/<span class="sy-tag">span</span>&gt;
+
+<span class="sy-com">&lt;!-- ○ 正しい書き方 --&gt;</span>
+&lt;<span class="sy-tag">div</span>&gt;
+  &lt;<span class="sy-tag">span</span>&gt;こちらは問題ない&lt;/<span class="sy-tag">span</span>&gt;
+&lt;/<span class="sy-tag">div</span>&gt;</code></pre>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      ブラウザは表示してしまうこともありますが、<strong>意図しない崩れ方をします</strong>。「大きい入れ物の中に小さいものを入れる」と覚えておけば、まず間違いません。
+    </div>
+
+    <h3>ここまでのまとめ</h3>
+    <table>
+      <tr>
+        <th>できること</th>
+        <th>ブロックレベル</th>
+        <th>インライン</th>
+      </tr>
+      <tr>
+        <td>並び方</td>
+        <td>縦に積まれる</td>
+        <td>横に流れる</td>
+      </tr>
+      <tr>
+        <td>幅の指定</td>
+        <td><strong>できる</strong></td>
+        <td>できない</td>
+      </tr>
+      <tr>
+        <td>高さの指定</td>
+        <td><strong>できる</strong></td>
+        <td>できない</td>
+      </tr>
+      <tr>
+        <td>上下の余白</td>
+        <td><strong>できる</strong></td>
+        <td>できない</td>
+      </tr>
+      <tr>
+        <td>左右の余白</td>
+        <td><strong>できる</strong></td>
+        <td><strong>できる</strong></td>
+      </tr>
+      <tr>
+        <td>中にブロックを入れる</td>
+        <td><strong>できる</strong></td>
+        <td>できない</td>
+      </tr>
+    </table>
+  </section>
+
+  <section id="chapter2">
+    <h2>2. displayで性質を変える</h2>
+
+    <p>
+      1章で見た性質は、タグごとに決まっていると書きました。ただし<strong>CSSで書き換えられます</strong>。それが <code>display</code> プロパティです。
+    </p>
+    <p>
+      「このタグはインラインだから幅が指定できない」で終わりではなく、<strong>ブロックに変えてしまえばいい</strong>わけです。
+    </p>
+
+    <table>
+      <tr>
+        <th>値</th>
+        <th>なにになるか</th>
+      </tr>
+      <tr>
+        <td><code>block</code></td>
+        <td>ブロックレベル要素になる（縦に積まれ、幅と高さが効く）</td>
+      </tr>
+      <tr>
+        <td><code>inline</code></td>
+        <td>インライン要素になる（横に流れ、幅と高さが効かない）</td>
+      </tr>
+      <tr>
+        <td><code>inline-block</code></td>
+        <td><strong>横に並びつつ、幅と高さも効く</strong></td>
+      </tr>
+      <tr>
+        <td><code>flex</code></td>
+        <td>子要素をflexで並べる（#5でやったもの）</td>
+      </tr>
+      <tr>
+        <td><code>none</code></td>
+        <td>表示そのものを消す</td>
+      </tr>
+    </table>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      #5でずっと書いてきた <code>display: flex;</code> も、この <code>display</code> の値のひとつです。<strong>同じプロパティの仲間</strong>だった、ということです。
+    </div>
+
+    <h3>リストを横に並べてみる</h3>
+    <p>
+      いちばんよく使う場面が、<strong>メニューを横に並べる</strong>ときです。<code>ul</code> と <code>li</code> はブロックレベル要素なので、何もしないと縦に積まれます。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.html — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.html</div>
+        <div class="vscode-tab">style.css</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5</div>
+        <pre class="vscode-code">&lt;<span class="sy-tag">ul</span> <span class="sy-attr">class</span>=<span class="sy-str">"menu"</span>&gt;
+  &lt;<span class="sy-tag">li</span>&gt;ホーム&lt;/<span class="sy-tag">li</span>&gt;
+  &lt;<span class="sy-tag">li</span>&gt;サービス&lt;/<span class="sy-tag">li</span>&gt;
+  &lt;<span class="sy-tag">li</span>&gt;会社概要&lt;/<span class="sy-tag">li</span>&gt;
+&lt;/<span class="sy-tag">ul</span>&gt;</pre>
+      </div>
+    </div>
+
+    <p>
+      このHTMLに対して、<code>li</code> の <code>display</code> を変えて比べます。
+    </p>
+
+    <div class="note">
+      <span class="label">見方</span><br>
+      4つの見本すべてに共通で、<code>li</code> には <code>margin: 12px 4px;</code>（上下12px・左右4px）の余白を指定してあります。<br>
+      <strong>点線の枠の高さ</strong>を見比べてください。上下の余白が効いているかどうかが、そこに出ます。
+    </div>
+
+    <div class="el-samples">
+      <div>
+        <span class="el-label">指定なし（block のまま）</span>
+        <code class="el-code"><span class="c">/* 何も書かない */</span></code>
+        <div class="el-demo">
+          <ul class="el-list">
+            <li>ホーム</li>
+            <li>サービス</li>
+            <li>会社概要</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <span class="el-label">inline にする</span>
+        <code class="el-code"><span class="s">.menu li</span> {
+  <span class="p">display</span>: <span class="v">inline</span>;
+}</code>
+        <div class="el-demo">
+          <ul class="el-list el-list-inline">
+            <li>ホーム</li>
+            <li>サービス</li>
+            <li>会社概要</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <span class="el-label">inline-block にする</span>
+        <code class="el-code"><span class="s">.menu li</span> {
+  <span class="p">display</span>: <span class="v">inline-block</span>;
+}</code>
+        <div class="el-demo">
+          <ul class="el-list el-list-ib">
+            <li>ホーム</li>
+            <li>サービス</li>
+            <li>会社概要</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <span class="el-label">inline-block + 幅を揃える</span>
+        <code class="el-code"><span class="s">.menu li</span> {
+  <span class="p">display</span>: <span class="v">inline-block</span>;
+  <span class="p">width</span>: <span class="n">110px</span>;
+  <span class="p">text-align</span>: <span class="v">center</span>;
+}</code>
+        <div class="el-demo">
+          <ul class="el-list el-list-ib-sized">
+            <li>ホーム</li>
+            <li>サービス</li>
+            <li>会社概要</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">inline と inline-block の違い</span><br>
+      どちらも横に並びます。違いは<strong>上下の余白と、幅・高さが効くかどうか</strong>です。<br>
+      <code>inline</code> の見本は、<strong>点線の枠と箱の間に、上下の隙間がほとんどありません</strong>。12pxの余白を指定したのに、効いていないからです。<br>
+      <code>inline-block</code> の見本は、<strong>箱の上下に余白ができて、枠が高くなっています</strong>。横に並んだうえで、余白も幅も高さも効きます。4つ目の見本で幅を110pxに揃えられているのがその証拠です。
+    </div>
+
+    <div class="note">
+      <span class="label">使い分け</span><br>
+      「横に並べたい」だけなら、いまは <strong>#5でやった <code>display: flex</code> のほうが簡単</strong>です。間隔も <code>gap</code> で決められます。<br>
+      ただし <code>inline-block</code> は古くから使われてきた書き方なので、<strong>既存のサイトを直すときによく出てきます</strong>。読めるようにしておいてください。
+    </div>
+
+    <h3>display: none で消す</h3>
+    <p>
+      <code>none</code> を指定すると、その要素は<strong>画面から完全に消えます</strong>。場所も残りません。
+    </p>
+
+    <div class="el-samples">
+      <div>
+        <span class="el-label">3つとも表示</span>
+        <code class="el-code"><span class="c">/* 何も書かない */</span></code>
+        <div class="el-demo">
+          <div class="el-block">1つ目</div>
+          <div class="el-block">2つ目</div>
+          <div class="el-block">3つ目</div>
+        </div>
+      </div>
+      <div>
+        <span class="el-label">2つ目を消す</span>
+        <code class="el-code"><span class="s">.box:nth-child(2)</span> {
+  <span class="p">display</span>: <span class="v">none</span>;
+}</code>
+        <div class="el-demo">
+          <div class="el-block">1つ目</div>
+          <div class="el-block" style="display: none;">2つ目</div>
+          <div class="el-block">3つ目</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">注意</span><br>
+      <code>display: none;</code> で消えるのは<strong>見た目だけ</strong>です。HTMLには残っているので、ページのソースを見れば中身は読めます。<br>
+      見せたくない情報を隠す目的では<strong>使えません</strong>。
+    </div>
+  </section>
+
+  <section id="chapter3">
+    <h2>3. positionで位置を調整する</h2>
+
+    <p>
+      ここまで見てきた並び方は、縦でも横でも<strong>書いた順に並ぶ</strong>ものでした。<code>position</code> を使うと、その流れから外して<strong>好きな場所に置けます</strong>。
+    </p>
+    <p>
+      使うのは <code>relative</code> と <code>absolute</code> の<strong>組み合わせ</strong>です。この形を覚えれば、実務で出てくる配置のほとんどが作れます。
+    </p>
+
+    <div class="note">
+      <span class="label">位置の指定</span><br>
+      場所は <code>top</code> <code>right</code> <code>bottom</code> <code>left</code> の4つで指定します。<code>top: 20px;</code> なら「上から20px」の位置です。
+    </div>
+
+    <h3>relative ― もといた場所からずらす</h3>
+    <p>
+      <code>position: relative;</code> を書くと、<strong>もともと自分がいた場所</strong>を基準にずれます。
+    </p>
+
+    <div class="el-samples">
+      <div>
+        <span class="el-label">指定なし</span>
+        <code class="el-code"><span class="c">/* 何も書かない */</span></code>
+        <div class="ps-stage">
+          <div class="ps-box">1つ目</div>
+          <div class="ps-box mark">2つ目</div>
+        </div>
+      </div>
+      <div>
+        <span class="el-label">2つ目に relative</span>
+        <code class="el-code"><span class="s">.box</span> {
+  <span class="p">position</span>: <span class="v">relative</span>;
+  <span class="p">top</span>: <span class="n">22px</span>;
+  <span class="p">left</span>: <span class="n">40px</span>;
+}</code>
+        <div class="ps-stage">
+          <div class="ps-box">1つ目</div>
+          <div class="ps-box mark ps-relative">2つ目</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      ずれるのは<strong>見た目だけ</strong>です。<strong>もといた場所は空いたまま残ります</strong>。<br>
+      右の見本でも、2つ目が下にずれたぶん、その下に隙間ができています。他の要素は「そこにまだ居る」つもりで並んでいます。
+    </div>
+
+    <h3>absolute ― 親を基準に置く</h3>
+    <p>
+      <code>position: absolute;</code> は、<strong>親要素を基準に</strong>好きな場所へ置きます。<code>relative</code> と違って、<strong>もといた場所は詰められます</strong>。
+    </p>
+
+    <div class="el-samples">
+      <div>
+        <span class="el-label">指定なし</span>
+        <code class="el-code"><span class="c">/* 何も書かない */</span></code>
+        <div class="ps-stage">
+          <div class="ps-box">1つ目</div>
+          <div class="ps-box mark">2つ目</div>
+        </div>
+      </div>
+      <div>
+        <span class="el-label">2つ目に absolute（右上へ）</span>
+        <code class="el-code"><span class="s">.親</span> {
+  <span class="p">position</span>: <span class="v">relative</span>;
+}
+
+<span class="s">.box</span> {
+  <span class="p">position</span>: <span class="v">absolute</span>;
+  <span class="p">top</span>: <span class="n">12px</span>;
+  <span class="p">right</span>: <span class="n">12px</span>;
+}</code>
+        <div class="ps-stage">
+          <div class="ps-box">1つ目</div>
+          <div class="ps-box mark ps-absolute">2つ目</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">relative との違い</span><br>
+      <code>absolute</code> にすると、その要素は<strong>並びの流れから完全に外れます</strong>。右の見本では、2つ目が抜けたぶん「1つ目」の下に隙間がありません。<br>
+      <code>relative</code> は席を空けたまま移動、<code>absolute</code> は席そのものを引き払う、という違いです。
+    </div>
+
+    <h3>この2つはセットで使う</h3>
+    <p>
+      ここが一番大事なところです。<code>absolute</code> の「親要素を基準に」の<strong>親とは、<code>position</code> が指定されている親</strong>のことです。
+    </p>
+    <p>
+      つまり、<strong>親に <code>relative</code>、子に <code>absolute</code></strong> と書くのが基本の形になります。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">style.css — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab">index.html</div>
+        <div class="vscode-tab is-active">style.css</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11</div>
+        <pre class="vscode-code"><span class="sy-com">/* 親：基準になる */</span>
+<span class="sy-sel">.container</span> {
+  <span class="sy-attr">position</span>: <span class="sy-str">relative</span>;
+}
+
+<span class="sy-com">/* 子：親の中で好きな場所へ */</span>
+<span class="sy-sel">.badge</span> {
+  <span class="sy-attr">position</span>: <span class="sy-str">absolute</span>;
+  <span class="sy-attr">top</span>: <span class="sy-num">12px</span>;
+  <span class="sy-attr">right</span>: <span class="sy-num">12px</span>;
+}</pre>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      <strong>「親に <code>relative</code>、子に <code>absolute</code>」</strong>。これが基本の形です。バッジ、ラベル、重ねた文字など、実務で出てくる配置のほとんどはこの組み合わせで作れます。
+    </div>
+  </section>
+
+  <section id="chapter4">
+    <h2>4. z-indexで重なりの順番を決める</h2>
+
+    <p>
+      3章の <code>absolute</code> を使うと、要素を好きな場所に置けました。すると、<strong>要素どうしが重なる</strong>ことがあります。
+    </p>
+    <p>
+      そのとき<strong>どちらを手前に出すか</strong>を決めるのが <code>z-index</code> です。
+    </p>
+
+    <h3>何も指定しないとき</h3>
+    <p>
+      3つの箱を用意しました。HTMLでは<strong>ボックス1、2、3の順</strong>に書いてあります。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.html — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.html</div>
+        <div class="vscode-tab">style.css</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3</div>
+        <pre class="vscode-code">&lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"box1"</span>&gt;ボックス1&lt;/<span class="sy-tag">div</span>&gt;
+&lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"box2"</span>&gt;ボックス2&lt;/<span class="sy-tag">div</span>&gt;
+&lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"box3"</span>&gt;ボックス3&lt;/<span class="sy-tag">div</span>&gt;</pre>
+      </div>
+    </div>
+
+    <p>
+      CSSでは、3章でやった <code>absolute</code> を使って<strong>位置だけ</strong>を指定します。重なり順については何も書いていません。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">style.css — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab">index.html</div>
+        <div class="vscode-tab is-active">style.css</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</div>
+        <pre class="vscode-code"><span class="sy-com">/* 親：基準になる */</span>
+<span class="sy-sel">.container</span> {
+  <span class="sy-attr">position</span>: <span class="sy-str">relative</span>;
+}
+
+<span class="sy-sel">.box1</span> {
+  <span class="sy-attr">position</span>: <span class="sy-str">absolute</span>;
+  <span class="sy-attr">top</span>: <span class="sy-num">24px</span>;
+  <span class="sy-attr">left</span>: <span class="sy-num">30px</span>;
+}
+
+<span class="sy-sel">.box2</span> {
+  <span class="sy-attr">position</span>: <span class="sy-str">absolute</span>;
+  <span class="sy-attr">top</span>: <span class="sy-num">52px</span>;
+  <span class="sy-attr">left</span>: <span class="sy-num">110px</span>;
+}
+
+<span class="sy-sel">.box3</span> {
+  <span class="sy-attr">position</span>: <span class="sy-str">absolute</span>;
+  <span class="sy-attr">top</span>: <span class="sy-num">80px</span>;
+  <span class="sy-attr">left</span>: <span class="sy-num">190px</span>;
+}</pre>
+      </div>
+    </div>
+
+    <div class="zi-stage">
+      <div class="zi-box zi-box1">ボックス1</div>
+      <div class="zi-box zi-box2">ボックス2</div>
+      <div class="zi-box zi-box3">ボックス3</div>
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      重なった部分を見てください。<strong>いちばん最後に書いた「ボックス3」が手前</strong>に出ています。<br>
+      何も指定しないと、<strong>HTMLで下に書いた要素ほど手前に来ます</strong>。「あとから書いたものが、先に書いたものの上にかぶさる」と考えてください。
+    </div>
+
+    <h3>z-indexで順番を変える</h3>
+    <p>
+      この重なり順は <code>z-index</code> で変えられます。<strong>数字が大きいほうが手前</strong>に出ます。
+    </p>
+    <p>
+      さきほどのCSSに、<code>z-index</code> を1行ずつ足します。位置の指定はそのままです。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">style.css — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab">index.html</div>
+        <div class="vscode-tab is-active">style.css</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</div>
+        <pre class="vscode-code"><span class="sy-sel">.box1</span> {
+  <span class="sy-attr">position</span>: <span class="sy-str">absolute</span>;
+  <span class="sy-attr">top</span>: <span class="sy-num">24px</span>;
+  <span class="sy-attr">left</span>: <span class="sy-num">30px</span>;
+  <span class="sy-attr">z-index</span>: <span class="sy-num">1</span>;
+}
+
+<span class="sy-sel">.box2</span> {
+  <span class="sy-attr">position</span>: <span class="sy-str">absolute</span>;
+  <span class="sy-attr">top</span>: <span class="sy-num">52px</span>;
+  <span class="sy-attr">left</span>: <span class="sy-num">110px</span>;
+  <span class="sy-attr">z-index</span>: <span class="sy-num">10</span>;
+}
+
+<span class="sy-sel">.box3</span> {
+  <span class="sy-attr">position</span>: <span class="sy-str">absolute</span>;
+  <span class="sy-attr">top</span>: <span class="sy-num">80px</span>;
+  <span class="sy-attr">left</span>: <span class="sy-num">190px</span>;
+  <span class="sy-attr">z-index</span>: <span class="sy-num">2</span>;
+}</pre>
+      </div>
+    </div>
+
+    <div class="zi-stage zi-set">
+      <div class="zi-box zi-box1">ボックス1</div>
+      <div class="zi-box zi-box2">ボックス2</div>
+      <div class="zi-box zi-box3">ボックス3</div>
+    </div>
+
+    <p>
+      さきほどと見比べてください。<strong>手前に出ている箱が変わりました。</strong>
+    </p>
+
+    <table>
+      <tr>
+        <th>箱</th>
+        <th>z-index</th>
+        <th>重なり順</th>
+      </tr>
+      <tr>
+        <td>ボックス2</td>
+        <td><code>10</code></td>
+        <td><strong>いちばん手前</strong></td>
+      </tr>
+      <tr>
+        <td>ボックス3</td>
+        <td><code>2</code></td>
+        <td>まんなか</td>
+      </tr>
+      <tr>
+        <td>ボックス1</td>
+        <td><code>1</code></td>
+        <td>いちばん奥</td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      HTMLで最後に書いたのは「ボックス3」ですが、手前に出ているのは「ボックス2」です。<br>
+      <code>z-index</code> を付けると、<strong>書いた順ではなく数字で順番が決まります</strong>。
+    </div>
+
+    <div class="caution">
+      <span class="label">注意</span><br>
+      <code>z-index</code> は、<strong><code>position</code> が指定されている要素にしか効きません</strong>。<br>
+      上の見本でも、3つの箱はすべて <code>position: absolute;</code> が指定されています。「数字を書いたのに順番が変わらない」というときは、まず <code>position</code> があるか確認してください。
+    </div>
+  </section>
+
+</main>
+
+<footer>
+</footer>
+
+<!-- ▼ 共通スクリプト。章ナビ・コピーボタン・先頭へ戻るが自動で付く（編集不要） -->
+<script src="../js/training.js"></script>
+
+</body>
+</html>

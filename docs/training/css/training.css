@@ -1,0 +1,1521 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic Medium", "YuGothic", "Meiryo", "Segoe UI", sans-serif;
+  background: #e9edf3;
+  color: #222;
+  line-height: 1.9;
+  letter-spacing: 0.02em;
+}
+
+a {
+  color: #2563eb;
+}
+
+header {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    #0c4f52 0%,
+    #123f6e 38%,
+    #2a1f5c 72%,
+    #1a0f33 100%
+  );
+  color: #fff;
+  padding: 26px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ▼ ぼかした光の玉を2つ浮かべ、ゆっくり漂わせる。
+   backdrop-filter は負荷が高いので使わず、
+   動かすのは transform だけにしてGPUで処理させる */
+header::before,
+header::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.36;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* 1枚目：光そのもの。
+   中心を白くし、外へ向かって暖色になる「光源」の構造にする。
+   暖色だけを黒に重ねると濁って土色に見えるため、芯の白が要る。
+   screen で重ねるので、黒の上では加算されて明るく灯る */
+header::before {
+  width: 320px;
+  height: 320px;
+  top: -170px;
+  left: -60px;
+  background: #1ac6d6;
+  animation: aurora-a 13s ease-in-out infinite;
+}
+
+/* 2枚目：小さめの光を逆向きに流し、明滅のゆらぎを作る */
+header::after {
+  width: 260px;
+  height: 260px;
+  bottom: -150px;
+  right: -50px;
+  background: #7b4bd8;
+  animation: aurora-b 16s ease-in-out infinite;
+}
+
+/* 拡縮させると blur の再計算が走るため、移動と回転だけにとどめる */
+/* 光の玉が漂う動き。移動距離を伸ばして流れを感じやすくする */
+@keyframes aurora-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(210px, 48px, 0);
+  }
+}
+
+@keyframes aurora-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-180px, -42px, 0);
+  }
+}
+
+/* ヘッダーが画面外にあるときは動きを止める（スクリプトが付与） */
+header.is-offscreen::before,
+header.is-offscreen::after {
+  animation-play-state: paused;
+}
+
+/* 動きを減らす設定にしている人には止める */
+@media (prefers-reduced-motion: reduce) {
+  header::before,
+  header::after {
+    animation: none;
+  }
+}
+
+.header-inner,
+main {
+  width: min(1000px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+/* ガラスより前面に文字を置く */
+.header-inner {
+  position: relative;
+  z-index: 2;
+}
+
+header h1 {
+  margin: 0 0 4px;
+  font-size: clamp(24px, 3.2vw, 34px);
+  line-height: 1.25;
+}
+
+header p {
+  margin: 0;
+  color: #d7dde8;
+  font-size: 15px;
+}
+
+main {
+  padding: 34px 0 80px;
+}
+
+section {
+  background: #fbfaf7;
+  border-radius: 18px;
+  padding: 34px;
+  margin-bottom: 28px;
+  box-shadow: 0 8px 26px rgba(15, 23, 42, 0.07);
+}
+
+h2 {
+  margin: 0 0 22px;
+  padding: 12px 16px;
+  border-left: 4px solid #2563eb;
+  border-radius: 0 7px 7px 0;
+  background: linear-gradient(90deg, #e8f0fd 0%, #f7f9fc 100%);
+  font-size: 20px;
+  color: #1e293b;
+  line-height: 1.4;
+}
+
+h3 {
+  margin: 28px 0 10px;
+  font-size: 17px;
+  color: #1f2937;
+  line-height: 1.5;
+}
+
+h4 {
+  margin: 22px 0 8px;
+  font-size: 15.5px;
+  color: #374151;
+}
+
+p {
+  margin: 0 0 14px;
+}
+
+ul,
+ol {
+  margin: 12px 0 18px 1.4em;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+.toc {
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+}
+
+.toc ol {
+  columns: 2;
+  column-gap: 40px;
+}
+
+.lead {
+  font-size: 17px;
+}
+
+.note,
+.point,
+.exercise,
+.instructor,
+.caution {
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin: 20px 0;
+}
+
+.point {
+  background: #eff6ff;
+  border-left: 5px solid #2563eb;
+}
+
+.note {
+  background: #f8fafc;
+  border-left: 5px solid #64748b;
+}
+
+.exercise {
+  background: #fffbeb;
+  border-left: 5px solid #d97706;
+}
+
+.instructor {
+  background: #f0fdf4;
+  border-left: 5px solid #16a34a;
+}
+
+.caution {
+  background: #fef2f2;
+  border-left: 5px solid #dc2626;
+}
+
+.label {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #475569;
+  letter-spacing: 0.04em;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 18px 0 22px;
+  font-size: 15px;
+}
+
+th,
+td {
+  border: 1px solid #d1d5db;
+  padding: 13px 14px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #f3f4f6;
+  color: #111827;
+  font-weight: 700;
+}
+
+code {
+  background: #eef2f7;
+  color: #111827;
+  padding: 2px 6px;
+  border-radius: 6px;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 0.95em;
+}
+
+pre {
+  background: #0f172a;
+  color: #f8fafc;
+  padding: 20px;
+  border-radius: 12px;
+  overflow-x: auto;
+  margin: 16px 0 20px;
+  line-height: 1.65;
+  tab-size: 2;
+}
+
+pre code {
+  background: transparent;
+  color: #f8fafc;
+  padding: 0;
+  border-radius: 0;
+  display: block;
+  white-space: pre;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 18px 0;
+}
+
+.card {
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 18px;
+  background: #fff;
+}
+
+.card h4 {
+  margin-top: 0;
+}
+
+.figure-box {
+  border: 2px dashed #cbd5e1;
+  background: #f8fafc;
+  color: #64748b;
+  border-radius: 14px;
+  padding: 24px;
+  margin: 18px 0;
+  text-align: center;
+}
+
+.mock-browser {
+  border: 1px solid #d1d5db;
+  border-radius: 14px;
+  overflow: hidden;
+  margin: 18px 0;
+  background: white;
+}
+
+.mock-browser-bar {
+  background: #e5e7eb;
+  padding: 8px 12px;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.mock-browser-body {
+  padding: 18px;
+  min-height: 70px;
+  background: #fff;
+}
+
+.sample-div {
+  height: 70px;
+  background: #d9e021;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.sample-p {
+  width: 70%;
+  height: 50px;
+  background: #f9b9d5;
+  text-align: center;
+  padding-top: 8px;
+  margin: 0 0 12px;
+}
+
+.sample-span {
+  border: 1px dotted #f9b9d5;
+  font-family: serif;
+  padding: 2px 4px;
+}
+
+/* ============================================================
+   VS Code 風のコード表示
+   使い方は .vscode のマークアップ例を参照
+   ============================================================ */
+.vscode {
+  position: relative;
+  margin: 22px 0;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #1e1e1e;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.18);
+}
+
+.vscode-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #3c3c3c;
+  padding: 10px 13px;
+}
+
+.win-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.win-dot.red {
+  background: #ff5f57;
+}
+
+.win-dot.yellow {
+  background: #febc2e;
+}
+
+.win-dot.green {
+  background: #28c840;
+}
+
+.vscode-title {
+  margin-left: 6px;
+  color: #cccccc;
+  font-size: 12px;
+}
+
+.vscode-tabs {
+  display: flex;
+  background: #252526;
+}
+
+.vscode-tab {
+  padding: 9px 18px;
+  background: #2d2d2d;
+  color: #969696;
+  font-size: 13px;
+  border-right: 1px solid #1e1e1e;
+  border-top: 2px solid transparent;
+}
+
+.vscode-tab.is-active {
+  background: #1e1e1e;
+  color: #ffffff;
+  border-top-color: #0078d4;
+}
+
+.vscode-body {
+  display: flex;
+  padding: 14px 0;
+  overflow-x: auto;
+}
+
+.vscode-gutter {
+  flex: none;
+  padding: 0 16px;
+  color: #858585;
+  text-align: right;
+  user-select: none;
+}
+
+.vscode-gutter,
+.vscode-code {
+  margin: 0;
+  background: transparent;
+  color: #d4d4d4;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 13.5px;
+  line-height: 1.75;
+  white-space: pre;
+}
+
+.vscode-code {
+  flex: 1;
+  padding: 0 18px 0 0;
+  border-radius: 0;
+}
+
+/* シンタックスハイライト（VS Code Dark+ 準拠） */
+.sy-tag {
+  color: #569cd6;
+}
+
+.sy-attr {
+  color: #9cdcfe;
+}
+
+.sy-str {
+  color: #ce9178;
+}
+
+.sy-com {
+  color: #6a9955;
+}
+
+/* CSS用（セレクタと数値） */
+.sy-sel {
+  color: #d7ba7d;
+}
+
+.sy-num {
+  color: #b5cea8;
+}
+
+/* ============================================================
+   10章「CSSでデザインしてみる」の適用結果
+   値は教材の style.css と同じものを使う
+   ============================================================ */
+.css-div {
+  height: 100px;
+  background-color: #d9e021;
+}
+
+.css-p {
+  width: 70%;
+  height: 50px;
+  background-color: #f9b9d5;
+  text-align: center;
+}
+
+.css-span {
+  border: 1px dotted #f9b9d5;
+  font-family: serif;
+}
+
+/* ============================================================
+   11章 CSSプロパティ一覧
+   見本の列は、実際にそのプロパティを効かせて作っている
+   ============================================================ */
+.prop-group {
+  margin: 26px 0 30px;
+}
+
+.prop-group > h4 {
+  margin: 0 0 12px;
+  padding-left: 12px;
+  border-left: 4px solid #2563eb;
+  color: #1e3a8a;
+  font-size: 17px;
+}
+
+.prop-table th,
+.prop-table td {
+  vertical-align: middle;
+}
+
+.prop-name {
+  width: 23%;
+  white-space: nowrap;
+}
+
+.prop-name code {
+  display: inline-block;
+  margin-bottom: 3px;
+}
+
+.prop-name small {
+  display: block;
+  color: #64748b;
+  font-size: 11.5px;
+  letter-spacing: 0.06em;
+}
+
+.prop-demo {
+  width: 25%;
+  background: #f8fafc;
+}
+
+.prop-desc code {
+  display: inline-block;
+  margin-top: 5px;
+}
+
+/* --- 見本 --- */
+.pd-w1,
+.pd-w2 {
+  height: 14px;
+  background: #93c5fd;
+}
+
+.pd-w2 {
+  width: 55%;
+  margin-top: 6px;
+  background: #2563eb;
+}
+
+.pd-hrow {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  height: 52px;
+}
+
+.pd-h1 {
+  width: 28px;
+  height: 24px;
+  background: #93c5fd;
+}
+
+.pd-h2 {
+  width: 28px;
+  height: 50px;
+  background: #2563eb;
+}
+
+.pd-bg {
+  height: 36px;
+  background: #f9b9d5;
+}
+
+.pd-border {
+  height: 36px;
+  border: 2px solid #334155;
+}
+
+/* 余白の見える化。斜線部分がその余白にあたる。
+   margin は枠線の外、padding は枠線の内に斜線が来る */
+.pd-space {
+  /* flow-root がないと、中の要素の上下marginが枠の外へ抜けてしまい
+     （マージンの相殺）、上下の斜線が描かれなくなる */
+  display: flow-root;
+  background: repeating-linear-gradient(45deg, #fcd34d, #fcd34d 3px, #fef3c7 3px, #fef3c7 7px);
+}
+
+.pd-inner {
+  padding: 7px;
+  background: #ffffff;
+  text-align: center;
+  font-size: 12px;
+}
+
+/* margin: 枠線の外側に余白 */
+.pd-margin-box {
+  margin: 13px;
+  border: 2px solid #334155;
+  background: #ffffff;
+}
+
+/* padding: 枠線の内側に余白 */
+.pd-padding-box {
+  padding: 13px;
+  border: 2px solid #334155;
+}
+
+.pd-color {
+  color: #dc2626;
+  font-weight: 700;
+}
+
+.pd-fs-s {
+  font-size: 11px;
+}
+
+.pd-fs-l {
+  font-size: 21px;
+}
+
+.pd-sans {
+  font-family: sans-serif;
+}
+
+.pd-serif {
+  font-family: serif;
+}
+
+.pd-align {
+  padding: 5px 7px;
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  text-align: right;
+  font-size: 12px;
+}
+
+.pd-lh-n,
+.pd-lh-w {
+  padding: 4px 7px;
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  font-size: 12px;
+}
+
+.pd-lh-n {
+  margin-bottom: 7px;
+  line-height: 1;
+}
+
+.pd-lh-w {
+  line-height: 2.2;
+}
+
+.pd-chip {
+  background: #bfdbfe;
+  border: 1px solid #60a5fa;
+  padding: 3px 8px;
+  font-size: 11.5px;
+  text-align: center;
+}
+
+.pd-block {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.pd-inline {
+  display: inline;
+}
+
+.pd-stage {
+  position: relative;
+  height: 54px;
+  background: #fff;
+  border: 1px dashed #cbd5e1;
+}
+
+.pd-pos-ghost {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 44px;
+  height: 26px;
+  border: 1px dashed #94a3b8;
+  background: #f1f5f9;
+}
+
+.pd-pos-moved {
+  position: absolute;
+  top: 20px;
+  left: 34px;
+  width: 44px;
+  height: 26px;
+  background: #2563eb;
+}
+
+.pd-z1,
+.pd-z2 {
+  position: absolute;
+  width: 46px;
+  height: 30px;
+}
+
+.pd-z1 {
+  top: 8px;
+  left: 12px;
+  background: #f9b9d5;
+  z-index: 2;
+}
+
+.pd-z2 {
+  top: 18px;
+  left: 40px;
+  background: #93c5fd;
+  z-index: 1;
+}
+
+.pd-float {
+  overflow: hidden;
+  padding: 6px;
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  font-size: 11.5px;
+  line-height: 1.5;
+}
+
+.pd-float-box {
+  float: left;
+  width: 30px;
+  height: 30px;
+  margin: 0 7px 3px 0;
+  background: #2563eb;
+}
+
+/* ============================================================
+   Chrome 風のブラウザ表示
+   ============================================================ */
+.chrome {
+  margin: 22px 0;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.18);
+}
+
+.chrome-tabbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #dee1e6;
+  padding: 9px 12px 0;
+}
+
+.chrome-tabbar .win-dot {
+  margin-bottom: 9px;
+}
+
+.chrome-tab {
+  margin-left: 6px;
+  padding: 8px 20px;
+  background: #ffffff;
+  border-radius: 9px 9px 0 0;
+  color: #3c4043;
+  font-size: 13px;
+  max-width: 240px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.chrome-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 14px;
+  background: #ffffff;
+  border-bottom: 1px solid #e3e5e8;
+}
+
+.chrome-nav {
+  color: #5f6368;
+  font-size: 15px;
+  letter-spacing: 5px;
+  user-select: none;
+}
+
+.chrome-url {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 14px;
+  background: #f1f3f4;
+  border-radius: 15px;
+  color: #5f6368;
+  font-size: 11.5px;
+  letter-spacing: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* 2カラムで並べたときはアドレスバーが狭くなるため、さらに詰める */
+.pair .chrome-url {
+  font-size: 10.5px;
+  padding: 6px 11px;
+}
+
+.pair .chrome-nav {
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.pair .chrome-toolbar {
+  gap: 8px;
+  padding: 9px 10px;
+}
+
+.pair .chrome-tabbar {
+  padding: 9px 10px 0;
+}
+
+.chrome-viewport {
+  padding: 20px;
+  background: #ffffff;
+  min-height: 80px;
+}
+
+/* エディタとブラウザを左右に並べる。780px 以下では縦に積む */
+.pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+  margin: 22px 0;
+}
+
+.pair > .vscode,
+.pair > .chrome {
+  margin: 0;
+}
+
+/* ブラウザ表示の再現部分は、教材ページ側の指定ではなく
+   ブラウザ既定の見え方に合わせる */
+.chrome-viewport p {
+  margin: 1em 0;
+}
+
+/* ============================================================
+   タグが占める領域を色で可視化する
+   実際のブラウザではこの色も枠線も表示されない
+   ============================================================ */
+.area-div,
+.area-p,
+.area-span {
+  outline: 1px dashed rgba(100, 116, 139, 0.5);
+}
+
+.area-div {
+  background: rgba(37, 99, 235, 0.1);
+}
+
+.area-p {
+  background: rgba(217, 119, 6, 0.15);
+}
+
+.area-span {
+  background: rgba(22, 163, 74, 0.16);
+}
+
+.area-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 0 0 18px;
+  color: #475569;
+  font-size: 14px;
+}
+
+.area-legend > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.area-key {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  outline: 1px dashed rgba(100, 116, 139, 0.5);
+}
+
+/* ============================================================
+   ページを枠の集まりとして示す図
+   ============================================================ */
+.layout-figure {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0;
+  padding: 14px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 14px;
+  background: #f8fafc;
+}
+
+.layout-row {
+  display: flex;
+  gap: 10px;
+}
+
+.layout-box {
+  padding: 15px 16px;
+  border: 1px solid #94a3b8;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #334155;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.layout-side {
+  flex: 0 0 34%;
+}
+
+.layout-main {
+  flex: 1;
+}
+
+.layout-inner {
+  margin-top: 12px;
+  border-color: #93c5fd;
+  background: #eff6ff;
+  font-size: 13px;
+}
+
+/* ============================================================
+   タグの入れ子構造を示す図
+   ============================================================ */
+.nest {
+  margin: 10px 0;
+  padding: 12px 14px;
+  border: 2px solid;
+  border-radius: 10px;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 14px;
+}
+
+.nest-html {
+  margin: 20px 0;
+  border-color: #2563eb;
+  background: rgba(37, 99, 235, 0.05);
+}
+
+.nest-head {
+  border-color: #d97706;
+  background: rgba(217, 119, 6, 0.07);
+}
+
+.nest-body {
+  border-color: #16a34a;
+  background: rgba(22, 163, 74, 0.07);
+}
+
+.nest-tag {
+  display: block;
+  font-weight: 700;
+}
+
+.nest-html > .nest-tag {
+  color: #1d4ed8;
+}
+
+.nest-head > .nest-tag {
+  color: #b45309;
+}
+
+.nest-body > .nest-tag {
+  color: #15803d;
+}
+
+.nest-content {
+  margin: 9px 0;
+  padding: 9px 14px;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #334155;
+}
+
+.nest-note {
+  display: block;
+  margin-top: 4px;
+  color: #64748b;
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic Medium", "YuGothic", "Meiryo", "Segoe UI", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+/* ============================================================
+   コードブロックのコピーボタン
+   .code-block は読み込み時にスクリプトが自動で付ける
+   ============================================================ */
+.code-block {
+  position: relative;
+}
+
+.copy-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 11px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  border-radius: 8px;
+  background: rgba(30, 41, 59, 0.9);
+  color: #cbd5e1;
+  font-family: inherit;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.vscode .copy-button {
+  top: 7px;
+  right: 10px;
+  background: rgba(30, 30, 30, 0.9);
+}
+
+.code-block:hover .copy-button,
+.vscode:hover .copy-button,
+.copy-button:focus-visible {
+  opacity: 1;
+}
+
+.copy-button:hover {
+  background: rgba(51, 65, 85, 0.95);
+  color: #f8fafc;
+}
+
+.copy-button.is-copied {
+  border-color: #22c55e;
+  color: #4ade80;
+  opacity: 1;
+}
+
+/* タッチ操作の端末はホバーできないため常に表示する */
+@media (hover: none) {
+  .copy-button {
+    opacity: 1;
+  }
+}
+
+footer {
+  text-align: center;
+  color: #6b7280;
+  padding: 36px 20px;
+  font-size: 13px;
+}
+
+/* ▼ タブレット・スマートフォン向け */
+@media (max-width: 780px) {
+  header {
+    padding: 30px 20px;
+  }
+
+  main {
+    padding: 24px 0 60px;
+  }
+
+  section {
+    padding: 24px;
+  }
+
+  h2 {
+    font-size: 23px;
+  }
+
+  h3 {
+    font-size: 19px;
+  }
+
+  .toc ol {
+    columns: 1;
+  }
+
+  /* 1fr だけだと中身の最小幅まで広がり、長いコード行が画面をはみ出す。
+     minmax(0, …) を付けて、親の幅で止める */
+  .grid-2,
+  .pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* .layout-row は「横に並べる」ことを示す図なので、
+     狭い画面でも縦積みにしない */
+  .layout-box {
+    padding: 12px 13px;
+    font-size: 13.5px;
+  }
+
+  th,
+  td {
+    padding: 10px;
+  }
+
+  pre {
+    padding: 16px;
+    font-size: 14px;
+  }
+}
+
+/* ▼ スマートフォン（縦持ち）向け */
+@media (max-width: 480px) {
+  .header-inner,
+  main {
+    width: calc(100% - 32px);
+  }
+
+  header {
+    padding: 24px 16px;
+  }
+
+  section {
+    padding: 18px 16px;
+  }
+
+  h2 {
+    font-size: 21px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  table {
+    font-size: 14px;
+  }
+
+  th,
+  td {
+    padding: 8px;
+  }
+
+  ul,
+  ol {
+    margin-left: 1.2em;
+  }
+
+  pre {
+    font-size: 13px;
+  }
+
+  .layout-figure {
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .layout-row {
+    gap: 8px;
+  }
+
+  .layout-box {
+    padding: 10px;
+    font-size: 12.5px;
+  }
+
+  .nest {
+    padding: 10px 11px;
+    font-size: 13px;
+  }
+
+  .nest-content {
+    padding: 8px 10px;
+  }
+}
+
+/* 表内のコードが長いとき、横にはみ出さず折り返す */
+th code,
+td code {
+  overflow-wrap: break-word;
+}
+
+/* ============================================================
+   セレクタ・プロパティ・値の対応図
+   HTMLとCSSを左右に並べ、CSS側を色分けして名称を示す
+   ============================================================ */
+.css-anatomy {
+  display: grid;
+  /* 1fr だけだと中身の最小幅まで広がるため、minmax(0, …) で親の幅に収める */
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+  margin: 20px 0 14px;
+}
+
+.ca-title {
+  display: block;
+  margin-bottom: 7px;
+  color: #64748b;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.ca-panel {
+  padding: 14px 16px;
+  border-radius: 8px;
+  background: #1e293b;
+  color: #d4d4d4;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 13.5px;
+  line-height: 1.85;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.ca-arrow {
+  color: #94a3b8;
+  font-size: 22px;
+  text-align: center;
+}
+
+.ca-tag {
+  color: #569cd6;
+}
+
+.ca-sel {
+  color: #d7ba7d;
+}
+
+.ca-prop {
+  color: #9cdcfe;
+}
+
+.ca-val {
+  color: #ce9178;
+}
+
+.ca-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin: 0 0 22px;
+  color: #475569;
+  font-size: 14px;
+}
+
+.ca-legend > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.ca-key {
+  width: 15px;
+  height: 15px;
+  border-radius: 3px;
+}
+
+.ca-key.sel {
+  background: #d7ba7d;
+}
+
+.ca-key.prop {
+  background: #9cdcfe;
+}
+
+.ca-key.val {
+  background: #ce9178;
+}
+
+@media (max-width: 780px) {
+  .css-anatomy {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .ca-arrow {
+    transform: rotate(90deg);
+  }
+}
+
+/* ============================================================
+   章ナビゲーション（スクロールに追従する目次）
+   HTMLは書かない。読み込み時にスクリプトが見出しから自動生成する
+   ============================================================ */
+.chapter-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(233, 237, 243, 0.94);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #cbd5e1;
+}
+
+/* 普段は1行に畳み、ボタンを押したときだけ全章を開く。
+   常時2〜3行あると画面上部を圧迫するため */
+/* 文字を小さくしたぶん、折り返して全章を常時見せる。
+   中途半端に切れないよう max-height は使わない */
+.chapter-nav-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  width: min(1000px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 12px 0;
+}
+
+
+.chapter-nav a {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px;
+  border: 1px solid #d7dee8;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #64748b;
+  font-size: 9px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.cn-num {
+  font-weight: 700;
+  opacity: 0.75;
+}
+
+.chapter-nav a.is-current .cn-num {
+  opacity: 1;
+}
+
+.chapter-nav a:hover {
+  border-color: #93c5fd;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+/* いま読んでいる章 */
+.chapter-nav a.is-current {
+  border-color: #2563eb;
+  background: #2563eb;
+  color: #ffffff;
+}
+
+/* ============================================================
+   広い画面では、本文の左の余白に縦のサイドバーとして出す。
+   上部を圧迫せず、章名も全部見える
+   ============================================================ */
+@media (min-width: 1420px) {
+  /* 主役は本文。ナビは枠も背景も影も持たせず、脇に静かに置く */
+  .chapter-nav {
+    position: fixed;
+    top: 50%;
+    left: calc((100% - 1000px) / 2 - 206px);
+    transform: translateY(-50%);
+    width: 190px;
+    max-height: 78vh;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    overflow-y: auto;
+  }
+
+  .chapter-nav-inner {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 1px;
+    width: 100%;
+    max-height: none;
+    padding: 0;
+    overflow: visible;
+  }
+
+  .chapter-nav a {
+    width: 100%;
+    padding: 5px 10px;
+    border: none;
+    border-left: 2px solid transparent;
+    border-radius: 0;
+    background: transparent;
+    color: #9aa6b6;
+    font-size: 12px;
+    white-space: normal;
+    line-height: 1.5;
+    text-align: left;
+    align-items: flex-start;
+  }
+
+  .chapter-nav a:hover {
+    background: transparent;
+    color: #475569;
+  }
+
+  /* 現在地は塗りつぶさず、左の線と文字の濃さだけで示す */
+  .chapter-nav a.is-current {
+    border-left-color: #2563eb;
+    background: transparent;
+    color: #1e293b;
+    font-weight: 700;
+  }
+
+  .chapter-nav a .cn-num {
+    opacity: 0.6;
+  }
+
+  main section[id] {
+    scroll-margin-top: 24px;
+  }
+}
+
+/* アンカーで飛んだとき、見出しがナビの下に隠れないようにする
+   （折り返しで2段になるぶん、余裕を多めに取る） */
+main section[id] {
+  scroll-margin-top: 84px;
+}
+
+/* ============================================================
+   先頭へ戻るボタン（右下に固定）
+   HTMLは書かない。スクリプトが生成する
+   ============================================================ */
+.to-top {
+  position: fixed;
+  /* 本文の右端と画面の右端の、ちょうど中間に置く。
+     画面が広いほど余白の真ん中へ寄り、狭い画面では 20px で止める */
+  right: max(20px, calc((100% - 1000px) / 4 - 24px));
+  bottom: 30px;
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid #cbd5e1;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.16);
+  color: #334155;
+  cursor: pointer;
+  /* 少しスクロールするまでは隠しておく */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease,
+    background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.to-top:hover {
+  border-color: #93c5fd;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+@media (max-width: 780px) {
+  /* 狭い画面で全タイトルを並べると高さを取りすぎるため、
+     ここだけ番号のみにして1行に収め、現在地だけ章名を出す */
+  .chapter-nav-inner {
+    width: calc(100% - 24px);
+    flex-wrap: nowrap;
+    gap: 5px;
+    padding: 8px 0;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+
+  .chapter-nav a {
+    justify-content: center;
+    min-width: 32px;
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+  .cn-label {
+    display: none;
+  }
+
+  .chapter-nav a.is-current .cn-label {
+    display: inline;
+  }
+
+  main section[id] {
+    scroll-margin-top: 56px;
+  }
+
+  .to-top {
+    right: 18px;
+    bottom: 18px;
+    width: 44px;
+    height: 44px;
+  }
+}

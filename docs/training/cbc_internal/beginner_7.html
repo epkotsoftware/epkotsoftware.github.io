@@ -1,0 +1,1127 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>コーダー初級#7</title>
+  <link rel="stylesheet" href="../css/training.css">
+
+  <!-- ▼ このページ専用のスタイル（float と セレクタの実演） -->
+  <style>
+    /* ============================================================
+       共通の実演枠
+       ============================================================ */
+    .sv-demo {
+      margin: 16px 0 22px;
+      padding: 12px;
+      border: 2px dashed #94a3b8;
+      background: #f1f5f9;
+    }
+
+    /* 見本を左右に並べる */
+    .sv-samples {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin: 20px 0 26px;
+    }
+
+    .sv-label {
+      display: block;
+      margin-bottom: 7px;
+      color: #1e3a8a;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .sv-label-ng { color: #b91c1c; }
+    .sv-label-ok { color: #15803d; }
+
+    /* 見本ごとの、実際に書くコード */
+    .sv-code {
+      display: block;
+      margin-bottom: 8px;
+      padding: 9px 12px;
+      border-radius: 6px;
+      background: #1e293b;
+      color: #e2e8f0;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      white-space: pre;
+      overflow-x: auto;
+    }
+
+    .sv-code .c { color: #6a9955; }
+    .sv-code .s { color: #d7ba7d; }
+    .sv-code .p { color: #9cdcfe; }
+    .sv-code .v { color: #ce9178; }
+    .sv-code .n { color: #b5cea8; }
+
+    /* ============================================================
+       1〜2章：float の実演
+       ============================================================ */
+    .fl-box {
+      width: 96px;
+      padding: 14px 0;
+      border: 1px solid #60a5fa;
+      border-radius: 5px;
+      background: #bfdbfe;
+      color: #1e3a8a;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    /* 縦に積まれている状態を見せるとき用 */
+    .fl-stack .fl-box + .fl-box {
+      margin-top: 8px;
+    }
+
+    .fl-left .fl-box { float: left; }
+    .fl-right .fl-box { float: right; }
+
+    /* 浮いた子の間隔。float は gap が効かないので margin で空ける。
+       right のときは寄る向きが逆なので、margin も逆側に付ける */
+    .fl-left .fl-box + .fl-box {
+      margin-left: 8px;
+    }
+
+    .fl-right .fl-box + .fl-box {
+      margin-right: 8px;
+    }
+
+    /* 親の高さが潰れることを見せるための枠。
+       背景と枠線を付けておくと、高さの違いが一目で分かる */
+    .cf-parent {
+      padding: 12px;
+      border: 2px solid #f59e0b;
+      background: #fef3c7;
+    }
+
+    .cf-parent .fl-box { float: left; }
+    .cf-parent .fl-box + .fl-box { margin-left: 8px; }
+
+    /* clearfix を当てた側。参照元と同じ書き方 */
+    .cf-fixed::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+
+    /* 親の下に置いて、はみ出しが見えるようにする文章 */
+    .cf-after-text {
+      padding: 9px 12px;
+      background: #e2e8f0;
+      color: #475569;
+      font-size: 13px;
+    }
+
+    /* ============================================================
+       3〜5章：セレクタの実演
+       ============================================================ */
+    .sel-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .sel-list li {
+      margin-bottom: 5px;
+      padding: 9px 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      background: #ffffff;
+      color: #334155;
+      font-size: 13.5px;
+    }
+
+    .sel-list li:last-child { margin-bottom: 0; }
+
+    /* 選ばれた要素の色。どの見本でもこの色＝「効いている」 */
+    .sel-hit {
+      border-color: #f59e0b !important;
+      background: #fde68a !important;
+      color: #92400e !important;
+      font-weight: 700;
+    }
+
+    /* --- 要素型セレクタ / 全称セレクタの比較 --- */
+    /* ul に余白を付けて、「箱の外側にも ul がある」ことを見えるようにする。
+       これがないと、色が変わったのが箱だけなのか ul もなのか判別できない */
+    .sel-compare .sel-list {
+      position: relative;
+      padding: 26px 12px 12px;
+    }
+
+    .sel-compare .sel-list::before {
+      content: "ul";
+      position: absolute;
+      top: 6px;
+      left: 12px;
+      color: #64748b;
+      font-family: Consolas, Monaco, "Courier New", monospace;
+      font-size: 11.5px;
+    }
+
+    /* 2クラス指定にしないと、上の .sel-list li（詳細度が上）に負けて
+       箱のほうだけ白いまま残ってしまう */
+    .sv-demo.sel-universal * {
+      border-color: #f59e0b;
+      background: #fde68a;
+      color: #92400e;
+    }
+
+    /* --- 疑似クラス --- */
+    .sel-hover li {
+      cursor: pointer;
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+    }
+
+    .sel-hover li:hover {
+      border-color: #f59e0b;
+      background: #fde68a;
+      color: #92400e;
+      font-weight: 700;
+    }
+
+    .sel-nth li:nth-child(2) {
+      border-color: #f59e0b;
+      background: #fde68a;
+      color: #92400e;
+      font-weight: 700;
+    }
+
+    .sel-odd li:nth-child(odd) {
+      border-color: #f59e0b;
+      background: #fde68a;
+      color: #92400e;
+      font-weight: 700;
+    }
+
+    .sel-even li:nth-child(even) {
+      border-color: #f59e0b;
+      background: #fde68a;
+      color: #92400e;
+      font-weight: 700;
+    }
+
+    .sel-first li:first-child {
+      border-color: #f59e0b;
+      background: #fde68a;
+      color: #92400e;
+      font-weight: 700;
+    }
+
+    /* --- 疑似要素 --- */
+    .sel-before li::before {
+      content: "★ ";
+      color: #f59e0b;
+      font-weight: 700;
+    }
+
+    .sel-after li::after {
+      content: " ← ここ";
+      color: #f59e0b;
+      font-weight: 700;
+    }
+
+    .sel-firstletter p::first-letter {
+      color: #f59e0b;
+      font-size: 26px;
+      font-weight: 700;
+    }
+
+    .sel-text {
+      margin: 0;
+      padding: 9px 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      background: #ffffff;
+      color: #334155;
+      font-size: 13.5px;
+      line-height: 1.9;
+    }
+
+    /* --- 属性セレクタ --- */
+    .sel-attr a {
+      color: #334155;
+      text-decoration: none;
+    }
+
+    .sel-attr a[target="_blank"]::after {
+      content: " ↗";
+      color: #f59e0b;
+      font-weight: 700;
+    }
+
+    /* --- 結合子 --- */
+    .sel-tree {
+      padding: 10px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+    }
+
+    .sel-tree .sel-item {
+      margin-bottom: 5px;
+      padding: 8px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      background: #f8fafc;
+      color: #334155;
+      font-size: 13px;
+    }
+
+    .sel-tree .sel-nest {
+      margin: 5px 0 5px 22px;
+      padding: 8px;
+      border-left: 3px solid #cbd5e1;
+    }
+
+    /* > 直下の子だけ */
+    .sel-child > .sel-item {
+      border-color: #f59e0b;
+      background: #fde68a;
+      color: #92400e;
+      font-weight: 700;
+    }
+
+    /* + すぐ次の1つだけ */
+    .sel-adjacent .sel-mark + .sel-item {
+      border-color: #f59e0b;
+      background: #fde68a;
+      color: #92400e;
+      font-weight: 700;
+    }
+
+    /* ~ 後ろに続く全部 */
+    .sel-sibling .sel-mark ~ .sel-item {
+      border-color: #f59e0b;
+      background: #fde68a;
+      color: #92400e;
+      font-weight: 700;
+    }
+
+    /* 基準になる要素の目印 */
+    .sel-mark {
+      border-color: #60a5fa !important;
+      background: #bfdbfe !important;
+      color: #1e3a8a !important;
+      font-weight: 700;
+    }
+
+    @media (max-width: 780px) {
+      /* 1fr だけだと中身の最小幅まで広がり、長いコード行が画面をはみ出す。
+         minmax(0, …) を付けて、親の幅で止める */
+      .sv-samples {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* 狭い画面では箱3つが1行に収まらず、意図せず折り返してしまう。
+       「横に並ぶ」ことを見せる見本なので、幅を詰めて1行を保つ */
+    @media (max-width: 560px) {
+      .fl-box {
+        width: 76px;
+        padding: 12px 0;
+        font-size: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>コーダー初級#7</h1>
+    <p>昔ながらの横並びと、要素の狙い方 ― float と セレクタ</p>
+  </div>
+</header>
+
+<main>
+
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol>
+      <li><a href="#chapter1">floatで横に並べる</a></li>
+      <li><a href="#chapter2">floatの後始末 ― clearfix</a></li>
+      <li><a href="#chapter3">セレクタの種類</a></li>
+      <li><a href="#chapter4">疑似クラスと疑似要素</a></li>
+      <li><a href="#chapter5">属性セレクタと結合子</a></li>
+    </ol>
+
+    <div class="note">
+      <span class="label">読む前に</span><br>
+      このページは<strong>2つの話</strong>でできています。前半（1〜2章）が <code>float</code>、後半（3〜5章）が<strong>セレクタ</strong>です。<br>
+      <code>float</code> は<strong>今から書くための技術ではありません</strong>。既存のサイトを直すときに読めるように、という位置づけです。そのつもりで気楽に読んでください。
+    </div>
+  </section>
+
+  <section id="chapter1">
+    <h2>1. floatで横に並べる</h2>
+
+    <p>
+      #5では <code>display: flex;</code> で横並びを作りました。<code>float</code> は、<strong>flexが登場する前に使われていたやり方</strong>です。
+    </p>
+
+    <div class="caution">
+      <span class="label">先に結論</span><br>
+      これから新しく作るときは、<strong><code>float</code> ではなく <code>flex</code> を使ってください。</strong><br>
+      ただ、世の中にある既存のサイトには <code>float</code> で組まれたものが山ほど残っています。<strong>読めないと直せない</strong>ので、ここで押さえておきます。
+    </div>
+
+    <h3>何もしないと縦に積まれる</h3>
+    <p>
+      #6でやったとおり、<code>div</code> はブロックレベル要素なので、何もしなければ縦に積まれます。
+    </p>
+
+    <div class="sv-demo fl-stack">
+      <div class="fl-box">ボックス1</div>
+      <div class="fl-box">ボックス2</div>
+      <div class="fl-box">ボックス3</div>
+    </div>
+
+    <h3>float: left で横に並ぶ</h3>
+    <p>
+      子要素に <code>float: left;</code> を書くと、その要素は<strong>浮き上がって左に寄ります</strong>。3つとも指定すると、左から順に並びます。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">style.css — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab">index.html</div>
+        <div class="vscode-tab is-active">style.css</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3</div>
+        <pre class="vscode-code"><span class="sy-sel">.box</span> {
+  <span class="sy-attr">float</span>: <span class="sy-str">left</span>;
+}</pre>
+      </div>
+    </div>
+
+    <div class="sv-demo fl-left cf-fixed">
+      <div class="fl-box">ボックス1</div>
+      <div class="fl-box">ボックス2</div>
+      <div class="fl-box">ボックス3</div>
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      <code>float</code> は「浮かべる」という意味の英単語です。名前のとおり、<strong>その要素だけを通常の並びから浮かせて、端に寄せます</strong>。<br>
+      浮いた要素は<strong>縦に積む列から抜ける</strong>ので、次の要素はその<strong>すぐ横</strong>に来ます。3つとも浮かせたので、3つが横一列に並びました。
+    </div>
+
+    <h3>float: right で右に並ぶ</h3>
+    <p>
+      <code>right</code> にすると、右端から順に寄ります。<strong>並ぶ順番が逆に見える</strong>ところに注意してください。
+    </p>
+
+    <div class="sv-samples">
+      <div>
+        <span class="sv-label">float: left</span>
+        <code class="sv-code"><span class="s">.box</span> { <span class="p">float</span>: <span class="v">left</span>; }</code>
+        <div class="sv-demo fl-left cf-fixed">
+          <div class="fl-box">1</div>
+          <div class="fl-box">2</div>
+          <div class="fl-box">3</div>
+        </div>
+      </div>
+      <div>
+        <span class="sv-label">float: right</span>
+        <code class="sv-code"><span class="s">.box</span> { <span class="p">float</span>: <span class="v">right</span>; }</code>
+        <div class="sv-demo fl-right cf-fixed">
+          <div class="fl-box">1</div>
+          <div class="fl-box">2</div>
+          <div class="fl-box">3</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      <code>float: right</code> の見本も、HTMLの書き順は「1・2・3」で同じです。それでも画面では<strong>右端から 1 → 2 → 3 の順</strong>に寄っていくので、見た目は「3・2・1」になります。<br>
+      「右端から順に詰めていく」と考えると分かりやすいです。
+    </div>
+  </section>
+
+  <section id="chapter2">
+    <h2>2. floatの後始末 ― clearfix</h2>
+
+    <p>
+      <code>float</code> には<strong>厄介な副作用</strong>があります。ここが最大のつまずきどころです。
+    </p>
+
+    <div class="note">
+      <span class="label">1章の見本について</span><br>
+      1章では、点線の枠がきちんと箱を囲んでいました。実はあの見本には、<strong>これから説明する後始末をあらかじめ入れてあります</strong>。<br>
+      入れないとどうなるのか、ここで見ていきます。
+    </div>
+
+    <h3>親の高さがなくなる</h3>
+    <p>
+      子要素が浮いてしまうと、<strong>親要素はその高さを知らないまま</strong>になります。結果、親の高さが0になり、中身が外へはみ出したように見えます。
+    </p>
+
+    <div class="sv-samples">
+      <div>
+        <span class="sv-label sv-label-ng">✕ floatあり・後始末なし</span>
+        <code class="sv-code"><span class="c">&lt;!-- HTML --&gt;</span>
+&lt;div class=<span class="v">"wrap"</span>&gt;
+
+<span class="c">/* CSS */</span>
+<span class="s">.box</span> { <span class="p">float</span>: <span class="v">left</span>; }</code>
+        <div class="cf-parent">
+          <div class="fl-box">1</div>
+          <div class="fl-box">2</div>
+        </div>
+        <div class="cf-after-text">この文章は親の外に書いてあります</div>
+      </div>
+      <div>
+        <span class="sv-label sv-label-ok">○ clearfixあり</span>
+        <code class="sv-code"><span class="c">&lt;!-- HTML：クラスを1つ足す --&gt;</span>
+&lt;div class=<span class="v">"wrap clearfix"</span>&gt;
+
+<span class="c">/* CSS：これを追加 */</span>
+<span class="s">.clearfix:after</span> { … }</code>
+        <div class="cf-parent cf-fixed">
+          <div class="fl-box">1</div>
+          <div class="fl-box">2</div>
+        </div>
+        <div class="cf-after-text">この文章は親の外に書いてあります</div>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">注意</span><br>
+      <strong>✕</strong> の見本を見てください。<strong>黄色い親の枠が、箱の高さぶんだけ広がっていません。</strong>箱が枠からはみ出し、下の文章とも重なっています。<br>
+      <strong>○</strong> の見本は、親の枠がきちんと箱を囲み、下の文章も正しい位置にあります。この差を作っているのが <strong>clearfix</strong> です。
+    </div>
+
+    <h3>clearfixの中身</h3>
+    <p>
+      やっていることは、<strong>親の最後に空っぽの要素を1つ足して、そこで浮きを打ち切る</strong>ことです。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">style.css — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab">index.html</div>
+        <div class="vscode-tab is-active">style.css</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5</div>
+        <pre class="vscode-code"><span class="sy-sel">.clearfix:after</span> {
+  <span class="sy-attr">content</span>: <span class="sy-str">""</span>;
+  <span class="sy-attr">display</span>: <span class="sy-str">block</span>;
+  <span class="sy-attr">clear</span>: <span class="sy-str">both</span>;
+}</pre>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th>書いていること</th>
+        <th>意味</th>
+      </tr>
+      <tr>
+        <td><code>:after</code></td>
+        <td>この要素の<strong>いちばん最後</strong>に、中身を1つ足す</td>
+      </tr>
+      <tr>
+        <td><code>content: "";</code></td>
+        <td>足す中身は<strong>空っぽ</strong>（画面には何も出さない）</td>
+      </tr>
+      <tr>
+        <td><code>display: block;</code></td>
+        <td>足したものを<strong>ブロックレベル要素</strong>にする</td>
+      </tr>
+      <tr>
+        <td><code>clear: both;</code></td>
+        <td><strong>浮いているものの下まで下がる</strong>（ここが本体）</td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      <code>clear: both;</code> を持った空の要素が、<strong>浮いた箱たちの下</strong>に来ます。親はその要素までを自分の中身として数えるので、<strong>結果的に高さが戻ります</strong>。<br>
+      使うときは、<code>float</code> した子を持つ<strong>親のほうに</strong> <code>class="clearfix"</code> を付けます。
+    </div>
+
+    <div class="note">
+      <span class="label">なぜ「fix」なのか</span><br>
+      <code>clearfix</code> は <code>clear</code>（打ち切る）と <code>fix</code>（直す）を合わせた呼び名です。CSSの正式な機能名ではなく、<strong>現場でそう呼ばれてきた通称</strong>です。<br>
+      検索すると書き方がいくつも出てきますが、どれも狙いは同じ「親の高さを取り戻す」です。
+    </div>
+
+    <div class="note">
+      <span class="label">コロンの数について</span><br>
+      ここでは <code>:after</code> と<strong>コロン1つ</strong>で書いています。じつは<strong>いまの正式な書き方はコロン2つ</strong>の <code>::after</code> です。<br>
+      ただ clearfix は古くから1つで書かれてきたので、既存のサイトではほぼ1つで見かけます。<strong>どちらでも同じように動きます</strong>ので、いまは気にしなくて大丈夫です。<br>
+      <code>::after</code> そのものについては、<strong>4章でくわしく扱います</strong>。
+    </div>
+
+    <div class="caution">
+      <span class="label">ここまでのまとめ</span><br>
+      <code>float</code> を使うと、<strong>必ずこの後始末がセットで必要</strong>になります。<code>flex</code> ならこの問題はそもそも起きません。<br>
+      これが「新しく作るなら <code>flex</code>」と言われる理由のひとつです。
+    </div>
+  </section>
+
+  <section id="chapter3">
+    <h2>3. セレクタの種類</h2>
+
+    <p>
+      ここからは話が変わります。CSSの<strong>「どこに効かせるか」を書く部分</strong>、セレクタの話です。
+    </p>
+    <p>
+      #5でクラス（<code>.box</code>）を使いました。実は、要素の狙い方は<strong>ほかにもたくさんあります</strong>。
+    </p>
+
+    <table>
+      <tr>
+        <th>呼び方</th>
+        <th>書き方</th>
+        <th>何を狙うか</th>
+      </tr>
+      <tr>
+        <td>クラスセレクタ</td>
+        <td><code>.test</code></td>
+        <td><code>class="test"</code> が付いた要素</td>
+      </tr>
+      <tr>
+        <td>IDセレクタ</td>
+        <td><code>#test</code></td>
+        <td><code>id="test"</code> が付いた要素</td>
+      </tr>
+      <tr>
+        <td>要素型セレクタ</td>
+        <td><code>div</code>　<code>p</code>　<code>span</code>　<code>a</code></td>
+        <td>そのタグ全部</td>
+      </tr>
+      <tr>
+        <td>全称セレクタ</td>
+        <td><code>*</code></td>
+        <td><strong>すべての要素</strong></td>
+      </tr>
+    </table>
+
+    <h3>クラスとIDの違い</h3>
+    <p>
+      どちらも「名前を付けて狙う」点は同じです。違いは<strong>同じ名前を何個に付けられるか</strong>です。
+    </p>
+
+    <div class="note">
+      <span class="label">見方</span><br>
+      次の2つの見本は、<strong>色が付くという結果だけ見れば同じ</strong>です。違いが出るのは<strong>コードのほう</strong>なので、そちらを見比べてください。<br>
+      クラスは<strong>2つの <code>li</code> に同じ名前</strong>を付けています。IDは<strong>1つにしか付けられません</strong>。
+    </div>
+
+    <div class="sv-samples">
+      <div>
+        <span class="sv-label">クラス（何回でも使える）</span>
+        <code class="sv-code"><span class="c">&lt;!-- HTML --&gt;</span>
+&lt;li class=<span class="v">"test"</span>&gt;1つ目&lt;/li&gt;
+&lt;li class=<span class="v">"test"</span>&gt;2つ目&lt;/li&gt;
+&lt;li&gt;3つ目&lt;/li&gt;
+
+<span class="c">/* CSS */</span>
+<span class="s">.test</span> { <span class="p">background</span>: <span class="v">黄色</span>; }</code>
+        <div class="sv-demo">
+          <ul class="sel-list">
+            <li class="sel-hit">1つ目</li>
+            <li class="sel-hit">2つ目</li>
+            <li>3つ目</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <span class="sv-label">ID（ページに1つだけ）</span>
+        <code class="sv-code"><span class="c">&lt;!-- HTML --&gt;</span>
+&lt;li id=<span class="v">"test"</span>&gt;1つ目&lt;/li&gt;
+&lt;li&gt;2つ目&lt;/li&gt;
+&lt;li&gt;3つ目&lt;/li&gt;
+
+<span class="c">/* CSS */</span>
+<span class="s">#test</span> { <span class="p">background</span>: <span class="v">黄色</span>; }</code>
+        <div class="sv-demo">
+          <ul class="sel-list">
+            <li class="sel-hit">1つ目</li>
+            <li>2つ目</li>
+            <li>3つ目</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th></th>
+        <th>クラス</th>
+        <th>ID</th>
+      </tr>
+      <tr>
+        <td>HTMLでの書き方</td>
+        <td><code>class="test"</code></td>
+        <td><code>id="test"</code></td>
+      </tr>
+      <tr>
+        <td>CSSでの書き方</td>
+        <td><code>.test</code>（ピリオド）</td>
+        <td><code>#test</code>（シャープ）</td>
+      </tr>
+      <tr>
+        <td>同じ名前を何個に付けられるか</td>
+        <td><strong>いくつでも</strong></td>
+        <td><strong>1ページに1つだけ</strong></td>
+      </tr>
+    </table>
+
+    <div class="caution">
+      <span class="label">ここが違い</span><br>
+      さきほどの見本で、クラスのほうは<strong>2つの <code>li</code> に同じ <code>class="test"</code></strong> を付けていました。これは正しい書き方です。<br>
+      IDで同じことをして <strong><code>id="test"</code> を2つに付けると、決まりを破ったことになります</strong>。画面には出てしまうこともありますが、<strong>やってはいけない書き方</strong>です。<br>
+      「同じ見た目にしたいものが複数ある」なら、迷わずクラスを使ってください。
+    </div>
+
+    <div class="note">
+      <span class="label">使い分け</span><br>
+      迷ったら<strong>クラスを使ってください</strong>。実務でも、見た目を整える目的ならほとんどクラスです。<br>
+      IDは「ページ内に1つしかないもの」に使います。ページ内リンクの飛び先（<code>#top</code> など）にも使われます。
+    </div>
+
+    <h3>要素型セレクタ</h3>
+    <p>
+      タグの名前をそのまま書くと、<strong>そのタグ全部</strong>が対象になります。名前を付けなくても狙えます。
+    </p>
+
+    <div class="sv-samples">
+      <div>
+        <span class="sv-label">li と書く（li だけ）</span>
+        <code class="sv-code"><span class="s">li</span> { <span class="p">background</span>: <span class="v">黄色</span>; }</code>
+        <div class="sv-demo sel-compare">
+          <ul class="sel-list">
+            <li class="sel-hit">1つ目</li>
+            <li class="sel-hit">2つ目</li>
+            <li class="sel-hit">3つ目</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <span class="sv-label">* と書く（ul も含めて全部）</span>
+        <code class="sv-code"><span class="s">*</span> { <span class="p">background</span>: <span class="v">黄色</span>; }</code>
+        <div class="sv-demo sel-compare sel-universal">
+          <ul class="sel-list">
+            <li>1つ目</li>
+            <li>2つ目</li>
+            <li>3つ目</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">注意</span><br>
+      <code>*</code> は<strong>ページ中のすべての要素</strong>に効きます。<code>*</code> の見本では、箱だけでなく<strong>それを囲んでいる <code>ul</code> まで色が変わっています</strong>。<br>
+      影響範囲が広すぎるので、見た目を作る目的で使うことはまずありません。使うのは、余白のリセットなど<strong>ページ全体に同じ設定をかけたいとき</strong>だけです。
+    </div>
+  </section>
+
+  <section id="chapter4">
+    <h2>4. 疑似クラスと疑似要素</h2>
+
+    <p>
+      名前が似ていますが、<strong>別のものです</strong>。先に違いを押さえてください。
+    </p>
+
+    <table>
+      <tr>
+        <th></th>
+        <th>書き方</th>
+        <th>やること</th>
+      </tr>
+      <tr>
+        <td><strong>疑似クラス</strong></td>
+        <td>コロン1つ　<code>:hover</code></td>
+        <td>すでにある要素を<strong>条件で選ぶ</strong></td>
+      </tr>
+      <tr>
+        <td><strong>疑似要素</strong></td>
+        <td>コロン2つ　<code>::before</code></td>
+        <td>要素の前後に<strong>中身を足す</strong></td>
+      </tr>
+    </table>
+
+    <h3>疑似クラス ― 条件で選ぶ</h3>
+    <p>
+      「マウスが乗っているとき」「2番目のとき」のように、<strong>状態や順番を条件にして選びます</strong>。
+    </p>
+
+    <div class="sv-samples">
+      <div>
+        <span class="sv-label">:hover（マウスを乗せて試せます）</span>
+        <code class="sv-code"><span class="s">li:hover</span> { <span class="p">background</span>: <span class="v">黄色</span>; }</code>
+        <div class="sv-demo">
+          <ul class="sel-list sel-hover">
+            <li>ここにマウスを乗せてください</li>
+            <li>ここでもいいです</li>
+            <li>乗せている間だけ色が変わります</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <span class="sv-label">:first-child（最初の1つ）</span>
+        <code class="sv-code"><span class="s">li:first-child</span> { <span class="p">background</span>: <span class="v">黄色</span>; }</code>
+        <div class="sv-demo">
+          <ul class="sel-list sel-first">
+            <li>1つ目</li>
+            <li>2つ目</li>
+            <li>3つ目</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <span class="sv-label">:nth-child(2)（2番目）</span>
+        <code class="sv-code"><span class="s">li:nth-child(2)</span> { <span class="p">background</span>: <span class="v">黄色</span>; }</code>
+        <div class="sv-demo">
+          <ul class="sel-list sel-nth">
+            <li>1つ目</li>
+            <li>2つ目</li>
+            <li>3つ目</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <span class="sv-label">:nth-child(odd)（奇数番目）</span>
+        <code class="sv-code"><span class="s">li:nth-child(odd)</span> { <span class="p">background</span>: <span class="v">黄色</span>; }</code>
+        <div class="sv-demo">
+          <ul class="sel-list sel-odd">
+            <li>1つ目</li>
+            <li>2つ目</li>
+            <li>3つ目</li>
+            <li>4つ目</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">odd と even</span><br>
+      <code>odd</code> は<strong>奇数</strong>、<code>even</code> は<strong>偶数</strong>という意味の英単語です。<br>
+      <code>:nth-child(even)</code> と書けば、2番目・4番目・6番目…が選ばれます。表の行を1行おきに色分けする、いわゆる<strong>縞模様</strong>はこれで作ります。
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      <code>:nth-child(2)</code> の <strong>2</strong> は「2番目」です。数え方は<strong>1から</strong>で、0からではありません。<br>
+      数字のかわりに <code>odd</code> や <code>even</code> と書くこともできる、と覚えておけば十分です。
+    </div>
+
+    <div class="note">
+      <span class="label">ほかの疑似クラス</span><br>
+      種類はほかにもあります。たとえば <code>:link</code> は<strong>まだ訪問していないリンク</strong>を指します。<br>
+      ただ、実務でよく使うのは <code>:hover</code> と <code>:nth-child()</code> です。まずはこの2つを押さえておけば十分です。
+    </div>
+
+    <h3>疑似要素 ― 前後に中身を足す</h3>
+    <p>
+      <code>::before</code> と <code>::after</code> は、<strong>HTMLに書いていない中身を、CSSだけで足します</strong>。何を足すかは <code>content</code> で決めます。
+    </p>
+
+    <div class="sv-samples">
+      <div>
+        <span class="sv-label">::before（前に足す）</span>
+        <code class="sv-code"><span class="s">li::before</span> {
+  <span class="p">content</span>: <span class="v">"★ "</span>;
+}</code>
+        <div class="sv-demo">
+          <ul class="sel-list sel-before">
+            <li>1つ目</li>
+            <li>2つ目</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <span class="sv-label">::after（後ろに足す）</span>
+        <code class="sv-code"><span class="s">li::after</span> {
+  <span class="p">content</span>: <span class="v">" ← ここ"</span>;
+}</code>
+        <div class="sv-demo">
+          <ul class="sel-list sel-after">
+            <li>1つ目</li>
+            <li>2つ目</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">注意</span><br>
+      足した「★」や「← ここ」は、<strong>HTMLのどこにも書かれていません</strong>。CSSだけで表示されています。<br>
+      画面には出ますが、<strong>文章としては存在しない扱い</strong>です。読み上げソフトで読まれないこともあるので、<strong>意味のある文章を <code>content</code> で入れるのは避けてください</strong>。飾りに使うものです。
+    </div>
+
+    <p>
+      もうひとつ、<code>::first-letter</code> は<strong>最初の1文字だけ</strong>を狙います。
+    </p>
+
+    <div class="sv-samples">
+      <div>
+        <span class="sv-label">指定なし</span>
+        <code class="sv-code"><span class="c">/* 何も書かない */</span></code>
+        <div class="sv-demo">
+          <p class="sel-text">むかしむかし、あるところに。</p>
+        </div>
+      </div>
+      <div>
+        <span class="sv-label">::first-letter</span>
+        <code class="sv-code"><span class="s">p::first-letter</span> {
+  <span class="p">font-size</span>: <span class="n">26px</span>;
+  <span class="p">color</span>: <span class="v">オレンジ</span>;
+}</code>
+        <div class="sv-demo sel-firstletter">
+          <p class="sel-text">むかしむかし、あるところに。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      <code>::first-letter</code> は、雑誌の記事などでよく見る<strong>「最初の一文字だけ大きくする」</strong>飾りを作るときに使います。<br>
+      なお、<code>:before</code> のようにコロン1つで書かれた古いコードも動きます。<strong>いまはコロン2つが正式</strong>ですが、既存のサイトでは1つのものをよく見かけます。
+    </div>
+  </section>
+
+  <section id="chapter5">
+    <h2>5. 属性セレクタと結合子</h2>
+
+    <h3>属性セレクタ ― 属性を条件にする</h3>
+
+    <div class="note">
+      <span class="label">その前に ― 属性とは</span><br>
+      タグの中に、タグ名のうしろへ書き足す情報のことを<strong>属性</strong>といいます。<br>
+      <code>&lt;a <strong>href="/about"</strong>&gt;</code> の <code>href="/about"</code> の部分です。#1で出てきた <code>href</code> がまさにこれにあたります。<br>
+      じつは <code>&lt;div <strong>class="box"</strong>&gt;</code> の <code>class="box"</code> も属性です。#5でクラス名を付けたとき、知らないうちに属性を書いていたことになります。
+    </div>
+
+    <p>
+      この属性を条件にして、要素を狙うことができます。書き方は <strong>角かっこ</strong>です。
+    </p>
+
+    <div class="sv-samples">
+      <div>
+        <span class="sv-label">HTML</span>
+        <code class="sv-code">&lt;a href=<span class="v">"/about"</span>&gt;会社概要&lt;/a&gt;
+&lt;a href=<span class="v">"https://…"</span>
+   target=<span class="v">"_blank"</span>&gt;外部サイト&lt;/a&gt;</code>
+        <!-- 見本なので href は付けていない。付けるとクリックで移動してしまう -->
+        <div class="sv-demo sel-attr">
+          <ul class="sel-list">
+            <li><a>会社概要</a></li>
+            <li><a target="_blank">外部サイト</a></li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <span class="sv-label">CSS</span>
+        <code class="sv-code"><span class="c">/* target="_blank" のリンクだけ */</span>
+<span class="s">a[target="_blank"]::after</span> {
+  <span class="p">content</span>: <span class="v">" ↗"</span>;
+}</code>
+        <div class="sv-demo" style="display: flex; align-items: center; justify-content: center; min-height: 110px;">
+          <div style="color: #475569; font-size: 13px; line-height: 1.9; text-align: center;">
+            「会社概要」には何も付かず、<br><strong>「外部サイト」にだけ「↗」</strong>が付きます。<br>
+            HTMLには書いていない記号です。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">よく使う場面</span><br>
+      <code>target="_blank"</code> は「別のタブで開く」という指定です。<strong>外部サイトへのリンクにだけ印を付ける</strong>のは、実務でよくある使い方です。<br>
+      ほかにも <code>input[type="text"]</code> のように、<strong>同じタグでも種類で分けたいとき</strong>に役立ちます。
+    </div>
+
+    <h3>結合子 ― 位置関係で狙う</h3>
+    <p>
+      要素どうしの<strong>位置関係</strong>を条件にする書き方です。3つあります。
+    </p>
+
+    <table>
+      <tr>
+        <th>記号</th>
+        <th>呼び方</th>
+        <th>選ばれるもの</th>
+      </tr>
+      <tr>
+        <td><code>&gt;</code></td>
+        <td>子結合子</td>
+        <td><strong>直下の子だけ</strong>（孫は選ばれない）</td>
+      </tr>
+      <tr>
+        <td><code>+</code></td>
+        <td>隣接結合子</td>
+        <td><strong>すぐ次の1つだけ</strong></td>
+      </tr>
+      <tr>
+        <td><code>~</code></td>
+        <td>間接結合子</td>
+        <td><strong>後ろに続くもの全部</strong></td>
+      </tr>
+    </table>
+
+    <h4>&gt; ― 直下の子だけ</h4>
+    <p>
+      入れ子が深くなっても、<strong>すぐ下の階層だけ</strong>に効きます。
+    </p>
+
+    <div class="sv-samples">
+      <div>
+        <span class="sv-label">.wrap &gt; .item</span>
+        <code class="sv-code"><span class="s">.wrap &gt; .item</span> { <span class="p">background</span>: <span class="v">黄色</span>; }</code>
+        <div class="sv-demo">
+          <div class="sel-tree sel-child">
+            <div class="sel-item">直下の子</div>
+            <div class="sel-nest">
+              <div class="sel-item">中に入っている（孫）</div>
+            </div>
+            <div class="sel-item">直下の子</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="sv-label">.wrap .item（記号なし）</span>
+        <code class="sv-code"><span class="s">.wrap .item</span> { <span class="p">background</span>: <span class="v">黄色</span>; }</code>
+        <div class="sv-demo">
+          <div class="sel-tree">
+            <div class="sel-item sel-hit">直下の子</div>
+            <div class="sel-nest">
+              <div class="sel-item sel-hit">中に入っている（孫）</div>
+            </div>
+            <div class="sel-item sel-hit">直下の子</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      記号なしで<strong>スペースだけ</strong>空けて書くと、<strong>何階層下でも全部</strong>が対象になります。<code>.wrap .item</code> の見本では、いちばん奥の「孫」まで色が変わっています。<br>
+      <code>&gt;</code> を入れると<strong>すぐ下の階層だけ</strong>に絞られます。<code>.wrap &gt; .item</code> の見本では、孫が選ばれていません。<br>
+      2つの見本で違うのは<strong>記号1つだけ</strong>です。
+    </div>
+
+    <h4>+ と ~ ― 後ろの兄弟を狙う</h4>
+    <p>
+      青い箱を基準にして、<strong>その後ろにあるもの</strong>を狙います。
+    </p>
+
+    <div class="sv-samples">
+      <div>
+        <span class="sv-label">+（すぐ次の1つ）</span>
+        <code class="sv-code"><span class="s">.mark + .item</span> { <span class="p">background</span>: <span class="v">黄色</span>; }</code>
+        <div class="sv-demo">
+          <div class="sel-tree sel-adjacent">
+            <div class="sel-item">前にあるもの</div>
+            <div class="sel-item sel-mark">ここが基準</div>
+            <div class="sel-item">すぐ次</div>
+            <div class="sel-item">そのまた次</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="sv-label">~（後ろに続く全部）</span>
+        <code class="sv-code"><span class="s">.mark ~ .item</span> { <span class="p">background</span>: <span class="v">黄色</span>; }</code>
+        <div class="sv-demo">
+          <div class="sel-tree sel-sibling">
+            <div class="sel-item">前にあるもの</div>
+            <div class="sel-item sel-mark">ここが基準</div>
+            <div class="sel-item">すぐ次</div>
+            <div class="sel-item">そのまた次</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      どちらも<strong>後ろ側だけ</strong>が対象です。基準より<strong>前にあるものは選ばれません</strong>。どちらの見本でも、いちばん上の「前にあるもの」は色が変わっていません。<br>
+      違いは、<code>+</code> が<strong>1つだけ</strong>、<code>~</code> が<strong>全部</strong>という点です。
+    </div>
+
+    <h3>まとめ</h3>
+    <table>
+      <tr>
+        <th>やりたいこと</th>
+        <th>書き方</th>
+      </tr>
+      <tr>
+        <td>名前を付けて狙う</td>
+        <td><code>.クラス名</code></td>
+      </tr>
+      <tr>
+        <td>タグ全部を狙う</td>
+        <td><code>div</code>　<code>p</code>　<code>li</code></td>
+      </tr>
+      <tr>
+        <td>マウスが乗ったとき</td>
+        <td><code>:hover</code></td>
+      </tr>
+      <tr>
+        <td>○番目だけ</td>
+        <td><code>:nth-child(○)</code></td>
+      </tr>
+      <tr>
+        <td>1行おきに色を変える</td>
+        <td><code>:nth-child(odd)</code>　<code>:nth-child(even)</code></td>
+      </tr>
+      <tr>
+        <td>前後に飾りを足す</td>
+        <td><code>::before</code>　<code>::after</code></td>
+      </tr>
+      <tr>
+        <td>属性で絞る</td>
+        <td><code>a[target="_blank"]</code></td>
+      </tr>
+      <tr>
+        <td>直下の子だけ</td>
+        <td><code>.親 &gt; .子</code></td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      たくさん出てきましたが、<strong>全部覚える必要はありません</strong>。実務でよく使うのは <code>.クラス名</code>、<code>:hover</code>、<code>:nth-child()</code>、<code>::before</code> / <code>::after</code> のあたりです。<br>
+      残りは「そういう書き方があった」と思い出して、ここに戻って調べられれば十分です。
+    </div>
+  </section>
+
+</main>
+
+<footer>
+</footer>
+
+<!-- ▼ 共通スクリプト。章ナビ・コピーボタン・先頭へ戻るが自動で付く（編集不要） -->
+<script src="../js/training.js"></script>
+
+</body>
+</html>

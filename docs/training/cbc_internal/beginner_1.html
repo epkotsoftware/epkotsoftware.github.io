@@ -3,297 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>簡単なWEBサイト制作 1</title>
+  <title>コーダー初級#1</title>
+  <link rel="stylesheet" href="../css/training.css">
+
+  <!-- ▼ このページ専用のスタイル -->
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "YuGothic", "Segoe UI", sans-serif;
-      background: #f4f6f9;
-      color: #222;
-      line-height: 1.9;
-      letter-spacing: 0.02em;
-    }
-
-    a {
-      color: #2563eb;
-    }
-
-    header {
-      background: #202938;
-      color: #fff;
-      padding: 42px 24px;
-    }
-
-    .header-inner,
-    main {
-      width: min(1120px, calc(100% - 40px));
-      margin: 0 auto;
-    }
-
-    header h1 {
-      margin: 0 0 8px;
-      font-size: clamp(28px, 4vw, 42px);
-      line-height: 1.25;
-    }
-
-    header p {
-      margin: 0;
-      color: #d7dde8;
-      font-size: 15px;
-    }
-
-    main {
-      padding: 34px 0 80px;
-    }
-
-    section {
-      background: #fff;
-      border-radius: 18px;
-      padding: 34px;
-      margin-bottom: 28px;
-      box-shadow: 0 8px 26px rgba(15, 23, 42, 0.07);
-    }
-
-    h2 {
-      margin: 0 0 22px;
-      padding-bottom: 12px;
-      border-bottom: 2px solid #e5e7eb;
-      font-size: 28px;
-      color: #111827;
-      line-height: 1.35;
-    }
-
-    h3 {
-      margin: 32px 0 12px;
-      font-size: 21px;
-      color: #1f2937;
-      line-height: 1.45;
-    }
-
-    h4 {
-      margin: 24px 0 8px;
-      font-size: 17px;
-      color: #374151;
-    }
-
-    p {
-      margin: 0 0 14px;
-    }
-
-    ul,
-    ol {
-      margin: 12px 0 18px 1.4em;
-      padding: 0;
-    }
-
-    li {
-      margin-bottom: 8px;
-    }
-
-    .toc {
-      background: #f8fafc;
-      border: 1px solid #e5e7eb;
-    }
-
-    .toc ol {
-      columns: 2;
-      column-gap: 40px;
-    }
-
-    .lead {
-      font-size: 17px;
-    }
-
-    .note,
-    .point,
-    .exercise,
-    .instructor,
-    .caution {
-      border-radius: 12px;
-      padding: 18px 20px;
-      margin: 20px 0;
-    }
-
-    .point {
-      background: #eff6ff;
-      border-left: 5px solid #2563eb;
-    }
-
-    .note {
-      background: #f8fafc;
-      border-left: 5px solid #64748b;
-    }
-
-    .exercise {
-      background: #fffbeb;
-      border-left: 5px solid #d97706;
-    }
-
-    .instructor {
-      background: #f0fdf4;
-      border-left: 5px solid #16a34a;
-    }
-
-    .caution {
-      background: #fef2f2;
-      border-left: 5px solid #dc2626;
-    }
-
-    .label {
+    /* カラーコードの見本。表の中に実際の色を出す */
+    .color-chip {
       display: inline-block;
-      margin-bottom: 8px;
-      font-size: 13px;
-      font-weight: 700;
-      color: #475569;
-      letter-spacing: 0.04em;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 18px 0 22px;
-      font-size: 15px;
-    }
-
-    th,
-    td {
-      border: 1px solid #d1d5db;
-      padding: 13px 14px;
-      text-align: left;
-      vertical-align: top;
-    }
-
-    th {
-      background: #f3f4f6;
-      color: #111827;
-      font-weight: 700;
-    }
-
-    code {
-      background: #eef2f7;
-      color: #111827;
-      padding: 2px 6px;
-      border-radius: 6px;
-      font-family: Consolas, Monaco, "Courier New", monospace;
-      font-size: 0.95em;
-    }
-
-    pre {
-      background: #0f172a;
-      color: #f8fafc;
-      padding: 20px;
-      border-radius: 12px;
-      overflow-x: auto;
-      margin: 16px 0 20px;
-      line-height: 1.65;
-      tab-size: 2;
-    }
-
-    pre code {
-      background: transparent;
-      color: #f8fafc;
-      padding: 0;
-      border-radius: 0;
-      display: block;
-      white-space: pre;
-    }
-
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 18px;
-      margin: 18px 0;
-    }
-
-    .card {
-      border: 1px solid #e5e7eb;
-      border-radius: 14px;
-      padding: 18px;
-      background: #fff;
-    }
-
-    .card h4 {
-      margin-top: 0;
-    }
-
-    .figure-box {
-      border: 2px dashed #cbd5e1;
-      background: #f8fafc;
-      color: #64748b;
-      border-radius: 14px;
-      padding: 24px;
-      margin: 18px 0;
-      text-align: center;
-    }
-
-    .mock-browser {
-      border: 1px solid #d1d5db;
-      border-radius: 14px;
-      overflow: hidden;
-      margin: 18px 0;
-      background: white;
-    }
-
-    .mock-browser-bar {
-      background: #e5e7eb;
-      padding: 8px 12px;
-      color: #6b7280;
-      font-size: 13px;
-    }
-
-    .mock-browser-body {
-      padding: 18px;
-      min-height: 70px;
-      background: #fff;
-    }
-
-    .sample-div {
-      height: 70px;
-      background: #d9e021;
-      padding: 12px;
-      margin-bottom: 12px;
-    }
-
-    .sample-p {
-      width: 70%;
-      height: 50px;
-      background: #f9b9d5;
-      text-align: center;
-      padding-top: 8px;
-      margin: 0 0 12px;
-    }
-
-    .sample-span {
-      border: 1px dotted #f9b9d5;
-      font-family: serif;
-      padding: 2px 4px;
-    }
-
-    footer {
-      text-align: center;
-      color: #6b7280;
-      padding: 36px 20px;
-      font-size: 13px;
-    }
-
-    @media (max-width: 780px) {
-      .toc ol,
-      .grid-2 {
-        columns: 1;
-        grid-template-columns: 1fr;
-      }
-
-      section {
-        padding: 24px;
-      }
+      width: 46px;
+      height: 22px;
+      border: 1px solid #cbd5e1;
+      border-radius: 4px;
+      vertical-align: middle;
     }
   </style>
 </head>
@@ -301,7 +23,7 @@
 
 <header>
   <div class="header-inner">
-    <h1>WEBサイト制作1</h1>
+    <h1>コーダー初級#1</h1>
   </div>
 </header>
 
@@ -355,21 +77,27 @@
       <tr>
         <td>ブラウザ</td>
         <td>作ったWebページを表示するためのアプリケーション</td>
-        <td>Chrome、Safari、Firefox</td>
+        <td>
+          <a href="https://www.google.com/chrome/" target="_blank" rel="noopener noreferrer">Chrome</a>、<a href="https://www.apple.com/safari/" target="_blank" rel="noopener noreferrer">Safari</a>、<a href="https://www.mozilla.org/firefox/" target="_blank" rel="noopener noreferrer">Firefox</a>
+        </td>
       </tr>
       <tr>
         <td>テキストエディタ</td>
         <td>HTMLやCSSなどのコードを書くためのアプリケーション</td>
-        <td>Visual Studio Code</td>
+        <td>
+          <a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">Visual Studio Code</a>
+        </td>
       </tr>
     </table>
 
-    <h3>プログラミング言語とマークアップ言語</h3>
+    <h3>マークアップ言語とプログラミング言語</h3>
     <p>
-      初めてのWebサイト制作では、いきなり本格的なプログラミング言語を使うわけではありません。まずはHTMLというマークアップ言語を使います。
+      初めてのWebサイト制作では、いきなり本格的なプログラミング言語を使うわけではありません。<br>
+      まずはHTMLというマークアップ言語を使います。
     </p>
     <p>
-      マークアップ言語は、文章や画像に「これは見出し」「これは段落」「これは画像」といった意味を付けるための言語です。計算や条件分岐を中心に扱うプログラミング言語とは役割が違います。
+      マークアップ言語は、文章や画像に「これは見出し」「これは段落」「これは画像」といった意味を付けるための言語です。<br>
+      計算や条件分岐を中心に扱うプログラミング言語とは役割が違います。
     </p>
 
     <div class="grid-2">
@@ -444,10 +172,6 @@
       <tr>
         <td>Auto Rename Tag</td>
         <td>開始タグを変更したとき、対応する終了タグも変更しやすくします。</td>
-      </tr>
-      <tr>
-        <td>Bracket Pair Colorizer</td>
-        <td>括弧の対応関係を色で見やすくします。</td>
       </tr>
       <tr>
         <td>Color info</td>
@@ -570,14 +294,15 @@
     <div class="grid-2">
       <div class="card">
         <h4>HTMLの例</h4>
-        <pre><code>&lt;p&gt;こんにちは&lt;/p&gt;</code></pre>
+        <pre><code>&lt;<span class="sy-tag">p</span>&gt;こんにちは&lt;/<span class="sy-tag">p</span>&gt;</code></pre>
         <p>文章のまとまりを作っています。</p>
+
       </div>
       <div class="card">
         <h4>CSSの例</h4>
-        <pre><code>p {
-  color: #ffff00;
-  background-color: #0000ff;
+        <pre><code><span class="sy-sel">p</span> {
+  <span class="sy-attr">color</span>: <span class="sy-str">#ffff00</span>;
+  <span class="sy-attr">background-color</span>: <span class="sy-str">#0000ff</span>;
 }</code></pre>
         <p>段落の文字色や背景色を指定しています。</p>
       </div>
@@ -602,7 +327,7 @@
       HTMLでは、<code>&lt;p&gt;</code> や <code>&lt;div&gt;</code> のようなタグを使って、文字や画像に役割を与えます。
     </p>
 
-    <pre><code>&lt;p&gt;こんにちは&lt;/p&gt;</code></pre>
+    <pre><code>&lt;<span class="sy-tag">p</span>&gt;こんにちは&lt;/<span class="sy-tag">p</span>&gt;</code></pre>
 
     <p>
       多くのタグは、開始タグと終了タグで内容を囲みます。ただし、画像を表示する <code>&lt;img&gt;</code> や改行を表す <code>&lt;br&gt;</code> のように、終了タグを持たないタグもあります。
@@ -610,7 +335,7 @@
 
     <h3>改行の扱い</h3>
     <p>
-      HTMLファイル上で改行しても、ブラウザ上ではそのまま改行されないことがあります。
+      HTMLファイル上で改行しても、ブラウザ上ではそのまま改行されません。
     </p>
 
     <h4>コード上の改行だけの場合</h4>
@@ -618,11 +343,11 @@
 かきくけこ</code></pre>
 
     <p>
-      このように書いても、ブラウザでは1行にまとまって表示される場合があります。
+      このように書いても、ブラウザでは1行にまとまって表示されます。HTMLは連続した改行や空白を、1個の半角スペースとしてまとめて扱うためです。
     </p>
 
     <h4><code>&lt;br&gt;</code> を使う場合</h4>
-    <pre><code>あいうえお&lt;br&gt;
+    <pre><code>あいうえお&lt;<span class="sy-tag">br</span>&gt;
 かきくけこ</code></pre>
 
     <p>
@@ -634,10 +359,38 @@
       CSSでは、どのHTML要素に、どのような見た目を指定するかを書きます。
     </p>
 
-    <pre><code>p {
-  color: #333333;
-  font-size: 16px;
-}</code></pre>
+    <p>
+      HTML側で書いたタグを、CSS側から名前で呼び出します。下の図は、その対応と各部分の名称です。
+    </p>
+
+    <div class="css-anatomy">
+      <div>
+        <span class="ca-title">HTML（index.html）</span>
+        <div class="ca-panel">&lt;<span class="ca-tag">p</span>&gt;あいうえお&lt;/<span class="ca-tag">p</span>&gt;</div>
+      </div>
+
+      <div class="ca-arrow">→</div>
+
+      <div>
+        <span class="ca-title">CSS（style.css）</span>
+        <div class="ca-panel"><span class="ca-sel">p</span> {
+  <span class="ca-prop">color</span>: <span class="ca-val">#FF0000</span>;
+  <span class="ca-prop">width</span>: <span class="ca-val">200px</span>;
+  <span class="ca-prop">background-color</span>: <span class="ca-val">#0000FF</span>;
+}</div>
+      </div>
+    </div>
+
+    <div class="ca-legend">
+      <span><span class="ca-key sel"></span>セレクタ</span>
+      <span><span class="ca-key prop"></span>プロパティ</span>
+      <span><span class="ca-key val"></span>値</span>
+    </div>
+
+    <div class="point">
+      <span class="label">対応関係</span><br>
+      HTMLで書いた <code>&lt;p&gt;</code> の <strong>p</strong> と、CSSの先頭にある <strong>p</strong> は<strong>同じもの</strong>を指しています。CSS側の <code>p</code> が「どの要素に指定するか」を表しているので、これを<strong>セレクタ</strong>と呼びます。
+    </div>
 
     <table>
       <tr>
@@ -676,11 +429,25 @@
       HTMLでは、文章や画像などを「枠」に入れていく感覚でページを作ります。枠を縦に積んだり、横に並べたり、別の枠の中に入れたりして、画面全体の構造を作ります。
     </p>
 
-    <div class="figure-box">
-      <img
-  src="../img/beginner"
-  style="max-width: 100%; height: auto; display: block;"
-      >
+    <div class="layout-figure">
+      <div class="layout-box layout-header">上に置いた枠（見出しやロゴなど）</div>
+      <div class="layout-row">
+        <div class="layout-box layout-side">
+          横に並べた枠<br>（メニューなど）
+        </div>
+        <div class="layout-box layout-main">
+          中身を入れる枠
+          <div class="layout-box layout-inner">
+            枠の中に、さらに枠を入れることもできます
+          </div>
+        </div>
+      </div>
+      <div class="layout-box layout-footer">下に置いた枠（著作権表記など）</div>
+    </div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      枠は<strong>縦に積む</strong>、<strong>横に並べる</strong>、<strong>中に入れる</strong>の3通りの組み合わせで作ります。複雑に見えるページも、突き詰めればこの繰り返しです。
     </div>
 
     <h3>必ず使う基本構造</h3>
@@ -688,14 +455,14 @@
       HTMLファイルには、基本的に以下のような大きな枠があります。
     </p>
 
-    <pre><code>&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;練習&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
+    <pre><code>&lt;<span class="sy-tag">html</span>&gt;
+  &lt;<span class="sy-tag">head</span>&gt;
+    &lt;<span class="sy-tag">title</span>&gt;練習&lt;/<span class="sy-tag">title</span>&gt;
+  &lt;/<span class="sy-tag">head</span>&gt;
+  &lt;<span class="sy-tag">body</span>&gt;
     画面に表示する内容
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre>
+  &lt;/<span class="sy-tag">body</span>&gt;
+&lt;/<span class="sy-tag">html</span>&gt;</code></pre>
 
     <table>
       <tr>
@@ -715,10 +482,33 @@
         <td>ブラウザ上に表示される内容を入れる場所です。</td>
       </tr>
     </table>
-    <img
-      src="../img/beginner1_2.png"
-      style="max-width: 100%; height: auto; display: block;"
-    >
+    <h3>入れ子の形で見る</h3>
+    <p>
+      上のコードを枠の形にすると、次のような入れ子構造になっています。
+    </p>
+
+    <div class="nest nest-html">
+      <span class="nest-tag">&lt;html&gt;<span class="nest-note">一番外側の枠。すべてがこの中に入ります</span></span>
+
+      <div class="nest nest-head">
+        <span class="nest-tag">&lt;head&gt;<span class="nest-note">画面には表示されない設定を書く場所</span></span>
+        <div class="nest-content">&lt;title&gt;練習&lt;/title&gt;</div>
+        <span class="nest-tag">&lt;/head&gt;</span>
+      </div>
+
+      <div class="nest nest-body">
+        <span class="nest-tag">&lt;body&gt;<span class="nest-note">画面に表示される内容を書く場所</span></span>
+        <div class="nest-content">画面に表示する内容</div>
+        <span class="nest-tag">&lt;/body&gt;</span>
+      </div>
+
+      <span class="nest-tag">&lt;/html&gt;</span>
+    </div>
+
+    <div class="caution">
+      <span class="label">注意</span><br>
+      タグは<strong>内側から順に閉じます</strong>。<code>&lt;head&gt;</code> を閉じないまま <code>&lt;/html&gt;</code> を書いたり、枠が交差するように閉じたりすると、構造が壊れて表示が崩れます。
+    </div>
   </section>
 
   <section id="chapter8">
@@ -736,40 +526,46 @@
       </tr>
       <tr>
         <td><code>&lt;div&gt; 〜 &lt;/div&gt;</code></td>
-        <td>division</td>
+        <td>division<br><strong>区分</strong></td>
         <td>特別な意味を持たない汎用的な枠として使います。</td>
       </tr>
       <tr>
         <td><code>&lt;p&gt; 〜 &lt;/p&gt;</code></td>
-        <td>paragraph</td>
+        <td>paragraph<br><strong>段落</strong></td>
         <td>文章の段落を表します。</td>
       </tr>
       <tr>
         <td><code>&lt;span&gt; 〜 &lt;/span&gt;</code></td>
-        <td>span</td>
+        <td>span<br><strong>範囲</strong></td>
         <td>文章の一部分を囲むときによく使います。</td>
       </tr>
       <tr>
         <td><code>&lt;h1&gt; 〜 &lt;/h1&gt;</code> 〜 <code>&lt;h6&gt; 〜 &lt;/h6&gt;</code></td>
-        <td>heading</td>
+        <td>heading<br><strong>見出し</strong></td>
         <td>見出しを表します。<code>h1</code> が最も大きな見出しで、<code>h6</code> に向かって階層が下がります。</td>
       </tr>
       <tr>
         <td><code>&lt;table&gt; 〜 &lt;/table&gt;</code></td>
-        <td>table</td>
+        <td>table<br><strong>表</strong></td>
         <td>表を作るときに使います。</td>
       </tr>
       <tr>
         <td><code>&lt;img&gt;</code></td>
-        <td>image</td>
+        <td>image<br><strong>画像</strong></td>
         <td>画像を表示するときに使います。終了タグはありません。</td>
       </tr>
       <tr>
         <td><code>&lt;br&gt;</code></td>
-        <td>break</td>
+        <td>break<br><strong>改行</strong></td>
         <td>改行を入れるときに使います。終了タグはありません。</td>
       </tr>
     </table>
+
+    <div class="note">
+      <span class="label">覚え方</span><br>
+      タグ名は<strong>英単語の略</strong>です。日本語の意味と一緒に覚えると、記号ではなく言葉として頭に入ります。<br>
+      <code>&lt;p&gt;</code> は「パラグラフ＝段落」、<code>&lt;div&gt;</code> は「ディビジョン＝区分」。そう考えると、なぜそのタグを使うのかが自然に分かります。
+    </div>
 
     <div class="point">
       <span class="label">理解ポイント</span><br>
@@ -785,28 +581,62 @@
       <code>index.html</code> を以下のように書き換え、ブラウザで表示を確認します。
     </p>
 
-    <pre><code>&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;練習&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;div&gt;
+    <div class="pair">
+      <div class="vscode">
+        <div class="vscode-titlebar">
+          <span class="win-dot red"></span>
+          <span class="win-dot yellow"></span>
+          <span class="win-dot green"></span>
+          <span class="vscode-title">index.html — Visual Studio Code</span>
+        </div>
+        <div class="vscode-tabs">
+          <div class="vscode-tab is-active">index.html</div>
+          <div class="vscode-tab">style.css</div>
+        </div>
+        <div class="vscode-body">
+          <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10</div>
+          <pre class="vscode-code">&lt;<span class="sy-tag">html</span>&gt;
+  &lt;<span class="sy-tag">head</span>&gt;
+    &lt;<span class="sy-tag">title</span>&gt;練習&lt;/<span class="sy-tag">title</span>&gt;
+  &lt;/<span class="sy-tag">head</span>&gt;
+  &lt;<span class="sy-tag">body</span>&gt;
+    &lt;<span class="sy-tag">div</span>&gt;
       あいうえお
-    &lt;/div&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre>
+    &lt;/<span class="sy-tag">div</span>&gt;
+  &lt;/<span class="sy-tag">body</span>&gt;
+&lt;/<span class="sy-tag">html</span>&gt;</pre>
+        </div>
+      </div>
 
-    <div>
-          <img
-          src="../img/beginner1_3.png"
-          style="max-width: 100%; height: auto; display: block;"
-        >
+      <div class="chrome">
+        <div class="chrome-tabbar">
+          <span class="win-dot red"></span>
+          <span class="win-dot yellow"></span>
+          <span class="win-dot green"></span>
+          <div class="chrome-tab">練習</div>
+        </div>
+        <div class="chrome-toolbar">
+          <span class="chrome-nav">←　→　⟳</span>
+          <div class="chrome-url">file:///C:/Users/自分のユーザー名/Desktop/index.html</div>
+        </div>
+        <div class="chrome-viewport">
+          あいうえお
+        </div>
+      </div>
     </div>
-        <div>
-          <img
-          src="../img/beginner1_4.png"
-          style="max-width: 100%; height: auto; display: block;"
-        >
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      左のエディタで <code>&lt;title&gt;</code> に書いた「練習」が、右のブラウザでは<strong>タブの名前</strong>として出ています。<code>&lt;body&gt;</code> の中に書いた文字だけが画面に表示されます。
     </div>
 
     <h3>複数のタグを使ってみる</h3>
@@ -814,23 +644,86 @@
       次に、<code>div</code>、<code>p</code>、<code>span</code> を同時に使って表示の違いを確認します。
     </p>
 
-    <pre><code>&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;練習&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;div&gt;
+    <div class="pair">
+      <div class="vscode">
+        <div class="vscode-titlebar">
+          <span class="win-dot red"></span>
+          <span class="win-dot yellow"></span>
+          <span class="win-dot green"></span>
+          <span class="vscode-title">index.html — Visual Studio Code</span>
+        </div>
+        <div class="vscode-tabs">
+          <div class="vscode-tab is-active">index.html</div>
+          <div class="vscode-tab">style.css</div>
+        </div>
+        <div class="vscode-body">
+          <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17</div>
+          <pre class="vscode-code">&lt;<span class="sy-tag">html</span>&gt;
+  &lt;<span class="sy-tag">head</span>&gt;
+    &lt;<span class="sy-tag">title</span>&gt;練習&lt;/<span class="sy-tag">title</span>&gt;
+  &lt;/<span class="sy-tag">head</span>&gt;
+  &lt;<span class="sy-tag">body</span>&gt;
+    &lt;<span class="sy-tag">div</span>&gt;
       おはよう
-    &lt;/div&gt;
-    &lt;p&gt;
+    &lt;/<span class="sy-tag">div</span>&gt;
+    &lt;<span class="sy-tag">p</span>&gt;
       こんにちは
-    &lt;/p&gt;
-    &lt;span&gt;
+    &lt;/<span class="sy-tag">p</span>&gt;
+    &lt;<span class="sy-tag">span</span>&gt;
       さようなら
-    &lt;/span&gt;
-    &lt;span&gt;おやすみ&lt;/span&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre>
+    &lt;/<span class="sy-tag">span</span>&gt;
+    &lt;<span class="sy-tag">span</span>&gt;おやすみ&lt;/<span class="sy-tag">span</span>&gt;
+  &lt;/<span class="sy-tag">body</span>&gt;
+&lt;/<span class="sy-tag">html</span>&gt;</pre>
+        </div>
+      </div>
+
+      <div class="chrome">
+        <div class="chrome-tabbar">
+          <span class="win-dot red"></span>
+          <span class="win-dot yellow"></span>
+          <span class="win-dot green"></span>
+          <div class="chrome-tab">練習</div>
+        </div>
+        <div class="chrome-toolbar">
+          <span class="chrome-nav">←　→　⟳</span>
+          <div class="chrome-url">file:///C:/Users/自分のユーザー名/Desktop/index.html</div>
+        </div>
+        <div class="chrome-viewport">
+          <div class="area-div">おはよう</div>
+          <p class="area-p">こんにちは</p>
+          <span class="area-span">さようなら</span>
+          <span class="area-span">おやすみ</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="area-legend">
+      <span><span class="area-key area-div"></span><code>div</code></span>
+      <span><span class="area-key area-p"></span><code>p</code></span>
+      <span><span class="area-key area-span"></span><code>span</code></span>
+    </div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      色を付けた部分が、それぞれのタグが占めている領域です。<strong>実際のブラウザではこの色も点線も表示されません</strong>。<code>div</code> と <code>p</code> は横幅いっぱいまで広がって下に積まれ、<code>span</code> は文字の分だけの幅しか持たないので横に並びます。
+    </div>
 
     <table>
       <tr>
@@ -850,14 +743,6 @@
         <td>中身に必要な分だけの幅を持ち、横に並びやすい要素です。</td>
       </tr>
     </table>
-
-    </div>
-    <div>
-          <img
-          src="../img/beginner1_5.png"
-          style="max-width: 100%; height: auto; display: block;"
-        >
-    </div>
 
     <div class="point">
       <span class="label">理解ポイント</span><br>
@@ -883,7 +768,7 @@
       <code>index.html</code> の <code>&lt;head&gt;</code> 内に、CSSを読み込むための <code>&lt;link&gt;</code> タグを書きます。
     </p>
 
-    <pre><code>&lt;link href="css/style.css" rel="stylesheet"&gt;</code></pre>
+    <pre><code>&lt;<span class="sy-tag">link</span> <span class="sy-attr">href</span>=<span class="sy-str">"css/style.css"</span> <span class="sy-attr">rel</span>=<span class="sy-str">"stylesheet"</span>&gt;</code></pre>
 
     <table>
       <tr>
@@ -891,68 +776,137 @@
         <th>意味</th>
       </tr>
       <tr>
-        <td><code>link</code></td>
+        <td><code>link</code><br><strong>つなぐ</strong></td>
         <td>外部ファイルをHTMLに関連付けるためのタグです。</td>
       </tr>
       <tr>
-        <td><code>href</code></td>
-        <td>読み込むファイルの場所を指定します。ここでは <code>css/style.css</code> を指定しています。</td>
+        <td><code>href</code><br><small>hypertext reference</small><br><strong>参照先</strong></td>
+        <td>読み込むファイルの<strong>場所</strong>を指定します。ここでは <code>css/style.css</code> を指定しています。</td>
       </tr>
       <tr>
-        <td><code>rel</code></td>
-        <td>HTMLと読み込むファイルの関係を指定します。CSSの場合は <code>stylesheet</code> と書きます。</td>
+        <td><code>rel</code><br><small>relation</small><br><strong>関係</strong></td>
+        <td>HTMLと読み込むファイルの<strong>関係</strong>を指定します。CSSの場合は <code>stylesheet</code> と書きます。</td>
       </tr>
     </table>
 
+    <div class="note">
+      <span class="label">略語の意味</span><br>
+      <code>href</code> は <strong>hypertext reference（ハイパーテキスト参照）</strong> の略で、「他のファイルを参照する」という意味です。<br>
+      <code>rel</code> は <strong>relation（関係）</strong> の略です。「読み込むファイルが、このHTMLにとって何なのか」を伝えています。<br>
+      どちらも<strong>この先ずっと使い続ける</strong>ものです。意味を知っておくと、書き間違いが減ります。
+    </div>
+
     <h3>index.html</h3>
-    <pre><code>&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;練習&lt;/title&gt;
-    &lt;link href="css/style.css" rel="stylesheet"&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;div&gt;
+    <pre><code>&lt;<span class="sy-tag">html</span>&gt;
+  &lt;<span class="sy-tag">head</span>&gt;
+    &lt;<span class="sy-tag">title</span>&gt;練習&lt;/<span class="sy-tag">title</span>&gt;
+    &lt;<span class="sy-tag">link</span> <span class="sy-attr">href</span>=<span class="sy-str">"css/style.css"</span> <span class="sy-attr">rel</span>=<span class="sy-str">"stylesheet"</span>&gt;
+  &lt;/<span class="sy-tag">head</span>&gt;
+  &lt;<span class="sy-tag">body</span>&gt;
+    &lt;<span class="sy-tag">div</span>&gt;
       おはよう
-    &lt;/div&gt;
-    &lt;p&gt;
+    &lt;/<span class="sy-tag">div</span>&gt;
+    &lt;<span class="sy-tag">p</span>&gt;
       こんにちは
-    &lt;/p&gt;
-    &lt;span&gt;
+    &lt;/<span class="sy-tag">p</span>&gt;
+    &lt;<span class="sy-tag">span</span>&gt;
       さようなら
-    &lt;/span&gt;
-    &lt;span&gt;おやすみ&lt;/span&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre>
+    &lt;/<span class="sy-tag">span</span>&gt;
+    &lt;<span class="sy-tag">span</span>&gt;おやすみ&lt;/<span class="sy-tag">span</span>&gt;
+  &lt;/<span class="sy-tag">body</span>&gt;
+&lt;/<span class="sy-tag">html</span>&gt;</code></pre>
 
     <h3>css/style.css</h3>
-    <pre><code>div {
-  height: 100px;
-  background-color: #d9e021;
+    <pre><code><span class="sy-sel">div</span> {
+  <span class="sy-attr">height</span>: <span class="sy-num">100px</span>;
+  <span class="sy-attr">background-color</span>: <span class="sy-str">#d9e021</span>;
 }
 
-p {
-  width: 70%;
-  height: 50px;
-  background-color: #f9b9d5;
-  text-align: center;
+<span class="sy-sel">p</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">70%</span>;
+  <span class="sy-attr">height</span>: <span class="sy-num">50px</span>;
+  <span class="sy-attr">background-color</span>: <span class="sy-str">#f9b9d5</span>;
+  <span class="sy-attr">text-align</span>: <span class="sy-str">center</span>;
 }
 
-span {
-  border: 1px dotted #f9b9d5;
-  font-family: serif;
+<span class="sy-sel">span</span> {
+  <span class="sy-attr">border</span>: <span class="sy-num">1px</span> <span class="sy-str">dotted</span> <span class="sy-str">#f9b9d5</span>;
+  <span class="sy-attr">font-family</span>: <span class="sy-str">serif</span>;
 }</code></pre>
 
-    <div>
-          <img
-          src="../img/beginner1_6.png"
-          style="max-width: 100%; height: auto; display: block;"
-        >
+    <h3>読み込んだ結果</h3>
+
+    <div class="pair">
+      <div class="vscode">
+        <div class="vscode-titlebar">
+          <span class="win-dot red"></span>
+          <span class="win-dot yellow"></span>
+          <span class="win-dot green"></span>
+          <span class="vscode-title">style.css — Visual Studio Code</span>
+        </div>
+        <div class="vscode-tabs">
+          <div class="vscode-tab">index.html</div>
+          <div class="vscode-tab is-active">style.css</div>
+        </div>
+        <div class="vscode-body">
+          <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16</div>
+          <pre class="vscode-code"><span class="sy-sel">div</span> {
+  <span class="sy-attr">height</span>: <span class="sy-num">100px</span>;
+  <span class="sy-attr">background-color</span>: <span class="sy-str">#d9e021</span>;
+}
+
+<span class="sy-sel">p</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">70%</span>;
+  <span class="sy-attr">height</span>: <span class="sy-num">50px</span>;
+  <span class="sy-attr">background-color</span>: <span class="sy-str">#f9b9d5</span>;
+  <span class="sy-attr">text-align</span>: <span class="sy-str">center</span>;
+}
+
+<span class="sy-sel">span</span> {
+  <span class="sy-attr">border</span>: <span class="sy-num">1px</span> <span class="sy-str">dotted</span> <span class="sy-str">#f9b9d5</span>;
+  <span class="sy-attr">font-family</span>: <span class="sy-str">serif</span>;
+}</pre>
+        </div>
+      </div>
+
+      <div class="chrome">
+        <div class="chrome-tabbar">
+          <span class="win-dot red"></span>
+          <span class="win-dot yellow"></span>
+          <span class="win-dot green"></span>
+          <div class="chrome-tab">練習</div>
+        </div>
+        <div class="chrome-toolbar">
+          <span class="chrome-nav">←　→　⟳</span>
+          <div class="chrome-url">file:///C:/Users/自分のユーザー名/Desktop/index.html</div>
+        </div>
+        <div class="chrome-viewport">
+          <div class="css-div">おはよう</div>
+          <p class="css-p">こんにちは</p>
+          <span class="css-span">さようなら</span>
+          <span class="css-span">おやすみ</span>
+        </div>
+      </div>
     </div>
-        <div>
-          <img
-          src="../img/beginner1_7.png"
-          style="max-width: 100%; height: auto; display: block;"
-        >
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      HTMLは9章とまったく同じで、変えたのは <code>style.css</code> だけです。それでも <code>div</code> に高さと黄緑の背景、<code>p</code> に幅70%とピンクの背景と中央寄せ、<code>span</code> に点線の枠と明朝体が付きました。<strong>構造はHTML、見た目はCSS</strong>という分担がここで実感できます。
     </div>
 
     <h3>単位について</h3>
@@ -992,11 +946,44 @@ span {
       CSSでは、色を <code>#FF0000</code> のような6桁のカラーコードで指定できます。<code>#</code> の後に数字やアルファベットを組み合わせて色を表します。
     </p>
 
-    <pre><code>#FF0000  赤
-#000000  黒
-#00FF00  緑
-#CCCCDD  薄い青紫
-#9932CC  紫</code></pre>
+    <table>
+      <tr>
+        <th>カラーコード</th>
+        <th>色</th>
+        <th>見本</th>
+      </tr>
+      <tr>
+        <td><code>#FF0000</code></td>
+        <td>赤</td>
+        <td><span class="color-chip" style="background: #FF0000;"></span></td>
+      </tr>
+      <tr>
+        <td><code>#000000</code></td>
+        <td>黒</td>
+        <td><span class="color-chip" style="background: #000000;"></span></td>
+      </tr>
+      <tr>
+        <td><code>#00FF00</code></td>
+        <td>緑</td>
+        <td><span class="color-chip" style="background: #00FF00;"></span></td>
+      </tr>
+      <tr>
+        <td><code>#CCCCDD</code></td>
+        <td>薄い青紫</td>
+        <td><span class="color-chip" style="background: #CCCCDD;"></span></td>
+      </tr>
+      <tr>
+        <td><code>#9932CC</code></td>
+        <td>紫</td>
+        <td><span class="color-chip" style="background: #9932CC;"></span></td>
+      </tr>
+    </table>
+
+    <div class="note">
+      <span class="label">6桁の意味</span><br>
+      6桁は<strong>2桁ずつ3つ</strong>に分かれていて、順に<strong>赤・緑・青</strong>の強さを表しています。<code>#FF0000</code> なら「赤が最大、緑と青はゼロ」なので赤になります。<br>
+      いまは仕組みを覚えなくて大丈夫です。<strong>色は自分で考えず、デザインで指定されたコードをそのまま使います。</strong>
+    </div>
   </section>
 
   <section id="chapter11">
@@ -1006,36 +993,245 @@ span {
       ここでは、枠や文字を装飾するときによく使うCSSプロパティを確認します。最初からすべて暗記する必要はありません。「こういう指定ができる」と知っておけば十分です。
     </p>
 
-    </div>
-        <div>
-          <img
-          src="../img/beginner1_8.png"
-          style="max-width: 100%; height: auto; display: block;"
-        >
+    <div class="note">
+      <span class="label">見方</span><br>
+      「見本」の列は画像ではなく、<strong>実際にそのプロパティを効かせて作っています</strong>。ページを拡大しても崩れません。
     </div>
 
-    </div>
-        <div>
-          <img
-          src="../img/beginner1_9.png"
-          style="max-width: 100%; height: auto; display: block;"
-        >
+    <div class="prop-group">
+      <h3>★ 枠のかたちに関するプロパティ</h3>
+      <table class="prop-table">
+        <tr>
+          <th class="prop-name">プロパティ</th>
+          <th class="prop-demo">見本</th>
+          <th class="prop-desc">説明</th>
+        </tr>
+        <tr>
+          <td class="prop-name"><code>width</code><small>ウィズ</small></td>
+          <td class="prop-demo">
+            <div class="pd-w1"></div>
+            <div class="pd-w2"></div>
+          </td>
+          <td class="prop-desc">
+            要素の幅を指定します。単位は <code>px</code>、<code>%</code>、<code>vw</code> などを使います。
+            <code>width: 100px;</code>
+          </td>
+        </tr>
+        <tr>
+          <td class="prop-name"><code>height</code><small>ハイト</small></td>
+          <td class="prop-demo">
+            <div class="pd-hrow">
+              <div class="pd-h1"></div>
+              <div class="pd-h2"></div>
+            </div>
+          </td>
+          <td class="prop-desc">
+            要素の高さを指定します。単位は <code>px</code>、<code>vh</code> などを使います。
+            <code>height: 50px;</code>
+          </td>
+        </tr>
+        <tr>
+          <td class="prop-name"><code>background</code><small>バックグラウンド</small></td>
+          <td class="prop-demo">
+            <div class="pd-bg"></div>
+          </td>
+          <td class="prop-desc">
+            要素の背景色や背景画像を指定します。
+            <code>background: #f9b9d5;</code>
+            <br>
+            背景色だけを指定するときは <code>background-color</code> を使います。
+          </td>
+        </tr>
+        <tr>
+          <td class="prop-name"><code>border</code><small>ボーダー</small></td>
+          <td class="prop-demo">
+            <div class="pd-border"></div>
+          </td>
+          <td class="prop-desc">
+            枠線の太さ・形・色を指定します。
+            <code>border: 2px solid #334155;</code>
+          </td>
+        </tr>
+      </table>
     </div>
 
-    </div>
-        <div>
-          <img
-          src="../img/beginner1_10.png"
-          style="max-width: 100%; height: auto; display: block;"
-        >
+    <div class="prop-group">
+      <h3>★ 枠の余白に関するプロパティ</h3>
+      <table class="prop-table">
+        <tr>
+          <th class="prop-name">プロパティ</th>
+          <th class="prop-demo">見本（斜線が余白）</th>
+          <th class="prop-desc">説明</th>
+        </tr>
+        <tr>
+          <td class="prop-name"><code>margin</code><small>マージン</small></td>
+          <td class="prop-demo">
+            <div class="pd-space">
+              <div class="pd-margin-box">
+                <div class="pd-inner">要素</div>
+              </div>
+            </div>
+          </td>
+          <td class="prop-desc">
+            枠線の<strong>外側</strong>にできる余白です。隣の要素との間隔を空けたいときに使います。
+            <code>margin: 10px;</code>
+            <br>
+            値を4つ並べると <strong>上・右・下・左</strong> の順で指定できます。
+            <code>margin: 0 10px 0 0;</code>
+          </td>
+        </tr>
+        <tr>
+          <td class="prop-name"><code>padding</code><small>パディング</small></td>
+          <td class="prop-demo">
+            <div class="pd-space pd-padding-box">
+              <div class="pd-inner">中身</div>
+            </div>
+          </td>
+          <td class="prop-desc">
+            枠線の<strong>内側</strong>にできる余白です。枠線と中身がくっつかないようにするときに使います。
+            <code>padding: 10px;</code>
+            <br>
+            padding は「詰め物」という意味です。肩パッドの pad と同じで、枠の中に詰めるものを指します。
+          </td>
+        </tr>
+      </table>
+
+      <div class="point">
+        <span class="label">見分け方</span><br>
+        上の2つの図で、<strong>黒い枠線がどちら側にあるか</strong>を見比べてください。斜線（余白）が枠線の<strong>外</strong>にあるのが <code>margin</code>、<strong>内</strong>にあるのが <code>padding</code> です。<br>
+        同じ <code>10px</code> でも、<code>margin</code> は要素の周りに空間を作るだけですが、<code>padding</code> は<strong>要素自体が大きくなります</strong>。
+      </div>
     </div>
 
+    <div class="prop-group">
+      <h3>★ 枠の中の文字に関するプロパティ</h3>
+      <table class="prop-table">
+        <tr>
+          <th class="prop-name">プロパティ</th>
+          <th class="prop-demo">見本</th>
+          <th class="prop-desc">説明</th>
+        </tr>
+        <tr>
+          <td class="prop-name"><code>color</code><small>カラー</small></td>
+          <td class="prop-demo"><span class="pd-color">あいうえお</span></td>
+          <td class="prop-desc">
+            文字の色を指定します。
+            <code>color: #dc2626;</code>
+          </td>
+        </tr>
+        <tr>
+          <td class="prop-name"><code>font-size</code><small>フォントサイズ</small></td>
+          <td class="prop-demo">
+            <span class="pd-fs-s">あいう</span>
+            <span class="pd-fs-l">あいう</span>
+          </td>
+          <td class="prop-desc">
+            文字のサイズを指定します。
+            <code>font-size: 12px;</code>
+          </td>
+        </tr>
+        <tr>
+          <td class="prop-name"><code>font-family</code><small>フォントファミリー</small></td>
+          <td class="prop-demo">
+            <div class="pd-sans">あいうえお</div>
+            <div class="pd-serif">あいうえお</div>
+          </td>
+          <td class="prop-desc">
+            文字の書体を指定します。上が <code>sans-serif</code>、下が <code>serif</code> です。
+            <code>font-family: serif;</code>
+          </td>
+        </tr>
+        <tr>
+          <td class="prop-name"><code>text-align</code><small>テキストアライン</small></td>
+          <td class="prop-demo">
+            <div class="pd-align">右寄せ</div>
+          </td>
+          <td class="prop-desc">
+            左右や中央など、配置位置を指定します。
+            <code>text-align: right;</code>
+          </td>
+        </tr>
+        <tr>
+          <td class="prop-name"><code>line-height</code><small>ラインハイト</small></td>
+          <td class="prop-demo">
+            <div class="pd-lh-n">あいうえお<br>かきくけこ</div>
+            <div class="pd-lh-w">あいうえお<br>かきくけこ</div>
+          </td>
+          <td class="prop-desc">
+            行間を指定します。上が狭く、下が広い状態です。
+            <code>line-height: 1.6;</code>
+            <br>
+            単位を付けずに書きます。<code>1.6em</code> のように単位を付けると、文字サイズの違う要素で行間が崩れることがあります。
+          </td>
+        </tr>
+      </table>
     </div>
-        <div>
-          <img
-          src="../img/beginner1_11.png"
-          style="max-width: 100%; height: auto; display: block;"
-        >
+
+    <div class="prop-group">
+      <h3>★★★ 配置（レイアウト）に関するプロパティ</h3>
+      <table class="prop-table">
+        <tr>
+          <th class="prop-name">プロパティ</th>
+          <th class="prop-demo">見本</th>
+          <th class="prop-desc">説明</th>
+        </tr>
+        <tr>
+          <td class="prop-name"><code>display</code><small>ディスプレイ</small></td>
+          <td class="prop-demo">
+            <span class="pd-chip pd-block">block</span>
+            <span class="pd-chip pd-block">block</span>
+            <span class="pd-chip pd-inline">inline</span>
+            <span class="pd-chip pd-inline">inline</span>
+          </td>
+          <td class="prop-desc">
+            枠の性質そのものを変更します。<code>block</code> は下に積まれ、<code>inline</code> は横に並びます。
+            <code>display: block;</code>
+          </td>
+        </tr>
+        <tr>
+          <td class="prop-name"><code>position</code><small>ポジション</small></td>
+          <td class="prop-demo">
+            <div class="pd-stage">
+              <div class="pd-pos-ghost"></div>
+              <div class="pd-pos-moved"></div>
+            </div>
+          </td>
+          <td class="prop-desc">
+            要素の位置を、相対的な位置か絶対的な位置かで指定します。点線が本来の位置、青が動かした後です。
+            <code>position: relative;</code>
+            <br>
+            相対的と絶対的の違いは、まず言葉だけ覚えておけば十分です。
+          </td>
+        </tr>
+        <tr>
+          <td class="prop-name"><code>z-index</code><small>ゼットインデックス</small></td>
+          <td class="prop-demo">
+            <div class="pd-stage">
+              <div class="pd-z1"></div>
+              <div class="pd-z2"></div>
+            </div>
+          </td>
+          <td class="prop-desc">
+            要素が重なるときの<strong>重ね順</strong>を変更します。数字が大きいほど手前に来ます。
+            <code>z-index: 2;</code>
+          </td>
+        </tr>
+        <tr>
+          <td class="prop-name"><code>float</code><small>フロート</small></td>
+          <td class="prop-demo">
+            <div class="pd-float">
+              <div class="pd-float-box"></div>
+              青い枠の右側に、文章が回り込んで並びます。
+            </div>
+          </td>
+          <td class="prop-desc">
+            回り込みを指定します。左右どちらかに寄せて、文章を横へ流します。
+            <code>float: left;</code>
+            <br>
+            現在は <code>display: flex</code> や <code>display: grid</code> で代替できるため、あまり使われません。
+          </td>
+        </tr>
+      </table>
     </div>
 
     <div class="point">
@@ -1048,6 +1244,8 @@ span {
 
 <footer>
 </footer>
+
+<script src="../js/training.js"></script>
 
 </body>
 </html>
