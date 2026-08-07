@@ -150,6 +150,63 @@ li {
   letter-spacing: 0.04em;
 }
 
+/* ダウンロードボタン */
+.dl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #2563eb;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1;
+  padding: 11px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.dl-btn:hover {
+  background: #1d4ed8;
+  text-decoration: none;
+}
+.dl-btn img {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+.dl-note {
+  margin-left: 10px;
+  font-size: 14px;
+  color: #64748b;
+}
+
+/* サンプルサイトを開くリンク（アウトラインボタン） */
+.open-site-wrap {
+  text-align: center;
+  margin: 14px 0 4px;
+}
+.open-site {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 16px;
+  border: 1.5px solid #2563eb;
+  border-radius: 8px;
+  color: #2563eb;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  background: #fff;
+}
+.open-site:hover {
+  background: #eff6ff;
+  text-decoration: none;
+}
+.open-site svg {
+  width: 16px;
+  height: 16px;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -338,8 +395,10 @@ pre code {
 
 .vscode-body {
   display: flex;
+  align-items: flex-start;
   padding: 14px 0;
-  overflow-x: auto;
+  max-height: 460px;
+  overflow: auto;
 }
 
 .vscode-gutter {
@@ -365,6 +424,15 @@ pre code {
   flex: 1;
   padding: 0 18px 0 0;
   border-radius: 0;
+}
+
+/* 行番号カラムを左端に固定：縦はコードと一緒に、横スクロールでは左に張り付く */
+.vscode-gutter {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: #1e1e1e;
+  box-shadow: 1px 0 0 #333;
 }
 
 /* シンタックスハイライト（VS Code Dark+ 準拠） */
@@ -1105,4 +1173,126 @@ footer {
 th code,
 td code {
   overflow-wrap: break-word;
+}
+
+/* ============================================================
+   章ナビゲーション（スクロールに追従する目次）
+   HTMLは書かない。読み込み時にスクリプトが見出しから自動生成する
+   ============================================================ */
+.chapter-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(233, 237, 243, 0.94);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid #cbd5e1;
+}
+
+.chapter-nav-inner {
+  display: flex;
+  gap: 7px;
+  width: min(1000px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 10px 0;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.chapter-nav a {
+  flex: none;
+  padding: 6px 14px;
+  border: 1px solid #d7dee8;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #475569;
+  font-size: 13px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.chapter-nav a:hover {
+  border-color: #93c5fd;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+/* いま読んでいる章 */
+.chapter-nav a.is-current {
+  border-color: #2563eb;
+  background: #2563eb;
+  color: #ffffff;
+}
+
+/* アンカーで飛んだとき、見出しがナビの下に隠れないようにする */
+main section[id] {
+  scroll-margin-top: 62px;
+}
+
+/* ============================================================
+   先頭へ戻るボタン（右下に固定）
+   HTMLは書かない。スクリプトが生成する
+   ============================================================ */
+.to-top {
+  position: fixed;
+  /* 本文の右端と画面の右端の、ちょうど中間に置く。
+     画面が広いほど余白の真ん中へ寄り、狭い画面では 20px で止める */
+  right: max(20px, calc((100% - 1000px) / 4 - 24px));
+  bottom: 30px;
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid #cbd5e1;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.16);
+  color: #334155;
+  cursor: pointer;
+  /* 少しスクロールするまでは隠しておく */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease,
+    background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.to-top:hover {
+  border-color: #93c5fd;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+@media (max-width: 780px) {
+  .chapter-nav-inner {
+    width: calc(100% - 24px);
+    gap: 6px;
+    padding: 8px 0;
+  }
+
+  .chapter-nav a {
+    padding: 5px 11px;
+    font-size: 12px;
+  }
+
+  main section[id] {
+    scroll-margin-top: 54px;
+  }
+
+  .to-top {
+    right: 18px;
+    bottom: 18px;
+    width: 44px;
+    height: 44px;
+  }
 }

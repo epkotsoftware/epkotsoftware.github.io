@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>p2_2 中央寄せ（header_contents 導入）</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Helvetica Neue", Arial, "Hiragino Sans", Meiryo, sans-serif; background: #f4f4f4; color: #333; padding: 12px; }
+
+    .lbl { position: absolute; top: 4px; left: 8px; font-size: 11px; color: #666; background: #f4f4f4; padding: 0 3px; z-index: 3; white-space: nowrap; }
+    .lbl.r { left: auto; right: 8px; }
+
+    /* header：全幅の箱（帯）＋中央寄せの header_contents */
+    .header { position: relative; border: 2px solid #e5484d; padding: 16px 0; }
+    .header_contents { position: relative; width: 980px; margin: 0 auto; height: 120px; border: 2px solid #e5484d; }
+    .logo { position: relative; width: 220px; height: 56px; border: 2px solid #e5484d; margin: 20px; }
+
+    /* contents：980px 中央寄せ。text と menu はまだ縦積み */
+    .contents { width: 980px; margin: 0 auto; }
+    .visual { position: relative; height: 320px; border: 2px solid #2b6cb0; margin-top: 16px; }
+    .copy { position: relative; width: 400px; height: 110px; border: 2px solid #2b6cb0; margin: 20px; }
+    .text { position: relative; height: 120px; border: 2px solid #30a46c; margin-top: 16px; }
+    .menu { position: relative; height: 100px; border: 2px solid #30a46c; margin-top: 16px; }
+
+    /* footer：全幅の箱（帯）＋中央寄せの footer_contents */
+    .footer { position: relative; border: 2px solid #8e4ec6; padding: 16px 0; margin-top: 16px; }
+    .footer_contents { position: relative; width: 980px; margin: 0 auto; height: 100px; border: 2px solid #8e4ec6; }
+  </style>
+</head>
+<body>
+  <div class="header"><span class="lbl">.header（全幅の帯）</span>
+    <div class="header_contents"><span class="lbl r">.header_contents（980px 中央）</span>
+      <div class="logo"><span class="lbl r">.logo</span></div>
+    </div>
+  </div>
+
+  <div class="contents">
+    <div class="visual"><span class="lbl">.visual</span>
+      <div class="copy"><span class="lbl r">.copy</span></div>
+    </div>
+    <div class="text"><span class="lbl">.text</span></div>
+    <div class="menu"><span class="lbl">.menu</span></div>
+  </div>
+
+  <div class="footer"><span class="lbl">.footer（全幅の帯）</span>
+    <div class="footer_contents"><span class="lbl r">.footer_contents（980px 中央）</span></div>
+  </div>
+</body>
+</html>

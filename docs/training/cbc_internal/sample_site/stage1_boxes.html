@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAMPLE SITE - 段階1 枠のみ</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* 中身は 980px に固定して中央寄せ（全幅の帯の中に置く） */
+    .header_contents,
+    .contents,
+    .footer_contents {
+      width: 980px;
+      margin: 0 auto;
+    }
+
+    /* ヘッダー：全幅の帯（下線が画面端まで伸びる） */
+    .header {
+      border-bottom: 1px solid #cbd5e1;
+    }
+    .header_contents {
+      height: 150px;
+      border: 2px solid #e5484d;
+    }
+    .logo {
+      width: 220px;
+      height: 60px;
+      border: 2px solid #e5484d;
+      margin: 20px;
+    }
+
+    .visual {
+      height: 400px;
+      border: 2px solid #2b6cb0;
+      margin-top: 20px;
+    }
+    .copy {
+      width: 400px;
+      height: 120px;
+      border: 2px solid #2b6cb0;
+      margin: 20px;
+    }
+
+    /* text と menu を横並びにする */
+    .text_wrapper {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .text {
+      width: 600px;
+      height: 140px;
+      border: 2px solid #30a46c;
+      margin-right: 16px;
+    }
+    .menu {
+      width: 344px;
+      height: 140px;
+      border: 2px solid #30a46c;
+    }
+
+    /* フッター：全幅の暗い帯（画面端まで伸びる） */
+    .footer {
+      background: #222;
+      margin-top: 20px;
+      margin-bottom: 40px;
+    }
+    .footer_contents {
+      height: 120px;
+      border: 2px solid #8e4ec6;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header_contents">
+    <div class="logo">logo</div>
+  </div>
+</div>
+
+<div class="contents">
+  <div class="visual">
+    <div class="copy">copy</div>
+  </div>
+
+  <div class="text_wrapper">
+    <div class="text">text</div>
+    <div class="menu">menu</div>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="footer_contents">SAMPLE SITE</div>
+</div>
+
+</body>
+</html>

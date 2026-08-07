@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8">
+<style>
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Hiragino Sans",Meiryo,sans-serif; background:#fff; padding:24px; }
+  .wrap { display:flex; align-items:center; gap:0; }
+  .side { width:340px; }
+  .side > .cap { font-size:13px; font-weight:bold; color:#333; margin-bottom:8px; }
+  .code { background:#0f1b2d; border-radius:8px; padding:16px; font:13px/2.1 "SFMono-Regular",Consolas,monospace; color:#e6edf3; }
+  .tag{color:#7ee787}.at{color:#79c0ff}.pu{color:#8b98a5}.br{color:#8b98a5}
+  .name { border-radius:3px; padding:1px 4px; font-weight:bold; color:#1a1a1a; }
+  .n-header { background:#ffd6a5; }   /* header = オレンジ系 */
+  .n-logo   { background:#a5d8ff; }   /* logo = 青系 */
+  .mid { width:120px; text-align:center; position:relative; }
+  .mid .arw { color:#f5a623; font-size:22px; }
+  .mid .txt { font-size:11px; color:#888; margin-top:2px; }
+</style></head>
+<body>
+  <div class="wrap">
+    <div class="side">
+      <div class="cap">HTML</div>
+      <div class="code">
+        <span class="pu">&lt;</span><span class="tag">div</span> <span class="at">class</span><span class="pu">=</span><span class="pu">"</span><span class="name n-header">header</span><span class="pu">"&gt;</span><br>
+        &nbsp;&nbsp;<span class="pu">&lt;</span><span class="tag">div</span> <span class="at">class</span><span class="pu">=</span><span class="pu">"</span><span class="name n-logo">logo</span><span class="pu">"&gt;&lt;/</span><span class="tag">div</span><span class="pu">&gt;</span><br>
+        <span class="pu">&lt;/</span><span class="tag">div</span><span class="pu">&gt;</span>
+      </div>
+    </div>
+
+    <div class="mid">
+      <div class="arw">──▶</div>
+      <div class="arw" style="margin-top:26px">──▶</div>
+    </div>
+
+    <div class="side">
+      <div class="cap">CSS</div>
+      <div class="code">
+        <span class="br">.</span><span class="name n-header">header</span> <span class="pu">{ ... }</span><br><br>
+        <span class="br">.</span><span class="name n-logo">logo</span> <span class="pu">{ ... }</span>
+      </div>
+    </div>
+  </div>
+</body></html>

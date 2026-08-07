@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WEBサイト制作3 — 画像・色・テキストの配置と完成</title>
+  <link rel="stylesheet" href="../css/training.css" />
+</head>
+<body>
+
+<!-- ============================================================
+     ヘッダー
+     ============================================================ -->
+<header>
+  <div class="header-inner">
+    <h1>WEBサイト制作3</h1>
+    <p>画像・色・テキストの配置と、シンプルなWebサイトの完成</p>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============================================================
+       目次
+       ============================================================ -->
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol start="14">
+      <li><a href="#chapter14">枠の中に画像や色を入れる</a></li>
+      <li><a href="#chapter15">枠の中にテキストとリストを入れる</a></li>
+      <li><a href="#chapter16">シンプルなWebサイトの完成</a></li>
+    </ol>
+
+    <p class="lead" style="margin-top: 8px;">
+      このページでは、これまでに組み立てた「枠（ボックス）」の中に、ロゴ画像・背景色・背景画像・テキスト・リストを入れていき、1つの完成した「SAMPLE SITE」を作り上げます。
+    </p>
+  </section>
+
+
+  <!-- ============================================================
+       14. 枠の中に画像や色を入れる
+       ============================================================ -->
+  <section id="chapter14">
+    <h2>14. 枠の中に画像や色を入れる</h2>
+
+    <p>
+      前のページで用意した「枠（ボックス）」の中に、いよいよ中身を入れていきます。まずは画像と色です。画像の表示には大きく2つの方法があります。
+    </p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h4>HTMLの <code>&lt;img&gt;</code> タグ</h4>
+        <p>画像そのものを1つの部品として枠の中に「置く」方法です。ロゴやアイコンなど、画像単体を表示したいときに使います。</p>
+      </div>
+      <div class="card">
+        <h4>CSSの <code>background</code> プロパティ</h4>
+        <p>枠の背景として画像を「敷く」方法です。画像の上に文字を重ねて表示したいときに向いています。</p>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">はじめに：素材をダウンロードして配置する</span><br>
+      この章で使うロゴ画像は、下のボタンからダウンロードできます。ダウンロードして展開し、出てきた <code>images</code> フォルダを <code>index.html</code> と同じ場所に置きましょう。<br>
+      <a class="dl-btn" href="assets/images.zip" style="margin-top:10px;">
+        <img src="assets/download.svg" alt="" width="18" height="18">images.zip をダウンロード
+      </a><span class="dl-note">ロゴなどの画像素材一式</span>
+    </div>
+
+    <h3>ロゴ画像を <code>&lt;img&gt;</code> で置く</h3>
+    <p>
+      ヘッダーの <code>logo</code> という枠の中に、<code>&lt;img&gt;</code> タグで画像を、続けてサイト名の文字を入れます。<code>src</code> という属性は source（ソース＝元）の略で、表示する画像ファイルの場所を指定します。ここでは前ページで用意した「中央寄せの受け皿」である <code>header_contents</code> の中に <code>logo</code> を置いています（<code>header_contents</code> の役割は前ページを参照）。
+    </p>
+
+    <div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">index.html</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">index.html</div></div><div class="vscode-body"><pre class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8</pre><pre class="vscode-code">&lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"header"</span>&gt;
+  &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"header_contents"</span>&gt;
+    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"logo"</span>&gt;
+      &lt;<span class="sy-tag">img</span> <span class="sy-attr">class</span>=<span class="sy-str">"mark"</span> <span class="sy-attr">src</span>=<span class="sy-str">"images/logo_mark.svg"</span> <span class="sy-attr">alt</span>=<span class="sy-str">""</span> <span class="sy-attr">width</span>=<span class="sy-str">"40"</span> <span class="sy-attr">height</span>=<span class="sy-str">"40"</span>&gt;
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"name"</span>&gt;SAMPLE SITE&lt;/<span class="sy-tag">div</span>&gt;
+    &lt;/<span class="sy-tag">div</span>&gt;
+  &lt;/<span class="sy-tag">div</span>&gt;
+&lt;/<span class="sy-tag">div</span>&gt;</pre></div></div>
+
+    <p>
+      CSSでは、親要素の <code>logo</code> に <code>display: flex</code> を指定して画像と文字を横並びにし、<code>align-items: center</code> で上下（天地）の中央に揃えます。
+    </p>
+
+    <div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">css/style.css</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">css/style.css</div></div><div class="vscode-body"><pre class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17</pre><pre class="vscode-code"><span class="sy-sel">.logo</span> {
+  <span class="sy-attr">display</span>: flex;
+  <span class="sy-attr">align-items</span>: center;
+}
+
+<span class="sy-sel">.logo .mark</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">40px</span>;
+  <span class="sy-attr">height</span>: <span class="sy-num">40px</span>;
+  <span class="sy-attr">border-radius</span>: <span class="sy-num">8px</span>;
+  <span class="sy-attr">margin-right</span>: <span class="sy-num">12px</span>;
+}
+
+<span class="sy-sel">.logo .name</span> {
+  <span class="sy-attr">font-size</span>: <span class="sy-num">20px</span>;
+  <span class="sy-attr">font-weight</span>: bold;
+  <span class="sy-attr">letter-spacing</span>: <span class="sy-num">1px</span>;
+}</pre></div></div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      <code>alt</code> 属性は、画像が表示できなかったときや読み上げ時に使われる「代わりのテキスト」です。ロゴマークのように装飾目的の画像では、あえて空（<code>alt=""</code>）にすることがあります。<br>
+      なお、<code>&lt;img&gt;</code> の <code>width</code>・<code>height</code> 属性は、読み込み前にレイアウトのガタつきを防ぐための目安です。実際の表示サイズはCSSの <code>.logo .mark</code> でも指定しており、両方書かれていても問題ありません（参考）。
+    </div>
+
+    <figure>
+      <picture>
+        <source srcset="sample_site/steps/p3_1_logo.webp" type="image/webp">
+        <img src="sample_site/steps/p3_1_logo.png" alt="ヘッダーの枠にロゴマーク画像とサイト名を横並びで入れた状態" style="max-width:100%;height:auto;display:block">
+      </picture>
+      <figcaption>制作の途中経過：header の logo 枠に <code>&lt;img&gt;</code> のロゴマークとサイト名を入れ、<code>flex</code> で横並びにした状態。</figcaption>
+    </figure>
+
+    <h3>枠に背景色をつける</h3>
+    <p>
+      枠の背景色は <code>background</code>（または <code>background-color</code>）プロパティで指定します。ここではフッターの枠に濃い色（<code>#222</code>）を敷き、中の文字を <code>display: flex</code> と <code>align-items: center</code>、<code>justify-content: center</code> で中央に配置しています。
+    </p>
+
+    <div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">css/style.css</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">css/style.css</div></div><div class="vscode-body"><pre class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11</pre><pre class="vscode-code"><span class="sy-sel">.footer</span> {
+  <span class="sy-attr">background</span>: <span class="sy-num">#222</span>;
+  <span class="sy-attr">color</span>: #bbb;
+}
+
+<span class="sy-sel">.footer_contents</span> {
+  <span class="sy-attr">height</span>: <span class="sy-num">90px</span>;
+  <span class="sy-attr">display</span>: flex;
+  <span class="sy-attr">align-items</span>: center;
+  <span class="sy-attr">justify-content</span>: center;
+}</pre></div></div>
+
+    <h3>背景画像を敷いて文字を重ねる</h3>
+    <p>
+      メインビジュアルのように「画像の上に文字を重ねたい」ときは、CSSの <code>background</code> プロパティで背景画像として配置します。実習の素材では、背景画像の代わりにグラデーション（<code>linear-gradient</code>）をプレースホルダとして使っています。
+    </p>
+
+    <div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">css/style.css</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">css/style.css</div></div><div class="vscode-body"><pre class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre><pre class="vscode-code"><span class="sy-sel">.visual</span> {
+  <span class="sy-attr">height</span>: <span class="sy-num">360px</span>;
+  <span class="sy-attr">margin-top</span>: <span class="sy-num">32px</span>;
+  <span class="sy-attr">margin-bottom</span>: <span class="sy-num">40px</span>;
+  <span class="sy-attr">background</span>: <span class="sy-num">linear-gradient(120deg,</span> <span class="sy-num">#1a3a5c</span> <span class="sy-num">0%,</span> <span class="sy-num">#2b6cb0</span> <span class="sy-num">55%,</span> <span class="sy-num">#30a46c</span> <span class="sy-num">100%)</span>;
+  <span class="sy-attr">display</span>: flex;
+  <span class="sy-attr">align-items</span>: center;
+}
+
+<span class="sy-sel">.visual .copy</span> {
+  <span class="sy-attr">color</span>: #fff;
+  <span class="sy-attr">padding-left</span>: <span class="sy-num">56px</span>;
+}
+
+<span class="sy-sel">.visual .copy h1</span> {
+  <span class="sy-attr">font-size</span>: <span class="sy-num">38px</span>;
+  <span class="sy-attr">line-height</span>: <span class="sy-num">1.3</span>;
+}
+
+<span class="sy-sel">.visual .copy p</span> {
+  <span class="sy-attr">font-size</span>: <span class="sy-num">16px</span>;
+  <span class="sy-attr">margin-top</span>: <span class="sy-num">12px</span>;
+  <span class="sy-attr">opacity</span>: <span class="sy-num">.9</span>;
+}</pre></div></div>
+
+    <figure>
+      <picture>
+        <source srcset="sample_site/steps/p3_2_hero.webp" type="image/webp">
+        <img src="sample_site/steps/p3_2_hero.png" alt="ビジュアルの枠に背景（グラデーション）を敷き、その上に見出しの文字を重ねた状態" style="max-width:100%;height:auto;display:block">
+      </picture>
+      <figcaption>制作の途中経過：visual の枠に背景（グラデーション）を敷き、その上に <code>h1</code> の見出しを重ねた状態。</figcaption>
+    </figure>
+
+    <p>
+      実際の写真を背景に使う場合は、<code>background</code> に画像のURLと表示方法をまとめて指定します。書き方は次のようになります。
+    </p>
+
+    <pre><code>background: url("../images/top_bg.jpg") no-repeat center center;</code></pre>
+
+    <table>
+      <tr>
+        <th>指定</th>
+        <th>意味</th>
+      </tr>
+      <tr>
+        <td><code>url("../images/top_bg.jpg")</code></td>
+        <td>背景に使う画像ファイルの場所</td>
+      </tr>
+      <tr>
+        <td><code>no-repeat</code></td>
+        <td>画像を繰り返さない（タイル表示しない）</td>
+      </tr>
+      <tr>
+        <td><code>center</code>（1つ目）</td>
+        <td>画像の左右の位置を中央にする</td>
+      </tr>
+      <tr>
+        <td><code>center</code>（2つ目）</td>
+        <td>画像の上下の位置を中央にする</td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      パスの先頭にある <code>../</code>（ドットドットスラッシュ）は「1つ前のフォルダ」という意味です。<code>images/top_bg.jpg</code> のように <code>../</code> が無ければ「今いるフォルダの中」を指します。<br>
+      <code>style.css</code> は <code>css/</code> フォルダの中にあるので、そこから <code>images/</code> フォルダに届くには、いったん <code>../</code> で1つ上（<code>index.html</code> のある階層）に戻る必要があります。<br>
+      同じロゴ画像でも、HTMLの <code>src</code> は <code>index.html</code> から見た位置なので <code>images/logo_mark.svg</code>、CSSの <code>url</code> は <code>css/style.css</code> から見た位置なので <code>../images/…</code> と、書き出す場所によってパスが変わる点に注意しましょう。
+    </div>
+
+    <div class="note">
+      <span class="label">参考：<code>em</code> という単位</span><br>
+      <code>em</code> は「1文字分の大きさ」を表す単位です。たとえば文字サイズが <code>32px</code> のとき、行間 <code>2em</code> は <code>64px</code>（32px × 2）になります。今回のサンプルでは使っていませんが、覚えておくと便利な単位です。
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       15. 枠の中にテキストとリストを入れる
+       ============================================================ -->
+  <section id="chapter15">
+    <h2>15. 枠の中にテキストとリストを入れる</h2>
+
+    <p>
+      次は、本文のテキストと、メニューのようなリストを枠の中に入れます。テキストの枠とメニューの枠を、<code>flex</code> を使って横並びにします。
+    </p>
+
+    <h3>テキストとメニューを横に並べる</h3>
+    <div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">index.html</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">index.html</div></div><div class="vscode-body"><pre class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17</pre><pre class="vscode-code">&lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"text_wrapper"</span>&gt;
+  &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"text"</span>&gt;
+    &lt;<span class="sy-tag">h2</span>&gt;このサイトについて&lt;/<span class="sy-tag">h2</span>&gt;
+    &lt;<span class="sy-tag">p</span>&gt;枠（ボックス）を組み立て、色や画像・テキストを入れて、
+       1つのWebサイトを完成させる流れを体験します。ブラウザ上の
+       あらゆる要素が「四角い枠」で構成されていることを学びましょう。&lt;/<span class="sy-tag">p</span>&gt;
+  &lt;/<span class="sy-tag">div</span>&gt;
+  &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"menu"</span>&gt;
+    &lt;<span class="sy-tag">ul</span>&gt;
+      &lt;<span class="sy-tag">li</span>&gt;ホーム&lt;/<span class="sy-tag">li</span>&gt;
+      &lt;<span class="sy-tag">li</span>&gt;レッスン&lt;/<span class="sy-tag">li</span>&gt;
+      &lt;<span class="sy-tag">li</span>&gt;入門&lt;/<span class="sy-tag">li</span>&gt;
+      &lt;<span class="sy-tag">li</span>&gt;基礎&lt;/<span class="sy-tag">li</span>&gt;
+      &lt;<span class="sy-tag">li</span>&gt;応用&lt;/<span class="sy-tag">li</span>&gt;
+    &lt;/<span class="sy-tag">ul</span>&gt;
+  &lt;/<span class="sy-tag">div</span>&gt;
+&lt;/<span class="sy-tag">div</span>&gt;</pre></div></div>
+
+    <h3>リストのタグ</h3>
+    <p>
+      リストは <code>&lt;li&gt;</code> タグ（1項目）を、<code>&lt;ul&gt;</code> か <code>&lt;ol&gt;</code> で囲って作ります。<code>&lt;li&gt;</code> は必ずどちらかで囲みます。
+    </p>
+
+    <table>
+      <tr>
+        <th>タグ</th>
+        <th>読み方・意味</th>
+        <th>マーカー</th>
+      </tr>
+      <tr>
+        <td><code>&lt;ul&gt;</code></td>
+        <td>unordered list（順序なしリスト）</td>
+        <td>「・」などの記号</td>
+      </tr>
+      <tr>
+        <td><code>&lt;ol&gt;</code></td>
+        <td>ordered list（順序ありリスト）</td>
+        <td>1, 2, 3 … の数字</td>
+      </tr>
+      <tr>
+        <td><code>&lt;li&gt;</code></td>
+        <td>list item（リストの1項目）</td>
+        <td>―</td>
+      </tr>
+    </table>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      別のページへ移動させたいときは <code>&lt;a&gt;</code> タグ（リンク）を使います。メニューの各項目を実際のページに繋ぐ場合は、<code>&lt;li&gt;</code> の中身を <code>&lt;a&gt;</code> で囲みます。
+    </div>
+
+    <h3>リストのCSS</h3>
+    <p>
+      リストのマーカー（先頭の記号）は <code>list-style-type</code> プロパティで変更できます（<code>list-style</code> は <code>list-style-type</code> などをまとめて指定できる省略形で、<code>list-style: none</code> と <code>list-style-type: none</code> は同じ意味になります）。ここでは <code>list-style: none</code> で標準のマーカーを消し、<code>::before</code> で「▸」を自分で付けています。
+    </p>
+    <p>
+      <code>::before</code> は、要素の前に飾りを差し込むための書き方（擬似要素）です。<code>content</code> プロパティで、差し込む文字（ここでは「▸ 」）を指定します。
+    </p>
+
+    <div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">css/style.css</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">css/style.css</div></div><div class="vscode-body"><pre class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40</pre><pre class="vscode-code"><span class="sy-sel">ul</span> {
+  <span class="sy-attr">list-style</span>: none;
+}
+
+<span class="sy-sel">.text_wrapper</span> {
+  <span class="sy-attr">display</span>: flex;
+  <span class="sy-attr">justify-content</span>: center;
+  <span class="sy-attr">margin-bottom</span>: <span class="sy-num">44px</span>;
+}
+
+<span class="sy-sel">.text</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">560px</span>;
+  <span class="sy-attr">padding-right</span>: <span class="sy-num">40px</span>;
+  <span class="sy-attr">border-right</span>: <span class="sy-num">1px</span> solid #ddd;
+}
+
+<span class="sy-sel">.text h2</span> {
+  <span class="sy-attr">font-size</span>: <span class="sy-num">20px</span>;
+  <span class="sy-attr">margin-bottom</span>: <span class="sy-num">12px</span>;
+}
+
+<span class="sy-sel">.text p</span> {
+  <span class="sy-attr">line-height</span>: <span class="sy-num">1.9</span>;
+  <span class="sy-attr">color</span>: <span class="sy-num">#555</span>;
+}
+
+<span class="sy-sel">.menu</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">240px</span>;
+  <span class="sy-attr">padding-left</span>: <span class="sy-num">40px</span>;
+}
+
+<span class="sy-sel">.menu li</span> {
+  <span class="sy-attr">padding</span>: <span class="sy-num">10px</span> <span class="sy-num">0</span>;
+  <span class="sy-attr">border-bottom</span>: <span class="sy-num">1px</span> solid #eee;
+}
+
+<span class="sy-sel">.menu li::before</span> {
+  <span class="sy-attr">content</span>: "▸ ";
+  <span class="sy-attr">color</span>: <span class="sy-num">#2b6cb0</span>;
+}</pre></div></div>
+
+    <figure>
+      <picture>
+        <source srcset="sample_site/steps/p3_3_textlist.webp" type="image/webp">
+        <img src="sample_site/steps/p3_3_textlist.png" alt="テキストの枠とメニューのリストを flex で横並びに配置した状態" style="max-width:100%;height:auto;display:block">
+      </picture>
+      <figcaption>制作の途中経過：text_wrapper の中に紹介文（text）とメニュー（ul/li）を入れ、<code>flex</code> で横並びにした状態。</figcaption>
+    </figure>
+
+    <table>
+      <tr>
+        <th>値</th>
+        <th><code>list-style-type</code> での見え方</th>
+      </tr>
+      <tr>
+        <td><code>none</code></td>
+        <td>マーカーを表示しない</td>
+      </tr>
+      <tr>
+        <td><code>disc</code></td>
+        <td>●（黒丸）</td>
+      </tr>
+      <tr>
+        <td><code>circle</code></td>
+        <td>○（白丸）</td>
+      </tr>
+      <tr>
+        <td><code>decimal</code></td>
+        <td>1, 2, 3 …（数字）</td>
+      </tr>
+    </table>
+
+  </section>
+
+
+  <!-- ============================================================
+       16. シンプルなWebサイトの完成
+       ============================================================ -->
+  <section id="chapter16">
+    <h2>16. シンプルなWebサイトの完成</h2>
+
+    <p>
+      最後に、確認用に付けていた不要な枠線（<code>border</code>）や仮のテキストを整理し、フッターの中身（<code>footer_contents</code>）まで仕上げます。これまでのHTMLとCSSをまとめると、次の完成コードになります。
+    </p>
+
+    <h3>完成版 HTML</h3>
+    <div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">index.html</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">index.html</div></div><div class="vscode-body"><pre class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52</pre><pre class="vscode-code">&lt;!DOCTYPE html&gt;
+&lt;<span class="sy-tag">html</span> <span class="sy-attr">lang</span>=<span class="sy-str">"ja"</span>&gt;
+&lt;<span class="sy-tag">head</span>&gt;
+  &lt;<span class="sy-tag">meta</span> <span class="sy-attr">charset</span>=<span class="sy-str">"UTF-8"</span> /&gt;
+  &lt;<span class="sy-tag">meta</span> <span class="sy-attr">name</span>=<span class="sy-str">"viewport"</span> <span class="sy-attr">content</span>=<span class="sy-str">"width=device-width, initial-scale=1.0"</span> /&gt;
+  &lt;<span class="sy-tag">title</span>&gt;SAMPLE SITE&lt;/<span class="sy-tag">title</span>&gt;
+  &lt;<span class="sy-tag">link</span> <span class="sy-attr">href</span>=<span class="sy-str">"css/style.css"</span> <span class="sy-attr">rel</span>=<span class="sy-str">"stylesheet"</span>&gt;
+&lt;/<span class="sy-tag">head</span>&gt;
+&lt;<span class="sy-tag">body</span>&gt;
+
+  &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"header"</span>&gt;
+    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"header_contents"</span>&gt;
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"logo"</span>&gt;
+        &lt;<span class="sy-tag">img</span> <span class="sy-attr">class</span>=<span class="sy-str">"mark"</span> <span class="sy-attr">src</span>=<span class="sy-str">"images/logo_mark.svg"</span> <span class="sy-attr">alt</span>=<span class="sy-str">""</span> <span class="sy-attr">width</span>=<span class="sy-str">"40"</span> <span class="sy-attr">height</span>=<span class="sy-str">"40"</span>&gt;
+        &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"name"</span>&gt;SAMPLE SITE&lt;/<span class="sy-tag">div</span>&gt;
+      &lt;/<span class="sy-tag">div</span>&gt;
+    &lt;/<span class="sy-tag">div</span>&gt;
+  &lt;/<span class="sy-tag">div</span>&gt;
+
+  &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"contents"</span>&gt;
+    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"visual"</span>&gt;
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"copy"</span>&gt;
+        &lt;<span class="sy-tag">h1</span>&gt;Webの基礎を、&lt;<span class="sy-tag">br</span>&gt;手を動かして学ぶ。&lt;/<span class="sy-tag">h1</span>&gt;
+        &lt;<span class="sy-tag">p</span>&gt;HTML / CSS からはじめる制作入門&lt;/<span class="sy-tag">p</span>&gt;
+      &lt;/<span class="sy-tag">div</span>&gt;
+    &lt;/<span class="sy-tag">div</span>&gt;
+
+    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"text_wrapper"</span>&gt;
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"text"</span>&gt;
+        &lt;<span class="sy-tag">h2</span>&gt;このサイトについて&lt;/<span class="sy-tag">h2</span>&gt;
+        &lt;<span class="sy-tag">p</span>&gt;枠（ボックス）を組み立て、色や画像・テキストを入れて、
+           1つのWebサイトを完成させる流れを体験します。ブラウザ上の
+           あらゆる要素が「四角い枠」で構成されていることを学びましょう。&lt;/<span class="sy-tag">p</span>&gt;
+      &lt;/<span class="sy-tag">div</span>&gt;
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"menu"</span>&gt;
+        &lt;<span class="sy-tag">ul</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;ホーム&lt;/<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;レッスン&lt;/<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;入門&lt;/<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;基礎&lt;/<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;応用&lt;/<span class="sy-tag">li</span>&gt;
+        &lt;/<span class="sy-tag">ul</span>&gt;
+      &lt;/<span class="sy-tag">div</span>&gt;
+    &lt;/<span class="sy-tag">div</span>&gt;
+  &lt;/<span class="sy-tag">div</span>&gt;
+
+  &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"footer"</span>&gt;
+    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"footer_contents"</span>&gt;© SAMPLE SITE&lt;/<span class="sy-tag">div</span>&gt;
+  &lt;/<span class="sy-tag">div</span>&gt;
+
+&lt;/<span class="sy-tag">body</span>&gt;
+&lt;/<span class="sy-tag">html</span>&gt;</pre></div></div>
+
+    <h3>完成版 CSS</h3>
+    <div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">css/style.css</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">css/style.css</div></div><div class="vscode-body"><pre class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49</pre><pre class="vscode-code">* { box-sizing: border-box; margin: 0; padding: 0; }
+<span class="sy-sel">body</span> {
+  <span class="sy-attr">font-family</span>: "Helvetica Neue", Arial, "Hiragino Sans", Meiryo, sans-serif;
+  <span class="sy-attr">color</span>: <span class="sy-num">#333</span>;
+  <span class="sy-attr">background</span>: #fff;
+}
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+<span class="sy-com">/* 内側の中身を980pxで中央寄せ（全幅の受け皿の中に置く） */</span>
+.header_contents, .contents, .footer_contents { width: 980px; margin: 0 auto; }
+
+<span class="sy-com">/* ヘッダー：全幅（下線が画面端まで）／中身はheader_contentsで中央寄せ */</span>
+.header { border-bottom: 1px solid #e5e7eb; }
+.header_contents { height: 84px; display: flex; align-items: center; }
+.logo { display: flex; align-items: center; }
+<span class="sy-sel">.logo .mark</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">40px;</span> height: <span class="sy-num">40px;</span> border-radius: <span class="sy-num">8px;</span> margin-right: <span class="sy-num">12px</span>;
+}
+.logo .name { font-size: 20px; font-weight: bold; letter-spacing: 1px; }
+
+<span class="sy-com">/* ビジュアル：背景画像(プレースホルダ=グラデ)＋見出しオーバーレイ */</span>
+<span class="sy-sel">.visual</span> {
+  <span class="sy-attr">height</span>: <span class="sy-num">360px;</span> margin-top: <span class="sy-num">32px;</span> margin-bottom: <span class="sy-num">40px</span>;
+  <span class="sy-attr">background</span>: <span class="sy-num">linear-gradient(120deg,</span> <span class="sy-num">#1a3a5c</span> <span class="sy-num">0%,</span> <span class="sy-num">#2b6cb0</span> <span class="sy-num">55%,</span> <span class="sy-num">#30a46c</span> <span class="sy-num">100%)</span>;
+  <span class="sy-attr">display</span>: flex; align-items: center;
+}
+.visual .copy { color: #fff; padding-left: 56px; }
+.visual .copy h1 { font-size: 38px; line-height: 1.3; }
+.visual .copy p { font-size: 16px; margin-top: 12px; opacity: .9; }
+
+<span class="sy-com">/* テキスト＋メニュー：flexで横並び */</span>
+.text_wrapper { display: flex; justify-content: center; margin-bottom: 44px; }
+.text { width: 560px; padding-right: 40px; border-right: 1px solid #ddd; }
+.text h2 { font-size: 20px; margin-bottom: 12px; }
+.text p { line-height: 1.9; color: #555; }
+.menu { width: 240px; padding-left: 40px; }
+.menu li { padding: 10px 0; border-bottom: 1px solid #eee; }
+.menu li::before { content: "▸ "; color: #2b6cb0; }
+
+<span class="sy-com">/* フッター：全幅（暗色帯が画面端まで）／中身はfooter_contentsで中央寄せ */</span>
+.footer { background: #222; color: #bbb; }
+<span class="sy-sel">.footer_contents</span> {
+  <span class="sy-attr">height</span>: <span class="sy-num">90px</span>;
+  <span class="sy-attr">display</span>: flex;
+  <span class="sy-attr">align-items</span>: center;
+  <span class="sy-attr">justify-content</span>: center;
+  <span class="sy-attr">font-size</span>: <span class="sy-num">13px</span>;
+}</pre></div></div>
+
+    <div class="note">
+      <span class="label">参考：フッターの文字位置</span><br>
+      枠の中で文字の位置を細かく揃えたいときは、<code>align-items</code> のほか、要素1つを個別に揃える <code>align-self</code>（例：<code>align-self: flex-end</code> で枠の下端に配置）も使えます。今回のサンプルでは使っていませんが、参考として覚えておきましょう。
+    </div>
+
+    <h3>完成イメージ</h3>
+    <p>
+      すべてのコードを反映すると、次のような「SAMPLE SITE」が表示されます。
+    </p>
+
+    <div class="chrome"><div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">SAMPLE SITE</div></div><div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">https://sample-site.example/</div></div><div class="chrome-viewport" style="padding: 0;">
+        <picture>
+          <source srcset="sample_site/stage2_simple.webp" type="image/webp">
+          <img
+            src="sample_site/stage2_simple.png"
+            alt="SAMPLE SITE の完成イメージ。ロゴ入りヘッダー、グラデーションのメインビジュアル、本文とメニューの2カラム、暗色のフッター。"
+            style="max-width: 100%; height: auto; display: block;"
+          >
+        </picture>
+      </div></div>
+
+    <div class="open-site-wrap">
+      <a class="open-site" href="sample_site/stage2_simple.html" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h6"/></svg>
+        実際のサンプルサイトを開く（新しいタブ）
+      </a>
+    </div>
+
+    <h3>使ったCSSプロパティ集計</h3>
+    <p>
+      このシンプルなWebサイトで使ったCSSプロパティと、その使用回数をまとめると次のとおりです。<code>margin</code> や <code>padding</code>、<code>display</code>、<code>width</code>・<code>height</code> などの「枠を組み立てる」プロパティが多く登場していることが分かります。
+    </p>
+
+    <table>
+      <tr>
+        <th>プロパティ</th>
+        <th>使用回数</th>
+      </tr>
+      <tr><td><code>margin</code></td><td>8</td></tr>
+      <tr><td><code>font</code></td><td>7</td></tr>
+      <tr><td><code>color</code></td><td>6</td></tr>
+      <tr><td><code>display</code></td><td>5</td></tr>
+      <tr><td><code>padding</code></td><td>5</td></tr>
+      <tr><td><code>background</code></td><td>3</td></tr>
+      <tr><td><code>width</code></td><td>4</td></tr>
+      <tr><td><code>height</code></td><td>4</td></tr>
+      <tr><td><code>align-items</code></td><td>4</td></tr>
+      <tr><td><code>border</code></td><td>3</td></tr>
+      <tr><td><code>justify-content</code></td><td>2</td></tr>
+      <tr><td><code>line-height</code></td><td>2</td></tr>
+      <tr><td><code>box-sizing</code></td><td>1</td></tr>
+      <tr><td><code>border-radius</code></td><td>1</td></tr>
+      <tr><td><code>letter-spacing</code></td><td>1</td></tr>
+      <tr><td><code>opacity</code></td><td>1</td></tr>
+      <tr><td><code>list-style</code></td><td>1</td></tr>
+    </table>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      Webサイトは、たくさんの「枠」を並べ・重ね、その中に色・画像・テキスト・リストを入れていくことで組み立てられます。使うプロパティの数は決して多くありません。まずはこの十数個を使いこなせれば十分です。
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  SAMPLE SITE 内部研修資料 — WEBサイト制作3
+</footer>
+
+</body>
+</html>

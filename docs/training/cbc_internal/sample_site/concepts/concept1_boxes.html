@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8">
+<style>
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:"Hiragino Sans",Meiryo,sans-serif; background:#fff; padding:24px; }
+  .wrap { display:flex; align-items:center; gap:30px; }
+  .siteimg { height:342px; width:auto; display:block; border:1px solid #e5e7eb; border-radius:8px; }
+  .eq { font-size:38px; color:#c4c4c4; }
+  .boxes { width:372px; }
+
+  .box, .b-text, .b-menu { position:relative; background:#fafafa; }
+  .lb { position:absolute; top:4px; left:8px; font-size:11px; color:#666; background:#fafafa; padding:0 3px; white-space:nowrap; z-index:2; }
+  .box { border-width:2px; border-style:solid; border-radius:3px; margin-bottom:8px; }
+  .b-header { height:54px; border-color:#e5484d; }
+  .b-hero   { height:150px; border-color:#2b6cb0; }
+  .b-row    { display:flex; gap:8px; margin-bottom:8px; }
+  .b-text   { flex:1; height:76px; border:2px solid #30a46c; border-radius:3px; }
+  .b-menu   { width:96px; height:76px; border:2px solid #30a46c; border-radius:3px; }
+  .b-footer { height:46px; border-color:#8e4ec6; }
+  .b-logo   { position:absolute; top:24px; left:12px; width:78px; height:22px; border:2px solid #e5484d; border-radius:2px; }
+  .b-logo > .lb { left:6px; top:3px; font-size:10px; }
+</style></head>
+<body>
+  <div class="wrap">
+    <picture>
+      <source srcset="../stage2_simple.webp" type="image/webp">
+      <img class="siteimg" src="../stage2_simple.png" alt="SAMPLE SITE の完成イメージ">
+    </picture>
+
+    <div class="eq">=</div>
+
+    <div class="boxes">
+      <div class="box b-header"><span class="lb">.header</span>
+        <div class="b-logo"><span class="lb">.logo</span></div>
+      </div>
+      <div class="box b-hero"><span class="lb">.visual</span></div>
+      <div class="b-row">
+        <div class="b-text"><span class="lb">.text</span></div>
+        <div class="b-menu"><span class="lb">.menu</span></div>
+      </div>
+      <div class="box b-footer"><span class="lb">.footer</span></div>
+    </div>
+  </div>
+</body></html>

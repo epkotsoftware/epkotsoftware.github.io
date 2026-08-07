@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WEBサイト制作4 — レイアウトの拡張</title>
+  <link rel="stylesheet" href="../css/training.css" />
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>WEBサイト制作4</h1>
+    <p>完成したレイアウトを拡張する — ナビゲーション・レッスンカード・フッター</p>
+  </div>
+</header>
+
+<main>
+
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol>
+      <li><a href="#chapter1">完成したレイアウトを拡張する</a></li>
+      <li><a href="#chapter2">素材画像を準備する</a></li>
+      <li><a href="#chapter3">完成コードと表示イメージ</a></li>
+    </ol>
+  </section>
+
+
+  <section id="chapter1">
+    <h2>1. 完成したレイアウトを拡張する</h2>
+
+    <p class="lead">
+      前回までで、ヘッダー・メインビジュアル（ヒーロー）・フッターという基本のレイアウトが完成しました。ここで「メインビジュアル」と「ヒーロー」は同じ大きな見せ場のことを指す、2つの呼び方です。ここからは、その完成したレイアウトを土台にして、実際のWebサイトに近い形へ拡張していきます。
+    </p>
+
+    <p>
+      すでにある枠組みを壊さずに、部品を足していくのがこの回のテーマです。今回は次の3つを追加します。
+    </p>
+
+    <h3>3つの拡張目標</h3>
+    <ol>
+      <li><strong>ヘッダーにナビゲーションを追加する</strong>（メニューのリンクを横並びにする）</li>
+      <li><strong>コンテンツ内容を増やす</strong>（レッスンカードとキャッチコピーを追加する）</li>
+      <li><strong>フッターにリンク集を追加する</strong>（複数カラムのリンクを並べる）</li>
+    </ol>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      新しいページをゼロから作り直すのではなく、<strong>完成したレイアウトに部品を足していく</strong>のがポイントです。これまで学んだ枠（div）・見出し・flex での横並びを組み合わせるだけで、ぐっと本格的なサイトになります。
+    </div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      この回で完成する見本サイトのブランド名は「SAMPLE SITE」です。ロゴやリンク文言は自由に自分のサイト名へ置き換えて構いません。
+    </div>
+  </section>
+
+
+  <section id="chapter2">
+    <h2>2. 素材画像を準備する</h2>
+
+    <p>
+      拡張したサイトでは、ロゴやレッスンカードのサムネイルなどの画像を表示します。実際の制作では、画像素材をプロジェクト内の <code>images</code> フォルダにまとめて置きます。<br>
+      この回で作る見本サイトでは、<strong>ヘッダーのロゴ <code>logo_mark.svg</code> と、レッスンカードのサムネイル3枚（HTML &amp; CSS / JavaScript / PHP）を、いずれも実際の画像ファイル</strong>として使います。まずは下のボタンからこれらの画像をダウンロードし、展開して出てきた <code>images</code> フォルダを <code>index.html</code> と同じ場所に置きましょう。
+    </p>
+
+    <p>
+      <a class="dl-btn" href="assets/images.zip">
+        <img src="assets/download.svg" alt="" width="18" height="18">images.zip をダウンロード
+      </a><span class="dl-note">ロゴ・カードのサムネイル画像の素材一式</span>
+    </p>
+
+    <h3>フォルダ構成</h3>
+    <p>
+      これまでの <code>index.html</code> と <code>css/style.css</code> に加えて、画像をまとめる <code>images</code> フォルダを用意し、その中にロゴ画像とカードのサムネイル画像を置きます。
+    </p>
+
+    <pre><code>mysite/
+├── index.html
+├── css/
+│   └── style.css
+└── images/
+    ├── logo_mark.svg   ← ロゴ画像
+    ├── card_html.png   ← レッスンカード（HTML &amp; CSS）
+    ├── card_js.png     ← レッスンカード（JavaScript）
+    └── card_php.png    ← レッスンカード（PHP）</code></pre>
+
+    <div class="caution">
+      <span class="label">注意</span><br>
+      画像を <code>images</code> フォルダに入れたら、HTML から呼び出すときのパスに注意します。<code>index.html</code> と同じ階層に <code>images</code> フォルダがある場合、<code>&lt;img src="images/ファイル名"&gt;</code> のように書きます。ファイル名やスペルが1文字でも違うと画像は表示されません。
+    </div>
+  </section>
+
+
+  <section id="chapter3">
+    <h2>3. 完成コードと表示イメージ</h2>
+
+    <p>
+      1章で挙げた3つの拡張 ―― <strong>ヘッダーのナビゲーション</strong>・<strong>レッスンカードとキャッチコピー</strong>・<strong>フッターのリンク集</strong> ―― をすべて反映すると、拡張版のサイトが完成します。以下の <code>index.html</code> と <code>css/style.css</code> の全体を、どこに何が追加されたかを確認しながら読み進めましょう。基本はこれまでと同じ「枠（div）を作って flex で並べる」の繰り返しです。
+    </p>
+
+    <h3>index.html（全体）</h3>
+    <div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">index.html</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">index.html</div></div><div class="vscode-body"><pre class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96</pre><pre class="vscode-code">&lt;!DOCTYPE html&gt;
+&lt;<span class="sy-tag">html</span> <span class="sy-attr">lang</span>=<span class="sy-str">"ja"</span>&gt;
+&lt;<span class="sy-tag">head</span>&gt;
+  &lt;<span class="sy-tag">meta</span> <span class="sy-attr">charset</span>=<span class="sy-str">"UTF-8"</span>&gt;
+  &lt;<span class="sy-tag">meta</span> <span class="sy-attr">name</span>=<span class="sy-str">"viewport"</span> <span class="sy-attr">content</span>=<span class="sy-str">"width=device-width, initial-scale=1.0"</span>&gt;
+  &lt;<span class="sy-tag">title</span>&gt;SAMPLE SITE&lt;/<span class="sy-tag">title</span>&gt;
+  &lt;<span class="sy-tag">link</span> <span class="sy-attr">href</span>=<span class="sy-str">"css/style.css"</span> <span class="sy-attr">rel</span>=<span class="sy-str">"stylesheet"</span>&gt;
+&lt;/<span class="sy-tag">head</span>&gt;
+&lt;<span class="sy-tag">body</span>&gt;
+
+  <span class="sy-com">&lt;!-- ヘッダー：全幅＋ナビ --&gt;</span>
+  &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"header"</span>&gt;
+    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"header_contents"</span>&gt;
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"logo"</span>&gt;
+        &lt;<span class="sy-tag">img</span> <span class="sy-attr">class</span>=<span class="sy-str">"mark"</span> <span class="sy-attr">src</span>=<span class="sy-str">"images/logo_mark.svg"</span> <span class="sy-attr">alt</span>=<span class="sy-str">""</span> <span class="sy-attr">width</span>=<span class="sy-str">"40"</span> <span class="sy-attr">height</span>=<span class="sy-str">"40"</span>&gt;
+        &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"name"</span>&gt;SAMPLE SITE&lt;/<span class="sy-tag">div</span>&gt;
+      &lt;/<span class="sy-tag">div</span>&gt;
+      &lt;<span class="sy-tag">nav</span> <span class="sy-attr">class</span>=<span class="sy-str">"nav"</span>&gt;
+        &lt;<span class="sy-tag">ul</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">"#"</span>&gt;ホーム&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">"#"</span>&gt;レッスン&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">"#"</span>&gt;入門&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">"#"</span>&gt;基礎&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">"#"</span>&gt;応用&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">"#"</span>&gt;実践&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;
+        &lt;/<span class="sy-tag">ul</span>&gt;
+      &lt;/<span class="sy-tag">nav</span>&gt;
+    &lt;/<span class="sy-tag">div</span>&gt;
+  &lt;/<span class="sy-tag">div</span>&gt;
+
+  &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"contents"</span>&gt;
+    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"visual"</span>&gt;
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"copy"</span>&gt;
+        &lt;<span class="sy-tag">h1</span>&gt;Webの基礎を、&lt;<span class="sy-tag">br</span>&gt;手を動かして学ぶ。&lt;/<span class="sy-tag">h1</span>&gt;
+        &lt;<span class="sy-tag">p</span>&gt;HTML / CSS からはじめる制作入門&lt;/<span class="sy-tag">p</span>&gt;
+      &lt;/<span class="sy-tag">div</span>&gt;
+    &lt;/<span class="sy-tag">div</span>&gt;
+
+    <span class="sy-com">&lt;!-- コンテンツ追加 --&gt;</span>
+    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"lessons"</span>&gt;
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"card"</span>&gt;
+        &lt;<span class="sy-tag">img</span> <span class="sy-attr">class</span>=<span class="sy-str">"thumb"</span> <span class="sy-attr">src</span>=<span class="sy-str">"images/card_html.png"</span> <span class="sy-attr">alt</span>=<span class="sy-str">"HTML &amp;amp; CSS"</span>&gt;
+        &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"body"</span>&gt;&lt;<span class="sy-tag">h3</span>&gt;HTML &amp;amp; CSS&lt;/<span class="sy-tag">h3</span>&gt;
+          &lt;<span class="sy-tag">p</span>&gt;Webページの構造と装飾。枠組みからレイアウトまでの基礎を学びます。&lt;/<span class="sy-tag">p</span>&gt;&lt;/<span class="sy-tag">div</span>&gt;
+      &lt;/<span class="sy-tag">div</span>&gt;
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"card"</span>&gt;
+        &lt;<span class="sy-tag">img</span> <span class="sy-attr">class</span>=<span class="sy-str">"thumb"</span> <span class="sy-attr">src</span>=<span class="sy-str">"images/card_js.png"</span> <span class="sy-attr">alt</span>=<span class="sy-str">"JavaScript"</span>&gt;
+        &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"body"</span>&gt;&lt;<span class="sy-tag">h3</span>&gt;JavaScript&lt;/<span class="sy-tag">h3</span>&gt;
+          &lt;<span class="sy-tag">p</span>&gt;動きのあるページ作り。DOM操作やイベントの基本を身につけます。&lt;/<span class="sy-tag">p</span>&gt;&lt;/<span class="sy-tag">div</span>&gt;
+      &lt;/<span class="sy-tag">div</span>&gt;
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"card"</span>&gt;
+        &lt;<span class="sy-tag">img</span> <span class="sy-attr">class</span>=<span class="sy-str">"thumb"</span> <span class="sy-attr">src</span>=<span class="sy-str">"images/card_php.png"</span> <span class="sy-attr">alt</span>=<span class="sy-str">"PHP"</span>&gt;
+        &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"body"</span>&gt;&lt;<span class="sy-tag">h3</span>&gt;PHP&lt;/<span class="sy-tag">h3</span>&gt;
+          &lt;<span class="sy-tag">p</span>&gt;サーバーサイドの入門。フォーム処理やDB連携の第一歩を学びます。&lt;/<span class="sy-tag">p</span>&gt;&lt;/<span class="sy-tag">div</span>&gt;
+      &lt;/<span class="sy-tag">div</span>&gt;
+    &lt;/<span class="sy-tag">div</span>&gt;
+
+    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"catchcopy"</span>&gt;
+      &lt;<span class="sy-tag">h2</span>&gt;Work&lt;/<span class="sy-tag">h2</span>&gt;
+      &lt;<span class="sy-tag">p</span>&gt;手を動かして作る、から身につく。&lt;/<span class="sy-tag">p</span>&gt;
+    &lt;/<span class="sy-tag">div</span>&gt;
+  &lt;/<span class="sy-tag">div</span>&gt;
+
+  <span class="sy-com">&lt;!-- リンク集追加 --&gt;</span>
+  &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"footer"</span>&gt;
+    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"footer_contents"</span>&gt;
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"col"</span>&gt;
+        &lt;<span class="sy-tag">h4</span>&gt;SAMPLE SITE&lt;/<span class="sy-tag">h4</span>&gt;
+        &lt;<span class="sy-tag">ul</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">"#"</span>&gt;会社概要&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">"#"</span>&gt;お問い合わせ&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">"#"</span>&gt;プライバシー&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;
+        &lt;/<span class="sy-tag">ul</span>&gt;
+      &lt;/<span class="sy-tag">div</span>&gt;
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"col"</span>&gt;
+        &lt;<span class="sy-tag">h4</span>&gt;コース&lt;/<span class="sy-tag">h4</span>&gt;
+        &lt;<span class="sy-tag">ul</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">"#"</span>&gt;入門&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">"#"</span>&gt;基礎&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">"#"</span>&gt;応用&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;
+        &lt;/<span class="sy-tag">ul</span>&gt;
+      &lt;/<span class="sy-tag">div</span>&gt;
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"col"</span>&gt;
+        &lt;<span class="sy-tag">h4</span>&gt;リンク&lt;/<span class="sy-tag">h4</span>&gt;
+        &lt;<span class="sy-tag">ul</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">"#"</span>&gt;ホーム&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">"#"</span>&gt;レッスン&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">"#"</span>&gt;実践&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;
+        &lt;/<span class="sy-tag">ul</span>&gt;
+      &lt;/<span class="sy-tag">div</span>&gt;
+    &lt;/<span class="sy-tag">div</span>&gt;
+    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"copyright"</span>&gt;© SAMPLE SITE&lt;/<span class="sy-tag">div</span>&gt;
+  &lt;/<span class="sy-tag">div</span>&gt;
+
+&lt;/<span class="sy-tag">body</span>&gt;
+&lt;/<span class="sy-tag">html</span>&gt;</pre></div></div></div>
+
+    <h3>css/style.css（全体）</h3>
+    <div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">css/style.css</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">css/style.css</div></div><div class="vscode-body"><pre class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63</pre><pre class="vscode-code">* { box-sizing: border-box; margin: 0; padding: 0; }
+<span class="sy-sel">body</span> {
+  <span class="sy-attr">font-family</span>: "Helvetica Neue", Arial, "Hiragino Sans", Meiryo, sans-serif;
+  <span class="sy-attr">color</span>: <span class="sy-num">#333</span>;
+  <span class="sy-attr">background</span>: #fff;
+}
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+.header_contents, .contents, .footer_contents { width: 980px; margin: 0 auto; }
+
+<span class="sy-com">/* ヘッダー：全幅（下線が画面端まで）／中身は header_contents で中央寄せ、ロゴ＋ナビ */</span>
+.header { border-bottom: 1px solid #e5e7eb; }
+<span class="sy-sel">.header_contents</span> {
+  <span class="sy-attr">height</span>: <span class="sy-num">90px</span>;
+  <span class="sy-attr">display</span>: flex;
+  <span class="sy-attr">align-items</span>: center;
+  <span class="sy-attr">justify-content</span>: space-between;
+}
+.logo { display: flex; align-items: center; }
+.logo .mark { width: 40px; height: 40px; border-radius: 8px; margin-right: 10px; }
+.logo .name { font-size: 20px; font-weight: bold; letter-spacing: 1px; }
+.nav ul { display: flex; }
+.nav li { margin-left: 24px; font-size: 14px; }
+.nav li:hover { color: #2b6cb0; }
+
+<span class="sy-com">/* ビジュアル（ヒーロー） */</span>
+.visual { height: 360px; margin-bottom: 56px;
+  <span class="sy-attr">background</span>: <span class="sy-num">linear-gradient(120deg,</span> <span class="sy-num">#1a3a5c</span> <span class="sy-num">0%,</span> <span class="sy-num">#2b6cb0</span> <span class="sy-num">55%,</span> <span class="sy-num">#30a46c</span> <span class="sy-num">100%)</span>;
+  <span class="sy-attr">display</span>: flex; align-items: center; }
+.visual .copy { color: #fff; padding-left: 60px; }
+.visual .copy h1 { font-size: 40px; line-height: 1.3; }
+.visual .copy p { font-size: 16px; margin-top: 12px; opacity: .9; }
+
+<span class="sy-com">/* レッスンカード×3（flex） */</span>
+.lessons { display: flex; justify-content: space-between; margin-bottom: 64px; }
+.card { width: 300px; border: 1px solid #eee; border-radius: 10px; overflow: hidden;
+        <span class="sy-attr">box-shadow</span>: <span class="sy-num">0</span> <span class="sy-num">2px</span> <span class="sy-num">10px</span> <span class="sy-num">rgba(0,0,0,.05);</span> }
+<span class="sy-sel">.card .thumb</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">100%;</span> height: <span class="sy-num">160px</span>;
+  <span class="sy-attr">object-fit</span>: cover;   <span class="sy-com">/* 画像を枠に合わせて表示 */</span>
+  <span class="sy-attr">display</span>: block;
+}
+.card .body { padding: 18px; }
+.card .body h3 { font-size: 18px; margin-bottom: 8px; }
+.card .body p { font-size: 13px; color: #666; line-height: 1.8; }
+
+<span class="sy-com">/* catchcopy */</span>
+.catchcopy { text-align: center; margin-bottom: 64px; }
+.catchcopy h2 { font-size: 44px; letter-spacing: 4px; color: #222; }
+.catchcopy p { margin-top: 12px; color: #666; }
+
+<span class="sy-com">/* フッター（カラム） */</span>
+.footer { background: #222; color: #bbb; padding: 40px 0; }
+.footer_contents { display: flex; justify-content: space-around; }
+.footer .col h4 { color: #fff; font-size: 14px; margin-bottom: 12px; }
+.footer .col li { font-size: 13px; padding: 5px 0; }
+<span class="sy-sel">.footer .copyright</span> {
+  <span class="sy-attr">text-align</span>: center;
+  <span class="sy-attr">font-size</span>: <span class="sy-num">12px</span>;
+  <span class="sy-attr">margin-top</span>: <span class="sy-num">28px</span>;
+  <span class="sy-attr">color</span>: <span class="sy-num">#777</span>;
+}</pre></div></div></div>
+
+    <h3>完成イメージ</h3>
+    <p>
+      すべてを組み合わせると、次のような1ページになります。ヘッダーのナビ、メインビジュアル、3枚のレッスンカード、キャッチコピー「Work」、3カラムのフッターがすべてそろっています。
+    </p>
+
+    <picture>
+      <source srcset="sample_site/stage3_extended.webp" type="image/webp">
+      <img
+        src="sample_site/stage3_extended.png"
+        alt="拡張版 SAMPLE SITE の完成イメージ。ヘッダーのナビ、メインビジュアル、レッスンカード3枚、キャッチコピー Work、3カラムのフッター。"
+        style="max-width: 100%; height: auto; display: block; border: 1px solid #e5e7eb; border-radius: 14px;"
+      >
+    </picture>
+
+    <div class="open-site-wrap">
+      <a class="open-site" href="sample_site/stage3_extended.html" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h6"/></svg>
+        実際のサンプルサイトを開く（新しいタブ）
+      </a>
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      今回追加した部品は、どれも「<strong>枠を作って（div）、flex で並べる</strong>」の繰り返しです。ナビ・カード・フッターと、見た目は違っても仕組みは同じです。これまで学んだ基本の組み合わせだけで、本格的なレイアウトが作れることを確認しましょう。
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  SAMPLE SITE 内部研修用教材
+</footer>
+
+</body>
+</html>

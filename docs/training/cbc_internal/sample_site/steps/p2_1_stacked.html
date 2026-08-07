@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <title>p2_1 枠を縦積み（画面幅いっぱい）</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Helvetica Neue", Arial, "Hiragino Sans", Meiryo, sans-serif; background: #f4f4f4; color: #333; padding: 20px; }
+
+    /* 中央寄せ前：画面幅いっぱい */
+    .header, .visual, .logo, .copy, .text, .menu, .footer { position: relative; }
+
+    .header { height: 120px; border: 2px solid #e5484d; }
+    .logo   { width: 220px; height: 56px; border: 2px solid #e5484d; margin: 20px; }
+
+    .visual { height: 320px; border: 2px solid #2b6cb0; margin-top: 16px; }
+    .copy   { width: 400px; height: 110px; border: 2px solid #2b6cb0; margin: 20px; }
+
+    /* .text と .menu は縦積み（この段階では横並びにしていない） */
+    .text { height: 120px; border: 2px solid #30a46c; margin-top: 16px; }
+    .menu { height: 100px; border: 2px solid #30a46c; margin-top: 16px; }
+
+    .footer { height: 100px; border: 2px solid #8e4ec6; margin-top: 16px; }
+
+    .label { position: absolute; top: 4px; left: 8px; font-size: 11px; color: #666; background: #f4f4f4; padding: 0 3px; z-index: 3; white-space: nowrap; }
+    .logo > .label, .copy > .label { left: auto; right: 8px; }
+  </style>
+</head>
+<body>
+  <div class="header"><span class="label">.header</span>
+    <div class="logo"><span class="label">.logo</span></div>
+  </div>
+  <div class="visual"><span class="label">.visual</span>
+    <div class="copy"><span class="label">.copy</span></div>
+  </div>
+  <div class="text"><span class="label">.text</span></div>
+  <div class="menu"><span class="label">.menu</span></div>
+  <div class="footer"><span class="label">.footer</span></div>
+</body>
+</html>
