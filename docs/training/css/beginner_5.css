@@ -1,0 +1,318 @@
+/* ============================================================
+   コーダー初級#5（beginner_5.html）専用のスタイル
+
+   全ページ共通の土台は training.css にあります。
+   ここに置くのは、このページだけで使う図やデモのスタイルです。
+   ============================================================ */
+/* --- 1〜2章：親子関係の実演 --- */
+.fx-parent-demo {
+  position: relative;
+  padding: 27px 10px 10px;
+  border: 2px dashed #94a3b8;
+  background: #f1f5f9;
+}
+
+.fx-parent-demo > .fx-item {
+  margin-bottom: 8px;
+}
+
+.fx-parent-demo > .fx-item:last-child {
+  margin-bottom: 0;
+}
+
+/* 親に display:flex を付けた状態 */
+.fx-parent-demo.fx-flex {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.fx-parent-demo.fx-flex > .fx-item {
+  margin-bottom: 0;
+}
+
+.fx-tag-label {
+  position: absolute;
+  top: 5px;
+  left: 9px;
+  color: #64748b;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 11.5px;
+}
+
+/* 子のほうに display:flex を書いた場合。親の並びは変わらない */
+.fx-wrong-demo > .fx-item {
+  display: flex;
+}
+
+.fx-label-ng { color: #b91c1c; }
+.fx-label-ok { color: #15803d; }
+
+/* 2章：クラスを付けた要素だけに効くことを見せる */
+.fx-plain,
+.fx-class-on {
+  padding: 9px 12px;
+  margin-bottom: 6px;
+}
+
+.fx-class-on {
+  background-color: #f9b9d5;
+}
+
+/* 実演の外枠。点線がflexを指定した親要素 */
+.fx-demo {
+  display: flex;
+  /* 既定は上寄せ。align-items の節だけ個別に上書きする */
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px;
+  border: 2px dashed #94a3b8;
+  background: #f1f5f9;
+  min-height: 108px;
+}
+
+.fx-item {
+  padding: 12px 16px;
+  border: 1px solid #60a5fa;
+  border-radius: 5px;
+  background: #bfdbfe;
+  color: #1e3a8a;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* 高さの違いを見せたいとき用 */
+.fx-item.tall {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+/* 値ごとの見本を並べる */
+.fx-samples {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 20px 0 26px;
+}
+
+.fx-sample-label {
+  display: block;
+  margin-bottom: 7px;
+  color: #1e3a8a;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* 見本ごとの、実際に書くコード。セレクタまで含めて見せる */
+.fx-sample-code {
+  display: block;
+  margin-bottom: 8px;
+  padding: 9px 12px;
+  border-radius: 6px;
+  background: #1e293b;
+  color: #e2e8f0;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+
+/* --- flex-direction --- */
+.fx-dir-row { flex-direction: row; }
+.fx-dir-row-rev { flex-direction: row-reverse; }
+.fx-dir-col { flex-direction: column; }
+.fx-dir-col-rev { flex-direction: column-reverse; }
+
+/* --- flex-wrap --- */
+.fx-wrap-no { flex-wrap: nowrap; }
+.fx-wrap-yes { flex-wrap: wrap; }
+
+/* 折り返しを起こすため、あえて幅を広げた子要素。
+   shrink は既定の 1 のままなので、nowrap のときは縮んで収まる */
+.fx-wide .fx-item { flex-basis: 40%; }
+
+/* --- justify-content（横方向の配置） --- */
+.fx-jc-start { justify-content: flex-start; }
+.fx-jc-center { justify-content: center; }
+.fx-jc-end { justify-content: flex-end; }
+.fx-jc-between { justify-content: space-between; }
+.fx-jc-around { justify-content: space-around; }
+.fx-jc-evenly { justify-content: space-evenly; }
+
+/* --- align-items（縦方向の配置） --- */
+.fx-ai-stretch { align-items: stretch; }
+.fx-ai-start { align-items: flex-start; }
+.fx-ai-center { align-items: center; }
+.fx-ai-end { align-items: flex-end; }
+
+/* stretch を見せるときは子の高さ指定を外す */
+.fx-ai-stretch .fx-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --- align-content（複数行の縦方向の配置） --- */
+/* 2クラス指定にして、後段のメディアクエリの .fx-demo に負けないようにする */
+.fx-demo.fx-ac-demo {
+  flex-wrap: wrap;
+  /* 行を動かせる余白がないと値の違いが見えないため、高めに取る */
+  min-height: 240px;
+}
+
+.fx-ac-demo .fx-item { flex: 0 0 40%; }
+
+.fx-ac-start { align-content: flex-start; }
+.fx-ac-center { align-content: center; }
+.fx-ac-end { align-content: flex-end; }
+.fx-ac-between { align-content: space-between; }
+
+/* ========== 4章：子要素に指定するプロパティ ========== */
+
+/* 指定した子だけ色を変えて目立たせる */
+.fx-item.mark {
+  border-color: #f59e0b;
+  background: #fde68a;
+  color: #92400e;
+}
+
+/* --- order --- */
+.fx-order-3 { order: 3; }
+
+/* --- flex-grow --- */
+.fx-grow-1 { flex-grow: 1; }
+.fx-grow-all .fx-item { flex-grow: 1; }
+/* 上の .fx-grow-all .fx-item と詳細度を揃えないと上書きできない */
+.fx-item.fx-grow-2 { flex-grow: 2; }
+
+/* flex: 1 の見本。flex-basis: 0 まで含むので、中身の幅に関係なく等分になる。
+   .fx-grow-all（flex-grow だけ）とは結果が変わるので、別クラスにしてある */
+.fx-flex1 .fx-item { flex: 1 1 0%; }
+
+/* 文字数の違いを見せる見本。
+   .fx-item の nowrap を解除しないと、狭い画面で長い文字が縮まず幅が揃わない */
+.fx-textdemo .fx-item { white-space: normal; }
+
+
+/* --- flex-shrink --- */
+/* 合計が親を超える幅を与えて、縮み方の違いを見せる */
+.fx-shrink-demo .fx-item { flex-basis: 45%; }
+.fx-shrink-0 { flex-shrink: 0; }
+
+/* --- flex-basis --- */
+.fx-basis-50 { flex-basis: 50%; }
+
+/* --- align-self --- */
+.fx-self-center { align-self: center; }
+.fx-self-end { align-self: flex-end; }
+.fx-self-stretch {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ========== 5章：組み合わせて作るレイアウト ========== */
+
+/* 上下左右の中央寄せ */
+.fx-demo.fx-center-demo {
+  justify-content: center;
+  align-items: center;
+  min-height: 150px;
+}
+
+/* 特定の要素だけ右へ送る */
+.fx-push-right { margin-left: auto; }
+
+/* ヘッダーの例。3段階に分けて、flexが二重になる様子を見せる */
+.fx-header-step {
+  margin: 14px 0 20px;
+  padding: 14px 18px;
+  border-radius: 6px;
+  background: #1e293b;
+}
+
+/* ブラウザ枠の中に置くときは、枠側の余白に任せる */
+.chrome-viewport .fx-header-step {
+  margin: 0;
+}
+
+/* 段階2・3：ヘッダー自体をflexにする */
+.fx-header-step.step2,
+.fx-header-step.step3 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 段階3：メニュー側もflexにする */
+.fx-header-step.step3 .fx-nav {
+  display: flex;
+  gap: 18px;
+}
+
+.fx-logo {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.fx-nav > div {
+  color: #cbd5e1;
+  font-size: 13px;
+}
+
+/* サイドバー＋メインの例 */
+.fx-demo.fx-layout-demo {
+  align-items: stretch;
+  min-height: 150px;
+}
+
+.fx-side {
+  flex: 0 0 110px;
+  border-color: #f59e0b;
+  background: #fde68a;
+  color: #92400e;
+}
+
+.fx-main { flex: 1; }
+
+/* カードを均等に並べる例 */
+.fx-cards-demo .fx-item { flex: 1; }
+
+/* 中身を上下中央に置くための共通指定 */
+.fx-side,
+.fx-main,
+.fx-cards-demo .fx-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: normal;
+  text-align: center;
+}
+
+@media (max-width: 780px) {
+  /* 1fr だけだと中身の最小幅まで広がり、長いコード行が画面をはみ出す。
+     minmax(0, …) を付けて、親の幅で止める */
+  .fx-samples {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .fx-demo {
+    min-height: 96px;
+  }
+
+  .fx-demo.fx-ac-demo {
+    min-height: 210px;
+  }
+
+  .fx-item {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+}
