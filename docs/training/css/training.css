@@ -367,6 +367,15 @@ pre code {
    使い方は .vscode のマークアップ例を参照
    ============================================================ */
 .vscode {
+  /* 何行までそのまま見せるか。これを超えると枠の中でスクロールする。
+     長いコードでページが間延びするのを防ぐため。
+     もっと見せたい枠だけ、この行数を上書きして増やせる。
+       <div class="vscode" style="--vs-lines: 30">   */
+  --vs-lines: 24;
+  --vs-font: 13.5px;
+  --vs-line-h: 1.75;
+  --vs-pad-y: 14px;
+
   position: relative;
   margin: 22px 0;
   border-radius: 10px;
@@ -429,8 +438,41 @@ pre code {
 
 .vscode-body {
   display: flex;
-  padding: 14px 0;
-  overflow-x: auto;
+  padding: var(--vs-pad-y) 0;
+  overflow: auto;
+  /* 20行を超えたら、ここから先は枠の中でスクロールする */
+  max-height: calc(var(--vs-font) * var(--vs-line-h) * var(--vs-lines) + var(--vs-pad-y) * 2);
+  /* Firefox 用。細くて目立たないつまみにする */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(121, 121, 121, 0.45) transparent;
+}
+
+/* スクロールバーを VS Code と同じ見た目にする（Chrome / Edge / Safari）。
+   溝は透明、つまみだけ半透明のグレーで浮かせる */
+.vscode-body::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+
+.vscode-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.vscode-body::-webkit-scrollbar-thumb {
+  border: 4px solid transparent;
+  border-radius: 8px;
+  background: rgba(121, 121, 121, 0.45);
+  /* 枠線ぶんを透かして、細いつまみに見せる */
+  background-clip: padding-box;
+}
+
+.vscode-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(159, 159, 159, 0.7);
+  background-clip: padding-box;
+}
+
+.vscode-body::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 .vscode-gutter {
@@ -447,8 +489,8 @@ pre code {
   background: transparent;
   color: #d4d4d4;
   font-family: Consolas, Monaco, "Courier New", monospace;
-  font-size: 13.5px;
-  line-height: 1.75;
+  font-size: var(--vs-font);
+  line-height: var(--vs-line-h);
   white-space: pre;
 }
 
