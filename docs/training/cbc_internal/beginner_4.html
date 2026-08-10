@@ -3,15 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WEBサイト制作4 — レイアウトの拡張</title>
+  <title>コーダー初級#4</title>
   <link rel="stylesheet" href="../css/training.css" />
+
+  <!-- ▼ このページ専用のスタイル -->
+  <link rel="stylesheet" href="../css/beginner_4.css" />
+
+  <!-- ▼ 開いたときに、ページの先頭から読み始められるようにする。
+       ブラウザが前回の位置へ戻すより先に動かす必要があるため、
+       training.js とは分けて <head> で読み込んでいる -->
+  <script src="../js/scroll-reset.js"></script>
 </head>
 <body>
 
 <header>
   <div class="header-inner">
-    <h1>WEBサイト制作4</h1>
-    <p>完成したレイアウトを拡張する — ナビゲーション・レッスンカード・フッター</p>
+    <h1>コーダー初級#4</h1>
   </div>
 </header>
 
@@ -20,23 +27,23 @@
   <section class="toc" id="top">
     <h2>目次</h2>
 
-    <ol>
-      <li><a href="#chapter1">完成したレイアウトを拡張する</a></li>
-      <li><a href="#chapter2">素材画像を準備する</a></li>
-      <li><a href="#chapter3">完成コードと表示イメージ</a></li>
+    <ol start="21">
+      <li><a href="#chapter21">完成したレイアウトを拡張する</a></li>
+      <li><a href="#chapter22">素材画像を準備する</a></li>
+      <li><a href="#chapter23">完成コードと表示イメージ</a></li>
     </ol>
   </section>
 
 
-  <section id="chapter1">
-    <h2>1. 完成したレイアウトを拡張する</h2>
+  <section id="chapter21">
+    <h2>21. 完成したレイアウトを拡張する</h2>
 
     <p class="lead">
-      前回までで、ヘッダー・メインビジュアル（ヒーロー）・フッターという基本のレイアウトが完成しました。ここで「メインビジュアル」と「ヒーロー」は同じ大きな見せ場のことを指す、2つの呼び方です。ここからは、その完成したレイアウトを土台にして、実際のWebサイトに近い形へ拡張していきます。
+      前回までで、ヘッダー・メインビジュアル・フッターという基本のレイアウトが完成しました。今回は、この完成したレイアウトを土台にして、実際のWebサイトに近い形へ拡張していきます。
     </p>
 
     <p>
-      すでにある枠組みを壊さずに、部品を足していくのがこの回のテーマです。今回は次の3つを追加します。
+      すでにある枠組みを壊さずに、部品を足していくのがこの回のテーマです。追加するのは次の3つです。
     </p>
 
     <h3>3つの拡張目標</h3>
@@ -46,63 +53,53 @@
       <li><strong>フッターにリンク集を追加する</strong>（複数カラムのリンクを並べる）</li>
     </ol>
 
-    <div class="point">
-      <span class="label">理解ポイント</span><br>
-      新しいページをゼロから作り直すのではなく、<strong>完成したレイアウトに部品を足していく</strong>のがポイントです。これまで学んだ枠（div）・見出し・flex での横並びを組み合わせるだけで、ぐっと本格的なサイトになります。
-    </div>
-
-    <div class="note">
-      <span class="label">補足</span><br>
-      この回で完成する見本サイトのブランド名は「SAMPLE SITE」です。ロゴやリンク文言は自由に自分のサイト名へ置き換えて構いません。
-    </div>
   </section>
 
 
-  <section id="chapter2">
-    <h2>2. 素材画像を準備する</h2>
+  <section id="chapter22">
+    <h2>22. 素材画像を準備する</h2>
 
     <p>
       拡張したサイトでは、ロゴやレッスンカードのサムネイルなどの画像を表示します。実際の制作では、画像素材をプロジェクト内の <code>images</code> フォルダにまとめて置きます。<br>
-      この回で作る見本サイトでは、<strong>ヘッダーのロゴ <code>logo_mark.svg</code> と、レッスンカードのサムネイル3枚（HTML &amp; CSS / JavaScript / PHP）を、いずれも実際の画像ファイル</strong>として使います。まずは下のボタンからこれらの画像をダウンロードし、展開して出てきた <code>images</code> フォルダを <code>index.html</code> と同じ場所に置きましょう。
+前ページでダウンロードした <code>images.zip</code> には、<strong>レッスンカードのサムネイル3枚（HTML &amp; CSS / JavaScript / PHP）</strong>も含まれています。まだ配置していない場合は、下のボタンからダウンロードし、展開して出てきた <code>images</code> フォルダを <code>index.html</code> と同じ場所に置きましょう。
     </p>
 
     <p>
-      <a class="dl-btn" href="assets/images.zip">
-        <img src="assets/download.svg" alt="" width="18" height="18">images.zip をダウンロード
+      <a class="dl-btn" href="sample_site/images.zip">
+        <img src="../img/beginner4_1.webp" alt="" width="18" height="18">images.zip をダウンロード
       </a><span class="dl-note">ロゴ・カードのサムネイル画像の素材一式</span>
     </p>
 
     <h3>フォルダ構成</h3>
-    <p>
-      これまでの <code>index.html</code> と <code>css/style.css</code> に加えて、画像をまとめる <code>images</code> フォルダを用意し、その中にロゴ画像とカードのサムネイル画像を置きます。
-    </p>
 
     <pre><code>mysite/
 ├── index.html
 ├── css/
 │   └── style.css
 └── images/
-    ├── logo_mark.svg   ← ロゴ画像
-    ├── card_html.png   ← レッスンカード（HTML &amp; CSS）
-    ├── card_js.png     ← レッスンカード（JavaScript）
-    └── card_php.png    ← レッスンカード（PHP）</code></pre>
+    ├── logo_mark.webp   ← ロゴ画像
+    ├── top_bg.webp      ← メインビジュアルの背景画像
+    ├── card_html.webp   ← レッスンカード（HTML &amp; CSS）
+    ├── card_js.webp     ← レッスンカード（JavaScript）
+    └── card_php.webp    ← レッスンカード（PHP）</code></pre>
 
     <div class="caution">
       <span class="label">注意</span><br>
-      画像を <code>images</code> フォルダに入れたら、HTML から呼び出すときのパスに注意します。<code>index.html</code> と同じ階層に <code>images</code> フォルダがある場合、<code>&lt;img src="images/ファイル名"&gt;</code> のように書きます。ファイル名やスペルが1文字でも違うと画像は表示されません。
+<code>index.html</code> と同じ階層に <code>images</code> フォルダがある場合、HTML からは <code>&lt;img src="images/ファイル名"&gt;</code> と書きます。フォルダ名やファイル名が1文字でも違うと画像は表示されません。
     </div>
   </section>
 
 
-  <section id="chapter3">
-    <h2>3. 完成コードと表示イメージ</h2>
+  <section id="chapter23">
+    <h2>23. 完成コードと表示イメージ</h2>
 
     <p>
-      1章で挙げた3つの拡張 ―― <strong>ヘッダーのナビゲーション</strong>・<strong>レッスンカードとキャッチコピー</strong>・<strong>フッターのリンク集</strong> ―― をすべて反映すると、拡張版のサイトが完成します。以下の <code>index.html</code> と <code>css/style.css</code> の全体を、どこに何が追加されたかを確認しながら読み進めましょう。基本はこれまでと同じ「枠（div）を作って flex で並べる」の繰り返しです。
+      21章で挙げた3つの拡張をすべて反映すると、拡張版のサイトが完成します。以下の <code>index.html</code> と <code>css/style.css</code> の全体を、どこに何が追加されたかを確認しながら読み進めましょう。<br>
+      前ページから変えているのは<strong>ヘッダーとフッターの2か所</strong>です。<strong>ヘッダー</strong>は、ロゴとナビを左右の端に分けるため <code>header_contents</code> に <code>justify-content: space-between;</code> を足しています。<strong>フッター</strong>は1行だった <code>footer_contents</code> を3カラムに組み替えたため、高さ指定をやめて <code>space-around</code> に変え、<code>.footer</code> に <code>padding: 40px 0;</code> を足しています。それ以外は前ページのままです。
     </p>
 
     <h3>index.html（全体）</h3>
-    <div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">index.html</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">index.html</div></div><div class="vscode-body"><pre class="vscode-gutter">1
+    <div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">index.html</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">index.html</div></div><div class="vscode-body"><div class="vscode-gutter">1
 2
 3
 4
@@ -197,7 +194,30 @@
 93
 94
 95
-96</pre><pre class="vscode-code">&lt;!DOCTYPE html&gt;
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119</div><code class="vscode-code">&lt;!DOCTYPE html&gt;
 &lt;<span class="sy-tag">html</span> <span class="sy-attr">lang</span>=<span class="sy-str">"ja"</span>&gt;
 &lt;<span class="sy-tag">head</span>&gt;
   &lt;<span class="sy-tag">meta</span> <span class="sy-attr">charset</span>=<span class="sy-str">"UTF-8"</span>&gt;
@@ -207,14 +227,14 @@
 &lt;/<span class="sy-tag">head</span>&gt;
 &lt;<span class="sy-tag">body</span>&gt;
 
-  <span class="sy-com">&lt;!-- ヘッダー：全幅＋ナビ --&gt;</span>
+  <span class="sy-com">&lt;!-- ナビゲーション追加 --&gt;</span>
   &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"header"</span>&gt;
     &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"header_contents"</span>&gt;
       &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"logo"</span>&gt;
-        &lt;<span class="sy-tag">img</span> <span class="sy-attr">class</span>=<span class="sy-str">"mark"</span> <span class="sy-attr">src</span>=<span class="sy-str">"images/logo_mark.svg"</span> <span class="sy-attr">alt</span>=<span class="sy-str">""</span> <span class="sy-attr">width</span>=<span class="sy-str">"40"</span> <span class="sy-attr">height</span>=<span class="sy-str">"40"</span>&gt;
-        &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"name"</span>&gt;SAMPLE SITE&lt;/<span class="sy-tag">div</span>&gt;
+        &lt;<span class="sy-tag">img</span> <span class="sy-attr">src</span>=<span class="sy-str">"images/logo_mark.webp"</span> <span class="sy-attr">alt</span>=<span class="sy-str">""</span> <span class="sy-attr">width</span>=<span class="sy-str">"40"</span> <span class="sy-attr">height</span>=<span class="sy-str">"40"</span>&gt;
+        SAMPLE SITE
       &lt;/<span class="sy-tag">div</span>&gt;
-      &lt;<span class="sy-tag">nav</span> <span class="sy-attr">class</span>=<span class="sy-str">"nav"</span>&gt;
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"nav"</span>&gt;
         &lt;<span class="sy-tag">ul</span>&gt;
           &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">"#"</span>&gt;ホーム&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;
           &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">"#"</span>&gt;レッスン&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;
@@ -223,41 +243,63 @@
           &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">"#"</span>&gt;応用&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;
           &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">"#"</span>&gt;実践&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;
         &lt;/<span class="sy-tag">ul</span>&gt;
-      &lt;/<span class="sy-tag">nav</span>&gt;
+      &lt;/<span class="sy-tag">div</span>&gt;
+      <span class="sy-com">&lt;!-- /ナビゲーション追加 --&gt;</span>
     &lt;/<span class="sy-tag">div</span>&gt;
   &lt;/<span class="sy-tag">div</span>&gt;
 
   &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"contents"</span>&gt;
     &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"visual"</span>&gt;
-      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"copy"</span>&gt;
-        &lt;<span class="sy-tag">h1</span>&gt;Webの基礎を、&lt;<span class="sy-tag">br</span>&gt;手を動かして学ぶ。&lt;/<span class="sy-tag">h1</span>&gt;
-        &lt;<span class="sy-tag">p</span>&gt;HTML / CSS からはじめる制作入門&lt;/<span class="sy-tag">p</span>&gt;
+      &lt;<span class="sy-tag">h1</span> <span class="sy-attr">class</span>=<span class="sy-str">"copy"</span>&gt;Webの基礎を、&lt;<span class="sy-tag">br</span>&gt;手を動かして学ぶ。&lt;/<span class="sy-tag">h1</span>&gt;
+    &lt;/<span class="sy-tag">div</span>&gt;
+
+    <span class="sy-com">&lt;!-- ここまでは前回のまま（テキストとメニュー） --&gt;</span>
+    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"text_wrapper"</span>&gt;
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"text"</span>&gt;
+        &lt;<span class="sy-tag">p</span>&gt;枠（ボックス）を組み立て、色や画像・テキストを入れて、
+           1つのWebサイトを完成させる流れを体験します。ブラウザ上の
+           あらゆる要素が「四角い枠」で構成されていることを学びましょう。&lt;/<span class="sy-tag">p</span>&gt;
+      &lt;/<span class="sy-tag">div</span>&gt;
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"menu"</span>&gt;
+        &lt;<span class="sy-tag">ul</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;ホーム&lt;/<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;レッスン&lt;/<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;入門&lt;/<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;基礎&lt;/<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;応用&lt;/<span class="sy-tag">li</span>&gt;
+        &lt;/<span class="sy-tag">ul</span>&gt;
       &lt;/<span class="sy-tag">div</span>&gt;
     &lt;/<span class="sy-tag">div</span>&gt;
 
     <span class="sy-com">&lt;!-- コンテンツ追加 --&gt;</span>
     &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"lessons"</span>&gt;
       &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"card"</span>&gt;
-        &lt;<span class="sy-tag">img</span> <span class="sy-attr">class</span>=<span class="sy-str">"thumb"</span> <span class="sy-attr">src</span>=<span class="sy-str">"images/card_html.png"</span> <span class="sy-attr">alt</span>=<span class="sy-str">"HTML &amp;amp; CSS"</span>&gt;
-        &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"body"</span>&gt;&lt;<span class="sy-tag">h3</span>&gt;HTML &amp;amp; CSS&lt;/<span class="sy-tag">h3</span>&gt;
-          &lt;<span class="sy-tag">p</span>&gt;Webページの構造と装飾。枠組みからレイアウトまでの基礎を学びます。&lt;/<span class="sy-tag">p</span>&gt;&lt;/<span class="sy-tag">div</span>&gt;
+        &lt;<span class="sy-tag">img</span> <span class="sy-attr">src</span>=<span class="sy-str">"images/card_html.webp"</span> <span class="sy-attr">alt</span>=<span class="sy-str">"HTML &amp;amp; CSS"</span>&gt;
+        &lt;<span class="sy-tag">h3</span>&gt;HTML &amp;amp; CSS&lt;/<span class="sy-tag">h3</span>&gt;
+          &lt;<span class="sy-tag">p</span>&gt;Webページの構造と装飾。枠組みからレイアウトまでの基礎を学びます。&lt;/<span class="sy-tag">p</span>&gt;
       &lt;/<span class="sy-tag">div</span>&gt;
       &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"card"</span>&gt;
-        &lt;<span class="sy-tag">img</span> <span class="sy-attr">class</span>=<span class="sy-str">"thumb"</span> <span class="sy-attr">src</span>=<span class="sy-str">"images/card_js.png"</span> <span class="sy-attr">alt</span>=<span class="sy-str">"JavaScript"</span>&gt;
-        &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"body"</span>&gt;&lt;<span class="sy-tag">h3</span>&gt;JavaScript&lt;/<span class="sy-tag">h3</span>&gt;
-          &lt;<span class="sy-tag">p</span>&gt;動きのあるページ作り。DOM操作やイベントの基本を身につけます。&lt;/<span class="sy-tag">p</span>&gt;&lt;/<span class="sy-tag">div</span>&gt;
+        &lt;<span class="sy-tag">img</span> <span class="sy-attr">src</span>=<span class="sy-str">"images/card_js.webp"</span> <span class="sy-attr">alt</span>=<span class="sy-str">"JavaScript"</span>&gt;
+        &lt;<span class="sy-tag">h3</span>&gt;JavaScript&lt;/<span class="sy-tag">h3</span>&gt;
+          &lt;<span class="sy-tag">p</span>&gt;動きのあるページ作り。DOM操作やイベントの基本を身につけます。&lt;/<span class="sy-tag">p</span>&gt;
       &lt;/<span class="sy-tag">div</span>&gt;
       &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"card"</span>&gt;
-        &lt;<span class="sy-tag">img</span> <span class="sy-attr">class</span>=<span class="sy-str">"thumb"</span> <span class="sy-attr">src</span>=<span class="sy-str">"images/card_php.png"</span> <span class="sy-attr">alt</span>=<span class="sy-str">"PHP"</span>&gt;
-        &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"body"</span>&gt;&lt;<span class="sy-tag">h3</span>&gt;PHP&lt;/<span class="sy-tag">h3</span>&gt;
-          &lt;<span class="sy-tag">p</span>&gt;サーバーサイドの入門。フォーム処理やDB連携の第一歩を学びます。&lt;/<span class="sy-tag">p</span>&gt;&lt;/<span class="sy-tag">div</span>&gt;
+        &lt;<span class="sy-tag">img</span> <span class="sy-attr">src</span>=<span class="sy-str">"images/card_php.webp"</span> <span class="sy-attr">alt</span>=<span class="sy-str">"PHP"</span>&gt;
+        &lt;<span class="sy-tag">h3</span>&gt;PHP&lt;/<span class="sy-tag">h3</span>&gt;
+          &lt;<span class="sy-tag">p</span>&gt;サーバーサイドの入門。フォーム処理やDB連携の第一歩を学びます。&lt;/<span class="sy-tag">p</span>&gt;
       &lt;/<span class="sy-tag">div</span>&gt;
     &lt;/<span class="sy-tag">div</span>&gt;
 
     &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"catchcopy"</span>&gt;
-      &lt;<span class="sy-tag">h2</span>&gt;Work&lt;/<span class="sy-tag">h2</span>&gt;
-      &lt;<span class="sy-tag">p</span>&gt;手を動かして作る、から身につく。&lt;/<span class="sy-tag">p</span>&gt;
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"readcopy"</span>&gt;
+        &lt;<span class="sy-tag">h2</span>&gt;Work&lt;/<span class="sy-tag">h2</span>&gt;
+      &lt;/<span class="sy-tag">div</span>&gt;
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"bodycopy"</span>&gt;
+        &lt;<span class="sy-tag">p</span>&gt;手を動かして作る、から身につく。実際に手を動かして作った数だけ、
+           できることが増えていきます。&lt;/<span class="sy-tag">p</span>&gt;
+      &lt;/<span class="sy-tag">div</span>&gt;
     &lt;/<span class="sy-tag">div</span>&gt;
+    <span class="sy-com">&lt;!-- /コンテンツ追加 --&gt;</span>
   &lt;/<span class="sy-tag">div</span>&gt;
 
   <span class="sy-com">&lt;!-- リンク集追加 --&gt;</span>
@@ -290,12 +332,13 @@
     &lt;/<span class="sy-tag">div</span>&gt;
     &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"copyright"</span>&gt;© SAMPLE SITE&lt;/<span class="sy-tag">div</span>&gt;
   &lt;/<span class="sy-tag">div</span>&gt;
+  <span class="sy-com">&lt;!-- /リンク集追加 --&gt;</span>
 
 &lt;/<span class="sy-tag">body</span>&gt;
-&lt;/<span class="sy-tag">html</span>&gt;</pre></div></div></div>
+&lt;/<span class="sy-tag">html</span>&gt;</code></div></div>
 
     <h3>css/style.css（全体）</h3>
-    <div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">css/style.css</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">css/style.css</div></div><div class="vscode-body"><pre class="vscode-gutter">1
+    <div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">css/style.css</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">css/style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
 2
 3
 4
@@ -357,83 +400,393 @@
 60
 61
 62
-63</pre><pre class="vscode-code">* { box-sizing: border-box; margin: 0; padding: 0; }
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166</div><code class="vscode-code"><span class="sy-sel">*</span> {
+  <span class="sy-attr">box-sizing</span>: border-box;
+  <span class="sy-attr">margin</span>: <span class="sy-num">0</span>;
+  <span class="sy-attr">padding</span>: <span class="sy-num">0</span>;
+}
 <span class="sy-sel">body</span> {
   <span class="sy-attr">font-family</span>: "Helvetica Neue", Arial, "Hiragino Sans", Meiryo, sans-serif;
   <span class="sy-attr">color</span>: <span class="sy-num">#333</span>;
   <span class="sy-attr">background</span>: #fff;
 }
-a { color: inherit; text-decoration: none; }
-ul { list-style: none; }
-
-.header_contents, .contents, .footer_contents { width: 980px; margin: 0 auto; }
+<span class="sy-sel">a</span> {
+  <span class="sy-attr">color</span>: inherit;
+  <span class="sy-attr">text-decoration</span>: none;
+}
+<span class="sy-sel">ul</span> {
+  <span class="sy-attr">list-style</span>: none;
+}
+.header_contents,
+.contents,
+<span class="sy-sel">.footer_contents</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">980px</span>;
+  <span class="sy-attr">margin</span>: <span class="sy-num">0</span> auto;
+}
 
 <span class="sy-com">/* ヘッダー：全幅（下線が画面端まで）／中身は header_contents で中央寄せ、ロゴ＋ナビ */</span>
-.header { border-bottom: 1px solid #e5e7eb; }
+<span class="sy-sel">.header</span> {
+  <span class="sy-attr">border-bottom</span>: <span class="sy-num">1px</span> solid #eee;
+}
 <span class="sy-sel">.header_contents</span> {
   <span class="sy-attr">height</span>: <span class="sy-num">90px</span>;
   <span class="sy-attr">display</span>: flex;
   <span class="sy-attr">align-items</span>: center;
   <span class="sy-attr">justify-content</span>: space-between;
 }
-.logo { display: flex; align-items: center; }
-.logo .mark { width: 40px; height: 40px; border-radius: 8px; margin-right: 10px; }
-.logo .name { font-size: 20px; font-weight: bold; letter-spacing: 1px; }
-.nav ul { display: flex; }
-.nav li { margin-left: 24px; font-size: 14px; }
-.nav li:hover { color: #2b6cb0; }
+<span class="sy-sel">.logo</span> {
+  <span class="sy-attr">display</span>: flex;
+  <span class="sy-attr">align-items</span>: center;
+  <span class="sy-attr">font-size</span>: <span class="sy-num">20px</span>;
+  <span class="sy-attr">font-weight</span>: bold;
+  <span class="sy-attr">letter-spacing</span>: <span class="sy-num">1px</span>;
+}
+<span class="sy-sel">.logo img</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">40px</span>;
+  <span class="sy-attr">height</span>: <span class="sy-num">40px</span>;
+  <span class="sy-attr">border-radius</span>: <span class="sy-num">8px</span>;
+  <span class="sy-attr">margin-right</span>: <span class="sy-num">12px</span>;
+}
+<span class="sy-sel">.nav ul</span> {
+  <span class="sy-attr">display</span>: flex;
+}
+<span class="sy-sel">.nav li</span> {
+  <span class="sy-attr">margin-left</span>: <span class="sy-num">24px</span>;
+  <span class="sy-attr">font-size</span>: <span class="sy-num">14px</span>;
+}
+<span class="sy-sel">.nav li:hover</span> {
+  <span class="sy-attr">color</span>: <span class="sy-num">#37b</span>;
+}
 
 <span class="sy-com">/* ビジュアル（ヒーロー） */</span>
-.visual { height: 360px; margin-bottom: 56px;
-  <span class="sy-attr">background</span>: <span class="sy-num">linear-gradient(120deg,</span> <span class="sy-num">#1a3a5c</span> <span class="sy-num">0%,</span> <span class="sy-num">#2b6cb0</span> <span class="sy-num">55%,</span> <span class="sy-num">#30a46c</span> <span class="sy-num">100%)</span>;
-  <span class="sy-attr">display</span>: flex; align-items: center; }
-.visual .copy { color: #fff; padding-left: 60px; }
-.visual .copy h1 { font-size: 40px; line-height: 1.3; }
-.visual .copy p { font-size: 16px; margin-top: 12px; opacity: .9; }
+<span class="sy-sel">.visual</span> {
+  <span class="sy-attr">height</span>: <span class="sy-num">360px</span>;
+  <span class="sy-attr">margin-top</span>: <span class="sy-num">32px</span>;
+  <span class="sy-attr">margin-bottom</span>: <span class="sy-num">40px</span>;
+  <span class="sy-attr">background</span>: url("../images/top_bg.webp") no-repeat center center;
+  <span class="sy-attr">display</span>: flex;
+  <span class="sy-attr">align-items</span>: center;
+}
+<span class="sy-sel">.copy</span> {
+  <span class="sy-attr">color</span>: #fff;
+  <span class="sy-attr">padding-left</span>: <span class="sy-num">56px</span>;
+  <span class="sy-attr">font-size</span>: <span class="sy-num">38px</span>;
+  <span class="sy-attr">line-height</span>: <span class="sy-num">1.3</span>;
+}
+
+<span class="sy-com">/* 前回までのテキストとメニュー（そのまま残す） */</span>
+<span class="sy-sel">.text_wrapper</span> {
+  <span class="sy-attr">display</span>: flex;
+  <span class="sy-attr">justify-content</span>: center;
+  <span class="sy-attr">margin-bottom</span>: <span class="sy-num">44px</span>;
+}
+<span class="sy-sel">.text</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">560px</span>;
+  <span class="sy-attr">padding-right</span>: <span class="sy-num">40px</span>;
+  <span class="sy-attr">border-right</span>: <span class="sy-num">1px</span> solid #ddd;
+  <span class="sy-attr">line-height</span>: <span class="sy-num">1.9</span>;
+  <span class="sy-attr">color</span>: <span class="sy-num">#555</span>;
+}
+<span class="sy-sel">.menu</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">240px</span>;
+  <span class="sy-attr">padding-left</span>: <span class="sy-num">40px</span>;
+  <span class="sy-attr">line-height</span>: <span class="sy-num">1.9</span>;
+}
 
 <span class="sy-com">/* レッスンカード×3（flex） */</span>
-.lessons { display: flex; justify-content: space-between; margin-bottom: 64px; }
-.card { width: 300px; border: 1px solid #eee; border-radius: 10px; overflow: hidden;
-        <span class="sy-attr">box-shadow</span>: <span class="sy-num">0</span> <span class="sy-num">2px</span> <span class="sy-num">10px</span> <span class="sy-num">rgba(0,0,0,.05);</span> }
-<span class="sy-sel">.card .thumb</span> {
-  <span class="sy-attr">width</span>: <span class="sy-num">100%;</span> height: <span class="sy-num">160px</span>;
-  <span class="sy-attr">object-fit</span>: cover;   <span class="sy-com">/* 画像を枠に合わせて表示 */</span>
+<span class="sy-sel">.lessons</span> {
+  <span class="sy-attr">display</span>: flex;
+  <span class="sy-attr">justify-content</span>: space-between;
+  <span class="sy-attr">margin-bottom</span>: <span class="sy-num">64px</span>;
+}
+<span class="sy-sel">.card</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">300px</span>;
+  <span class="sy-attr">border</span>: <span class="sy-num">1px</span> solid #eee;
+}
+<span class="sy-sel">.card img</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">100%</span>;
   <span class="sy-attr">display</span>: block;
 }
-.card .body { padding: 18px; }
-.card .body h3 { font-size: 18px; margin-bottom: 8px; }
-.card .body p { font-size: 13px; color: #666; line-height: 1.8; }
+<span class="sy-sel">.card h3</span> {
+  <span class="sy-attr">font-size</span>: <span class="sy-num">18px</span>;
+  <span class="sy-attr">margin</span>: <span class="sy-num">18px</span> <span class="sy-num">18px</span> <span class="sy-num">8px</span>;
+}
+<span class="sy-sel">.card p</span> {
+  <span class="sy-attr">font-size</span>: <span class="sy-num">13px</span>;
+  <span class="sy-attr">color</span>: <span class="sy-num">#666</span>;
+  <span class="sy-attr">line-height</span>: <span class="sy-num">1.8</span>;
+  <span class="sy-attr">margin</span>: <span class="sy-num">0</span> <span class="sy-num">18px</span> <span class="sy-num">18px</span>;
+}
 
-<span class="sy-com">/* catchcopy */</span>
-.catchcopy { text-align: center; margin-bottom: 64px; }
-.catchcopy h2 { font-size: 44px; letter-spacing: 4px; color: #222; }
-.catchcopy p { margin-top: 12px; color: #666; }
+<span class="sy-com">/* catchcopy：flex で幅を 1 : 3 の割合に分ける */</span>
+<span class="sy-sel">.catchcopy</span> {
+  <span class="sy-attr">display</span>: flex;
+  <span class="sy-attr">align-items</span>: center;
+  <span class="sy-attr">margin-bottom</span>: <span class="sy-num">64px</span>;
+}
+<span class="sy-sel">.readcopy</span> {
+  <span class="sy-attr">flex</span>: <span class="sy-num">1</span>;
+}
+<span class="sy-sel">.bodycopy</span> {
+  <span class="sy-attr">flex</span>: <span class="sy-num">3</span>;
+  <span class="sy-attr">padding-left</span>: <span class="sy-num">40px</span>;
+}
+<span class="sy-sel">.catchcopy h2</span> {
+  <span class="sy-attr">font-size</span>: <span class="sy-num">44px</span>;
+  <span class="sy-attr">letter-spacing</span>: <span class="sy-num">4px</span>;
+  <span class="sy-attr">color</span>: <span class="sy-num">#222</span>;
+}
+<span class="sy-sel">.catchcopy p</span> {
+  <span class="sy-attr">color</span>: <span class="sy-num">#666</span>;
+  <span class="sy-attr">line-height</span>: <span class="sy-num">1.9</span>;
+}
 
 <span class="sy-com">/* フッター（カラム） */</span>
-.footer { background: #222; color: #bbb; padding: 40px 0; }
-.footer_contents { display: flex; justify-content: space-around; }
-.footer .col h4 { color: #fff; font-size: 14px; margin-bottom: 12px; }
-.footer .col li { font-size: 13px; padding: 5px 0; }
-<span class="sy-sel">.footer .copyright</span> {
+<span class="sy-sel">.footer</span> {
+  <span class="sy-attr">background</span>: <span class="sy-num">#222</span>;
+  <span class="sy-attr">color</span>: #bbb;
+  <span class="sy-attr">padding</span>: <span class="sy-num">40px</span> <span class="sy-num">0</span>;
+}
+<span class="sy-sel">.footer_contents</span> {
+  <span class="sy-attr">display</span>: flex;
+  <span class="sy-attr">justify-content</span>: space-around;
+}
+<span class="sy-sel">.col h4</span> {
+  <span class="sy-attr">color</span>: #fff;
+  <span class="sy-attr">font-size</span>: <span class="sy-num">14px</span>;
+  <span class="sy-attr">margin-bottom</span>: <span class="sy-num">12px</span>;
+}
+<span class="sy-sel">.col li</span> {
+  <span class="sy-attr">font-size</span>: <span class="sy-num">13px</span>;
+  <span class="sy-attr">padding</span>: <span class="sy-num">5px</span> <span class="sy-num">0</span>;
+}
+<span class="sy-sel">.copyright</span> {
   <span class="sy-attr">text-align</span>: center;
   <span class="sy-attr">font-size</span>: <span class="sy-num">12px</span>;
   <span class="sy-attr">margin-top</span>: <span class="sy-num">28px</span>;
   <span class="sy-attr">color</span>: <span class="sy-num">#777</span>;
-}</pre></div></div></div>
+}</code></div></div>
 
     <h3>完成イメージ</h3>
     <p>
-      すべてを組み合わせると、次のような1ページになります。ヘッダーのナビ、メインビジュアル、3枚のレッスンカード、キャッチコピー「Work」、3カラムのフッターがすべてそろっています。
+      すべてを組み合わせると、次のような1ページになります。
     </p>
 
-    <picture>
-      <source srcset="sample_site/stage3_extended.webp" type="image/webp">
-      <img
-        src="sample_site/stage3_extended.png"
-        alt="拡張版 SAMPLE SITE の完成イメージ。ヘッダーのナビ、メインビジュアル、レッスンカード3枚、キャッチコピー Work、3カラムのフッター。"
-        style="max-width: 100%; height: auto; display: block; border: 1px solid #e5e7eb; border-radius: 14px;"
-      >
-    </picture>
+    <div class="chrome"><div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">SAMPLE SITE</div></div><div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">file:///mysite/index.html</div></div><div class="chrome-viewport" style="padding: 0;">
+        <div class="browser-demo demo-reset dm4">
+
+        <!-- ナビゲーション追加 -->
+        <div class="header">
+          <div class="header_contents">
+            <div class="logo">
+              <img src="sample_site/images/logo_mark.webp" alt="" width="40" height="40">
+              SAMPLE SITE
+            </div>
+            <div class="nav">
+              <ul>
+                <li><a href="#">ホーム</a></li>
+                <li><a href="#">レッスン</a></li>
+                <li><a href="#">入門</a></li>
+                <li><a href="#">基礎</a></li>
+                <li><a href="#">応用</a></li>
+                <li><a href="#">実践</a></li>
+              </ul>
+            </div>
+            <!-- /ナビゲーション追加 -->
+          </div>
+        </div>
+
+        <div class="contents">
+          <div class="visual">
+            <h1 class="copy">Webの基礎を、<br>手を動かして学ぶ。</h1>
+          </div>
+
+          <!-- ここまでは前回のまま（テキストとメニュー） -->
+          <div class="text_wrapper">
+            <div class="text">
+              <p>枠（ボックス）を組み立て、色や画像・テキストを入れて、
+                 1つのWebサイトを完成させる流れを体験します。ブラウザ上の
+                 あらゆる要素が「四角い枠」で構成されていることを学びましょう。</p>
+            </div>
+            <div class="menu">
+              <ul>
+                <li>ホーム</li>
+                <li>レッスン</li>
+                <li>入門</li>
+                <li>基礎</li>
+                <li>応用</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- コンテンツ追加 -->
+          <div class="lessons">
+            <div class="card">
+              <img src="sample_site/images/card_html.webp" alt="HTML &amp; CSS">
+              <h3>HTML &amp; CSS</h3>
+                <p>Webページの構造と装飾。枠組みからレイアウトまでの基礎を学びます。</p>
+            </div>
+            <div class="card">
+              <img src="sample_site/images/card_js.webp" alt="JavaScript">
+              <h3>JavaScript</h3>
+                <p>動きのあるページ作り。DOM操作やイベントの基本を身につけます。</p>
+            </div>
+            <div class="card">
+              <img src="sample_site/images/card_php.webp" alt="PHP">
+              <h3>PHP</h3>
+                <p>サーバーサイドの入門。フォーム処理やDB連携の第一歩を学びます。</p>
+            </div>
+          </div>
+
+          <div class="catchcopy">
+            <div class="readcopy">
+              <h2>Work</h2>
+            </div>
+            <div class="bodycopy">
+              <p>手を動かして作る、から身につく。実際に手を動かして作った数だけ、
+                 できることが増えていきます。</p>
+            </div>
+          </div>
+          <!-- /コンテンツ追加 -->
+        </div>
+
+        <!-- リンク集追加 -->
+        <div class="footer">
+          <div class="footer_contents">
+            <div class="col">
+              <h4>SAMPLE SITE</h4>
+              <ul>
+                <li><a href="#">会社概要</a></li>
+                <li><a href="#">お問い合わせ</a></li>
+                <li><a href="#">プライバシー</a></li>
+              </ul>
+            </div>
+            <div class="col">
+              <h4>コース</h4>
+              <ul>
+                <li><a href="#">入門</a></li>
+                <li><a href="#">基礎</a></li>
+                <li><a href="#">応用</a></li>
+              </ul>
+            </div>
+            <div class="col">
+              <h4>リンク</h4>
+              <ul>
+                <li><a href="#">ホーム</a></li>
+                <li><a href="#">レッスン</a></li>
+                <li><a href="#">実践</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="copyright">© SAMPLE SITE</div>
+        </div>
+        <!-- /リンク集追加 -->
+
+        </div>
+      </div></div>
 
     <div class="open-site-wrap">
       <a class="open-site" href="sample_site/stage3_extended.html" target="_blank" rel="noopener">
@@ -441,6 +794,38 @@ ul { list-style: none; }
         実際のサンプルサイトを開く（新しいタブ）
       </a>
     </div>
+
+    <h3>今回はじめて出てくる書き方</h3>
+    <p>
+      完成コードには、次の5つが新しく登場します。いずれも詳しい使い方は今後の研修で扱います。
+    </p>
+
+    <table>
+      <tr>
+        <th style="width: 32%;">書き方</th>
+        <th>意味</th>
+      </tr>
+      <tr>
+        <td><code>list-style: none</code></td>
+        <td>リストの先頭に標準で付く「●」を消す。ナビ・メニュー・リンク集の <code>&lt;ul&gt;</code> にまとめて指定する</td>
+      </tr>
+      <tr>
+        <td><code>color: inherit</code><br><code>text-decoration: none</code></td>
+        <td>リンクの<strong>青い文字＋下線</strong>を消し、まわりの文字になじませる（<code>inherit</code> ＝ 親の枠の文字色を受け継ぐ）</td>
+      </tr>
+      <tr>
+        <td><code>:hover</code></td>
+        <td><strong>疑似クラス</strong>。マウスを乗せたときだけ効く指定</td>
+      </tr>
+      <tr>
+        <td><code>flex: 1</code> / <code>flex: 3</code></td>
+        <td>横並びにした枠の幅を<strong>数値の比率</strong>で分ける（ここでは 1 : 3）</td>
+      </tr>
+      <tr>
+        <td><code>space-between</code><br><code>space-around</code></td>
+        <td>横並びの<strong>配置のしかた</strong>。<code>between</code> は両端いっぱいに寄せて間を均等に、<code>around</code> はそれぞれの左右に均等な余白（前ページの <code>center</code> は中央にまとめる）</td>
+      </tr>
+    </table>
 
     <div class="point">
       <span class="label">理解ポイント</span><br>
@@ -452,8 +837,23 @@ ul { list-style: none; }
 </main>
 
 <footer>
-  SAMPLE SITE 内部研修用教材
 </footer>
 
+
+<script>
+  // ライブデモ（.browser-demo）を chrome 枠の幅にフィットさせる
+  (function () {
+    function fit() {
+      document.querySelectorAll('.browser-demo').forEach(function (d) {
+        d.style.zoom = d.parentElement.clientWidth / 1160;
+      });
+    }
+    window.addEventListener('load', fit);
+    window.addEventListener('resize', fit);
+  })();
+</script>
+
+<!-- ▼ 共通スクリプト。章ナビ・コピーボタン・先頭へ戻るが自動で付く（編集不要） -->
+<script src="../js/training.js"></script>
 </body>
 </html>

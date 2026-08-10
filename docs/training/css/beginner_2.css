@@ -1,0 +1,1191 @@
+/* ============================================================
+   コーダー初級#2（beginner_2.html）専用のスタイル
+
+   全ページ共通の土台は training.css にあります。
+   ここに置くのは、このページだけで使う図やデモのスタイルです。
+   ============================================================ */
+
+/* ── サンプルサイトを開くリンク（アウトラインボタン） ── */
+.open-site-wrap {
+  text-align: center;
+  margin: 14px 0 4px;
+}
+.open-site {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 16px;
+  border: 1.5px solid #2563eb;
+  border-radius: 8px;
+  color: #2563eb;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  background: #fff;
+}
+.open-site:hover {
+  background: #eff6ff;
+  text-decoration: none;
+}
+.open-site svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ── ライブデモの表示枠 ──
+   実寸（幅1160pxのウィンドウ相当）で組み、zoom で枠内に縮小表示する。
+   zoom の値はページ末尾のフィットスクリプトが上書きする。 */
+.browser-demo {
+  width: 1160px;
+  zoom: 0.72;
+  background: #fff;
+  padding: 8px;  /* ブラウザ既定の body 余白（8px）の再現 */
+}
+.browser-demo * {
+  box-sizing: content-box;
+}
+
+/* リセット前のブラウザ既定に合わせる */
+.browser-demo.demo-reset {
+  padding: 0;
+}
+
+/* * { margin: 0 } リセット済みのページ用 */
+.browser-demo.demo-reset * {
+  box-sizing: border-box;
+}
+
+/* デモ内は教材ページ側の見出し・段落装飾を打ち消してブラウザ既定に戻す */
+.browser-demo :is(h1,
+h2,
+h3,
+h4,
+h5,
+h6) {
+  margin: revert;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  letter-spacing: normal;
+  font-size: revert;
+  font-weight: revert;
+  line-height: revert;
+}
+.browser-demo p {
+  margin: revert;
+}
+.browser-demo.demo-reset :is(h1,
+h2,
+h3,
+h4,
+h5,
+h6),
+.browser-demo.demo-reset p {
+  margin: 0;
+}
+
+/* ── 概念図のライブ埋め込み ──
+   設計幅を data-width に持ち、収まらないときだけフィットスクリプトが縮小する */
+.diagram-embed {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.diagram-embed :is(h1,
+h2,
+h3,
+h4,
+h5,
+h6),
+.diagram-embed p {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  letter-spacing: normal;
+}
+
+/* ── ライブデモ用スタイル ──
+   図はスクリーンショットではなく、各章で教えたコードを .demo-* でスコープして
+   そのままページ内に埋め込み、ブラウザにライブ描画させている。 */
+/* 第11章①：header に高さと枠線（教材の手順を積み上げて生成）*/
+.demo-11a * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.demo-11a .header {
+  height: 150px;
+  border: 2px solid #e44;
+}
+
+/* 第11章②：logo に幅・高さ・余白（教材の手順を積み上げて生成）*/
+.demo-11b * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.demo-11b .header {
+  height: 150px;
+  border: 2px solid #e44;
+}
+.demo-11b .logo {
+  width: 220px;
+  height: 60px;
+  margin: 20px;
+  border: 2px solid #e44;
+}
+
+/* 第11章③：残りの枠にも大きさと枠線（教材の手順を積み上げて生成）*/
+.demo-11c * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.demo-11c .header {
+  height: 150px;
+  border: 2px solid #e44;
+}
+.demo-11c .logo {
+  width: 220px;
+  height: 60px;
+  margin: 20px;
+  border: 2px solid #e44;
+}
+.demo-11c .visual {
+  height: 400px;
+  margin-top: 20px;
+  border: 2px solid #37b;
+}
+.demo-11c .copy {
+  width: 400px;
+  height: 120px;
+  margin: 20px;
+  border: 2px solid #37b;
+}
+.demo-11c .text {
+  height: 140px;
+  border: 2px solid #3a6;
+}
+.demo-11c .menu {
+  height: 140px;
+  border: 2px solid #3a6;
+}
+.demo-11c .footer {
+  height: 120px;
+  border: 2px solid #85c;
+}
+
+/* 第11章：980pxで中央寄せ（教材の手順を積み上げて生成）*/
+.demo-11d * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.demo-11d .header {
+  border-bottom: 1px solid #ccd;
+}
+.demo-11d .logo {
+  width: 220px;
+  height: 60px;
+  margin: 20px;
+  border: 2px solid #e44;
+}
+.demo-11d .visual {
+  height: 400px;
+  margin-top: 20px;
+  border: 2px solid #37b;
+}
+.demo-11d .copy {
+  width: 400px;
+  height: 120px;
+  margin: 20px;
+  border: 2px solid #37b;
+}
+.demo-11d .text {
+  height: 140px;
+  border: 2px solid #3a6;
+}
+.demo-11d .menu {
+  height: 140px;
+  border: 2px solid #3a6;
+}
+.demo-11d .footer {
+  background: #222;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+.demo-11d .header_contents {
+  width: 980px;
+  margin: 0 auto;
+  height: 150px;
+  border: 2px solid #e44;
+}
+.demo-11d .contents {
+  width: 980px;
+  margin: 0 auto;
+  border: 2px dashed #94a3b8;
+}
+.demo-11d .footer_contents {
+  width: 980px;
+  margin: 0 auto;
+  height: 120px;
+  border: 2px solid #85c;
+  color: #fff;
+  text-align: center;
+}
+
+/* 第12章：text と menu を横並び（教材の手順を積み上げて生成）*/
+.demo-12 * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.demo-12 .header {
+  border-bottom: 1px solid #ccd;
+}
+.demo-12 .logo {
+  width: 220px;
+  height: 60px;
+  margin: 20px;
+  border: 2px solid #e44;
+}
+.demo-12 .visual {
+  height: 400px;
+  margin-top: 20px;
+  border: 2px solid #37b;
+}
+.demo-12 .copy {
+  width: 400px;
+  height: 120px;
+  margin: 20px;
+  border: 2px solid #37b;
+}
+.demo-12 .text {
+  height: 140px;
+  border: 2px solid #3a6;
+  width: 600px;
+  margin-right: 16px;
+}
+.demo-12 .menu {
+  height: 140px;
+  border: 2px solid #3a6;
+  width: 344px;
+}
+.demo-12 .footer {
+  background: #222;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+.demo-12 .header_contents {
+  width: 980px;
+  margin: 0 auto;
+  height: 150px;
+  border: 2px solid #e44;
+}
+.demo-12 .contents {
+  width: 980px;
+  margin: 0 auto;
+  border: 2px dashed #94a3b8;
+}
+.demo-12 .footer_contents {
+  width: 980px;
+  margin: 0 auto;
+  height: 120px;
+  border: 2px solid #85c;
+  color: #fff;
+  text-align: center;
+}
+.demo-12 .text_wrapper {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* 第13章：完成（第12章と同じ状態）（教材の手順を積み上げて生成）*/
+.demo-13 * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.demo-13 .header {
+  border-bottom: 1px solid #ccd;
+}
+.demo-13 .logo {
+  width: 220px;
+  height: 60px;
+  margin: 20px;
+  border: 2px solid #e44;
+}
+.demo-13 .visual {
+  height: 400px;
+  margin-top: 20px;
+  border: 2px solid #37b;
+}
+.demo-13 .copy {
+  width: 400px;
+  height: 120px;
+  margin: 20px;
+  border: 2px solid #37b;
+}
+.demo-13 .text {
+  height: 140px;
+  border: 2px solid #3a6;
+  width: 600px;
+  margin-right: 16px;
+}
+.demo-13 .menu {
+  height: 140px;
+  border: 2px solid #3a6;
+  width: 344px;
+}
+.demo-13 .footer {
+  background: #222;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+.demo-13 .header_contents {
+  width: 980px;
+  margin: 0 auto;
+  height: 150px;
+  border: 2px solid #e44;
+}
+.demo-13 .contents {
+  width: 980px;
+  margin: 0 auto;
+  border: 2px dashed #94a3b8;
+}
+.demo-13 .footer_contents {
+  width: 980px;
+  margin: 0 auto;
+  height: 120px;
+  border: 2px solid #85c;
+  color: #fff;
+  text-align: center;
+}
+.demo-13 .text_wrapper {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* ── 概念図のライブ埋め込み ──
+   設計幅を data-width に持ち、収まらないときだけフィットスクリプトが縮小する */
+.diagram-embed {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.diagram-embed :is(h1,
+h2,
+h3,
+h4,
+h5,
+h6),
+.diagram-embed p {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  letter-spacing: normal;
+}
+
+/* ── ライブデモ用スタイル ──
+   図はスクリーンショットではなく、各章で教えたコードを .demo-* でスコープして
+   そのままページ内に埋め込み、ブラウザにライブ描画させている。 */
+
+/* 第11章①：header に高さと枠線（教材の手順を積み上げて生成）*/
+.demo-11a * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.demo-11a .header {
+  height: 150px;
+  border: 2px solid #e44;
+}
+
+/* 第11章②：logo に幅・高さ・余白（教材の手順を積み上げて生成）*/
+.demo-11b * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.demo-11b .header {
+  height: 150px;
+  border: 2px solid #e44;
+}
+.demo-11b .logo {
+  width: 220px;
+  height: 60px;
+  margin: 20px;
+  border: 2px solid #e44;
+}
+
+/* 第11章③：残りの枠にも大きさと枠線（教材の手順を積み上げて生成）*/
+.demo-11c * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.demo-11c .header {
+  height: 150px;
+  border: 2px solid #e44;
+}
+.demo-11c .logo {
+  width: 220px;
+  height: 60px;
+  margin: 20px;
+  border: 2px solid #e44;
+}
+.demo-11c .visual {
+  height: 400px;
+  margin-top: 20px;
+  border: 2px solid #37b;
+}
+.demo-11c .copy {
+  width: 400px;
+  height: 120px;
+  margin: 20px;
+  border: 2px solid #37b;
+}
+.demo-11c .text {
+  height: 140px;
+  border: 2px solid #3a6;
+}
+.demo-11c .menu {
+  height: 140px;
+  border: 2px solid #3a6;
+}
+.demo-11c .footer {
+  height: 120px;
+  border: 2px solid #85c;
+}
+
+/* 第11章：980pxで中央寄せ（教材の手順を積み上げて生成）*/
+.demo-11d * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.demo-11d .header {
+  border-bottom: 1px solid #ccd;
+}
+.demo-11d .logo {
+  width: 220px;
+  height: 60px;
+  margin: 20px;
+  border: 2px solid #e44;
+}
+.demo-11d .visual {
+  height: 400px;
+  margin-top: 20px;
+  border: 2px solid #37b;
+}
+.demo-11d .copy {
+  width: 400px;
+  height: 120px;
+  margin: 20px;
+  border: 2px solid #37b;
+}
+.demo-11d .text {
+  height: 140px;
+  border: 2px solid #3a6;
+}
+.demo-11d .menu {
+  height: 140px;
+  border: 2px solid #3a6;
+}
+.demo-11d .footer {
+  background: #222;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+.demo-11d .footer_contents {
+  width: 980px;
+  margin: 0 auto;
+  height: 120px;
+  border: 2px solid #85c;
+  color: #fff;
+  text-align: center;
+}
+.demo-11d .contents {
+  border: 2px dashed #94a3b8;
+}
+.demo-11d .header_contents {
+  height: 150px;
+  border: 2px solid #e44;
+}
+
+/* 第12章：text と menu を横並び（教材の手順を積み上げて生成）*/
+.demo-12 * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.demo-12 .header {
+  border-bottom: 1px solid #ccd;
+}
+.demo-12 .logo {
+  width: 220px;
+  height: 60px;
+  margin: 20px;
+  border: 2px solid #e44;
+}
+.demo-12 .visual {
+  height: 400px;
+  margin-top: 20px;
+  border: 2px solid #37b;
+}
+.demo-12 .copy {
+  width: 400px;
+  height: 120px;
+  margin: 20px;
+  border: 2px solid #37b;
+}
+.demo-12 .text {
+  height: 140px;
+  border: 2px solid #3a6;
+  width: 600px;
+  margin-right: 16px;
+}
+.demo-12 .menu {
+  height: 140px;
+  border: 2px solid #3a6;
+  width: 344px;
+}
+.demo-12 .footer {
+  background: #222;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+.demo-12 .footer_contents {
+  width: 980px;
+  margin: 0 auto;
+  height: 120px;
+  border: 2px solid #85c;
+  color: #fff;
+  text-align: center;
+}
+.demo-12 .contents {
+  border: 2px dashed #94a3b8;
+}
+.demo-12 .header_contents {
+  height: 150px;
+  border: 2px solid #e44;
+}
+.demo-12 .text_wrapper {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+/* 第13章：完成（第12章と同じ状態）*/
+.demo-13 * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.demo-13 .header {
+  border-bottom: 1px solid #ccd;
+}
+.demo-13 .logo {
+  width: 220px;
+  height: 60px;
+  margin: 20px;
+  border: 2px solid #e44;
+}
+.demo-13 .visual {
+  height: 400px;
+  margin-top: 20px;
+  border: 2px solid #37b;
+}
+.demo-13 .copy {
+  width: 400px;
+  height: 120px;
+  margin: 20px;
+  border: 2px solid #37b;
+}
+.demo-13 .text {
+  height: 140px;
+  border: 2px solid #3a6;
+  width: 600px;
+  margin-right: 16px;
+}
+.demo-13 .menu {
+  height: 140px;
+  border: 2px solid #3a6;
+  width: 344px;
+}
+.demo-13 .footer {
+  background: #222;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+.demo-13 .footer_contents {
+  width: 980px;
+  margin: 0 auto;
+  height: 120px;
+  border: 2px solid #85c;
+  color: #fff;
+  text-align: center;
+}
+.demo-13 .contents {
+  border: 2px dashed #94a3b8;
+}
+.demo-13 .header_contents {
+  height: 150px;
+  border: 2px solid #e44;
+}
+.demo-13 .text_wrapper {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+
+/* ── 概念図のライブ埋め込み用（concepts/*.html から移植・スコープ付与） ──
+   図を修正するときはここを編集する */
+
+/* --- concept1_boxes --- */
+.cd1 * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.cd1 {
+  font-family: "Hiragino Sans",Meiryo,sans-serif;
+  background: #fff;
+  padding: 24px;
+}
+.cd1 .wrap {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.cd1 .siteimg {
+  height: 342px;
+  width: auto;
+  display: block;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+.cd1 .eq {
+  font-size: 38px;
+  color: #c4c4c4;
+}
+.cd1 .boxes {
+  width: 372px;
+}
+
+.cd1 .box,
+.cd1 .b-text,
+.cd1 .b-menu {
+  position: relative;
+  background: #fafafa;
+}
+.cd1 .lb {
+  position: absolute;
+  top: 7px;
+  left: 10px;
+  font-size: 11px;
+  line-height: 1.2;
+  color: #666;
+  background: #fafafa;
+  padding: 0 3px;
+  white-space: nowrap;
+  z-index: 2;
+}
+.cd1 .box {
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 3px;
+  margin-bottom: 8px;
+}
+.cd1 .b-header {
+  height: 54px;
+  border-color: #e44;
+}
+.cd1 .b-hero {
+  height: 150px;
+  border-color: #37b;
+}
+.cd1 .b-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.cd1 .b-text {
+  flex: 1;
+  height: 76px;
+  border: 2px solid #3a6;
+  border-radius: 3px;
+}
+.cd1 .b-menu {
+  width: 96px;
+  height: 76px;
+  border: 2px solid #3a6;
+  border-radius: 3px;
+}
+.cd1 .b-footer {
+  height: 46px;
+  border-color: #85c;
+}
+.cd1 .b-copy {
+  position: absolute;
+  top: 44px;
+  left: 14px;
+  width: 132px;
+  height: 46px;
+  border: 2px solid #37b;
+  border-radius: 2px;
+  background: #fafafa;
+}
+.cd1 .b-copy > .lb {
+  left: 7px;
+  top: 5px;
+  font-size: 10px;
+  line-height: 1;
+}
+
+.cd1 .b-logo {
+  position: absolute;
+  top: 24px;
+  left: 12px;
+  width: 78px;
+  height: 22px;
+  border: 2px solid #e44;
+  border-radius: 2px;
+}
+.cd1 .b-logo > .lb {
+  left: 7px;
+  top: 5px;
+  font-size: 10px;
+  line-height: 1;
+}
+
+/* --- concept3_width --- */
+.cd3 * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.cd3 {
+  font-family: "Hiragino Sans",Meiryo,sans-serif;
+  background: #fff;
+  padding: 24px;
+}
+.cd3 .row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 36px;
+}
+.cd3 .unit > .cap {
+  font-size: 13px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 8px;
+  text-align: center;
+}
+.cd3 .browser {
+  border: 1px solid #d9dee5;
+  border-radius: 8px 8px 6px 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,.06);
+}
+.cd3 .bbar {
+  height: 22px;
+  background: #eef1f5;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 0 8px;
+  border-bottom: 1px solid #e2e6ec;
+}
+.cd3 .bbar i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.cd3 .bbar .r {
+  background: #ff6159;
+}
+.cd3 .bbar .y {
+  background: #ffbd2e;
+}
+.cd3 .bbar .g {
+  background: #28c840;
+}
+.cd3 .screen {
+  background: #f4f6f9;
+  padding: 14px 0;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.cd3 .gutter-label {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  color: #e44;
+}
+.cd3 .content {
+  width: 150px;
+  background: linear-gradient(120deg,#37b,#3a6);
+  color: #fff;
+  border-radius: 5px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 1.5;
+}
+.cd3 .screen.narrow {
+  width: 220px;
+}
+.cd3 .screen.wide {
+  width: 440px;
+}
+.cd3 .gut {
+  position: absolute;
+  top: 14px;
+  bottom: 14px;
+  width: 0;
+  border-left: 1px dashed #f5a08f;
+}
+.cd3 .arrow-w {
+  position: absolute;
+  height: 1px;
+  background: #f5a08f;
+  top: 50%;
+}
+.cd3 .note {
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+  margin-top: 14px;
+}
+.cd3 .note b {
+  color: #37b;
+}
+
+/* --- concept4_class --- */
+.cd4 * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.cd4 {
+  font-family: "Hiragino Sans",Meiryo,sans-serif;
+  background: #fff;
+  padding: 24px;
+}
+.cd4 .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+.cd4 .side {
+  flex: 0 0 auto;
+}
+.cd4 .side > .cap {
+  font-size: 12px;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 8px;
+  text-align: center;
+}
+.cd4 .code {
+  background: #1e1e1e;
+  border-radius: 8px;
+  padding: 16px;
+  font: 13px/2.1 Consolas, Monaco, "Courier New", monospace;
+  color: #d4d4d4;
+}
+.cd4 .tag {
+  color: #569cd6;
+}
+.cd4 .at {
+  color: #9cdcfe;
+}
+.cd4 .pu {
+  color: #d4d4d4;
+}
+.cd4 .br {
+  color: #d7ba7d;
+}
+.cd4 .name {
+  border-radius: 3px;
+  padding: 1px 4px;
+  font-weight: bold;
+  color: #1a1a1a;
+}
+.cd4 .n-header {
+  background: #ffd6a5;
+}
+
+/* header = オレンジ系 */
+.cd4 .n-logo {
+  background: #a5d8ff;
+}
+
+/* logo = 青系 */
+.cd4 .arrow {
+  font-size: 24px;
+  color: #ccd;
+  flex: 0 0 auto;
+}
+
+/* --- concept5_boxes2html --- */
+.cd5 {
+  font-family: "Hiragino Sans",Meiryo,sans-serif;
+  background: #fff;
+  padding: 24px;
+}
+.cd5 * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.cd5 .wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.cd5 .cap {
+  font-size: 12px;
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 8px;
+  text-align: center;
+  white-space: nowrap;
+}
+.cd5 .arrow {
+  font-size: 24px;
+  color: #ccd;
+  flex: 0 0 auto;
+  align-self: center;
+}
+.cd5 .col {
+  flex: 0 0 auto;
+}
+.cd5 .p-view {
+  width: 280px;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}
+.cd5 .p-view .v-header {
+  margin-top: auto;
+}
+.cd5 .p-view .v-footer {
+  margin-bottom: auto;
+}
+.cd5 .p-order {
+  width: 280px;
+}
+.cd5 .p-code {
+  width: 220px;
+}
+
+/* ラベル：#8（concept1）と同じ控えめなグレー */
+.cd5 .lb {
+  position: absolute;
+  top: 7px;
+  left: 10px;
+  font-size: 11px;
+  line-height: 1.2;
+  color: #666;
+  background: #fafafa;
+  padding: 0 3px;
+  white-space: nowrap;
+  z-index: 2;
+}
+.cd5 .lb.in {
+  top: 5px;
+  left: 7px;
+  font-size: 10px;
+  line-height: 1;
+  padding: 0 2px;
+}
+.cd5 .lb.inl {
+  top: 5px;
+  left: 7px;
+  font-size: 10px;
+  line-height: 1;
+  padding: 0 2px;
+}
+.cd5 .num {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  font-size: 11px;
+  color: #9aa3af;
+  font-weight: bold;
+}
+.cd5 .num.n-in {
+  right: 6px;
+  font-size: 10px;
+  color: #b6bcc6;
+}
+
+/* ① 画面の見た目（#8と同じ塗り・比率のモック） */
+.cd5 .vbx {
+  position: relative;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 3px;
+  background: #fafafa;
+  margin-bottom: 8px;
+}
+.cd5 .v-header {
+  height: 52px;
+  border-color: #e44;
+}
+.cd5 .v-logo {
+  position: absolute;
+  top: 24px;
+  left: 12px;
+  width: 108px;
+  height: 22px;
+  border: 2px solid #e44;
+  border-radius: 2px;
+  background: #fafafa;
+}
+.cd5 .v-visual {
+  height: 100px;
+  border-color: #37b;
+}
+.cd5 .v-copy {
+  position: absolute;
+  top: 36px;
+  left: 12px;
+  width: 150px;
+  height: 40px;
+  border: 2px solid #37b;
+  border-radius: 2px;
+  background: #fafafa;
+}
+.cd5 .v-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.cd5 .v-text {
+  position: relative;
+  flex: 1;
+  height: 54px;
+  border: 2px solid #3a6;
+  border-radius: 3px;
+  background: #fafafa;
+}
+.cd5 .v-menu {
+  position: relative;
+  width: 78px;
+  height: 54px;
+  border: 2px solid #3a6;
+  border-radius: 3px;
+  background: #fafafa;
+}
+.cd5 .v-footer {
+  height: 34px;
+  border-color: #85c;
+}
+
+/* ② 書く順：③のコードと行の高さを揃える（1行=18px） */
+.cd5 .stack {
+  margin-top: 14px;
+}
+.cd5 .obx {
+  position: relative;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 3px;
+  background: #fafafa;
+}
+.cd5 .o-header {
+  height: 108px;
+  border-color: #e44;
+  margin-bottom: 18px;
+}
+.cd5 .o-logo {
+  position: absolute;
+  top: 52px;
+  left: 30px;
+  width: 150px;
+  height: 24px;
+  border: 2px solid #e44;
+  border-radius: 2px;
+  background: #fafafa;
+}
+.cd5 .o-visual {
+  height: 108px;
+  border-color: #37b;
+  margin-bottom: 18px;
+}
+.cd5 .o-copy {
+  position: absolute;
+  top: 52px;
+  left: 30px;
+  width: 150px;
+  height: 24px;
+  border: 2px solid #37b;
+  border-radius: 2px;
+  background: #fafafa;
+}
+.cd5 .o-text {
+  height: 50px;
+  border-color: #3a6;
+  margin-bottom: 4px;
+}
+.cd5 .o-menu {
+  height: 50px;
+  border-color: #3a6;
+  margin-bottom: 22px;
+}
+.cd5 .o-footer {
+  height: 54px;
+  border-color: #85c;
+}
+
+/* ③ コード（教材と同じ vscode Dark+、1行=18px で②と対応） */
+.cd5 .code {
+  background: #1e1e1e;
+  border-radius: 8px;
+  padding: 14px 16px;
+  font: 11.5px/18px Consolas, Monaco, "Courier New", monospace;
+  color: #d4d4d4;
+  white-space: pre;
+}
+.cd5 .tag {
+  color: #569cd6;
+}
+.cd5 .nm-h {
+  color: #f48771;
+  font-weight: bold;
+}
+.cd5 .nm-v {
+  color: #4fc1ff;
+  font-weight: bold;
+}
+.cd5 .nm-t {
+  color: #6cc596;
+  font-weight: bold;
+}
+.cd5 .nm-f {
+  color: #c586c0;
+  font-weight: bold;
+}
