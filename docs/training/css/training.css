@@ -1609,6 +1609,70 @@ main section[id] {
 .hl .r { color: #9cdcfe; }   /* セル参照 */
 
 /* ============================================================
+   追加・変更した行を目立たせる
+   使用: これから使う想定（現時点では未使用）
+
+   「ここを書き足してください」を、手順の中で行ごとに示すためのもの。
+   囲んだ span が1行ぶんの帯になり、左に縦線と背景色が付く。
+
+   ▼ 書き方（閉じタグの直後で改行しない）
+
+     <pre class="vscode-code">.header {
+     <span class="add">  display: flex;</span>}</pre>
+
+   閉じタグ </span> のうしろで改行すると、空行が1行増える。
+   span が block なので、そこで行が変わるためにもう改行は要らない。
+   行が増えると行番号とズレるので、必ず詰めて書くこと。
+
+   ▼ 続けて何行も示すとき
+
+   1つの span でまとめて囲む。帯がつながって出る。
+
+     <pre class="vscode-code">.header {
+     <span class="add">  display: flex;
+       gap: 12px;</span>}</pre>
+
+   ▼ 直す前の行を示すとき
+
+     <span class="add del">  display: block;</span>
+   ============================================================ */
+.vscode-code .add,
+.hl .add,
+pre .add,
+code .add {
+  display: block;
+  /* 帯を枠の右端まで伸ばす。
+     .vscode-code は右にだけ padding があるので、そのぶんを打ち消して足し直す。
+     左は padding が無いため、そのままで行番号の手前にそろう */
+  margin-right: -18px;
+  padding-right: 18px;
+  background: rgba(46, 160, 67, 0.16);
+  box-shadow: inset 3px 0 0 #2ea043;
+}
+
+/* 消す行・直す前の行 */
+.vscode-code .add.del,
+.hl .add.del,
+pre .add.del,
+code .add.del {
+  background: rgba(248, 81, 73, 0.14);
+  box-shadow: inset 3px 0 0 #f85149;
+}
+
+/* 白い背景のコード枠に置いた場合は色を薄くする。
+   暗い枠と同じ濃さだと、明るい面では強すぎるため。
+   また padding の付き方が枠ごとに違うので、はみ出しは打ち消す */
+.hl .add {
+  margin-right: 0;
+  padding-right: 0;
+  background: rgba(46, 160, 67, 0.13);
+}
+
+.hl .add.del {
+  background: rgba(248, 81, 73, 0.11);
+}
+
+/* ============================================================
    答えの折りたたみ（演習・長いコードの開閉）
    使用: マークアップ中級#2（3章）、マークアップ中級#3（7章）、
          マークアップ中級#6（4・6章）、マークアップ中級#7（1〜4章）
