@@ -1,0 +1,963 @@
+/* ============================================================
+   マークアップ中級#1（basic_1.html）専用のスタイル
+
+   全ページ共通の土台は training.css にあります。
+   ここに置くのは、このページだけで使う図やデモのスタイルです。
+   ============================================================ */
+/* ============================================================
+   通信の流れ図
+   ============================================================ */
+.net-fig {
+  margin: 20px 0;
+  padding: 22px 18px 18px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(37, 99, 235, 0.04), transparent 60%),
+    radial-gradient(circle at 80% 80%, rgba(124, 58, 237, 0.04), transparent 60%),
+    #ffffff;
+}
+
+.net-flow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+}
+
+/* --- ノード（機器） --- */
+.net-node {
+  flex: 1 1 0;
+  min-width: 0;
+  text-align: center;
+}
+
+/* 機器の絵。CSSだけで描く */
+.net-icon {
+  position: relative;
+  width: 62px;
+  height: 52px;
+  margin: 0 auto 10px;
+}
+
+/* ノートPC。フタ・表示面・映り込み・台形の本体 */
+.ic-pc .scr {
+  position: absolute;
+  top: 0;
+  left: 6px;
+  width: 50px;
+  height: 34px;
+  border-radius: 4px 4px 2px 2px;
+  background: linear-gradient(#3b4a5f, #1f2937);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+    0 2px 4px rgba(15, 23, 42, 0.18);
+}
+
+.ic-pc .scr::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  bottom: 4px;
+  left: 3px;
+  border-radius: 2px;
+  background: linear-gradient(150deg, #7fb2f7, #dbeafe 48%, #f0f7ff);
+}
+
+/* 画面の映り込み */
+.ic-pc .scr::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  width: 19px;
+  height: 27px;
+  background: linear-gradient(112deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0) 68%);
+  transform: skewX(-14deg);
+}
+
+.ic-pc .base {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  width: 50px;
+  height: 0;
+  margin-left: -25px;
+  border-bottom: 6px solid #334155;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+}
+
+/* トラックパッドのくぼみ */
+.ic-pc .base::after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 50%;
+  width: 15px;
+  height: 2px;
+  margin-left: -7px;
+  border-radius: 1px;
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* 画面に映っているページの中身。1本を box-shadow で3本に増やしている */
+.ic-pc::before {
+  content: "";
+  position: absolute;
+  top: 9px;
+  left: 11px;
+  width: 40px;
+  height: 3px;
+  border-radius: 1.5px;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow:
+    0 6px 0 rgba(255, 255, 255, 0.72),
+    0 12px 0 rgba(255, 255, 255, 0.55);
+}
+
+/* 上のふちのカメラ */
+.ic-pc::after {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 50%;
+  width: 2px;
+  height: 2px;
+  margin-left: -1px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+}
+
+/* ルーター（プロバイダ）。本体・通気スリット・アンテナ・点灯するLED */
+.ic-router .body {
+  position: absolute;
+  bottom: 7px;
+  left: 3px;
+  width: 56px;
+  height: 21px;
+  border-radius: 5px;
+  background: linear-gradient(#6b7a8f, #3d4859);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    0 2px 4px rgba(15, 23, 42, 0.18);
+}
+
+.ic-router .body::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 15px;
+  height: 10px;
+  border-radius: 1px;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.2) 0 1px,
+    transparent 1px 3px
+  );
+}
+
+.ic-router .ant {
+  position: absolute;
+  bottom: 25px;
+  width: 4px;
+  height: 19px;
+  border-radius: 2px;
+  background: linear-gradient(#aab6c6, #64748b);
+}
+
+.ic-router .ant.a { left: 15px; transform: rotate(-20deg); }
+.ic-router .ant.b { right: 15px; transform: rotate(20deg); }
+
+.ic-router .led {
+  position: absolute;
+  bottom: 14px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 5px rgba(74, 222, 128, 0.95);
+}
+
+.ic-router .led.l1 { left: 12px; }
+
+.ic-router .led.l2 {
+  left: 21px;
+  background: #facc15;
+  box-shadow: 0 0 5px rgba(250, 204, 21, 0.95);
+}
+
+.ic-router .led.l3 { left: 30px; }
+
+/* 接地影 */
+.ic-router::after {
+  content: "";
+  position: absolute;
+  right: 10px;
+  bottom: 3px;
+  left: 10px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.16);
+  filter: blur(1.5px);
+}
+
+/* DNS（帳簿）。表紙・ページの小口・背表紙 */
+.ic-dns .book {
+  position: absolute;
+  top: 3px;
+  left: 11px;
+  width: 41px;
+  height: 46px;
+  border-radius: 2px 6px 6px 2px;
+  background: linear-gradient(#fffdf5, #fdf1d8);
+  box-shadow:
+    inset 0 0 0 1px rgba(180, 83, 9, 0.22),
+    0 2px 4px rgba(15, 23, 42, 0.16);
+}
+
+/* 重なったページの断面 */
+.ic-dns .book::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  right: 0;
+  bottom: 3px;
+  width: 4px;
+  border-radius: 0 5px 5px 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    #efdcb4 0 2px,
+    #fffdf5 2px 4px
+  );
+}
+
+.ic-dns .spine {
+  position: absolute;
+  top: 3px;
+  left: 11px;
+  width: 9px;
+  height: 46px;
+  border-radius: 2px 0 0 2px;
+  background: linear-gradient(90deg, #8a3c08, #c2620b);
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.18);
+}
+
+.ic-dns .line {
+  position: absolute;
+  left: 25px;
+  width: 20px;
+  height: 3px;
+  border-radius: 2px;
+  background: #fcd34d;
+}
+
+.ic-dns .line.n1 { top: 19px; }
+.ic-dns .line.n2 { top: 27px; width: 14px; }
+.ic-dns .line.n3 { top: 35px; }
+
+/* 表紙のタイトル欄 */
+.ic-dns::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 25px;
+  width: 21px;
+  height: 6px;
+  border-radius: 1px;
+  background: rgba(194, 98, 11, 0.14);
+  box-shadow: inset 0 0 0 1px rgba(194, 98, 11, 0.34);
+}
+
+/* しおり。下端を三角に切り欠く */
+.ic-dns::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  right: 13px;
+  width: 5px;
+  height: 15px;
+  background: linear-gradient(#ef4444, #b91c1c);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 74%, 0 100%);
+}
+
+/* サーバー（ラック）。筐体・支柱・1台ずつのベゼル・通気スリット・動作ランプ */
+.ic-server::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 7px;
+  bottom: 0;
+  left: 7px;
+  border-radius: 5px;
+  background: linear-gradient(#3a4759, #1a2331);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 3px 8px rgba(15, 23, 42, 0.22);
+}
+
+/* 左右の支柱。1本を box-shadow で反対側にも出している */
+.ic-server::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  bottom: 3px;
+  left: 9px;
+  width: 2px;
+  border-radius: 1px;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 42px 0 0 rgba(255, 255, 255, 0.12);
+}
+
+.ic-server .unit {
+  position: absolute;
+  z-index: 1;
+  left: 12px;
+  width: 38px;
+  height: 14px;
+  border-radius: 3px;
+  background: linear-gradient(#f8fafc, #dfe6ee);
+  box-shadow:
+    inset 0 0 0 1px #b8c4d1,
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 1px 2px rgba(15, 23, 42, 0.12);
+}
+
+.ic-server .unit.u1 { top: 2px; }
+.ic-server .unit.u2 { top: 19px; }
+.ic-server .unit.u3 { top: 36px; }
+
+.ic-server .unit::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 5px;
+  width: 17px;
+  height: 6px;
+  border-radius: 1px;
+  background: repeating-linear-gradient(
+    to right,
+    #93a3b5 0 2px,
+    transparent 2px 4px
+  );
+}
+
+.ic-server .unit::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 4px rgba(16, 185, 129, 0.9);
+}
+
+.net-title {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.net-sub {
+  display: block;
+  margin-top: 4px;
+  font-size: 11.5px;
+  color: #64748b;
+  line-height: 1.7;
+}
+
+/* --- ノード間をつなぐ線。往路と復路の2車線 --- */
+.net-link {
+  flex: 0 0 56px;
+  position: relative;
+  height: 52px;
+  align-self: flex-start;
+}
+
+.lane {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: repeating-linear-gradient(
+    to right,
+    #cbd5e1 0 6px,
+    transparent 6px 11px
+  );
+}
+
+.lane.go { top: 17px; }
+.lane.back { top: 34px; }
+
+/* 進む向きを示す矢印。動きを止めていても向きが分かる */
+.lane::after {
+  content: "";
+  position: absolute;
+  top: -4px;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+
+.lane.go::after {
+  right: -3px;
+  border-left: 7px solid #60a5fa;
+}
+
+.lane.back::after {
+  left: -3px;
+  border-right: 7px solid #34d399;
+}
+
+/* 線の上を流れるデータ */
+.lane i {
+  position: absolute;
+  top: -4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* 末尾の backwards は、出番を待っている間も最初のキーフレーム（透明）を
+   当てるための指定。これがないと animation-delay の間だけ玉が見えてしまい、
+   ページを開いた直後に全部の玉が並んで表示される。 */
+.lane.go i {
+  background: #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+  animation: goRight 2.4s linear infinite backwards;
+}
+
+.lane.back i {
+  background: #10b981;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15);
+  animation: backLeft 2.4s linear infinite backwards;
+}
+
+/* 行き（PC → サーバー）→ 帰り（サーバー → PC）の順に流れる */
+.net-link .lane.go i      { animation-delay: 0s; }
+.net-link.d2 .lane.go i   { animation-delay: 0.4s; }
+.net-link.d3 .lane.go i   { animation-delay: 0.8s; }
+.net-link.d3 .lane.back i { animation-delay: 1.2s; }
+.net-link.d2 .lane.back i { animation-delay: 1.6s; }
+.net-link .lane.back i    { animation-delay: 2s; }
+
+@keyframes goRight {
+  0%   { left: -8px; opacity: 0; }
+  2%   { left: -8px; opacity: 1; }
+  15%  { left: calc(100% - 2px); opacity: 1; }
+  17%  { left: calc(100% - 2px); opacity: 0; }
+  100% { left: calc(100% - 2px); opacity: 0; }
+}
+
+@keyframes backLeft {
+  0%   { left: calc(100% - 2px); opacity: 0; }
+  2%   { left: calc(100% - 2px); opacity: 1; }
+  15%  { left: -8px; opacity: 1; }
+  17%  { left: -8px; opacity: 0; }
+  100% { left: -8px; opacity: 0; }
+}
+
+/* ============================================================
+   FTPの図（開発者のPC ⇄ Webサーバー）
+   ============================================================ */
+.ftp-fig {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin: 20px 0;
+  padding: 24px 18px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.ftp-side {
+  flex: 0 0 auto;
+  text-align: center;
+}
+
+.ftp-cap {
+  display: block;
+  margin-top: 10px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.ftp-cap small {
+  display: block;
+  margin-top: 2px;
+  font-size: 11px;
+  font-weight: 400;
+  color: #94a3b8;
+  letter-spacing: 0.08em;
+}
+
+/* --- 開発者のモニター --- */
+.ftp-pc {
+  position: relative;
+  width: 116px;
+  height: 92px;
+  margin: 0 auto;
+}
+
+.ftp-pc .frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 116px;
+  height: 74px;
+  border: 5px solid #1e293b;
+  border-radius: 8px;
+  background: linear-gradient(155deg, #eef4fb, #f8fafc 45%, #ffffff);
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.35),
+    0 4px 10px rgba(15, 23, 42, 0.18);
+}
+
+/* 画面の映り込み */
+.ftp-pc .frame::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -14px;
+  width: 52px;
+  height: 96px;
+  background: linear-gradient(112deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 62%);
+  transform: skewX(-16deg);
+  pointer-events: none;
+}
+
+/* モニターの中のウィンドウ */
+.ftp-pc .win {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 62px;
+  height: 46px;
+  border-radius: 3px;
+  background: #ffffff;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.25);
+}
+
+.ftp-pc .win.two {
+  top: 20px;
+  left: 34px;
+  width: 58px;
+  height: 42px;
+  background: #eff6ff;
+}
+
+.ftp-pc .bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  border-radius: 3px 3px 0 0;
+  background: #cbd5e1;
+}
+
+.ftp-pc .win.two .bar { background: #93c5fd; }
+
+.ftp-pc .row {
+  position: absolute;
+  left: 5px;
+  height: 4px;
+  border-radius: 2px;
+  background: #e2e8f0;
+}
+
+.ftp-pc .row.r1 { top: 14px; width: 40px; }
+.ftp-pc .row.r2 { top: 22px; width: 28px; }
+.ftp-pc .row.r3 { top: 30px; width: 34px; }
+
+/* 首は下に向かって広がる台形にする */
+.ftp-pc .stand {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  width: 18px;
+  height: 0;
+  margin-left: -9px;
+  border-bottom: 12px solid #334155;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+}
+
+.ftp-pc .foot {
+  position: absolute;
+  bottom: 2px;
+  left: 30px;
+  width: 56px;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(#3b4a5f, #1e293b);
+  box-shadow: 0 2px 5px rgba(15, 23, 42, 0.22);
+}
+
+/* --- サーバーラック --- */
+.ftp-rack {
+  position: relative;
+  width: 74px;
+  height: 92px;
+  margin: 0 auto;
+}
+
+.ftp-rack .box {
+  position: absolute;
+  top: 0;
+  left: 5px;
+  width: 64px;
+  height: 88px;
+  border-radius: 6px;
+  background: linear-gradient(#2f3b4e, #151d2b);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 5px 12px rgba(15, 23, 42, 0.28);
+}
+
+/* 筐体の底の通気口 */
+.ftp-rack .box::after {
+  content: "";
+  position: absolute;
+  right: 8px;
+  bottom: 5px;
+  left: 8px;
+  height: 5px;
+  border-radius: 1px;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.14) 0 2px,
+    transparent 2px 5px
+  );
+}
+
+.ftp-rack .slot {
+  position: absolute;
+  left: 13px;
+  width: 48px;
+  height: 7px;
+  border-radius: 2px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+/* 各ユニットの動作ランプ */
+.ftp-rack .slot::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  right: 3px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.ftp-rack .slot.s1 { top: 12px; background: linear-gradient(#fdba74, #f97316); }
+.ftp-rack .slot.s2 { top: 25px; background: linear-gradient(#fdba74, #f97316); }
+.ftp-rack .slot.s3 { top: 38px; background: linear-gradient(#7dd3fc, #0ea5e9); }
+.ftp-rack .slot.s4 { top: 51px; background: linear-gradient(#7dd3fc, #0ea5e9); }
+.ftp-rack .slot.s5 { top: 64px; background: linear-gradient(#64748b, #414f63); }
+.ftp-rack .slot.s6 { top: 74px; background: linear-gradient(#64748b, #414f63); }
+
+/* --- 中央の通信部分 --- */
+.ftp-wire {
+  flex: 1 1 auto;
+  min-width: 0;
+  position: relative;
+  padding: 0 14px;
+}
+
+.ftp-arrow {
+  position: relative;
+  height: 30px;
+}
+
+.ftp-arrow + .ftp-arrow {
+  margin-top: 10px;
+}
+
+.ftp-arrow::before {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: repeating-linear-gradient(
+    to right,
+    #cbd5e1 0 7px,
+    transparent 7px 13px
+  );
+}
+
+.ftp-arrow::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+
+.ftp-arrow.up::after {
+  right: 0;
+  border-left: 8px solid #60a5fa;
+}
+
+.ftp-arrow.down::after {
+  left: 0;
+  border-right: 8px solid #34d399;
+}
+
+.ftp-arrow b {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 2px 12px;
+  border-radius: 999px;
+  background: #ffffff;
+  font-size: 11.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.ftp-arrow.up b { color: #1d4ed8; }
+.ftp-arrow.down b { color: #047857; }
+
+.ftp-ops {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 1.9;
+  color: #64748b;
+}
+
+@media (max-width: 640px) {
+  .ftp-fig {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  /* 開発者とサーバーが縦に並ぶので、矢印も縦向きに置き換える。
+     PC用の .ftp-arrow.up::after などと詳細度を合わせて打ち消している。 */
+  .ftp-wire {
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px 16px;
+  }
+
+  .ftp-arrow {
+    flex: 0 0 112px;
+    height: 78px;
+  }
+
+  .ftp-arrow + .ftp-arrow {
+    margin-top: 0;
+  }
+
+  .ftp-arrow::before {
+    top: 0;
+    bottom: auto;
+    left: 12px;
+    width: 2px;
+    height: 100%;
+    background: repeating-linear-gradient(
+      to bottom,
+      #cbd5e1 0 7px,
+      transparent 7px 13px
+    );
+  }
+
+  .ftp-arrow.up::after {
+    top: auto;
+    bottom: -2px;
+    left: 8px;
+    right: auto;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 0;
+    border-top: 8px solid #60a5fa;
+  }
+
+  .ftp-arrow.down::after {
+    top: -2px;
+    bottom: auto;
+    left: 8px;
+    right: auto;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 0;
+    border-bottom: 8px solid #34d399;
+  }
+
+  .ftp-arrow b {
+    top: 50%;
+    left: 26px;
+    padding: 2px 6px;
+    transform: translateY(-50%);
+  }
+
+  /* 矢印と同じ flex の行に入らないよう、1行まるごと使わせる */
+  .ftp-ops {
+    flex: 0 0 100%;
+    margin-top: 0;
+  }
+}
+
+/* ============================================================
+   このページでの置き方
+   ============================================================ */
+/* 一覧の左側が隠れきらないよう、登録画面は右下にずらして重ねる */
+.fig-bm-list { width: 82%; }
+
+.fig-bm-edit {
+  justify-self: end;
+  width: 76%;
+  margin-top: 58px;
+}
+
+.fig-fm-dialog {
+  justify-self: center;
+  width: 84%;
+  margin-top: 86px;
+}
+
+/* 一覧の行の中はボタンなので、背景に合わせてくり抜き色を変える */
+.gui-toolbar .gui-icon { --bg: #f4f5f7; }
+
+/* 往路・復路のラベル */
+.net-way {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px dashed #e2e8f0;
+  font-size: 12.5px;
+  line-height: 1.8;
+  color: #475569;
+}
+
+.net-way b {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 46px;
+  padding: 3px 12px;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: 11.5px;
+  white-space: nowrap;
+}
+
+.net-way b.back {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+/* 動きを減らす設定の人には、矢印だけ残して粒を止める */
+@media (prefers-reduced-motion: reduce) {
+  .lane i { animation: none; opacity: 0; }
+}
+
+@media (max-width: 640px) {
+  .net-flow {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  /* 横並び用の flex 指定を打ち消さないと、幅がはみ出す */
+  .net-node {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  /* 縦並びのときは、2車線を左右に並べる */
+  .net-link {
+    flex: 0 0 56px;
+    width: 56px;
+    height: 56px;
+    align-self: center;
+  }
+
+  .lane {
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: repeating-linear-gradient(
+      to bottom,
+      #cbd5e1 0 6px,
+      transparent 6px 11px
+    );
+  }
+
+  /* PC用の .lane.go / .lane.back（top指定）と詳細度を合わせて打ち消す。
+     合わせないと線が下にずれて、短く見える */
+  .lane.go { top: 0; left: 18px; }
+  .lane.back { top: 0; left: 38px; }
+
+  /* 横並び用の指定は詳細度が同じ .lane.go / .lane.back で打ち消す。
+     矢印は線の内側に置いて、上下のアイコンと重ならないようにする */
+  .lane.go::after {
+    top: auto;
+    bottom: 5px;
+    left: -4px;
+    right: auto;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: none;
+    border-top: 7px solid #60a5fa;
+  }
+
+  .lane.back::after {
+    top: 5px;
+    bottom: auto;
+    left: -4px;
+    right: auto;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: none;
+    border-bottom: 7px solid #34d399;
+  }
+
+  .lane i {
+    left: -4px;
+  }
+
+  .lane.go i { animation-name: goDown; }
+  .lane.back i { animation-name: backUp; }
+
+  @keyframes goDown {
+    0%   { top: -8px; opacity: 0; }
+    2%   { top: -8px; opacity: 1; }
+    15%  { top: calc(100% - 2px); opacity: 1; }
+    17%  { top: calc(100% - 2px); opacity: 0; }
+    100% { top: calc(100% - 2px); opacity: 0; }
+  }
+
+  @keyframes backUp {
+    0%   { top: calc(100% - 2px); opacity: 0; }
+    2%   { top: calc(100% - 2px); opacity: 1; }
+    15%  { top: -8px; opacity: 1; }
+    17%  { top: -8px; opacity: 0; }
+    100% { top: -8px; opacity: 0; }
+  }
+}
