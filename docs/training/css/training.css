@@ -4432,3 +4432,579 @@ code .add.del {
     gap: 5px;
   }
 }
+
+/* ============================================================
+   Excel の画面
+   使用: マークアップ中級#4（2章）
+
+   数式バー・列ヘッダー・行番号まで含めた、本物に寄せた画面。
+   スクリーンショットの代わりに使う。画像は1枚も使っていない。
+
+   ▼ 書き方
+
+     <div class="ex">
+       <div class="ex-bar">                     … 上部の数式バー
+         <span class="ex-name">SUM</span>          名前ボックス
+         <span class="ex-fx">fx</span>
+         <span class="ex-input">=D3+</span>        入力中の式
+       </div>
+       <div class="ex-grid">
+         <table>…</table>
+       </div>
+     </div>
+
+   ・列ヘッダーの <th> に is-on を付けると、その列が選択状態になる
+   ・行番号の <th> に is-on を付けると、その行が選択状態になる
+   ・<td class="is-edit"> で入力中のセル（緑の枠）
+   ・<td class="is-copy"> でコピー元（点線の枠）
+   ============================================================ */
+.ex {
+  --ex-line: #d0d0d0;      /* 罫線 */
+  --ex-head: #f0f0f0;      /* 見出しの帯 */
+  --ex-band: #e8e3d9;      /* 表の中の色付き行 */
+  --ex-sel:  #217346;      /* Excel の緑 */
+
+  margin: 22px 0;
+  border: 1px solid #c8c8c8;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #ffffff;
+  font-family: "Segoe UI", "Yu Gothic UI", "Hiragino Sans", sans-serif;
+  font-size: 12.5px;
+  color: #1a1a1a;
+  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.1);
+}
+
+/* ---------- 上部の数式バー ---------- */
+.ex-bar {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  height: 30px;
+  border-bottom: 1px solid var(--ex-line);
+  background: #ffffff;
+}
+
+/* 名前ボックス（左端。いまのセル番地や関数名が出る） */
+.ex-name {
+  flex: none;
+  width: 96px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  border-right: 1px solid var(--ex-line);
+  font-size: 12.5px;
+}
+
+/* 上下の三角（スピンボタン） */
+.ex-spin {
+  flex: none;
+  width: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  border-right: 1px solid var(--ex-line);
+}
+
+.ex-spin::before,
+.ex-spin::after {
+  content: "";
+  width: 0;
+  height: 0;
+  margin: 0 auto;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+}
+
+.ex-spin::before { border-bottom: 5px solid #5a5a5a; }
+.ex-spin::after  { border-top: 5px solid #5a5a5a; }
+
+/* × ✓ fx の3つ */
+.ex-btns {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 0 12px;
+  border-right: 1px solid var(--ex-line);
+}
+
+.ex-x,
+.ex-check {
+  position: relative;
+  width: 13px;
+  height: 13px;
+}
+
+/* × 印。2本の線を交差させる */
+.ex-x::before,
+.ex-x::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1.8px;
+  background: #c0392b;
+}
+
+.ex-x::before { transform: rotate(45deg); }
+.ex-x::after  { transform: rotate(-45deg); }
+
+/* ✓ 印。短い線と長い線をL字に組んで傾ける */
+.ex-check::before {
+  content: "";
+  position: absolute;
+  left: 1px;
+  top: 5px;
+  width: 5px;
+  height: 1.8px;
+  background: #2e7d32;
+  transform: rotate(45deg);
+  transform-origin: left center;
+}
+
+.ex-check::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 8px;
+  width: 10px;
+  height: 1.8px;
+  background: #2e7d32;
+  transform: rotate(-52deg);
+  transform-origin: left center;
+}
+
+.ex-fx {
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-size: 14px;
+  color: #444444;
+}
+
+/* 入力中の式 */
+.ex-input {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  min-width: 0;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 12.5px;
+  color: #1565c0;
+}
+
+/* ---------- 表 ---------- */
+.ex-grid {
+  overflow-x: auto;
+  background: #ffffff;
+}
+
+.ex-grid table {
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.ex-grid th,
+.ex-grid td {
+  height: 22px;
+  padding: 0 5px;
+  border: 1px solid var(--ex-line);
+  font-weight: normal;
+  font-size: 12.5px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* 列ヘッダー（A B C …）と行番号 */
+.ex-grid thead th,
+.ex-grid tbody th {
+  background: var(--ex-head);
+  color: #444444;
+  text-align: center;
+  font-size: 12px;
+}
+
+/* 列ごとの幅。table-layout: fixed なので colgroup 側で決める。
+   th に width を書いても効かない */
+.ex-grid col.ex-rownum { width: 32px; }   /* 行番号 */
+.ex-grid col.ex-a      { width: 34px; }   /* A列。本物と同じく狭い */
+.ex-grid col.ex-b      { width: 150px; }  /* 会社名 */
+.ex-grid col.ex-c      { width: 110px; }  /* 項目名 */
+
+/* 選択中の列・行は帯が濃くなり、下に緑の線が入る */
+.ex-grid thead th.is-on {
+  background: #d3d3d3;
+  color: #217346;
+  font-weight: 700;
+  box-shadow: inset 0 -2px 0 var(--ex-sel);
+}
+
+.ex-grid tbody th.is-on {
+  background: #d3d3d3;
+  color: #217346;
+  font-weight: 700;
+  box-shadow: inset -2px 0 0 var(--ex-sel);
+}
+
+/* 数値は右寄せ。Excel の既定と同じ */
+.ex-num { text-align: right; }
+.ex-mid { text-align: center; }
+
+/* 色付きの行（配布ファイルの塗り） */
+.ex-band { background: var(--ex-band); }
+
+/* 項目名の列 */
+.ex-item { text-align: right; }
+
+/* オレンジの項目名（利益率・目標達成率） */
+.ex-orange { color: #f79646; text-align: right; }
+
+/* 入力中のセル。緑の太枠 + 右下のハンドル */
+.ex-grid td.is-edit {
+  position: relative;
+  box-shadow: inset 0 0 0 2px var(--ex-sel);
+  color: #1565c0;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+}
+
+.ex-grid td.is-edit::after {
+  content: "";
+  position: absolute;
+  right: -3px;
+  bottom: -3px;
+  width: 6px;
+  height: 6px;
+  background: var(--ex-sel);
+  border: 1px solid #ffffff;
+}
+
+/* 参照しているセル。青い点線 */
+.ex-grid td.is-ref {
+  box-shadow: inset 0 0 0 2px #4a90d9;
+}
+
+.ex-grid td.is-ref::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px dashed #4a90d9;
+  pointer-events: none;
+}
+
+@media screen and (max-width: 780px) {
+  .ex-name { width: 68px; }
+  .ex-btns { gap: 9px; padding: 0 8px; }
+  .ex-grid th,
+  .ex-grid td { font-size: 11.5px; padding: 0 3px; }
+}
+
+/* ---------- Excel画面のアニメーション ----------
+   .ex に is-play を付けると、式を入力していく流れが自動で再生される。
+
+   ぜんぶで9秒。終わったら最初に戻って繰り返す。
+     0.0-1.0s  セルを選ぶ
+     1.0-4.5s  式が1文字ずつ入る
+     2.2s      D4 が光る（式の中で D4 を打った瞬間）
+     3.4s      D6 が光る
+     4.5-7.5s  完成した式のまま静止
+     7.5-9.0s  確定して結果が出る
+
+   文字が増える表現は width を伸ばして実現している。
+   1文字ずつ出す方法（steps）だと等幅フォント前提になるため、
+   ここでは滑らかに伸ばす形にした。 */
+.ex.is-play .ex-input {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ex.is-play .ex-input span {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: bottom;
+  animation: exType 22s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes exType {
+  0%,  11%  { width: 0; }     /* 0.0-2.4s  セルを選んでいる */
+  45%       { width: 15em; }  /* 2.4-9.9s  ゆっくり式が伸びる */
+  70%       { width: 15em; }  /* 9.9-15.4s 完成した式のまま静止 */
+  72%, 100% { width: 0; }     /* 15.8s     確定して式が消える */
+}
+
+/* 入力中のセル。式が伸びるのに合わせて中身も伸びる */
+.ex.is-play td.is-edit .ex-cell {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: bottom;
+  animation: exType 22s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+/* 選択枠。最初の1秒でセルを選び、最後に結果へ変わる */
+.ex.is-play td.is-edit {
+  animation: exSelect 22s linear infinite;
+}
+
+@keyframes exSelect {
+  0%, 7%      { box-shadow: inset 0 0 0 0 var(--ex-sel); }
+  11%, 100%   { box-shadow: inset 0 0 0 2px var(--ex-sel); }
+}
+
+/* 参照セルの光り方。式の中でそのセル番地を打った瞬間に点く */
+.ex.is-play td.is-ref {
+  box-shadow: none;
+  animation: exRef1 22s linear infinite;
+}
+
+.ex.is-play td.is-ref2 {
+  box-shadow: none;
+  animation: exRef2 22s linear infinite;
+}
+
+@keyframes exRef1 {
+  0%, 21%    { box-shadow: inset 0 0 0 0 #4a90d9; }   /* 4.6s D4 を打った瞬間 */
+  24%, 70%   { box-shadow: inset 0 0 0 2px #4a90d9; }
+  73%, 100%  { box-shadow: inset 0 0 0 0 #4a90d9; }
+}
+
+@keyframes exRef2 {
+  0%, 37%    { box-shadow: inset 0 0 0 0 #d98a4a; }   /* 8.1s D6 を打った瞬間 */
+  40%, 70%   { box-shadow: inset 0 0 0 2px #d98a4a; }
+  73%, 100%  { box-shadow: inset 0 0 0 0 #d98a4a; }
+}
+
+/* 参照セルの点線も同じ間だけ出す */
+.ex.is-play td.is-ref::after,
+.ex.is-play td.is-ref2::after {
+  border: 0;
+}
+
+/* カーソル（縦棒）。式を打っている間だけ点滅する */
+.ex.is-play .ex-caret {
+  display: inline-block;
+  width: 1px;
+  height: 13px;
+  margin-left: 1px;
+  background: #1a1a1a;
+  vertical-align: middle;
+  animation: exCaret 1s steps(2) infinite, exCaretShow 22s linear infinite;
+}
+
+@keyframes exCaret {
+  0%, 50%   { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+@keyframes exCaretShow {
+  0%, 7%     { visibility: hidden; }
+  11%, 70%   { visibility: visible; }
+  72%, 100%  { visibility: hidden; }
+}
+
+/* 確定後に出る結果。最後の1.5秒だけ見せる */
+.ex.is-play .ex-done {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 5px;
+  background: #ffffff;
+  color: #1a1a1a;
+  font-family: inherit;
+  opacity: 0;
+  animation: exDone 22s linear infinite;
+}
+
+@keyframes exDone {
+  0%, 70%     { opacity: 0; }
+  73%, 96%    { opacity: 1; }   /* 16.1-21.1s 結果が出て、5秒とどまる */
+  99%, 100%   { opacity: 0; }
+}
+
+/* 動きを減らす設定の人には、完成した状態だけを見せる */
+@media (prefers-reduced-motion: reduce) {
+  .ex.is-play .ex-input span,
+  .ex.is-play td.is-edit .ex-cell,
+  .ex.is-play td.is-edit,
+  .ex.is-play td.is-ref,
+  .ex.is-play td.is-ref2,
+  .ex.is-play .ex-caret,
+  .ex.is-play .ex-done {
+    animation: none;
+  }
+  .ex.is-play .ex-input span,
+  .ex.is-play td.is-edit .ex-cell { width: auto; }
+  .ex.is-play td.is-edit  { box-shadow: inset 0 0 0 2px var(--ex-sel); }
+  .ex.is-play td.is-ref   { box-shadow: inset 0 0 0 2px #4a90d9; }
+  .ex.is-play td.is-ref2  { box-shadow: inset 0 0 0 2px #d98a4a; }
+  .ex.is-play .ex-caret,
+  .ex.is-play .ex-done    { display: none; }
+}
+
+/* ---------- 再生 / 一時停止ボタン ----------
+   チェックボックスの on/off で animation-play-state を切り替える。
+   JavaScript は使わない。
+
+     <div class="ex is-play">
+       <input type="checkbox" id="ex-stop1" class="ex-stop">
+       <label class="ex-ctrl" for="ex-stop1">
+         <span class="ex-ctrl-pause">一時停止</span>
+         <span class="ex-ctrl-play">再生</span>
+       </label>
+       …
+
+   id は枠ごとに変える。同じページに2つ置くときに効かなくなるため */
+.ex-stop { display: none; }
+
+.ex-ctrl {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  border-bottom: 1px solid var(--ex-line);
+  background: #f7f7f7;
+  color: #444444;
+  font-size: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.ex-ctrl:hover { background: #eef1f5; color: #1d4ed8; }
+
+/* 印。再生中は「二本線」、停止中は「三角」 */
+.ex-ctrl::before {
+  content: "";
+  flex: none;
+  width: 0;
+  height: 11px;
+  border-left: 3.5px solid currentColor;
+  border-right: 3.5px solid currentColor;
+  box-sizing: content-box;
+  width: 3px;
+}
+
+/* 停止中は三角（再生マーク）に差し替える */
+.ex-stop:checked ~ .ex-ctrl::before {
+  width: 0;
+  height: 0;
+  border-left: 9px solid currentColor;
+  border-right: 0;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+}
+
+/* 表示するラベルを入れ替える */
+.ex-ctrl-play  { display: none; }
+.ex-stop:checked ~ .ex-ctrl .ex-ctrl-pause { display: none; }
+.ex-stop:checked ~ .ex-ctrl .ex-ctrl-play  { display: inline; }
+
+/* 止めたときは、動いているものを全部その場で停止する */
+.ex-stop:checked ~ .ex-bar .ex-input span,
+.ex-stop:checked ~ .ex-bar .ex-caret,
+.ex-stop:checked ~ .ex-grid td.is-edit,
+.ex-stop:checked ~ .ex-grid td.is-edit .ex-cell,
+.ex-stop:checked ~ .ex-grid td.is-ref,
+.ex-stop:checked ~ .ex-grid td.is-ref2,
+.ex-stop:checked ~ .ex-grid .ex-done {
+  animation-play-state: paused;
+}
+
+/* 動きを減らす設定のときは、ボタン自体を隠す（すでに静止しているため） */
+@media (prefers-reduced-motion: reduce) {
+  .ex-ctrl { display: none; }
+}
+
+/* ---------- いま何をしているかのキャプション ----------
+   アニメーションと同じ 14秒周期で、4つの文を順に見せる。
+   文章で手順を書くと冗長になるので、図の中で示す。
+
+     <div class="ex-step">
+       <span>答えを出したいセルをクリックする</span>
+       <span>= を打ち、使うセルをクリックしていく</span>
+       <span>式ができた。参照したセルに色が付いている</span>
+       <span>Enter で確定すると、結果が出る</span>
+     </div>                                                   */
+.ex-step {
+  position: relative;
+  height: 34px;
+  border-top: 1px solid var(--ex-line);
+  background: #fbfbfb;
+}
+
+.ex-step span {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  color: #475569;
+  font-size: 12.5px;
+  opacity: 0;
+  animation: exStep 22s ease-in-out infinite;
+}
+
+/* 頭に付ける丸。いま進行中であることを示す */
+.ex-step span::before {
+  content: "";
+  flex: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ex-sel);
+}
+
+/* 4つとも同じ 22秒のタイムラインを共有し、自分の担当区間だけ出す。
+   delay でずらす方式だと、前のフェードアウトと次のフェードインが
+   重なって二重に読めてしまうため、こちらに変えた。
+
+     1つ目  0.0- 4.0s   セルを選ぶ
+     2つ目  4.4-10.0s   式を打つ
+     3つ目 10.4-15.4s   式ができた
+     4つ目 15.8-21.6s   確定して結果
+   区切りごとに 0.4秒の空きを入れて、完全に入れ替わるようにしている */
+.ex-step span:nth-child(1) { animation-name: exStep1; }
+.ex-step span:nth-child(2) { animation-name: exStep2; }
+.ex-step span:nth-child(3) { animation-name: exStep3; }
+.ex-step span:nth-child(4) { animation-name: exStep4; }
+
+@keyframes exStep1 {
+  0%          { opacity: 0; }
+  3%,  16%    { opacity: 1; }
+  18%, 100%   { opacity: 0; }
+}
+
+@keyframes exStep2 {
+  0%,  20%    { opacity: 0; }
+  23%, 43%    { opacity: 1; }
+  45%, 100%   { opacity: 0; }
+}
+
+@keyframes exStep3 {
+  0%,  47%    { opacity: 0; }
+  50%, 68%    { opacity: 1; }
+  70%, 100%   { opacity: 0; }
+}
+
+@keyframes exStep4 {
+  0%,  72%    { opacity: 0; }
+  75%, 96%    { opacity: 1; }
+  98%, 100%   { opacity: 0; }
+}
+
+/* 止めたときはキャプションも止める */
+.ex-stop:checked ~ .ex-step span {
+  animation-play-state: paused;
+}
+
+/* 動きを減らす設定のときは、最後の1つだけ出す */
+@media (prefers-reduced-motion: reduce) {
+  .ex-step span { animation: none; opacity: 0; }
+  .ex-step span:nth-child(3) { opacity: 1; }
+}
