@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>マークアップ中級#4</title>
+  <link rel="stylesheet" href="../css/training.css">
+
+  <!-- ▼ 開いたときに、ページの先頭から読み始められるようにする。
+       ブラウザが前回の位置へ戻すより先に動かす必要があるため、
+       training.js とは分けて <head> で読み込んでいる -->
+  <script src="../js/scroll-reset.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>マークアップ中級#4</h1>
+    <p>簡単にエクセル関数を理解しよう</p>
+  </div>
+</header>
+
+<main>
+
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol>
+      <li><a href="#chapter1">なぜエクセルをやるのか</a></li>
+      <li><a href="#chapter2">数式の基本</a></li>
+      <li><a href="#chapter3">IF ― 条件で切り分ける</a></li>
+      <li><a href="#chapter4">エラー表示の読み方</a></li>
+      <li><a href="#chapter5">文字の中に数字を埋め込む ― TEXT</a></li>
+      <li><a href="#chapter6">切り捨て・切り上げ ― FLOOR / CEILING</a></li>
+    </ol>
+
+    <div class="note">
+      <span class="label">読む前に</span><br>
+      このページの見本は<strong>実際に動きます</strong>。数字を打ち替えると結果がその場で変わるので、手を動かしながら読んでください。<br>
+      ここでやることは、そのまま<strong>提出課題の「売上管理票」</strong>につながります。
+    </div>
+  </section>
+
+  <section id="chapter1">
+    <h2>1. なぜエクセルをやるのか</h2>
+
+    <p>
+      Webの勉強をしているのに、なぜ表計算ソフトなのか。理由は<strong>プログラミングの考え方を、いちばん早く体験できるから</strong>です。
+    </p>
+
+    <div class="xl-samples">
+      <div>
+        <span class="xl-label">プログラムで「合計を出して表示」する場合</span>
+        <code class="xl-code hl"><span class="c">1. データベースに接続する
+2. SQLを書いて取り出す
+3. 計算する
+4. HTMLに埋め込んで表示する
+5. ブラウザで開いて確認する
+
+→ 結果を見るまでの道のりが長い</span></code>
+      </div>
+      <div>
+        <span class="xl-label">エクセルで「合計を出して表示」する場合</span>
+        <code class="xl-code hl"><span class="c">1. セルに式を書く
+
+→ その場で答えが出る</span></code>
+      </div>
+    </div>
+
+    <p>
+      「値を受け取って、条件で分けて、計算して、返す」。これはエクセルの関数も、JavaScriptの関数もまったく同じ構造です。<br>
+      違うのは書き方だけ。エクセルなら1秒で結果が見えるので、考え方の練習に向いています。
+    </p>
+
+    <p>
+      Excel がなければ Googleスプレッドシート（無料）や Mac の Numbers でも進められます。<br>
+      ただし一部の関数は動きが違うことがあります。うまくいかないときは、その関数名で検索してください。
+    </p>
+
+    <div class="note">
+      <span class="label">練習用のファイル</span><br>
+      <a href="../files/basic_excel.xlsx" download>ここから演習用のエクセルファイルをダウンロード</a>して、手を動かしながら読んでください。<br>
+      <br>
+      シートが3つ入っています。<strong>このページで使うのは「売上管理票」</strong>です。<br>
+      「成績表」は次の <a href="basic_5.html">マークアップ中級#5</a> で、「請求書」は仕上げの練習に使います。
+    </div>
+
+    <p>
+      1つのセルの中で改行したいときは、ふつうの <kbd>Enter</kbd> では確定してしまいます。<br>
+      Windows は <kbd>Alt</kbd> + <kbd>Enter</kbd>、Mac は <kbd>⌘</kbd> + <kbd>option</kbd> + <kbd>Enter</kbd> です。
+    </p>
+  </section>
+
+  <section id="chapter2">
+    <h2>2. 数式の基本</h2>
+
+    <p>
+      式はすべて <strong><code>=</code> から始めます</strong>。これが「ここから先は計算です」という合図になります。
+    </p>
+
+    <table>
+      <tr>
+        <th>手順</th>
+        <th>やること</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>答えを出したいセルをクリックする</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><code>=</code> を打つ</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>計算に使いたいセルを<strong>クリックする</strong>（セル番号が自動で入る）</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td><code>+</code> を打って、次のセルをクリックする</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td><kbd>Enter</kbd> で確定する</td>
+      </tr>
+    </table>
+
+    <div class="note">
+      <span class="label">セル番号は手で打たない</span><br>
+      <strong>クリックで入れるのが基本</strong>です。手で打つと打ち間違いに気づけません。クリックなら、いま何を選んでいるかが色で分かります。<br>
+      実際にどう見えるかは、<a href="#chapter3">3章の画面</a>で動かしています。
+    </div>
+
+    <h3>四則計算の記号</h3>
+
+    <table>
+      <tr>
+        <th>やりたいこと</th>
+        <th>記号</th>
+        <th>例</th>
+      </tr>
+      <tr>
+        <td>足す</td>
+        <td><code>+</code></td>
+        <td><code>=D4+D5</code></td>
+      </tr>
+      <tr>
+        <td>引く</td>
+        <td><code>-</code></td>
+        <td><code>=D4-D5</code></td>
+      </tr>
+      <tr>
+        <td>掛ける</td>
+        <td><code>*</code></td>
+        <td><code>=D4*D5</code></td>
+      </tr>
+      <tr>
+        <td>割る</td>
+        <td><code>/</code></td>
+        <td><code>=D4/D5</code></td>
+      </tr>
+    </table>
+
+    <div class="caution">
+      <span class="label">掛け算は × ではない</span><br>
+      掛ける記号は <strong><code>*</code>（アスタリスク）</strong>、割る記号は <strong><code>/</code>（スラッシュ）</strong>です。<br>
+      これは<strong>エクセルだけでなく、JavaScript でも PHP でも同じ</strong>です。プログラムの世界で共通の書き方だと思ってください。
+    </div>
+
+    <h3>オートフィルコピー</h3>
+
+    <p>
+      同じ形の式を、隣のセルにも入れたい。1つずつ打つ必要はありません。
+    </p>
+
+    <table>
+      <tr>
+        <th>手順</th>
+        <th>やること</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>式を入れたセルを選ぶ</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>セルの<strong>右下の角</strong>にカーソルを合わせる（＋の形に変わる）</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>そのまま<strong>ドラッグ</strong>する</td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">便利なのは、参照が自動でズレること</span><br>
+      <code>=D4+D5</code> を右にコピーすると、<strong>自動で <code>=E4+E5</code> になります</strong>。列が1つ動いたぶん、参照も1つ動く。<br>
+      この「相対的にズレる」性質を<strong>相対参照</strong>と呼びます。ズレてほしくない場合の書き方は <a href="basic_5.html#chapter3">中級#5</a> で扱います。
+    </div>
+
+    <p>
+      ところで、4月から3月までの合計を出すとき <code>=D3+E3+F3+G3+H3+I3+J3+K3+L3+M3+N3+O3</code> と書くことになります。12個。<br>
+      不便だと思いませんか。こういうときのために <code>SUM</code> というものがあります。詳しくは<strong>「エクセル SUM 使い方」で検索してみてください</strong>。
+    </p>
+
+    <p>
+      調べて使えるようになる、というのは実務でずっと必要になる力です。<strong>知らない関数に出会ったら、まず検索する</strong>。この習慣を今のうちから作っておいてください。
+    </p>
+  </section>
+
+  <section id="chapter3">
+    <h2>3. IF ― 条件で切り分ける</h2>
+
+    <p>
+      売上表で<strong>利益率</strong>を出します。式は「利益 ÷ 売上」です。ところが、ここで問題が起きます。
+    </p>
+
+    <div class="ex is-play">
+      <input type="checkbox" id="ex-stop-if" class="ex-stop">
+      <label class="ex-ctrl" for="ex-stop-if">
+        <span class="ex-ctrl-pause">一時停止</span>
+        <span class="ex-ctrl-play">再生</span>
+      </label>
+
+      <div class="ex-bar">
+        <span class="ex-name">IF</span>
+        <span class="ex-spin"></span>
+        <span class="ex-btns">
+          <span class="ex-x"></span>
+          <span class="ex-check"></span>
+          <span class="ex-fx">fx</span>
+        </span>
+        <span class="ex-input"><span>=IF(D4=0,"",D6/D4)</span><i class="ex-caret"></i></span>
+      </div>
+
+      <div class="ex-grid">
+        <table>
+          <colgroup>
+            <col class="ex-rownum">
+            <col class="ex-a">
+            <col class="ex-b">
+            <col class="ex-c">
+            <col>
+            <col>
+            <col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th></th>
+              <th>A</th>
+              <th>B</th>
+              <th>C</th>
+              <th class="is-on">D</th>
+              <th>E</th>
+              <th>F</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th>1</th><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><th>2</th><td></td><td></td><td></td><td class="ex-mid">4月</td><td class="ex-mid">5月</td><td class="ex-mid">6月</td></tr>
+            <tr><th>3</th><td></td><td>株式会社サンプル</td><td class="ex-item">目標売上</td><td class="ex-num">2,000,000</td><td class="ex-num">1,300,000</td><td class="ex-num">1,200,000</td></tr>
+            <tr><th>4</th><td></td><td></td><td class="ex-item ex-band">売上高</td><td class="ex-num ex-band is-ref">707,625</td><td class="ex-num ex-band">261,000</td><td class="ex-num ex-band">879,000</td></tr>
+            <tr><th>5</th><td></td><td></td><td class="ex-item">仕入れ</td><td class="ex-num">127,224</td><td class="ex-num">41,147</td><td class="ex-num">25,030</td></tr>
+            <tr><th>6</th><td></td><td></td><td class="ex-item">粗利益</td><td class="ex-num is-ref2">580,401</td><td class="ex-num">219,853</td><td class="ex-num">853,970</td></tr>
+            <tr><th class="is-on">7</th><td></td><td></td><td class="ex-orange">利益率</td><td class="is-edit"><span class="ex-cell">=IF(D4=0,"",D6/D4)</span><span class="ex-done">82.0%</span></td><td></td><td></td></tr>
+            <tr><th>8</th><td></td><td></td><td class="ex-orange">目標達成率</td><td></td><td></td><td></td></tr>
+            <tr><th>9</th><td></td><td>エグザンプル株式会社</td><td class="ex-item">目標売上</td><td class="ex-num">3,485,017</td><td class="ex-num">3,376,400</td><td class="ex-num">9,353,777</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="ex-step">
+        <span>答えを出したいセル（D7）をクリックする</span>
+        <span><code>=</code> を打ち、使うセルをクリックしていく</span>
+        <span>式ができた。参照したセルに色が付いている</span>
+        <span><kbd>Enter</kbd> で確定すると、結果が出る</span>
+      </div>
+    </div>
+
+    <p>
+      左上が<strong>名前ボックス</strong>、その右が <strong>×（取り消し）</strong>、<strong>✓（確定）</strong>、<strong><em>fx</em>（関数の挿入）</strong>。右に伸びているのが<strong>数式バー</strong>です。
+    </p>
+
+    <p>
+      式を打っていくと、<strong>参照したセルに色が付いていきます</strong>。<code>D4</code> を打てば売上高のセルが<strong>青</strong>に、<code>D6</code> を打てば粗利益のセルが<strong>オレンジ</strong>に。式の中の色と、表の中の色が対応しています。<br>
+      <strong>いま自分がどのセルを指しているかを、目で確かめながら書ける</strong>ということです。手でセル番号を打つのではなくクリックで入れるのは、これを見るためでもあります。
+    </p>
+
+    <div class="caution">
+      <span class="label">まだ売上のない月</span><br>
+      売上が <code>0</code> の月を計算すると、<strong><code>#DIV/0!</code></strong> というエラーが出ます。<br>
+      <strong>0で割ることはできない</strong>からです（算数でも「10 ÷ 0」は答えが出ません）。
+    </div>
+
+    <h3>IF の形</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">数式バー</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">IF の書き方</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5</div>
+        <pre class="vscode-code">=IF(
+  条件,
+  <span class="sy-com">「条件に合ったとき」の答え,</span>
+  <span class="sy-com">「合わなかったとき」の答え</span>
+)</pre>
+      </div>
+    </div>
+
+    <p>
+      これを利益率に当てはめると、こうなります。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">数式バー</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">利益率</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5</div>
+        <pre class="vscode-code">=IF(
+  D4=0,
+  <span class="sy-str">""</span>,
+  D6/D4
+)</pre>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th>部分</th>
+        <th>意味</th>
+      </tr>
+      <tr>
+        <td><code>D4=0</code></td>
+        <td>もし売上（D4）が 0 なら</td>
+      </tr>
+      <tr>
+        <td><code>""</code></td>
+        <td>何も表示しない（空っぽ）</td>
+      </tr>
+      <tr>
+        <td><code>D6/D4</code></td>
+        <td>そうでなければ、利益 ÷ 売上を計算する</td>
+      </tr>
+    </table>
+
+    <div class="note">
+      <span class="label">"" は「空っぽの文字」</span><br>
+      ダブルクォート2つ <code>""</code> は<strong>「文字が1つもない状態」</strong>を表します。0 でもスペースでもなく、<strong>空</strong>です。<br>
+      この書き方も、JavaScript や PHP と共通です。
+    </div>
+
+    <h3>実際に試してみる</h3>
+
+    <p>
+      売上の数字を <strong>0 に変えてみてください。</strong>左と右で結果が変わります。
+    </p>
+
+    <div class="xl-demo">
+      <div class="xl-row">
+        <label for="in-sales">売上（D4）</label>
+        <input type="number" class="xl-input" id="in-sales" value="500000">
+        <label for="in-profit">利益（D6）</label>
+        <input type="number" class="xl-input" id="in-profit" value="120000">
+      </div>
+
+      <div class="xl-samples" style="margin: 14px 0 0;">
+        <div>
+          <span class="xl-label xl-label-ng">IF なし</span>
+          <code class="xl-formula">=D6/D4</code>
+          <span class="xl-result" id="out-raw">-</span>
+        </div>
+        <div>
+          <span class="xl-label xl-label-ok">IF あり</span>
+          <code class="xl-formula">=IF(D4=0, "", D6/D4)</code>
+          <span class="xl-result" id="out-if">-</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">エラーは「防ぐ」もの</span><br>
+      エラーが出てから直すのではなく、<strong>起きうる条件をあらかじめ考えて、逃げ道を用意しておく</strong>。<br>
+      この考え方はプログラムでもまったく同じです。<strong>「値が空だったら」「0だったら」を先に潰す</strong>のが、動くものを作る人の習慣です。
+    </div>
+  </section>
+
+  <section id="chapter4">
+    <h2>4. エラー表示の読み方</h2>
+
+    <p>
+      エクセルのエラーは<strong>種類ごとに名前が付いています</strong>。読めれば原因がすぐ分かります。
+    </p>
+
+    <table>
+      <tr>
+        <th>表示</th>
+        <th>意味</th>
+        <th>よくある原因</th>
+      </tr>
+      <tr>
+        <td><code>#DIV/0!</code></td>
+        <td>0で割っている</td>
+        <td>まだ数字が入っていないセルで割った</td>
+      </tr>
+      <tr>
+        <td><code>#VALUE!</code></td>
+        <td>データの種類が違う</td>
+        <td>文字が入っているセルを計算に使った</td>
+      </tr>
+      <tr>
+        <td><code>#NAME?</code></td>
+        <td>名前が間違っている</td>
+        <td>関数名のスペルミス</td>
+      </tr>
+      <tr>
+        <td><code>#NUM!</code></td>
+        <td>数値が大きすぎる／小さすぎる</td>
+        <td>計算結果が扱える範囲を超えた</td>
+      </tr>
+      <tr>
+        <td><code>#REF!</code></td>
+        <td>参照できない</td>
+        <td>式が参照していた行や列を削除した</td>
+      </tr>
+      <tr>
+        <td><code>#N/A</code></td>
+        <td>値が見つからない</td>
+        <td>検索した結果、該当がなかった</td>
+      </tr>
+      <tr>
+        <td><code>#NULL!</code></td>
+        <td>範囲の指定ミス</td>
+        <td>範囲の書き方が間違っている</td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">エラーは敵ではない</span><br>
+      エラーは<strong>「ここがおかしい」と教えてくれている</strong>だけです。無視して消すのではなく、<strong>何を言っているのかを読む</strong>。<br>
+      <a href="basic_7.html#chapter3">中級#7</a> でやるブラウザのエラーも同じです。<strong>読む習慣がある人だけが、早く直せます。</strong>
+    </div>
+
+    <h3>IS系関数で先に防ぐ</h3>
+
+    <p>
+      「中身がどうなっているか」を調べる関数があります。IF と組み合わせて使います。
+    </p>
+
+    <table>
+      <tr>
+        <th>関数</th>
+        <th>調べること</th>
+      </tr>
+      <tr>
+        <td><code>ISBLANK()</code></td>
+        <td>空っぽかどうか</td>
+      </tr>
+      <tr>
+        <td><code>ISERROR()</code></td>
+        <td>エラーかどうか</td>
+      </tr>
+      <tr>
+        <td><code>ISNUMBER()</code></td>
+        <td>数値かどうか</td>
+      </tr>
+      <tr>
+        <td><code>ISTEXT()</code></td>
+        <td>文字かどうか</td>
+      </tr>
+    </table>
+
+    <div class="xl-samples">
+      <div>
+        <span class="xl-label">空っぽなら「-」を出す</span>
+        <code class="xl-code hl">=<span class="f">IF</span>(
+  <span class="f">ISBLANK</span>(<span class="r">D1</span>),
+  <span class="v">"-"</span>,
+  <span class="r">D2</span>/<span class="r">D1</span>
+)</code>
+      </div>
+      <div>
+        <span class="xl-label">何か入っていれば計算する</span>
+        <code class="xl-code hl">=<span class="f">IF</span>(
+  <span class="r">D1</span>&gt;<span class="v">""</span>,
+  <span class="r">D2</span>/<span class="r">D1</span>,
+  <span class="v">""</span>
+)</code>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">D1&gt;"" の読み方</span><br>
+      <strong>「空っぽより大きい」＝「何か入っている」</strong>という意味です。少し変わった書き方ですが、実務ではよく見かけます。<br>
+      <code>ISBLANK()</code> のほうが読んで分かりやすいので、<strong>自分で書くならこちら</strong>をおすすめします。
+    </div>
+  </section>
+
+  <section id="chapter5">
+    <h2>5. 文字の中に数字を埋め込む ― TEXT</h2>
+
+    <p>
+      報告書に「今年の売上高は 1,250,000 円でした。」と書きたい。<strong>数字を手で打つと、あとで数字が変わったときに直し忘れます。</strong>
+    </p>
+
+    <div class="point">
+      <span class="label">これがヒューマンエラー対策</span><br>
+      <strong>「同じ情報を2箇所に書かない」</strong>。表の数字と文章の数字が別々にあると、必ずどこかで食い違います。<br>
+      式でつないでおけば、<strong>表を直せば文章も自動で直ります</strong>。<a href="basic_3.html#chapter6">中級#3</a> でCSSの重複を避けたのと、まったく同じ考え方です。
+    </div>
+
+    <h3>書き方</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">数式バー</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">TEXT の書き方</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1</div>
+        <pre class="vscode-code">=<span class="sy-str">"何か文字列"</span> &amp; TEXT(対象のセル, <span class="sy-str">"表示形式"</span>) &amp; <span class="sy-str">"何か文字列"</span></pre>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th>部分</th>
+        <th>意味</th>
+      </tr>
+      <tr>
+        <td><code>&amp;</code></td>
+        <td>文字と文字を<strong>つなぐ</strong>記号</td>
+      </tr>
+      <tr>
+        <td><code>"…"</code></td>
+        <td>そのまま表示したい文字（クォートで囲む）</td>
+      </tr>
+      <tr>
+        <td><code>TEXT(セル, 形式)</code></td>
+        <td>数値を<strong>指定した見た目の文字に変える</strong></td>
+      </tr>
+    </table>
+
+    <h3>表示形式の記号</h3>
+
+    <table>
+      <tr>
+        <th>記号</th>
+        <th>意味</th>
+      </tr>
+      <tr>
+        <td><code>#</code></td>
+        <td>数字1桁。<strong>余分な 0 は表示しない</strong></td>
+      </tr>
+      <tr>
+        <td><code>0</code></td>
+        <td>数字1桁。<strong>桁が足りなければ 0 を表示する</strong></td>
+      </tr>
+      <tr>
+        <td><code>?</code></td>
+        <td>小数の桁数を揃えたいときに使う</td>
+      </tr>
+      <tr>
+        <td><code>,</code></td>
+        <td>3桁ごとの<strong>カンマ</strong></td>
+      </tr>
+      <tr>
+        <td><code>%</code></td>
+        <td>100倍して <strong>%</strong> を付ける</td>
+      </tr>
+    </table>
+
+    <h3>実際に試してみる</h3>
+
+    <p>
+      数字を打ち替えると、下の文章が<strong>そのまま変わります</strong>。
+    </p>
+
+    <div class="xl-demo">
+      <div class="xl-row">
+        <label for="in-text">売上高（P17）</label>
+        <input type="number" class="xl-input" id="in-text" value="1250000">
+      </div>
+      <code class="xl-formula">="今年の売上高は" &amp; TEXT(P17,"#,0") &amp; "円でした。"</code>
+      <span class="xl-result is-text" id="out-text">-</span>
+
+      <div class="xl-row" style="margin-top: 18px;">
+        <label for="in-rate">達成率（P21）</label>
+        <input type="number" class="xl-input" id="in-rate" value="0.876" step="0.001">
+      </div>
+      <code class="xl-formula">="今年の目標達成率は" &amp; TEXT(P21,"#.#0%") &amp; "です。"</code>
+      <span class="xl-result is-text" id="out-rate">-</span>
+    </div>
+
+    <div class="caution">
+      <span class="label">TEXT を通すと「文字」になる</span><br>
+      <code>TEXT()</code> の結果は<strong>数値ではなく文字</strong>です。見た目は数字でも、<strong>それ以上の計算には使えません</strong>。<br>
+      計算に使いたい値と、表示のための値は<strong>別に持つ</strong>のが安全です。
+    </div>
+  </section>
+
+  <section id="chapter6">
+    <h2>6. 切り捨て・切り上げ ― FLOOR / CEILING</h2>
+
+    <p>
+      来年の売上目標を立てるとき、<strong>1,373,482円</strong> という数字をそのまま目標にはしません。<strong>キリのいい数字に丸めます</strong>。
+    </p>
+
+    <table>
+      <tr>
+        <th>関数</th>
+        <th>やること</th>
+        <th>書き方</th>
+      </tr>
+      <tr>
+        <td><code>FLOOR</code></td>
+        <td>基準値の倍数に<strong>切り捨てる</strong></td>
+        <td><code>=FLOOR(数値, 基準値)</code></td>
+      </tr>
+      <tr>
+        <td><code>CEILING</code></td>
+        <td>基準値の倍数に<strong>切り上げる</strong></td>
+        <td><code>=CEILING(数値, 基準値)</code></td>
+      </tr>
+    </table>
+
+    <p>
+      floor は「床」、ceiling は「天井」。数直線を思い浮かべて、下（床）に落とすのが FLOOR、上（天井）に持ち上げるのが CEILING です。<br>
+      この2つの名前は、JavaScript にも <code>Math.floor()</code> / <code>Math.ceil()</code> として同じ意味で存在します。
+    </p>
+
+    <h3>基準値がポイント</h3>
+
+    <div class="xl-samples">
+      <div>
+        <span class="xl-label">100単位で切り捨て</span>
+        <code class="xl-code hl">=<span class="f">FLOOR</span>(<span class="r">A1</span>, <span class="n">100</span>)
+
+<span class="c">2,560 → 2,500</span></code>
+      </div>
+      <div>
+        <span class="xl-label">15分単位で切り上げ</span>
+        <code class="xl-code hl">=<span class="f">CEILING</span>(<span class="r">A1</span>, <span class="v">"0:15"</span>)
+
+<span class="c">56:37 → 56:45</span></code>
+      </div>
+    </div>
+
+    <p>
+      勤怠管理で「15分単位で切り上げる」のような処理は、この <code>CEILING</code> そのものです。<br>
+      基準値を <code>"0:15"</code> と書けば15分単位、<code>"0:30"</code> なら30分単位になります。
+    </p>
+
+    <h3>実際に試してみる</h3>
+
+    <p>
+      売上に数字を入れると、<strong>3種類の目標額</strong>が同時に出ます。10万円単位で丸めています。
+    </p>
+
+    <div class="xl-demo">
+      <div class="xl-row">
+        <label for="in-goal">今年の売上（D17）</label>
+        <input type="number" class="xl-input" id="in-goal" value="1373482">
+      </div>
+
+      <div class="xl-scroll">
+        <table class="xl-sheet">
+          <thead>
+            <tr>
+              <th></th>
+              <th>式</th>
+              <th>結果</th>
+              <th>意味</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="xl-rownum">1</td>
+              <td class="xl-name">=FLOOR(D17, 100000)</td>
+              <td class="xl-out" id="out-floor">-</td>
+              <td class="xl-name">10万円単位で切り捨て</td>
+            </tr>
+            <tr>
+              <td class="xl-rownum">2</td>
+              <td class="xl-name">=CEILING(D17, 100000)</td>
+              <td class="xl-out" id="out-ceil">-</td>
+              <td class="xl-name">10万円単位で切り上げ</td>
+            </tr>
+            <tr>
+              <td class="xl-rownum">3</td>
+              <td class="xl-name">=CEILING(D17*110%, 100000)</td>
+              <td class="xl-out" id="out-goal">-</td>
+              <td class="xl-name">110%にしてから切り上げ（来年の目標）</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p>
+      3行目は、<code>D17*110%</code> で1割増しにしてから、10万円単位に切り上げています。<br>
+      「今年より1割多い、キリのいい数字」を1行で出しているわけです。これが関数を組み合わせるということです。
+    </p>
+
+    <div class="caution">
+      <span class="label">配布したエクセルに関して</span><br>
+      配布ファイルの下のほうに <code>目標売上A（切り捨て）</code> <code>目標売上B（切り上げ）</code> <code>目標売上C（10%UP+切り上げ）</code> という3行があります。<br>
+      これは<strong>A社・B社という意味ではなく、丸め方の違い</strong>です。<strong>同じ売上から、計算方法を変えると目標値がどう変わるか</strong>を並べて比べるための3行で、上の表の1〜3行目とそのまま対応しています。<br>
+      会社ごとの区分は<strong>表の左側</strong>（<code>株式会社サンプル</code> / <code>エグザンプル株式会社</code> / <code>全体</code>）で分かれています。
+    </div>
+
+    <div class="point">
+      <span class="label">このページで身についたこと</span><br>
+      <strong>条件で分ける（IF）／エラーを先に防ぐ／値を組み立てて表示する（TEXT）／数を整える（FLOOR・CEILING）</strong>。<br>
+      名前と書き方が違うだけで、<strong>やっていることはプログラムとまったく同じ</strong>です。
+    </div>
+
+    <div class="note">
+      <span class="label">次のページへ</span><br>
+      次の <a href="basic_5.html">マークアップ中級#5（初めてのエクセル関数）</a> では<strong>成績表</strong>を作ります。条件が複数になったとき、どう組み立てるかを扱います。
+    </div>
+  </section>
+
+</main>
+
+<nav class="page-nav">
+  <a class="page-prev" href="basic_3.html">
+    <span class="page-nav-label">前のページ</span>
+    <span class="page-nav-title">マークアップ中級#3</span>
+    <span class="page-nav-sub">レスポンシブサイトをコーディングする方法</span>
+  </a>
+  <a class="page-next" href="basic_5.html">
+    <span class="page-nav-label">次のページ</span>
+    <span class="page-nav-title">マークアップ中級#5</span>
+    <span class="page-nav-sub">初めてのエクセル関数 ― 成績表を作る</span>
+  </a>
+</nav>
+
+<footer></footer>
+
+<!-- ▼ 共通スクリプト。章ナビ・コピーボタン・先頭へ戻るが自動で付く（編集不要） -->
+<script src="../js/training.js"></script>
+
+<!-- ▼ このページの見本を動かすスクリプト -->
+<script>
+  (function () {
+    var $ = function (id) { return document.getElementById(id); };
+
+    // 3桁ごとにカンマを入れる
+    function comma(n) {
+      return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    /* 3章：ゼロ除算と IF */
+    function calcIf() {
+      var sales = Number($('in-sales').value);
+      var profit = Number($('in-profit').value);
+      var raw = $('out-raw');
+      var withIf = $('out-if');
+
+      if (sales === 0) {
+        raw.textContent = '#DIV/0!';
+        raw.className = 'xl-result is-error';
+        withIf.textContent = '（空白）';
+        withIf.className = 'xl-result';
+      } else {
+        var rate = (profit / sales * 100).toFixed(1) + '%';
+        raw.textContent = rate;
+        raw.className = 'xl-result';
+        withIf.textContent = rate;
+        withIf.className = 'xl-result';
+      }
+    }
+
+    /* 5章：TEXT */
+    function calcText() {
+      var sales = Number($('in-text').value);
+      $('out-text').textContent = '今年の売上高は' + comma(sales) + '円でした。';
+
+      // "#.#0%" は小数2桁まで表示する指定
+      var rate = Number($('in-rate').value);
+      $('out-rate').textContent = '今年の目標達成率は' + (rate * 100).toFixed(2) + '%です。';
+    }
+
+    /* 6章：FLOOR / CEILING */
+    function calcRound() {
+      var v = Number($('in-goal').value);
+      var unit = 100000;
+      $('out-floor').textContent = comma(Math.floor(v / unit) * unit);
+      $('out-ceil').textContent = comma(Math.ceil(v / unit) * unit);
+      $('out-goal').textContent = comma(Math.ceil(v * 1.1 / unit) * unit);
+    }
+
+    function bind(ids, fn) {
+      ids.forEach(function (id) {
+        var el = $(id);
+        if (!el) { return; }
+        el.addEventListener('input', fn);
+        el.addEventListener('change', fn);
+      });
+      fn();
+    }
+
+    bind(['in-sales', 'in-profit'], calcIf);
+    bind(['in-text', 'in-rate'], calcText);
+    bind(['in-goal'], calcRound);
+  })();
+</script>
+
+</body>
+</html>
