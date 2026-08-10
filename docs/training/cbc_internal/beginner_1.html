@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>コーダー初級#1</title>
   <link rel="stylesheet" href="../css/training.css">
+
+  <!-- ▼ このページ専用のスタイル -->
+  <link rel="stylesheet" href="../css/beginner_1.css">
+
+  <!-- ▼ 開いたときに、ページの先頭から読み始められるようにする。
+       ブラウザが前回の位置へ戻すより先に動かす必要があるため、
+       training.js とは分けて <head> で読み込んでいる -->
+  <script src="../js/scroll-reset.js"></script>
 </head>
 <body>
 
@@ -45,6 +53,40 @@
       コンピューターでのプログラミングも、基本的な考え方は同じです。たとえば「写真を表示する」「ボタンを押したら反応する」「削除されたら表示を変える」といった処理を、コンピューターにわかる形で順番に書いていきます。
     </p>
 
+    <div class="image-vs">
+      <div class="iv-side">
+        <span class="iv-cap">こんなイメージ、ありませんか</span>
+        <div class="iv-screen">
+<b>function</b> checkMail(value) {<br>
+&nbsp;&nbsp;<b>const</b> atpos = value.indexOf(<u>'@'</u>);<br>
+&nbsp;&nbsp;<b>const</b> dotpos = value.lastIndexOf(<u>'.'</u>);<br>
+<br>
+&nbsp;&nbsp;<b>if</b> (atpos &lt; <u>1</u> || dotpos &lt; atpos + <u>2</u>) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<i>document</i>.getElementById(<u>'err'</u>).textContent = <u>'形式が違います'</u>;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<b>return</b> <i>false</i>;<br>
+&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;<b>return</b> <i>true</i>;<br>
+}<br>
+        </div>
+        <p class="iv-note">記号だらけで、何が書いてあるか分からない。<br>そう見えますよね。</p>
+      </div>
+
+      <span class="iv-arrow">じっさいは</span>
+
+      <div class="iv-side iv-real">
+        <span class="iv-cap">こんな感じの「作文」です</span>
+        <div class="iv-paper">
+          入力された文字から、<b>@ の位置</b>を調べる<br>
+          最後の <b>. の位置</b>も調べる<br>
+          <b>@ が先頭</b>にある、または<br>
+          <b>. が @ より前</b>にあるなら、<br>
+          「形式が違います」と<b>知らせて終わり</b><br>
+          そうでなければ<b>通す</b><br>
+        </div>
+        <p class="iv-note">左のコードを日本語にしただけです。<br>難しいのは記号の見た目で、中身はこう言えば済みます。</p>
+      </div>
+    </div>
+
     <div class="point">
       <span class="label">理解ポイント</span><br>
       プログラミングは、コンピューターに対して「何を、どの順番でしてほしいか」を文章のように書く作業です。
@@ -77,7 +119,7 @@
       </tr>
     </table>
 
-    <h3>プログラミング言語とマークアップ言語</h3>
+    <h3>マークアップ言語とプログラミング言語</h3>
     <p>
       初めてのWebサイト制作では、いきなり本格的なプログラミング言語を使うわけではありません。<br>
       まずはHTMLというマークアップ言語を使います。
@@ -149,23 +191,23 @@
         <th>役割</th>
       </tr>
       <tr>
-        <td>Japanese Language Pack for VS Code</td>
+        <td><code class="copy-chip">Japanese Language Pack for VS Code</code></td>
         <td>Visual Studio Codeのメニュー表示を日本語化します。</td>
       </tr>
       <tr>
-        <td>Auto Close Tag</td>
+        <td><code class="copy-chip">Auto Close Tag</code></td>
         <td>開始タグを書いたとき、終了タグの入力を補助します。</td>
       </tr>
       <tr>
-        <td>Auto Rename Tag</td>
+        <td><code class="copy-chip">Auto Rename Tag</code></td>
         <td>開始タグを変更したとき、対応する終了タグも変更しやすくします。</td>
       </tr>
       <tr>
-        <td>Color info</td>
+        <td><code class="copy-chip">Color info</code></td>
         <td>CSSの色指定を確認しやすくします。</td>
       </tr>
       <tr>
-        <td>Highlight Matching Tag</td>
+        <td><code class="copy-chip">Highlight Matching Tag</code></td>
         <td>開始タグと終了タグの対応を確認しやすくします。</td>
       </tr>
     </table>
@@ -173,10 +215,157 @@
     <h3>拡張機能の入れ方</h3>
     <ol>
       <li>Visual Studio Codeを開く</li>
-      <li>左側の「拡張機能」アイコンを押す</li>
+      <li>左側の<strong>「拡張機能」アイコン</strong>を押す（四角が4つ並んだ絵）</li>
       <li>検索欄に拡張機能名を入力する</li>
-      <li>対象の拡張機能を選び、インストールする</li>
+      <li>対象の拡張機能を選び、<strong>「インストール」</strong>を押す</li>
     </ol>
+
+    <div class="vs-app">
+      <div class="vs-title">
+        <span class="vs-logo"></span>
+        <span class="vs-menu">ファイル(F)　編集(E)　選択(S)　表示(V)　…</span>
+        <span class="vs-navs">←　→</span>
+        <span class="vs-center">beginner_1.html</span>
+        <span class="vs-signin">サインイン</span>
+      </div>
+
+      <div class="vs-body">
+        <div class="vs-bar">
+          <span class="vs-bar-item"><i class="vs-ico files"></i></span>
+          <span class="vs-bar-item"><i class="vs-ico find"></i></span>
+          <span class="vs-bar-item"><i class="vs-ico git"></i></span>
+          <span class="vs-bar-item"><i class="vs-ico run"></i></span>
+          <span class="vs-bar-item"><i class="vs-ico remote"></i></span>
+          <span class="vs-bar-item is-on is-mark">
+            <i class="vs-ico ext"></i>
+            <b class="vs-badge">7</b>
+            <b class="vs-step">1</b>
+          </span>
+          <span class="vs-bar-item"><i class="vs-ico clock"></i></span>
+          <span class="vs-bar-item"><i class="vs-ico py"></i></span>
+          <span class="vs-bar-item"><i class="vs-ico book"></i></span>
+        </div>
+
+        <div class="vs-side">
+          <span class="vs-side-title">拡張機能: マーケットプレース</span>
+          <span class="vs-input is-focus">Japanese Language Pack</span>
+
+          <div class="vs-item is-on">
+            <span class="vs-item-icon globe"></span>
+            <span class="vs-item-body">
+              <b class="vs-item-name">Japanese Language Pack for Visua…</b>
+              <small class="vs-item-desc">日本語</small>
+              <span class="vs-item-foot">
+                <i class="vs-verify"></i>
+                <small class="vs-item-pub">Microsoft</small>
+                <small class="vs-dl">15M</small>
+                <span class="vs-btn is-mark">インストール<b class="vs-step">2</b></span>
+              </span>
+            </span>
+          </div>
+
+          <div class="vs-item">
+            <span class="vs-item-icon tag"></span>
+            <span class="vs-item-body">
+              <b class="vs-item-name">Auto Rename Tag</b>
+              <small class="vs-item-desc">開始タグを変えると終了タグも変わる</small>
+              <span class="vs-item-foot">
+                <small class="vs-item-pub">Jun Han</small>
+                <small class="vs-dl">18K</small>
+                <small class="vs-rate">★4.5</small>
+                <span class="vs-btn">インストール</span>
+              </span>
+            </span>
+          </div>
+
+          <div class="vs-item">
+            <span class="vs-item-icon color"></span>
+            <span class="vs-item-body">
+              <b class="vs-item-name">Color Info</b>
+              <small class="vs-item-desc">CSSの色指定を確認しやすくする</small>
+              <span class="vs-item-foot">
+                <small class="vs-item-pub">Brian Clark</small>
+                <small class="vs-dl">61K</small>
+                <small class="vs-rate">★5</small>
+                <span class="vs-btn">インストール</span>
+              </span>
+            </span>
+          </div>
+        </div>
+
+        <div class="vs-main">
+          <div class="vs-tabbar">
+            <span class="vs-tab"><i class="vs-tab-ico code"></i>beginner_1.html</span>
+            <span class="vs-tab is-on">
+              <i class="vs-tab-ico ext"></i>
+              拡張機能 Japanese Language Pack
+              <i class="vs-close"></i>
+            </span>
+          </div>
+
+          <div class="vs-detail">
+            <div class="vs-detail-head">
+              <span class="vs-detail-icon"></span>
+              <span>
+                <b class="vs-detail-title">Japanese Language Pack for Visual Studio Code</b>
+                <span class="vs-detail-meta">
+                  Microsoft
+                  <i class="vs-verify"></i>
+                  <b>microsoft.com</b>
+                  ｜ 15,148,036
+                  ｜ <span class="vs-star">★★★★☆</span> (10)
+                </span>
+                <small class="vs-detail-sub">Language pack extension for Japanese</small>
+                <span class="vs-actions">
+                  <span class="vs-action">v1.131 に更新</span>
+                  <span class="vs-action">アンインストール</span>
+                  <span class="vs-action">自動更新</span>
+                  <i class="vs-gear"></i>
+                </span>
+              </span>
+            </div>
+
+            <div class="vs-tabs"><b>詳細</b>機能変更ログ</div>
+
+            <div class="vs-panel">
+              <div class="vs-readme">
+                <h5>Japanese Language Pack for VS Code</h5>
+                <p>Japanese Language Pack は VS Code にローカライズされた UI を提供します。</p>
+                <h6>使用法</h6>
+                <p>
+                  既定の UI 言語をオーバーライドするには、<code>Ctrl+Shift+P</code> を押して
+                  コマンドパレットを表示し、<code>display</code> と入力して
+                  Configure Display Language コマンドを選びます。
+                </p>
+              </div>
+
+              <div class="vs-info">
+                <h6>インストール</h6>
+                <dl>
+                  <dt>識別子</dt>
+                  <dd>ms-ceintl.vscode-language-pack-ja</dd>
+                  <dt>バージョン</dt>
+                  <dd>1.125</dd>
+                  <dt>サイズ</dt>
+                  <dd>2.57MB</dd>
+                </dl>
+                <h6>Marketplace</h6>
+                <dl>
+                  <dt>公開済み</dt>
+                  <dd>8 年前</dd>
+                  <dt>前回のリリース日</dt>
+                  <dd>2 週間前</dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="vs-note">
+      画面はイメージです。バージョンによって配色や並びは多少変わります。
+    </p>
 
     <h3>Hover表示の設定</h3>
     <p>
@@ -188,6 +377,52 @@
       <li>検索欄に <code>editor.hover</code> と入力する</li>
       <li><code>Editor &gt; Hover: Enabled</code> のチェックを外す</li>
     </ol>
+
+    <div class="vs-app">
+      <div class="vs-title">
+        <span class="vs-logo"></span>
+        <span class="vs-menu">ファイル(F)　編集(E)　選択(S)　表示(V)　…</span>
+        <span class="vs-center">設定</span>
+        <span class="vs-signin">サインイン</span>
+      </div>
+
+      <div class="vs-tabbar">
+        <span class="vs-tab">beginner_1.html</span>
+        <span class="vs-tab is-on">設定<i class="vs-close"></i></span>
+      </div>
+
+      <div class="vs-settings">
+        <span class="vs-input is-focus is-mark">editor.hover<b class="vs-step">1</b></span>
+
+        <div class="vs-setting-row">
+          <span class="vs-check is-on"></span>
+          <span>
+            <b class="vs-setting-name">Editor &gt; Hover: <b>Above</b></b>
+            <small class="vs-setting-desc">スペースがある場合は、行の上にマウスカーソルを被せて表示する</small>
+          </span>
+        </div>
+
+        <div class="vs-setting-row">
+          <span class="vs-check is-on is-mark"><b class="vs-step">2</b></span>
+          <span>
+            <b class="vs-setting-name">Editor &gt; Hover: <b>Enabled</b></b>
+            <small class="vs-setting-desc">ホバーを表示するかどうかを制御する。ここのチェックを外す</small>
+          </span>
+        </div>
+
+        <div class="vs-setting-row">
+          <span class="vs-check"></span>
+          <span>
+            <b class="vs-setting-name">Editor &gt; Hover: <b>Sticky</b></b>
+            <small class="vs-setting-desc">マウスを移動してもホバーを表示したままにする</small>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <p class="vs-note">
+      画面はイメージです。バージョンによって配色や並びは多少変わります。
+    </p>
   </section>
 
   <section id="chapter4">
@@ -278,20 +513,78 @@
       HTMLで作った要素に対して、CSSで「どのように見せるか」を指定します。
     </p>
 
-    <div class="grid-2">
-      <div class="card">
-        <h4>HTMLの例</h4>
-        <pre><code>&lt;p&gt;こんにちは&lt;/p&gt;</code></pre>
-        <p>文章のまとまりを作っています。</p>
+    <div class="combine">
+      <div class="combine-row">
+        <div class="combine-file">
+          <span class="combine-cap">HTMLファイル</span>
+          <div class="vscode">
+            <div class="vscode-titlebar">
+              <span class="win-dot red"></span>
+              <span class="win-dot yellow"></span>
+              <span class="win-dot green"></span>
+              <span class="vscode-title">index.html</span>
+            </div>
+            <div class="vscode-body">
+              <div class="vscode-gutter">1</div>
+              <pre class="vscode-code">&lt;<span class="sy-tag">p</span>&gt;こんにちは&lt;/<span class="sy-tag">p</span>&gt;</pre>
+            </div>
+          </div>
+          <p class="combine-note">文章のまとまりを作ります。<br>これだけでは、ただの黒い文字です。</p>
+        </div>
+
+        <span class="combine-op">＋</span>
+
+        <div class="combine-file">
+          <span class="combine-cap">CSSファイル</span>
+          <div class="vscode">
+            <div class="vscode-titlebar">
+              <span class="win-dot red"></span>
+              <span class="win-dot yellow"></span>
+              <span class="win-dot green"></span>
+              <span class="vscode-title">style.css</span>
+            </div>
+            <div class="vscode-body">
+              <div class="vscode-gutter">1
+2
+3
+4
+5</div>
+              <pre class="vscode-code"><span class="sy-sel">p</span> {
+  <span class="sy-attr">color</span>: <span class="sy-str">#ffff00</span>;
+  <span class="sy-attr">width</span>: <span class="sy-num">200px</span>;
+  <span class="sy-attr">background-color</span>: <span class="sy-str">#0000ff</span>;
+}</pre>
+            </div>
+          </div>
+          <p class="combine-note">その段落を、どう見せるかを決めます。<br>色・幅・背景色を指定しています。</p>
+        </div>
       </div>
-      <div class="card">
-        <h4>CSSの例</h4>
-        <pre><code>p {
-  color: #ffff00;
-  background-color: #0000ff;
-}</code></pre>
-        <p>段落の文字色や背景色を指定しています。</p>
+
+      <span class="combine-eq">＝</span>
+
+      <div class="combine-result">
+        <div class="chrome">
+          <div class="chrome-tabbar">
+            <span class="win-dot red"></span>
+            <span class="win-dot yellow"></span>
+            <span class="win-dot green"></span>
+            <span class="chrome-tab">index.html</span>
+          </div>
+          <div class="chrome-toolbar">
+            <span class="chrome-nav">←→↻</span>
+            <span class="chrome-url">index.html</span>
+          </div>
+          <div class="chrome-viewport">
+            <p class="combine-out">こんにちは</p>
+          </div>
+        </div>
       </div>
+    </div>
+
+    <div class="point">
+      <span class="label">2つで1つ</span><br>
+      <strong>HTMLだけでは、文字が並ぶだけ</strong>です。<strong>CSSだけでは、飾る相手がいません</strong>。<br>
+      2つのファイルを組み合わせて、はじめてWebページになります。
     </div>
 
     <h3>CSSファイル</h3>
@@ -313,7 +606,7 @@
       HTMLでは、<code>&lt;p&gt;</code> や <code>&lt;div&gt;</code> のようなタグを使って、文字や画像に役割を与えます。
     </p>
 
-    <pre><code>&lt;p&gt;こんにちは&lt;/p&gt;</code></pre>
+    <pre><code>&lt;<span class="sy-tag">p</span>&gt;こんにちは&lt;/<span class="sy-tag">p</span>&gt;</code></pre>
 
     <p>
       多くのタグは、開始タグと終了タグで内容を囲みます。ただし、画像を表示する <code>&lt;img&gt;</code> や改行を表す <code>&lt;br&gt;</code> のように、終了タグを持たないタグもあります。
@@ -333,7 +626,7 @@
     </p>
 
     <h4><code>&lt;br&gt;</code> を使う場合</h4>
-    <pre><code>あいうえお&lt;br&gt;
+    <pre><code>あいうえお&lt;<span class="sy-tag">br</span>&gt;
 かきくけこ</code></pre>
 
     <p>
@@ -345,10 +638,38 @@
       CSSでは、どのHTML要素に、どのような見た目を指定するかを書きます。
     </p>
 
-    <pre><code>p {
-  color: #333333;
-  font-size: 16px;
-}</code></pre>
+    <p>
+      HTML側で書いたタグを、CSS側から名前で呼び出します。下の図は、その対応と各部分の名称です。
+    </p>
+
+    <div class="css-anatomy">
+      <div>
+        <span class="ca-title">HTML（index.html）</span>
+        <div class="ca-panel">&lt;<span class="ca-tag">p</span>&gt;あいうえお&lt;/<span class="ca-tag">p</span>&gt;</div>
+      </div>
+
+      <div class="ca-arrow">→</div>
+
+      <div>
+        <span class="ca-title">CSS（style.css）</span>
+        <div class="ca-panel"><span class="ca-sel">p</span> {
+  <span class="ca-prop">color</span>: <span class="ca-val">#FF0000</span>;
+  <span class="ca-prop">width</span>: <span class="ca-val">200px</span>;
+  <span class="ca-prop">background-color</span>: <span class="ca-val">#0000FF</span>;
+}</div>
+      </div>
+    </div>
+
+    <div class="ca-legend">
+      <span><span class="ca-key sel"></span>セレクタ</span>
+      <span><span class="ca-key prop"></span>プロパティ</span>
+      <span><span class="ca-key val"></span>値</span>
+    </div>
+
+    <div class="point">
+      <span class="label">対応関係</span><br>
+      HTMLで書いた <code>&lt;p&gt;</code> の <strong>p</strong> と、CSSの先頭にある <strong>p</strong> は<strong>同じもの</strong>を指しています。CSS側の <code>p</code> が「どの要素に指定するか」を表しているので、これを<strong>セレクタ</strong>と呼びます。
+    </div>
 
     <table>
       <tr>
@@ -408,19 +729,99 @@
       枠は<strong>縦に積む</strong>、<strong>横に並べる</strong>、<strong>中に入れる</strong>の3通りの組み合わせで作ります。複雑に見えるページも、突き詰めればこの繰り返しです。
     </div>
 
+    <h3>積み木と同じ</h3>
+    <p>
+      ばらばらの積み木を組み合わせて形を作るのと、やっていることは同じです。<strong>1つ1つは、ただの四角い枠</strong>です。
+    </p>
+
+    <div class="blocks-pair">
+      <div>
+        <span class="blocks-cap">積み木</span>
+        <div class="blocks-frame">
+          <div class="blocks-toy">
+            <i class="sq b1"></i>
+            <i class="sq b2"></i>
+            <i class="tri b3"></i>
+            <i class="bar b4"></i>
+            <i class="tri b5"></i>
+            <i class="bar b6"></i>
+            <i class="sq b7"></i>
+          </div>
+        </div>
+        <p class="blocks-note">ばらばらの部品。</p>
+      </div>
+
+      <div>
+        <span class="blocks-cap">ホームページ</span>
+        <div class="blocks-frame">
+          <div class="blocks-page">
+            <div class="blocks-part head">見出し</div>
+            <div class="blocks-part side">本文</div>
+            <div class="blocks-part sub1">お知らせ</div>
+            <div class="blocks-part sub2">リンク</div>
+            <div class="blocks-part foot">著作権表記</div>
+          </div>
+        </div>
+        <p class="blocks-note">組み合わせると1枚のページ。</p>
+      </div>
+    </div>
+
+    <h3>枠には大きさがある</h3>
+    <p>
+      家を建てるとき、部屋の広さを決めます。ページも同じで、<strong>どの枠を何ピクセルにするか</strong>を決めて組み立てます。
+    </p>
+
+    <div class="blocks-pair">
+      <div>
+        <span class="blocks-cap">家の間取り</span>
+        <div class="blocks-frame">
+          <div class="blocks-plan">
+            <div class="blocks-room r1">洋室<b>3m</b></div>
+            <div class="blocks-room r2">和室<b>3m</b></div>
+            <div class="blocks-room r3">浴室</div>
+            <div class="blocks-room r4">ダイニング<b>6m</b></div>
+            <div class="blocks-room r5">寝室</div>
+            <span class="blocks-dim top">12m</span>
+            <span class="blocks-dim bottom">12m</span>
+          </div>
+        </div>
+        <p class="blocks-note">部屋ごとに広さを決める。</p>
+      </div>
+
+      <div>
+        <span class="blocks-cap">ホームページ</span>
+        <div class="blocks-frame">
+          <div class="blocks-page">
+            <div class="blocks-part head">見出し<small>990px</small></div>
+            <div class="blocks-part side">本文<small>640px</small></div>
+            <div class="blocks-part sub1"><small>320px</small></div>
+            <div class="blocks-part sub2"><small>320px</small></div>
+            <div class="blocks-part foot">著作権表記<small>990px</small></div>
+          </div>
+        </div>
+        <p class="blocks-note">枠ごとに幅を決める。</p>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      間取り図が読めれば、ページの構造も読めます。<strong>どちらも「大きさを決めた四角を、どう並べるか」だけ</strong>です。<br>
+      その四角を作るのがHTML、大きさや色を決めるのがCSSです。
+    </div>
+
     <h3>必ず使う基本構造</h3>
     <p>
       HTMLファイルには、基本的に以下のような大きな枠があります。
     </p>
 
-    <pre><code>&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;練習&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
+    <pre><code>&lt;<span class="sy-tag">html</span>&gt;
+  &lt;<span class="sy-tag">head</span>&gt;
+    &lt;<span class="sy-tag">title</span>&gt;練習&lt;/<span class="sy-tag">title</span>&gt;
+  &lt;/<span class="sy-tag">head</span>&gt;
+  &lt;<span class="sy-tag">body</span>&gt;
     画面に表示する内容
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre>
+  &lt;/<span class="sy-tag">body</span>&gt;
+&lt;/<span class="sy-tag">html</span>&gt;</code></pre>
 
     <table>
       <tr>
@@ -484,40 +885,46 @@
       </tr>
       <tr>
         <td><code>&lt;div&gt; 〜 &lt;/div&gt;</code></td>
-        <td>division</td>
+        <td>division<br><strong>区分</strong></td>
         <td>特別な意味を持たない汎用的な枠として使います。</td>
       </tr>
       <tr>
         <td><code>&lt;p&gt; 〜 &lt;/p&gt;</code></td>
-        <td>paragraph</td>
+        <td>paragraph<br><strong>段落</strong></td>
         <td>文章の段落を表します。</td>
       </tr>
       <tr>
         <td><code>&lt;span&gt; 〜 &lt;/span&gt;</code></td>
-        <td>span（ひと続きの範囲）</td>
+        <td>span<br><strong>範囲</strong></td>
         <td>文章の一部分を囲むときによく使います。</td>
       </tr>
       <tr>
         <td><code>&lt;h1&gt; 〜 &lt;/h1&gt;</code> 〜 <code>&lt;h6&gt; 〜 &lt;/h6&gt;</code></td>
-        <td>heading</td>
+        <td>heading<br><strong>見出し</strong></td>
         <td>見出しを表します。<code>h1</code> が最も大きな見出しで、<code>h6</code> に向かって階層が下がります。</td>
       </tr>
       <tr>
         <td><code>&lt;table&gt; 〜 &lt;/table&gt;</code></td>
-        <td>table</td>
+        <td>table<br><strong>表</strong></td>
         <td>表を作るときに使います。</td>
       </tr>
       <tr>
         <td><code>&lt;img&gt;</code></td>
-        <td>image</td>
+        <td>image<br><strong>画像</strong></td>
         <td>画像を表示するときに使います。終了タグはありません。</td>
       </tr>
       <tr>
         <td><code>&lt;br&gt;</code></td>
-        <td>break</td>
+        <td>break<br><strong>改行</strong></td>
         <td>改行を入れるときに使います。終了タグはありません。</td>
       </tr>
     </table>
+
+    <div class="note">
+      <span class="label">覚え方</span><br>
+      タグ名は<strong>英単語の略</strong>です。日本語の意味と一緒に覚えると、記号ではなく言葉として頭に入ります。<br>
+      <code>&lt;p&gt;</code> は「パラグラフ＝段落」、<code>&lt;div&gt;</code> は「ディビジョン＝区分」。そう考えると、なぜそのタグを使うのかが自然に分かります。
+    </div>
 
     <div class="point">
       <span class="label">理解ポイント</span><br>
@@ -720,7 +1127,7 @@
       <code>index.html</code> の <code>&lt;head&gt;</code> 内に、CSSを読み込むための <code>&lt;link&gt;</code> タグを書きます。
     </p>
 
-    <pre><code>&lt;link href="css/style.css" rel="stylesheet"&gt;</code></pre>
+    <pre><code>&lt;<span class="sy-tag">link</span> <span class="sy-attr">href</span>=<span class="sy-str">"css/style.css"</span> <span class="sy-attr">rel</span>=<span class="sy-str">"stylesheet"</span>&gt;</code></pre>
 
     <table>
       <tr>
@@ -728,55 +1135,62 @@
         <th>意味</th>
       </tr>
       <tr>
-        <td><code>link</code></td>
+        <td><code>link</code><br><strong>つなぐ</strong></td>
         <td>外部ファイルをHTMLに関連付けるためのタグです。</td>
       </tr>
       <tr>
-        <td><code>href</code></td>
-        <td>読み込むファイルの場所を指定します。ここでは <code>css/style.css</code> を指定しています。</td>
+        <td><code>href</code><br><small>hypertext reference</small><br><strong>参照先</strong></td>
+        <td>読み込むファイルの<strong>場所</strong>を指定します。ここでは <code>css/style.css</code> を指定しています。</td>
       </tr>
       <tr>
-        <td><code>rel</code></td>
-        <td>HTMLと読み込むファイルの関係を指定します。CSSの場合は <code>stylesheet</code> と書きます。</td>
+        <td><code>rel</code><br><small>relation</small><br><strong>関係</strong></td>
+        <td>HTMLと読み込むファイルの<strong>関係</strong>を指定します。CSSの場合は <code>stylesheet</code> と書きます。</td>
       </tr>
     </table>
 
+    <div class="note">
+      <span class="label">略語の意味</span><br>
+      <code>href</code> は <strong>hypertext reference（ハイパーテキスト参照）</strong> の略で、「他のファイルを参照する」という意味です。<br>
+      <code>rel</code> は <strong>relation（関係）</strong> の略です。「読み込むファイルが、このHTMLにとって何なのか」を伝えています。<br>
+      どちらも<strong>この先ずっと使い続ける</strong>ものです。意味を知っておくと、書き間違いが減ります。
+    </div>
+
     <h3>index.html</h3>
-    <pre><code>&lt;html&gt;
-  &lt;head&gt;
-    &lt;title&gt;練習&lt;/title&gt;
-    &lt;link href="css/style.css" rel="stylesheet"&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-    &lt;div&gt;
+    <pre><code>&lt;<span class="sy-tag">html</span>&gt;
+  &lt;<span class="sy-tag">head</span>&gt;
+    &lt;<span class="sy-tag">title</span>&gt;練習&lt;/<span class="sy-tag">title</span>&gt;
+    &lt;<span class="sy-tag">link</span> <span class="sy-attr">href</span>=<span class="sy-str">"css/style.css"</span> <span class="sy-attr">rel</span>=<span class="sy-str">"stylesheet"</span>&gt;
+  &lt;/<span class="sy-tag">head</span>&gt;
+  &lt;<span class="sy-tag">body</span>&gt;
+    &lt;<span class="sy-tag">div</span>&gt;
       おはよう
-    &lt;/div&gt;
-    &lt;p&gt;
+    &lt;/<span class="sy-tag">div</span>&gt;
+    &lt;<span class="sy-tag">p</span>&gt;
       こんにちは
-    &lt;/p&gt;
-    &lt;span&gt;
+    &lt;/<span class="sy-tag">p</span>&gt;
+    &lt;<span class="sy-tag">span</span>&gt;
       さようなら
-    &lt;/span&gt;
-    &lt;span&gt;おやすみ&lt;/span&gt;
-  &lt;/body&gt;
-&lt;/html&gt;</code></pre>
+    &lt;/<span class="sy-tag">span</span>&gt;
+    &lt;<span class="sy-tag">span</span>&gt;おやすみ&lt;/<span class="sy-tag">span</span>&gt;
+  &lt;/<span class="sy-tag">body</span>&gt;
+&lt;/<span class="sy-tag">html</span>&gt;</code></pre>
 
     <h3>css/style.css</h3>
-    <pre><code>div {
-  height: 100px;
-  background-color: #d9e021;
+    <pre><code><span class="sy-sel">div</span> {
+  <span class="sy-attr">height</span>: <span class="sy-num">100px</span>;
+  <span class="sy-attr">background-color</span>: <span class="sy-str">#d9e021</span>;
 }
 
-p {
-  width: 70%;
-  height: 50px;
-  background-color: #f9b9d5;
-  text-align: center;
+<span class="sy-sel">p</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">70%</span>;
+  <span class="sy-attr">height</span>: <span class="sy-num">50px</span>;
+  <span class="sy-attr">background-color</span>: <span class="sy-str">#f9b9d5</span>;
+  <span class="sy-attr">text-align</span>: <span class="sy-str">center</span>;
 }
 
-span {
-  border: 1px dotted #f9b9d5;
-  font-family: serif;
+<span class="sy-sel">span</span> {
+  <span class="sy-attr">border</span>: <span class="sy-num">1px</span> <span class="sy-str">dotted</span> <span class="sy-str">#f9b9d5</span>;
+  <span class="sy-attr">font-family</span>: <span class="sy-str">serif</span>;
 }</code></pre>
 
     <h3>読み込んだ結果</h3>
@@ -891,11 +1305,44 @@ span {
       CSSでは、色を <code>#FF0000</code> のような6桁のカラーコードで指定できます。<code>#</code> の後に数字やアルファベットを組み合わせて色を表します。
     </p>
 
-    <pre><code>#FF0000  赤
-#000000  黒
-#00FF00  緑
-#CCCCDD  薄い青紫
-#9932CC  紫</code></pre>
+    <table>
+      <tr>
+        <th>カラーコード</th>
+        <th>色</th>
+        <th>見本</th>
+      </tr>
+      <tr>
+        <td><code>#FF0000</code></td>
+        <td>赤</td>
+        <td><span class="color-chip" style="background: #FF0000;"></span></td>
+      </tr>
+      <tr>
+        <td><code>#000000</code></td>
+        <td>黒</td>
+        <td><span class="color-chip" style="background: #000000;"></span></td>
+      </tr>
+      <tr>
+        <td><code>#00FF00</code></td>
+        <td>緑</td>
+        <td><span class="color-chip" style="background: #00FF00;"></span></td>
+      </tr>
+      <tr>
+        <td><code>#CCCCDD</code></td>
+        <td>薄い青紫</td>
+        <td><span class="color-chip" style="background: #CCCCDD;"></span></td>
+      </tr>
+      <tr>
+        <td><code>#9932CC</code></td>
+        <td>紫</td>
+        <td><span class="color-chip" style="background: #9932CC;"></span></td>
+      </tr>
+    </table>
+
+    <div class="note">
+      <span class="label">6桁の意味</span><br>
+      6桁は<strong>2桁ずつ3つ</strong>に分かれていて、順に<strong>赤・緑・青</strong>の強さを表しています。<code>#FF0000</code> なら「赤が最大、緑と青はゼロ」なので赤になります。<br>
+      いまは仕組みを覚えなくて大丈夫です。<strong>色は自分で考えず、デザインで指定されたコードをそのまま使います。</strong>
+    </div>
   </section>
 
   <section id="chapter11">
@@ -911,7 +1358,7 @@ span {
     </div>
 
     <div class="prop-group">
-      <h4>★ 枠のかたちに関するプロパティ</h4>
+      <h3>★ 枠のかたちに関するプロパティ</h3>
       <table class="prop-table">
         <tr>
           <th class="prop-name">プロパティ</th>
@@ -968,7 +1415,7 @@ span {
     </div>
 
     <div class="prop-group">
-      <h4>★ 枠の余白に関するプロパティ</h4>
+      <h3>★ 枠の余白に関するプロパティ</h3>
       <table class="prop-table">
         <tr>
           <th class="prop-name">プロパティ</th>
@@ -1016,7 +1463,7 @@ span {
     </div>
 
     <div class="prop-group">
-      <h4>★ 枠の中の文字に関するプロパティ</h4>
+      <h3>★ 枠の中の文字に関するプロパティ</h3>
       <table class="prop-table">
         <tr>
           <th class="prop-name">プロパティ</th>
@@ -1080,7 +1527,7 @@ span {
     </div>
 
     <div class="prop-group">
-      <h4>★★★ 配置（レイアウト）に関するプロパティ</h4>
+      <h3>★★★ 配置（レイアウト）に関するプロパティ</h3>
       <table class="prop-table">
         <tr>
           <th class="prop-name">プロパティ</th>
@@ -1154,91 +1601,17 @@ span {
 
 </main>
 
-<footer>
-</footer>
+<nav class="page-nav">
+  <a class="page-next" href="beginner_2.html">
+    <span class="page-nav-label">次のページ</span>
+    <span class="page-nav-title">コーダー初級#2</span>
+    <span class="page-nav-sub">レスポンシブコーディングとは</span>
+  </a>
+</nav>
 
-<!-- ============================================================
-     すべてのコードブロックにコピーボタンを付ける
-     ============================================================ -->
-<script>
-  (function () {
-    var ICON =
-      '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor"' +
-      ' stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' +
-      '<rect x="9" y="9" width="13" height="13" rx="2"></rect>' +
-      '<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>' +
-      '</svg>';
+<footer></footer>
 
-    function label(text) {
-      return ICON + '<span>' + text + '</span>';
-    }
-
-    function copyText(text) {
-      // https で開いているとき（GitHub Pages 上）はクリップボードAPIを使う
-      if (navigator.clipboard && window.isSecureContext) {
-        return navigator.clipboard.writeText(text);
-      }
-      // file:// で直接開いた場合はAPIが使えないため、旧方式で代替する
-      return new Promise(function (resolve, reject) {
-        var area = document.createElement('textarea');
-        area.value = text;
-        area.setAttribute('readonly', '');
-        area.style.position = 'fixed';
-        area.style.top = '-1000px';
-        document.body.appendChild(area);
-        area.select();
-        try {
-          if (document.execCommand('copy')) {
-            resolve();
-          } else {
-            reject(new Error('copy failed'));
-          }
-        } catch (error) {
-          reject(error);
-        }
-        document.body.removeChild(area);
-      });
-    }
-
-    document.querySelectorAll('pre').forEach(function (pre) {
-      // VS Code 風の枠は枠全体を基準にする。それ以外は包む要素を作る
-      var host = pre.closest('.vscode');
-
-      if (!host) {
-        host = document.createElement('div');
-        host.className = 'code-block';
-        pre.parentNode.insertBefore(host, pre);
-        host.appendChild(pre);
-      }
-
-      var button = document.createElement('button');
-      button.type = 'button';
-      button.className = 'copy-button';
-      button.innerHTML = label('コピー');
-      button.setAttribute('aria-label', 'コードをコピー');
-      host.appendChild(button);
-
-      button.addEventListener('click', function () {
-        copyText(pre.innerText).then(
-          function () {
-            button.classList.add('is-copied');
-            button.innerHTML = label('コピーしました');
-            window.setTimeout(function () {
-              button.classList.remove('is-copied');
-              button.innerHTML = label('コピー');
-            }, 1800);
-          },
-          function () {
-            button.innerHTML = label('コピーできません');
-            window.setTimeout(function () {
-              button.innerHTML = label('コピー');
-            }, 1800);
-          }
-        );
-      });
-    });
-  })();
-</script>
+<script src="../js/training.js"></script>
 
 </body>
 </html>
