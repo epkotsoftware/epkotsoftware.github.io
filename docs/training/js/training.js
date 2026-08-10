@@ -1,15 +1,21 @@
 /* ============================================================
    研修ページ共通スクリプト
 
-   読み込むだけで、次の3つが自動で付きます。
+   読み込むだけで、次の4つが自動で付きます。
    HTMLに何かを書き足す必要はありません。
 
      1. スクロールに追従する章ナビゲーション
      2. コードブロックのコピーボタン
-     3. 先頭へ戻るボタン
+     3. 画面外のときは、ヘッダーの動きを止める
+     4. 先頭へ戻るボタン
 
    使い方（</body> の直前に1行）
      <script src="../js/training.js"></script>
+
+   なお、リンクで来たときにページの先頭から読み始める処理は
+   scroll-reset.js に分けてあります。
+   ブラウザが位置を戻すより先に動かす必要があり、
+   <head> で読み込まないと間に合わないためです。
    ============================================================ */
 
 /* ------------------------------------------------------------
@@ -37,10 +43,35 @@
     if (!heading) {
       return;
     }
+    var text = heading.textContent.trim();
     var link = document.createElement('a');
     link.href = '#' + section.id;
-    link.textContent = heading.textContent.trim();
     link.setAttribute('data-target', section.id);
+    // ホバーで全文が出るようにしておく
+    link.title = text;
+
+    // 「1. タイトル」を番号と本文に分ける。
+    // 番号は常に表示し、本文は現在地のときだけ見せる
+    var parts = text.match(/^(\d+)[.．]\s*(.+)$/);
+
+    if (parts) {
+      var num = document.createElement('span');
+      num.className = 'cn-num';
+      num.textContent = parts[1];
+
+      var label = document.createElement('span');
+      label.className = 'cn-label';
+      label.textContent = parts[2];
+
+      link.appendChild(num);
+      link.appendChild(label);
+    } else {
+      var only = document.createElement('span');
+      only.className = 'cn-label is-always';
+      only.textContent = text;
+      link.appendChild(only);
+    }
+
     inner.appendChild(link);
     links.push(link);
   });
@@ -131,15 +162,36 @@
     });
   }
 
-  document.querySelectorAll('pre').forEach(function (pre) {
+  // コピー対象を集める。
+  //   1. <pre> はすべて対象
+  //   2. <code> のうち、ブロック表示で改行が保持されているもの
+  //      （見本ごとに置いているコード枠。文中の <code> は対象外）
+  var blocks = [];
+
+  document.querySelectorAll('pre').forEach(function (el) {
+    blocks.push(el);
+  });
+
+  document.querySelectorAll('code').forEach(function (el) {
+    // <pre> の中の <code> は、親の <pre> 側で対応済み
+    if (el.closest('pre')) {
+      return;
+    }
+    var style = window.getComputedStyle(el);
+    if (style.display === 'block' && style.whiteSpace.indexOf('pre') === 0) {
+      blocks.push(el);
+    }
+  });
+
+  blocks.forEach(function (code) {
     // VS Code 風の枠は枠全体を基準にする。それ以外は包む要素を作る
-    var host = pre.closest('.vscode');
+    var host = code.closest('.vscode');
 
     if (!host) {
       host = document.createElement('div');
       host.className = 'code-block';
-      pre.parentNode.insertBefore(host, pre);
-      host.appendChild(pre);
+      code.parentNode.insertBefore(host, code);
+      host.appendChild(code);
     }
 
     var button = document.createElement('button');
@@ -150,7 +202,7 @@
     host.appendChild(button);
 
     button.addEventListener('click', function () {
-      copyText(pre.innerText).then(
+      copyText(code.innerText).then(
         function () {
           button.classList.add('is-copied');
           button.innerHTML = label('コピーしました');
@@ -168,10 +220,69 @@
       );
     });
   });
+
+  // 表の中など、短い文字列をそのまま写せるようにする。
+  //   <code class="copy-chip">拡張機能の名前</code>
+  // と書くと、うしろにコピーボタンが付く。
+  // 検索欄へ貼るだけで済むので、打ち間違いが起きない。
+  document.querySelectorAll('.copy-chip').forEach(function (chip) {
+    // ボタンを足す前に控えておく（足したあとだとボタンの文字まで混ざる）
+    var text = chip.textContent.trim();
+
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'copy-chip-btn';
+    button.innerHTML = label('コピー');
+    button.setAttribute('aria-label', text + ' をコピー');
+    chip.appendChild(button);
+
+    button.addEventListener('click', function () {
+      copyText(text).then(
+        function () {
+          // 文字は「コピー」のまま変えない。
+          // 差し替えるとボタンの幅が伸びて、表がガタつくため。
+          // 済んだことは、チェックの印と緑色で伝える（CSS側）
+          button.classList.remove('is-failed');
+          button.classList.add('is-copied');
+          window.setTimeout(function () {
+            button.classList.remove('is-copied');
+          }, 1800);
+        },
+        function () {
+          button.classList.remove('is-copied');
+          button.classList.add('is-failed');
+          window.setTimeout(function () {
+            button.classList.remove('is-failed');
+          }, 1800);
+        }
+      );
+    });
+  });
 })();
 
 /* ------------------------------------------------------------
-   3. 先頭へ戻るボタンを右下に置く
+   3. ヘッダーが画面外にあるとき、背景の動きを止める
+   読んでいる間ずっと裏で描画し続けるのを避け、
+   低スペック機での負荷とバッテリー消費を減らす
+   ------------------------------------------------------------ */
+(function () {
+  var header = document.querySelector('header');
+  if (!header || !('IntersectionObserver' in window)) {
+    return;
+  }
+
+  var observer = new IntersectionObserver(
+    function (entries) {
+      header.classList.toggle('is-offscreen', !entries[0].isIntersecting);
+    },
+    { threshold: 0 }
+  );
+
+  observer.observe(header);
+})();
+
+/* ------------------------------------------------------------
+   4. 先頭へ戻るボタンを右下に置く
    ------------------------------------------------------------ */
 (function () {
   var ARROW =
