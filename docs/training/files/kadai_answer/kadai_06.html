@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>CBC jQuery</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/kadai_06.css">
+  <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+</head>
+<script>
+  $(function () {
+
+    /* 1. クリックイベント */
+    $('#change_btn').on('click', function () {
+      $('#box').toggleClass('is-active');
+    });
+
+    /* 2. ホバーイベント */
+    $('#text')
+      .on('mouseenter', function () {
+        $(this).addClass('is-hover');
+      })
+      .on('mouseleave', function () {
+        $(this).removeClass('is-hover');
+      });
+
+    /* 3. スライドボックス。$(this).next() で、押した見出しの次だけを開閉する */
+    $('.slide_btn').on('click', function () {
+      $(this).next().slideToggle();
+    });
+
+    /* 4. ページトップへ戻るボタン */
+    $(window).on('scroll', function () {
+      if ($(this).scrollTop() > 200) {
+        $('.pageTop_btn').fadeIn();
+      } else {
+        $('.pageTop_btn').fadeOut();
+      }
+    });
+
+    $('.pageTop_btn').on('click', function () {
+      $('html, body').animate({ scrollTop: 0 }, 400);
+    });
+
+    /* 5. ツールチップ。乗った項目の子だけを出す */
+    $('#nav li')
+      .on('mouseenter', function () {
+        $(this).children('.tooltips').fadeIn(150);
+      })
+      .on('mouseleave', function () {
+        $(this).children('.tooltips').fadeOut(150);
+      });
+
+  });
+</script>
+<body>
+  <header>
+    <h1>マークアップ編課題：#6 簡単な機能をjQueryで実装しよう</h1>
+  </header>
+  <main>
+    <section>
+      <h2>1. クリックイベント</h2>
+      <button type="button" id="change_btn">見た目を変える</button>
+      <div id="box">ボタンを押すと、この箱の見た目が変わります。</div>
+    </section>
+    <section>
+      <h2>2. ホバーイベント</h2>
+      <div id="text">この箱にマウスを乗せている間だけ、背景色が変わります。</div>
+    </section>
+    <section>
+      <h2>3. スライドボックス</h2>
+      <button type="button" class="slide_btn">1つ目の見出し</button>
+      <div class="slide_box">1つ目の中身です。見出しを押すと開き、もう一度押すと閉じます。</div>
+      <button type="button" class="slide_btn">2つ目の見出し</button>
+      <div class="slide_box">2つ目の中身です。押した見出しの中身だけが開きます。</div>
+      <button type="button" class="slide_btn">3つ目の見出し</button>
+      <div class="slide_box">3つ目の中身です。jQueryは1つしか書いていません。</div>
+    </section>
+    <section>
+      <h2>4. ページトップへ戻るボタン（スクロールした時に画面右下に配置される）</h2>
+      <p>下へスクロールすると、画面の右下にボタンが出ます。押すと先頭に戻ります。</p>
+      <p>ページが短くてスクロールできないときは、ウィンドウを縦に縮めるか、表示倍率を上げて確かめてください。</p>
+      <div class="pageTop_btn">↑</div>
+    </section>
+    <section>
+      <h2>5. ツールチップ</h2>
+      <div id="nav">
+        <ul>
+          <li>ホーム<p class="tooltips">トップページへ戻ります</p></li>
+          <li>制作実績<p class="tooltips">これまでの制作事例です</p></li>
+          <li>お問い合わせ<p class="tooltips">ご相談はこちらから</p></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

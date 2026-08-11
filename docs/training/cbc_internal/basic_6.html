@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>マークアップ中級#6</title>
+  <link rel="stylesheet" href="../css/training.css">
+
+  <!-- ▼ このページ専用のスタイル（jQueryの実演） -->
+  <link rel="stylesheet" href="../css/basic_6.css">
+
+  <!-- ▼ 開いたときに、ページの先頭から読み始められるようにする。
+       ブラウザが前回の位置へ戻すより先に動かす必要があるため、
+       training.js とは分けて <head> で読み込んでいる -->
+  <script src="../js/scroll-reset.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>マークアップ中級#6</h1>
+    <p>JavaScriptを短く書く道具 ― jQueryの基本</p>
+  </div>
+</header>
+
+<main>
+
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol>
+      <li><a href="#chapter1">jQueryとは何か</a></li>
+      <li><a href="#chapter2">jQueryを読み込む</a></li>
+      <li><a href="#chapter3">書き方の基本</a></li>
+      <li><a href="#chapter4">イベント ― 操作に反応させる</a></li>
+      <li><a href="#chapter5">よく使うメソッド</a></li>
+      <li><a href="#chapter6">実際に作ってみる</a></li>
+    </ol>
+
+    <div class="point">
+      <span class="label">なぜ今の時代に jQuery なのか</span><br>
+      <strong>新しく作るサイトで jQuery が選ばれることは、たしかに少なくなりました。</strong>それでもこの章を置いているのは、次の3つの理由です。
+    </div>
+
+    <ol class="jq-reasons">
+      <li>
+        <strong>いまも現場に残っている</strong><br>
+        調査会社 W3Techs によると、<strong>世界のサイトの 67.2%</strong> が jQuery を使っています（2026年8月時点）。JavaScriptのライブラリが判別できたサイトに限れば <strong>86.8%</strong> です。<br>
+        新しく書く機会は減っても、<strong>すでに動いているものを直す仕事</strong>は残ります。
+      </li>
+      <li>
+        <strong>ライブラリを使う練習として、いちばん軽い</strong><br>
+        他人が作った部品を読み込んで使う、というのはこの先ずっと付いてくる作業です。<br>
+        いまどきのライブラリは<strong>環境をひととおり用意してから</strong>でないと動かせないものが多く、最初の一歩には重すぎます。jQuery は <code>&lt;script&gt;</code> を<strong>1行書くだけ</strong>。<strong>読み込む → 使う</strong>という流れだけに集中できます。
+      </li>
+      <li>
+        <strong>覚えたことが、そのまま次に活きる</strong><br>
+        <strong>「どれを選ぶ → 何をする」</strong>という組み立ては、jQuery でも素の JavaScript でも同じです。<br>
+        選ぶときの書き方は<strong>CSSのセレクタそのもの</strong>なので、初級で覚えたことがそのまま使えます。
+      </li>
+    </ol>
+
+    <div class="caution">
+      <span class="label">古いバージョンが現場に残っている</span><br>
+      同じ調査では、jQuery を使っているサイトのうち <strong>17.5% がバージョン1系</strong>のままです。<br>
+      1系は<strong>脆弱性が見つかったまま</strong>のものを含みます（2章で扱います）。<strong>「古いものが現役で動いている」</strong>という状況そのものが、この章を学ぶ理由でもあります。
+    </div>
+
+    <div class="note">
+      <span class="label">読む前に</span><br>
+      このページの見本は<strong>実際に動きます</strong>。ボタンを押したりマウスを乗せたりして、手で触りながら読んでください。<br>
+      コードを丸暗記する必要はありません。<strong>「どう書くと、何が起きるか」</strong>の対応が分かれば十分です。
+    </div>
+
+    <div class="exercise">
+      <span class="label">課題</span><br>
+      章の途中に<strong>演習が5つ</strong>あります（この色の枠です）。<br>
+      最後まで読んでからまとめてやるのではなく、<strong>出てきたその場で <code>kadai_06.html</code> に書いてください</strong>。<br>
+      課題ファイルの場所は、課題リポジトリの <code>02_basic/htdocs/kadai_06.html</code> です。ブラウザで開きながら進めます。
+    </div>
+
+    <div class="note">
+      <span class="label">演習のコードは穴埋めになっています</span><br>
+      演習には書きかけのコードが載っています。<code class="hl"><span class="blank">xxxxxx</span></code> と<strong>黄色くなっているところを埋めてみましょう</strong>。<br>
+      横のコメントがヒントです。すぐ下に「答え」の折りたたみを置いていますが、<strong>先に自分で考えてから</strong>開いてください。
+    </div>
+
+    <div class="jq-offline" id="jq-offline">
+      <strong>jQueryを読み込めませんでした。</strong><br>
+      このページはインターネット経由でjQueryを読み込みます。オフラインで開いている場合、見本が動きません。ネットに繋がった状態で開き直してください。
+    </div>
+  </section>
+
+  <section id="chapter1">
+    <h2>1. jQueryとは何か</h2>
+
+    <p>
+      <strong>JavaScriptを短く書くための道具</strong>です。プログラミング言語ではありません。JavaScriptで書かれた<strong>部品の詰め合わせ</strong>で、こういうものを<strong>ライブラリ</strong>と呼びます。
+    </p>
+
+    <p>
+      たとえば「クラスを付ける」という処理を書くと、こうなります。
+    </p>
+
+    <div class="jq-samples">
+      <div>
+        <span class="jq-label">JavaScriptだけで書く</span>
+        <code class="jq-code hl"><span class="f">document</span>.<span class="f">querySelector</span>(<span class="v">'.box'</span>)
+  .<span class="p">classList</span>.<span class="f">add</span>(<span class="v">'active'</span>);</code>
+      </div>
+      <div>
+        <span class="jq-label">jQueryで書く</span>
+        <code class="jq-code hl"><span class="f">$</span>(<span class="v">'.box'</span>).<span class="f">addClass</span>(<span class="v">'active'</span>);</code>
+      </div>
+    </div>
+
+    <p>
+      やっていることは<strong>まったく同じ</strong>です。同じ処理を短く書けるのが、jQueryの持ち味でした。
+    </p>
+
+    <div class="note">
+      <span class="label">なぜ広まって、なぜ役目が減ったのか</span><br>
+      jQueryが作られた当時は、<strong>ブラウザごとに書き方が違う</strong>という大きな問題がありました。同じ処理でもブラウザによって動いたり動かなかったりする。jQueryはその差を吸収してくれる道具として広まりました。<br>
+      いまはその問題がほぼ解消し、<strong>JavaScript本体が同じことをできるようになりました</strong>。上の2つの書き方を見比べてください。<strong>短く書ける</strong>という利点は残っていますが、<strong>それだけのために外部の部品を足す理由は弱くなった</strong>わけです。<br>
+      だからこのページの目的は「新しく書けるようになる」ことではなく、<strong>「出てきたときに読めて、直せる」</strong>ことです。
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      jQueryは<strong>JavaScriptの一部ではありません</strong>。あとから追加して使う、外部の部品です。<br>
+      だから使う前に<strong>「読み込む」という作業が必要</strong>になります。次の章でやります。
+    </div>
+  </section>
+
+  <section id="chapter2">
+    <h2>2. jQueryを読み込む</h2>
+
+    <p>
+      jQueryは自分のパソコンには入っていません。使うには、<strong>ファイルを持ってくる</strong>必要があります。方法は2つあります。
+    </p>
+
+    <table>
+      <tr>
+        <th></th>
+        <th>方法</th>
+        <th>やること</th>
+        <th>向いている場面</th>
+      </tr>
+      <tr>
+        <td>方法1</td>
+        <td>ダウンロードして置く</td>
+        <td>ファイルを自分のフォルダに置く</td>
+        <td>ネットに繋がらない環境</td>
+      </tr>
+      <tr>
+        <td>方法2</td>
+        <td>CDNから読む</td>
+        <td>URLを1行書くだけ</td>
+        <td>ふつうはこちら</td>
+      </tr>
+    </table>
+
+    <div class="note">
+      <span class="label">どちらを使えばいいか</span><br>
+      <strong>ふだんは方法2（CDN）で十分</strong>です。1行書くだけで済みます。<br>
+      ただし<strong>ネットに繋がらない環境</strong>では読み込めません。そういう場合に方法1を使います。両方とも順番に見ていきます。
+    </div>
+
+    <h3>方法1 ― ダウンロードして置く</h3>
+    <p>
+      公式サイトからファイルを落として、自分のフォルダに置きます。ダウンロードはこちらからできます。
+    </p>
+
+    <ul>
+      <li>
+        <a href="https://jquery.com/download/" target="_blank" rel="noopener noreferrer">jQuery 公式ダウンロードページ</a>
+      </li>
+    </ul>
+
+    <table>
+      <tr>
+        <th>手順</th>
+        <th>やること</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>上のリンクからダウンロードページを開く</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><strong>compressed（圧縮版）</strong>のほうを選ぶ</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>落ちてきた <code>jquery-4.0.0.min.js</code> を、<code>js</code> という名前のフォルダに入れる</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>HTMLから読み込む</td>
+      </tr>
+    </table>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.html — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.html</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1</div>
+        <pre class="vscode-code">&lt;<span class="sy-tag">script</span> <span class="sy-attr">src</span>=<span class="sy-str">"js/jquery-4.0.0.min.js"</span>&gt;&lt;/<span class="sy-tag">script</span>&gt;</pre>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">2種類あるのはなぜ</span><br>
+      ダウンロードページには <strong>compressed（圧縮版）</strong> と <strong>uncompressed（非圧縮版）</strong> があります。<br>
+      <strong>圧縮版</strong>は改行や空白を削ってファイルを小さくしたものです。ファイル名に <code>.min</code> が付きます。<strong>実際のサイトではこちらを使います。</strong><br>
+      <strong>非圧縮版</strong>は人が読める形のままです。中身を調べたいときに使います。
+    </div>
+
+    <div class="caution">
+      <span class="label">置き場所に注意</span><br>
+      <code>src="js/jquery-4.0.0.min.js"</code> は、<strong>HTMLファイルから見た場所</strong>を書いています。<br>
+      HTMLと同じ階層に <code>js</code> フォルダがあり、その中にjQueryが入っている、という前提です。場所がずれると読み込めません。<strong>動かないときは、まずここを疑ってください。</strong>
+    </div>
+
+    <h3>方法2 ― CDNから読む</h3>
+
+    <div class="note">
+      <span class="label">CDNとは</span><br>
+      <strong>Content Delivery Network（コンテンツ配信ネットワーク）</strong>の略です。よく使われるファイルを、世界中のサーバーから配る仕組みのことです。<br>
+      jQueryのような有名なライブラリは、こうした配信元が公式に用意されています。<strong>ダウンロードが要らず、URLを1行書くだけ</strong>で使えます。
+    </div>
+
+    <p>
+      <code>&lt;/body&gt;</code> の<strong>直前</strong>に、この1行を書きます。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.html — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.html</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11</div>
+        <pre class="vscode-code">&lt;<span class="sy-tag">body</span>&gt;
+
+  &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"box"</span>&gt;ここが中身&lt;/<span class="sy-tag">div</span>&gt;
+
+  <span class="sy-com">&lt;!-- ↓ jQuery本体を読み込む --&gt;</span>
+  &lt;<span class="sy-tag">script</span> <span class="sy-attr">src</span>=<span class="sy-str">"https://code.jquery.com/jquery-4.0.0.min.js"</span>&gt;&lt;/<span class="sy-tag">script</span>&gt;
+
+  <span class="sy-com">&lt;!-- ↓ 自分のコードは、そのあとに書く --&gt;</span>
+  &lt;<span class="sy-tag">script</span> <span class="sy-attr">src</span>=<span class="sy-str">"js/main.js"</span>&gt;&lt;/<span class="sy-tag">script</span>&gt;
+
+&lt;/<span class="sy-tag">body</span>&gt;</pre>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">順番を間違えない</span><br>
+      <strong>jQuery本体が先、自分のコードが後</strong>です。逆にすると、自分のコードが動いたときにjQueryがまだ存在せず、<code>$ is not defined</code>（$なんて知らない）というエラーになります。<br>
+      道具箱を開ける前に道具を使おうとしている状態、と考えてください。
+    </div>
+
+    <div class="note">
+      <span class="label">head の中で読み込む形もある</span><br>
+      <code>&lt;head&gt;</code> の中で読み込んでいるサイトも多くあります。<strong>課題ファイルはこちらの形</strong>で、jQuery本体は最初から読み込み済みです。<br>
+      その場合、自分のコードの書き方にひとつ注意が要ります。<strong>3章の最後</strong>で説明します。
+    </div>
+
+    <h3>バージョンについて</h3>
+    <p>
+      URLの中の <code>4.0.0</code> がバージョン番号です。<strong>2026年1月17日に公開された、いちばん新しいバージョン</strong>です。
+    </p>
+
+    <div class="caution">
+      <span class="label">古いバージョンの注意</span><br>
+      <strong>jQuery 3.4.1以前には、XSSと呼ばれる脆弱性が見つかっています。</strong><code>jQuery.htmlPrefilter</code> という内部処理が原因で、<strong>3.5.0で修正されました</strong>。<br>
+      既存のサイトを触るときにバージョンが古かったら、まず<strong>その事実を報告</strong>してください。勝手に上げると動かなくなる箇所が出ることがあるので、判断は自分でしないことです。
+    </div>
+
+    <div class="note">
+      <span class="label">XSSとは</span><br>
+      <strong>クロスサイトスクリプティング</strong>の略です。ページに悪意のあるスクリプトを紛れ込ませて実行させる攻撃のことです。<br>
+      いまは「そういう攻撃があって、古いjQueryはそれを許してしまう穴があった」とだけ知っておけば十分です。
+    </div>
+
+    <div class="note">
+      <span class="label">4.0で消えたもの</span><br>
+      4.0では、以前から「もう使わないでください」と案内されていた機能が削除されました。公式のアップグレードガイドに挙がっているのは、<code>jQuery.trim</code>、<code>jQuery.isArray</code>、<code>jQuery.parseJSON</code>、<code>jQuery.type</code>、<code>jQuery.now</code>、<code>jQuery.isNumeric</code>、<code>jQuery.isFunction</code>、<code>jQuery.isWindow</code>、<code>jQuery.camelCase</code>、<code>jQuery.nodeName</code>、<code>jQuery.cssProps</code>、<code>jQuery.unique</code>、<code>jQuery.fx.interval</code> などです。<br>
+      古いサイトを4.0に上げると、これらを使っている箇所が<strong>動かなくなります</strong>。バージョンを上げる作業が「番号を書き換えるだけ」で済まないのは、こういう理由です。
+    </div>
+  </section>
+
+  <section id="chapter3">
+    <h2>3. 書き方の基本</h2>
+
+    <p>
+      jQueryのコードは、<strong>ほぼ全部この形</strong>です。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">main.js — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">main.js</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1</div>
+        <pre class="vscode-code"><span class="sy-attr">$</span>(<span class="sy-str">'どれを'</span>).<span class="sy-attr">何をする</span>(<span class="sy-str">'どうやって'</span>);</pre>
+      </div>
+    </div>
+
+    <p>
+      3つの部分に分かれています。
+    </p>
+
+    <table>
+      <tr>
+        <th>部分</th>
+        <th>意味</th>
+        <th>例</th>
+      </tr>
+      <tr>
+        <td><code>$('…')</code></td>
+        <td><strong>どれを</strong>操作するか選ぶ</td>
+        <td><code>$('.box')</code></td>
+      </tr>
+      <tr>
+        <td><code>.メソッド名()</code></td>
+        <td><strong>何をする</strong>か</td>
+        <td><code>.addClass()</code></td>
+      </tr>
+      <tr>
+        <td><code>(…)</code> の中身</td>
+        <td><strong>どうやって</strong>（材料）</td>
+        <td><code>'active'</code></td>
+      </tr>
+    </table>
+
+    <div class="note">
+      <span class="label">メソッドとは</span><br>
+      <code>.addClass()</code> や <code>.text()</code> のような、<strong>あらかじめ用意されている命令</strong>のことです。jQueryには数百のメソッドがあり、それぞれが決まった仕事をします。<br>
+      名前のうしろに <code>( )</code> が付いているのが目印です。<strong>いまは「命令の名前」と考えておけば十分</strong>です。この言葉はjQueryに限らず、プログラムの世界で広く使われます。
+    </div>
+
+    <h3>$( ) の中はCSSと同じ</h3>
+    <p>
+      <strong>ここが一番の朗報です。</strong>要素の選び方は、<a href="beginner_7.html#chapter3">コーダー初級#7</a> でやったCSSのセレクタと<strong>まったく同じ書き方</strong>です。新しく覚えることはありません。
+    </p>
+
+    <table>
+      <tr>
+        <th>書き方</th>
+        <th>選ばれるもの</th>
+      </tr>
+      <tr>
+        <td><code>$('.box')</code></td>
+        <td><code>class="box"</code> が付いた要素<strong>すべて</strong></td>
+      </tr>
+      <tr>
+        <td><code>$('#main')</code></td>
+        <td><code>id="main"</code> が付いた要素</td>
+      </tr>
+      <tr>
+        <td><code>$('li')</code></td>
+        <td><code>li</code> タグすべて</td>
+      </tr>
+      <tr>
+        <td><code>$('.list &gt; li')</code></td>
+        <td><code>.list</code> の直下の <code>li</code></td>
+      </tr>
+      <tr>
+        <td><code>$('li:first-child')</code></td>
+        <td>最初の <code>li</code></td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      <code>$('.box')</code> は「<strong>class="box" の要素を全部つかまえる</strong>」という意味です。1個しかなくても、10個あっても、同じ書き方でつかまえられます。<br>
+      そして<strong>つかまえた全部に、まとめて同じ処理をします</strong>。1個ずつ書く必要はありません。
+    </div>
+
+    <h3>メソッドはつなげられる</h3>
+    <p>
+      <code>.</code> でつないで、続けて書けます。<strong>上から順に実行されます</strong>。
+    </p>
+
+    <div class="jq-samples">
+      <div>
+        <span class="jq-label">1つずつ書く</span>
+        <code class="jq-code hl"><span class="f">$</span>(<span class="v">'.box'</span>).<span class="f">addClass</span>(<span class="v">'active'</span>);
+<span class="f">$</span>(<span class="v">'.box'</span>).<span class="f">text</span>(<span class="v">'変わった'</span>);
+<span class="f">$</span>(<span class="v">'.box'</span>).<span class="f">show</span>();</code>
+      </div>
+      <div>
+        <span class="jq-label">つなげて書く（同じ意味）</span>
+        <code class="jq-code hl"><span class="f">$</span>(<span class="v">'.box'</span>)
+  .<span class="f">addClass</span>(<span class="v">'active'</span>)
+  .<span class="f">text</span>(<span class="v">'変わった'</span>)
+  .<span class="f">show</span>();</code>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      この書き方を<strong>メソッドチェーン</strong>と呼びます。<code>$('.box')</code> を何度も書かずに済むので、jQueryのコードではよく見かけます。<br>
+      改行して <code>.</code> を行頭に置くと読みやすくなります。<strong>最後にセミコロン <code>;</code> を1つだけ</strong>付けてください。
+    </div>
+
+    <h3>いつ動かすか ― $(function(){ })</h3>
+
+    <p>
+      書き方の最後に、<strong>知らないと必ずハマる形</strong>をひとつ覚えます。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">main.js — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">main.js</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3</div>
+        <pre class="vscode-code"><span class="sy-attr">$</span>(<span class="sy-str">function</span>() {
+  <span class="sy-com">// ここに、jQueryのコードを書く</span>
+});</pre>
+      </div>
+    </div>
+
+    <p>
+      日本語にすると「<strong>HTMLの読み込みが終わったら、中身を動かして</strong>」です。
+    </p>
+
+    <div class="note">
+      <span class="label">function() { } の正体は、まだ気にしない</span><br>
+      この <code>function() { }</code> という書き方の意味は、<a href="basic_7.html#chapter2">中級#7</a> でじっくり扱います。いまは<strong>決まり文句</strong>として、この形のまま使ってください。
+    </div>
+
+    <div class="caution">
+      <span class="label">なぜ必要か</span><br>
+      コードは<strong>書いてある場所で、上から順に</strong>動きます。ページの上のほうに書いたコードは、<strong>下のHTMLがまだ読み込まれていない時点</strong>で動きます。その時点で <code>$('#btn')</code> と書いても、<strong>ボタンはまだ存在しないので、つかまえられません</strong>。エラーも出ず、ただ何も起きません。<br>
+      <code>$(function(){ })</code> で包んでおけば、<strong>HTMLがそろってから</strong>中身が動くので、この事故が起きません。
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      課題ファイルの「ここにjQueryを記述します」という書き場所は、<strong>HTMLより上</strong>にあります。つまり、包まずに書くと<strong>全部の機能が黙って動かなくなります</strong>。<br>
+      このページのこれ以降のコードも、<strong>実際に書くときは全部この中に入れる</strong>前提で読んでください。
+    </div>
+  </section>
+
+  <section id="chapter4">
+    <h2>4. イベント ― 操作に反応させる</h2>
+
+    <p>
+      ここからが本番です。<strong>「クリックされたら」「マウスが乗ったら」といった操作に反応させる</strong>のが、jQueryを使う最大の目的です。
+    </p>
+    <p>
+      この「操作」のことを <strong>イベント</strong> と呼びます。
+    </p>
+
+    <h3>書き方は .on() ひとつ</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">main.js — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">main.js</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3</div>
+        <pre class="vscode-code"><span class="sy-attr">$</span>(<span class="sy-str">'.btn'</span>).<span class="sy-attr">on</span>(<span class="sy-str">'click'</span>, <span class="sy-str">function</span>() {
+  <span class="sy-com">// ここに、クリックされたときにやることを書く</span>
+});</pre>
+      </div>
+    </div>
+
+    <p>
+      日本語にすると、こうなります。
+    </p>
+
+    <table>
+      <tr>
+        <th>コード</th>
+        <th>意味</th>
+      </tr>
+      <tr>
+        <td><code>$('.btn')</code></td>
+        <td><code>.btn</code> が付いた要素を<strong>つかまえて</strong></td>
+      </tr>
+      <tr>
+        <td><code>.on('click', …)</code></td>
+        <td><strong>クリックされたら</strong></td>
+      </tr>
+      <tr>
+        <td><code>function() { … }</code></td>
+        <td><strong>この中身をやる</strong></td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      <code>function() { … }</code> は<strong>「あとでやること」をまとめた箱</strong>です。書いた瞬間には実行されません。<strong>クリックされたときに初めて中身が動きます</strong>。<br>
+      ここがHTMLやCSSと決定的に違うところです。CSSは書いた通りにすぐ表示されますが、<strong>JavaScriptは「いつ動くか」を自分で決めます</strong>。
+    </div>
+
+    <h3>動かしてみる</h3>
+    <p>
+      実際に押せます。<strong>ボタンを押すと、下の箱の色が変わります。</strong>
+    </p>
+
+    <div class="jq-samples">
+      <div>
+        <span class="jq-label">コード</span>
+        <code class="jq-code hl"><span class="f">$</span>(<span class="v">'#btn1'</span>).<span class="f">on</span>(<span class="v">'click'</span>, <span class="k">function</span>() {
+  <span class="f">$</span>(<span class="v">'#box1'</span>).<span class="f">toggleClass</span>(<span class="v">'is-active'</span>);
+});</code>
+      </div>
+      <div>
+        <span class="jq-label">動く見本</span>
+        <div class="jq-demo">
+          <button type="button" class="jq-btn" id="btn1">押してみる</button>
+          <div class="jq-box" id="box1">ここの色が変わります</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">toggleClass とは</span><br>
+      <strong>付いていなければ付ける、付いていれば外す</strong>、というメソッドです。押すたびに切り替わるのはこのためです。<br>
+      <code>toggle</code> は「切り替える」という意味の英単語です。
+    </div>
+
+    <h3>よく使うイベント</h3>
+    <p>
+      <code>'click'</code> の部分を変えるだけで、別の操作に反応させられます。
+    </p>
+
+    <table>
+      <tr>
+        <th>イベント名</th>
+        <th>いつ起きるか</th>
+      </tr>
+      <tr>
+        <td><code>'click'</code></td>
+        <td>クリックされたとき</td>
+      </tr>
+      <tr>
+        <td><code>'mouseenter'</code></td>
+        <td>マウスが<strong>乗ったとき</strong></td>
+      </tr>
+      <tr>
+        <td><code>'mouseleave'</code></td>
+        <td>マウスが<strong>離れたとき</strong></td>
+      </tr>
+      <tr>
+        <td><code>'change'</code></td>
+        <td>入力欄の内容が変わったとき</td>
+      </tr>
+      <tr>
+        <td><code>'scroll'</code></td>
+        <td>スクロールされたとき</td>
+      </tr>
+      <tr>
+        <td><code>'submit'</code></td>
+        <td>フォームが送信されたとき</td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      <strong>覚えるのは <code>.on()</code> ひとつだけで足ります。</strong>あとはイベント名を差し替えるだけです。<br>
+      jQueryには <code>.click()</code> のような短縮形もあり、既存のサイトではよく見かけます。<strong>読めれば十分</strong>で、自分で書くときは <code>.on()</code> に揃えておけば迷いません。
+    </div>
+
+    <h3>マウスの出入りに反応させる</h3>
+    <p>
+      <code>.on()</code> はつなげて書けます。<strong>乗ったとき</strong>と<strong>離れたとき</strong>を続けて指定できます。
+    </p>
+
+    <div class="jq-samples">
+      <div>
+        <span class="jq-label">コード</span>
+        <code class="jq-code hl"><span class="f">$</span>(<span class="v">'#hover1'</span>)
+  .<span class="f">on</span>(<span class="v">'mouseenter'</span>, <span class="k">function</span>() {
+    <span class="f">$</span>(<span class="k">this</span>).<span class="f">addClass</span>(<span class="v">'is-hover'</span>);
+  })
+  .<span class="f">on</span>(<span class="v">'mouseleave'</span>, <span class="k">function</span>() {
+    <span class="f">$</span>(<span class="k">this</span>).<span class="f">removeClass</span>(<span class="v">'is-hover'</span>);
+  });</code>
+      </div>
+      <div>
+        <span class="jq-label">動く見本（マウスを乗せてください）</span>
+        <div class="jq-demo">
+          <div class="jq-hover-box" id="hover1">ここにマウスを乗せてください</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">$(this) とは</span><br>
+      <code>$(this)</code> は<strong>「いま操作された、その要素自身」</strong>を指します。<br>
+      上の例では <code>$('#hover1')</code> と書いても同じ結果になりますが、<strong>同じ処理を複数の要素に付けるとき</strong>に効いてきます。<code>$('.box')</code> で10個つかまえても、<code>$(this)</code> なら<strong>マウスが乗ったその1個だけ</strong>を指せます。
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習1</span><br>
+      課題ファイル <strong><code>kadai_06.html</code> の「1. クリックイベント」</strong>を作ります。<br>
+      ボタンと箱を1つずつ置き、<strong>ボタンを押すと箱の見た目が変わる</strong>ようにしてください。ボタンには <code>id="change_btn"</code> を付けます。<br>
+      見た目の指定は<strong>このページ専用のCSSファイルを新しく作って</strong>そこに書き（ファイル名は自分で決める）、jQueryでは<strong>クラスを付け外しするだけ</strong>にします。<br>
+      jQuery本体は課題ファイルで<strong>読み込み済み</strong>です（自分で足さない）。コードは <code>$(function(){ })</code> の中に書きます（3章参照）。
+      <span class="jq-label">HTML（セクションの中）</span>
+      <code class="jq-code hl">&lt;button type=<span class="v">"button"</span> id=<span class="v">"change_btn"</span>&gt;色を変える&lt;/button&gt;
+&lt;div id=<span class="v">"box"</span>&gt;ボタンを押すと、この箱の見た目が変わります。&lt;/div&gt;</code>
+      <span class="jq-label">CSS（ページ専用のCSSファイル）</span>
+      <code class="jq-code hl"><span class="s">#change_btn </span>{
+  <span class="p">padding</span>: <span class="v">8px 18px</span>;
+  <span class="p">border</span>: <span class="v">none</span>;
+  <span class="p">border-radius</span>: <span class="v">8px</span>;
+  <span class="p">background</span>: <span class="v">linear-gradient(135deg, #2563eb, #7c3aed)</span>;
+  <span class="p">color</span>: <span class="v">#ffffff</span>;
+  <span class="p">font-weight</span>: <span class="v">700</span>;
+  <span class="p">cursor</span>: <span class="v">pointer</span>;
+}
+
+<span class="s">#box </span>{
+  <span class="p">margin-top</span>: <span class="v">8px</span>;
+  <span class="p">padding</span>: <span class="v">10px 14px</span>;
+  <span class="p">border</span>: <span class="v">1px solid #e2e8f0</span>;
+  <span class="p">border-radius</span>: <span class="v">10px</span>;
+  <span class="p">background</span>: <span class="v">#f8fafc</span>;
+}
+
+<span class="s">#box.is-active </span>{
+  <span class="p">border-color</span>: <span class="v">#7c3aed</span>;
+  <span class="p">background</span>: <span class="v">#f5f3ff</span>;
+  <span class="p">color</span>: <span class="v">#6d28d9</span>;
+}</code>
+      <span class="jq-label">jQuery（穴埋め ― まず自分で考える）</span>
+      <code class="jq-code hl">$(<span class="v">'#change_btn'</span>).on(<span class="v">'click'</span>, <span class="k">function</span>() {
+  $(<span class="v">'#box'</span>).<span class="blank">xxxxxx</span>(<span class="v">'is-active'</span>);  <span class="c">/* 付け外しを1つでやるメソッドは？（この章の見本にある） */</span>
+});</code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="jq-label">jQuery</span>
+        <code class="jq-code hl">$(<span class="v">'#change_btn'</span>).on(<span class="v">'click'</span>, <span class="k">function</span>() {
+  $(<span class="v">'#box'</span>).toggleClass(<span class="v">'is-active'</span>);
+});</code>
+      </details>
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習2</span><br>
+      <strong><code>kadai_06.html</code> の「2. ホバーイベント」</strong>を作ります。<br>
+      文章の入った箱を置き、<strong>マウスが乗っている間だけ背景色が変わる</strong>ようにしてください。箱には <code>id="text"</code> を付けます。<br>
+      乗ったときと離れたときの2つを書きます。上の見本と同じく <code>$(this)</code> を使えば、つかまえ直さずに済みます。
+      <span class="jq-label">HTML</span>
+      <code class="jq-code hl">&lt;div id=<span class="v">"text"</span>&gt;この箱にマウスを乗せると色が変わり、離すと戻ります。&lt;/div&gt;</code>
+      <span class="jq-label">CSS（ページ専用のCSSファイル）</span>
+      <code class="jq-code hl"><span class="s">#text </span>{
+  <span class="p">padding</span>: <span class="v">10px 14px</span>;
+  <span class="p">border</span>: <span class="v">1px solid #e2e8f0</span>;
+  <span class="p">border-radius</span>: <span class="v">10px</span>;
+  <span class="p">background</span>: <span class="v">#f8fafc</span>;
+  <span class="p">transition</span>: <span class="v">background 0.2s, color 0.2s, border-color 0.2s</span>;
+}
+
+<span class="s">#text.is-hover </span>{
+  <span class="p">border-color</span>: <span class="v">#0f766e</span>;
+  <span class="p">background</span>: <span class="v">#0f766e</span>;
+  <span class="p">color</span>: <span class="v">#ffffff</span>;
+}</code>
+      <span class="jq-label">jQuery（穴埋め ― まず自分で考える）</span>
+      <code class="jq-code hl">$(<span class="v">'#text'</span>)
+  .on(<span class="v">'<span class="blank">xxxxxx</span>'</span>, <span class="k">function</span>() {  <span class="c">/* マウスが乗ったときのイベント名は？（4章の表） */</span>
+    $(<span class="k">this</span>).addClass(<span class="v">'is-hover'</span>);
+  })
+  .on(<span class="v">'<span class="blank">xxxxxx</span>'</span>, <span class="k">function</span>() {  <span class="c">/* マウスが離れたときは？ */</span>
+    $(<span class="k">this</span>).removeClass(<span class="v">'is-hover'</span>);
+  });</code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="jq-label">jQuery</span>
+        <code class="jq-code hl">$(<span class="v">'#text'</span>)
+  .on(<span class="v">'mouseenter'</span>, <span class="k">function</span>() {
+    $(<span class="k">this</span>).addClass(<span class="v">'is-hover'</span>);
+  })
+  .on(<span class="v">'mouseleave'</span>, <span class="k">function</span>() {
+    $(<span class="k">this</span>).removeClass(<span class="v">'is-hover'</span>);
+  });</code>
+      </details>
+    </div>
+  </section>
+
+  <section id="chapter5">
+    <h2>5. よく使うメソッド</h2>
+
+    <p>
+      イベントの中に書く「やること」の部分です。<strong>全部覚える必要はありません。</strong>こういうものがある、と眺めてください。
+    </p>
+
+    <h3>表示と非表示</h3>
+
+    <table>
+      <tr>
+        <th>メソッド</th>
+        <th>やること</th>
+      </tr>
+      <tr>
+        <td><code>.show()</code></td>
+        <td>表示する</td>
+      </tr>
+      <tr>
+        <td><code>.hide()</code></td>
+        <td>隠す</td>
+      </tr>
+      <tr>
+        <td><code>.toggle()</code></td>
+        <td>表示と非表示を<strong>切り替える</strong></td>
+      </tr>
+      <tr>
+        <td><code>.fadeIn()</code></td>
+        <td>じわっと表示する</td>
+      </tr>
+      <tr>
+        <td><code>.fadeOut()</code></td>
+        <td>じわっと消す</td>
+      </tr>
+      <tr>
+        <td><code>.slideToggle()</code></td>
+        <td>上下に伸び縮みして切り替える</td>
+      </tr>
+    </table>
+
+    <div class="jq-samples">
+      <div>
+        <span class="jq-label">コード</span>
+        <code class="jq-code hl"><span class="f">$</span>(<span class="v">'#show'</span>).<span class="f">on</span>(<span class="v">'click'</span>, <span class="k">function</span>() {
+  <span class="f">$</span>(<span class="v">'#target1'</span>).<span class="f">fadeIn</span>();
+});
+
+<span class="f">$</span>(<span class="v">'#hide'</span>).<span class="f">on</span>(<span class="v">'click'</span>, <span class="k">function</span>() {
+  <span class="f">$</span>(<span class="v">'#target1'</span>).<span class="f">fadeOut</span>();
+});</code>
+      </div>
+      <div>
+        <span class="jq-label">動く見本</span>
+        <div class="jq-demo">
+          <div class="jq-btns">
+            <button type="button" class="jq-btn" id="show">表示</button>
+            <button type="button" class="jq-btn" id="hide">非表示</button>
+            <button type="button" class="jq-btn" id="toggle">切り替え</button>
+          </div>
+          <div class="jq-target" id="target1" style="margin-top: 12px;">この箱が出たり消えたりします</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">速さを指定できる</span><br>
+      かっこの中に数字を書くと、<strong>ミリ秒（1000分の1秒）</strong>で速さを指定できます。<code>.fadeIn(1000)</code> なら1秒かけて表示されます。<br>
+      何も書かないと既定の速さになります。
+    </div>
+
+    <h3>動きをつける ― animate</h3>
+    <p>
+      <code>.animate()</code> は、<strong>CSSの数値を、時間をかけて変える</strong>メソッドです。「今の位置」から「指定した位置」まで、じわじわ動きます。
+    </p>
+
+    <div class="jq-samples">
+      <div>
+        <span class="jq-label">コード</span>
+        <code class="jq-code hl"><span class="c">// 400ミリ秒かけて、左の余白を100pxにする</span>
+<span class="f">$</span>(<span class="v">'#box'</span>).<span class="f">animate</span>({
+  <span class="p">marginLeft</span>: <span class="n">100</span>
+}, <span class="n">400</span>);</code>
+      </div>
+      <div>
+        <span class="jq-label">動く見本</span>
+        <div class="jq-demo">
+          <div class="jq-btns">
+            <button type="button" class="jq-btn" id="anim-go">動かす</button>
+            <button type="button" class="jq-btn is-sub" id="anim-back">戻す</button>
+          </div>
+          <div class="jq-anim-stage" style="margin-top: 12px;">
+            <div class="jq-anim-box" id="anim-box">この箱</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">書き方が少し違う</span><br>
+      これまでのメソッドと違い、<strong>かっこの中が <code>{ }</code> で囲まれています</strong>。<code>{ プロパティ: 値 }</code> という形で、<strong>変えたいCSSをまとめて渡します</strong>。<br>
+      2つ目の数字（上の例では <code>400</code>）が、かかる時間です。ミリ秒で指定します。
+    </div>
+
+    <div class="caution">
+      <span class="label">動かせないものがある</span><br>
+      <code>.animate()</code> で変えられるのは<strong>数値のCSSだけ</strong>です。<code>width</code>、<code>height</code>、<code>margin</code>、<code>opacity</code> などは動きますが、<strong><code>color</code> や <code>background-color</code> は動きません</strong>（別のプラグインを入れないと対応できません）。<br>
+      いまは<strong>CSSの <code>transition</code> でも同じことができます</strong>。そちらのほうが動きが滑らかで軽いため、新しく書くならCSS側で済ませられないかを先に考えてください。
+    </div>
+
+    <h3>クラスの操作</h3>
+
+    <table>
+      <tr>
+        <th>メソッド</th>
+        <th>やること</th>
+      </tr>
+      <tr>
+        <td><code>.addClass('名前')</code></td>
+        <td>クラスを<strong>付ける</strong></td>
+      </tr>
+      <tr>
+        <td><code>.removeClass('名前')</code></td>
+        <td>クラスを<strong>外す</strong></td>
+      </tr>
+      <tr>
+        <td><code>.toggleClass('名前')</code></td>
+        <td>付いていなければ付け、付いていれば外す</td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">実務ではこれが主役</span><br>
+      <strong>見た目の変更は、できるだけCSSに書いて、jQueryではクラスを付け外しするだけにします。</strong><br>
+      色や大きさをjQueryで直接書くと、見た目の設定がCSSとJavaScriptに散らばって、あとから探せなくなります。<strong>「見た目はCSS、切り替えはjQuery」</strong>と役割を分けてください。
+    </div>
+
+    <h3>中身と見た目を直接変える</h3>
+
+    <table>
+      <tr>
+        <th>メソッド</th>
+        <th>やること</th>
+      </tr>
+      <tr>
+        <td><code>.text('文字')</code></td>
+        <td>中の文字を<strong>書き換える</strong></td>
+      </tr>
+      <tr>
+        <td><code>.html('&lt;b&gt;文字&lt;/b&gt;')</code></td>
+        <td>中身をHTMLごと書き換える</td>
+      </tr>
+      <tr>
+        <td><code>.css('color', 'red')</code></td>
+        <td>CSSを直接指定する</td>
+      </tr>
+    </table>
+
+    <div class="caution">
+      <span class="label">.html() は慎重に</span><br>
+      <code>.html()</code> は、渡した文字列を<strong>HTMLとして解釈します</strong>。ユーザーが入力した文字をそのまま入れると、<strong>2章で触れたXSSの入口になります</strong>。<br>
+      文字を入れたいだけなら <code>.text()</code> を使ってください。こちらはHTMLとして解釈されないので安全です。
+    </div>
+  </section>
+
+  <section id="chapter6">
+    <h2>6. 実際に作ってみる</h2>
+
+    <p>
+      ここまでの部品を組み合わせて、<strong>実務でよく作るもの</strong>を3つ作ります。どれも動くので、触りながら読んでください。最後に、複数の要素をまとめて処理する書き方も見ます。
+    </p>
+
+    <h3>開閉するボックス（アコーディオン）</h3>
+    <p>
+      よくある「クリックすると開く」パネルです。<code>.slideToggle()</code> ひとつで作れます。
+    </p>
+
+    <div class="jq-samples">
+      <div>
+        <span class="jq-label">HTML</span>
+        <code class="jq-code hl">&lt;button class=<span class="v">"open"</span>&gt;開く&lt;/button&gt;
+&lt;div class=<span class="v">"panel"</span>&gt;
+  中身
+&lt;/div&gt;
+
+<span class="c">/* CSS：最初は隠しておく */</span>
+<span class="s">.panel</span> { <span class="p">display</span>: <span class="v">none</span>; }</code>
+      </div>
+      <div>
+        <span class="jq-label">jQuery</span>
+        <code class="jq-code hl"><span class="f">$</span>(<span class="v">'.open'</span>).<span class="f">on</span>(<span class="v">'click'</span>, <span class="k">function</span>() {
+  <span class="f">$</span>(<span class="k">this</span>).<span class="f">next</span>().<span class="f">slideToggle</span>();
+});</code>
+      </div>
+    </div>
+
+    <div class="jq-demo">
+      <button type="button" class="jq-btn" id="acc-btn">開く / 閉じる</button>
+      <div class="jq-panel" id="acc-panel">
+        中身がここに入ります。もう一度ボタンを押すと閉じます。<br>
+        <code>.slideToggle()</code> は、上下に伸び縮みしながら表示を切り替えます。
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">.next() とは</span><br>
+      <strong>すぐ次にある兄弟要素</strong>を指します。<a href="beginner_7.html#chapter5">コーダー初級#7</a> でやった結合子の <code>+</code> と同じ考え方です。<br>
+      この書き方なら、<strong>ボタンとパネルが何組あっても同じコード1つで動きます</strong>。押されたボタンの隣を開く、という指定になっているからです。
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習3</span><br>
+      <strong><code>kadai_06.html</code> の「3. スライドボックス」</strong>を作ります。<br>
+      見出しと中身の組を<strong>3組</strong>作り、見出しをクリックすると<strong>その中身だけ</strong>が開閉するようにしてください。<br>
+      <strong>jQueryは1つで足ります。</strong>3組それぞれに書くのではなく、上の <code>$(this).next()</code> の形を使ってください。中身はCSSで <code>display: none;</code> にして、最初は閉じておきます。<br>
+      コードは<strong>上の見本がそのまま答え</strong>です。HTMLの「ボタン＋中身」の組を3つに増やして使ってください。
+    </div>
+
+    <h3>ツールチップ</h3>
+    <p>
+      マウスを乗せると説明が出るものです。<strong>CSSだけでも作れますが</strong>、ここではjQueryの練習として作ります。
+    </p>
+
+    <div class="jq-samples">
+      <div>
+        <span class="jq-label">jQuery</span>
+        <code class="jq-code hl"><span class="f">$</span>(<span class="v">'.tip-wrap'</span>)
+  .<span class="f">on</span>(<span class="v">'mouseenter'</span>, <span class="k">function</span>() {
+    <span class="f">$</span>(<span class="k">this</span>).<span class="f">children</span>(<span class="v">'.tip'</span>).<span class="f">fadeIn</span>(<span class="n">150</span>);
+  })
+  .<span class="f">on</span>(<span class="v">'mouseleave'</span>, <span class="k">function</span>() {
+    <span class="f">$</span>(<span class="k">this</span>).<span class="f">children</span>(<span class="v">'.tip'</span>).<span class="f">fadeOut</span>(<span class="n">150</span>);
+  });</code>
+      </div>
+      <div>
+        <span class="jq-label">動く見本</span>
+        <div class="jq-demo">
+          <span class="jq-tip-wrap" id="tip-wrap">
+            <span class="jq-tip" id="tip">これが説明です</span>
+            <button type="button" class="jq-btn">マウスを乗せる</button>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">.children() とは</span><br>
+      <strong>直下の子要素</strong>を指します。<a href="beginner_7.html#chapter5">コーダー初級#7</a> でやった結合子の <code>&gt;</code> と同じです。<br>
+      <code>$(this).children('.tip')</code> で「マウスが乗った要素の中にある <code>.tip</code>」だけを狙えます。
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習4</span><br>
+      <strong><code>kadai_06.html</code> の「5. ツールチップ」</strong>を作ります。<br>
+      横に並んだ項目を3つ作り、<strong>マウスを乗せた項目にだけ</strong>説明が出るようにしてください。<br>
+      説明を浮かせるには <code>position: absolute;</code> を使います。<strong>親側に <code>position: relative;</code> を付けるのを忘れると</strong>、まったく違う場所に出ます。<a href="beginner_6.html#chapter3">コーダー初級#6</a> で扱った内容です。
+      <span class="jq-label">HTML</span>
+      <code class="jq-code hl">&lt;div id=<span class="v">"nav"</span>&gt;
+  &lt;ul&gt;
+    &lt;li&gt;ホーム&lt;p class=<span class="v">"tooltips"</span>&gt;トップページへ戻ります&lt;/p&gt;&lt;/li&gt;
+    &lt;li&gt;制作実績&lt;p class=<span class="v">"tooltips"</span>&gt;これまでの制作事例です&lt;/p&gt;&lt;/li&gt;
+    &lt;li&gt;お問い合わせ&lt;p class=<span class="v">"tooltips"</span>&gt;ご相談はこちらから&lt;/p&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code>
+      <span class="jq-label">CSS（ページ専用のCSSファイル・穴埋め ― まず自分で考える）</span>
+      <code class="jq-code hl"><span class="s">#nav ul </span>{
+  <span class="p">display</span>: <span class="v">flex</span>;
+  <span class="p">gap</span>: <span class="v">10px</span>;
+}
+
+<span class="s">#nav li </span>{
+  <span class="p">position</span>: <span class="v"><span class="blank">xxxxxx</span></span>;  <span class="c">/* 子要素の位置の基準になる側（初級#6） */</span>
+  <span class="p">padding</span>: <span class="v">8px 16px</span>;
+  <span class="p">border</span>: <span class="v">1px solid #e2e8f0</span>;
+  <span class="p">border-radius</span>: <span class="v">8px</span>;
+  <span class="p">background</span>: <span class="v">#f8fafc</span>;
+  <span class="p">font-weight</span>: <span class="v">700</span>;
+}
+
+<span class="s">.tooltips </span>{
+  <span class="p">display</span>: <span class="v">none</span>;
+  <span class="p">position</span>: <span class="v"><span class="blank">xxxxxx</span></span>;  <span class="c">/* 親を基準に自由に動かせる側 */</span>
+  <span class="p">left</span>: <span class="v">0</span>;
+  <span class="p">top</span>: <span class="v">calc(100% + 8px)</span>;
+  <span class="p">padding</span>: <span class="v">6px 12px</span>;
+  <span class="p">border-radius</span>: <span class="v">6px</span>;
+  <span class="p">background</span>: <span class="v">#1e293b</span>;
+  <span class="p">color</span>: <span class="v">#ffffff</span>;
+  <span class="p">font-size</span>: <span class="v">12px</span>;
+  <span class="p">font-weight</span>: <span class="v">400</span>;
+  <span class="p">white-space</span>: <span class="v">nowrap</span>;
+}</code>
+      <span class="jq-label">jQuery（穴埋め）</span>
+      <code class="jq-code hl">$(<span class="v">'#nav li'</span>)
+  .on(<span class="v">'mouseenter'</span>, <span class="k">function</span>() {
+    $(<span class="k">this</span>).children(<span class="v">'.tooltips'</span>).fadeIn(150);
+  })
+  .on(<span class="v">'mouseleave'</span>, <span class="k">function</span>() {
+    $(<span class="k">this</span>).children(<span class="v">'.tooltips'</span>).<span class="blank">xxxxxx</span>(150);  <span class="c">/* フェードインの逆は？（5章の表） */</span>
+  });</code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="jq-label">CSS（ページ専用のCSSファイル）</span>
+        <code class="jq-code hl"><span class="s">#nav ul </span>{
+  <span class="p">display</span>: <span class="v">flex</span>;
+  <span class="p">gap</span>: <span class="v">10px</span>;
+}
+
+<span class="s">#nav li </span>{
+  <span class="p">position</span>: <span class="v">relative</span>;
+  <span class="p">padding</span>: <span class="v">8px 16px</span>;
+  <span class="p">border</span>: <span class="v">1px solid #e2e8f0</span>;
+  <span class="p">border-radius</span>: <span class="v">8px</span>;
+  <span class="p">background</span>: <span class="v">#f8fafc</span>;
+  <span class="p">font-weight</span>: <span class="v">700</span>;
+}
+
+<span class="s">.tooltips </span>{
+  <span class="p">display</span>: <span class="v">none</span>;
+  <span class="p">position</span>: <span class="v">absolute</span>;
+  <span class="p">left</span>: <span class="v">0</span>;
+  <span class="p">top</span>: <span class="v">calc(100% + 8px)</span>;
+  <span class="p">padding</span>: <span class="v">6px 12px</span>;
+  <span class="p">border-radius</span>: <span class="v">6px</span>;
+  <span class="p">background</span>: <span class="v">#1e293b</span>;
+  <span class="p">color</span>: <span class="v">#ffffff</span>;
+  <span class="p">font-size</span>: <span class="v">12px</span>;
+  <span class="p">font-weight</span>: <span class="v">400</span>;
+  <span class="p">white-space</span>: <span class="v">nowrap</span>;
+}</code>
+        <span class="jq-label">jQuery</span>
+        <code class="jq-code hl">$(<span class="v">'#nav li'</span>)
+  .on(<span class="v">'mouseenter'</span>, <span class="k">function</span>() {
+    $(<span class="k">this</span>).children(<span class="v">'.tooltips'</span>).fadeIn(150);
+  })
+  .on(<span class="v">'mouseleave'</span>, <span class="k">function</span>() {
+    $(<span class="k">this</span>).children(<span class="v">'.tooltips'</span>).fadeOut(150);
+  });</code>
+      </details>
+    </div>
+
+    <h3>スクロールで出るボタン</h3>
+    <p>
+      少し読み進めると右下に現れる「先頭へ戻る」ボタンです。<strong>このページの右下にもあります。</strong>
+    </p>
+
+    <div class="jq-samples">
+      <div>
+        <span class="jq-label">jQuery</span>
+        <code class="jq-code hl"><span class="c">// スクロール量を見て出し入れする</span>
+<span class="f">$</span>(<span class="f">window</span>).<span class="f">on</span>(<span class="v">'scroll'</span>, <span class="k">function</span>() {
+  <span class="k">if</span> (<span class="f">$</span>(<span class="k">this</span>).<span class="f">scrollTop</span>() &gt; <span class="n">200</span>) {
+    <span class="f">$</span>(<span class="v">'.totop'</span>).<span class="f">fadeIn</span>();
+  } <span class="k">else</span> {
+    <span class="f">$</span>(<span class="v">'.totop'</span>).<span class="f">fadeOut</span>();
+  }
+});</code>
+      </div>
+      <div>
+        <span class="jq-label">動く見本（枠の中をスクロール）</span>
+        <div class="jq-demo" style="padding: 0; border: none;">
+          <div class="jq-scroll-area" id="scroll-area">
+            <div class="jq-scroll-inner">
+              <div class="jq-filler">ここをスクロールしてください</div>
+              <div class="jq-filler">文章がずっと続きます</div>
+              <div class="jq-filler">まだ続きます</div>
+              <div class="jq-filler">もう少し下がると…</div>
+              <div class="jq-filler">右下にボタンが出ます</div>
+              <div class="jq-filler">押すと先頭に戻ります</div>
+              <div class="jq-filler">最後の行です</div>
+            </div>
+            <div class="jq-totop" id="totop">↑</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">ここに条件分岐が出てきました</span><br>
+      <strong><code>if</code> / <code>else</code></strong> は「<strong>もし〜なら A、そうでなければ B</strong>」という書き方です。<br>
+      <code>.scrollTop()</code> は「いまどれだけスクロールされたか」を数値で返します。それが200を超えていたら出す、超えていなければ消す。<strong>読み下せば日本語のままです。</strong>
+    </div>
+
+    <div class="note">
+      <span class="label">見本の作り</span><br>
+      上のコードは<strong>ページ全体</strong>のスクロールを見ています（<code>$(window)</code>）。<br>
+      この見本は、ページごと動いてしまうと読みづらいので、<strong>枠の中だけをスクロールする形に作り替えています</strong>。仕組みは同じで、見ている対象が「ページ全体」か「枠」かだけが違います。
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習5</span><br>
+      <strong><code>kadai_06.html</code> の「4. ページトップへ戻るボタン」</strong>を作ります。<br>
+      <strong>少しスクロールすると画面の右下に現れ、押すと先頭に戻る</strong>ボタンを作ってください。最初は隠しておきます。<br>
+      画面に貼り付けるので <code>position: fixed;</code> を使います。先頭へ戻す動きは、5章の <code>.animate()</code> で <code>scrollTop</code> を <code>0</code> にします。<br>
+      この演習だけは<strong>上の見本と作りが違います</strong>。見本は枠の中を見ていますが、課題では <code>$(window)</code> で<strong>ページ全体</strong>を対象にしてください。<br>
+      中身が短いとページがスクロールできず、<strong>正しく作れてもボタンは出ません</strong>。ウィンドウを縦に縮めて、スクロールが出る状態で確認してください。
+      <span class="jq-label">HTML（&lt;/main&gt; の後ろ、&lt;/body&gt; の前）</span>
+      <code class="jq-code hl">&lt;div class=<span class="v">"pageTop_btn"</span>&gt;↑&lt;/div&gt;</code>
+      <span class="jq-label">CSS（ページ専用のCSSファイル・穴埋め ― まず自分で考える）</span>
+      <code class="jq-code hl"><span class="s">.pageTop_btn </span>{
+  <span class="p">display</span>: <span class="v">none</span>;
+  <span class="p">position</span>: <span class="v"><span class="blank">xxxxxx</span></span>;  <span class="c">/* スクロールしても画面に貼り付いたままにする指定（初級#6） */</span>
+  <span class="p">right</span>: <span class="v">24px</span>;
+  <span class="p">bottom</span>: <span class="v">24px</span>;
+  <span class="p">width</span>: <span class="v">48px</span>;
+  <span class="p">height</span>: <span class="v">48px</span>;
+  <span class="p">border-radius</span>: <span class="v">50%</span>;
+  <span class="p">background</span>: <span class="v">#1e293b</span>;
+  <span class="p">color</span>: <span class="v">#ffffff</span>;
+  <span class="p">font-size</span>: <span class="v">18px</span>;
+  <span class="p">line-height</span>: <span class="v">48px</span>;
+  <span class="p">text-align</span>: <span class="v">center</span>;
+  <span class="p">cursor</span>: <span class="v">pointer</span>;
+}</code>
+      <span class="jq-label">jQuery（穴埋め）</span>
+      <code class="jq-code hl">$(window).on(<span class="v">'scroll'</span>, <span class="k">function</span>() {
+  <span class="k">if</span> ($(<span class="k">this</span>).<span class="blank">xxxxxx</span>() > 200) {  <span class="c">/* いまのスクロール量を返すメソッドは？（この章の見本にある） */</span>
+    $(<span class="v">'.pageTop_btn'</span>).fadeIn();
+  } <span class="k">else</span> {
+    $(<span class="v">'.pageTop_btn'</span>).fadeOut();
+  }
+});
+
+$(<span class="v">'.pageTop_btn'</span>).on(<span class="v">'click'</span>, <span class="k">function</span>() {
+  $(<span class="v">'html, body'</span>).animate({ scrollTop: 0 }, 400);
+});</code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="jq-label">CSS（ページ専用のCSSファイル）</span>
+        <code class="jq-code hl"><span class="s">.pageTop_btn </span>{
+  <span class="p">display</span>: <span class="v">none</span>;
+  <span class="p">position</span>: <span class="v">fixed</span>;
+  <span class="p">right</span>: <span class="v">24px</span>;
+  <span class="p">bottom</span>: <span class="v">24px</span>;
+  <span class="p">width</span>: <span class="v">48px</span>;
+  <span class="p">height</span>: <span class="v">48px</span>;
+  <span class="p">border-radius</span>: <span class="v">50%</span>;
+  <span class="p">background</span>: <span class="v">#1e293b</span>;
+  <span class="p">color</span>: <span class="v">#ffffff</span>;
+  <span class="p">font-size</span>: <span class="v">18px</span>;
+  <span class="p">line-height</span>: <span class="v">48px</span>;
+  <span class="p">text-align</span>: <span class="v">center</span>;
+  <span class="p">cursor</span>: <span class="v">pointer</span>;
+}</code>
+        <span class="jq-label">jQuery</span>
+        <code class="jq-code hl">$(window).on(<span class="v">'scroll'</span>, <span class="k">function</span>() {
+  <span class="k">if</span> ($(<span class="k">this</span>).scrollTop() > 200) {
+    $(<span class="v">'.pageTop_btn'</span>).fadeIn();
+  } <span class="k">else</span> {
+    $(<span class="v">'.pageTop_btn'</span>).fadeOut();
+  }
+});
+
+$(<span class="v">'.pageTop_btn'</span>).on(<span class="v">'click'</span>, <span class="k">function</span>() {
+  $(<span class="v">'html, body'</span>).animate({ scrollTop: 0 }, 400);
+});</code>
+      </details>
+    </div>
+
+    <h3>複数まとめて処理する</h3>
+    <p>
+      つかまえた要素が複数あるとき、<strong>1つずつ順番に処理する</strong>書き方です。
+    </p>
+
+    <div class="jq-samples">
+      <div>
+        <span class="jq-label">jQuery</span>
+        <code class="jq-code hl"><span class="f">$</span>(<span class="v">'.item'</span>).<span class="f">each</span>(<span class="k">function</span>() {
+  <span class="k">if</span> (<span class="f">$</span>(<span class="k">this</span>).<span class="f">text</span>() === <span class="v">'完了'</span>) {
+    <span class="f">$</span>(<span class="k">this</span>).<span class="f">addClass</span>(<span class="v">'done'</span>);
+  }
+});</code>
+      </div>
+      <div>
+        <span class="jq-label">日本語にすると</span>
+        <code class="jq-code hl"><span class="c">// .item を全部つかまえて
+// 上から1つずつ見ていき
+// 中身が「完了」だったら
+// done というクラスを付ける</span></code>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">この形は他でも出てきます</span><br>
+      <strong>「全部を上から順に見て、条件に合うものだけ何かする」</strong>。この動きは、プログラムを書くときに繰り返し出てきます。<br>
+      Excelの <code>SUMIF</code> も、やっていることは同じです。「表を上から1行ずつ見て、条件に合った行だけ足す」。<strong>道具が違うだけで、考え方は同じ</strong>です。<br>
+      いま名前を覚える必要はありません。<strong>この形を見たことがある、という状態</strong>になっていれば十分です。
+    </div>
+
+    <h3>まとめ</h3>
+    <table>
+      <tr>
+        <th>やりたいこと</th>
+        <th>書き方</th>
+      </tr>
+      <tr>
+        <td>要素をつかまえる</td>
+        <td><code>$('セレクタ')</code>（CSSと同じ書き方）</td>
+      </tr>
+      <tr>
+        <td>操作に反応させる</td>
+        <td><code>.on('イベント名', function() { … })</code></td>
+      </tr>
+      <tr>
+        <td>いま操作された要素を指す</td>
+        <td><code>$(this)</code></td>
+      </tr>
+      <tr>
+        <td>見た目を切り替える</td>
+        <td><code>.addClass()</code> / <code>.removeClass()</code> / <code>.toggleClass()</code></td>
+      </tr>
+      <tr>
+        <td>出したり消したり</td>
+        <td><code>.fadeIn()</code> / <code>.fadeOut()</code> / <code>.slideToggle()</code></td>
+      </tr>
+      <tr>
+        <td>文字を書き換える</td>
+        <td><code>.text()</code></td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      jQueryのメソッドは数百ありますが、<strong>実際に使うのはこの表の範囲がほとんど</strong>です。<br>
+      大事なのは暗記ではなく、<strong>「つかまえて、何をするか」という形が体に入ること</strong>です。形さえ分かっていれば、知らないメソッドが出てきても調べれば読めます。
+    </div>
+
+    <div class="note">
+      <span class="label">次のページへ</span><br>
+      このページでは <code>function() { … }</code> という書き方が何度も出てきましたが、<strong>その正体にはまだ触れていません</strong>。<code>const</code> や <code>if</code> も同じです。<br>
+      それらをまとめて扱うのが <a href="basic_7.html">マークアップ中級#7（変数と関数）</a> です。<strong>そこまで読むと、このページのコードが「呪文」から「読める文章」に変わります。</strong>
+    </div>
+  </section>
+
+</main>
+
+<nav class="page-nav">
+  <a class="page-prev" href="basic_5.html">
+    <span class="page-nav-label">前のページ</span>
+    <span class="page-nav-title">マークアップ中級#5</span>
+    <span class="page-nav-sub">初めてのエクセル関数 ― 成績表を作る</span>
+  </a>
+  <a class="page-next" href="basic_7.html">
+    <span class="page-nav-label">次のページ</span>
+    <span class="page-nav-title">マークアップ中級#7</span>
+    <span class="page-nav-sub">プログラムの土台 ― 変数と関数</span>
+  </a>
+</nav>
+
+<footer></footer>
+
+<!-- ▼ jQuery本体。この教材の見本を動かすために読み込む -->
+<script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+
+<!-- ▼ 共通スクリプト。章ナビ・コピーボタン・先頭へ戻るが自動で付く（編集不要） -->
+<script src="../js/training.js"></script>
+
+<!-- ▼ このページの見本を動かすスクリプト。
+     本文に載せているコードと同じ書き方で実装している -->
+<script>
+  if (!window.jQuery) {
+    // jQueryが読めなかった場合は、ページ上部で知らせる
+    document.getElementById('jq-offline').style.display = 'block';
+  } else {
+
+    /* 4章：クリックでクラスを切り替える */
+    $('#btn1').on('click', function () {
+      $('#box1').toggleClass('is-active');
+    });
+
+    /* 4章：マウスの出入りに反応させる */
+    $('#hover1')
+      .on('mouseenter', function () {
+        $(this).addClass('is-hover');
+      })
+      .on('mouseleave', function () {
+        $(this).removeClass('is-hover');
+      });
+
+    /* 5章：表示と非表示 */
+    $('#show').on('click', function () {
+      $('#target1').fadeIn();
+    });
+
+    $('#hide').on('click', function () {
+      $('#target1').fadeOut();
+    });
+
+    $('#toggle').on('click', function () {
+      $('#target1').fadeToggle();
+    });
+
+    /* 5章：animate で数値のCSSを時間をかけて変える */
+    $('#anim-go').on('click', function () {
+      $('#anim-box').stop().animate({ marginLeft: 100 }, 400);
+    });
+
+    $('#anim-back').on('click', function () {
+      $('#anim-box').stop().animate({ marginLeft: 0 }, 400);
+    });
+
+    /* 6章：開閉するボックス。押されたボタンの「次」を開く */
+    $('#acc-btn').on('click', function () {
+      $(this).next().slideToggle();
+    });
+
+    /* 6章：ツールチップ。乗った要素の子だけを出す */
+    $('#tip-wrap')
+      .on('mouseenter', function () {
+        $(this).children('.jq-tip').fadeIn(150);
+      })
+      .on('mouseleave', function () {
+        $(this).children('.jq-tip').fadeOut(150);
+      });
+
+    /* 6章：スクロールで出るボタン。
+       本文のコードは window を対象にしているが、
+       見本ではページ全体を動かさずに済むよう、枠の中だけで完結させている */
+    $('#scroll-area').on('scroll', function () {
+      if ($(this).scrollTop() > 60) {
+        $('#totop').fadeIn();
+      } else {
+        $('#totop').fadeOut();
+      }
+    });
+
+    $('#totop').on('click', function () {
+      $('#scroll-area').stop().animate({ scrollTop: 0 }, 300);
+    });
+  }
+</script>
+
+</body>
+</html>

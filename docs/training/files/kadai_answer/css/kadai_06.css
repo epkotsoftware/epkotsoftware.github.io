@@ -1,0 +1,131 @@
+/* ------------------------------------------------------------
+   kadai_06.html 専用のスタイル
+
+   common.css は共通ファイルなので触りません。
+   このページで使う見た目だけを、ここに書きます。
+   ------------------------------------------------------------ */
+
+/* ------------------------------------------------------------
+   1. クリックイベント
+   jQuery では is-active を付け外しするだけ。
+   色や枠の指定は、こちらに書きます。
+   ------------------------------------------------------------ */
+#change_btn {
+  padding: 8px 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+#box {
+  margin-top: 8px;
+  padding: 10px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #f8fafc;
+}
+
+#box.is-active {
+  border-color: #7c3aed;
+  background: #f5f3ff;
+  color: #6d28d9;
+}
+
+/* ------------------------------------------------------------
+   2. ホバーイベント
+   ------------------------------------------------------------ */
+#text {
+  padding: 12px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #f8fafc;
+  transition: background 0.2s, color 0.2s;
+}
+
+#text.is-hover {
+  background: #0f766e;
+  color: #ffffff;
+}
+
+/* ------------------------------------------------------------
+   3. スライドボックス
+   中身は最初から閉じておく。開閉は jQuery がやります。
+   ------------------------------------------------------------ */
+.slide_btn {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.slide_box {
+  display: none;
+  padding: 12px 14px;
+  border: 1px solid #e2e8f0;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  background: #f8fafc;
+}
+
+/* ------------------------------------------------------------
+   4. ページトップへ戻るボタン
+   position: fixed で画面に貼り付ける。最初は隠しておく。
+   ------------------------------------------------------------ */
+.pageTop_btn {
+  display: none;
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 30;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #1e293b;
+  color: #ffffff;
+  font-size: 18px;
+  line-height: 48px;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* ------------------------------------------------------------
+   5. ツールチップ
+   浮かせる側に position: absolute、
+   基準になる親側に position: relative を付けます。
+   ------------------------------------------------------------ */
+#nav ul {
+  display: flex;
+  gap: 10px;
+}
+
+#nav li {
+  position: relative;
+  padding: 8px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f8fafc;
+  font-weight: 700;
+}
+
+.tooltips {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: calc(100% + 8px);
+  z-index: 10;
+  padding: 6px 12px;
+  border-radius: 6px;
+  background: #1e293b;
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 400;
+  white-space: nowrap;
+}
