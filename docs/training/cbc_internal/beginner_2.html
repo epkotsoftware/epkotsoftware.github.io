@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ▼ ページごとに変更 -->
+  <title>コーダー初級#2</title>
+  <link rel="stylesheet" href="../css/training.css" />
+
+  <!-- ▼ このページ専用のスタイル -->
+  <link rel="stylesheet" href="../css/beginner_2.css" />
+
+  <!-- ▼ 開いたときに、ページの先頭から読み始められるようにする。
+       ブラウザが前回の位置へ戻すより先に動かす必要があるため、
+       training.js とは分けて <head> で読み込んでいる -->
+  <script src="../js/scroll-reset.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>コーダー初級#2</h1>
+  </div>
+</header>
+
+<main>
+
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol start="12">
+      <li><a href="#chapter12">簡単なWebサイトを作ってみよう</a></li>
+      <li><a href="#chapter13">枠をなぞってHTMLを作る</a></li>
+      <li><a href="#chapter14">枠に名前をつけて個別にデザインする</a></li>
+      <li><a href="#chapter15">枠を中央に配置する margin</a></li>
+      <li><a href="#chapter16">2つの枠を横並びにする flex</a></li>
+      <li><a href="#chapter17">枠だけのホームページが完成</a></li>
+    </ol>
+  </section>
+
+
+  <section id="chapter12">
+    <h2>12. 簡単なWebサイトを作ってみよう</h2>
+
+    <p class="lead">
+      ここからは、実際に1ページ分のWebサイトを組み立てていきます。今回作るのは、色や文章がまだ入っていない「枠だけのホームページ」です。
+    </p>
+
+    <p>
+      いきなりコードを書き始めるのではなく、まずは完成イメージを紙に鉛筆でラフに描くところから始めます。どこに何を置くのかを先に決めておくと、コーディングが迷わず進みます。
+    </p>
+
+    <h3>Webページはすべて「四角い枠」でできている</h3>
+    <p>
+      Webページを作るうえで最初に押さえてほしい考え方が「枠」です。ブラウザに表示されるものは、写真も文章もボタンも、すべて四角い枠の中に入っています。
+    </p>
+    <p>
+      画面上には三角形や丸、斜めの装飾も見えますが、それらもすべて四角い枠の中で描かれているだけです。
+    </p>
+
+    <figure style="margin: 18px 0;">
+      <div class="diagram-embed cd1" data-width="940" role="img" aria-label="実際のWebサイトと、それを header・visual・text・menu・footer の四角い枠に分解した図の対比">
+        <div class="wrap">
+            <div class="sitemock" role="img" aria-label="SAMPLE SITE の完成イメージ">
+
+              <div class="header">
+                <div class="header_contents">
+                  <div class="logo">
+                    <img src="sample_site/images/logo_mark.webp" alt="" width="40" height="40">
+                    SAMPLE SITE
+                  </div>
+                </div>
+              </div>
+
+              <div class="contents">
+                <div class="visual">
+                  <h1 class="copy">Webの基礎を、<br>手を動かして学ぶ。</h1>
+                </div>
+
+                <div class="text_wrapper">
+                  <div class="text">
+                    <p>枠（ボックス）を組み立て、色や画像・テキストを入れて、
+                       1つのWebサイトを完成させる流れを体験します。ブラウザ上の
+                       あらゆる要素が「四角い枠」で構成されていることを学びましょう。</p>
+                  </div>
+                  <div class="menu">
+                    <ul>
+                      <li>ホーム</li>
+                      <li>レッスン</li>
+                      <li>入門</li>
+                      <li>基礎</li>
+                      <li>応用</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="footer">
+                <div class="footer_contents">© SAMPLE SITE</div>
+              </div>
+            </div>
+
+            <div class="eq">=</div>
+
+            <div class="boxes">
+              <div class="box b-header"><span class="lb">header</span>
+                <div class="b-logo"><span class="lb">logo</span></div>
+              </div>
+              <div class="box b-hero"><span class="lb">visual</span>
+        <div class="b-copy"><span class="lb">copy</span></div>
+      </div>
+              <div class="b-row">
+                <div class="b-text"><span class="lb">text</span></div>
+                <div class="b-menu"><span class="lb">menu</span></div>
+              </div>
+              <div class="box b-footer"><span class="lb">footer</span></div>
+            </div>
+          </div>
+      </div>
+      <figcaption style="text-align: center; color: #6b7280; font-size: 14px; margin-top: 10px;">
+        実際のWebサイトも、分解すればすべて四角い枠（header / logo / visual / copy / text / menu / footer）の組み合わせ。枠の中に、さらに枠が入ることもある。
+      </figcaption>
+    </figure>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      デザインを見たら、まず「どんな四角い枠に分けられるか」を考えます。枠に分解できれば、そのままHTMLの構造になります。
+    </div>
+  </section>
+
+
+  <section id="chapter13">
+    <h2>13. 枠をなぞってHTMLを作る</h2>
+
+    <p>
+      ラフデザインを枠線だけで描き直すと、ページの構造がはっきり見えてきます。今回の「SAMPLE SITE」では、次のような枠に分けて考えます。
+    </p>
+
+    <ul>
+      <li><code>header</code> … ページ上部。中に <code>logo</code> の枠を持つ</li>
+      <li><code>visual</code> … メインビジュアル。中に <code>copy</code>（キャッチコピー）の枠を持つ</li>
+      <li><code>text</code> … 本文の枠</li>
+      <li><code>menu</code> … メニューの枠</li>
+      <li><code>footer</code> … ページ下部</li>
+    </ul>
+
+    <p>
+      作る流れは「<strong>完成イメージ → 枠に分解 → 枠に名前をつけてHTMLに</strong>」です。前の章で枠に分解できたので、ここからはHTMLにしていきます。
+    </p>
+
+        <h3>枠に名前をつけるとHTML文書になる</h3>
+    <p>
+      枠の名前を上から順番に書き、開始タグと終了タグで囲めば、それがそのままHTML文書になります。ここでは特別な意味を持たない汎用的な枠として <code>&lt;div&gt;</code> タグを使います。
+    </p>
+    <p>
+      入れ子（枠の中の枠）は、インデント（字下げ）でずらして書くと、親子関係がひと目でわかるようになります。
+    </p>
+
+    <figure style="margin: 18px 0;">
+      <div class="diagram-embed cd5" data-width="940" role="img" aria-label="①画面では横並びの枠を、②HTMLに書く順に上から縦一列（1〜7）に並べ替え、③divタグで囲んで名前を目印として書く対応図。②の各枠と③のコードは横の行で対応している。">
+        <div class="wrap">
+          <div class="col p-view">
+            <div class="cap">① 画面の見た目（横並び）</div>
+            <div class="vbx v-header"><span class="lb">header</span><div class="v-logo"><span class="lb in">logo</span></div></div>
+            <div class="vbx v-visual"><span class="lb">visual</span><div class="v-copy"><span class="lb in">copy</span></div></div>
+            <div class="v-row">
+              <div class="v-text"><span class="lb">text</span></div>
+              <div class="v-menu"><span class="lb">menu</span></div>
+            </div>
+            <div class="vbx v-footer"><span class="lb">footer</span></div>
+          </div>
+          <div class="arrow">→</div>
+          <div class="col p-order">
+            <div class="cap">② HTMLに書く順（縦一列）</div>
+            <div class="stack">
+              <div class="obx o-header"><span class="lb">header</span><span class="num">1</span>
+                <div class="o-logo"><span class="lb inl">logo</span><span class="num n-in">2</span></div>
+              </div>
+              <div class="obx o-visual"><span class="lb">visual</span><span class="num">3</span>
+                <div class="o-copy"><span class="lb inl">copy</span><span class="num n-in">4</span></div>
+              </div>
+              <div class="obx o-text"><span class="lb">text</span><span class="num">5</span></div>
+              <div class="obx o-menu"><span class="lb">menu</span><span class="num">6</span></div>
+              <div class="obx o-footer"><span class="lb">footer</span><span class="num">7</span></div>
+            </div>
+          </div>
+          <div class="arrow">→</div>
+          <div class="col p-code">
+            <div class="cap">③ HTMLコード</div>
+            <div class="code">&lt;<span class="tag">div</span>&gt;
+  <span class="nm-h">header</span>
+  &lt;<span class="tag">div</span>&gt;
+    <span class="nm-h">logo</span>
+  &lt;/<span class="tag">div</span>&gt;
+&lt;/<span class="tag">div</span>&gt;
+
+&lt;<span class="tag">div</span>&gt;
+  <span class="nm-v">visual</span>
+  &lt;<span class="tag">div</span>&gt;
+    <span class="nm-v">copy</span>
+  &lt;/<span class="tag">div</span>&gt;
+&lt;/<span class="tag">div</span>&gt;
+
+&lt;<span class="tag">div</span>&gt;
+  <span class="nm-t">text</span>
+&lt;/<span class="tag">div</span>&gt;
+&lt;<span class="tag">div</span>&gt;
+  <span class="nm-t">menu</span>
+&lt;/<span class="tag">div</span>&gt;
+
+&lt;<span class="tag">div</span>&gt;
+  <span class="nm-f">footer</span>
+&lt;/<span class="tag">div</span>&gt;</div>
+          </div>
+        </div>
+      </div>
+      <figcaption style="text-align: center; color: #6b7280; font-size: 14px; margin-top: 10px;">
+        <strong>①画面の見た目</strong>（横並びの <code>text</code>・<code>menu</code>）を、<strong>②HTMLに書く順</strong>（上から縦一列）に並べ替えてから、<strong>③タグ</strong>にする。<strong>②の各枠と③のコードは、横の行がそのまま対応</strong>している。（名前を <code>class</code> として正式に指定する方法は第14章、横並びに戻す指定は第16章で行う）。
+      </figcaption>
+    </figure>
+
+    <div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">index.html — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">index.html</div><div class="vscode-tab">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33</div><code class="vscode-code">&lt;<span class="sy-tag">html</span>&gt;
+  &lt;<span class="sy-tag">head</span>&gt;
+    &lt;<span class="sy-tag">title</span>&gt;練習&lt;/<span class="sy-tag">title</span>&gt;
+    &lt;<span class="sy-tag">link</span> <span class="sy-attr">href</span>=<span class="sy-str">"css/style.css"</span> <span class="sy-attr">rel</span>=<span class="sy-str">"stylesheet"</span>&gt;
+  &lt;/<span class="sy-tag">head</span>&gt;
+
+  &lt;<span class="sy-tag">body</span>&gt;
+    &lt;<span class="sy-tag">div</span>&gt;
+      header
+      &lt;<span class="sy-tag">div</span>&gt;
+        logo
+      &lt;/<span class="sy-tag">div</span>&gt;
+    &lt;/<span class="sy-tag">div</span>&gt;
+
+    &lt;<span class="sy-tag">div</span>&gt;
+      visual
+      &lt;<span class="sy-tag">div</span>&gt;
+        copy
+      &lt;/<span class="sy-tag">div</span>&gt;
+    &lt;/<span class="sy-tag">div</span>&gt;
+
+    &lt;<span class="sy-tag">div</span>&gt;
+      text
+    &lt;/<span class="sy-tag">div</span>&gt;
+    &lt;<span class="sy-tag">div</span>&gt;
+      menu
+    &lt;/<span class="sy-tag">div</span>&gt;
+
+    &lt;<span class="sy-tag">div</span>&gt;
+      footer
+    &lt;/<span class="sy-tag">div</span>&gt;
+  &lt;/<span class="sy-tag">body</span>&gt;
+&lt;/<span class="sy-tag">html</span>&gt;</code></div></div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      枠の中に書いた <code>header</code> や <code>logo</code> といった文字は、どの枠かを確認するための目印です。実際のサイトではロゴ画像や見出しに置き換わります。
+    </div>
+  </section>
+
+
+  <section id="chapter14">
+    <h2>14. 枠に名前をつけて個別にデザインする</h2>
+
+    <p>
+      いまの状態でCSSに <code>div { ... }</code> と書くと、すべての <code>&lt;div&gt;</code> に同じデザインが一括で当たってしまいます。枠ごとに別のデザインをするには、個別の名前をつけます。ここで使うのが <code>class</code> という属性です。
+    </p>
+
+    <h3>class でグループ分けする</h3>
+    <p>
+      <code>class</code> は「この枠は○○の仲間」というグループ名をつけるイメージです。学校でいえば「1年生（div）」という大きなくくりの中を「1組・2組（class名）」に分けるようなものです。<code>&lt;div class="header"&gt;</code> のように書き、CSS側では先頭にドットを付けて <code>.header { ... }</code> と指定すると、その名前の枠だけをデザインできます。
+    </p>
+
+    <figure style="margin: 18px 0;">
+      <div class="diagram-embed cd4" data-width="830" role="img" aria-label="HTMLの class=&quot;header&quot; と CSSの .header が同じ名前で対応することを矢印で示す図">
+        <div class="wrap">
+            <div class="side">
+              <div class="cap">HTML</div>
+              <div class="code">
+                <span class="pu">&lt;</span><span class="tag">div</span> <span class="at">class</span><span class="pu">=</span><span class="pu">"</span><span class="name n-header">header</span><span class="pu">"&gt;</span><br>
+                &nbsp;&nbsp;<span class="pu">&lt;</span><span class="tag">div</span> <span class="at">class</span><span class="pu">=</span><span class="pu">"</span><span class="name n-logo">logo</span><span class="pu">"&gt;&lt;/</span><span class="tag">div</span><span class="pu">&gt;</span><br>
+                <span class="pu">&lt;/</span><span class="tag">div</span><span class="pu">&gt;</span>
+              </div>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="side">
+              <div class="cap">CSS</div>
+              <div class="code">
+                <span class="br">.</span><span class="name n-header">header</span> <span class="pu">{ ... }</span><br><br>
+                <span class="br">.</span><span class="name n-logo">logo</span> <span class="pu">{ ... }</span>
+              </div>
+            </div>
+          </div>
+      </div>
+      <figcaption style="text-align: center; color: #6b7280; font-size: 14px; margin-top: 10px;">
+        HTMLの <code>class="名前"</code> と、CSSの <code>.名前</code> が同じ名前でつながる。
+      </figcaption>
+    </figure>
+
+    <div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">index.html — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">index.html</div><div class="vscode-tab">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</div><code class="vscode-code">&lt;<span class="sy-tag">html</span>&gt;
+  &lt;<span class="sy-tag">head</span>&gt;
+    &lt;<span class="sy-tag">title</span>&gt;練習&lt;/<span class="sy-tag">title</span>&gt;
+    &lt;<span class="sy-tag">link</span> <span class="sy-attr">href</span>=<span class="sy-str">"css/style.css"</span> <span class="sy-attr">rel</span>=<span class="sy-str">"stylesheet"</span>&gt;
+  &lt;/<span class="sy-tag">head</span>&gt;
+
+  &lt;<span class="sy-tag">body</span>&gt;
+<span class="add">    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"header"</span>&gt;</span>      header
+<span class="add">      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"logo"</span>&gt;logo&lt;/<span class="sy-tag">div</span>&gt;</span>    &lt;/<span class="sy-tag">div</span>&gt;
+
+<span class="add">    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"visual"</span>&gt;</span>      visual
+<span class="add">      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"copy"</span>&gt;copy&lt;/<span class="sy-tag">div</span>&gt;</span>    &lt;/<span class="sy-tag">div</span>&gt;
+
+<span class="add">    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"text"</span>&gt;text&lt;/<span class="sy-tag">div</span>&gt;</span><span class="add">    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"menu"</span>&gt;menu&lt;/<span class="sy-tag">div</span>&gt;</span>
+<span class="add">    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"footer"</span>&gt;footer&lt;/<span class="sy-tag">div</span>&gt;</span>  &lt;/<span class="sy-tag">body</span>&gt;
+&lt;/<span class="sy-tag">html</span>&gt;</code></div></div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      HTMLの <code>class="名前"</code> と、CSSの <code>.名前</code> はセットです。この2つの名前が一致していないと、デザインは反映されません。
+    </div>
+
+    <div class="note">
+      <span class="label">CSSを書く順番</span><br>
+      CSSは、<strong>HTMLでクラス名が出てきた順に上から書いていく</strong>と迷いません。この先も <code>header</code> → <code>logo</code> → <code>visual</code> → <code>copy</code> … と追加していきます。順番を揃えておくと、あとから直したい枠のCSSがすぐ見つかります。
+    </div>
+
+    <div class="caution">
+      <span class="label">よくある間違い</span><br>
+      この時点で思い描いたデザインと違って見えても問題ありません。<strong>HTMLは構造（枠組み）を作るための言語</strong>であり、高さ・幅・色などの見た目はこのあとCSSで整えていきます。
+    </div>
+
+    <h3>この時点での表示</h3>
+    <p>
+      まだCSSを書いていないので、<code>index.html</code> をブラウザで開くと、枠の中身（<code>header</code>・<code>logo</code>・<code>visual</code>…）が<strong>文字として上から順に縦に並ぶだけ</strong>です。枠線も色もありません。
+    </p>
+    <figure style="margin: 18px 0;">
+      <div class="chrome"><div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">練習</div></div><div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">file:///mysite/index.html</div></div><div class="chrome-viewport" style="padding: 0;">
+        <div class="browser-demo demo-10">
+        <div class="header">
+          header
+          <div class="logo">logo</div>
+        </div>
+        <div class="visual">
+          visual
+          <div class="copy">copy</div>
+        </div>
+        <div class="text">text</div>
+        <div class="menu">menu</div>
+        <div class="footer">footer</div>
+      </div>
+      </div></div>
+      <figcaption style="text-align: center; color: #6b7280; font-size: 14px; margin-top: 10px;">
+        まだCSSが無い状態の、ブラウザでの実際の表示。
+      </figcaption>
+    </figure>
+  </section>
+
+
+  <section id="chapter15">
+    <h2>15. 枠を中央に配置する margin</h2>
+
+    <h3>まず、ページ全体の下準備をする</h3>
+    <p>
+      枠を並べる前に、すべての枠に共通する設定を1つだけ書いておきます。<code>css/style.css</code> の<strong>いちばん上</strong>に書いてください。
+    </p>
+
+<div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">style.css — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab">index.html</div><div class="vscode-tab is-active">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5</div><code class="vscode-code"><span class="add"><span class="sy-sel">*</span> {</span><span class="add">  <span class="sy-attr">box-sizing</span>: border-box;</span><span class="add">  <span class="sy-attr">margin</span>: <span class="sy-num">0</span>;</span><span class="add">  <span class="sy-attr">padding</span>: <span class="sy-num">0</span>;</span><span class="add">}</span></code></div></div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      <code>*</code> は「すべての要素」という意味です。<code>box-sizing: border-box;</code> は、<strong>枠線や padding を <code>width</code> の中に含める</strong>設定です。これがあるおかげで、<code>980px</code> と指定した枠に枠線を付けても幅が崩れません。<code>margin: 0; padding: 0;</code> は、ブラウザが最初から付けている余白をリセットして、指定どおりの位置に枠を並べるためのものです。
+    </div>
+
+    <h3>枠の大きさと枠線を指定して、枠を見えるようにする</h3>
+    <p>
+      前の章の表示では、枠がどこにあるのか目で確認できませんでした。いきなり全部に指定するのではなく、<strong>1つずつ指定して、そのつどブラウザで確認</strong>しながら進めます。
+    </p>
+
+    <h4>① まずは header から</h4>
+    <p>
+      最初にヘッダーの枠へ、高さ（<code>height</code>）と枠線（<code>border</code>）を指定します。
+    </p>
+
+    <div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">style.css — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab">index.html</div><div class="vscode-tab is-active">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4</div><code class="vscode-code"><span class="add"><span class="sy-sel">.header</span> {</span><span class="add">  <span class="sy-attr">height</span>: <span class="sy-num">150px</span>;</span><span class="add">  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> solid <span class="sy-num">#e44</span>;</span><span class="add">}</span></code></div></div>
+
+    <table>
+      <tr>
+        <th>書き方</th>
+        <th>意味</th>
+      </tr>
+      <tr>
+        <td><code>height: 150px;</code></td>
+        <td>枠の高さを150pxにする</td>
+      </tr>
+      <tr>
+        <td><code>border: 2px solid #e44;</code></td>
+        <td>枠線。「太さ・線種・色」の順に指定する（<code>solid</code>＝実線）</td>
+      </tr>
+    </table>
+
+    <figure style="margin: 18px 0;">
+      <div class="chrome"><div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">練習</div></div><div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">file:///mysite/index.html</div></div><div class="chrome-viewport" style="padding: 0;">
+        <div class="browser-demo demo-11a demo-reset">
+        <div class="header">
+          header
+          <div class="logo">logo</div>
+        </div>
+        <div class="visual">
+          visual
+          <div class="copy">copy</div>
+        </div>
+        <div class="text">text</div>
+        <div class="menu">menu</div>
+        <div class="footer">footer</div>
+      </div>
+      </div></div>
+      <figcaption style="text-align: center; color: #6b7280; font-size: 14px; margin-top: 10px;">
+        <code>header</code> に枠が現れた。ほかの枠はまだ文字のまま。
+      </figcaption>
+    </figure>
+
+    <h4>② 入れ子の logo に幅・高さ・余白</h4>
+    <p>
+      次に、header の中にある logo です。幅（<code>width</code>）と高さに加えて、<code>margin</code>（枠の<strong>外側</strong>の余白）を指定して、親の枠から少し離します。
+    </p>
+
+    <div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">style.css — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab">index.html</div><div class="vscode-tab is-active">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5
+6</div><code class="vscode-code"><span class="add"><span class="sy-sel">.logo</span> {</span><span class="add">  <span class="sy-attr">width</span>: <span class="sy-num">220px</span>;</span><span class="add">  <span class="sy-attr">height</span>: <span class="sy-num">60px</span>;</span><span class="add">  <span class="sy-attr">margin</span>: <span class="sy-num">20px</span>;</span><span class="add">  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> solid <span class="sy-num">#e44</span>;</span><span class="add">}</span></code></div></div>
+
+    <figure style="margin: 18px 0;">
+      <div class="chrome"><div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">練習</div></div><div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">file:///mysite/index.html</div></div><div class="chrome-viewport" style="padding: 0;">
+        <div class="browser-demo demo-11b demo-reset">
+        <div class="header">
+          header
+          <div class="logo">logo</div>
+        </div>
+        <div class="visual">
+          visual
+          <div class="copy">copy</div>
+        </div>
+        <div class="text">text</div>
+        <div class="menu">menu</div>
+        <div class="footer">footer</div>
+      </div>
+      </div></div>
+      <figcaption style="text-align: center; color: #6b7280; font-size: 14px; margin-top: 10px;">
+        header の中に <code>logo</code> の枠が現れた。<code>margin: 20px;</code> の余白のぶん、親の枠から離れて配置される。
+      </figcaption>
+    </figure>
+
+    <h4>③ 残りの枠にも同じ要領で</h4>
+    <p>
+      同じ要領で、残りの枠にも大きさと枠線をつけます。色は、枠のグループが分かるように塗り分けています。
+    </p>
+
+    <div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">style.css — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab">index.html</div><div class="vscode-tab is-active">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</div><code class="vscode-code"><span class="add"><span class="sy-com">/* 残りの枠にも、同じ要領で大きさと枠線をつける */</span></span><span class="add"><span class="sy-sel">.visual</span> {</span><span class="add">  <span class="sy-attr">height</span>: <span class="sy-num">400px</span>;</span><span class="add">  <span class="sy-attr">margin-top</span>: <span class="sy-num">20px</span>;</span><span class="add">  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> solid <span class="sy-num">#37b</span>;</span><span class="add">}</span><span class="add"><span class="sy-sel">.copy</span> {</span><span class="add">  <span class="sy-attr">width</span>: <span class="sy-num">400px</span>;</span><span class="add">  <span class="sy-attr">height</span>: <span class="sy-num">120px</span>;</span><span class="add">  <span class="sy-attr">margin</span>: <span class="sy-num">20px</span>;</span><span class="add">  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> solid <span class="sy-num">#37b</span>;</span><span class="add">}</span><span class="add"><span class="sy-sel">.text</span> {</span><span class="add">  <span class="sy-attr">height</span>: <span class="sy-num">140px</span>;</span><span class="add">  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> solid <span class="sy-num">#3a6</span>;</span><span class="add">}</span><span class="add"><span class="sy-sel">.menu</span> {</span><span class="add">  <span class="sy-attr">height</span>: <span class="sy-num">140px</span>;</span><span class="add">  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> solid <span class="sy-num">#3a6</span>;</span><span class="add">}</span><span class="add"><span class="sy-sel">.footer</span> {</span><span class="add">  <span class="sy-attr">height</span>: <span class="sy-num">120px</span>;</span><span class="add">  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> solid <span class="sy-num">#85c</span>;</span><span class="add">}</span></code></div></div>
+
+    <figure style="margin: 18px 0;">
+      <div class="chrome"><div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">練習</div></div><div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">file:///mysite/index.html</div></div><div class="chrome-viewport" style="padding: 0;">
+        <div class="browser-demo demo-11c demo-reset">
+        <div class="header">
+          header
+          <div class="logo">logo</div>
+        </div>
+        <div class="visual">
+          visual
+          <div class="copy">copy</div>
+        </div>
+        <div class="text">text</div>
+        <div class="menu">menu</div>
+        <div class="footer">footer</div>
+      </div>
+      </div></div>
+      <figcaption style="text-align: center; color: #6b7280; font-size: 14px; margin-top: 10px;">
+        すべての枠が見えるようになった状態。幅を指定していない枠は<strong>画面幅いっぱい</strong>に広がり、上から下へ縦に積み重なることが分かる。
+      </figcaption>
+    </figure>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      上の図で、幅を指定した <code>logo</code> と <code>copy</code> の枠は<strong>左に寄って</strong>います。HTMLは特に指定がない限り<strong>左から順に表示される</strong>ためです。この「放っておくと左に寄る」性質を知っておくと、次に学ぶ「中央に寄せる指定」が何のために必要なのかが分かります。
+    </div>
+
+
+    <p>
+      Webサイトの横幅には、大きく分けて「固定幅」と「可変幅」の2種類があります。閲覧者の画面サイズはバラバラなので、中身が横に広がりすぎないよう、コンテンツの幅をコントロールする必要があります。
+    </p>
+
+    <figure style="margin: 18px 0;">
+      <div class="diagram-embed cd3" data-width="730" role="img" aria-label="狭い画面と広い画面で、固定幅980pxのコンテンツが中央に配置され、広い画面では両脇に余白ができる様子">
+        <div class="row">
+            <div class="unit">
+              <div class="cap">狭い画面</div>
+              <div class="browser">
+                <div class="bbar"><i class="r"></i><i class="y"></i><i class="g"></i></div>
+                <div class="screen narrow">
+                  <div class="content">固定幅<br>980px</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="unit">
+              <div class="cap">広い画面</div>
+              <div class="browser">
+                <div class="bbar"><i class="r"></i><i class="y"></i><i class="g"></i></div>
+                <div class="screen wide">
+                  <span class="gutter-label" style="left:34px">余白</span>
+                  <div class="content">固定幅<br>980px</div>
+                  <span class="gutter-label" style="right:34px">余白</span>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <figcaption style="text-align: center; color: #6b7280; font-size: 14px; margin-top: 10px;">
+        固定幅（980px）は画面が広がっても幅が変わらず、margin: 0 auto で両脇に余白ができて中央に来る。
+      </figcaption>
+    </figure>
+
+    <table>
+      <tr>
+        <th>種類</th>
+        <th>説明</th>
+      </tr>
+      <tr>
+        <td>固定幅</td>
+        <td>コンテンツの幅を <code>980px</code> などに固定する。大きな画面でも横に広がりすぎない。</td>
+      </tr>
+      <tr>
+        <td>可変幅</td>
+        <td>画面幅に合わせて伸び縮みする。背景色や下線を画面いっぱいに広げたいときに使う。</td>
+      </tr>
+    </table>
+
+    <p>
+      今回のページは、この2つを組み合わせます。ヘッダーとフッターの<strong>帯（背景・下線）は画面いっぱいの全幅</strong>にして、その中に置く中身（<code>header_contents</code> / <code>footer_contents</code>）だけを<strong>980pxの固定幅で中央寄せ</strong>にします。こうすると「背景は画面の端まで伸びるのに、文字やロゴは中央の980pxにそろう」という、多くのサイトで使われるレイアウトになります。
+    </p>
+
+    <h3>margin: 0 auto; で中央に寄せる</h3>
+    <p>
+      この中央寄せのために、中身を入れるための枠（<code>header_contents</code> / <code>contents</code> / <code>footer_contents</code>）を新しく追加します。これらは、第13章の分解図では省略していた枠です。CSSでは、この枠の幅を <code>980px</code> に固定したうえで <code>margin: 0 auto;</code> を指定します。
+    </p>
+    <p>
+      あわせて、これまで目印に入れていた <code>header</code>・<code>visual</code>・<code>footer</code> の文字は、枠線で枠が見えるようになったので削除します。フッターには目印の代わりに、実際に表示する文字として「© SAMPLE SITE」を入れておきます。
+    </p>
+    <p>
+      <code>contents</code> は中に <code>visual</code>・<code>text</code>・<code>menu</code> をまとめて包む受け皿で、それ自体は画面に何も表示しません。位置が分かるように、ここでは<strong>グレーの破線</strong>で印をつけておきます。
+    </p>
+    <p>
+      <code>margin: 0 auto;</code> は「上下の余白は0、左右の余白は自動（auto）」という意味です。左右の余白を自動にすると、余白が均等に振り分けられ、結果として枠が中央に配置されます。
+    </p>
+
+    <h4>中身を入れる枠を追加したHTML</h4>
+    <p>
+      <code>&lt;head&gt;</code> の部分は前の章のままです。<code>&lt;body&gt;</code> の中身を次のように書き換えます（<strong>緑色の行</strong>が新しく追加する枠です）。
+    </p>
+    <div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">index.html — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">index.html</div><div class="vscode-tab">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</div><code class="vscode-code">&lt;<span class="sy-tag">body</span>&gt;
+  &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"header"</span>&gt;
+<span class="add">    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"header_contents"</span>&gt;</span>      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"logo"</span>&gt;logo&lt;/<span class="sy-tag">div</span>&gt;
+<span class="add">    &lt;/<span class="sy-tag">div</span>&gt;</span>  &lt;/<span class="sy-tag">div</span>&gt;
+
+<span class="add">  &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"contents"</span>&gt;</span>    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"visual"</span>&gt;
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"copy"</span>&gt;copy&lt;/<span class="sy-tag">div</span>&gt;
+    &lt;/<span class="sy-tag">div</span>&gt;
+    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"text"</span>&gt;text&lt;/<span class="sy-tag">div</span>&gt;
+    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"menu"</span>&gt;menu&lt;/<span class="sy-tag">div</span>&gt;
+<span class="add">  &lt;/<span class="sy-tag">div</span>&gt;</span>
+  &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"footer"</span>&gt;
+<span class="add">    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"footer_contents"</span>&gt;© SAMPLE SITE&lt;/<span class="sy-tag">div</span>&gt;</span>  &lt;/<span class="sy-tag">div</span>&gt;
+&lt;/<span class="sy-tag">body</span>&gt;</code></div></div>
+
+    <h4>中央寄せを指定するCSS</h4>
+    <div class="caution">
+      <span class="label">書き換えるところ</span><br>
+      ここで <code>header</code>・<code>footer</code> の役割が「枠」から「全幅の帯」に変わります。<strong>①③で <code>.header</code> と <code>.footer</code> に書いた <code>height</code> と <code>border</code> は削除し</strong>、中身の枠（<code>header_contents</code> / <code>footer_contents</code>）の方に書き直してください。
+    </div>
+
+    <div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">style.css — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab">index.html</div><div class="vscode-tab is-active">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34</div><code class="vscode-code"><span class="add"><span class="sy-com">/* ヘッダー・フッターは全幅の帯（下線・背景が画面端まで伸びる） */</span></span><span class="sy-sel">.header</span> {
+<span class="add">  <span class="sy-attr">border-bottom</span>: <span class="sy-num">1px</span> solid #ccd;</span>}
+<span class="sy-sel">.footer</span> {
+<span class="add">  <span class="sy-attr">background</span>: <span class="sy-num">#222</span>;</span><span class="add">  <span class="sy-attr">margin-top</span>: <span class="sy-num">20px</span>;</span><span class="add">  <span class="sy-attr">margin-bottom</span>: <span class="sy-num">40px</span>;</span>}
+<span class="add"></span><span class="add"><span class="sy-com">/* 中身は 980px に固定して中央寄せ（全幅の帯の中に置く） */</span></span><span class="add">.header_contents,</span><span class="add">.contents,</span><span class="add"><span class="sy-sel">.footer_contents</span> {</span><span class="add">  <span class="sy-attr">width</span>: <span class="sy-num">980px</span>;</span><span class="add">  <span class="sy-attr">margin</span>: <span class="sy-num">0</span> auto;</span><span class="add">}</span><span class="add"></span><span class="add"><span class="sy-com">/* contents にも、位置が分かるように確認用の枠線をつける */</span></span><span class="add"><span class="sy-sel">.contents</span> {</span><span class="add">  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> dashed <span class="sy-num">#94a3b8</span>;</span><span class="add">}</span><span class="add"></span><span class="add"><span class="sy-com">/* 高さ・枠線は、外側の帯ではなく中身の枠につける（文字色は帯に合わせて白に） */</span></span><span class="add"><span class="sy-sel">.header_contents</span> {</span><span class="add">  <span class="sy-attr">height</span>: <span class="sy-num">150px</span>;</span><span class="add">  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> solid <span class="sy-num">#e44</span>;</span><span class="add">}</span><span class="add"><span class="sy-sel">.footer_contents</span> {</span><span class="add">  <span class="sy-attr">height</span>: <span class="sy-num">120px</span>;</span><span class="add">  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> solid <span class="sy-num">#85c</span>;</span><span class="add">  <span class="sy-attr">color</span>: #fff;</span><span class="add">  <span class="sy-attr">text-align</span>: center;  <span class="sy-com">/* 中の文字を左右中央にそろえる */</span></span><span class="add">}</span></code></div></div>
+
+    <figure style="margin: 18px 0;">
+      <div class="chrome"><div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">練習</div></div><div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">file:///mysite/index.html</div></div><div class="chrome-viewport" style="padding: 0;">
+        <div class="browser-demo demo-11d demo-reset">
+        <div class="header">
+          <div class="header_contents">
+            <div class="logo">logo</div>
+          </div>
+        </div>
+        <div class="contents">
+          <div class="visual">
+            <div class="copy">copy</div>
+          </div>
+          <div class="text">text</div>
+          <div class="menu">menu</div>
+        </div>
+        <div class="footer">
+          <div class="footer_contents">© SAMPLE SITE</div>
+        </div>
+      </div>
+      </div></div>
+      <figcaption style="text-align: center; color: #6b7280; font-size: 14px; margin-top: 10px;">
+        中央寄せ後のブラウザ表示。帯（ヘッダーの下線・フッターの暗い背景）は画面の端まで伸びたまま、3つの受け皿（赤の <code>header_contents</code> / グレー破線の <code>contents</code> / 紫の <code>footer_contents</code>）が980pxで中央にそろい、左右に均等な余白ができている。高さと枠線は、外側の帯からこの中身の枠につけ替えている。
+      </figcaption>
+    </figure>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      中央寄せは「幅を決める」＋「<code>margin: 0 auto;</code> を指定する」の2つがセットです。幅が決まっていない（画面いっぱいの）枠には <code>auto</code> が効かないため、中央に寄りません。
+    </div>
+
+    <div class="caution">
+      <span class="label">よくある間違い</span><br>
+      CSSが反映されないときは、まず次の点を確認してください。
+      <ul>
+        <li>ファイルを保存したあと、ブラウザを再読み込み（リロード）したか</li>
+        <li>値の最後が <code>;</code>（セミコロン）ではなく <code>:</code>（コロン）になっている</li>
+        <li>HTMLの <code>class</code> 名と、CSSのセレクタ名が違っている（例：<code>headr</code> と <code>header</code>）</li>
+        <li><code>class="header"</code> と書くべきところを <code>class-"header"</code> のように書いてしまっている</li>
+      </ul>
+    </div>
+  </section>
+
+
+  <section id="chapter16">
+    <h2>16. 2つの枠を横並びにする flex</h2>
+
+    <p>
+      これまでの枠は上から下へ縦に積み重なっていました。<code>text</code>（本文）と <code>menu</code>（メニュー）を左右に並べたいときは、この2つをさらに大きな枠で囲み、その枠に横並びの指定をします。
+    </p>
+
+    <h3>ラッピングして flex を指定する</h3>
+    <p>
+      横に並べたい枠を、もう一段大きな枠でまとめることを「ラッピングする」といいます。ここでは <code>text_wrapper</code> という枠で <code>text</code> と <code>menu</code> を囲みます。
+    </p>
+    <p>
+      その <code>text_wrapper</code> に <code>display: flex;</code> を指定すると、中の子要素が横並びになります。さらに <code>justify-content: center;</code> を加えると、横並びになった子要素が枠の中央にまとまります。
+    </p>
+    <p>
+      あわせて <code>text</code> と <code>menu</code> に横幅を指定して、2つのバランスを決めます。合計は 600px ＋ 間隔16px ＋ 344px ＝ <strong>960px</strong>。受け皿の <code>contents</code>（980px）より少し小さいので、横並びの2つが中央にまとまります。
+    </p>
+
+    <h4>text と menu をラッピングしたHTML</h4>
+    <div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">index.html — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">index.html</div><div class="vscode-tab">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4</div><code class="vscode-code"><span class="add">&lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"text_wrapper"</span>&gt;</span>  &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"text"</span>&gt;text&lt;/<span class="sy-tag">div</span>&gt;
+  &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"menu"</span>&gt;menu&lt;/<span class="sy-tag">div</span>&gt;
+<span class="add">&lt;/<span class="sy-tag">div</span>&gt;</span></code></div></div>
+
+    <h4>横並びを指定するCSS</h4>
+    <div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">style.css — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab">index.html</div><div class="vscode-tab is-active">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18</div><code class="vscode-code"><span class="add"><span class="sy-sel">.text_wrapper</span> {</span><span class="add">  <span class="sy-attr">margin-top</span>: <span class="sy-num">20px</span>;</span><span class="add">  <span class="sy-attr">display</span>: flex;</span><span class="add">  <span class="sy-attr">justify-content</span>: center;</span><span class="add">}</span><span class="add"></span><span class="add"><span class="sy-com">/* 横幅を指定して、2つの枠のバランスを決める */</span></span><span class="sy-sel">.text</span> {
+  <span class="sy-attr">height</span>: <span class="sy-num">140px</span>;
+  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> solid <span class="sy-num">#3a6</span>;
+<span class="add">  <span class="sy-attr">width</span>: <span class="sy-num">600px</span>;</span><span class="add">  <span class="sy-attr">margin-right</span>: <span class="sy-num">16px</span>;</span>}
+<span class="sy-sel">.menu</span> {
+  <span class="sy-attr">height</span>: <span class="sy-num">140px</span>;
+  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> solid <span class="sy-num">#3a6</span>;
+<span class="add">  <span class="sy-attr">width</span>: <span class="sy-num">344px</span>;</span>}</code></div></div>
+
+    <figure style="margin: 18px 0;">
+      <div class="chrome"><div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">練習</div></div><div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">file:///mysite/index.html</div></div><div class="chrome-viewport" style="padding: 0;">
+        <div class="browser-demo demo-12 demo-reset">
+        <div class="header">
+          <div class="header_contents">
+            <div class="logo">logo</div>
+          </div>
+        </div>
+        <div class="contents">
+          <div class="visual">
+            <div class="copy">copy</div>
+          </div>
+          <div class="text_wrapper">
+            <div class="text">text</div>
+            <div class="menu">menu</div>
+          </div>
+        </div>
+        <div class="footer">
+          <div class="footer_contents">© SAMPLE SITE</div>
+        </div>
+      </div>
+      </div></div>
+      <figcaption style="text-align: center; color: #6b7280; font-size: 14px; margin-top: 10px;">
+        横並び後のブラウザ表示。縦に積まれていた <code>text</code> と <code>menu</code> が横並びになり、<code>justify-content: center;</code> で中央にまとまっている。
+      </figcaption>
+    </figure>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      <code>display: flex;</code> は、指定した枠そのものではなく「その枠の直接の子要素」の並び方を変えるものです。横に並べたい要素の1つ上の枠に指定する、と覚えてください。
+    </div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      flex には、縦揃えを指定する <code>align-items</code> など、他にも多くの指定があります。ここでは「横に並べる」と「中央にまとめる」の2つだけ押さえれば十分です。詳しい使い方は今後の研修で扱います。
+    </div>
+  </section>
+
+
+  <section id="chapter17">
+    <h2>17. 枠だけのホームページが完成</h2>
+
+    <p>
+      ここまでの内容をまとめると、枠だけのホームページの土台が完成します。以下が、完成したHTMLとCSSの全体です。
+    </p>
+
+    <h3>完成したHTML</h3>
+    <div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">index.html — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">index.html</div><div class="vscode-tab">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29</div><code class="vscode-code">&lt;<span class="sy-tag">html</span>&gt;
+  &lt;<span class="sy-tag">head</span>&gt;
+    &lt;<span class="sy-tag">title</span>&gt;練習&lt;/<span class="sy-tag">title</span>&gt;
+    &lt;<span class="sy-tag">link</span> <span class="sy-attr">href</span>=<span class="sy-str">"css/style.css"</span> <span class="sy-attr">rel</span>=<span class="sy-str">"stylesheet"</span>&gt;
+  &lt;/<span class="sy-tag">head</span>&gt;
+
+  &lt;<span class="sy-tag">body</span>&gt;
+    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"header"</span>&gt;
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"header_contents"</span>&gt;
+        &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"logo"</span>&gt;logo&lt;/<span class="sy-tag">div</span>&gt;
+      &lt;/<span class="sy-tag">div</span>&gt;
+    &lt;/<span class="sy-tag">div</span>&gt;
+
+    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"contents"</span>&gt;
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"visual"</span>&gt;
+        &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"copy"</span>&gt;copy&lt;/<span class="sy-tag">div</span>&gt;
+      &lt;/<span class="sy-tag">div</span>&gt;
+
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"text_wrapper"</span>&gt;
+        &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"text"</span>&gt;text&lt;/<span class="sy-tag">div</span>&gt;
+        &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"menu"</span>&gt;menu&lt;/<span class="sy-tag">div</span>&gt;
+      &lt;/<span class="sy-tag">div</span>&gt;
+    &lt;/<span class="sy-tag">div</span>&gt;
+
+    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"footer"</span>&gt;
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"footer_contents"</span>&gt;© SAMPLE SITE&lt;/<span class="sy-tag">div</span>&gt;
+    &lt;/<span class="sy-tag">div</span>&gt;
+  &lt;/<span class="sy-tag">body</span>&gt;
+&lt;/<span class="sy-tag">html</span>&gt;</code></div></div>
+
+    <h3>完成したCSS</h3>
+    <p>
+      枠の位置と大きさが分かるように、確認用としてそれぞれの枠に <code>border</code>（枠線）を付けています。また、横並びにした <code>.text</code> に <code>margin-right</code> を付けて、<code>text</code> と <code>menu</code> の間にすき間（余白）を作っています。
+    </p>
+
+    <div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">style.css — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab">index.html</div><div class="vscode-tab is-active">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75</div><code class="vscode-code"><span class="sy-sel">*</span> {
+  <span class="sy-attr">box-sizing</span>: border-box;
+  <span class="sy-attr">margin</span>: <span class="sy-num">0</span>;
+  <span class="sy-attr">padding</span>: <span class="sy-num">0</span>;
+}
+
+<span class="sy-com">/* 中身は 980px に固定して中央寄せ（全幅の帯の中に置く） */</span>
+.header_contents,
+.contents,
+<span class="sy-sel">.footer_contents</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">980px</span>;
+  <span class="sy-attr">margin</span>: <span class="sy-num">0</span> auto;
+}
+
+<span class="sy-com">/* contents：中身をまとめる受け皿（確認用の破線） */</span>
+<span class="sy-sel">.contents</span> {
+  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> dashed <span class="sy-num">#94a3b8</span>;
+}
+
+<span class="sy-com">/* ヘッダー：全幅の帯（下線が画面端まで伸びる） */</span>
+<span class="sy-sel">.header</span> {
+  <span class="sy-attr">border-bottom</span>: <span class="sy-num">1px</span> solid #ccd;
+}
+<span class="sy-sel">.header_contents</span> {
+  <span class="sy-attr">height</span>: <span class="sy-num">150px</span>;
+  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> solid <span class="sy-num">#e44</span>;
+}
+<span class="sy-sel">.logo</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">220px</span>;
+  <span class="sy-attr">height</span>: <span class="sy-num">60px</span>;
+  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> solid <span class="sy-num">#e44</span>;
+  <span class="sy-attr">margin</span>: <span class="sy-num">20px</span>;
+}
+<span class="sy-sel">.visual</span> {
+  <span class="sy-attr">height</span>: <span class="sy-num">400px</span>;
+  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> solid <span class="sy-num">#37b</span>;
+  <span class="sy-attr">margin-top</span>: <span class="sy-num">20px</span>;
+}
+<span class="sy-sel">.copy</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">400px</span>;
+  <span class="sy-attr">height</span>: <span class="sy-num">120px</span>;
+  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> solid <span class="sy-num">#37b</span>;
+  <span class="sy-attr">margin</span>: <span class="sy-num">20px</span>;
+}
+
+<span class="sy-com">/* text と menu を横並びにする */</span>
+<span class="sy-sel">.text_wrapper</span> {
+  <span class="sy-attr">margin-top</span>: <span class="sy-num">20px</span>;
+  <span class="sy-attr">display</span>: flex;
+  <span class="sy-attr">justify-content</span>: center;
+}
+<span class="sy-sel">.text</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">600px</span>;
+  <span class="sy-attr">height</span>: <span class="sy-num">140px</span>;
+  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> solid <span class="sy-num">#3a6</span>;
+  <span class="sy-attr">margin-right</span>: <span class="sy-num">16px</span>;
+}
+<span class="sy-sel">.menu</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">344px</span>;
+  <span class="sy-attr">height</span>: <span class="sy-num">140px</span>;
+  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> solid <span class="sy-num">#3a6</span>;
+}
+
+<span class="sy-com">/* フッター：全幅の暗い帯（画面端まで伸びる） */</span>
+<span class="sy-sel">.footer</span> {
+  <span class="sy-attr">background</span>: <span class="sy-num">#222</span>;
+  <span class="sy-attr">margin-top</span>: <span class="sy-num">20px</span>;
+  <span class="sy-attr">margin-bottom</span>: <span class="sy-num">40px</span>;
+}
+<span class="sy-sel">.footer_contents</span> {
+  <span class="sy-attr">height</span>: <span class="sy-num">120px</span>;
+  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> solid <span class="sy-num">#85c</span>;
+  <span class="sy-attr">color</span>: #fff;
+  <span class="sy-attr">text-align</span>: center;
+}</code></div></div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      完成CSSでは、枠どうしの間隔として <code>margin-top</code>・<code>margin-bottom</code> の余白を追加しています（<code>margin</code> は「中央寄せ（0 auto）」だけでなく、枠の間隔をあける用途にも使います）。
+    </div>
+    
+
+    <h3>ブラウザでの表示イメージ</h3>
+    <p>
+      このHTMLとCSSをブラウザで開くと、次のように枠だけのレイアウトが表示されます。
+    </p>
+
+    <figure style="margin: 18px 0;">
+      <div class="chrome"><div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">練習</div></div><div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">file:///mysite/index.html</div></div><div class="chrome-viewport" style="padding: 0;">
+        <div class="browser-demo demo-13 demo-reset">
+        <div class="header">
+          <div class="header_contents">
+            <div class="logo">logo</div>
+          </div>
+        </div>
+        <div class="contents">
+          <div class="visual">
+            <div class="copy">copy</div>
+          </div>
+          <div class="text_wrapper">
+            <div class="text">text</div>
+            <div class="menu">menu</div>
+          </div>
+        </div>
+        <div class="footer">
+          <div class="footer_contents">© SAMPLE SITE</div>
+        </div>
+      </div>
+      </div></div>
+      <figcaption style="text-align: center; color: #6b7280; font-size: 14px; margin-top: 10px;">
+        完成した「枠だけのホームページ」。中身が980pxで中央寄せされ、text と menu が横並びになっている。
+      </figcaption>
+    </figure>
+
+    <div class="open-site-wrap">
+      <a class="open-site" href="sample_site/stage1_boxes.html" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h6"/></svg>
+        枠だけのサンプルを開く（新しいタブ）
+      </a>
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      色も文章もまだ入っていませんが、これがWebページの土台です。この枠の中に、ロゴ画像・キャッチコピー・本文・メニューを流し込んでいけば、少しずつ本物のサイトに近づいていきます。
+    </div>
+  </section>
+
+</main>
+
+<nav class="page-nav">
+  <a class="page-prev" href="beginner_1.html">
+    <span class="page-nav-label">前のページ</span>
+    <span class="page-nav-title">コーダー初級#1</span>
+    <span class="page-nav-sub">準備からHTML・CSSの基本まで</span>
+  </a>
+  <a class="page-next" href="beginner_3.html">
+    <span class="page-nav-label">次のページ</span>
+    <span class="page-nav-title">コーダー初級#3</span>
+    <span class="page-nav-sub">枠の中に画像・色・テキストを入れる</span>
+  </a>
+</nav>
+
+<footer>
+</footer>
+
+
+<script>
+  // ライブデモ（.browser-demo）を chrome 枠の幅にフィットさせる
+  (function () {
+    function fit() {
+      document.querySelectorAll('.browser-demo, .diagram-embed').forEach(function (d) {
+        var w = parseFloat(d.dataset.width) || 1160;
+        var z = d.parentElement.clientWidth / w;
+        if (d.classList.contains('diagram-embed')) z = Math.min(1, z);
+        d.style.zoom = z;
+      });
+    }
+    window.addEventListener('load', fit);
+    window.addEventListener('resize', fit);
+  })();
+</script>
+
+<!-- ▼ 共通スクリプト。章ナビ・コピーボタン・先頭へ戻るが自動で付く（編集不要） -->
+<script src="../js/training.js"></script>
+</body>
+</html>
