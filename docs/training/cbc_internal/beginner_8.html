@@ -1,0 +1,2469 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>コーダー上級#1</title>
+  <link rel="stylesheet" href="../css/training.css">
+  <link rel="stylesheet" href="../css/beginner_8.css">
+  <script src="../js/scroll-reset.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>コーダー上級#1</h1>
+  </div>
+</header>
+
+<main>
+
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol>
+      <li><a href="#step1">ファイルの準備</a></li>
+      <li><a href="#step2">大枠を組む</a></li>
+      <li><a href="#step3">header と footer を作る</a></li>
+      <li><a href="#step4">コンテンツ部分の枠を作る</a></li>
+      <li><a href="#step5">about エリア</a></li>
+      <li><a href="#step6">service エリア</a></li>
+      <li><a href="#step7">news エリア</a></li>
+      <li><a href="#step8">枠が完成</a></li>
+      <li><a href="#step9">画像や文字要素を入れ込んでいく</a></li>
+    </ol>
+  </section>
+
+
+  <section id="chapter1">
+    <h2>1. 実践を踏まえたコーディング</h2>
+
+    <p>
+      ここからは、これまで学んだことを使って<strong>WebサイトのTOPページを1枚</strong>作ります。
+      6時間ほどを目安に、自分の手で最後まで組み立ててみましょう。
+    </p>
+    <p>
+      作り方の流れは、これまでと同じです。まず紙に枠を書いて名前をつけ、
+      HTMLで枠だけのページを作り、その後に画像や文字を入れていきます。
+    </p>
+
+    <h3>今回作るページ</h3>
+    <p>
+      作るのは次のページです。ヘッダーにロゴとナビ、大きなメインビジュアル、
+      紹介文、レッスンの一覧、お知らせの一覧、そしてフッターが並びます。
+    </p>
+
+    <figure>
+      <div class="compare">
+        <div>
+          <div class="compare-cap">完成したページ</div>
+          <div class="browser-demo dm8-9">
+            <header class="header">
+              <div class="header__wrap">
+                <div class="header__logo">
+                  <a href=""><img src="sample_site/images/logo_mark.webp" alt="SAMPLE SITE"></a>
+                </div>
+                <div class="header__menu">
+                  <ul>
+                    <li><a href="">ホーム</a></li>
+                    <li><a href="">レッスン</a></li>
+                    <li><a href="">実績</a></li>
+                    <li><a href="">お知らせ</a></li>
+                  </ul>
+                </div>
+              </div>
+            </header>
+
+            <main class="main">
+              <section class="main__kv">
+                手を動かして、<br>
+                作りながら覚える。<br>
+                Webの基礎を、ここから。
+              </section>
+
+              <section class="main__about">
+                <h1 class="main__about--ttl">つくることが、いちばんの近道</h1>
+                <div class="main__about--logo"><img src="sample_site/images/logo_mark.webp" alt="logo"></div>
+                <p class="main__about--txt">
+                  SAMPLE SITE は、Web制作をこれから学ぶ人のための練習用サイトです。
+                  枠を組み立て、色や画像を入れ、1ページを完成させるまでの流れを、
+                  実際に手を動かしながら体験できます。
+                  読むだけでは身につかないことも、作ってみれば自然と分かるようになります。
+                </p>
+              </section>
+
+              <section class="main__service">
+                <div class="main__service--message">
+                  <h2>Lesson</h2>
+                  <p>
+                    HTML と CSS の基礎から、実際のページを組み立てるところまで。<br>
+                    ひとつずつ手を動かして確かめながら進むので、<br>
+                    はじめての人でも迷わず最後までたどり着けます。
+                  </p>
+                </div>
+                <ul class="main__service--list">
+                  <li>
+                    <a href="">
+                      <img src="sample_site/images/card_html.webp" alt="">
+                      <h3>HTML &amp; CSS</h3>
+                      <p>Webページの構造と装飾。枠組みからレイアウトまでの基礎を学びます。</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="">
+                      <img src="sample_site/images/card_js.webp" alt="">
+                      <h3>JavaScript</h3>
+                      <p>動きのあるページ作り。DOM操作やイベントの基本を身につけます。</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="">
+                      <img src="sample_site/images/card_php.webp" alt="">
+                      <h3>PHP</h3>
+                      <p>サーバーサイドの入門。フォーム処理やDB連携の第一歩を学びます。</p>
+                    </a>
+                  </li>
+                </ul>
+              </section>
+
+              <section class="main__news">
+                <h2 class="main__news--ttl">News</h2>
+                <ul class="main__news--list">
+                  <li>
+                    <a href="">
+                      <dl class="main__news--item">
+                        <dt class="main__news--day">2026.08.12</dt>
+                        <dd class="main__news--data">レッスンに「実践コーディング」を追加しました。1ページを通して作る課題です。</dd>
+                      </dl>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="">
+                      <dl class="main__news--item">
+                        <dt class="main__news--day">2026.07.30</dt>
+                        <dd class="main__news--data">サンプルサイトの素材を差し替えました。ダウンロードは各レッスンのページから行えます。</dd>
+                      </dl>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="">
+                      <dl class="main__news--item">
+                        <dt class="main__news--day">2026.07.15</dt>
+                        <dd class="main__news--data">よくある質問のページを公開しました。つまずきやすい点をまとめています。</dd>
+                      </dl>
+                    </a>
+                  </li>
+                </ul>
+              </section>
+            </main>
+
+            <footer class="footer">
+              <div class="footer__logo"><img src="sample_site/images/logo_mark.webp" alt="logo"></div>
+              <div class="footer__copyright">© SAMPLE SITE</div>
+            </footer>
+          </div>
+        </div>
+        <div>
+          <div class="compare-cap">枠だけを組んだ状態</div>
+          <div class="browser-demo dm8-7">
+            <header class="header">
+              .header
+              <div class="header__wrap">
+                .header__wrap
+                <div class="header__logo">
+                  .header__logo
+                  <a href=""><img src=""></a>
+                </div>
+                <div class="header__menu">
+                  .header__menu
+                  <ul>
+                    <li><a href="">li</a></li>
+                    <li><a href="">li</a></li>
+                    <li><a href="">li</a></li>
+                    <li><a href="">li</a></li>
+                  </ul>
+                </div>
+              </div>
+            </header>
+
+            <main class="main">
+              .main
+              <section class="main__kv">
+                .main__kv
+              </section>
+
+              <section class="main__about">
+                .main__about
+                <h1 class="main__about--ttl">title</h1>
+                <div class="main__about--logo"><img src=""></div>
+                <p class="main__about--txt">text</p>
+              </section>
+
+              <section class="main__service">
+                .main__service
+                <div class="main__service--message">
+                  <h2>h2 title</h2>
+                  <p>text</p>
+                </div>
+                <ul class="main__service--list">
+                  <li>
+                    <a href="">
+                      <img src="">
+                      <h3>title</h3>
+                      <p>text</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="">
+                      <img src="">
+                      <h3>title</h3>
+                      <p>text</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="">
+                      <img src="">
+                      <h3>title</h3>
+                      <p>text</p>
+                    </a>
+                  </li>
+                </ul>
+              </section>
+
+              <section class="main__news">
+                .main__news
+                <h2 class="main__news--ttl">h2 title</h2>
+                <ul class="main__news--list">
+                  <li>
+                    <a href="">
+                      <dl class="main__news--item">
+                        <dt class="main__news--day">2026.08.12</dt>
+                        <dd class="main__news--data">text</dd>
+                      </dl>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="">
+                      <dl class="main__news--item">
+                        <dt class="main__news--day">2026.08.12</dt>
+                        <dd class="main__news--data">text</dd>
+                      </dl>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="">
+                      <dl class="main__news--item">
+                        <dt class="main__news--day">2026.08.12</dt>
+                        <dd class="main__news--data">text</dd>
+                      </dl>
+                    </a>
+                  </li>
+                </ul>
+              </section>
+            </main>
+
+            <footer class="footer">
+              .footer
+              <div class="footer__logo"><img src=""></div>
+              <div class="footer__copyright">copy</div>
+            </footer>
+          </div>
+        </div>
+      </div>
+      <figcaption>
+左右は同じ構造で、上から順に
+        <strong>ヘッダー → メインビジュアル → 紹介 → レッスン → お知らせ → フッター</strong>
+        と同じ部品が並ぶ。右は、枠の位置が分かるように枠線と目印の文字を入れた状態。
+        なお、メインビジュアルの高さは<strong>画面の高さに合わせて変わる</strong>ので、
+        この見本と自分の画面では縦の比率が変わります。
+      </figcaption>
+    </figure>
+
+    <div class="open-site-wrap">
+      <a class="open-site" href="sample_site/top_complete.html" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h6"/></svg>
+        完成したサンプルサイトを開く（新しいタブ）
+      </a>
+    </div>
+
+    <p>
+      いきなり完成形を目指すのではなく、まず<strong>枠だけ</strong>を組み立てます。
+      デザインを見ながら、どこにどんな四角が並んでいるかを紙に書き出し、
+      それぞれに名前をつけていきましょう。
+    </p>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      枠だけの状態まで作れれば、ページはほぼ完成したようなものです。
+      そこまでに使うCSSプロパティは <code>width</code>・<code>height</code>・<code>margin</code>・<code>padding</code>・
+      <code>display</code>・<code>flex</code>・<code>justify-content</code>・<code>align-items</code>・
+      <code>text-align</code> が中心で、新しいものはほとんど出てきません。
+      色や文字の指定は、最後の仕上げでまとめて足します。
+    </div>
+
+    <h3>クラス名のつけ方</h3>
+    <p>
+      これまでは <code>header</code>・<code>logo</code> のような短い名前を使ってきました。
+      このページでは <code>main__service--list</code> のように、
+      <strong>記号で区切って「どこの、何か」を名前に持たせます</strong>。
+    </p>
+
+    <figure style="margin: 18px 0;">
+      <div class="diagram-embed cd8" data-width="900" role="img" aria-label="service エリアの実物にクラス名を重ね、その名前 main__service--list の分解と対応させた図">
+        <div class="wrap">
+          <div class="side">
+            <div class="cap">ページの一部（service エリア）</div>
+            <div class="mock">
+              <span class="lb">main__service</span>
+              <div class="inner">
+                <span class="lb">main__service--message</span>
+                <div class="real">
+                  <div class="main__service--message">
+                    <h2>Lesson</h2>
+                    <p>HTML と CSS の基礎から、実際のページを組み立てるところまで。</p>
+                  </div>
+                </div>
+              </div>
+              <div class="inner">
+                <span class="lb">main__service--list</span>
+                <div class="real">
+                  <ul class="main__service--list">
+                    <li><a href=""><img src="sample_site/images/card_html.webp" alt=""><h3>HTML &amp; CSS</h3></a></li>
+                    <li><a href=""><img src="sample_site/images/card_js.webp" alt=""><h3>JavaScript</h3></a></li>
+                    <li><a href=""><img src="sample_site/images/card_php.webp" alt=""><h3>PHP</h3></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="side">
+            <div class="cap">名前の組み立て</div>
+            <div class="parts">
+              <div class="part p-b">
+                <div class="val">main</div>
+                <div class="role"><b>どの枠の中か</b>main の中</div>
+              </div>
+              <div class="sep">__</div>
+              <div class="part p-e">
+                <div class="val">service</div>
+                <div class="role"><b>どの部品か</b>service エリア</div>
+              </div>
+              <div class="sep">--</div>
+              <div class="part p-m">
+                <div class="val">list</div>
+                <div class="role"><b>どの種類か</b>list</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <figcaption>
+        <code>__</code> は「〜の中の」、<code>--</code> は「〜の違い」を表す区切り。
+      </figcaption>
+    </figure>
+
+    <div class="note">
+      <span class="label">なぜ長い名前にするのか（BEM）</span><br>
+      <code>list</code> のような短い名前は、ページのあちこちで使いたくなります。
+      同じ名前を別の場所にも付けてしまうと、片方を直したつもりが
+      <strong>もう片方の見た目まで変わってしまいます</strong>。
+      <code>main__service--list</code> なら、どこの list なのかが名前で決まるのでぶつかりません。<br>
+      こうした名前のつけ方を <strong>BEM</strong>（ベム）と呼びます。
+      ただし細かい流儀があり、このサンプルも厳密な BEM ではありません
+      （本来 <code>--</code> は「同じ部品の<strong>状態や見た目の違い</strong>」を表す記号です）。
+      ここではサンプルのクラス名をそのまま使って進めましょう。
+    </div>
+
+
+    <h3>つまずきやすいところ</h3>
+    <p>
+      思ったとおりに表示されないときは、たいてい次のどれかです。
+      自力で長時間作るのは今回が初めてなので、先に目を通しておきましょう。
+    </p>
+
+    <div class="caution">
+      <span class="label">HTMLでよくあるつまずき</span><br>
+      ・<strong>閉じタグが無い</strong>、または違うタグで閉じている<br>
+      ・CSSファイルが読み込めていない。<code>&lt;link&gt;</code> のパスを確認する<br>
+      ・別のCSSファイルを編集している（開いているタブを確認する）<br>
+      ・英数字は<strong>必ず半角小文字</strong>で書く<br>
+      ・スペースも<strong>必ず半角</strong>。全角スペースが混ざると効かなくなる
+    </div>
+
+    <div class="caution">
+      <span class="label">CSSでよくあるつまずき</span><br>
+      ・セレクタの <code>.</code> や、末尾の <code>;</code>・<code>}</code> が抜けている<br>
+      ・HTMLのクラス名とCSSのセレクタ名が違う。
+      <strong>クラス名はHTMLからコピーして貼り付ける</strong>と間違えない<br>
+      ・スペースも必ず半角<br>
+      ・<strong>1つ書いたらブラウザで確認</strong>する。まとめて書いてから確認すると、
+      どこが原因か分からなくなる（最後の仕上げだけは、まとめて書き換えます）
+    </div>
+
+
+    <h3 id="step1">1. ファイルの準備</h3>
+    <p>
+      作業用のフォルダ（ここでは <code>mysite</code> とします）を作り、その中に
+      <code>index.html</code> と <code>css</code> フォルダを用意します。
+      <code>css</code> の中には、次にダウンロードする <code>reset.css</code> と、
+      これから書く <code>style.css</code> を置きます。
+    </p>
+
+    <div class="caution">
+      <span class="label">reset.css をダウンロードして配置する</span><br>
+      ブラウザごとに、見出しの大きさやリストの記号などの<strong>初期値が違います</strong>。
+      そのままだと見た目がずれるので、いったん打ち消して同じ状態から始めるためのCSSが
+      <strong>reset.css</strong> です。実務でもほぼ必ず使います。<br>
+      下のボタンからダウンロードし、<code>css</code> フォルダの中に置きましょう。<br>
+      <a class="dl-btn" href="sample_site/css/reset.css" download style="margin-top:10px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>reset.css をダウンロード
+      </a><span class="dl-note">中身を書き換える必要はありません</span>
+    </div>
+
+    <p>
+      <code>index.html</code> は次のように書いておきます。
+      <strong><code>reset.css</code> を自分の <code>style.css</code> より先に読み込む</strong>のがポイントです。
+      順番が逆だと、自分の指定が打ち消されてしまいます。
+    </p>
+
+<div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">index.html — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">index.html</div><div class="vscode-tab">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13</div><code class="vscode-code"><span class="add">&lt;!DOCTYPE html&gt;</span><span class="add">&lt;<span class="sy-tag">html</span> <span class="sy-attr">lang</span>=<span class="sy-str">"ja"</span>&gt;</span><span class="add">&lt;<span class="sy-tag">head</span>&gt;</span><span class="add">  &lt;<span class="sy-tag">meta</span> <span class="sy-attr">charset</span>=<span class="sy-str">"UTF-8"</span>&gt;</span><span class="add">  &lt;<span class="sy-tag">meta</span> <span class="sy-attr">name</span>=<span class="sy-str">"viewport"</span> <span class="sy-attr">content</span>=<span class="sy-str">"width=device-width, initial-scale=1.0"</span>&gt;</span><span class="add">  &lt;<span class="sy-tag">title</span>&gt;SAMPLE SITE&lt;/<span class="sy-tag">title</span>&gt;</span><span class="add">  &lt;<span class="sy-tag">link</span> <span class="sy-attr">rel</span>=<span class="sy-str">"stylesheet"</span> <span class="sy-attr">href</span>=<span class="sy-str">"css/reset.css"</span>&gt;</span><span class="add">  &lt;<span class="sy-tag">link</span> <span class="sy-attr">rel</span>=<span class="sy-str">"stylesheet"</span> <span class="sy-attr">href</span>=<span class="sy-str">"css/style.css"</span>&gt;</span><span class="add">&lt;/<span class="sy-tag">head</span>&gt;</span><span class="add">&lt;<span class="sy-tag">body</span>&gt;</span><span class="add"> </span><span class="add">&lt;/<span class="sy-tag">body</span>&gt;</span><span class="add">&lt;/<span class="sy-tag">html</span>&gt;</span></code></div></div>
+
+    <p>
+      CSSには、まず<strong>ページ全体の初期設定</strong>と、
+      <strong>枠の位置を目で確かめるための一時的な指定</strong>を書きます。
+      枠線と余白をつけておくと、どこにどの枠があるのか分かりやすくなります。
+      これらは完成間近になったら削除します。
+    </p>
+
+<div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">style.css — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab">index.html</div><div class="vscode-tab is-active">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32</div><code class="vscode-code"><span class="add">@charset "UTF-8";</span><span class="add"> </span><span class="add"><span class="sy-com">/******************************</span></span><span class="add">  初期設定</span><span class="add"><span class="sy-com">******************************/</span></span><span class="add"><span class="sy-sel">*</span> {</span><span class="add">  <span class="sy-attr">box-sizing</span>: border-box;</span><span class="add">}</span><span class="add"><span class="sy-sel">body</span> {</span><span class="add">  <span class="sy-attr">color</span>: <span class="sy-num">#060606</span>;</span><span class="add">  <span class="sy-attr">font-size</span>: <span class="sy-num">16px</span>;</span><span class="add">  <span class="sy-attr">font-family</span>: "Helvetica Neue", Arial, "Hiragino Sans", Meiryo, sans-serif;</span><span class="add">}</span><span class="add"><span class="sy-sel">a</span> {</span><span class="add">  <span class="sy-attr">color</span>: inherit;</span><span class="add">  <span class="sy-attr">text-decoration</span>: none;</span><span class="add">}</span><span class="add"> </span><span class="add"><span class="sy-com">/* 枠の位置を目で確かめるための一時的な指定。完成間近になったら削除する */</span></span><span class="add"><span class="sy-sel">header, footer, main, section</span> {</span><span class="add">  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> solid <span class="sy-num">#e44</span>;</span><span class="add">}</span><span class="add"><span class="sy-sel">div, p</span> {</span><span class="add">  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> solid <span class="sy-num">#37b</span>;</span><span class="add">}</span><span class="add"><span class="sy-sel">li, dt, dd</span> {</span><span class="add">  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> dashed <span class="sy-num">#3a6</span>;</span><span class="add">}</span><span class="add"><span class="sy-sel">header, footer, main, section, div, p, ul, li, dl, dt, dd</span> {</span><span class="add">  <span class="sy-attr">margin</span>: <span class="sy-num">10px</span>;</span><span class="add">  <span class="sy-attr">padding</span>: <span class="sy-num">10px</span>;</span><span class="add">}</span></code></div></div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      枠線の色は、<strong>赤＝大きな枠</strong>（<code>header</code>・<code>main</code>・<code>section</code> など）、
+      <strong>青＝中の枠</strong>（<code>div</code>・<code>p</code>）、
+      <strong>緑の破線＝リストの項目</strong>（<code>li</code>・<code>dt</code>・<code>dd</code>）という具合に分けています。
+      色で種類が分かると、入れ子の関係を追いやすくなります。
+    </div>
+
+
+    <h3 id="step2">2. 大枠を組む</h3>
+    <p>
+      紙に書いた枠を見ながら、いちばん大きな3つの枠を作ります。
+      ページの上から順に <code>header</code>・<code>main</code>・<code>footer</code> です。
+    </p>
+
+<div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">index.html — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">index.html</div><div class="vscode-tab">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25</div><code class="vscode-code">&lt;!DOCTYPE html&gt;
+&lt;<span class="sy-tag">html</span> <span class="sy-attr">lang</span>=<span class="sy-str">"ja"</span>&gt;
+&lt;<span class="sy-tag">head</span>&gt;
+  &lt;<span class="sy-tag">meta</span> <span class="sy-attr">charset</span>=<span class="sy-str">"UTF-8"</span>&gt;
+  &lt;<span class="sy-tag">meta</span> <span class="sy-attr">name</span>=<span class="sy-str">"viewport"</span> <span class="sy-attr">content</span>=<span class="sy-str">"width=device-width, initial-scale=1.0"</span>&gt;
+  &lt;<span class="sy-tag">title</span>&gt;SAMPLE SITE&lt;/<span class="sy-tag">title</span>&gt;
+  &lt;<span class="sy-tag">link</span> <span class="sy-attr">rel</span>=<span class="sy-str">"stylesheet"</span> <span class="sy-attr">href</span>=<span class="sy-str">"css/reset.css"</span>&gt;
+  &lt;<span class="sy-tag">link</span> <span class="sy-attr">rel</span>=<span class="sy-str">"stylesheet"</span> <span class="sy-attr">href</span>=<span class="sy-str">"css/style.css"</span>&gt;
+&lt;/<span class="sy-tag">head</span>&gt;
+&lt;<span class="sy-tag">body</span>&gt;
+
+<span class="add">  &lt;<span class="sy-tag">header</span> <span class="sy-attr">class</span>=<span class="sy-str">"header"</span>&gt;</span><span class="add">    .header</span><span class="add">  &lt;/<span class="sy-tag">header</span>&gt;</span><span class="add"> </span><span class="add">  &lt;<span class="sy-tag">main</span> <span class="sy-attr">class</span>=<span class="sy-str">"main"</span>&gt;</span><span class="add">    .main</span><span class="add">  &lt;/<span class="sy-tag">main</span>&gt;</span><span class="add"> </span><span class="add">  &lt;<span class="sy-tag">footer</span> <span class="sy-attr">class</span>=<span class="sy-str">"footer"</span>&gt;</span><span class="add">    .footer</span><span class="add">  &lt;/<span class="sy-tag">footer</span>&gt;</span><span class="add"> </span>&lt;/<span class="sy-tag">body</span>&gt;
+&lt;/<span class="sy-tag">html</span>&gt;</code></div></div>
+
+    <p>
+      CSSファイルにも、これから書く場所の目印としてコメントで見出しを入れておきます。
+      どこに何を書くか決めておくと、あとから直したい枠のCSSがすぐ見つかります。
+      なお <code>/* */</code> や <code>&lt;!-- --&gt;</code> で囲んだコメントは、
+      説明のために入れているものです。書き写さなくても動きます。
+      ここから先は、HTMLもCSSも<strong>書き足す部分だけ</strong>を抜き出して載せます
+      （<strong>色のついた行</strong>がそれにあたります）。
+      行番号は<strong>その抜粋の中での番号</strong>なので、ファイルの行番号とは一致しません。
+      CSSは、<strong>見出しコメントで区切ったまとまりの、いちばん下</strong>に書き足していきます。
+    </p>
+
+<div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">style.css — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab">index.html</div><div class="vscode-tab is-active">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12</div><code class="vscode-code"><span class="add"> </span><span class="add"><span class="sy-com">/******************************</span></span><span class="add">  header</span><span class="add"><span class="sy-com">******************************/</span></span><span class="add"> </span><span class="add"><span class="sy-com">/******************************</span></span><span class="add">  main</span><span class="add"><span class="sy-com">******************************/</span></span><span class="add"> </span><span class="add"><span class="sy-com">/******************************</span></span><span class="add">  footer</span><span class="add"><span class="sy-com">******************************/</span></span></code></div></div>
+
+    <figure>
+      <div class="chrome"><div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">SAMPLE SITE</div></div><div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">file:///mysite/index.html</div></div><div class="chrome-viewport" style="padding: 0;">
+        <div class="browser-demo dm8-2">
+            <header class="header">
+              .header
+            </header>
+
+            <main class="main">
+              .main
+            </main>
+
+            <footer class="footer">
+              .footer
+            </footer>
+        </div>
+      </div></div>
+      <figcaption>ステップ2まで書いた時点のブラウザ表示。</figcaption>
+    </figure>
+
+
+
+    <h3 id="step3">3. header と footer を作る</h3>
+    <p>
+      先に <code>header</code> と <code>footer</code> の中身を作ります。
+      <code>header</code> にはロゴとナビゲーション、<code>footer</code> にはロゴとコピーライトを置きます。
+      HTMLは <strong><code>&lt;body&gt;</code> の中だけ</strong>を載せます。
+    </p>
+
+<div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">index.html — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">index.html</div><div class="vscode-tab">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29</div><code class="vscode-code">  &lt;<span class="sy-tag">header</span> <span class="sy-attr">class</span>=<span class="sy-str">"header"</span>&gt;
+    .header
+<span class="add">    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"header__wrap"</span>&gt;</span><span class="add">      .header__wrap</span><span class="add">      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"header__logo"</span>&gt;</span><span class="add">        .header__logo</span><span class="add">        &lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;&lt;<span class="sy-tag">img</span> <span class="sy-attr">src</span>=<span class="sy-str">""</span>&gt;&lt;/<span class="sy-tag">a</span>&gt;</span><span class="add">      &lt;/<span class="sy-tag">div</span>&gt;</span><span class="add">      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"header__menu"</span>&gt;</span><span class="add">        .header__menu</span><span class="add">        &lt;<span class="sy-tag">ul</span>&gt;</span><span class="add">          &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;li&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;</span><span class="add">          &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;li&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;</span><span class="add">          &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;li&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;</span><span class="add">          &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;li&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;</span><span class="add">        &lt;/<span class="sy-tag">ul</span>&gt;</span><span class="add">      &lt;/<span class="sy-tag">div</span>&gt;</span><span class="add">    &lt;/<span class="sy-tag">div</span>&gt;</span>  &lt;/<span class="sy-tag">header</span>&gt;
+
+  &lt;<span class="sy-tag">main</span> <span class="sy-attr">class</span>=<span class="sy-str">"main"</span>&gt;
+    .main
+  &lt;/<span class="sy-tag">main</span>&gt;
+
+  &lt;<span class="sy-tag">footer</span> <span class="sy-attr">class</span>=<span class="sy-str">"footer"</span>&gt;
+    .footer
+<span class="add">    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"footer__logo"</span>&gt;&lt;<span class="sy-tag">img</span> <span class="sy-attr">src</span>=<span class="sy-str">""</span>&gt;&lt;/<span class="sy-tag">div</span>&gt;</span><span class="add">    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"footer__copyright"</span>&gt;copy&lt;/<span class="sy-tag">div</span>&gt;</span>  &lt;/<span class="sy-tag">footer</span>&gt;</code></div></div>
+
+    <p>
+      CSSでは、中身を<strong>85%の幅で中央に置き</strong>、<code>flex</code> で横並びにします。<br>
+      フッターの <code>padding: 90px 0 70px;</code> のように値を3つ書くと、
+      <strong>上・左右・下</strong>の順の指定になります。値が1つなら四方すべて、
+      2つなら<strong>上下・左右</strong>です。
+    </p>
+
+<div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">style.css — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab">index.html</div><div class="vscode-tab is-active">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35</div><code class="vscode-code"><span class="sy-com">/******************************</span>
+  header
+<span class="sy-com">******************************/</span>
+<span class="add"><span class="sy-sel">.header__wrap</span> {</span><span class="add">  <span class="sy-attr">width</span>: <span class="sy-num">85%</span>;</span><span class="add">  <span class="sy-attr">margin</span>: <span class="sy-num">0</span> auto;</span><span class="add">  <span class="sy-attr">display</span>: flex;</span><span class="add">  <span class="sy-attr">justify-content</span>: space-between;</span><span class="add">  <span class="sy-attr">align-items</span>: center;</span><span class="add">}</span><span class="add"><span class="sy-sel">.header__logo</span> {</span><span class="add">  <span class="sy-attr">width</span>: <span class="sy-num">54px</span>;</span><span class="add">  <span class="sy-attr">height</span>: <span class="sy-num">54px</span>;</span><span class="add">}</span><span class="add"><span class="sy-sel">.header__menu ul</span> {</span><span class="add">  <span class="sy-attr">display</span>: flex;</span><span class="add">}</span><span class="add"><span class="sy-sel">.header__menu li</span> {</span><span class="add">  <span class="sy-attr">width</span>: <span class="sy-num">100px</span>;</span><span class="add">}</span>
+<span class="sy-com">/******************************</span>
+  footer
+<span class="sy-com">******************************/</span>
+<span class="add"><span class="sy-sel">.footer</span> {</span><span class="add">  <span class="sy-attr">padding</span>: <span class="sy-num">90px</span> <span class="sy-num">0</span> <span class="sy-num">70px</span>;</span><span class="add">}</span><span class="add"><span class="sy-sel">.footer__logo</span> {</span><span class="add">  <span class="sy-attr">width</span>: <span class="sy-num">60px</span>;</span><span class="add">  <span class="sy-attr">margin</span>: <span class="sy-num">0</span> auto;</span><span class="add">}</span><span class="add"><span class="sy-sel">.footer__copyright</span> {</span><span class="add">  <span class="sy-attr">margin-top</span>: <span class="sy-num">30px</span>;</span><span class="add">  <span class="sy-attr">text-align</span>: center;</span><span class="add">}</span></code></div></div>
+
+    <figure>
+      <div class="chrome"><div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">SAMPLE SITE</div></div><div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">file:///mysite/index.html</div></div><div class="chrome-viewport" style="padding: 0;">
+        <div class="browser-demo dm8-3">
+            <header class="header">
+              .header
+              <div class="header__wrap">
+                .header__wrap
+                <div class="header__logo">
+                  .header__logo
+                  <a href=""><img src=""></a>
+                </div>
+                <div class="header__menu">
+                  .header__menu
+                  <ul>
+                    <li><a href="">li</a></li>
+                    <li><a href="">li</a></li>
+                    <li><a href="">li</a></li>
+                    <li><a href="">li</a></li>
+                  </ul>
+                </div>
+              </div>
+            </header>
+
+            <main class="main">
+              .main
+            </main>
+
+            <footer class="footer">
+              .footer
+              <div class="footer__logo"><img src=""></div>
+              <div class="footer__copyright">copy</div>
+            </footer>
+        </div>
+      </div></div>
+      <figcaption>ステップ3まで書いた時点のブラウザ表示。</figcaption>
+    </figure>
+
+
+
+    <h3 id="step4">4. コンテンツ部分の枠を作る</h3>
+    <p>
+      <code>main</code> の中に、大きな枠を4つ作ります。
+      メインビジュアル（<code>main__kv</code>）、紹介（<code>main__about</code>）、
+      サービス（<code>main__service</code>）、お知らせ（<code>main__news</code>）です。
+    </p>
+
+<div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">index.html — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">index.html</div><div class="vscode-tab">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18</div><code class="vscode-code">  &lt;<span class="sy-tag">main</span> <span class="sy-attr">class</span>=<span class="sy-str">"main"</span>&gt;
+    .main
+<span class="add">    &lt;<span class="sy-tag">section</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__kv"</span>&gt;</span><span class="add">      .main__kv</span><span class="add">    &lt;/<span class="sy-tag">section</span>&gt;</span><span class="add"> </span><span class="add">    &lt;<span class="sy-tag">section</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__about"</span>&gt;</span><span class="add">      .main__about</span><span class="add">    &lt;/<span class="sy-tag">section</span>&gt;</span><span class="add"> </span><span class="add">    &lt;<span class="sy-tag">section</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__service"</span>&gt;</span><span class="add">      .main__service</span><span class="add">    &lt;/<span class="sy-tag">section</span>&gt;</span><span class="add"> </span><span class="add">    &lt;<span class="sy-tag">section</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news"</span>&gt;</span><span class="add">      .main__news</span><span class="add">    &lt;/<span class="sy-tag">section</span>&gt;</span>  &lt;/<span class="sy-tag">main</span>&gt;</code></div></div>
+
+    <p>
+      4つの <code>section</code> はどれも同じ幅・同じ余白なので、
+      <strong>まとめて指定してから、違うところだけ上書き</strong>します。
+      メインビジュアルだけは<strong>横幅いっぱいに広げたい</strong>ので、幅と高さを別に指定します。
+      高さに使っている <code>vh</code> は<strong>画面の高さを100とした割合</strong>の単位で、
+      <code>70vh</code> なら画面の高さの70%になります。
+    </p>
+
+<div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">style.css — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab">index.html</div><div class="vscode-tab is-active">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11</div><code class="vscode-code"><span class="sy-com">/******************************</span>
+  main
+<span class="sy-com">******************************/</span>
+<span class="add"><span class="sy-sel">.main section</span> {</span><span class="add">  <span class="sy-attr">width</span>: <span class="sy-num">85%</span>;</span><span class="add">  <span class="sy-attr">margin</span>: <span class="sy-num">0</span> auto <span class="sy-num">60px</span>;</span><span class="add">}</span><span class="add"><span class="sy-sel">.main .main__kv</span> {</span><span class="add">  <span class="sy-attr">width</span>: auto;</span><span class="add">  <span class="sy-attr">height</span>: <span class="sy-num">70vh</span>;</span><span class="add">}</span></code></div></div>
+
+    <figure>
+      <div class="chrome"><div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">SAMPLE SITE</div></div><div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">file:///mysite/index.html</div></div><div class="chrome-viewport" style="padding: 0;">
+        <div class="browser-demo dm8-4">
+            <header class="header">
+              .header
+              <div class="header__wrap">
+                .header__wrap
+                <div class="header__logo">
+                  .header__logo
+                  <a href=""><img src=""></a>
+                </div>
+                <div class="header__menu">
+                  .header__menu
+                  <ul>
+                    <li><a href="">li</a></li>
+                    <li><a href="">li</a></li>
+                    <li><a href="">li</a></li>
+                    <li><a href="">li</a></li>
+                  </ul>
+                </div>
+              </div>
+            </header>
+
+            <main class="main">
+              .main
+              <section class="main__kv">
+                .main__kv
+              </section>
+
+              <section class="main__about">
+                .main__about
+              </section>
+
+              <section class="main__service">
+                .main__service
+              </section>
+
+              <section class="main__news">
+                .main__news
+              </section>
+            </main>
+
+            <footer class="footer">
+              .footer
+              <div class="footer__logo"><img src=""></div>
+              <div class="footer__copyright">copy</div>
+            </footer>
+        </div>
+      </div></div>
+      <figcaption>ステップ4まで書いた時点のブラウザ表示。メインビジュアルの高さは <code>70vh</code>（画面の高さの70%）なので、この見本と自分の画面では縦の比率が変わります。</figcaption>
+    </figure>
+
+
+    <div class="note">
+      <span class="label">クラスの数が多いほうが優先される</span><br>
+      <code>.main section</code> で幅を <code>85%</code> にしたあと、
+      メインビジュアルだけ <code>width: auto</code> に戻す場合、
+      <code>.main__kv</code> と1つだけ書いても効きません。
+      どちらが優先されるかは、セレクタに含まれる<strong>クラスの数</strong>で決まります。
+      <strong>タグ名は数に入りません</strong>。
+      <code>.main section</code> はクラス1つ、<code>.main .main__kv</code> はクラス2つ。
+      <strong>多いほうが優先される</strong>ので、後者が適用されます。
+      数が同じときに初めて、<strong>あとに書いたほう</strong>が優先されます。<br>
+      なお、いまは確認用の枠線と余白が付いているので、画面の端までは届きません。
+      最後の仕上げでそれらを消すと、実際に端まで広がります。
+    </div>
+
+
+    <h3 id="step5">5. about エリア</h3>
+    <p>
+      ここからは <code>main</code> の中を上から順に作っていきます。
+      まずは <code>main__about</code> です。見出し・ロゴ画像・説明文の3つを入れます。
+      見出しに <code>&lt;h1&gt;</code> を使うのは、<strong>ここがこのページでいちばん大きな見出し</strong>だからです。
+      ロゴは画像なので、<code>&lt;h1&gt;</code> にはしません。
+    </p>
+
+<div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">index.html — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">index.html</div><div class="vscode-tab">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5
+6</div><code class="vscode-code">    &lt;<span class="sy-tag">section</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__about"</span>&gt;
+      .main__about
+<span class="add">      &lt;<span class="sy-tag">h1</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__about--ttl"</span>&gt;title&lt;/<span class="sy-tag">h1</span>&gt;</span><span class="add">      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__about--logo"</span>&gt;&lt;<span class="sy-tag">img</span> <span class="sy-attr">src</span>=<span class="sy-str">""</span>&gt;&lt;/<span class="sy-tag">div</span>&gt;</span><span class="add">      &lt;<span class="sy-tag">p</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__about--txt"</span>&gt;text&lt;/<span class="sy-tag">p</span>&gt;</span>    &lt;/<span class="sy-tag">section</span>&gt;</code></div></div>
+
+    <p>
+      見出しと説明文は中央ぞろえにし、ロゴは <code>margin: 0 auto;</code> で中央に置きます。
+    </p>
+
+<div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">style.css — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab">index.html</div><div class="vscode-tab is-active">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14</div><code class="vscode-code"><span class="add"> </span><span class="add"><span class="sy-com">/* about */</span></span><span class="add"><span class="sy-sel">.main__about--ttl</span> {</span><span class="add">  <span class="sy-attr">margin-bottom</span>: <span class="sy-num">60px</span>;</span><span class="add">  <span class="sy-attr">text-align</span>: center;</span><span class="add">}</span><span class="add"><span class="sy-sel">.main__about--logo</span> {</span><span class="add">  <span class="sy-attr">width</span>: <span class="sy-num">120px</span>;</span><span class="add">  <span class="sy-attr">margin</span>: <span class="sy-num">0</span> auto;</span><span class="add">}</span><span class="add"><span class="sy-sel">.main__about--txt</span> {</span><span class="add">  <span class="sy-attr">margin</span>: <span class="sy-num">45px</span> <span class="sy-num">0</span> <span class="sy-num">60px</span>;</span><span class="add">  <span class="sy-attr">text-align</span>: center;</span><span class="add">}</span></code></div></div>
+
+    <figure>
+      <div class="chrome"><div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">SAMPLE SITE</div></div><div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">file:///mysite/index.html</div></div><div class="chrome-viewport" style="padding: 0;">
+        <div class="browser-demo dm8-5">
+            <header class="header">
+              .header
+              <div class="header__wrap">
+                .header__wrap
+                <div class="header__logo">
+                  .header__logo
+                  <a href=""><img src=""></a>
+                </div>
+                <div class="header__menu">
+                  .header__menu
+                  <ul>
+                    <li><a href="">li</a></li>
+                    <li><a href="">li</a></li>
+                    <li><a href="">li</a></li>
+                    <li><a href="">li</a></li>
+                  </ul>
+                </div>
+              </div>
+            </header>
+
+            <main class="main">
+              .main
+              <section class="main__kv">
+                .main__kv
+              </section>
+
+              <section class="main__about">
+                .main__about
+                <h1 class="main__about--ttl">title</h1>
+                <div class="main__about--logo"><img src=""></div>
+                <p class="main__about--txt">text</p>
+              </section>
+
+              <section class="main__service">
+                .main__service
+              </section>
+
+              <section class="main__news">
+                .main__news
+              </section>
+            </main>
+
+            <footer class="footer">
+              .footer
+              <div class="footer__logo"><img src=""></div>
+              <div class="footer__copyright">copy</div>
+            </footer>
+        </div>
+      </div></div>
+      <figcaption>ステップ5まで書いた時点のブラウザ表示。</figcaption>
+    </figure>
+
+
+    <div class="note">
+      <span class="label">クラス名をつけるか、子孫セレクタにするか</span><br>
+      <code>main__about--ttl</code> は <code>&lt;h1&gt;</code> なので、クラス名をつけずに
+      <code>.main__about h1</code> と書いても同じ結果になります。
+      このように<strong>半角スペースで区切って書く</strong>と「<code>.main__about</code> の中にある
+      <code>&lt;h1&gt;</code>」という意味になり、これを<strong>子孫セレクタ</strong>と呼びます。
+      基本はすべての要素にクラスをつけ、クラス名が増えて煩雑になるときは子孫セレクタを使う。
+      その程度の使い分けで構いません。
+    </div>
+
+
+    <h3 id="step6">6. service エリア</h3>
+    <p>
+      つづいて <code>main__service</code> です。
+      上に見出しと説明文、下にカードを3枚並べます。
+    </p>
+
+<div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">index.html — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">index.html</div><div class="vscode-tab">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30</div><code class="vscode-code">    &lt;<span class="sy-tag">section</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__service"</span>&gt;
+      .main__service
+<span class="add">      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__service--message"</span>&gt;</span><span class="add">        &lt;<span class="sy-tag">h2</span>&gt;h2 title&lt;/<span class="sy-tag">h2</span>&gt;</span><span class="add">        &lt;<span class="sy-tag">p</span>&gt;text&lt;/<span class="sy-tag">p</span>&gt;</span><span class="add">      &lt;/<span class="sy-tag">div</span>&gt;</span><span class="add">      &lt;<span class="sy-tag">ul</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__service--list"</span>&gt;</span><span class="add">        &lt;<span class="sy-tag">li</span>&gt;</span><span class="add">          &lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;</span><span class="add">            &lt;<span class="sy-tag">img</span> <span class="sy-attr">src</span>=<span class="sy-str">""</span>&gt;</span><span class="add">            &lt;<span class="sy-tag">h3</span>&gt;title&lt;/<span class="sy-tag">h3</span>&gt;</span><span class="add">            &lt;<span class="sy-tag">p</span>&gt;text&lt;/<span class="sy-tag">p</span>&gt;</span><span class="add">          &lt;/<span class="sy-tag">a</span>&gt;</span><span class="add">        &lt;/<span class="sy-tag">li</span>&gt;</span><span class="add">        &lt;<span class="sy-tag">li</span>&gt;</span><span class="add">          &lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;</span><span class="add">            &lt;<span class="sy-tag">img</span> <span class="sy-attr">src</span>=<span class="sy-str">""</span>&gt;</span><span class="add">            &lt;<span class="sy-tag">h3</span>&gt;title&lt;/<span class="sy-tag">h3</span>&gt;</span><span class="add">            &lt;<span class="sy-tag">p</span>&gt;text&lt;/<span class="sy-tag">p</span>&gt;</span><span class="add">          &lt;/<span class="sy-tag">a</span>&gt;</span><span class="add">        &lt;/<span class="sy-tag">li</span>&gt;</span><span class="add">        &lt;<span class="sy-tag">li</span>&gt;</span><span class="add">          &lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;</span><span class="add">            &lt;<span class="sy-tag">img</span> <span class="sy-attr">src</span>=<span class="sy-str">""</span>&gt;</span><span class="add">            &lt;<span class="sy-tag">h3</span>&gt;title&lt;/<span class="sy-tag">h3</span>&gt;</span><span class="add">            &lt;<span class="sy-tag">p</span>&gt;text&lt;/<span class="sy-tag">p</span>&gt;</span><span class="add">          &lt;/<span class="sy-tag">a</span>&gt;</span><span class="add">        &lt;/<span class="sy-tag">li</span>&gt;</span><span class="add">      &lt;/<span class="sy-tag">ul</span>&gt;</span>    &lt;/<span class="sy-tag">section</span>&gt;</code></div></div>
+
+    <p>
+      見出しと説明文は <code>flex</code> で横に並べます。
+      横並びにした要素に <code>flex</code> を指定すると、その<strong>数値の比率で幅が分かれます</strong>。
+      ここでは <code>flex: 1</code> と <code>flex: 2</code> で <strong>1 : 2</strong> にしています。
+      カード3枚も同じように <code>flex: 1</code> で均等に分けます。<br>
+      カードの中身は <code>&lt;a&gt;</code> で囲み、<code>display: block;</code> を指定しています。
+      こうすると、文字だけでなく<strong>カード全体がリンクとして反応</strong>します。
+    </p>
+
+<div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">style.css — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab">index.html</div><div class="vscode-tab is-active">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</div><code class="vscode-code"><span class="add"> </span><span class="add"><span class="sy-com">/* service */</span></span><span class="add"><span class="sy-sel">.main__service--message</span> {</span><span class="add">  <span class="sy-attr">margin-bottom</span>: <span class="sy-num">95px</span>;</span><span class="add">  <span class="sy-attr">display</span>: flex;</span><span class="add">}</span><span class="add"><span class="sy-sel">.main__service--message h2</span> {</span><span class="add">  <span class="sy-attr">flex</span>: <span class="sy-num">1</span>;</span><span class="add">}</span><span class="add"><span class="sy-sel">.main__service--message p</span> {</span><span class="add">  <span class="sy-attr">flex</span>: <span class="sy-num">2</span>;</span><span class="add">}</span><span class="add"><span class="sy-sel">.main__service--list</span> {</span><span class="add">  <span class="sy-attr">display</span>: flex;</span><span class="add">}</span><span class="add"><span class="sy-sel">.main__service--list li</span> {</span><span class="add">  <span class="sy-attr">flex</span>: <span class="sy-num">1</span>;</span><span class="add">}</span><span class="add"><span class="sy-sel">.main__service--list a</span> {</span><span class="add">  <span class="sy-attr">display</span>: block;</span><span class="add">}</span></code></div></div>
+
+    <figure>
+      <div class="chrome"><div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">SAMPLE SITE</div></div><div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">file:///mysite/index.html</div></div><div class="chrome-viewport" style="padding: 0;">
+        <div class="browser-demo dm8-6">
+            <header class="header">
+              .header
+              <div class="header__wrap">
+                .header__wrap
+                <div class="header__logo">
+                  .header__logo
+                  <a href=""><img src=""></a>
+                </div>
+                <div class="header__menu">
+                  .header__menu
+                  <ul>
+                    <li><a href="">li</a></li>
+                    <li><a href="">li</a></li>
+                    <li><a href="">li</a></li>
+                    <li><a href="">li</a></li>
+                  </ul>
+                </div>
+              </div>
+            </header>
+
+            <main class="main">
+              .main
+              <section class="main__kv">
+                .main__kv
+              </section>
+
+              <section class="main__about">
+                .main__about
+                <h1 class="main__about--ttl">title</h1>
+                <div class="main__about--logo"><img src=""></div>
+                <p class="main__about--txt">text</p>
+              </section>
+
+              <section class="main__service">
+                .main__service
+                <div class="main__service--message">
+                  <h2>h2 title</h2>
+                  <p>text</p>
+                </div>
+                <ul class="main__service--list">
+                  <li>
+                    <a href="">
+                      <img src="">
+                      <h3>title</h3>
+                      <p>text</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="">
+                      <img src="">
+                      <h3>title</h3>
+                      <p>text</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="">
+                      <img src="">
+                      <h3>title</h3>
+                      <p>text</p>
+                    </a>
+                  </li>
+                </ul>
+              </section>
+
+              <section class="main__news">
+                .main__news
+              </section>
+            </main>
+
+            <footer class="footer">
+              .footer
+              <div class="footer__logo"><img src=""></div>
+              <div class="footer__copyright">copy</div>
+            </footer>
+        </div>
+      </div></div>
+      <figcaption>ステップ6まで書いた時点のブラウザ表示。</figcaption>
+    </figure>
+
+
+
+    <h3 id="step7">7. news エリア</h3>
+    <p>
+      最後に <code>main__news</code> です。日付と本文が横に並ぶお知らせを3件作ります。<br>
+      「日付」と「その説明」のように<strong>組になった情報</strong>には
+      <code>&lt;dl&gt;</code>（definition list＝定義リスト）を使います。
+      組全体を <code>&lt;dl&gt;</code> で囲み、見出しにあたるほうを <code>&lt;dt&gt;</code>、
+      説明にあたるほうを <code>&lt;dd&gt;</code> で書きます。
+    </p>
+
+<div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">index.html — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">index.html</div><div class="vscode-tab">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30</div><code class="vscode-code">    &lt;<span class="sy-tag">section</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news"</span>&gt;
+      .main__news
+<span class="add">      &lt;<span class="sy-tag">h2</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--ttl"</span>&gt;h2 title&lt;/<span class="sy-tag">h2</span>&gt;</span><span class="add">      &lt;<span class="sy-tag">ul</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--list"</span>&gt;</span><span class="add">        &lt;<span class="sy-tag">li</span>&gt;</span><span class="add">          &lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;</span><span class="add">            &lt;<span class="sy-tag">dl</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--item"</span>&gt;</span><span class="add">              &lt;<span class="sy-tag">dt</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--day"</span>&gt;2026.08.12&lt;/<span class="sy-tag">dt</span>&gt;</span><span class="add">              &lt;<span class="sy-tag">dd</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--data"</span>&gt;text&lt;/<span class="sy-tag">dd</span>&gt;</span><span class="add">            &lt;/<span class="sy-tag">dl</span>&gt;</span><span class="add">          &lt;/<span class="sy-tag">a</span>&gt;</span><span class="add">        &lt;/<span class="sy-tag">li</span>&gt;</span><span class="add">        &lt;<span class="sy-tag">li</span>&gt;</span><span class="add">          &lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;</span><span class="add">            &lt;<span class="sy-tag">dl</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--item"</span>&gt;</span><span class="add">              &lt;<span class="sy-tag">dt</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--day"</span>&gt;2026.08.12&lt;/<span class="sy-tag">dt</span>&gt;</span><span class="add">              &lt;<span class="sy-tag">dd</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--data"</span>&gt;text&lt;/<span class="sy-tag">dd</span>&gt;</span><span class="add">            &lt;/<span class="sy-tag">dl</span>&gt;</span><span class="add">          &lt;/<span class="sy-tag">a</span>&gt;</span><span class="add">        &lt;/<span class="sy-tag">li</span>&gt;</span><span class="add">        &lt;<span class="sy-tag">li</span>&gt;</span><span class="add">          &lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;</span><span class="add">            &lt;<span class="sy-tag">dl</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--item"</span>&gt;</span><span class="add">              &lt;<span class="sy-tag">dt</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--day"</span>&gt;2026.08.12&lt;/<span class="sy-tag">dt</span>&gt;</span><span class="add">              &lt;<span class="sy-tag">dd</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--data"</span>&gt;text&lt;/<span class="sy-tag">dd</span>&gt;</span><span class="add">            &lt;/<span class="sy-tag">dl</span>&gt;</span><span class="add">          &lt;/<span class="sy-tag">a</span>&gt;</span><span class="add">        &lt;/<span class="sy-tag">li</span>&gt;</span><span class="add">      &lt;/<span class="sy-tag">ul</span>&gt;</span>    &lt;/<span class="sy-tag">section</span>&gt;</code></div></div>
+
+    <p>
+      <code>&lt;a&gt;</code> を <code>display: block;</code> にしているのは、
+      ステップ6のカードと同じ理由です。
+    </p>
+
+<div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">style.css — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab">index.html</div><div class="vscode-tab is-active">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18</div><code class="vscode-code"><span class="add"> </span><span class="add"><span class="sy-com">/* news */</span></span><span class="add"><span class="sy-sel">.main__news--ttl</span> {</span><span class="add">  <span class="sy-attr">margin-bottom</span>: <span class="sy-num">16px</span>;</span><span class="add">}</span><span class="add"><span class="sy-sel">.main__news--list a</span> {</span><span class="add">  <span class="sy-attr">display</span>: block;</span><span class="add">  <span class="sy-attr">padding</span>: <span class="sy-num">50px</span> <span class="sy-num">20px</span>;</span><span class="add">}</span><span class="add"><span class="sy-sel">.main__news--item</span> {</span><span class="add">  <span class="sy-attr">display</span>: flex;</span><span class="add">}</span><span class="add"><span class="sy-sel">.main__news--day</span> {</span><span class="add">  <span class="sy-attr">width</span>: <span class="sy-num">265px</span>;</span><span class="add">  <span class="sy-attr">margin-right</span>: <span class="sy-num">32px</span>;</span><span class="add">  <span class="sy-attr">display</span>: flex;</span><span class="add">  <span class="sy-attr">align-items</span>: center;</span><span class="add">}</span></code></div></div>
+
+    <figure>
+      <div class="chrome"><div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">SAMPLE SITE</div></div><div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">file:///mysite/index.html</div></div><div class="chrome-viewport" style="padding: 0;">
+        <div class="browser-demo dm8-7">
+            <header class="header">
+              .header
+              <div class="header__wrap">
+                .header__wrap
+                <div class="header__logo">
+                  .header__logo
+                  <a href=""><img src=""></a>
+                </div>
+                <div class="header__menu">
+                  .header__menu
+                  <ul>
+                    <li><a href="">li</a></li>
+                    <li><a href="">li</a></li>
+                    <li><a href="">li</a></li>
+                    <li><a href="">li</a></li>
+                  </ul>
+                </div>
+              </div>
+            </header>
+
+            <main class="main">
+              .main
+              <section class="main__kv">
+                .main__kv
+              </section>
+
+              <section class="main__about">
+                .main__about
+                <h1 class="main__about--ttl">title</h1>
+                <div class="main__about--logo"><img src=""></div>
+                <p class="main__about--txt">text</p>
+              </section>
+
+              <section class="main__service">
+                .main__service
+                <div class="main__service--message">
+                  <h2>h2 title</h2>
+                  <p>text</p>
+                </div>
+                <ul class="main__service--list">
+                  <li>
+                    <a href="">
+                      <img src="">
+                      <h3>title</h3>
+                      <p>text</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="">
+                      <img src="">
+                      <h3>title</h3>
+                      <p>text</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="">
+                      <img src="">
+                      <h3>title</h3>
+                      <p>text</p>
+                    </a>
+                  </li>
+                </ul>
+              </section>
+
+              <section class="main__news">
+                .main__news
+                <h2 class="main__news--ttl">h2 title</h2>
+                <ul class="main__news--list">
+                  <li>
+                    <a href="">
+                      <dl class="main__news--item">
+                        <dt class="main__news--day">2026.08.12</dt>
+                        <dd class="main__news--data">text</dd>
+                      </dl>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="">
+                      <dl class="main__news--item">
+                        <dt class="main__news--day">2026.08.12</dt>
+                        <dd class="main__news--data">text</dd>
+                      </dl>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="">
+                      <dl class="main__news--item">
+                        <dt class="main__news--day">2026.08.12</dt>
+                        <dd class="main__news--data">text</dd>
+                      </dl>
+                    </a>
+                  </li>
+                </ul>
+              </section>
+            </main>
+
+            <footer class="footer">
+              .footer
+              <div class="footer__logo"><img src=""></div>
+              <div class="footer__copyright">copy</div>
+            </footer>
+        </div>
+      </div></div>
+      <figcaption>ステップ7まで書いた時点のブラウザ表示。</figcaption>
+    </figure>
+
+
+
+    <h3 id="step8">8. 枠が完成</h3>
+    <p>
+      ここまでのコードをまとめると、枠だけのページが完成します。
+      自分のファイルと見比べてみましょう。
+    </p>
+
+    <h4>index.html（全体）</h4>
+
+<div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">index.html — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">index.html</div><div class="vscode-tab">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115</div><code class="vscode-code">&lt;!DOCTYPE html&gt;
+&lt;<span class="sy-tag">html</span> <span class="sy-attr">lang</span>=<span class="sy-str">"ja"</span>&gt;
+&lt;<span class="sy-tag">head</span>&gt;
+  &lt;<span class="sy-tag">meta</span> <span class="sy-attr">charset</span>=<span class="sy-str">"UTF-8"</span>&gt;
+  &lt;<span class="sy-tag">meta</span> <span class="sy-attr">name</span>=<span class="sy-str">"viewport"</span> <span class="sy-attr">content</span>=<span class="sy-str">"width=device-width, initial-scale=1.0"</span>&gt;
+  &lt;<span class="sy-tag">title</span>&gt;SAMPLE SITE&lt;/<span class="sy-tag">title</span>&gt;
+  &lt;<span class="sy-tag">link</span> <span class="sy-attr">rel</span>=<span class="sy-str">"stylesheet"</span> <span class="sy-attr">href</span>=<span class="sy-str">"css/reset.css"</span>&gt;
+  &lt;<span class="sy-tag">link</span> <span class="sy-attr">rel</span>=<span class="sy-str">"stylesheet"</span> <span class="sy-attr">href</span>=<span class="sy-str">"css/style.css"</span>&gt;
+&lt;/<span class="sy-tag">head</span>&gt;
+&lt;<span class="sy-tag">body</span>&gt;
+
+  &lt;<span class="sy-tag">header</span> <span class="sy-attr">class</span>=<span class="sy-str">"header"</span>&gt;
+    .header
+    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"header__wrap"</span>&gt;
+      .header__wrap
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"header__logo"</span>&gt;
+        .header__logo
+        &lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;&lt;<span class="sy-tag">img</span> <span class="sy-attr">src</span>=<span class="sy-str">""</span>&gt;&lt;/<span class="sy-tag">a</span>&gt;
+      &lt;/<span class="sy-tag">div</span>&gt;
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"header__menu"</span>&gt;
+        .header__menu
+        &lt;<span class="sy-tag">ul</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;li&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;li&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;li&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;li&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;
+        &lt;/<span class="sy-tag">ul</span>&gt;
+      &lt;/<span class="sy-tag">div</span>&gt;
+    &lt;/<span class="sy-tag">div</span>&gt;
+  &lt;/<span class="sy-tag">header</span>&gt;
+
+  &lt;<span class="sy-tag">main</span> <span class="sy-attr">class</span>=<span class="sy-str">"main"</span>&gt;
+    .main
+    &lt;<span class="sy-tag">section</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__kv"</span>&gt;
+      .main__kv
+    &lt;/<span class="sy-tag">section</span>&gt;
+
+    &lt;<span class="sy-tag">section</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__about"</span>&gt;
+      .main__about
+      &lt;<span class="sy-tag">h1</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__about--ttl"</span>&gt;title&lt;/<span class="sy-tag">h1</span>&gt;
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__about--logo"</span>&gt;&lt;<span class="sy-tag">img</span> <span class="sy-attr">src</span>=<span class="sy-str">""</span>&gt;&lt;/<span class="sy-tag">div</span>&gt;
+      &lt;<span class="sy-tag">p</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__about--txt"</span>&gt;text&lt;/<span class="sy-tag">p</span>&gt;
+    &lt;/<span class="sy-tag">section</span>&gt;
+
+    &lt;<span class="sy-tag">section</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__service"</span>&gt;
+      .main__service
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__service--message"</span>&gt;
+        &lt;<span class="sy-tag">h2</span>&gt;h2 title&lt;/<span class="sy-tag">h2</span>&gt;
+        &lt;<span class="sy-tag">p</span>&gt;text&lt;/<span class="sy-tag">p</span>&gt;
+      &lt;/<span class="sy-tag">div</span>&gt;
+      &lt;<span class="sy-tag">ul</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__service--list"</span>&gt;
+        &lt;<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;
+            &lt;<span class="sy-tag">img</span> <span class="sy-attr">src</span>=<span class="sy-str">""</span>&gt;
+            &lt;<span class="sy-tag">h3</span>&gt;title&lt;/<span class="sy-tag">h3</span>&gt;
+            &lt;<span class="sy-tag">p</span>&gt;text&lt;/<span class="sy-tag">p</span>&gt;
+          &lt;/<span class="sy-tag">a</span>&gt;
+        &lt;/<span class="sy-tag">li</span>&gt;
+        &lt;<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;
+            &lt;<span class="sy-tag">img</span> <span class="sy-attr">src</span>=<span class="sy-str">""</span>&gt;
+            &lt;<span class="sy-tag">h3</span>&gt;title&lt;/<span class="sy-tag">h3</span>&gt;
+            &lt;<span class="sy-tag">p</span>&gt;text&lt;/<span class="sy-tag">p</span>&gt;
+          &lt;/<span class="sy-tag">a</span>&gt;
+        &lt;/<span class="sy-tag">li</span>&gt;
+        &lt;<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;
+            &lt;<span class="sy-tag">img</span> <span class="sy-attr">src</span>=<span class="sy-str">""</span>&gt;
+            &lt;<span class="sy-tag">h3</span>&gt;title&lt;/<span class="sy-tag">h3</span>&gt;
+            &lt;<span class="sy-tag">p</span>&gt;text&lt;/<span class="sy-tag">p</span>&gt;
+          &lt;/<span class="sy-tag">a</span>&gt;
+        &lt;/<span class="sy-tag">li</span>&gt;
+      &lt;/<span class="sy-tag">ul</span>&gt;
+    &lt;/<span class="sy-tag">section</span>&gt;
+
+    &lt;<span class="sy-tag">section</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news"</span>&gt;
+      .main__news
+      &lt;<span class="sy-tag">h2</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--ttl"</span>&gt;h2 title&lt;/<span class="sy-tag">h2</span>&gt;
+      &lt;<span class="sy-tag">ul</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--list"</span>&gt;
+        &lt;<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;
+            &lt;<span class="sy-tag">dl</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--item"</span>&gt;
+              &lt;<span class="sy-tag">dt</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--day"</span>&gt;2026.08.12&lt;/<span class="sy-tag">dt</span>&gt;
+              &lt;<span class="sy-tag">dd</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--data"</span>&gt;text&lt;/<span class="sy-tag">dd</span>&gt;
+            &lt;/<span class="sy-tag">dl</span>&gt;
+          &lt;/<span class="sy-tag">a</span>&gt;
+        &lt;/<span class="sy-tag">li</span>&gt;
+        &lt;<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;
+            &lt;<span class="sy-tag">dl</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--item"</span>&gt;
+              &lt;<span class="sy-tag">dt</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--day"</span>&gt;2026.08.12&lt;/<span class="sy-tag">dt</span>&gt;
+              &lt;<span class="sy-tag">dd</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--data"</span>&gt;text&lt;/<span class="sy-tag">dd</span>&gt;
+            &lt;/<span class="sy-tag">dl</span>&gt;
+          &lt;/<span class="sy-tag">a</span>&gt;
+        &lt;/<span class="sy-tag">li</span>&gt;
+        &lt;<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;
+            &lt;<span class="sy-tag">dl</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--item"</span>&gt;
+              &lt;<span class="sy-tag">dt</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--day"</span>&gt;2026.08.12&lt;/<span class="sy-tag">dt</span>&gt;
+              &lt;<span class="sy-tag">dd</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--data"</span>&gt;text&lt;/<span class="sy-tag">dd</span>&gt;
+            &lt;/<span class="sy-tag">dl</span>&gt;
+          &lt;/<span class="sy-tag">a</span>&gt;
+        &lt;/<span class="sy-tag">li</span>&gt;
+      &lt;/<span class="sy-tag">ul</span>&gt;
+    &lt;/<span class="sy-tag">section</span>&gt;
+  &lt;/<span class="sy-tag">main</span>&gt;
+
+  &lt;<span class="sy-tag">footer</span> <span class="sy-attr">class</span>=<span class="sy-str">"footer"</span>&gt;
+    .footer
+    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"footer__logo"</span>&gt;&lt;<span class="sy-tag">img</span> <span class="sy-attr">src</span>=<span class="sy-str">""</span>&gt;&lt;/<span class="sy-tag">div</span>&gt;
+    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"footer__copyright"</span>&gt;copy&lt;/<span class="sy-tag">div</span>&gt;
+  &lt;/<span class="sy-tag">footer</span>&gt;
+
+&lt;/<span class="sy-tag">body</span>&gt;
+&lt;/<span class="sy-tag">html</span>&gt;</code></div></div>
+
+    <h4>css/style.css（全体）</h4>
+
+<div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">style.css — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab">index.html</div><div class="vscode-tab is-active">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133</div><code class="vscode-code">@charset "UTF-8";
+
+<span class="sy-com">/******************************</span>
+  初期設定
+<span class="sy-com">******************************/</span>
+<span class="sy-sel">*</span> {
+  <span class="sy-attr">box-sizing</span>: border-box;
+}
+<span class="sy-sel">body</span> {
+  <span class="sy-attr">color</span>: <span class="sy-num">#060606</span>;
+  <span class="sy-attr">font-size</span>: <span class="sy-num">16px</span>;
+  <span class="sy-attr">font-family</span>: "Helvetica Neue", Arial, "Hiragino Sans", Meiryo, sans-serif;
+}
+<span class="sy-sel">a</span> {
+  <span class="sy-attr">color</span>: inherit;
+  <span class="sy-attr">text-decoration</span>: none;
+}
+
+<span class="sy-com">/* 枠の位置を目で確かめるための一時的な指定。完成間近になったら削除する */</span>
+<span class="sy-sel">header, footer, main, section</span> {
+  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> solid <span class="sy-num">#e44</span>;
+}
+<span class="sy-sel">div, p</span> {
+  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> solid <span class="sy-num">#37b</span>;
+}
+<span class="sy-sel">li, dt, dd</span> {
+  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> dashed <span class="sy-num">#3a6</span>;
+}
+<span class="sy-sel">header, footer, main, section, div, p, ul, li, dl, dt, dd</span> {
+  <span class="sy-attr">margin</span>: <span class="sy-num">10px</span>;
+  <span class="sy-attr">padding</span>: <span class="sy-num">10px</span>;
+}
+
+<span class="sy-com">/******************************</span>
+  header
+<span class="sy-com">******************************/</span>
+<span class="sy-sel">.header__wrap</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">85%</span>;
+  <span class="sy-attr">margin</span>: <span class="sy-num">0</span> auto;
+  <span class="sy-attr">display</span>: flex;
+  <span class="sy-attr">justify-content</span>: space-between;
+  <span class="sy-attr">align-items</span>: center;
+}
+<span class="sy-sel">.header__logo</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">54px</span>;
+  <span class="sy-attr">height</span>: <span class="sy-num">54px</span>;
+}
+<span class="sy-sel">.header__menu ul</span> {
+  <span class="sy-attr">display</span>: flex;
+}
+<span class="sy-sel">.header__menu li</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">100px</span>;
+}
+
+<span class="sy-com">/******************************</span>
+  main
+<span class="sy-com">******************************/</span>
+<span class="sy-sel">.main section</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">85%</span>;
+  <span class="sy-attr">margin</span>: <span class="sy-num">0</span> auto <span class="sy-num">60px</span>;
+}
+<span class="sy-sel">.main .main__kv</span> {
+  <span class="sy-attr">width</span>: auto;
+  <span class="sy-attr">height</span>: <span class="sy-num">70vh</span>;
+}
+
+<span class="sy-com">/* about */</span>
+<span class="sy-sel">.main__about--ttl</span> {
+  <span class="sy-attr">margin-bottom</span>: <span class="sy-num">60px</span>;
+  <span class="sy-attr">text-align</span>: center;
+}
+<span class="sy-sel">.main__about--logo</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">120px</span>;
+  <span class="sy-attr">margin</span>: <span class="sy-num">0</span> auto;
+}
+<span class="sy-sel">.main__about--txt</span> {
+  <span class="sy-attr">margin</span>: <span class="sy-num">45px</span> <span class="sy-num">0</span> <span class="sy-num">60px</span>;
+  <span class="sy-attr">text-align</span>: center;
+}
+
+<span class="sy-com">/* service */</span>
+<span class="sy-sel">.main__service--message</span> {
+  <span class="sy-attr">margin-bottom</span>: <span class="sy-num">95px</span>;
+  <span class="sy-attr">display</span>: flex;
+}
+<span class="sy-sel">.main__service--message h2</span> {
+  <span class="sy-attr">flex</span>: <span class="sy-num">1</span>;
+}
+<span class="sy-sel">.main__service--message p</span> {
+  <span class="sy-attr">flex</span>: <span class="sy-num">2</span>;
+}
+<span class="sy-sel">.main__service--list</span> {
+  <span class="sy-attr">display</span>: flex;
+}
+<span class="sy-sel">.main__service--list li</span> {
+  <span class="sy-attr">flex</span>: <span class="sy-num">1</span>;
+}
+<span class="sy-sel">.main__service--list a</span> {
+  <span class="sy-attr">display</span>: block;
+}
+
+<span class="sy-com">/* news */</span>
+<span class="sy-sel">.main__news--ttl</span> {
+  <span class="sy-attr">margin-bottom</span>: <span class="sy-num">16px</span>;
+}
+<span class="sy-sel">.main__news--list a</span> {
+  <span class="sy-attr">display</span>: block;
+  <span class="sy-attr">padding</span>: <span class="sy-num">50px</span> <span class="sy-num">20px</span>;
+}
+<span class="sy-sel">.main__news--item</span> {
+  <span class="sy-attr">display</span>: flex;
+}
+<span class="sy-sel">.main__news--day</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">265px</span>;
+  <span class="sy-attr">margin-right</span>: <span class="sy-num">32px</span>;
+  <span class="sy-attr">display</span>: flex;
+  <span class="sy-attr">align-items</span>: center;
+}
+
+<span class="sy-com">/******************************</span>
+  footer
+<span class="sy-com">******************************/</span>
+<span class="sy-sel">.footer</span> {
+  <span class="sy-attr">padding</span>: <span class="sy-num">90px</span> <span class="sy-num">0</span> <span class="sy-num">70px</span>;
+}
+<span class="sy-sel">.footer__logo</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">60px</span>;
+  <span class="sy-attr">margin</span>: <span class="sy-num">0</span> auto;
+}
+<span class="sy-sel">.footer__copyright</span> {
+  <span class="sy-attr">margin-top</span>: <span class="sy-num">30px</span>;
+  <span class="sy-attr">text-align</span>: center;
+}</code></div></div>
+
+    <div class="open-site-wrap">
+      <a class="open-site" href="sample_site/top_boxes.html" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h6"/></svg>
+        枠だけのサンプルを開く（新しいタブ）
+      </a>
+    </div>
+
+    <p>
+      これで枠だけのページが完成しました。
+      残りは画像と文字を入れ、余白や文字の大きさを整えるだけです。
+    </p>
+
+
+    <h3 id="step9">9. 画像や文字要素を入れ込んでいく</h3>
+
+    <div class="caution">
+      <span class="label">はじめに：素材をダウンロードして配置する</span><br>
+      このステップで使う画像は、下のボタンからダウンロードできます。
+      ダウンロードして展開し、出てきた <code>images</code> フォルダを
+      <code>index.html</code> と同じ場所に置きましょう。<br>
+      <a class="dl-btn" href="sample_site/images.zip" style="margin-top:10px;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>images.zip をダウンロード
+      </a><span class="dl-note">ロゴ・メインビジュアル・カード画像の素材一式</span>
+    </div>
+
+    <p>
+      HTMLでは、目印に書いていたクラス名の文字（<code>.header</code>・<code>.main</code>・
+      <code>.header__wrap</code> など）を<strong>すべて削除</strong>し、
+      テキストと <code>&lt;img&gt;</code> タグを入れていきます。
+      <strong>緑の行</strong>が新しく書く場所です。目印の文字が消えている行には色が付かないので、
+      完成コードと自分のファイルを見比べながら進めてください。
+    </p>
+<div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">index.html — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab is-active">index.html</div><div class="vscode-tab">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117</div><code class="vscode-code">&lt;!DOCTYPE html&gt;
+&lt;<span class="sy-tag">html</span> <span class="sy-attr">lang</span>=<span class="sy-str">"ja"</span>&gt;
+&lt;<span class="sy-tag">head</span>&gt;
+  &lt;<span class="sy-tag">meta</span> <span class="sy-attr">charset</span>=<span class="sy-str">"UTF-8"</span>&gt;
+  &lt;<span class="sy-tag">meta</span> <span class="sy-attr">name</span>=<span class="sy-str">"viewport"</span> <span class="sy-attr">content</span>=<span class="sy-str">"width=device-width, initial-scale=1.0"</span>&gt;
+  &lt;<span class="sy-tag">title</span>&gt;SAMPLE SITE&lt;/<span class="sy-tag">title</span>&gt;
+  &lt;<span class="sy-tag">link</span> <span class="sy-attr">rel</span>=<span class="sy-str">"stylesheet"</span> <span class="sy-attr">href</span>=<span class="sy-str">"css/reset.css"</span>&gt;
+  &lt;<span class="sy-tag">link</span> <span class="sy-attr">rel</span>=<span class="sy-str">"stylesheet"</span> <span class="sy-attr">href</span>=<span class="sy-str">"css/style.css"</span>&gt;
+&lt;/<span class="sy-tag">head</span>&gt;
+&lt;<span class="sy-tag">body</span>&gt;
+
+  &lt;<span class="sy-tag">header</span> <span class="sy-attr">class</span>=<span class="sy-str">"header"</span>&gt;
+    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"header__wrap"</span>&gt;
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"header__logo"</span>&gt;
+<span class="add">        &lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;&lt;<span class="sy-tag">img</span> <span class="sy-attr">src</span>=<span class="sy-str">"images/logo_mark.webp"</span> <span class="sy-attr">alt</span>=<span class="sy-str">"SAMPLE SITE"</span>&gt;&lt;/<span class="sy-tag">a</span>&gt;</span>      &lt;/<span class="sy-tag">div</span>&gt;
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"header__menu"</span>&gt;
+        &lt;<span class="sy-tag">ul</span>&gt;
+<span class="add">          &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;ホーム&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;</span><span class="add">          &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;レッスン&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;</span><span class="add">          &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;実績&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;</span><span class="add">          &lt;<span class="sy-tag">li</span>&gt;&lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;お知らせ&lt;/<span class="sy-tag">a</span>&gt;&lt;/<span class="sy-tag">li</span>&gt;</span>        &lt;/<span class="sy-tag">ul</span>&gt;
+      &lt;/<span class="sy-tag">div</span>&gt;
+    &lt;/<span class="sy-tag">div</span>&gt;
+  &lt;/<span class="sy-tag">header</span>&gt;
+
+  &lt;<span class="sy-tag">main</span> <span class="sy-attr">class</span>=<span class="sy-str">"main"</span>&gt;
+    &lt;<span class="sy-tag">section</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__kv"</span>&gt;
+<span class="add">      手を動かして、&lt;<span class="sy-tag">br</span>&gt;</span><span class="add">      作りながら覚える。&lt;<span class="sy-tag">br</span>&gt;</span><span class="add">      Webの基礎を、ここから。</span>    &lt;/<span class="sy-tag">section</span>&gt;
+
+    &lt;<span class="sy-tag">section</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__about"</span>&gt;
+<span class="add">      &lt;<span class="sy-tag">h1</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__about--ttl"</span>&gt;つくることが、いちばんの近道&lt;/<span class="sy-tag">h1</span>&gt;</span><span class="add">      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__about--logo"</span>&gt;&lt;<span class="sy-tag">img</span> <span class="sy-attr">src</span>=<span class="sy-str">"images/logo_mark.webp"</span> <span class="sy-attr">alt</span>=<span class="sy-str">"logo"</span>&gt;&lt;/<span class="sy-tag">div</span>&gt;</span><span class="add">      &lt;<span class="sy-tag">p</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__about--txt"</span>&gt;</span><span class="add">        SAMPLE SITE は、Web制作をこれから学ぶ人のための練習用サイトです。</span><span class="add">        枠を組み立て、色や画像を入れ、1ページを完成させるまでの流れを、</span><span class="add">        実際に手を動かしながら体験できます。</span><span class="add">        読むだけでは身につかないことも、作ってみれば自然と分かるようになります。</span><span class="add">      &lt;/<span class="sy-tag">p</span>&gt;</span>    &lt;/<span class="sy-tag">section</span>&gt;
+
+    &lt;<span class="sy-tag">section</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__service"</span>&gt;
+      &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__service--message"</span>&gt;
+<span class="add">        &lt;<span class="sy-tag">h2</span>&gt;Lesson&lt;/<span class="sy-tag">h2</span>&gt;</span><span class="add">        &lt;<span class="sy-tag">p</span>&gt;</span><span class="add">          HTML と CSS の基礎から、実際のページを組み立てるところまで。&lt;<span class="sy-tag">br</span>&gt;</span><span class="add">          ひとつずつ手を動かして確かめながら進むので、&lt;<span class="sy-tag">br</span>&gt;</span><span class="add">          はじめての人でも迷わず最後までたどり着けます。</span><span class="add">        &lt;/<span class="sy-tag">p</span>&gt;</span>      &lt;/<span class="sy-tag">div</span>&gt;
+      &lt;<span class="sy-tag">ul</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__service--list"</span>&gt;
+        &lt;<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;
+<span class="add">            &lt;<span class="sy-tag">img</span> <span class="sy-attr">src</span>=<span class="sy-str">"images/card_html.webp"</span> <span class="sy-attr">alt</span>=<span class="sy-str">""</span>&gt;</span><span class="add">            &lt;<span class="sy-tag">h3</span>&gt;HTML &amp;amp; CSS&lt;/<span class="sy-tag">h3</span>&gt;</span><span class="add">            &lt;<span class="sy-tag">p</span>&gt;Webページの構造と装飾。枠組みからレイアウトまでの基礎を学びます。&lt;/<span class="sy-tag">p</span>&gt;</span>          &lt;/<span class="sy-tag">a</span>&gt;
+        &lt;/<span class="sy-tag">li</span>&gt;
+        &lt;<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;
+<span class="add">            &lt;<span class="sy-tag">img</span> <span class="sy-attr">src</span>=<span class="sy-str">"images/card_js.webp"</span> <span class="sy-attr">alt</span>=<span class="sy-str">""</span>&gt;</span><span class="add">            &lt;<span class="sy-tag">h3</span>&gt;JavaScript&lt;/<span class="sy-tag">h3</span>&gt;</span><span class="add">            &lt;<span class="sy-tag">p</span>&gt;動きのあるページ作り。DOM操作やイベントの基本を身につけます。&lt;/<span class="sy-tag">p</span>&gt;</span>          &lt;/<span class="sy-tag">a</span>&gt;
+        &lt;/<span class="sy-tag">li</span>&gt;
+        &lt;<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;
+<span class="add">            &lt;<span class="sy-tag">img</span> <span class="sy-attr">src</span>=<span class="sy-str">"images/card_php.webp"</span> <span class="sy-attr">alt</span>=<span class="sy-str">""</span>&gt;</span><span class="add">            &lt;<span class="sy-tag">h3</span>&gt;PHP&lt;/<span class="sy-tag">h3</span>&gt;</span><span class="add">            &lt;<span class="sy-tag">p</span>&gt;サーバーサイドの入門。フォーム処理やDB連携の第一歩を学びます。&lt;/<span class="sy-tag">p</span>&gt;</span>          &lt;/<span class="sy-tag">a</span>&gt;
+        &lt;/<span class="sy-tag">li</span>&gt;
+      &lt;/<span class="sy-tag">ul</span>&gt;
+    &lt;/<span class="sy-tag">section</span>&gt;
+
+    &lt;<span class="sy-tag">section</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news"</span>&gt;
+<span class="add">      &lt;<span class="sy-tag">h2</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--ttl"</span>&gt;News&lt;/<span class="sy-tag">h2</span>&gt;</span>      &lt;<span class="sy-tag">ul</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--list"</span>&gt;
+        &lt;<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;
+            &lt;<span class="sy-tag">dl</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--item"</span>&gt;
+              &lt;<span class="sy-tag">dt</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--day"</span>&gt;2026.08.12&lt;/<span class="sy-tag">dt</span>&gt;
+<span class="add">              &lt;<span class="sy-tag">dd</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--data"</span>&gt;レッスンに「実践コーディング」を追加しました。1ページを通して作る課題です。&lt;/<span class="sy-tag">dd</span>&gt;</span>            &lt;/<span class="sy-tag">dl</span>&gt;
+          &lt;/<span class="sy-tag">a</span>&gt;
+        &lt;/<span class="sy-tag">li</span>&gt;
+        &lt;<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;
+            &lt;<span class="sy-tag">dl</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--item"</span>&gt;
+<span class="add">              &lt;<span class="sy-tag">dt</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--day"</span>&gt;2026.07.30&lt;/<span class="sy-tag">dt</span>&gt;</span><span class="add">              &lt;<span class="sy-tag">dd</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--data"</span>&gt;サンプルサイトの素材を差し替えました。ダウンロードは各レッスンのページから行えます。&lt;/<span class="sy-tag">dd</span>&gt;</span>            &lt;/<span class="sy-tag">dl</span>&gt;
+          &lt;/<span class="sy-tag">a</span>&gt;
+        &lt;/<span class="sy-tag">li</span>&gt;
+        &lt;<span class="sy-tag">li</span>&gt;
+          &lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">""</span>&gt;
+            &lt;<span class="sy-tag">dl</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--item"</span>&gt;
+<span class="add">              &lt;<span class="sy-tag">dt</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--day"</span>&gt;2026.07.15&lt;/<span class="sy-tag">dt</span>&gt;</span><span class="add">              &lt;<span class="sy-tag">dd</span> <span class="sy-attr">class</span>=<span class="sy-str">"main__news--data"</span>&gt;よくある質問のページを公開しました。つまずきやすい点をまとめています。&lt;/<span class="sy-tag">dd</span>&gt;</span>            &lt;/<span class="sy-tag">dl</span>&gt;
+          &lt;/<span class="sy-tag">a</span>&gt;
+        &lt;/<span class="sy-tag">li</span>&gt;
+      &lt;/<span class="sy-tag">ul</span>&gt;
+    &lt;/<span class="sy-tag">section</span>&gt;
+  &lt;/<span class="sy-tag">main</span>&gt;
+
+  &lt;<span class="sy-tag">footer</span> <span class="sy-attr">class</span>=<span class="sy-str">"footer"</span>&gt;
+<span class="add">    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"footer__logo"</span>&gt;&lt;<span class="sy-tag">img</span> <span class="sy-attr">src</span>=<span class="sy-str">"images/logo_mark.webp"</span> <span class="sy-attr">alt</span>=<span class="sy-str">"logo"</span>&gt;&lt;/<span class="sy-tag">div</span>&gt;</span><span class="add">    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"footer__copyright"</span>&gt;© SAMPLE SITE&lt;/<span class="sy-tag">div</span>&gt;</span>  &lt;/<span class="sy-tag">footer</span>&gt;
+
+&lt;/<span class="sy-tag">body</span>&gt;
+&lt;/<span class="sy-tag">html</span>&gt;</code></div></div>
+
+    <p>
+      CSSでは、まず<strong>ステップ1で入れた確認用の指定を削除</strong>します。
+      「枠の位置を目で確かめるための一時的な指定」というコメントから、
+      その下の <code>border</code> と <code>margin</code>・<code>padding</code> のかたまりまでを、
+      <strong>前後の空行が二重にならないように</strong>削除します。
+      消し忘れると枠線と余白が残り、見た目が大きく崩れます。
+      そのうえで、背景画像・文字の大きさ・余白を整えていきます。
+    </p>
+
+<div class="vscode"><div class="vscode-titlebar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><span class="vscode-title">style.css — Visual Studio Code</span></div><div class="vscode-tabs"><div class="vscode-tab">index.html</div><div class="vscode-tab is-active">style.css</div></div><div class="vscode-body"><div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211</div><code class="vscode-code">@charset "UTF-8";
+
+<span class="sy-com">/******************************</span>
+  初期設定
+<span class="sy-com">******************************/</span>
+<span class="sy-sel">*</span> {
+  <span class="sy-attr">box-sizing</span>: border-box;
+}
+<span class="sy-sel">body</span> {
+  <span class="sy-attr">color</span>: <span class="sy-num">#060606</span>;
+  <span class="sy-attr">font-size</span>: <span class="sy-num">16px</span>;
+  <span class="sy-attr">font-family</span>: "Helvetica Neue", Arial, "Hiragino Sans", Meiryo, sans-serif;
+<span class="add">  <span class="sy-attr">letter-spacing</span>: <span class="sy-num">0.06em</span>;</span>}
+<span class="sy-sel">a</span> {
+  <span class="sy-attr">color</span>: inherit;
+  <span class="sy-attr">text-decoration</span>: none;
+}
+
+<span class="sy-com">/******************************</span>
+  header
+<span class="sy-com">******************************/</span>
+<span class="add"><span class="sy-sel">.header</span> {</span><span class="add">  <span class="sy-attr">width</span>: <span class="sy-num">100%</span>;</span><span class="add">  <span class="sy-attr">padding</span>: <span class="sy-num">10px</span>;</span><span class="add">  <span class="sy-attr">box-shadow</span>: <span class="sy-num">0</span> <span class="sy-num">5px</span> <span class="sy-num">15px</span> <span class="sy-num">rgba(0,</span> <span class="sy-num">0,</span> <span class="sy-num">0,</span> <span class="sy-num">0.15)</span>;</span>}
+<span class="sy-sel">.header__wrap</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">85%</span>;
+  <span class="sy-attr">margin</span>: <span class="sy-num">0</span> auto;
+  <span class="sy-attr">display</span>: flex;
+  <span class="sy-attr">justify-content</span>: space-between;
+  <span class="sy-attr">align-items</span>: center;
+}
+<span class="sy-sel">.header__logo</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">54px</span>;
+  <span class="sy-attr">height</span>: <span class="sy-num">54px</span>;
+}
+<span class="add"><span class="sy-sel">.header__logo a</span> {</span><span class="add">  <span class="sy-attr">display</span>: block;</span>}
+<span class="add"><span class="sy-sel">.header__logo img</span> {</span><span class="add">  <span class="sy-attr">width</span>: <span class="sy-num">100%</span>;</span><span class="add">  <span class="sy-attr">display</span>: block;</span>}
+<span class="sy-sel">.header__menu ul</span> {
+  <span class="sy-attr">display</span>: flex;
+}
+<span class="sy-sel">.header__menu li</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">100px</span>;
+}
+<span class="add"><span class="sy-sel">.header__menu a</span> {</span><span class="add">  <span class="sy-attr">display</span>: block;</span><span class="add">  <span class="sy-attr">text-align</span>: center;</span><span class="add">  <span class="sy-attr">font-size</span>: <span class="sy-num">14px</span>;</span>}
+
+<span class="sy-com">/******************************</span>
+  main
+<span class="sy-com">******************************/</span>
+<span class="sy-sel">.main section</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">85%</span>;
+  <span class="sy-attr">margin</span>: <span class="sy-num">0</span> auto <span class="sy-num">60px</span>;
+}
+<span class="add"> </span><span class="add"><span class="sy-com">/* KV：画面幅いっぱいに背景画像を敷き、その上に文字を置く */</span></span><span class="sy-sel">.main .main__kv</span> {
+  <span class="sy-attr">width</span>: auto;
+  <span class="sy-attr">height</span>: <span class="sy-num">70vh</span>;
+<span class="add">  <span class="sy-attr">display</span>: flex;</span><span class="add">  <span class="sy-attr">align-items</span>: center;</span><span class="add">  <span class="sy-attr">padding-left</span>: <span class="sy-num">10%</span>;</span><span class="add">  <span class="sy-attr">background</span>: url(../images/top_bg.webp) center / cover no-repeat;</span><span class="add">  <span class="sy-attr">color</span>: #fff;</span><span class="add">  <span class="sy-attr">font-size</span>: <span class="sy-num">24px</span>;</span><span class="add">  <span class="sy-attr">line-height</span>: <span class="sy-num">1.8</span>;</span>}
+
+<span class="sy-com">/* about */</span>
+<span class="add"><span class="sy-sel">.main__about</span> {</span><span class="add">  <span class="sy-attr">padding</span>: <span class="sy-num">0</span> <span class="sy-num">10px</span> <span class="sy-num">80px</span>;</span>}
+<span class="sy-sel">.main__about--ttl</span> {
+  <span class="sy-attr">margin-bottom</span>: <span class="sy-num">60px</span>;
+  <span class="sy-attr">text-align</span>: center;
+<span class="add">  <span class="sy-attr">font-size</span>: <span class="sy-num">28px</span>;</span><span class="add">  <span class="sy-attr">font-weight</span>: bold;</span><span class="add">  <span class="sy-attr">letter-spacing</span>: <span class="sy-num">4px</span>;</span>}
+<span class="sy-sel">.main__about--logo</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">120px</span>;
+  <span class="sy-attr">margin</span>: <span class="sy-num">0</span> auto;
+}
+<span class="add"><span class="sy-sel">.main__about--logo img</span> {</span><span class="add">  <span class="sy-attr">width</span>: <span class="sy-num">100%</span>;</span><span class="add">  <span class="sy-attr">display</span>: block;</span>}
+<span class="sy-sel">.main__about--txt</span> {
+  <span class="sy-attr">margin</span>: <span class="sy-num">45px</span> <span class="sy-num">0</span> <span class="sy-num">60px</span>;
+<span class="add">  <span class="sy-attr">padding</span>: <span class="sy-num">0</span> <span class="sy-num">20px</span>;</span>  <span class="sy-attr">text-align</span>: center;
+<span class="add">  <span class="sy-attr">font-size</span>: <span class="sy-num">16px</span>;</span><span class="add">  <span class="sy-attr">line-height</span>: <span class="sy-num">2</span>;</span><span class="add">  <span class="sy-attr">letter-spacing</span>: <span class="sy-num">4px</span>;</span>}
+
+<span class="sy-com">/* service */</span>
+<span class="add"><span class="sy-sel">.main__service</span> {</span><span class="add">  <span class="sy-attr">padding-bottom</span>: <span class="sy-num">100px</span>;</span>}
+<span class="sy-sel">.main__service--message</span> {
+  <span class="sy-attr">margin-bottom</span>: <span class="sy-num">95px</span>;
+  <span class="sy-attr">display</span>: flex;
+}
+<span class="sy-sel">.main__service--message h2</span> {
+  <span class="sy-attr">flex</span>: <span class="sy-num">1</span>;
+<span class="add">  <span class="sy-attr">font-size</span>: <span class="sy-num">50px</span>;</span><span class="add">  <span class="sy-attr">font-weight</span>: bold;</span>}
+<span class="sy-sel">.main__service--message p</span> {
+  <span class="sy-attr">flex</span>: <span class="sy-num">2</span>;
+<span class="add">  <span class="sy-attr">font-size</span>: <span class="sy-num">16px</span>;</span><span class="add">  <span class="sy-attr">line-height</span>: <span class="sy-num">2.2</span>;</span><span class="add">  <span class="sy-attr">letter-spacing</span>: <span class="sy-num">2px</span>;</span>}
+<span class="sy-sel">.main__service--list</span> {
+  <span class="sy-attr">display</span>: flex;
+}
+<span class="sy-sel">.main__service--list li</span> {
+  <span class="sy-attr">flex</span>: <span class="sy-num">1</span>;
+<span class="add">  <span class="sy-attr">margin-right</span>: <span class="sy-num">2%</span>;</span>}
+<span class="add"><span class="sy-sel">.main__service--list li:last-child</span> {</span><span class="add">  <span class="sy-attr">margin-right</span>: <span class="sy-num">0</span>;</span>}
+<span class="sy-sel">.main__service--list a</span> {
+  <span class="sy-attr">display</span>: block;
+}
+<span class="add"><span class="sy-sel">.main__service--list img</span> {</span><span class="add">  <span class="sy-attr">width</span>: <span class="sy-num">100%</span>;</span><span class="add">  <span class="sy-attr">display</span>: block;</span>}
+<span class="add"><span class="sy-sel">.main__service--list h3</span> {</span><span class="add">  <span class="sy-attr">margin</span>: <span class="sy-num">50px</span> <span class="sy-num">0</span> <span class="sy-num">30px</span>;</span><span class="add">  <span class="sy-attr">font-size</span>: <span class="sy-num">18px</span>;</span><span class="add">  <span class="sy-attr">font-weight</span>: bold;</span>}
+<span class="add"><span class="sy-sel">.main__service--list p</span> {</span><span class="add">  <span class="sy-attr">font-size</span>: <span class="sy-num">14px</span>;</span><span class="add">  <span class="sy-attr">line-height</span>: <span class="sy-num">1.8</span>;</span>}
+
+<span class="sy-com">/* news */</span>
+<span class="add"><span class="sy-sel">.main__news</span> {</span><span class="add">  <span class="sy-attr">padding</span>: <span class="sy-num">0</span> <span class="sy-num">20px</span>;</span>}
+<span class="sy-sel">.main__news--ttl</span> {
+  <span class="sy-attr">margin-bottom</span>: <span class="sy-num">16px</span>;
+<span class="add">  <span class="sy-attr">font-size</span>: <span class="sy-num">48px</span>;</span><span class="add">  <span class="sy-attr">font-weight</span>: bold;</span>}
+<span class="add"><span class="sy-sel">.main__news--list</span> {</span><span class="add">  <span class="sy-attr">padding</span>: <span class="sy-num">40px</span> <span class="sy-num">12px</span>;</span>}
+<span class="add"><span class="sy-sel">.main__news--list li</span> {</span><span class="add">  <span class="sy-attr">border-bottom</span>: <span class="sy-num">1px</span> solid <span class="sy-num">#e8ecee</span>;</span>}
+<span class="add"><span class="sy-sel">.main__news--list li:first-child</span> {</span><span class="add">  <span class="sy-attr">border-top</span>: <span class="sy-num">1px</span> solid <span class="sy-num">#e8ecee</span>;</span>}
+<span class="sy-sel">.main__news--list a</span> {
+  <span class="sy-attr">display</span>: block;
+  <span class="sy-attr">padding</span>: <span class="sy-num">50px</span> <span class="sy-num">20px</span>;
+}
+<span class="add"><span class="sy-sel">.main__news--list a:hover</span> {</span><span class="add">  <span class="sy-attr">background</span>: <span class="sy-num">#e8ecee</span>;</span>}
+<span class="sy-sel">.main__news--item</span> {
+  <span class="sy-attr">display</span>: flex;
+}
+<span class="sy-sel">.main__news--day</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">265px</span>;
+  <span class="sy-attr">margin-right</span>: <span class="sy-num">32px</span>;
+  <span class="sy-attr">display</span>: flex;
+  <span class="sy-attr">align-items</span>: center;
+}
+<span class="add"><span class="sy-sel">.main__news--data</span> {</span><span class="add">  <span class="sy-attr">line-height</span>: <span class="sy-num">1.8</span>;</span>}
+
+<span class="sy-com">/******************************</span>
+  footer
+<span class="sy-com">******************************/</span>
+<span class="sy-sel">.footer</span> {
+  <span class="sy-attr">padding</span>: <span class="sy-num">90px</span> <span class="sy-num">0</span> <span class="sy-num">70px</span>;
+<span class="add">  <span class="sy-attr">border-top</span>: <span class="sy-num">1px</span> solid <span class="sy-num">#e8ecee</span>;</span>}
+<span class="sy-sel">.footer__logo</span> {
+  <span class="sy-attr">width</span>: <span class="sy-num">60px</span>;
+  <span class="sy-attr">margin</span>: <span class="sy-num">0</span> auto;
+}
+<span class="add"><span class="sy-sel">.footer__logo img</span> {</span><span class="add">  <span class="sy-attr">width</span>: <span class="sy-num">100%</span>;</span><span class="add">  <span class="sy-attr">display</span>: block;</span>}
+<span class="sy-sel">.footer__copyright</span> {
+  <span class="sy-attr">margin-top</span>: <span class="sy-num">30px</span>;
+  <span class="sy-attr">text-align</span>: center;
+<span class="add">  <span class="sy-attr">color</span>: <span class="sy-num">#b5b5b5</span>;</span><span class="add">  <span class="sy-attr">font-size</span>: <span class="sy-num">11px</span>;</span>}</code></div></div>
+
+
+
+    <p>
+      ここまで書けたら、ブラウザで <code>index.html</code> を開いて、
+      このページの冒頭で見た<strong>完成したページ</strong>と見比べてみましょう。
+      同じ見た目になっていれば完成です。
+    </p>
+
+    <div class="open-site-wrap">
+      <a class="open-site" href="sample_site/top_complete.html" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h6"/></svg>
+        完成したサンプルサイトを開く（新しいタブ）
+      </a>
+    </div>
+
+    <h3>仕上げで出てくる書き方</h3>
+    <p>
+      見た目を整える指定がまとめて増えます。
+      <code>letter-spacing</code>（字間）や <code>font-weight</code>（文字の太さ）のように
+      意味が名前どおりのものは省き、<strong>とくに知っておきたい次の2つ</strong>を取り上げます。
+    </p>
+
+    <h4><code>background</code> ── 背景の指定を1行にまとめる</h4>
+    <p>
+      背景画像を敷くことはコーダー初級#3 でも扱いましたが、
+      <strong>画像の大きさ</strong>の書き方は今回が初めてです。
+      メインビジュアルでは次のように書いています。
+    </p>
+
+    <pre><code>background: url(../images/top_bg.webp) center / cover no-repeat;</code></pre>
+
+    <table>
+      <tr>
+        <th style="width: 32%;">指定</th>
+        <th>意味</th>
+      </tr>
+      <tr>
+        <td><code>url(../images/top_bg.webp)</code></td>
+        <td>背景に使う画像ファイルの場所</td>
+      </tr>
+      <tr>
+        <td><code>center</code></td>
+        <td>画像を<strong>どの位置に置くか</strong>。中央にそろえる</td>
+      </tr>
+      <tr>
+        <td><code>/ cover</code></td>
+        <td><code>/</code> の後ろは<strong>画像の大きさ</strong>。
+        <code>cover</code> は、枠いっぱいに広がるように拡大するという意味</td>
+      </tr>
+      <tr>
+        <td><code>no-repeat</code></td>
+        <td>画像を<strong>繰り返さず、1枚だけ</strong>表示する</td>
+      </tr>
+    </table>
+
+    <h4><code>box-shadow</code> ── 枠に影をつける</h4>
+    <p>
+      ヘッダーの下側に影をつけています。
+    </p>
+
+    <pre><code>box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);</code></pre>
+
+    <p>
+      値は左から<strong>横のずれ・縦のずれ・ぼかし・色</strong>。
+      ここでは「右に <strong>0</strong>・下に <strong>5px</strong> ずらし、
+      <strong>15px</strong> ぼかして、<strong>薄い黒</strong>」という意味です。
+      <code>rgba</code> は色の指定で、<strong>最後の数値が濃さ</strong>を表します。
+      <code>0</code> で透明、<code>1</code> で完全な黒になります。
+    </p>
+
+  </section>
+
+</main>
+
+<nav class="page-nav">
+  <a class="page-prev" href="beginner_7.html">
+    <span class="page-nav-label">前のページ</span>
+    <span class="page-nav-title">コーダー中級#3</span>
+    <span class="page-nav-sub">レイアウトの組み立てを深める</span>
+  </a>
+  <a class="page-next" href="basic_1.html">
+    <span class="page-nav-label">次のページ</span>
+    <span class="page-nav-title">マークアップ中級#1</span>
+    <span class="page-nav-sub">マークアップの実務を学ぶ</span>
+  </a>
+</nav>
+
+<footer>
+</footer>
+
+<script>
+  // ライブデモ（.browser-demo）を chrome 枠の幅にフィットさせる
+  (function () {
+    function fit() {
+      document.querySelectorAll('.browser-demo, .diagram-embed').forEach(function (d) {
+        var w = parseFloat(d.dataset.width) || 1160;
+        var z = d.parentElement.clientWidth / w;
+        if (d.classList.contains('diagram-embed')) z = Math.min(1, z);
+        d.style.zoom = z;
+      });
+    }
+    window.addEventListener('load', fit);
+    window.addEventListener('resize', fit);
+  })();
+</script>
+
+<script src="../js/training.js"></script>
+
+</body>
+</html>

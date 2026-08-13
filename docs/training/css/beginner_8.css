@@ -1,0 +1,1882 @@
+/* ============================================================
+   コーダー上級#1（beginner_8.html）専用のスタイル
+
+   全ページ共通の土台は training.css にあります。
+   ここに置くのは、このページだけで使う図やデモのスタイルです。
+   ============================================================ */
+
+/* ── 素材のダウンロードボタン ── */
+.dl-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #2563eb;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 1;
+  padding: 11px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.dl-btn:hover {
+  background: #1d4ed8;
+  text-decoration: none;
+}
+.dl-btn svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+.dl-note {
+  margin-left: 10px;
+  font-size: 14px;
+  color: #64748b;
+}
+
+/* ── サンプルサイトを開くリンク（アウトラインボタン） ── */
+.open-site-wrap {
+  text-align: center;
+  margin: 14px 0 4px;
+}
+.open-site {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 16px;
+  border: 1.5px solid #2563eb;
+  border-radius: 8px;
+  color: #2563eb;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+  background: #fff;
+}
+.open-site:hover {
+  background: #eff6ff;
+  text-decoration: none;
+}
+.open-site svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ── ライブデモの表示枠 ──
+   実寸（幅1160pxのウィンドウ相当）で組み、zoom で枠内に縮小表示する。
+   zoom の値はページ末尾のフィットスクリプトが上書きする。 */
+.browser-demo {
+  width: 1160px;
+  zoom: 0.72;
+  background: #fff;
+}
+.browser-demo * {
+  box-sizing: border-box;
+}
+
+/* ── 完成形と枠だけを左右に並べる図 ──
+   2つは同じ HTML なので、上から順に同じ部品が並ぶ。
+   幅は親要素に合わせて自動で縮小される（ページ末尾のフィットスクリプト） */
+.compare {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.compare > div {
+  flex: 1;
+  min-width: 0;
+}
+.compare .compare-cap {
+  margin-bottom: 8px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  color: #475569;
+}
+.compare .browser-demo {
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+@media (max-width: 780px) {
+  .compare {
+    flex-direction: column;
+  }
+}
+
+/* デモの中は「研修生のブラウザ」を再現する場所なので、
+   教材ページ側の装飾（見出しの帯・余白・リンク色など）をいったん打ち消し、
+   ブラウザの既定の見た目に戻してから、各ステップのCSSを当てる */
+.browser-demo header,
+.browser-demo footer,
+.browser-demo main,
+.browser-demo section,
+.browser-demo h1,
+.browser-demo h2,
+.browser-demo h3,
+.browser-demo h4,
+.browser-demo p,
+.browser-demo ul,
+.browser-demo li,
+.browser-demo dl,
+.browser-demo dt,
+.browser-demo dd,
+.browser-demo a,
+.browser-demo img,
+.browser-demo div {
+  all: revert;
+}
+
+/* 教材ページのヘッダーには、光の玉を浮かべる装飾（::before / ::after）が
+   付いている。これはタグ名で指定されているためデモ内の <header> にも当たり、
+   上の all: revert で overflow と position が消えると、
+   ページ全体に玉がはみ出してしまう。デモ内では装飾ごと消しておく */
+.browser-demo header::before,
+.browser-demo header::after {
+  content: none;
+}
+
+/* ── ステップ2時点の表示（reset.css ＋ 教材の手順から生成）── */
+.dm8-2 html,
+.dm8-2,
+.dm8-2 div,
+.dm8-2 span,
+.dm8-2 applet,
+.dm8-2 object,
+.dm8-2 iframe,
+.dm8-2 h1,
+.dm8-2 h2,
+.dm8-2 h3,
+.dm8-2 h4,
+.dm8-2 h5,
+.dm8-2 h6,
+.dm8-2 p,
+.dm8-2 blockquote,
+.dm8-2 pre,
+.dm8-2 a,
+.dm8-2 abbr,
+.dm8-2 acronym,
+.dm8-2 address,
+.dm8-2 big,
+.dm8-2 cite,
+.dm8-2 code,
+.dm8-2 del,
+.dm8-2 dfn,
+.dm8-2 em,
+.dm8-2 img,
+.dm8-2 ins,
+.dm8-2 kbd,
+.dm8-2 q,
+.dm8-2 s,
+.dm8-2 samp,
+.dm8-2 small,
+.dm8-2 strike,
+.dm8-2 strong,
+.dm8-2 sub,
+.dm8-2 sup,
+.dm8-2 tt,
+.dm8-2 var,
+.dm8-2 b,
+.dm8-2 u,
+.dm8-2 i,
+.dm8-2 center,
+.dm8-2 dl,
+.dm8-2 dt,
+.dm8-2 dd,
+.dm8-2 ol,
+.dm8-2 ul,
+.dm8-2 li,
+.dm8-2 fieldset,
+.dm8-2 form,
+.dm8-2 label,
+.dm8-2 legend,
+.dm8-2 table,
+.dm8-2 caption,
+.dm8-2 tbody,
+.dm8-2 tfoot,
+.dm8-2 thead,
+.dm8-2 tr,
+.dm8-2 th,
+.dm8-2 td,
+.dm8-2 article,
+.dm8-2 aside,
+.dm8-2 canvas,
+.dm8-2 details,
+.dm8-2 embed,
+.dm8-2 figure,
+.dm8-2 figcaption,
+.dm8-2 footer,
+.dm8-2 header,
+.dm8-2 hgroup,
+.dm8-2 menu,
+.dm8-2 nav,
+.dm8-2 output,
+.dm8-2 ruby,
+.dm8-2 section,
+.dm8-2 summary,
+.dm8-2 time,
+.dm8-2 mark,
+.dm8-2 audio,
+.dm8-2 video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+.dm8-2 article,
+.dm8-2 aside,
+.dm8-2 details,
+.dm8-2 figcaption,
+.dm8-2 figure,
+.dm8-2 footer,
+.dm8-2 header,
+.dm8-2 hgroup,
+.dm8-2 menu,
+.dm8-2 nav,
+.dm8-2 section {
+  display: block;
+}
+.dm8-2 {
+  line-height: 1;
+}
+.dm8-2 ol,
+.dm8-2 ul {
+  list-style: none;
+}
+.dm8-2 blockquote,
+.dm8-2 q {
+  quotes: none;
+}
+.dm8-2 blockquote:before,
+.dm8-2 blockquote:after,
+.dm8-2 q:before,
+.dm8-2 q:after {
+  content: "";
+  content: none;
+}
+.dm8-2 table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.dm8-2 * {
+  box-sizing: border-box;
+}
+.dm8-2 {
+  color: #060606;
+  font-size: 16px;
+  font-family: "Helvetica Neue", Arial, "Hiragino Sans", Meiryo, sans-serif;
+}
+.dm8-2 a {
+  color: inherit;
+  text-decoration: none;
+}
+.dm8-2 header,
+.dm8-2 footer,
+.dm8-2 main,
+.dm8-2 section {
+  border: 2px solid #e44;
+}
+.dm8-2 div,
+.dm8-2 p {
+  border: 2px solid #37b;
+}
+.dm8-2 li,
+.dm8-2 dt,
+.dm8-2 dd {
+  border: 2px dashed #3a6;
+}
+.dm8-2 header,
+.dm8-2 footer,
+.dm8-2 main,
+.dm8-2 section,
+.dm8-2 div,
+.dm8-2 p,
+.dm8-2 ul,
+.dm8-2 li,
+.dm8-2 dl,
+.dm8-2 dt,
+.dm8-2 dd {
+  margin: 10px;
+  padding: 10px;
+}
+
+/* ── ステップ3時点の表示（reset.css ＋ 教材の手順から生成）── */
+.dm8-3 html,
+.dm8-3,
+.dm8-3 div,
+.dm8-3 span,
+.dm8-3 applet,
+.dm8-3 object,
+.dm8-3 iframe,
+.dm8-3 h1,
+.dm8-3 h2,
+.dm8-3 h3,
+.dm8-3 h4,
+.dm8-3 h5,
+.dm8-3 h6,
+.dm8-3 p,
+.dm8-3 blockquote,
+.dm8-3 pre,
+.dm8-3 a,
+.dm8-3 abbr,
+.dm8-3 acronym,
+.dm8-3 address,
+.dm8-3 big,
+.dm8-3 cite,
+.dm8-3 code,
+.dm8-3 del,
+.dm8-3 dfn,
+.dm8-3 em,
+.dm8-3 img,
+.dm8-3 ins,
+.dm8-3 kbd,
+.dm8-3 q,
+.dm8-3 s,
+.dm8-3 samp,
+.dm8-3 small,
+.dm8-3 strike,
+.dm8-3 strong,
+.dm8-3 sub,
+.dm8-3 sup,
+.dm8-3 tt,
+.dm8-3 var,
+.dm8-3 b,
+.dm8-3 u,
+.dm8-3 i,
+.dm8-3 center,
+.dm8-3 dl,
+.dm8-3 dt,
+.dm8-3 dd,
+.dm8-3 ol,
+.dm8-3 ul,
+.dm8-3 li,
+.dm8-3 fieldset,
+.dm8-3 form,
+.dm8-3 label,
+.dm8-3 legend,
+.dm8-3 table,
+.dm8-3 caption,
+.dm8-3 tbody,
+.dm8-3 tfoot,
+.dm8-3 thead,
+.dm8-3 tr,
+.dm8-3 th,
+.dm8-3 td,
+.dm8-3 article,
+.dm8-3 aside,
+.dm8-3 canvas,
+.dm8-3 details,
+.dm8-3 embed,
+.dm8-3 figure,
+.dm8-3 figcaption,
+.dm8-3 footer,
+.dm8-3 header,
+.dm8-3 hgroup,
+.dm8-3 menu,
+.dm8-3 nav,
+.dm8-3 output,
+.dm8-3 ruby,
+.dm8-3 section,
+.dm8-3 summary,
+.dm8-3 time,
+.dm8-3 mark,
+.dm8-3 audio,
+.dm8-3 video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+.dm8-3 article,
+.dm8-3 aside,
+.dm8-3 details,
+.dm8-3 figcaption,
+.dm8-3 figure,
+.dm8-3 footer,
+.dm8-3 header,
+.dm8-3 hgroup,
+.dm8-3 menu,
+.dm8-3 nav,
+.dm8-3 section {
+  display: block;
+}
+.dm8-3 {
+  line-height: 1;
+}
+.dm8-3 ol,
+.dm8-3 ul {
+  list-style: none;
+}
+.dm8-3 blockquote,
+.dm8-3 q {
+  quotes: none;
+}
+.dm8-3 blockquote:before,
+.dm8-3 blockquote:after,
+.dm8-3 q:before,
+.dm8-3 q:after {
+  content: "";
+  content: none;
+}
+.dm8-3 table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.dm8-3 * {
+  box-sizing: border-box;
+}
+.dm8-3 {
+  color: #060606;
+  font-size: 16px;
+  font-family: "Helvetica Neue", Arial, "Hiragino Sans", Meiryo, sans-serif;
+}
+.dm8-3 a {
+  color: inherit;
+  text-decoration: none;
+}
+.dm8-3 header,
+.dm8-3 footer,
+.dm8-3 main,
+.dm8-3 section {
+  border: 2px solid #e44;
+}
+.dm8-3 div,
+.dm8-3 p {
+  border: 2px solid #37b;
+}
+.dm8-3 li,
+.dm8-3 dt,
+.dm8-3 dd {
+  border: 2px dashed #3a6;
+}
+.dm8-3 header,
+.dm8-3 footer,
+.dm8-3 main,
+.dm8-3 section,
+.dm8-3 div,
+.dm8-3 p,
+.dm8-3 ul,
+.dm8-3 li,
+.dm8-3 dl,
+.dm8-3 dt,
+.dm8-3 dd {
+  margin: 10px;
+  padding: 10px;
+}
+.dm8-3 .header__wrap {
+  width: 85%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dm8-3 .header__logo {
+  width: 54px;
+  height: 54px;
+}
+.dm8-3 .header__menu ul {
+  display: flex;
+}
+.dm8-3 .header__menu li {
+  width: 100px;
+}
+.dm8-3 .footer {
+  padding: 90px 0 70px;
+}
+.dm8-3 .footer__logo {
+  width: 60px;
+  margin: 0 auto;
+}
+.dm8-3 .footer__copyright {
+  margin-top: 30px;
+  text-align: center;
+}
+
+/* ── ステップ4時点の表示（reset.css ＋ 教材の手順から生成）── */
+.dm8-4 html,
+.dm8-4,
+.dm8-4 div,
+.dm8-4 span,
+.dm8-4 applet,
+.dm8-4 object,
+.dm8-4 iframe,
+.dm8-4 h1,
+.dm8-4 h2,
+.dm8-4 h3,
+.dm8-4 h4,
+.dm8-4 h5,
+.dm8-4 h6,
+.dm8-4 p,
+.dm8-4 blockquote,
+.dm8-4 pre,
+.dm8-4 a,
+.dm8-4 abbr,
+.dm8-4 acronym,
+.dm8-4 address,
+.dm8-4 big,
+.dm8-4 cite,
+.dm8-4 code,
+.dm8-4 del,
+.dm8-4 dfn,
+.dm8-4 em,
+.dm8-4 img,
+.dm8-4 ins,
+.dm8-4 kbd,
+.dm8-4 q,
+.dm8-4 s,
+.dm8-4 samp,
+.dm8-4 small,
+.dm8-4 strike,
+.dm8-4 strong,
+.dm8-4 sub,
+.dm8-4 sup,
+.dm8-4 tt,
+.dm8-4 var,
+.dm8-4 b,
+.dm8-4 u,
+.dm8-4 i,
+.dm8-4 center,
+.dm8-4 dl,
+.dm8-4 dt,
+.dm8-4 dd,
+.dm8-4 ol,
+.dm8-4 ul,
+.dm8-4 li,
+.dm8-4 fieldset,
+.dm8-4 form,
+.dm8-4 label,
+.dm8-4 legend,
+.dm8-4 table,
+.dm8-4 caption,
+.dm8-4 tbody,
+.dm8-4 tfoot,
+.dm8-4 thead,
+.dm8-4 tr,
+.dm8-4 th,
+.dm8-4 td,
+.dm8-4 article,
+.dm8-4 aside,
+.dm8-4 canvas,
+.dm8-4 details,
+.dm8-4 embed,
+.dm8-4 figure,
+.dm8-4 figcaption,
+.dm8-4 footer,
+.dm8-4 header,
+.dm8-4 hgroup,
+.dm8-4 menu,
+.dm8-4 nav,
+.dm8-4 output,
+.dm8-4 ruby,
+.dm8-4 section,
+.dm8-4 summary,
+.dm8-4 time,
+.dm8-4 mark,
+.dm8-4 audio,
+.dm8-4 video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+.dm8-4 article,
+.dm8-4 aside,
+.dm8-4 details,
+.dm8-4 figcaption,
+.dm8-4 figure,
+.dm8-4 footer,
+.dm8-4 header,
+.dm8-4 hgroup,
+.dm8-4 menu,
+.dm8-4 nav,
+.dm8-4 section {
+  display: block;
+}
+.dm8-4 {
+  line-height: 1;
+}
+.dm8-4 ol,
+.dm8-4 ul {
+  list-style: none;
+}
+.dm8-4 blockquote,
+.dm8-4 q {
+  quotes: none;
+}
+.dm8-4 blockquote:before,
+.dm8-4 blockquote:after,
+.dm8-4 q:before,
+.dm8-4 q:after {
+  content: "";
+  content: none;
+}
+.dm8-4 table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.dm8-4 * {
+  box-sizing: border-box;
+}
+.dm8-4 {
+  color: #060606;
+  font-size: 16px;
+  font-family: "Helvetica Neue", Arial, "Hiragino Sans", Meiryo, sans-serif;
+}
+.dm8-4 a {
+  color: inherit;
+  text-decoration: none;
+}
+.dm8-4 header,
+.dm8-4 footer,
+.dm8-4 main,
+.dm8-4 section {
+  border: 2px solid #e44;
+}
+.dm8-4 div,
+.dm8-4 p {
+  border: 2px solid #37b;
+}
+.dm8-4 li,
+.dm8-4 dt,
+.dm8-4 dd {
+  border: 2px dashed #3a6;
+}
+.dm8-4 header,
+.dm8-4 footer,
+.dm8-4 main,
+.dm8-4 section,
+.dm8-4 div,
+.dm8-4 p,
+.dm8-4 ul,
+.dm8-4 li,
+.dm8-4 dl,
+.dm8-4 dt,
+.dm8-4 dd {
+  margin: 10px;
+  padding: 10px;
+}
+.dm8-4 .header__wrap {
+  width: 85%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dm8-4 .header__logo {
+  width: 54px;
+  height: 54px;
+}
+.dm8-4 .header__menu ul {
+  display: flex;
+}
+.dm8-4 .header__menu li {
+  width: 100px;
+}
+.dm8-4 .main section {
+  width: 85%;
+  margin: 0 auto 60px;
+}
+.dm8-4 .main .main__kv {
+  width: auto;
+  height: 420px;
+}
+.dm8-4 .footer {
+  padding: 90px 0 70px;
+}
+.dm8-4 .footer__logo {
+  width: 60px;
+  margin: 0 auto;
+}
+.dm8-4 .footer__copyright {
+  margin-top: 30px;
+  text-align: center;
+}
+
+/* ── ステップ5時点の表示（reset.css ＋ 教材の手順から生成）── */
+.dm8-5 html,
+.dm8-5,
+.dm8-5 div,
+.dm8-5 span,
+.dm8-5 applet,
+.dm8-5 object,
+.dm8-5 iframe,
+.dm8-5 h1,
+.dm8-5 h2,
+.dm8-5 h3,
+.dm8-5 h4,
+.dm8-5 h5,
+.dm8-5 h6,
+.dm8-5 p,
+.dm8-5 blockquote,
+.dm8-5 pre,
+.dm8-5 a,
+.dm8-5 abbr,
+.dm8-5 acronym,
+.dm8-5 address,
+.dm8-5 big,
+.dm8-5 cite,
+.dm8-5 code,
+.dm8-5 del,
+.dm8-5 dfn,
+.dm8-5 em,
+.dm8-5 img,
+.dm8-5 ins,
+.dm8-5 kbd,
+.dm8-5 q,
+.dm8-5 s,
+.dm8-5 samp,
+.dm8-5 small,
+.dm8-5 strike,
+.dm8-5 strong,
+.dm8-5 sub,
+.dm8-5 sup,
+.dm8-5 tt,
+.dm8-5 var,
+.dm8-5 b,
+.dm8-5 u,
+.dm8-5 i,
+.dm8-5 center,
+.dm8-5 dl,
+.dm8-5 dt,
+.dm8-5 dd,
+.dm8-5 ol,
+.dm8-5 ul,
+.dm8-5 li,
+.dm8-5 fieldset,
+.dm8-5 form,
+.dm8-5 label,
+.dm8-5 legend,
+.dm8-5 table,
+.dm8-5 caption,
+.dm8-5 tbody,
+.dm8-5 tfoot,
+.dm8-5 thead,
+.dm8-5 tr,
+.dm8-5 th,
+.dm8-5 td,
+.dm8-5 article,
+.dm8-5 aside,
+.dm8-5 canvas,
+.dm8-5 details,
+.dm8-5 embed,
+.dm8-5 figure,
+.dm8-5 figcaption,
+.dm8-5 footer,
+.dm8-5 header,
+.dm8-5 hgroup,
+.dm8-5 menu,
+.dm8-5 nav,
+.dm8-5 output,
+.dm8-5 ruby,
+.dm8-5 section,
+.dm8-5 summary,
+.dm8-5 time,
+.dm8-5 mark,
+.dm8-5 audio,
+.dm8-5 video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+.dm8-5 article,
+.dm8-5 aside,
+.dm8-5 details,
+.dm8-5 figcaption,
+.dm8-5 figure,
+.dm8-5 footer,
+.dm8-5 header,
+.dm8-5 hgroup,
+.dm8-5 menu,
+.dm8-5 nav,
+.dm8-5 section {
+  display: block;
+}
+.dm8-5 {
+  line-height: 1;
+}
+.dm8-5 ol,
+.dm8-5 ul {
+  list-style: none;
+}
+.dm8-5 blockquote,
+.dm8-5 q {
+  quotes: none;
+}
+.dm8-5 blockquote:before,
+.dm8-5 blockquote:after,
+.dm8-5 q:before,
+.dm8-5 q:after {
+  content: "";
+  content: none;
+}
+.dm8-5 table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.dm8-5 * {
+  box-sizing: border-box;
+}
+.dm8-5 {
+  color: #060606;
+  font-size: 16px;
+  font-family: "Helvetica Neue", Arial, "Hiragino Sans", Meiryo, sans-serif;
+}
+.dm8-5 a {
+  color: inherit;
+  text-decoration: none;
+}
+.dm8-5 header,
+.dm8-5 footer,
+.dm8-5 main,
+.dm8-5 section {
+  border: 2px solid #e44;
+}
+.dm8-5 div,
+.dm8-5 p {
+  border: 2px solid #37b;
+}
+.dm8-5 li,
+.dm8-5 dt,
+.dm8-5 dd {
+  border: 2px dashed #3a6;
+}
+.dm8-5 header,
+.dm8-5 footer,
+.dm8-5 main,
+.dm8-5 section,
+.dm8-5 div,
+.dm8-5 p,
+.dm8-5 ul,
+.dm8-5 li,
+.dm8-5 dl,
+.dm8-5 dt,
+.dm8-5 dd {
+  margin: 10px;
+  padding: 10px;
+}
+.dm8-5 .header__wrap {
+  width: 85%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dm8-5 .header__logo {
+  width: 54px;
+  height: 54px;
+}
+.dm8-5 .header__menu ul {
+  display: flex;
+}
+.dm8-5 .header__menu li {
+  width: 100px;
+}
+.dm8-5 .main section {
+  width: 85%;
+  margin: 0 auto 60px;
+}
+.dm8-5 .main .main__kv {
+  width: auto;
+  height: 420px;
+}
+.dm8-5 .main__about--ttl {
+  margin-bottom: 60px;
+  text-align: center;
+}
+.dm8-5 .main__about--logo {
+  width: 120px;
+  margin: 0 auto;
+}
+.dm8-5 .main__about--txt {
+  margin: 45px 0 60px;
+  text-align: center;
+}
+.dm8-5 .footer {
+  padding: 90px 0 70px;
+}
+.dm8-5 .footer__logo {
+  width: 60px;
+  margin: 0 auto;
+}
+.dm8-5 .footer__copyright {
+  margin-top: 30px;
+  text-align: center;
+}
+
+/* ── ステップ6時点の表示（reset.css ＋ 教材の手順から生成）── */
+.dm8-6 html,
+.dm8-6,
+.dm8-6 div,
+.dm8-6 span,
+.dm8-6 applet,
+.dm8-6 object,
+.dm8-6 iframe,
+.dm8-6 h1,
+.dm8-6 h2,
+.dm8-6 h3,
+.dm8-6 h4,
+.dm8-6 h5,
+.dm8-6 h6,
+.dm8-6 p,
+.dm8-6 blockquote,
+.dm8-6 pre,
+.dm8-6 a,
+.dm8-6 abbr,
+.dm8-6 acronym,
+.dm8-6 address,
+.dm8-6 big,
+.dm8-6 cite,
+.dm8-6 code,
+.dm8-6 del,
+.dm8-6 dfn,
+.dm8-6 em,
+.dm8-6 img,
+.dm8-6 ins,
+.dm8-6 kbd,
+.dm8-6 q,
+.dm8-6 s,
+.dm8-6 samp,
+.dm8-6 small,
+.dm8-6 strike,
+.dm8-6 strong,
+.dm8-6 sub,
+.dm8-6 sup,
+.dm8-6 tt,
+.dm8-6 var,
+.dm8-6 b,
+.dm8-6 u,
+.dm8-6 i,
+.dm8-6 center,
+.dm8-6 dl,
+.dm8-6 dt,
+.dm8-6 dd,
+.dm8-6 ol,
+.dm8-6 ul,
+.dm8-6 li,
+.dm8-6 fieldset,
+.dm8-6 form,
+.dm8-6 label,
+.dm8-6 legend,
+.dm8-6 table,
+.dm8-6 caption,
+.dm8-6 tbody,
+.dm8-6 tfoot,
+.dm8-6 thead,
+.dm8-6 tr,
+.dm8-6 th,
+.dm8-6 td,
+.dm8-6 article,
+.dm8-6 aside,
+.dm8-6 canvas,
+.dm8-6 details,
+.dm8-6 embed,
+.dm8-6 figure,
+.dm8-6 figcaption,
+.dm8-6 footer,
+.dm8-6 header,
+.dm8-6 hgroup,
+.dm8-6 menu,
+.dm8-6 nav,
+.dm8-6 output,
+.dm8-6 ruby,
+.dm8-6 section,
+.dm8-6 summary,
+.dm8-6 time,
+.dm8-6 mark,
+.dm8-6 audio,
+.dm8-6 video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+.dm8-6 article,
+.dm8-6 aside,
+.dm8-6 details,
+.dm8-6 figcaption,
+.dm8-6 figure,
+.dm8-6 footer,
+.dm8-6 header,
+.dm8-6 hgroup,
+.dm8-6 menu,
+.dm8-6 nav,
+.dm8-6 section {
+  display: block;
+}
+.dm8-6 {
+  line-height: 1;
+}
+.dm8-6 ol,
+.dm8-6 ul {
+  list-style: none;
+}
+.dm8-6 blockquote,
+.dm8-6 q {
+  quotes: none;
+}
+.dm8-6 blockquote:before,
+.dm8-6 blockquote:after,
+.dm8-6 q:before,
+.dm8-6 q:after {
+  content: "";
+  content: none;
+}
+.dm8-6 table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.dm8-6 * {
+  box-sizing: border-box;
+}
+.dm8-6 {
+  color: #060606;
+  font-size: 16px;
+  font-family: "Helvetica Neue", Arial, "Hiragino Sans", Meiryo, sans-serif;
+}
+.dm8-6 a {
+  color: inherit;
+  text-decoration: none;
+}
+.dm8-6 header,
+.dm8-6 footer,
+.dm8-6 main,
+.dm8-6 section {
+  border: 2px solid #e44;
+}
+.dm8-6 div,
+.dm8-6 p {
+  border: 2px solid #37b;
+}
+.dm8-6 li,
+.dm8-6 dt,
+.dm8-6 dd {
+  border: 2px dashed #3a6;
+}
+.dm8-6 header,
+.dm8-6 footer,
+.dm8-6 main,
+.dm8-6 section,
+.dm8-6 div,
+.dm8-6 p,
+.dm8-6 ul,
+.dm8-6 li,
+.dm8-6 dl,
+.dm8-6 dt,
+.dm8-6 dd {
+  margin: 10px;
+  padding: 10px;
+}
+.dm8-6 .header__wrap {
+  width: 85%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dm8-6 .header__logo {
+  width: 54px;
+  height: 54px;
+}
+.dm8-6 .header__menu ul {
+  display: flex;
+}
+.dm8-6 .header__menu li {
+  width: 100px;
+}
+.dm8-6 .main section {
+  width: 85%;
+  margin: 0 auto 60px;
+}
+.dm8-6 .main .main__kv {
+  width: auto;
+  height: 420px;
+}
+.dm8-6 .main__about--ttl {
+  margin-bottom: 60px;
+  text-align: center;
+}
+.dm8-6 .main__about--logo {
+  width: 120px;
+  margin: 0 auto;
+}
+.dm8-6 .main__about--txt {
+  margin: 45px 0 60px;
+  text-align: center;
+}
+.dm8-6 .main__service--message {
+  margin-bottom: 95px;
+  display: flex;
+}
+.dm8-6 .main__service--message h2 {
+  flex: 1;
+}
+.dm8-6 .main__service--message p {
+  flex: 2;
+}
+.dm8-6 .main__service--list {
+  display: flex;
+}
+.dm8-6 .main__service--list li {
+  flex: 1;
+}
+.dm8-6 .main__service--list a {
+  display: block;
+}
+.dm8-6 .footer {
+  padding: 90px 0 70px;
+}
+.dm8-6 .footer__logo {
+  width: 60px;
+  margin: 0 auto;
+}
+.dm8-6 .footer__copyright {
+  margin-top: 30px;
+  text-align: center;
+}
+
+/* ── ステップ7時点の表示（reset.css ＋ 教材の手順から生成）── */
+.dm8-7 html,
+.dm8-7,
+.dm8-7 div,
+.dm8-7 span,
+.dm8-7 applet,
+.dm8-7 object,
+.dm8-7 iframe,
+.dm8-7 h1,
+.dm8-7 h2,
+.dm8-7 h3,
+.dm8-7 h4,
+.dm8-7 h5,
+.dm8-7 h6,
+.dm8-7 p,
+.dm8-7 blockquote,
+.dm8-7 pre,
+.dm8-7 a,
+.dm8-7 abbr,
+.dm8-7 acronym,
+.dm8-7 address,
+.dm8-7 big,
+.dm8-7 cite,
+.dm8-7 code,
+.dm8-7 del,
+.dm8-7 dfn,
+.dm8-7 em,
+.dm8-7 img,
+.dm8-7 ins,
+.dm8-7 kbd,
+.dm8-7 q,
+.dm8-7 s,
+.dm8-7 samp,
+.dm8-7 small,
+.dm8-7 strike,
+.dm8-7 strong,
+.dm8-7 sub,
+.dm8-7 sup,
+.dm8-7 tt,
+.dm8-7 var,
+.dm8-7 b,
+.dm8-7 u,
+.dm8-7 i,
+.dm8-7 center,
+.dm8-7 dl,
+.dm8-7 dt,
+.dm8-7 dd,
+.dm8-7 ol,
+.dm8-7 ul,
+.dm8-7 li,
+.dm8-7 fieldset,
+.dm8-7 form,
+.dm8-7 label,
+.dm8-7 legend,
+.dm8-7 table,
+.dm8-7 caption,
+.dm8-7 tbody,
+.dm8-7 tfoot,
+.dm8-7 thead,
+.dm8-7 tr,
+.dm8-7 th,
+.dm8-7 td,
+.dm8-7 article,
+.dm8-7 aside,
+.dm8-7 canvas,
+.dm8-7 details,
+.dm8-7 embed,
+.dm8-7 figure,
+.dm8-7 figcaption,
+.dm8-7 footer,
+.dm8-7 header,
+.dm8-7 hgroup,
+.dm8-7 menu,
+.dm8-7 nav,
+.dm8-7 output,
+.dm8-7 ruby,
+.dm8-7 section,
+.dm8-7 summary,
+.dm8-7 time,
+.dm8-7 mark,
+.dm8-7 audio,
+.dm8-7 video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+.dm8-7 article,
+.dm8-7 aside,
+.dm8-7 details,
+.dm8-7 figcaption,
+.dm8-7 figure,
+.dm8-7 footer,
+.dm8-7 header,
+.dm8-7 hgroup,
+.dm8-7 menu,
+.dm8-7 nav,
+.dm8-7 section {
+  display: block;
+}
+.dm8-7 {
+  line-height: 1;
+}
+.dm8-7 ol,
+.dm8-7 ul {
+  list-style: none;
+}
+.dm8-7 blockquote,
+.dm8-7 q {
+  quotes: none;
+}
+.dm8-7 blockquote:before,
+.dm8-7 blockquote:after,
+.dm8-7 q:before,
+.dm8-7 q:after {
+  content: "";
+  content: none;
+}
+.dm8-7 table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.dm8-7 * {
+  box-sizing: border-box;
+}
+.dm8-7 {
+  color: #060606;
+  font-size: 16px;
+  font-family: "Helvetica Neue", Arial, "Hiragino Sans", Meiryo, sans-serif;
+}
+.dm8-7 a {
+  color: inherit;
+  text-decoration: none;
+}
+.dm8-7 header,
+.dm8-7 footer,
+.dm8-7 main,
+.dm8-7 section {
+  border: 2px solid #e44;
+}
+.dm8-7 div,
+.dm8-7 p {
+  border: 2px solid #37b;
+}
+.dm8-7 li,
+.dm8-7 dt,
+.dm8-7 dd {
+  border: 2px dashed #3a6;
+}
+.dm8-7 header,
+.dm8-7 footer,
+.dm8-7 main,
+.dm8-7 section,
+.dm8-7 div,
+.dm8-7 p,
+.dm8-7 ul,
+.dm8-7 li,
+.dm8-7 dl,
+.dm8-7 dt,
+.dm8-7 dd {
+  margin: 10px;
+  padding: 10px;
+}
+.dm8-7 .header__wrap {
+  width: 85%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dm8-7 .header__logo {
+  width: 54px;
+  height: 54px;
+}
+.dm8-7 .header__menu ul {
+  display: flex;
+}
+.dm8-7 .header__menu li {
+  width: 100px;
+}
+.dm8-7 .main section {
+  width: 85%;
+  margin: 0 auto 60px;
+}
+.dm8-7 .main .main__kv {
+  width: auto;
+  height: 420px;
+}
+.dm8-7 .main__about--ttl {
+  margin-bottom: 60px;
+  text-align: center;
+}
+.dm8-7 .main__about--logo {
+  width: 120px;
+  margin: 0 auto;
+}
+.dm8-7 .main__about--txt {
+  margin: 45px 0 60px;
+  text-align: center;
+}
+.dm8-7 .main__service--message {
+  margin-bottom: 95px;
+  display: flex;
+}
+.dm8-7 .main__service--message h2 {
+  flex: 1;
+}
+.dm8-7 .main__service--message p {
+  flex: 2;
+}
+.dm8-7 .main__service--list {
+  display: flex;
+}
+.dm8-7 .main__service--list li {
+  flex: 1;
+}
+.dm8-7 .main__service--list a {
+  display: block;
+}
+.dm8-7 .main__news--ttl {
+  margin-bottom: 16px;
+}
+.dm8-7 .main__news--list a {
+  display: block;
+  padding: 50px 20px;
+}
+.dm8-7 .main__news--item {
+  display: flex;
+}
+.dm8-7 .main__news--day {
+  width: 265px;
+  margin-right: 32px;
+  display: flex;
+  align-items: center;
+}
+.dm8-7 .footer {
+  padding: 90px 0 70px;
+}
+.dm8-7 .footer__logo {
+  width: 60px;
+  margin: 0 auto;
+}
+.dm8-7 .footer__copyright {
+  margin-top: 30px;
+  text-align: center;
+}
+
+/* ── ステップ9時点の表示（reset.css ＋ 教材の手順から生成）── */
+.dm8-9 html,
+.dm8-9,
+.dm8-9 div,
+.dm8-9 span,
+.dm8-9 applet,
+.dm8-9 object,
+.dm8-9 iframe,
+.dm8-9 h1,
+.dm8-9 h2,
+.dm8-9 h3,
+.dm8-9 h4,
+.dm8-9 h5,
+.dm8-9 h6,
+.dm8-9 p,
+.dm8-9 blockquote,
+.dm8-9 pre,
+.dm8-9 a,
+.dm8-9 abbr,
+.dm8-9 acronym,
+.dm8-9 address,
+.dm8-9 big,
+.dm8-9 cite,
+.dm8-9 code,
+.dm8-9 del,
+.dm8-9 dfn,
+.dm8-9 em,
+.dm8-9 img,
+.dm8-9 ins,
+.dm8-9 kbd,
+.dm8-9 q,
+.dm8-9 s,
+.dm8-9 samp,
+.dm8-9 small,
+.dm8-9 strike,
+.dm8-9 strong,
+.dm8-9 sub,
+.dm8-9 sup,
+.dm8-9 tt,
+.dm8-9 var,
+.dm8-9 b,
+.dm8-9 u,
+.dm8-9 i,
+.dm8-9 center,
+.dm8-9 dl,
+.dm8-9 dt,
+.dm8-9 dd,
+.dm8-9 ol,
+.dm8-9 ul,
+.dm8-9 li,
+.dm8-9 fieldset,
+.dm8-9 form,
+.dm8-9 label,
+.dm8-9 legend,
+.dm8-9 table,
+.dm8-9 caption,
+.dm8-9 tbody,
+.dm8-9 tfoot,
+.dm8-9 thead,
+.dm8-9 tr,
+.dm8-9 th,
+.dm8-9 td,
+.dm8-9 article,
+.dm8-9 aside,
+.dm8-9 canvas,
+.dm8-9 details,
+.dm8-9 embed,
+.dm8-9 figure,
+.dm8-9 figcaption,
+.dm8-9 footer,
+.dm8-9 header,
+.dm8-9 hgroup,
+.dm8-9 menu,
+.dm8-9 nav,
+.dm8-9 output,
+.dm8-9 ruby,
+.dm8-9 section,
+.dm8-9 summary,
+.dm8-9 time,
+.dm8-9 mark,
+.dm8-9 audio,
+.dm8-9 video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+.dm8-9 article,
+.dm8-9 aside,
+.dm8-9 details,
+.dm8-9 figcaption,
+.dm8-9 figure,
+.dm8-9 footer,
+.dm8-9 header,
+.dm8-9 hgroup,
+.dm8-9 menu,
+.dm8-9 nav,
+.dm8-9 section {
+  display: block;
+}
+.dm8-9 {
+  line-height: 1;
+}
+.dm8-9 ol,
+.dm8-9 ul {
+  list-style: none;
+}
+.dm8-9 blockquote,
+.dm8-9 q {
+  quotes: none;
+}
+.dm8-9 blockquote:before,
+.dm8-9 blockquote:after,
+.dm8-9 q:before,
+.dm8-9 q:after {
+  content: "";
+  content: none;
+}
+.dm8-9 table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.dm8-9 * {
+  box-sizing: border-box;
+}
+.dm8-9 {
+  color: #060606;
+  font-size: 16px;
+  font-family: "Helvetica Neue", Arial, "Hiragino Sans", Meiryo, sans-serif;
+  letter-spacing: 0.06em;
+}
+.dm8-9 a {
+  color: inherit;
+  text-decoration: none;
+}
+.dm8-9 .header {
+  width: 100%;
+  padding: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+.dm8-9 .header__wrap {
+  width: 85%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dm8-9 .header__logo {
+  width: 54px;
+  height: 54px;
+}
+.dm8-9 .header__logo a {
+  display: block;
+}
+.dm8-9 .header__logo img {
+  width: 100%;
+  display: block;
+}
+.dm8-9 .header__menu ul {
+  display: flex;
+}
+.dm8-9 .header__menu li {
+  width: 100px;
+}
+.dm8-9 .header__menu a {
+  display: block;
+  text-align: center;
+  font-size: 14px;
+}
+.dm8-9 .main section {
+  width: 85%;
+  margin: 0 auto 60px;
+}
+.dm8-9 .main .main__kv {
+  width: auto;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  padding-left: 10%;
+  background: url(../cbc_internal/sample_site/images/top_bg.webp) center / cover no-repeat;
+  color: #fff;
+  font-size: 24px;
+  line-height: 1.8;
+}
+.dm8-9 .main__about {
+  padding: 0 10px 80px;
+}
+.dm8-9 .main__about--ttl {
+  margin-bottom: 60px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 4px;
+}
+.dm8-9 .main__about--logo {
+  width: 120px;
+  margin: 0 auto;
+}
+.dm8-9 .main__about--logo img {
+  width: 100%;
+  display: block;
+}
+.dm8-9 .main__about--txt {
+  margin: 45px 0 60px;
+  padding: 0 20px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 2;
+  letter-spacing: 4px;
+}
+.dm8-9 .main__service {
+  padding-bottom: 100px;
+}
+.dm8-9 .main__service--message {
+  margin-bottom: 95px;
+  display: flex;
+}
+.dm8-9 .main__service--message h2 {
+  flex: 1;
+  font-size: 50px;
+  font-weight: bold;
+}
+.dm8-9 .main__service--message p {
+  flex: 2;
+  font-size: 16px;
+  line-height: 2.2;
+  letter-spacing: 2px;
+}
+.dm8-9 .main__service--list {
+  display: flex;
+}
+.dm8-9 .main__service--list li {
+  flex: 1;
+  margin-right: 2%;
+}
+.dm8-9 .main__service--list li:last-child {
+  margin-right: 0;
+}
+.dm8-9 .main__service--list a {
+  display: block;
+}
+.dm8-9 .main__service--list img {
+  width: 100%;
+  display: block;
+}
+.dm8-9 .main__service--list h3 {
+  margin: 50px 0 30px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.dm8-9 .main__service--list p {
+  font-size: 14px;
+  line-height: 1.8;
+}
+.dm8-9 .main__news {
+  padding: 0 20px;
+}
+.dm8-9 .main__news--ttl {
+  margin-bottom: 16px;
+  font-size: 48px;
+  font-weight: bold;
+}
+.dm8-9 .main__news--list {
+  padding: 40px 12px;
+}
+.dm8-9 .main__news--list li {
+  border-bottom: 1px solid #e8ecee;
+}
+.dm8-9 .main__news--list li:first-child {
+  border-top: 1px solid #e8ecee;
+}
+.dm8-9 .main__news--list a {
+  display: block;
+  padding: 50px 20px;
+}
+.dm8-9 .main__news--list a:hover {
+  background: #e8ecee;
+}
+.dm8-9 .main__news--item {
+  display: flex;
+}
+.dm8-9 .main__news--day {
+  width: 265px;
+  margin-right: 32px;
+  display: flex;
+  align-items: center;
+}
+.dm8-9 .main__news--data {
+  line-height: 1.8;
+}
+.dm8-9 .footer {
+  padding: 90px 0 70px;
+  border-top: 1px solid #e8ecee;
+}
+.dm8-9 .footer__logo {
+  width: 60px;
+  margin: 0 auto;
+}
+.dm8-9 .footer__logo img {
+  width: 100%;
+  display: block;
+}
+.dm8-9 .footer__copyright {
+  margin-top: 30px;
+  text-align: center;
+  color: #b5b5b5;
+  font-size: 11px;
+}
+
+/* ── 概念図の共通枠 ──
+   図は中央に置き、教材ページ側の見出し・段落の装飾は打ち消しておく */
+.diagram-embed {
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.diagram-embed :is(h1, h2, h3, h4, h5, h6),
+.diagram-embed p {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  letter-spacing: normal;
+}
+
+/* ── BEM の図（cd8）──
+   左：service エリアの実物に、クラス名のラベルを重ねたもの。
+   右：その名前の組み立て。色（赤＝どの枠 / 青＝どの部品 / 緑＝どの種類）で対応させる */
+.cd8 {
+  width: 780px;
+  padding: 22px 24px;
+  font-size: 13px;
+}
+.cd8 .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+/* 左（実物）と右（名前）を 実物 : 名前 ＝ 大きめ : 中身なり で置く。
+   右は中身が細いので、列の中でも中央にそろえる */
+.cd8 .side {
+  min-width: 0;
+}
+.cd8 .side:first-child {
+  flex: 0 1 400px;
+}
+.cd8 .side:last-child {
+  flex: 0 0 auto;
+  text-align: center;
+}
+.cd8 .cap {
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #64748b;
+}
+
+/* 左：実物に枠とラベルを重ねる */
+.cd8 .mock {
+  border: 1px solid #e44;
+  border-radius: 6px;
+  padding: 8px 10px 10px;
+  background: #fff;
+}
+.cd8 .inner {
+  border: 1px solid #37b;
+  border-radius: 5px;
+  padding: 6px 8px 8px;
+  margin-top: 7px;
+}
+.cd8 .lb {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+}
+.cd8 .mock > .lb { background: #fde8e8; color: #b91c1c; }
+.cd8 .inner > .lb { background: #e4edfb; color: #1d4ed8; }
+
+/* 実物は幅980px相当で組み、zoom で図の中に収める */
+.cd8 .real {
+  width: 980px;
+  zoom: 0.36;
+  margin-top: 6px;
+  overflow: hidden;
+}
+.cd8 .real * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.cd8 .real ul { list-style: none; }
+.cd8 .real a { color: inherit; text-decoration: none; }
+.cd8 .real {
+  color: #060606;
+  font-size: 16px;
+  font-family: "Helvetica Neue", Arial, "Hiragino Sans", Meiryo, sans-serif;
+  letter-spacing: 0.06em;
+}
+
+.cd8 .real .main__service--message {
+  display: flex;
+  align-items: center;
+}
+.cd8 .real .main__service--message h2 {
+  flex: 1;
+  font-size: 50px;
+  font-weight: bold;
+}
+.cd8 .real .main__service--message p {
+  flex: 2;
+  font-size: 16px;
+  line-height: 2.2;
+  letter-spacing: 2px;
+}
+.cd8 .real .main__service--list {
+  display: flex;
+}
+.cd8 .real .main__service--list li {
+  flex: 1;
+  margin-right: 2%;
+}
+.cd8 .real .main__service--list li:last-child {
+  margin-right: 0;
+}
+.cd8 .real .main__service--list a {
+  display: block;
+}
+.cd8 .real .main__service--list img {
+  width: 100%;
+  display: block;
+}
+.cd8 .real .main__service--list h3 {
+  margin: 16px 0 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+.cd8 .real .main__service--list p {
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* 右：名前の分解 */
+.cd8 .parts {
+  display: flex;
+  align-items: flex-start;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.cd8 .part {
+  text-align: center;
+}
+.cd8 .part .val {
+  padding: 7px 12px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 700;
+}
+.cd8 .part .role {
+  margin-top: 7px;
+  font-family: "Helvetica Neue", Arial, "Hiragino Sans", Meiryo, sans-serif;
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: #475569;
+}
+.cd8 .part .role b { display: block; color: #1e293b; }
+.cd8 .p-b .val { background: #fde8e8; color: #b91c1c; }
+.cd8 .p-e .val { background: #e4edfb; color: #1d4ed8; }
+.cd8 .p-m .val { background: #e6f4ea; color: #15803d; }
+.cd8 .sep {
+  padding: 7px 3px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #94a3b8;
+}
+
+@media (max-width: 780px) {
+  .cd8 .wrap { flex-direction: column; align-items: stretch; }
+}
