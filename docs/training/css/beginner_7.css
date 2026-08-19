@@ -1,0 +1,321 @@
+/* ============================================================
+   コーダー初級#7（beginner_7.html）専用のスタイル
+
+   全ページ共通の土台は training.css にあります。
+   ここに置くのは、このページだけで使う図やデモのスタイルです。
+   ============================================================ */
+/* ============================================================
+   共通の実演枠
+   ============================================================ */
+.sv-demo {
+  margin: 16px 0 22px;
+  padding: 12px;
+  border: 2px dashed #94a3b8;
+  background: #f1f5f9;
+}
+
+/* 見本を左右に並べる */
+.sv-samples {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 20px 0 26px;
+}
+
+.sv-label {
+  display: block;
+  margin-bottom: 7px;
+  color: #1e3a8a;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.sv-label-ng { color: #b91c1c; }
+.sv-label-ok { color: #15803d; }
+
+/* 見本ごとの、実際に書くコード */
+.sv-code {
+  display: block;
+  margin-bottom: 8px;
+  padding: 9px 12px;
+  border-radius: 6px;
+  background: #1e293b;
+  color: #e2e8f0;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+
+/* ============================================================
+   1〜2章：float の実演
+   ============================================================ */
+.fl-box {
+  width: 96px;
+  padding: 14px 0;
+  border: 1px solid #60a5fa;
+  border-radius: 5px;
+  background: #bfdbfe;
+  color: #1e3a8a;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* 縦に積まれている状態を見せるとき用 */
+.fl-stack .fl-box + .fl-box {
+  margin-top: 8px;
+}
+
+.fl-left .fl-box { float: left; }
+.fl-right .fl-box { float: right; }
+
+/* 浮いた子の間隔。float は gap が効かないので margin で空ける。
+   right のときは寄る向きが逆なので、margin も逆側に付ける */
+.fl-left .fl-box + .fl-box {
+  margin-left: 8px;
+}
+
+.fl-right .fl-box + .fl-box {
+  margin-right: 8px;
+}
+
+/* 親の高さが潰れることを見せるための枠。
+   背景と枠線を付けておくと、高さの違いが一目で分かる */
+.cf-parent {
+  padding: 12px;
+  border: 2px solid #f59e0b;
+  background: #fef3c7;
+}
+
+.cf-parent .fl-box { float: left; }
+.cf-parent .fl-box + .fl-box { margin-left: 8px; }
+
+/* clearfix を当てた側。参照元と同じ書き方 */
+.cf-fixed::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* 親の下に置いて、はみ出しが見えるようにする文章 */
+.cf-after-text {
+  padding: 9px 12px;
+  background: #e2e8f0;
+  color: #475569;
+  font-size: 13px;
+}
+
+/* ============================================================
+   3〜5章：セレクタの実演
+   ============================================================ */
+.sel-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sel-list li {
+  margin-bottom: 5px;
+  padding: 9px 13px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #334155;
+  font-size: 13.5px;
+}
+
+.sel-list li:last-child { margin-bottom: 0; }
+
+/* 選ばれた要素の色。どの見本でもこの色＝「効いている」 */
+.sel-hit {
+  border-color: #f59e0b !important;
+  background: #fde68a !important;
+  color: #92400e !important;
+  font-weight: 700;
+}
+
+/* --- 要素型セレクタ / 全称セレクタの比較 --- */
+/* ul に余白を付けて、「箱の外側にも ul がある」ことを見えるようにする。
+   これがないと、色が変わったのが箱だけなのか ul もなのか判別できない */
+.sel-compare .sel-list {
+  position: relative;
+  padding: 26px 12px 12px;
+}
+
+.sel-compare .sel-list::before {
+  content: "ul";
+  position: absolute;
+  top: 6px;
+  left: 12px;
+  color: #64748b;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 11.5px;
+}
+
+/* 2クラス指定にしないと、上の .sel-list li（詳細度が上）に負けて
+   箱のほうだけ白いまま残ってしまう */
+.sv-demo.sel-universal * {
+  border-color: #f59e0b;
+  background: #fde68a;
+  color: #92400e;
+}
+
+/* --- 疑似クラス --- */
+.sel-hover li {
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.sel-hover li:hover {
+  border-color: #f59e0b;
+  background: #fde68a;
+  color: #92400e;
+  font-weight: 700;
+}
+
+.sel-nth li:nth-child(2) {
+  border-color: #f59e0b;
+  background: #fde68a;
+  color: #92400e;
+  font-weight: 700;
+}
+
+.sel-odd li:nth-child(odd) {
+  border-color: #f59e0b;
+  background: #fde68a;
+  color: #92400e;
+  font-weight: 700;
+}
+
+.sel-even li:nth-child(even) {
+  border-color: #f59e0b;
+  background: #fde68a;
+  color: #92400e;
+  font-weight: 700;
+}
+
+.sel-first li:first-child {
+  border-color: #f59e0b;
+  background: #fde68a;
+  color: #92400e;
+  font-weight: 700;
+}
+
+/* --- 疑似要素 --- */
+.sel-before li::before {
+  content: "★ ";
+  color: #f59e0b;
+  font-weight: 700;
+}
+
+.sel-after li::after {
+  content: " ← ここ";
+  color: #f59e0b;
+  font-weight: 700;
+}
+
+.sel-firstletter p::first-letter {
+  color: #f59e0b;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.sel-text {
+  margin: 0;
+  padding: 9px 13px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #334155;
+  font-size: 13.5px;
+  line-height: 1.9;
+}
+
+/* --- 属性セレクタ --- */
+.sel-attr a {
+  color: #334155;
+  text-decoration: none;
+}
+
+.sel-attr a[target="_blank"]::after {
+  content: " ↗";
+  color: #f59e0b;
+  font-weight: 700;
+}
+
+/* --- 結合子 --- */
+.sel-tree {
+  padding: 10px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+}
+
+.sel-tree .sel-item {
+  margin-bottom: 5px;
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 13px;
+}
+
+.sel-tree .sel-nest {
+  margin: 5px 0 5px 22px;
+  padding: 8px;
+  border-left: 3px solid #cbd5e1;
+}
+
+/* > 直下の子だけ */
+.sel-child > .sel-item {
+  border-color: #f59e0b;
+  background: #fde68a;
+  color: #92400e;
+  font-weight: 700;
+}
+
+/* + すぐ次の1つだけ */
+.sel-adjacent .sel-mark + .sel-item {
+  border-color: #f59e0b;
+  background: #fde68a;
+  color: #92400e;
+  font-weight: 700;
+}
+
+/* ~ 後ろに続く全部 */
+.sel-sibling .sel-mark ~ .sel-item {
+  border-color: #f59e0b;
+  background: #fde68a;
+  color: #92400e;
+  font-weight: 700;
+}
+
+/* 基準になる要素の目印 */
+.sel-mark {
+  border-color: #60a5fa !important;
+  background: #bfdbfe !important;
+  color: #1e3a8a !important;
+  font-weight: 700;
+}
+
+@media (max-width: 780px) {
+  /* 1fr だけだと中身の最小幅まで広がり、長いコード行が画面をはみ出す。
+     minmax(0, …) を付けて、親の幅で止める */
+  .sv-samples {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* 狭い画面では箱3つが1行に収まらず、意図せず折り返してしまう。
+   「横に並ぶ」ことを見せる見本なので、幅を詰めて1行を保つ */
+@media (max-width: 560px) {
+  .fl-box {
+    width: 76px;
+    padding: 12px 0;
+    font-size: 12px;
+  }
+}
