@@ -1,0 +1,75 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* 中身は 980px に固定して中央寄せ（全幅の帯の中に置く） */
+.header_contents,
+.contents,
+.footer_contents {
+  width: 980px;
+  margin: 0 auto;
+}
+
+/* contents：中身をまとめる受け皿（確認用の破線） */
+.contents {
+  border: 2px dashed #94a3b8;
+}
+
+/* ヘッダー：全幅の帯（下線が画面端まで伸びる） */
+.header {
+  border-bottom: 1px solid #ccd;
+}
+.header_contents {
+  height: 150px;
+  border: 2px solid #e44;
+}
+.logo {
+  width: 220px;
+  height: 60px;
+  border: 2px solid #e44;
+  margin: 20px;
+}
+.visual {
+  height: 400px;
+  border: 2px solid #37b;
+  margin-top: 20px;
+}
+.copy {
+  width: 400px;
+  height: 120px;
+  border: 2px solid #37b;
+  margin: 20px;
+}
+
+/* text と menu を横並びにする */
+.text_wrapper {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+.text {
+  width: 600px;
+  height: 140px;
+  border: 2px solid #3a6;
+  margin-right: 16px;
+}
+.menu {
+  width: 344px;
+  height: 140px;
+  border: 2px solid #3a6;
+}
+
+/* フッター：全幅の暗い帯（画面端まで伸びる） */
+.footer {
+  background: #222;
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+.footer_contents {
+  height: 120px;
+  border: 2px solid #85c;
+  color: #fff;
+  text-align: center;
+}
