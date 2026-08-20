@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>コーダー初級#5</title>
+  <title>コーダー中級#5</title>
   <link rel="stylesheet" href="../css/training.css">
 
   <!-- ▼ このページ専用のスタイル（flexの実演） -->
@@ -18,8 +18,8 @@
 
 <header>
   <div class="header-inner">
-    <h1>コーダー初級#5</h1>
-    <p>要素を横に並べる ― flexboxの基本</p>
+    <h1>コーダー中級#5</h1>
+    <p>要素を並べる ― flexbox と grid</p>
   </div>
 </header>
 
@@ -34,12 +34,16 @@
       <li><a href="#chapter3">親に指定するプロパティ</a></li>
       <li><a href="#chapter4">子に指定するプロパティ</a></li>
       <li><a href="#chapter5">組み合わせてレイアウトを作る</a></li>
+      <li><a href="#chapter6">gridで格子に並べる</a></li>
+      <li><a href="#chapter7">親に指定するプロパティ（grid）</a></li>
+      <li><a href="#chapter8">子に指定するプロパティ（grid）</a></li>
+      <li><a href="#chapter9">gridでレイアウトを作る</a></li>
     </ol>
 
     <div class="note">
       <span class="label">読む前に</span><br>
-      このページには12個のプロパティが出てきます。ただし、<strong>いま全部を覚えきる必要はありません。</strong><br>
-      実務でも、必要になったときに調べて使えれば十分です。まずは「flexにはこういう指定がある」と知っておくことを目標にしてください。<br>
+      このページには <code>flex</code> と <code>grid</code> の指定が20個ほど出てきます。ただし、<strong>いま全部を覚えきる必要はありません。</strong><br>
+      実務でも、必要になったときに調べて使えれば十分です。まずは<strong>「flexとgridという2つの並べ方がある」</strong>と知っておくことを目標にしてください。<br>
       迷ったら、このページに戻ってきて見比べれば大丈夫です。
     </div>
   </section>
@@ -1548,6 +1552,649 @@
     </div>
   </section>
 
+  <section id="chapter6">
+    <h2>6. gridで格子に並べる</h2>
+
+    <p>
+      ここまでは <code>flex</code> を使ってきました。<strong>もうひとつ、並べ方があります。</strong>
+    </p>
+
+    <div class="point">
+      <span class="label">flex と grid の違い</span><br>
+      <code>flex</code> は<strong>1本の線に並べる</strong>もの。横一列か、縦一列かのどちらかです。<br>
+      <code>grid</code> は<strong>格子に並べる</strong>もの。<strong>縦と横を同時に決められます。</strong><br>
+      どちらが優れているという話ではありません。<strong>形が違うだけ</strong>です。
+    </div>
+
+    <div class="gd-vs">
+      <div class="gd-vs-item is-flex">
+        <span class="gd-vs-label">flex ― 1方向</span>
+        <div class="fx-demo">
+          <div class="fx-item">1</div>
+          <div class="fx-item">2</div>
+          <div class="fx-item">3</div>
+        </div>
+        <p>並ぶ向きは<strong>1つだけ</strong>。折り返しはできますが、「何列にするか」は指定できません。</p>
+      </div>
+      <div class="gd-vs-item is-grid">
+        <span class="gd-vs-label">grid ― 2方向</span>
+        <div class="gd-demo gd-col-rep">
+          <div class="gd-item">1</div>
+          <div class="gd-item">2</div>
+          <div class="gd-item">3</div>
+          <div class="gd-item">4</div>
+          <div class="gd-item">5</div>
+          <div class="gd-item">6</div>
+        </div>
+        <p><strong>3列</strong>と決めれば、あとは<strong>自動で次の行へ</strong>送られます。</p>
+      </div>
+    </div>
+
+    <h3>親要素に1行書くだけ</h3>
+
+    <p>
+      使い方は <code>flex</code> と同じです。<strong>並べたいものを囲んでいる親に書きます。</strong>
+    </p>
+
+    <pre><code><span class="sy-sel">.container</span> {
+  <span class="sy-attr">display</span>: <span class="sy-str">grid</span>;
+}</code></pre>
+
+    <div class="note">
+      <span class="label">これだけでは何も変わらない</span><br>
+      <code>display: flex</code> は書いた瞬間に横並びになりました。<strong><code>display: grid</code> は縦に積まれたままです。</strong><br>
+      <code>grid</code> は「何列にするか」を自分で決める仕組みなので、<strong>次に出てくる <code>grid-template-columns</code> とセットで書きます。</strong>
+    </div>
+
+    <h3>用語 ― gridコンテナとgridアイテム</h3>
+
+    <table>
+      <tr>
+        <th>呼び方</th>
+        <th>どれのこと</th>
+      </tr>
+      <tr>
+        <td>gridコンテナ</td>
+        <td><code>display: grid</code> を書いた<strong>親要素</strong></td>
+      </tr>
+      <tr>
+        <td>gridアイテム</td>
+        <td>その<strong>直接の子要素</strong></td>
+      </tr>
+      <tr>
+        <td>トラック</td>
+        <td>列や行<strong>1本ぶん</strong>のこと</td>
+      </tr>
+      <tr>
+        <td>セル</td>
+        <td>列と行が交わった<strong>1マス</strong></td>
+      </tr>
+    </table>
+
+    <div class="note">
+      <span class="label">flex のときと同じ考え方</span><br>
+      「親に書く指定」と「子に書く指定」に分かれるところも同じです。<strong>3章と4章でやった構造が、そのまま当てはまります。</strong>
+    </div>
+  </section>
+
+  <section id="chapter7">
+    <h2>7. 親に指定するプロパティ（grid）</h2>
+
+    <div class="note">
+      <span class="label">見方</span><br>
+      ここから先は、<strong>すべて親要素（gridコンテナ）に書く</strong>指定です。<br>
+      見本の上に、実際に書くコードを載せています。<strong>値を変えると見た目がどう変わるか</strong>を見比べてください。
+    </div>
+
+    <h3>grid-template-columns ― 何列にするか</h3>
+
+    <p>
+      <strong>grid でいちばん大事な指定です。</strong>書いた値の数だけ列ができます。
+    </p>
+
+    <pre><code><span class="sy-sel">.container</span> {
+  <span class="sy-attr">display</span>: <span class="sy-str">grid</span>;
+  <span class="sy-attr">grid-template-columns</span>: <span class="sy-num">100px</span> <span class="sy-num">100px</span> <span class="sy-num">100px</span>;   <span class="sy-com">/* 100px の列が3つ */</span>
+}</code></pre>
+
+    <div class="gd-samples">
+      <div>
+        <span class="gd-sample-label">100px 100px 100px</span>
+        <code class="gd-sample-code">grid-template-columns:
+  100px 100px 100px;</code>
+        <div class="gd-demo gd-col-3">
+          <div class="gd-item">1</div>
+          <div class="gd-item">2</div>
+          <div class="gd-item">3</div>
+          <div class="gd-item">4</div>
+        </div>
+      </div>
+      <div>
+        <span class="gd-sample-label">1fr 1fr 1fr</span>
+        <code class="gd-sample-code">grid-template-columns:
+  1fr 1fr 1fr;</code>
+        <div class="gd-demo gd-col-fr">
+          <div class="gd-item">1</div>
+          <div class="gd-item">2</div>
+          <div class="gd-item">3</div>
+          <div class="gd-item">4</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">4つ目が次の行に送られている</span><br>
+      列を3つと決めたので、<strong>4つ目は自動で2行目へ回ります。</strong>行の数は書いていません。<br>
+      <strong>中身が増えても、勝手に下へ伸びていきます。</strong>これが grid の楽なところです。
+    </div>
+
+    <h3>fr という単位</h3>
+
+    <p>
+      <code>fr</code> は grid だけで使える単位です。<strong>「余っている幅を、何:何で分けるか」</strong>を表します。
+    </p>
+
+    <div class="gd-samples">
+      <div>
+        <span class="gd-sample-label">1fr 1fr 1fr ― 均等</span>
+        <code class="gd-sample-code">grid-template-columns:
+  1fr 1fr 1fr;</code>
+        <div class="gd-demo gd-col-fr">
+          <div class="gd-item">1</div>
+          <div class="gd-item">2</div>
+          <div class="gd-item">3</div>
+        </div>
+      </div>
+      <div>
+        <span class="gd-sample-label">2fr 1fr ― 2対1</span>
+        <code class="gd-sample-code">grid-template-columns:
+  2fr 1fr;</code>
+        <div class="gd-demo gd-col-21">
+          <div class="gd-item">2fr</div>
+          <div class="gd-item">1fr</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">fraction の略</span><br>
+      fraction は<strong>「分数」「割合」</strong>という意味です。<code>2fr 1fr</code> なら<strong>2:1で分ける</strong>ということ。<br>
+      <code>%</code> と違って、<strong><code>gap</code> の隙間を引いたあとの残り</strong>を分けてくれます。だから <code>33.3%</code> のような半端な数を自分で計算しなくて済みます。
+    </div>
+
+    <div class="note">
+      <span class="label">px と fr は混ぜられる</span><br>
+      <code>grid-template-columns: 100px 1fr;</code> と書けば、<strong>左は100px固定、右は残り全部</strong>になります。<br>
+      サイドバーとメインのような形が、この1行で作れます。
+    </div>
+
+    <div class="gd-samples">
+      <div>
+        <span class="gd-sample-label">100px 1fr ― 固定と可変</span>
+        <code class="gd-sample-code">grid-template-columns:
+  100px 1fr;</code>
+        <div class="gd-demo gd-col-mix">
+          <div class="gd-item">100px</div>
+          <div class="gd-item">残り全部</div>
+        </div>
+      </div>
+      <div>
+        <span class="gd-sample-label">repeat(3, 1fr) ― 繰り返し</span>
+        <code class="gd-sample-code">grid-template-columns:
+  repeat(3, 1fr);</code>
+        <div class="gd-demo gd-col-rep">
+          <div class="gd-item">1</div>
+          <div class="gd-item">2</div>
+          <div class="gd-item">3</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">repeat() は書くのを省くためのもの</span><br>
+      <code>repeat(3, 1fr)</code> は <code>1fr 1fr 1fr</code> と<strong>まったく同じ意味</strong>です。<br>
+      12列のような多い数のとき、<code>repeat(12, 1fr)</code> と書けるのが利点です。
+    </div>
+
+    <h3>grid-template-rows ― 行の高さを決める</h3>
+
+    <p>
+      列と同じ書き方で、<strong>行の高さ</strong>も指定できます。書かなければ<strong>中身の高さ</strong>になります。
+    </p>
+
+    <div class="gd-samples">
+      <div>
+        <span class="gd-sample-label">行を指定しない（既定）</span>
+        <code class="gd-sample-code">grid-template-columns: 1fr 1fr;</code>
+        <div class="gd-demo gd-col-fr">
+          <div class="gd-item">1</div>
+          <div class="gd-item">2</div>
+          <div class="gd-item">3</div>
+          <div class="gd-item">4</div>
+        </div>
+      </div>
+      <div>
+        <span class="gd-sample-label">60px 100px</span>
+        <code class="gd-sample-code">grid-template-columns: 1fr 1fr;
+grid-template-rows: 60px 100px;</code>
+        <div class="gd-demo gd-row-2">
+          <div class="gd-item">1</div>
+          <div class="gd-item">2</div>
+          <div class="gd-item">3</div>
+          <div class="gd-item">4</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">行は書かないことが多い</span><br>
+      中身の量は変わることが多いので、<strong>高さは中身に任せるほうが安全</strong>です。<br>
+      「ヘッダーだけ44pxにしたい」のように、<strong>決め打ちしたいときだけ</strong>書きます。
+    </div>
+
+    <h3>gap ― マスの間をあける</h3>
+
+    <p>
+      マスとマスの隙間です。<strong><code>flex</code> でも使える指定</strong>ですが、grid では特によく使います。
+    </p>
+
+    <div class="gd-samples">
+      <div>
+        <span class="gd-sample-label">gap: 0</span>
+        <code class="gd-sample-code">gap: 0;</code>
+        <div class="gd-demo gd-gap-0">
+          <div class="gd-item">1</div>
+          <div class="gd-item">2</div>
+          <div class="gd-item">3</div>
+        </div>
+      </div>
+      <div>
+        <span class="gd-sample-label">gap: 24px</span>
+        <code class="gd-sample-code">gap: 24px;</code>
+        <div class="gd-demo gd-gap-24">
+          <div class="gd-item">1</div>
+          <div class="gd-item">2</div>
+          <div class="gd-item">3</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">縦と横で違う値にもできる</span><br>
+      <code>row-gap</code> が<strong>行の間</strong>、<code>column-gap</code> が<strong>列の間</strong>です。<br>
+      <code>gap: 24px 4px;</code> と2つ書くと、<strong>行が24px・列が4px</strong>という意味になります。
+    </div>
+
+    <div class="gd-samples">
+      <div>
+        <span class="gd-sample-label">row-gap: 24px / column-gap: 4px</span>
+        <code class="gd-sample-code">row-gap: 24px;
+column-gap: 4px;</code>
+        <div class="gd-demo gd-gap-rc">
+          <div class="gd-item">1</div>
+          <div class="gd-item">2</div>
+          <div class="gd-item">3</div>
+          <div class="gd-item">4</div>
+          <div class="gd-item">5</div>
+          <div class="gd-item">6</div>
+        </div>
+      </div>
+      <div>
+        <span class="gd-sample-label">gap: 8px（同じ値）</span>
+        <code class="gd-sample-code">gap: 8px;</code>
+        <div class="gd-demo gd-gap-8">
+          <div class="gd-item">1</div>
+          <div class="gd-item">2</div>
+          <div class="gd-item">3</div>
+          <div class="gd-item">4</div>
+          <div class="gd-item">5</div>
+          <div class="gd-item">6</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">margin で隙間を作らない</span><br>
+      昔は <code>margin-right: 8px</code> のようにして隙間を作り、<strong>最後の1つだけ打ち消す</strong>書き方をしていました。<br>
+      <code>gap</code> なら<strong>外側に余計な隙間ができません。</strong>いま書くなら <code>gap</code> を使ってください。
+    </div>
+
+    <h3>justify-items ― マスの中で、横のどこに置くか</h3>
+
+    <p>
+      ここから2つは、<strong>1つ1つのマスの中での位置</strong>を決める指定です。
+    </p>
+
+    <div class="gd-samples">
+      <div>
+        <span class="gd-sample-label">stretch（既定値）</span>
+        <code class="gd-sample-code">justify-items: stretch;</code>
+        <div class="gd-demo gd-ji-demo gd-ji-stretch">
+          <div class="gd-item">1</div>
+          <div class="gd-item">2</div>
+          <div class="gd-item">3</div>
+        </div>
+      </div>
+      <div>
+        <span class="gd-sample-label">center</span>
+        <code class="gd-sample-code">justify-items: center;</code>
+        <div class="gd-demo gd-ji-demo gd-ji-center">
+          <div class="gd-item">1</div>
+          <div class="gd-item">2</div>
+          <div class="gd-item">3</div>
+        </div>
+      </div>
+      <div>
+        <span class="gd-sample-label">start</span>
+        <code class="gd-sample-code">justify-items: start;</code>
+        <div class="gd-demo gd-ji-demo gd-ji-start">
+          <div class="gd-item">1</div>
+          <div class="gd-item">2</div>
+          <div class="gd-item">3</div>
+        </div>
+      </div>
+      <div>
+        <span class="gd-sample-label">end</span>
+        <code class="gd-sample-code">justify-items: end;</code>
+        <div class="gd-demo gd-ji-demo gd-ji-end">
+          <div class="gd-item">1</div>
+          <div class="gd-item">2</div>
+          <div class="gd-item">3</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">既定は stretch ― マスいっぱいに広がる</span><br>
+      何も書かないと、<strong>子はマスの幅いっぱいに引き伸ばされます。</strong><code>flex</code> の <code>align-items</code> が既定で <code>stretch</code> なのと同じ考え方です。<br>
+      <strong><code>start</code> にすると、中身の大きさに戻ります。</strong>
+    </div>
+
+    <h3>align-items ― マスの中で、縦のどこに置くか</h3>
+
+    <p>
+      <code>justify-items</code> の<strong>縦版</strong>です。名前は <code>flex</code> のときと同じですが、<strong>意味する方向が変わりません</strong>（grid では常に縦）。
+    </p>
+
+    <div class="gd-samples">
+      <div>
+        <span class="gd-sample-label">stretch（既定値）</span>
+        <code class="gd-sample-code">align-items: stretch;</code>
+        <div class="gd-demo gd-ai-demo gd-ai-stretch">
+          <div class="gd-item">1</div>
+          <div class="gd-item">2</div>
+          <div class="gd-item">3</div>
+        </div>
+      </div>
+      <div>
+        <span class="gd-sample-label">center</span>
+        <code class="gd-sample-code">align-items: center;</code>
+        <div class="gd-demo gd-ai-demo gd-ai-center">
+          <div class="gd-item">1</div>
+          <div class="gd-item">2</div>
+          <div class="gd-item">3</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">flex との違いに注意</span><br>
+      <code>flex</code> の <code>align-items</code> は、<strong><code>flex-direction</code> によって向きが変わりました。</strong>横並びなら縦、縦並びなら横です。<br>
+      <code>grid</code> は<strong>縦と横が最初から決まっている</strong>ので、迷いません。<code>justify-</code> が横、<code>align-</code> が縦。<strong>これだけです。</strong>
+    </div>
+
+    <div class="note">
+      <span class="label">place-items でまとめて書ける</span><br>
+      <code>place-items: center;</code> と書くと、<strong><code>align-items</code> と <code>justify-items</code> の両方が <code>center</code></strong> になります。<br>
+      <strong>ど真ん中に置きたいときは、この1行で済みます。</strong>
+    </div>
+  </section>
+
+  <section id="chapter8">
+    <h2>8. 子に指定するプロパティ（grid）</h2>
+
+    <div class="note">
+      <span class="label">見方</span><br>
+      ここからは<strong>子要素（gridアイテム）に書く</strong>指定です。<br>
+      <strong>1つだけ大きくしたい、というときに使います。</strong>
+    </div>
+
+    <h3>grid-column ― 横にいくつぶん占めるか</h3>
+
+    <p>
+      <code>span 2</code> と書くと、<strong>2マスぶんの幅</strong>になります。
+    </p>
+
+    <pre><code><span class="sy-sel">.item1</span> {
+  <span class="sy-attr">grid-column</span>: <span class="sy-str">span</span> <span class="sy-num">2</span>;   <span class="sy-com">/* 横に2マスぶん */</span>
+}</code></pre>
+
+    <div class="gd-samples">
+      <div>
+        <span class="gd-sample-label">指定なし</span>
+        <code class="gd-sample-code">（何も書かない）</code>
+        <div class="gd-demo gd-span-demo">
+          <div class="gd-item">1</div>
+          <div class="gd-item">2</div>
+          <div class="gd-item">3</div>
+          <div class="gd-item">4</div>
+        </div>
+      </div>
+      <div>
+        <span class="gd-sample-label">1つ目に span 2</span>
+        <code class="gd-sample-code">.item1 {
+  grid-column: span 2;
+}</code>
+        <div class="gd-demo gd-span-demo">
+          <div class="gd-item gd-col-span2">1</div>
+          <div class="gd-item">2</div>
+          <div class="gd-item">3</div>
+          <div class="gd-item">4</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>grid-row ― 縦にいくつぶん占めるか</h3>
+
+    <p>
+      <code>grid-column</code> の縦版です。<strong>2行ぶんの高さ</strong>にできます。
+    </p>
+
+    <div class="gd-samples">
+      <div>
+        <span class="gd-sample-label">1つ目に grid-row: span 2</span>
+        <code class="gd-sample-code">.item1 {
+  grid-row: span 2;
+}</code>
+        <div class="gd-demo gd-span-demo">
+          <div class="gd-item gd-row-span2">1</div>
+          <div class="gd-item">2</div>
+          <div class="gd-item">3</div>
+          <div class="gd-item">4</div>
+        </div>
+      </div>
+      <div>
+        <span class="gd-sample-label">1 / 3 という書き方</span>
+        <code class="gd-sample-code">.item1 {
+  grid-column: 1 / 3;
+}</code>
+        <div class="gd-demo gd-span-demo">
+          <div class="gd-item gd-col-1to3">1</div>
+          <div class="gd-item">2</div>
+          <div class="gd-item">3</div>
+          <div class="gd-item">4</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">数えているのは「線」であって「マス」ではない</span><br>
+      <code>grid-column: 1 / 3</code> は<strong>「1本目の線から3本目の線まで」</strong>という意味です。マスの番号ではありません。<br>
+      3列なら線は<strong>4本</strong>（左端・1つ目と2つ目の間・2つ目と3つ目の間・右端）。だから <code>1 / 3</code> で<strong>2マスぶん</strong>になります。<br>
+      <strong>数えにくいので、迷ったら <code>span</code> を使ってください。</strong>「いくつぶん」のほうが分かりやすいです。
+    </div>
+
+    <div class="caution">
+      <span class="label">列の数を超えると、はみ出す</span><br>
+      3列しかないのに <code>grid-column: span 4</code> と書くと、<strong>列が勝手に足されます。</strong>枠からはみ出したように見えます。<br>
+      <strong><code>grid-template-columns</code> で決めた数を超えない</strong>ようにしてください。
+    </div>
+  </section>
+
+  <section id="chapter9">
+    <h2>9. gridでレイアウトを作る</h2>
+
+    <p>
+      5章で <code>flex</code> を使って作ったものを、<strong>grid で書くとどうなるか</strong>を見てみます。
+    </p>
+
+    <h3>カードを均等に並べる</h3>
+
+    <div class="gd-vs">
+      <div class="gd-vs-item is-flex">
+        <span class="gd-vs-label">flex で書くと</span>
+        <code class="gd-sample-code">.cards {
+  display: flex;
+  gap: 8px;
+}
+.card {
+  flex: 1 1 0%;
+}</code>
+        <p><strong>親と子の両方</strong>に書く必要があります。</p>
+      </div>
+      <div class="gd-vs-item is-grid">
+        <span class="gd-vs-label">grid で書くと</span>
+        <code class="gd-sample-code">.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}</code>
+        <p><strong>親だけ</strong>で済みます。<strong>3列と決め打ちできる</strong>のが違いです。</p>
+      </div>
+    </div>
+
+    <div class="gd-demo gd-layout-card">
+      <div class="gd-item">カード1</div>
+      <div class="gd-item">カード2</div>
+      <div class="gd-item">カード3</div>
+      <div class="gd-item">カード4</div>
+      <div class="gd-item">カード5</div>
+      <div class="gd-item">カード6</div>
+    </div>
+
+    <div class="point">
+      <span class="label">数が増えても崩れない</span><br>
+      <code>flex</code> だと、6つ入れたときに<strong>1行に6つ並んでしまいます。</strong>折り返させるには <code>flex-wrap</code> と <code>flex-basis</code> の調整が要ります。<br>
+      <code>grid</code> は<strong>3列と書いた時点で、4つ目から自動で次の行</strong>です。<strong>カード並べは grid のほうが楽</strong>です。
+    </div>
+
+    <h3>サイドバーとメインに分ける</h3>
+
+    <pre><code><span class="sy-sel">.layout</span> {
+  <span class="sy-attr">display</span>: <span class="sy-str">grid</span>;
+  <span class="sy-attr">grid-template-columns</span>: <span class="sy-num">200px</span> <span class="sy-num">1fr</span>;
+}</code></pre>
+
+    <div class="gd-demo gd-layout-side">
+      <div class="gd-item">サイドバー<br>200px</div>
+      <div class="gd-item">メイン<br>残り全部</div>
+    </div>
+
+    <div class="note">
+      <span class="label">flex より短い</span><br>
+      <code>flex</code> なら、サイドバーに <code>flex: 0 0 200px</code>、メインに <code>flex: 1</code> と<strong>子2つに書きました。</strong><br>
+      <code>grid</code> は <code>200px 1fr</code> の<strong>1行だけ</strong>です。
+    </div>
+
+    <h3>ヘッダー・サイドバー・フッターをまとめて</h3>
+
+    <p>
+      <strong>grid がいちばん力を出すのはここです。</strong>ページ全体の骨組みを、1つの指定で作れます。
+    </p>
+
+    <pre><code><span class="sy-sel">.page</span> {
+  <span class="sy-attr">display</span>: <span class="sy-str">grid</span>;
+  <span class="sy-attr">grid-template-columns</span>: <span class="sy-num">160px</span> <span class="sy-num">1fr</span>;
+  <span class="sy-attr">grid-template-rows</span>: <span class="sy-num">44px</span> <span class="sy-num">1fr</span> <span class="sy-num">44px</span>;
+}
+
+<span class="sy-com">/* ヘッダーとフッターは横いっぱい */</span>
+<span class="sy-sel">.head</span>,
+<span class="sy-sel">.foot</span> {
+  <span class="sy-attr">grid-column</span>: <span class="sy-num">1</span> / <span class="sy-num">3</span>;
+}</code></pre>
+
+    <div class="gd-demo gd-layout-holy">
+      <div class="gd-item gd-head">ヘッダー</div>
+      <div class="gd-item">サイド</div>
+      <div class="gd-item">メイン</div>
+      <div class="gd-item gd-foot">フッター</div>
+    </div>
+
+    <div class="point">
+      <span class="label">HTMLの順番どおりに置かれている</span><br>
+      <code>.head</code> <code>.side</code> <code>.main</code> <code>.foot</code> と書いた順に、<strong>左上から埋まっていきます。</strong><br>
+      ヘッダーとフッターだけ <code>grid-column: 1 / 3</code> で<strong>横2マスぶん</strong>にしているので、その行を独り占めします。<br>
+      <strong>flex でこれを作ると、入れ子が3段くらい必要になります。</strong>
+    </div>
+
+    <h3>どちらを使うか</h3>
+
+    <table>
+      <tr>
+        <th>作りたいもの</th>
+        <th>向いているほう</th>
+      </tr>
+      <tr>
+        <td>ヘッダーの中のロゴとメニュー</td>
+        <td><code>flex</code>　横1列に並べるだけ</td>
+      </tr>
+      <tr>
+        <td>ボタンを右端に寄せる</td>
+        <td><code>flex</code>　<code>justify-content</code> が使える</td>
+      </tr>
+      <tr>
+        <td>アイコンと文字を縦中央で揃える</td>
+        <td><code>flex</code>　中身の数が決まっていない</td>
+      </tr>
+      <tr>
+        <td>カードを3列で並べる</td>
+        <td><code>grid</code>　列の数を決め打ちしたい</td>
+      </tr>
+      <tr>
+        <td>ページ全体の骨組み</td>
+        <td><code>grid</code>　縦横を同時に決めたい</td>
+      </tr>
+      <tr>
+        <td>写真をタイル状に敷き詰める</td>
+        <td><code>grid</code>　格子そのもの</td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">迷ったときの決め方</span><br>
+      <strong>「並べる向きは1つか、2つか」</strong>で考えます。<br>
+      横だけ、あるいは縦だけなら <code>flex</code>。<strong>縦と横を同時に決めたいなら <code>grid</code>。</strong><br>
+      どちらでも作れる場面は多いので、<strong>どちらかが間違いということはありません。</strong>
+    </div>
+
+    <div class="note">
+      <span class="label">組み合わせて使う</span><br>
+      実際のページでは<strong>両方を使います。</strong>ページ全体は <code>grid</code> で骨組みを作り、その中のヘッダーは <code>flex</code> で横に並べる、という具合です。<br>
+      <strong>gridアイテムの中に、さらに <code>display: flex</code> を書いても構いません。</strong>
+    </div>
+
+    <div class="point">
+      <span class="label">まとめ</span><br>
+      <code>display: grid</code> と <code>grid-template-columns</code> は<strong>セットで書く</strong>。<br>
+      <code>fr</code> は<strong>余りを何:何で分けるか</strong>。<code>repeat()</code> は書くのを省くもの。<br>
+      <code>justify-</code> が<strong>横</strong>、<code>align-</code> が<strong>縦</strong>。grid では向きが変わらない。<br>
+      1つだけ大きくしたいときは、子に <code>span</code>。<br>
+      <strong>1方向なら flex、2方向なら grid。</strong>
+    </div>
+  </section>
+
+
 </main>
 
 <nav class="page-nav">
@@ -1558,7 +2205,7 @@
   </a>
   <a class="page-next" href="beginner_6.html">
     <span class="page-nav-label">次のページ</span>
-    <span class="page-nav-title">コーダー初級#6</span>
+    <span class="page-nav-title">コーダー中級#6</span>
     <span class="page-nav-sub">要素の性質と位置 ― display と position</span>
   </a>
 </nav>
