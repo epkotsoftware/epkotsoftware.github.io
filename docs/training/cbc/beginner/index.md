@@ -21,28 +21,19 @@
   - VSCode フォルダ・ファイル追加方法  
     ![vscode_add_dir_and_file.gif](./images/vscode_add_dir_and_file.gif)
 
-動画を見終わったら、[CBC](https://cbc-study.com/)の入門コースをやっていきましょう。
+動画を見終わったら、下記入門コース1~3をやっていきましょう。
 
 - 入門1（コーダー 初級）
-  - <https://cbc-study.com/training/beginner/page1>
-  - <https://cbc-study.com/training/beginner/page2>
-  - <https://cbc-study.com/training/beginner/page3>
-  - <https://cbc-study.com/training/beginner/page4>
+  - <https://epkotsoftware.github.io/training/cbc_internal/beginner_1.html>
+  - <https://epkotsoftware.github.io/training/cbc_internal/beginner_2.html>
+  - <https://epkotsoftware.github.io/training/cbc_internal/beginner_3.html>
+  - <https://epkotsoftware.github.io/training/cbc_internal/beginner_4.html>
 - 入門2（コーダー 中級）
-  - <https://cbc-study.com/training/beginner/page5>
-  - <https://cbc-study.com/training/beginner/page6>
-  - <https://cbc-study.com/training/beginner/page7>
+  - <https://epkotsoftware.github.io/training/cbc_internal/beginner_5.html>  
+  - <https://epkotsoftware.github.io/training/cbc_internal/beginner_6.html>
+  - <https://epkotsoftware.github.io/training/cbc_internal/beginner_7.html>
 - 入門3（コーダー 上級）
-  - <https://cbc-study.com/training/beginner/page8>
-  - **注意: [「8. 枠が完成！」](https://cbc-study.com/training/beginner/page8#pl-12) の「このようになります。」のリンクをクリックすると誤ったサンプルが出てきますので無視してください。**
-
-2022/6/15でブラウザの「`Internet Explorer(IE)`」が廃止されることにより  
-CSSの「`grid-template`」が、ほぼ全てのブラウザでサポートされます。  
-今後、使われる事が増えそうなので以下も覚えておきましょう。
-
-- 動画
-  - 【HTML/CSSレイアウト】Gridを使うとFlexboxより簡単に複雑なレイアウトを組めます
-    - <https://youtu.be/cwkkD0ejX8Q>
+  - <https://epkotsoftware.github.io/training/cbc_internal/beginner_8.html>
 
 ## 課題
 
@@ -74,3 +65,38 @@ CSSの「`grid-template`」が、ほぼ全てのブラウザでサポートさ�
 課題提出した日付で「研修進捗」資料の更新をお願いします。
 
 - [研修進捗](https://github.com/epkotsoftware/training-docs/blob/main/training/progress/README.md)
+
+
+
+
+
+## ここから先は廃止されます。かつての資料です。緊急用に残してあるだけですので、指示がない限り学習しないでください)
+- *2026/8まで利用されていた資料へのリンクです。古い情報なので、学習しないこと。* ToDo: このセクションは本年中に廃止します。
+
+- 動画を見終わったら、[CBC](https://cbc-study.com/)の入門コースをやっていきましょう。
+- - 入門1（コーダー 初級）
+  - <https://epkotsoftware.github.io/training/cbc_internal/beginner_1.html>
+  - <https://epkotsoftware.github.io/training/cbc_internal/beginner_2.html>
+  - <https://epkotsoftware.github.io/training/cbc_internal/beginner_3.html>
+  - <https://epkotsoftware.github.io/training/cbc_internal/beginner_4.html>
+  - <https://cbc-study.com/training/beginner/page1>
+  - <https://cbc-study.com/training/beginner/page2>
+  - <https://cbc-study.com/training/beginner/page3>
+  - <https://cbc-study.com/training/beginner/page4>
+- 入門2（コーダー 中級）
+  - <https://epkotsoftware.github.io/training/cbc_internal/beginner_5.html>  
+  - <https://cbc-study.com/training/beginner/page5>
+  - <https://cbc-study.com/training/beginner/page6>
+  - <https://cbc-study.com/training/beginner/page7>
+- 入門3（コーダー 上級）
+  - <https://cbc-study.com/training/beginner/page8>
+  - **注意: [「8. 枠が完成！」](https://cbc-study.com/training/beginner/page8#pl-12) の「このようになります。」のリンクをクリックすると誤ったサンプルが出てきますので無視してください。**
+
+2022/6/15でブラウザの「`Internet Explorer(IE)`」が廃止されることにより  
+CSSの「`grid-template`」が、ほぼ全てのブラウザでサポートされます。  
+今後、使われる事が増えそうなので以下も覚えておきましょう。
+
+- 動画
+  - 【HTML/CSSレイアウト】Gridを使うとFlexboxより簡単に複雑なレイアウトを組めます
+    - <https://youtu.be/cwkkD0ejX8Q>
+- 
