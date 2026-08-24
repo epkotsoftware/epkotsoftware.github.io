@@ -75,10 +75,6 @@
 
 - 動画を見終わったら、[CBC](https://cbc-study.com/)の入門コースをやっていきましょう。
 - - 入門1（コーダー 初級）
-  - <https://epkotsoftware.github.io/training/cbc_internal/beginner_1.html>
-  - <https://epkotsoftware.github.io/training/cbc_internal/beginner_2.html>
-  - <https://epkotsoftware.github.io/training/cbc_internal/beginner_3.html>
-  - <https://epkotsoftware.github.io/training/cbc_internal/beginner_4.html>
   - <https://cbc-study.com/training/beginner/page1>
   - <https://cbc-study.com/training/beginner/page2>
   - <https://cbc-study.com/training/beginner/page3>
