@@ -1,0 +1,260 @@
+/* ============================================================
+   コーダー初級#6（beginner_6.html）専用のスタイル
+
+   全ページ共通の土台は training.css にあります。
+   ここに置くのは、このページだけで使う図やデモのスタイルです。
+   ============================================================ */
+/* ============================================================
+   共通の実演枠
+   ============================================================ */
+.el-demo {
+  margin: 16px 0 22px;
+  padding: 12px;
+  border: 2px dashed #94a3b8;
+  background: #f1f5f9;
+}
+
+/* ブロックレベル要素の見本（青） */
+.el-block {
+  display: block;
+  padding: 9px 12px;
+  border: 1px solid #60a5fa;
+  background: #bfdbfe;
+  color: #1e3a8a;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* インライン要素の見本（オレンジ） */
+.el-inline {
+  display: inline;
+  padding: 9px 12px;
+  border: 1px solid #f59e0b;
+  background: #fde68a;
+  color: #92400e;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* inline-block の見本（緑） */
+.el-inline-block {
+  display: inline-block;
+  padding: 9px 12px;
+  border: 1px solid #16a34a;
+  background: #bbf7d0;
+  color: #14532d;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* 見本を左右に並べる */
+.el-samples {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 20px 0 26px;
+}
+
+.el-label {
+  display: block;
+  margin-bottom: 7px;
+  color: #1e3a8a;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* 見本ごとの、実際に書くコード */
+.el-code {
+  display: block;
+  margin-bottom: 8px;
+  padding: 9px 12px;
+  border-radius: 6px;
+  background: #1e293b;
+  color: #e2e8f0;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+
+/* --- 幅・高さが効くかどうかの見本 --- */
+.el-sized {
+  width: 200px;
+  height: 60px;
+}
+
+/* --- 上下の余白が効くかどうかの見本 --- */
+.el-spaced {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+/* 余白の位置を見えるようにする外枠 */
+.el-space-frame {
+  background: repeating-linear-gradient(45deg, #fcd34d, #fcd34d 3px, #fef3c7 3px, #fef3c7 7px);
+}
+
+/* ============================================================
+   2章：display の実演（リストを使う）
+   ============================================================ */
+.el-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* 上下の余白を入れてあるのは、inline のときだけ効かないことを見せるため */
+.el-list li {
+  margin: 12px 4px;
+  padding: 9px 14px;
+  border: 1px solid #60a5fa;
+  background: #bfdbfe;
+  color: #1e3a8a;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.el-list-inline li {
+  display: inline;
+}
+
+.el-list-ib li {
+  display: inline-block;
+}
+
+/* inline-block に幅を与えた見本 */
+.el-list-ib-sized li {
+  display: inline-block;
+  width: 110px;
+  text-align: center;
+}
+
+/* ============================================================
+   3章：position の実演
+   ============================================================ */
+/* 実演の舞台。ここが「親要素」にあたる */
+.ps-stage {
+  position: relative;
+  height: 160px;
+  padding: 12px;
+  border: 2px dashed #94a3b8;
+  background: #f1f5f9;
+}
+
+/* 舞台の左上に「親要素」と表示する */
+.ps-stage::before {
+  content: "親要素";
+  position: absolute;
+  top: 4px;
+  left: 8px;
+  color: #64748b;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 11.5px;
+}
+
+.ps-box {
+  width: 96px;
+  padding: 10px 0;
+  border: 1px solid #60a5fa;
+  border-radius: 5px;
+  background: #bfdbfe;
+  color: #1e3a8a;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.ps-box + .ps-box {
+  margin-top: 8px;
+}
+
+/* 動かす対象の箱だけ色を変える */
+.ps-box.mark {
+  border-color: #f59e0b;
+  background: #fde68a;
+  color: #92400e;
+}
+
+/* もといた場所からずらす */
+.ps-relative {
+  position: relative;
+  top: 22px;
+  left: 40px;
+}
+
+/* 親（.ps-stage）を基準に右上へ置く */
+.ps-absolute {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+/* ============================================================
+   4章：z-index の実演
+   ============================================================ */
+.zi-stage {
+  position: relative;
+  height: 180px;
+  margin: 16px 0 22px;
+  border: 2px dashed #94a3b8;
+  background: #f1f5f9;
+}
+
+/* 3つを少しずつずらして、必ず重なるように置く */
+.zi-box {
+  position: absolute;
+  width: 150px;
+  padding: 18px 0;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.zi-box1 {
+  top: 24px;
+  left: 30px;
+  border: 1px solid #60a5fa;
+  background: #bfdbfe;
+  color: #1e3a8a;
+}
+
+.zi-box2 {
+  top: 52px;
+  left: 110px;
+  border: 1px solid #f59e0b;
+  background: #fde68a;
+  color: #92400e;
+}
+
+.zi-box3 {
+  top: 80px;
+  left: 190px;
+  border: 1px solid #16a34a;
+  background: #bbf7d0;
+  color: #14532d;
+}
+
+/* 狭い画面では横に並べきれないので、ずらし幅を詰める */
+@media (max-width: 560px) {
+  .zi-box { width: 116px; }
+  .zi-box1 { left: 14px; }
+  .zi-box2 { left: 64px; }
+  .zi-box3 { left: 114px; }
+}
+
+/* z-index を指定した見本。数字が大きいほど手前に出る */
+.zi-set .zi-box1 { z-index: 1; }
+.zi-set .zi-box2 { z-index: 10; }
+.zi-set .zi-box3 { z-index: 2; }
+
+@media (max-width: 780px) {
+  /* 1fr だけだと中身の最小幅まで広がり、長いコード行が画面をはみ出す。
+     minmax(0, …) を付けて、親の幅で止める */
+  .el-samples {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -1,0 +1,211 @@
+@charset "UTF-8";
+
+/******************************
+  初期設定
+******************************/
+* {
+  box-sizing: border-box;
+}
+body {
+  color: #060606;
+  font-size: 16px;
+  font-family: "Helvetica Neue", Arial, "Hiragino Sans", Meiryo, sans-serif;
+  letter-spacing: 0.06em;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/******************************
+  header
+******************************/
+.header {
+  width: 100%;
+  padding: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+.header__wrap {
+  width: 85%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header__logo {
+  width: 54px;
+  height: 54px;
+}
+.header__logo a {
+  display: block;
+}
+.header__logo img {
+  width: 100%;
+  display: block;
+}
+.header__menu ul {
+  display: flex;
+}
+.header__menu li {
+  width: 100px;
+}
+.header__menu a {
+  display: block;
+  text-align: center;
+  font-size: 14px;
+}
+
+/******************************
+  main
+******************************/
+.main section {
+  width: 85%;
+  margin: 0 auto 60px;
+}
+
+/* KV：画面幅いっぱいに背景画像を敷き、その上に文字を置く */
+.main .main__kv {
+  width: auto;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  padding-left: 10%;
+  background: url(../images/top_bg.webp) center / cover no-repeat;
+  color: #fff;
+  font-size: 24px;
+  line-height: 1.8;
+}
+
+/* about */
+.main__about {
+  padding: 0 10px 80px;
+}
+.main__about--ttl {
+  margin-bottom: 60px;
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  letter-spacing: 4px;
+}
+.main__about--logo {
+  width: 120px;
+  margin: 0 auto;
+}
+.main__about--logo img {
+  width: 100%;
+  display: block;
+}
+.main__about--txt {
+  margin: 45px 0 60px;
+  padding: 0 20px;
+  text-align: center;
+  font-size: 16px;
+  line-height: 2;
+  letter-spacing: 4px;
+}
+
+/* service */
+.main__service {
+  padding-bottom: 100px;
+}
+.main__service--message {
+  margin-bottom: 95px;
+  display: flex;
+}
+.main__service--message h2 {
+  flex: 1;
+  font-size: 50px;
+  font-weight: bold;
+}
+.main__service--message p {
+  flex: 2;
+  font-size: 16px;
+  line-height: 2.2;
+  letter-spacing: 2px;
+}
+.main__service--list {
+  display: flex;
+}
+.main__service--list li {
+  flex: 1;
+  margin-right: 2%;
+}
+.main__service--list li:last-child {
+  margin-right: 0;
+}
+.main__service--list a {
+  display: block;
+}
+.main__service--list img {
+  width: 100%;
+  display: block;
+}
+.main__service--list h3 {
+  margin: 50px 0 30px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.main__service--list p {
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* news */
+.main__news {
+  padding: 0 20px;
+}
+.main__news--ttl {
+  margin-bottom: 16px;
+  font-size: 48px;
+  font-weight: bold;
+}
+.main__news--list {
+  padding: 40px 12px;
+}
+.main__news--list li {
+  border-bottom: 1px solid #e8ecee;
+}
+.main__news--list li:first-child {
+  border-top: 1px solid #e8ecee;
+}
+.main__news--list a {
+  display: block;
+  padding: 50px 20px;
+}
+.main__news--list a:hover {
+  background: #e8ecee;
+}
+.main__news--item {
+  display: flex;
+}
+.main__news--day {
+  width: 265px;
+  margin-right: 32px;
+  display: flex;
+  align-items: center;
+}
+.main__news--data {
+  line-height: 1.8;
+}
+
+/******************************
+  footer
+******************************/
+.footer {
+  padding: 90px 0 70px;
+  border-top: 1px solid #e8ecee;
+}
+.footer__logo {
+  width: 60px;
+  margin: 0 auto;
+}
+.footer__logo img {
+  width: 100%;
+  display: block;
+}
+.footer__copyright {
+  margin-top: 30px;
+  text-align: center;
+  color: #b5b5b5;
+  font-size: 11px;
+}
