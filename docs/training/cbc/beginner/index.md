@@ -80,7 +80,6 @@
   - <https://cbc-study.com/training/beginner/page3>
   - <https://cbc-study.com/training/beginner/page4>
 - 入門2（コーダー 中級）
-  - <https://epkotsoftware.github.io/training/cbc_internal/beginner_5.html>  
   - <https://cbc-study.com/training/beginner/page5>
   - <https://cbc-study.com/training/beginner/page6>
   - <https://cbc-study.com/training/beginner/page7>
