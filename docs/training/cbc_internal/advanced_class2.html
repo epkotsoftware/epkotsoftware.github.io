@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>フロントエンド中級#12</title>
+  <link rel="stylesheet" href="../css/training.css">
+
+  <!-- ▼ フロント編で共通のスタイル -->
+  <link rel="stylesheet" href="../css/advanced_common.css">
+
+  <!-- ▼ このページ専用のスタイル -->
+  <link rel="stylesheet" href="../css/advanced_class2.css">
+
+  <!-- ▼ 開いたときに、ページの先頭から読み始められるようにする。
+       ブラウザが前回の位置へ戻すより先に動かす必要があるため、
+       training.js とは分けて <head> で読み込んでいる -->
+  <script src="../js/scroll-reset.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>フロントエンド中級#12</h1>
+    <p>クラスにまとめる</p>
+  </div>
+</header>
+
+<main>
+
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol>
+      <li><a href="#chapter1">分けただけだと、まだ足りない</a></li>
+      <li><a href="#chapter2">クラスとは</a></li>
+      <li><a href="#chapter3">見せる・見せない ― public と private</a></li>
+      <li><a href="#chapter4">受け継ぐ ― 継承</a></li>
+      <li><a href="#chapter5">組み立てる</a></li>
+    </ol>
+
+    <div class="note">
+      <span class="label">読む前に</span><br>
+      <a href="advanced_class1.html">フロントエンド中級#11</a> でファイルを分けました。<strong>ここではさらに、まとまって動くものを1つにします。</strong><br>
+      動きはまた1つも変わりません。<strong>3回目の作り直し</strong>です。ここまで来ると、<strong>同じものでも書き方でこれだけ変わる</strong>ということが見えてきます。
+    </div>
+
+    <div class="exercise">
+      <span class="label">課題</span><br>
+      作るのは <code>03_advanced/htdocs/sortable3/index.php</code> です。<strong>また新しいフォルダを作ります。</strong><br>
+      <code>sortable2/</code> はそのまま残してください。<strong>3つとも並べて残します。</strong><br>
+      章の途中に<strong>演習が3つ</strong>あります（この色の枠です）。
+    </div>
+
+    <div class="note">
+      <span class="label">演習のコードは穴埋めになっています</span><br>
+      演習には書きかけのコードが載っています。<code class="hl"><span class="blank">xxxxxx</span></code> と<strong>黄色くなっているところを埋めてみましょう</strong>。<br>
+      横のコメントがヒントです。すぐ下に「答え」の折りたたみを置いていますが、<strong>先に自分で考えてから</strong>開いてください。
+    </div>
+  </section>
+
+  <section id="chapter1">
+    <h2>1. 分けただけだと、まだ足りない</h2>
+
+    <p>
+      <a href="advanced_class1.html">#11</a> で作った3つのファイルを、頭から並べてみます。<strong>気になるところがあります。</strong>
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">sortable2 — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">3つのファイルの1行目</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3</div>
+        <pre class="vscode-code"><span class="ad-cm">// index.php</span>           <span class="ad-k">require_once</span> <span class="ad-c">__DIR__</span> . <span class="ad-s">'/config/config.php'</span>;
+<span class="ad-cm">// function/insert.php</span>  <span class="ad-k">require_once</span> <span class="ad-c">__DIR__</span> . <span class="ad-s">'/../config/config.php'</span>;
+<span class="ad-cm">// function/update.php</span>  <span class="ad-k">require_once</span> <span class="ad-c">__DIR__</span> . <span class="ad-s">'/../config/config.php'</span>;</pre>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">全部が同じものを読み込んでいる</span><br>
+      3つとも、やっていることは同じです。<strong>「DBにつなぐ」ためだけに、毎回1行使っています。</strong><br>
+      しかも読み込んだあと、中では <code>$pdo</code> という<strong>変数がむき出し</strong>のまま置かれています。
+    </div>
+
+    <p>
+      困っていることを整理すると、こうなります。
+    </p>
+
+    <table>
+      <tr>
+        <th>困ること</th>
+        <th>中身</th>
+      </tr>
+      <tr>
+        <td>毎回つなぎ直す</td>
+        <td>どのファイルも、まず接続から始めなければいけません</td>
+      </tr>
+      <tr>
+        <td>$pdo がむき出し</td>
+        <td>読み込んだ側から自由に触れます。うっかり上書きもできてしまいます</td>
+      </tr>
+      <tr>
+        <td>関連が見えない</td>
+        <td>「つなぐ」と「登録する」がひとまとまりだと、ファイルを開くまで分かりません</td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">つなぐ道具と、使う人をまとめたい</span><br>
+      「登録する」も「更新する」も、<strong>まず接続が要ります。</strong>それなら<strong>接続を持ったまま、登録も更新もできる部品</strong>があればいい。<br>
+      その<strong>「持ち物」と「できること」をひとまとめにする</strong>のが<strong>クラス</strong>です。
+    </div>
+  </section>
+
+  <section id="chapter2">
+    <h2>2. クラスとは</h2>
+
+    <p>
+      変数と関数を、まとめて1つにしたものです。<strong>中に入れた変数を、中の関数が自由に使えます。</strong>
+    </p>
+
+    <div class="ac2-compare">
+      <div class="ac2-compare-item">
+        <span class="ac2-compare-label">いままで</span>
+        <div class="ac2-loose">
+          <span class="ac2-piece is-prop">$pdo</span>
+          <span class="ac2-piece">prepare(...)</span>
+          <span class="ac2-piece">execute(...)</span>
+        </div>
+        <p>バラバラ。<strong>使うたびに $pdo を持ち出す</strong></p>
+      </div>
+      <div class="ac2-compare-item">
+        <span class="ac2-compare-label">クラスにすると</span>
+        <div class="ac2-box">
+          <span class="ac2-box-name">Connect</span>
+          <span class="ac2-piece is-prop">$pdo</span>
+          <span class="ac2-piece">__construct()</span>
+        </div>
+        <p>1つの箱の中。<strong>中の関数は $pdo をそのまま使える</strong></p>
+      </div>
+    </div>
+
+    <h3>書いてみる</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">Connect.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">Controller/Connect.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php</span>
+
+<span class="ad-k">class</span> <span class="ad-c">Connect</span>
+{
+    <span class="ad-k">private const</span> <span class="ad-c">DB_DSN</span>  = <span class="ad-s">'mysql:host=mysql; dbname=cri_sortable; charset=utf8mb4'</span>;
+    <span class="ad-k">private const</span> <span class="ad-c">DB_USER</span> = <span class="ad-s">'root'</span>;
+    <span class="ad-k">private const</span> <span class="ad-c">DB_PASS</span> = <span class="ad-s">'root'</span>;
+
+    <span class="ad-k">protected</span> <span class="ad-c">PDO</span> <span class="ad-v">$pdo</span>;
+
+    <span class="ad-k">public function</span> <span class="ad-f">__construct</span>()
+    {
+        <span class="ad-v">$this</span>-&gt;pdo = <span class="ad-k">new</span> <span class="ad-c">PDO</span>(<span class="ad-k">self</span>::<span class="ad-c">DB_DSN</span>, <span class="ad-k">self</span>::<span class="ad-c">DB_USER</span>, <span class="ad-k">self</span>::<span class="ad-c">DB_PASS</span>, [
+            <span class="ad-c">PDO</span>::<span class="ad-c">ATTR_ERRMODE</span>            =&gt; <span class="ad-c">PDO</span>::<span class="ad-c">ERRMODE_EXCEPTION</span>,
+            <span class="ad-c">PDO</span>::<span class="ad-c">ATTR_DEFAULT_FETCH_MODE</span> =&gt; <span class="ad-c">PDO</span>::<span class="ad-c">FETCH_ASSOC</span>,
+            <span class="ad-c">PDO</span>::<span class="ad-c">ATTR_EMULATE_PREPARES</span>   =&gt; <span class="ad-k">false</span>,
+        ]);
+    }
+}</pre>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th>言葉</th>
+        <th>意味</th>
+      </tr>
+      <tr>
+        <td><code>class Connect</code></td>
+        <td>クラスを作る合図と、その名前</td>
+      </tr>
+      <tr>
+        <td><code>private const</code></td>
+        <td>クラスの中だけで使う定数。外からは読めません</td>
+      </tr>
+      <tr>
+        <td><code>protected PDO $pdo;</code></td>
+        <td><strong>プロパティ</strong>。クラスが持っておく変数</td>
+      </tr>
+      <tr>
+        <td><code>__construct</code></td>
+        <td><strong>コンストラクタ</strong>。作られたときに1回だけ動きます</td>
+      </tr>
+      <tr>
+        <td><code>$this-&gt;pdo</code></td>
+        <td>自分が持っているプロパティを指します</td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">$this とは</span><br>
+      <strong>「いま自分」</strong>という意味です。<a href="basic_6.html">マークアップ中級#6</a> で <code>$(this)</code> を使いました。考え方は同じで、<strong>「いま動いているこれ自身」</strong>を指します。<br>
+      <code>$this-&gt;pdo</code> と書けば、自分が持っている <code>$pdo</code> です。<strong>引数で渡さなくても使えます。</strong>
+    </div>
+
+    <div class="caution">
+      <span class="label">$this-&gt;pdo に $ は付けない</span><br>
+      プロパティを<strong>宣言するとき</strong>は <code>protected PDO $pdo;</code> と <strong>$ 付き</strong>。<br>
+      <strong>使うとき</strong>は <code>$this-&gt;pdo</code> と <strong>$ なし</strong>です。<br>
+      <code>$this-&gt;$pdo</code> と書くと別の意味になります（変数の中身を名前として使う書き方）。<strong>ここは間違えやすいところです。</strong>
+    </div>
+
+    <h3>取り出す側をもう1つ作る</h3>
+
+    <p>
+      同じ <code>Connect.php</code> の中に、<strong>もう1つクラスを書きます。</strong>
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">Connect.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">Controller/Connect.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7</div>
+        <pre class="vscode-code"><span class="ad-k">class</span> <span class="ad-c">SelectData</span> <span class="ad-k">extends</span> <span class="ad-c">Connect</span>
+{
+    <span class="ad-k">public function</span> <span class="ad-f">select</span>(<span class="ad-k">string</span> <span class="ad-v">$sql</span>): <span class="ad-k">array</span>
+    {
+        <span class="ad-k">return</span> <span class="ad-v">$this</span>-&gt;pdo-&gt;<span class="ad-f">query</span>(<span class="ad-v">$sql</span>)-&gt;<span class="ad-f">fetchAll</span>();
+    }
+}</pre>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">1つのファイルに2つ書いていい</span><br>
+      <code>Connect.php</code> の中に <code>Connect</code> と <code>SelectData</code> の2つが入っています。<strong>これは問題ありません。</strong><br>
+      関係の深いものは、同じファイルにまとめたほうが読みやすいことがあります。<strong>「1ファイル1クラス」は決まりではなく、目安です。</strong>
+    </div>
+
+    <h3>使う</h3>
+
+    <div class="ad-compare">
+      <div class="ad-compare-item is-ng">
+        <span class="ad-compare-label">#11 のとき</span>
+        <code class="ad-code">require_once '../config/config.php';
+
+$stmt = $pdo->query($sql);
+$rows = $stmt->fetchAll();</code>
+      </div>
+      <div class="ad-compare-item is-ok">
+        <span class="ad-compare-label">クラスにすると</span>
+        <code class="ad-code">require_once '../Controller/Connect.php';
+
+$select = new SelectData();
+$rows = $select->select($sql);</code>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">new とは</span><br>
+      <strong>クラスから実物を作る</strong>という意味です。作られたものを<strong>インスタンス</strong>といいます。<br>
+      <strong>クラスは設計図、インスタンスはそこから作った実物</strong>、とよく例えられます。設計図のままでは使えません。<br>
+      <code>new SelectData()</code> と書いた瞬間に <code>__construct</code> が動いて、<strong>DBにつながります。</strong>接続を書く必要はもうありません。
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習1</span><br>
+      <code>sortable3/</code> フォルダを作り、<strong><code>Controller/Connect.php</code> を作ってください。</strong><br>
+      <code>Connect</code> と <code>SelectData</code> の2つを書きます。<code>index.php</code> から <code>new</code> して呼び出し、<strong>一覧が表示されるところまで</strong>動かします。
+      <span class="ad-label">Controller/Connect.php（穴埋め）</span>
+      <code class="ad-code hl"><span class="ad-k">class</span> <span class="ad-c">Connect</span>
+{
+    <span class="ad-k">protected</span> <span class="ad-c">PDO</span> <span class="ad-v">$pdo</span>;
+
+    <span class="ad-k">public function</span> <span class="ad-f"><span class="blank">xxxxxx</span></span>()  <span class="ad-cm">/* 作られたときに1回動くメソッドの名前は？（この章） */</span>
+    {
+        <span class="blank">xxxxxx</span>-&gt;pdo = <span class="ad-k">new</span> <span class="ad-c">PDO</span>(...);  <span class="ad-cm">/* 「いま自分」を指す書き方は？ */</span>
+    }
+}</code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="ad-label">Controller/Connect.php</span>
+        <code class="ad-code hl"><span class="ad-k">public function</span> <span class="ad-f">__construct</span>()
+{
+    <span class="ad-v">$this</span>-&gt;pdo = <span class="ad-k">new</span> <span class="ad-c">PDO</span>(...);
+}</code>
+      </details>
+    </div>
+  </section>
+
+  <section id="chapter3">
+    <h2>3. 見せる・見せない ― public と private</h2>
+
+    <p>
+      さっきのコードに <code>public</code> と <code>private</code> と <code>protected</code> が出てきました。<strong>外から触れるかどうか</strong>を決めるものです。
+    </p>
+
+    <table>
+      <tr>
+        <th>書き方</th>
+        <th>外から</th>
+        <th>子クラスから</th>
+      </tr>
+      <tr>
+        <td><code>public</code></td>
+        <td>触れる</td>
+        <td>触れる</td>
+      </tr>
+      <tr>
+        <td><code>protected</code></td>
+        <td>触れない</td>
+        <td>触れる</td>
+      </tr>
+      <tr>
+        <td><code>private</code></td>
+        <td>触れない</td>
+        <td>触れない</td>
+      </tr>
+    </table>
+
+    <div class="ac2-access">
+      <div class="ac2-access-outer">
+        <span class="ac2-access-tag">外（index.php）</span>
+        <div class="ac2-access-inner">
+          <span class="ac2-access-tag">Connect の中</span>
+          <span class="ac2-item is-private">private const DB_PASS</span>
+          <span class="ac2-item is-private">protected $pdo</span>
+          <span class="ac2-item is-public">public select()</span>
+        </div>
+        <div class="ac2-access-arrows">
+          <span class="is-ng">✕ DB_PASS には届かない</span>
+          <span class="is-ng">✕ $pdo にも届かない</span>
+          <span class="is-ok">○ select() は呼べる</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">なぜ隠すのか</span><br>
+      <code>$pdo</code> を <code>public</code> にすると、<strong>外から直接SQLを実行できてしまいます。</strong><br>
+      <code>$select-&gt;pdo-&gt;query('DELETE FROM sortable');</code><br>
+      せっかくクラスにまとめたのに、<strong>横から勝手に触られたら意味がありません。</strong><br>
+      <strong>「使ってほしい入口だけ public にする」。</strong>これが基本です。
+    </div>
+
+    <div class="note">
+      <span class="label">迷ったら private から</span><br>
+      あとから <code>public</code> にするのは簡単ですが、<strong>逆は大変</strong>です。すでに外から使われていたら、直す場所が増えます。<br>
+      <strong>最初は閉じておいて、必要になったら開ける。</strong>この順番が安全です。
+    </div>
+
+    <div class="point">
+      <span class="label">カプセル化</span><br>
+      いまやったように<strong>「中身を隠して、決まった入口だけを見せる」</strong>ことを<strong>カプセル化</strong>といいます。<br>
+      薬のカプセルと同じで、<strong>中身は見えないが、飲み方は決まっている</strong>という状態です。
+    </div>
+  </section>
+
+  <section id="chapter4">
+    <h2>4. 受け継ぐ ― 継承</h2>
+
+    <p>
+      <code>SelectData</code> に <code>extends Connect</code> と書きました。これが<strong>継承</strong>です。
+    </p>
+
+    <div class="ac2-extend">
+      <div class="ac2-extend-parent">
+        <span class="ac2-extend-name">Connect</span>
+        <span class="ac2-piece is-prop">$pdo</span>
+        <span class="ac2-piece">__construct()</span>
+      </div>
+      <div class="ac2-extend-arrow">↓ extends（受け継ぐ）</div>
+      <div class="ac2-extend-children">
+        <div class="ac2-extend-child">
+          <span class="ac2-extend-name">SelectData</span>
+          <span class="ac2-piece is-inherit">$pdo（もらった）</span>
+          <span class="ac2-piece">select()</span>
+        </div>
+        <div class="ac2-extend-child">
+          <span class="ac2-extend-name">AppController</span>
+          <span class="ac2-piece is-inherit">$pdo（もらった）</span>
+          <span class="ac2-piece">insertSortable()</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">extends と書くだけ</span><br>
+      <code>class SelectData extends Connect</code> と書けば、<strong><code>Connect</code> が持っているものを、そのまま使えます。</strong><br>
+      <code>$pdo</code> も <code>__construct</code> も書いていないのに、<code>new SelectData()</code> でつながります。<strong>親から受け継いでいるから</strong>です。
+    </div>
+
+    <div class="caution">
+      <span class="label">private だと受け継げない</span><br>
+      <code>Connect</code> の <code>$pdo</code> を、<code>private</code> ではなく <strong><code>protected</code></strong> にしています。<br>
+      <code>private</code> にすると<strong>子クラスからも見えません。</strong><code>$this-&gt;pdo</code> と書いた瞬間にエラーです。<br>
+      <strong>「子には見せたいが、外には見せたくない」</strong>ときが <code>protected</code> の出番です。
+    </div>
+
+    <h3>もう1つのクラスを作る</h3>
+
+    <p>
+      登録と更新を受け持つクラスを、<strong>別のファイル</strong>に作ります。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">AppController.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">Controller/AppController.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php</span>
+
+<span class="ad-k">class</span> <span class="ad-c">AppController</span> <span class="ad-k">extends</span> <span class="ad-c">Connect</span>
+{
+    <span class="ad-cm">/** 新しいメンバーを登録する */</span>
+    <span class="ad-k">public function</span> <span class="ad-f">insertSortable</span>(<span class="ad-k">string</span> <span class="ad-v">$name</span>, <span class="ad-k">int</span> <span class="ad-v">$departmentId</span>): <span class="ad-k">void</span>
+    {
+        <span class="ad-v">$stmt</span> = <span class="ad-v">$this</span>-&gt;pdo-&gt;<span class="ad-f">prepare</span>(
+            <span class="ad-s">'INSERT INTO sortable (name, department_id, left_x, top_y)
+             VALUES (:name, :department_id, 20, 20)'</span>
+        );
+        <span class="ad-v">$stmt</span>-&gt;<span class="ad-f">execute</span>([
+            <span class="ad-s">':name'</span>      =&gt; <span class="ad-v">$name</span>,
+            <span class="ad-s">':department_id'</span> =&gt; <span class="ad-v">$departmentId</span>,
+        ]);
+    }
+
+    <span class="ad-cm">/** ドラッグした位置を保存する */</span>
+    <span class="ad-k">public function</span> <span class="ad-f">updateSortable</span>(<span class="ad-k">int</span> <span class="ad-v">$id</span>, <span class="ad-k">int</span> <span class="ad-v">$left</span>, <span class="ad-k">int</span> <span class="ad-v">$top</span>): <span class="ad-k">void</span>
+    {
+        <span class="ad-v">$stmt</span> = <span class="ad-v">$this</span>-&gt;pdo-&gt;<span class="ad-f">prepare</span>(
+            <span class="ad-s">'UPDATE sortable
+             SET left_x = :left, top_y = :top
+             WHERE id = :id'</span>
+        );
+        <span class="ad-v">$stmt</span>-&gt;<span class="ad-f">execute</span>([
+            <span class="ad-s">':left'</span> =&gt; <span class="ad-v">$left</span>,
+            <span class="ad-s">':top'</span>  =&gt; <span class="ad-v">$top</span>,
+            <span class="ad-s">':id'</span>   =&gt; <span class="ad-v">$id</span>,
+        ]);
+    }
+}</pre>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">$pdo をどこにも渡していない</span><br>
+      <code>insertSortable(string $name, int $departmentId)</code>。<strong>引数に <code>$pdo</code> がありません。</strong><br>
+      親から受け継いだ <code>$this-&gt;pdo</code> をそのまま使えるからです。<strong>これが「まとめる」効果です。</strong>
+    </div>
+
+    <div class="note">
+      <span class="label">型を書いておく</span><br>
+      <code>string $name</code> <code>int $departmentId</code> のように、<strong>受け取るものの種類</strong>を書いています。<code>: void</code> は<strong>「何も返さない」</strong>という意味です。<br>
+      書かなくても動きますが、<strong>間違ったものを渡したときに、その場でエラーになります。</strong>あとから原因を探すより、ずっと楽です。
+    </div>
+
+    <div class="caution">
+      <span class="label">継承は、使いすぎない</span><br>
+      便利ですが、<strong>親を直すと子が全部影響を受けます。</strong>親子が3段、4段と重なると、どこで何が定義されているのか追えなくなります。<br>
+      <strong>本当に「同じもの」を共有するときだけ</strong>使う。「なんとなく似ているから」で継承すると、あとで苦しみます。
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習2</span><br>
+      <code>Controller/AppController.php</code> を作り、<strong><code>Connect</code> を受け継がせてください。</strong><br>
+      <code>insertSortable()</code> と <code>updateSortable()</code> の2つを書きます。<strong>どちらにも <code>$pdo</code> を渡さない</strong>のがポイントです。<br>
+      書けたら、<code>Connect</code> の <code>protected</code> を <code>private</code> に変えてみてください。<strong>どんなエラーが出るか見ておきます。</strong>
+      <span class="ad-label">Controller/AppController.php（穴埋め）</span>
+      <code class="ad-code hl"><span class="ad-k">class</span> <span class="ad-c">AppController</span> <span class="blank">xxxxxx</span> <span class="ad-c">Connect</span>  <span class="ad-cm">/* 受け継ぐときに書く語は？（この章） */</span>
+{
+    <span class="ad-k">public function</span> <span class="ad-f">updateSortable</span>(<span class="ad-k">int</span> <span class="ad-v">$id</span>, <span class="ad-k">int</span> <span class="ad-v">$left</span>, <span class="ad-k">int</span> <span class="ad-v">$top</span>): <span class="blank">xxxxxx</span>  <span class="ad-cm">/* 何も返さないときの型は？ */</span>
+    {
+        <span class="ad-v">$stmt</span> = <span class="ad-v">$this</span>-&gt;pdo-&gt;<span class="ad-f">prepare</span>(<span class="ad-s">'UPDATE sortable SET ...'</span>);
+        <span class="ad-v">$stmt</span>-&gt;<span class="ad-f">execute</span>([...]);
+    }
+}</code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="ad-label">Controller/AppController.php</span>
+        <code class="ad-code hl"><span class="ad-k">class</span> <span class="ad-c">AppController</span> <span class="ad-k">extends</span> <span class="ad-c">Connect</span>
+
+<span class="ad-k">public function</span> <span class="ad-f">updateSortable</span>(<span class="ad-k">int</span> <span class="ad-v">$id</span>, <span class="ad-k">int</span> <span class="ad-v">$left</span>, <span class="ad-k">int</span> <span class="ad-v">$top</span>): <span class="ad-k">void</span></code>
+      </details>
+    </div>
+  </section>
+
+  <section id="chapter5">
+    <h2>5. 組み立てる</h2>
+
+    <p>
+      クラスができたので、<strong>#11 で作ったファイルの中身を差し替えます。</strong>ファイルの名前も場所も変わりません。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">エクスプローラー</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">sortable3</div>
+      </div>
+      <div class="vscode-body">
+        <pre class="vscode-code">sortable3/
+├── index.php                 画面の組み立て
+├── Controller/
+│   ├── Connect.php           Connect と SelectData
+│   └── AppController.php     登録と更新
+├── function/
+│   ├── insert.php            クラスを呼ぶだけになる
+│   └── update.php            クラスを呼ぶだけになる
+├── css/
+│   └── style.css             変えない
+└── js/
+    └── sort.js               変えない</pre>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">config/ が Controller/ に変わった</span><br>
+      <code>sortable2</code> にあった <code>config/config.php</code> は<strong>もう要りません。</strong>接続は <code>Connect</code> クラスが持っているからです。<br>
+      <code>function/</code> の2つは<strong>名前も置き場所もそのまま</strong>。中身だけ書き換えます。<strong>だから <code>js/sort.js</code> の送り先も変えなくて済みます。</strong>
+    </div>
+
+    <h3>function/update.php はこうなる</h3>
+
+    <div class="ad-compare">
+      <div class="ad-compare-item is-ng">
+        <span class="ad-compare-label">#11（sortable2）</span>
+        <code class="ad-code">require_once __DIR__ . '/../config/config.php';
+
+if (isset($_POST['id'])) {
+    $stmt = $pdo->prepare('UPDATE ...');
+    $stmt->execute([
+        ':left' => (int)$_POST['left'],
+        ':top'  => (int)$_POST['top'],
+        ':id'   => (int)$_POST['id'],
+    ]);
+}</code>
+      </div>
+      <div class="ad-compare-item is-ok">
+        <span class="ad-compare-label">#12（sortable3）</span>
+        <code class="ad-code">require_once __DIR__ . '/../Controller/Connect.php';
+require_once __DIR__ . '/../Controller/AppController.php';
+
+if (isset($_POST['id'])) {
+    $app = new AppController();
+    $app->updateSortable(
+        (int)$_POST['id'],
+        (int)$_POST['left'],
+        (int)$_POST['top']
+    );
+}</code>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">SQLが消えた</span><br>
+      <code>update.php</code> を開いても、<strong>SQLは1行もありません。</strong>「Ajaxで来たら、更新させる」と書いてあるだけです。<br>
+      SQLの中身が気になったら <code>AppController.php</code> を開けばいい。<strong>読む場所を選べます。</strong>
+    </div>
+
+    <div class="caution">
+      <span class="label">require は2つ要る</span><br>
+      <code>AppController</code> は <code>Connect</code> を継承しています。<strong>親が読み込まれていないと動きません。</strong><br>
+      <code>Connect.php</code> を先に、<code>AppController.php</code> をあとに。<strong>この順番です。</strong><br>
+      忘れると <code>Class "Connect" not found</code> というエラーが出ます。
+    </div>
+
+    <h3>index.php はこうなる</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php</span>
+<span class="ad-k">require_once</span> <span class="ad-c">__DIR__</span> . <span class="ad-s">'/Controller/Connect.php'</span>;
+
+<span class="ad-v">$select</span> = <span class="ad-k">new</span> <span class="ad-c">SelectData</span>();
+
+<span class="ad-v">$rows</span> = <span class="ad-v">$select</span>-&gt;<span class="ad-f">select</span>(
+    <span class="ad-s">'SELECT s.*, g.department
+     FROM sortable AS s
+     LEFT JOIN departments AS g ON s.department_id = g.id
+     ORDER BY s.id'</span>
+);
+
+<span class="ad-v">$departments</span> = <span class="ad-v">$select</span>-&gt;<span class="ad-f">select</span>(<span class="ad-s">'SELECT * FROM departments ORDER BY id'</span>);
+<span class="sy-tag">?&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">ここは Connect.php だけでいい</span><br>
+      <code>index.php</code> は<strong>取り出すだけ</strong>なので、<code>AppController.php</code> は読み込みません。<strong>使わないものは読み込まない。</strong><br>
+      <code>SelectData</code> は <code>Connect.php</code> の中にあるので、1行で足ります。
+    </div>
+
+    <h3>3つを並べてみる</h3>
+
+    <div class="ac2-three">
+      <div class="ac2-three-item">
+        <span class="ac2-three-name">index.php</span>
+        <span class="ac2-three-sub">#1〜#10</span>
+        <p>1枚に全部。<strong>動くものを作った</strong></p>
+      </div>
+      <div class="ac2-three-item">
+        <span class="ac2-three-name">sortable2/</span>
+        <span class="ac2-three-sub">#11</span>
+        <p>処理ごとに分けた。<strong>探せるようになった</strong></p>
+      </div>
+      <div class="ac2-three-item">
+        <span class="ac2-three-name">sortable3/</span>
+        <span class="ac2-three-sub">#12</span>
+        <p>クラスにまとめた。<strong>持ち運べるようになった</strong></p>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">動きは3つとも同じ</span><br>
+      <strong>チェックリストの5項目は、3画面すべてで同じです。</strong>使う人から見れば、まったく同じアプリです。<br>
+      変わったのは<strong>作る側の都合だけ。</strong>それでも、この違いが分かるかどうかで、<strong>あとの伸び方がまったく変わります。</strong>
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習3</span><br>
+      <strong><code>sortable3/</code> を完成させてください。</strong>やることは4つです。<br>
+      <strong>1.</strong> <code>Controller/Connect.php</code> と <code>Controller/AppController.php</code> を作る<br>
+      <strong>2.</strong> <code>function/insert.php</code> <code>function/update.php</code> を、クラスを呼ぶ形に書き換える<br>
+      <strong>3.</strong> <code>index.php</code> で <code>SelectData</code> を使って一覧を取る<br>
+      <strong>4.</strong> <code>css/</code> <code>js/</code> はコピーするだけ（<strong>中身は変えない</strong>）<br>
+      <br>
+      <strong>チェックリストの5項目が、3画面すべてで通ることを確認してください。</strong>
+      <span class="ad-label">index.php（穴埋め）</span>
+      <code class="ad-code hl"><span class="ad-k">require_once</span> <span class="ad-c">__DIR__</span> . <span class="ad-s">'/Controller/Connect.php'</span>;
+
+<span class="ad-v">$select</span> = <span class="blank">xxxxxx</span> <span class="ad-c">SelectData</span>();  <span class="ad-cm">/* クラスから実物を作る語は？（2章） */</span>
+<span class="ad-v">$rows</span> = <span class="ad-v">$select</span>-&gt;<span class="ad-f"><span class="blank">xxxxxx</span></span>(<span class="ad-s">'SELECT ...'</span>);  <span class="ad-cm">/* SelectData に作ったメソッド名は？ */</span></code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="ad-label">index.php</span>
+        <code class="ad-code hl"><span class="ad-v">$select</span> = <span class="ad-k">new</span> <span class="ad-c">SelectData</span>();
+<span class="ad-v">$rows</span> = <span class="ad-v">$select</span>-&gt;<span class="ad-f">select</span>(<span class="ad-s">'SELECT ...'</span>);</code>
+      </details>
+    </div>
+
+    <div class="point">
+      <span class="label">このページでやったこと</span><br>
+      クラス／プロパティ／メソッド／コンストラクタ／<code>$this</code>／<code>public</code>・<code>protected</code>・<code>private</code>／継承。<br>
+      いちどに出てきましたが、どれも<strong>「まとめる」「隠す」「共有する」</strong>のどれかです。<strong>目的から覚えると、忘れません。</strong>
+    </div>
+
+    <div class="note">
+      <span class="label">ここまでで、フロントエンド編は終わりです</span><br>
+      <strong>同じアプリを3回作りました。</strong>1回目は動かすため、2回目は探せるようにするため、3回目はまとめるため。<br>
+      実務でも同じことをします。<strong>まず動かして、あとから形を整える。</strong>最初から完璧に書ける人はいません。<br>
+      <strong>「動くものを、より良い形にできる」。</strong>これが身についていれば、どの言語でも通用します。
+    </div>
+  </section>
+
+
+</main>
+
+<nav class="page-nav">
+  <a class="page-prev" href="advanced_class1.html">
+    <span class="page-nav-label">前のページ</span>
+    <span class="page-nav-title">フロントエンド中級#11</span>
+    <span class="page-nav-sub">ファイルを機能別に分ける</span>
+  </a>
+</nav>
+
+<!-- ▼ 共通スクリプト。章ナビ・コピーボタン・先頭へ戻るが自動で付く（編集不要） -->
+<script src="../js/training.js"></script>
+
+</body>
+</html>

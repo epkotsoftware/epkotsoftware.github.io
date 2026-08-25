@@ -1,0 +1,48 @@
+/* ============================================================
+   フロントエンド中級#7（advanced_7.html）専用のスタイル
+
+   フロント編で共通のものは advanced_common.css にあります。
+   ここに置くのは、このページだけで使うものです。
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   開発者ツールの Network タブを再現した図
+
+   Ajax は画面が変わらないので、通信が起きたことを
+   どこで確かめるのかを、実物に寄せた見た目で示す
+   ------------------------------------------------------------ */
+.ad-screen-body.is-network {
+  display: block;
+  min-height: 0;
+  padding: 0;
+  background: #ffffff;
+}
+
+/* 見出しの行 */
+.ad-net-head,
+.ad-net-row {
+  display: grid;
+  grid-template-columns: 1fr 80px 80px;
+  gap: 8px;
+  padding: 8px 14px;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 11.5px;
+}
+
+.ad-net-head {
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+  color: #64748b;
+  font-weight: 700;
+}
+
+/* 通信が1件記録された行 */
+.ad-net-row {
+  color: #334155;
+}
+
+/* 成功したときは Status を緑にする */
+.ad-net-row.is-ok span:nth-child(2) {
+  color: #15803d;
+  font-weight: 700;
+}

@@ -1,0 +1,287 @@
+/* ============================================================
+   フロントエンド中級#12（advanced_class2.html）専用のスタイル
+
+   フロント編で共通のものは advanced_common.css にあります。
+   ここに置くのは、このページだけで使うものです。
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   コードの中で、注目させたい部分を光らせる
+   ------------------------------------------------------------ */
+.ad-hl {
+  padding: 1px 4px;
+  border-radius: 3px;
+  background: rgba(220, 38, 38, 0.28);
+  color: #fca5a5;
+  font-weight: 700;
+}
+
+/* ------------------------------------------------------------
+   共通の部品
+
+   $pdo や select() を1つずつの札として並べる。
+   バラバラの状態と、箱にまとまった状態を見比べさせる
+   ------------------------------------------------------------ */
+.ac2-piece {
+  display: inline-block;
+  padding: 6px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background: #ffffff;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 12px;
+}
+
+/* プロパティ（クラスが持っている変数） */
+.ac2-piece.is-prop {
+  border-color: #93c5fd;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-weight: 700;
+}
+
+/* 親から受け継いだもの */
+.ac2-piece.is-inherit {
+  border-style: dashed;
+  border-color: #93c5fd;
+  background: #f8fafc;
+  color: #64748b;
+}
+
+/* ------------------------------------------------------------
+   関数だけのとき / クラスにしたとき の対比（2章）
+   ------------------------------------------------------------ */
+.ac2-compare {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 20px 0 26px;
+}
+
+.ac2-compare-item {
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #f8fafc;
+}
+
+.ac2-compare-label {
+  display: block;
+  margin-bottom: 10px;
+  color: #475569;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.ac2-compare-item p {
+  margin: 10px 0 0;
+  font-size: 12.5px;
+  line-height: 1.85;
+}
+
+/* バラバラに散らばっている状態 */
+.ac2-loose {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* 箱にまとまった状態 */
+.ac2-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 14px;
+  border: 2px solid #2563eb;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.ac2-box-name {
+  color: #1d4ed8;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+/* ------------------------------------------------------------
+   public と private の届く範囲（3章）
+
+   外側の枠から内側の枠へ、どこまで手が届くかを示す
+   ------------------------------------------------------------ */
+.ac2-access {
+  margin: 20px 0 26px;
+}
+
+.ac2-access-outer {
+  padding: 16px;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  background: #f8fafc;
+}
+
+.ac2-access-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 14px;
+  border: 2px solid #2563eb;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.ac2-access-tag {
+  display: block;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.ac2-access-inner .ac2-access-tag {
+  flex: 0 0 100%;
+  margin-bottom: 2px;
+}
+
+.ac2-item {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.ac2-item.is-private { background: #fee2e2; color: #b91c1c; }
+.ac2-item.is-public  { background: #dcfce7; color: #15803d; }
+
+.ac2-access-arrows {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 12px;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.ac2-access-arrows .is-ng { color: #b91c1c; }
+.ac2-access-arrows .is-ok { color: #15803d; }
+
+/* ------------------------------------------------------------
+   継承の図（4章）
+
+   親を上に、子を下に置いて、受け継がれることを示す
+   ------------------------------------------------------------ */
+.ac2-extend {
+  margin: 20px 0 26px;
+}
+
+.ac2-extend-parent,
+.ac2-extend-child {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 14px;
+  border: 2px solid #2563eb;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.ac2-extend-child {
+  border-color: #93c5fd;
+}
+
+.ac2-extend-name {
+  color: #1d4ed8;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ac2-extend-arrow {
+  padding: 10px 0;
+  color: #64748b;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.ac2-extend-children {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* ------------------------------------------------------------
+   名前空間つきのクラス名（5章）
+   ------------------------------------------------------------ */
+.ac2-fqcn {
+  margin: 18px 0 22px;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #f8fafc;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 15px;
+  text-align: center;
+}
+
+.ac2-fqcn-ns   { color: #64748b; }
+.ac2-fqcn-sep  { color: #cbd5e1; padding: 0 2px; }
+.ac2-fqcn-name { color: #1d4ed8; font-weight: 700; }
+
+/* ------------------------------------------------------------
+   3回作り直した結果を並べる（6章）
+   ------------------------------------------------------------ */
+.ac2-three {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 20px 0 26px;
+}
+
+.ac2-three-item {
+  padding: 16px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #f8fafc;
+}
+
+/* 最後の1つだけ色を変えて、到達点だと分かるようにする */
+.ac2-three-item:last-child {
+  border-color: #93c5fd;
+  background: #eff6ff;
+}
+
+.ac2-three-name {
+  display: block;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.ac2-three-sub {
+  display: block;
+  margin-top: 2px;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.ac2-three-item p {
+  margin: 8px 0 0;
+  font-size: 12.5px;
+  line-height: 1.8;
+}
+
+/* ------------------------------------------------------------
+   スマホ
+   ------------------------------------------------------------ */
+@media (max-width: 780px) {
+  .ac2-compare,
+  .ac2-extend-children,
+  .ac2-three {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

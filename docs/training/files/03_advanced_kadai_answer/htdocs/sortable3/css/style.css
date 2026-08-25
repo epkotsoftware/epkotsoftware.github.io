@@ -1,0 +1,153 @@
+/* ============================================================
+   メンバー配置アプリ
+   ============================================================ */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #eef2f7;
+  color: #0f172a;
+  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans", Meiryo, sans-serif;
+  line-height: 1.8;
+}
+
+header {
+  padding: 14px 24px;
+  background: linear-gradient(120deg, #0f766e 0%, #1e40af 55%, #4c1d95 100%);
+  color: #ffffff;
+  box-shadow: 0 2px 16px rgba(15, 23, 42, 0.18);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 17px;
+  letter-spacing: 0.01em;
+}
+
+main {
+  /* 座標は最大 824。札の幅を足しても収まるように広げてある */
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 20px 24px 32px;
+}
+
+/* ------------------------------------------------------------
+   登録フォーム
+   ------------------------------------------------------------ */
+.entry {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding: 16px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06),
+    0 8px 24px -14px rgba(15, 23, 42, 0.35);
+}
+
+.entry input[type="text"],
+.entry select {
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.entry input[type="text"] {
+  flex: 1 1 220px;
+  min-width: 0;
+}
+
+.entry button {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.16s ease;
+}
+
+.entry button:hover {
+  background: #1d4ed8;
+}
+
+/* ------------------------------------------------------------
+   配置エリア
+
+   子を自由に置くので、親に position: relative を付ける
+   ------------------------------------------------------------ */
+#drag-area {
+  position: relative;
+  height: 560px;
+  border-radius: 12px;
+  background: #ffffff;
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.14) 1px, transparent 1px);
+  background-size: 40px 40px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06),
+    0 8px 24px -14px rgba(15, 23, 42, 0.35);
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------
+   ドラッグできる札
+   ------------------------------------------------------------ */
+.drag {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 1px solid #e2e8f0;
+  border-left-width: 4px;
+  border-radius: 10px;
+  background: #ffffff;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: move;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.12);
+  transition: box-shadow 0.16s ease;
+}
+
+.drag:hover {
+  box-shadow: 0 6px 18px -6px rgba(15, 23, 42, 0.4);
+}
+
+/* つかんでいる間 */
+.drag.ui-draggable-dragging {
+  box-shadow: 0 12px 28px -10px rgba(15, 23, 42, 0.5);
+}
+
+.drag-id {
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: #64748b;
+  font-size: 11px;
+}
+
+.drag-department {
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 400;
+}
+
+/* ------------------------------------------------------------
+   性別ごとの色
+
+   PHP はクラス名を出すだけ。色はここで決める
+   ------------------------------------------------------------ */
+.department1 { border-left-color: #2563eb; }   /* 開発部 */
+.department2 { border-left-color: #db2777; }   /* 営業部 */
+
+.department1 .drag-id { background: #eff6ff; color: #1d4ed8; }
+.department2 .drag-id { background: #fdf2f8; color: #be185d; }

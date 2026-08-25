@@ -1,0 +1,209 @@
+/* ============================================================
+   フロントエンド編（advanced_5 〜 advanced_class2）で共通のスタイル
+
+   全編共通の土台は training.css にあります。
+   ここに置くのは「フロント編の5ページで使うが、他編では使わない」もの。
+   PHPのコード見本、対比図、流れ図など。
+
+   1ページでしか使わないものは、各ページの CSS に書いてください。
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   PHP / SQL のコード見本
+   暗い枠に色分けして出す。training.css の .hl と組み合わせて使う
+   ------------------------------------------------------------ */
+.ad-code {
+  display: block;
+  overflow-x: auto;
+  margin: 6px 0 0;
+  padding: 14px 18px;
+  border-radius: 10px;
+  background: #1e293b;
+  color: #e2e8f0;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 12.5px;
+  line-height: 1.85;
+  white-space: pre;
+  tab-size: 4;
+}
+
+.ad-label {
+  display: block;
+  margin-top: 14px;
+  color: #1e3a8a;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* コードの色分け。VS Code Dark+ に寄せている */
+.ad-k  { color: #c586c0; }   /* const, new, foreach などのキーワード */
+.ad-f  { color: #dcdcaa; }   /* 関数名・メソッド名 */
+.ad-v  { color: #9cdcfe; }   /* $変数 */
+.ad-s  { color: #ce9178; }   /* '文字列' */
+.ad-n  { color: #b5cea8; }   /* 数値 */
+.ad-c  { color: #4ec9b0; }   /* 定数・クラス名 */
+.ad-cm { color: #6a9955; }   /* コメント */
+
+/* ------------------------------------------------------------
+   コードを2つ並べる（コード + 出力 など）
+   ------------------------------------------------------------ */
+.ad-samples {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 20px 0 26px;
+}
+
+/* ------------------------------------------------------------
+   手順や流れを3つ並べて示す図
+   ------------------------------------------------------------ */
+.ad-flow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 20px 0 26px;
+}
+
+.ad-flow-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 14px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #f8fafc;
+  font-size: 13px;
+  text-align: center;
+}
+
+.ad-flow-num {
+  color: #64748b;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.ad-flow-item > span:last-child {
+  color: #475569;
+  font-size: 12.5px;
+}
+
+/* ------------------------------------------------------------
+   良い例・悪い例を並べる
+   色を付けない中立の対比にも使う（GET と POST など）
+   ------------------------------------------------------------ */
+.ad-compare {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 20px 0 26px;
+}
+
+.ad-compare-item {
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.ad-compare-item.is-ng { border-color: #fecaca; background: #fef2f2; }
+.ad-compare-item.is-ok { border-color: #bbf7d0; background: #f0fdf4; }
+
+.ad-compare-label {
+  display: block;
+  margin-bottom: 8px;
+  color: #475569;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.ad-compare-item.is-ng .ad-compare-label { color: #b91c1c; }
+.ad-compare-item.is-ok .ad-compare-label { color: #15803d; }
+
+.ad-compare-item p {
+  margin: 8px 0 0;
+  font-size: 12.5px;
+  line-height: 1.85;
+}
+
+/* ------------------------------------------------------------
+   ブラウザ画面の再現
+   エラー表示や確認ダイアログを見せるのに使う
+   ------------------------------------------------------------ */
+.ad-screen {
+  margin: 20px 0 22px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.ad-screen-bar {
+  display: flex;
+  gap: 6px;
+  padding: 8px 10px;
+  background: #e2e8f0;
+}
+
+.ad-screen-body {
+  min-height: 96px;
+  padding: 14px;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 11.5px;
+  line-height: 1.7;
+}
+
+/* 何も出ていない状態 */
+.ad-screen-body.is-blank {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #cbd5e1;
+}
+
+/* エラーが出ている状態 */
+.ad-screen-body.is-error {
+  color: #b91c1c;
+  word-break: break-all;
+}
+
+/* ブラウザが出す確認ダイアログ */
+.ad-screen-body.is-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+  background: #f8fafc;
+  color: #334155;
+  font-family: inherit;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* ------------------------------------------------------------
+   穴埋めの伏せ字
+   コードの中で埋める場所が一目で分かるようにする
+   ------------------------------------------------------------ */
+.blank {
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: #fde68a;
+  box-shadow: inset 0 -2px 0 #f59e0b;
+  color: #92400e;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* ------------------------------------------------------------
+   スマホ
+   ------------------------------------------------------------ */
+@media (max-width: 780px) {
+  /* 1fr だけだと中身の最小幅まで広がり、長いコード行が画面をはみ出す。
+     minmax(0, …) を付けて、親の幅で止める */
+  .ad-samples,
+  .ad-compare,
+  .ad-flow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
