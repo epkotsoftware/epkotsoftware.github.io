@@ -1,0 +1,163 @@
+/* ============================================================
+   フロントエンド初級#3 専用スタイル
+   共通スタイル（training.css）にないもののみを定義する。
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   for 文の実行順を示す図（第5章）
+   ① 初期化 → ② 条件 →（真）→ 処理 → ③ 増減 → ② に戻る
+   という循環を、SVGで実際の線として描く。
+   ------------------------------------------------------------ */
+
+.forfig {
+  margin: 18px 0;
+  padding: 16px 16px 10px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+
+.forfig-canvas {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.forfig-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.forfig figcaption {
+  margin-top: 8px;
+  color: #475569;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* 狭い画面では図が小さくなりすぎるので横スクロールに切り替える */
+@media (max-width: 640px) {
+  .forfig-canvas {
+    overflow-x: auto;
+  }
+
+  .forfig-svg {
+    width: 640px;
+  }
+}
+
+/* キャプションの色の凡例。図中の色と1対1で対応させる */
+.forfig-key {
+  font-weight: 700;
+}
+
+.forfig-once  { color: #177245; }
+.forfig-loop  { color: #2563eb; }
+.forfig-outer { color: #475569; }
+
+/* ------------------------------------------------------------
+   添字の概念図（第6章）
+   1つの変数の中に、0から始まる番号付きの区画が並ぶことを示す。
+   原典の「箱やタンス」という比喩をそのまま図にしたもの。
+   ------------------------------------------------------------ */
+
+.idxfig {
+  margin: 18px 0;
+  padding: 16px 16px 10px;
+  background: #f5f7fa;
+  border: 1px solid #dde3ea;
+  border-radius: 10px;
+}
+
+.idxfig-canvas {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.idxfig-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.idxfig figcaption {
+  margin-top: 10px;
+  color: #475569;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* ------------------------------------------------------------
+   foreach のループ展開表（第7章）
+   1回まわるごとに $val の中身が入れ替わることを、回ごとに並べて示す。
+   ------------------------------------------------------------ */
+
+.loopmap {
+  margin: 18px 0;
+}
+
+.loopmap table {
+  margin: 0;
+}
+
+.loopmap-var {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.loopmap figcaption {
+  margin-top: 8px;
+  color: #475569;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* ============================================================
+   目次（節まで展開）
+   このページは 4 章ぶんあり、節を並べないと現在地が分からない。
+   共通の .toc ol は columns: 2 なので、章とその節が
+   途中で段またぎしないよう break-inside を止める
+   ============================================================ */
+.toc ol > li {
+  break-inside: avoid;
+}
+
+.toc ol ul {
+  margin: 6px 0 0 1.1em;
+  padding: 0;
+  list-style: none;
+}
+
+.toc ol ul li {
+  margin-bottom: 4px;
+  font-size: 14px;
+}
+
+/* 節であることが分かるよう、行頭に短い罫を引く */
+.toc ol ul li::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  margin-right: 7px;
+  border-top: 1px solid #cbd5e1;
+  vertical-align: middle;
+}
+
+/* ============================================================
+   狭い画面での横溢れ対策
+   列数の多い表はページごと横スクロールしてしまうため、
+   枠の内側でスクロールさせる。
+   表のセル内の長いコードは最小幅を縮める（break-word では縮まない）
+   ============================================================ */
+@media (max-width: 620px) {
+  th code,
+  td code {
+    overflow-wrap: anywhere;
+  }
+
+  /* 出力モックの表（小テスト3の目標）とループの対応表 */
+  .chrome-viewport,
+  .loopmap {
+    overflow-x: auto;
+  }
+}
