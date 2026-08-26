@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>バックエンド編#3</title>
+  <link rel="stylesheet" href="../css/training.css">
+
+  <!-- ▼ バックエンド編で共通のスタイル -->
+  <link rel="stylesheet" href="../css/backend_common.css">
+
+  <!-- ▼ 開いたときに、ページの先頭から読み始められるようにする。
+       ブラウザが前回の位置へ戻すより先に動かす必要があるため、
+       training.js とは分けて <head> で読み込んでいる -->
+  <script src="../js/scroll-reset.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>バックエンド編#3</h1>
+    <p>MVC ― Model と Controller で組み立てる</p>
+  </div>
+</header>
+
+<main>
+
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol>
+      <li><a href="#chapter1">仕事を3つに分ける ― MVC</a></li>
+      <li><a href="#chapter2">Model ― テーブルをクラスにする</a></li>
+      <li><a href="#chapter3">Controller ― 受け取って、渡す</a></li>
+      <li><a href="#chapter4">リレーション ― JOIN を書かずに部署をたどる</a></li>
+      <li><a href="#chapter5">画面に出す ― ここまでを繋ぐ</a></li>
+    </ol>
+
+    <div class="note">
+      <span class="label">読む前に</span><br>
+      前のページで、<strong>テーブル・データ・URL・画面</strong>ができました。ただし<strong>まだ繋がっていません。</strong>画面は空のままです。<br>
+      このページで <strong>Model</strong> と <strong>Controller</strong> を足して、<strong>DB のデータを画面に出します。</strong><br>
+      <code>php artisan</code> は、<a href="backend_1.html#chapter4">#1の4章</a> のとおり<strong>コンテナに入ってから</strong>打ちます。
+    </div>
+
+    <div class="exercise">
+      <span class="label">課題</span><br>
+      章の途中に<strong>演習が4つ</strong>あります。<br>
+      このページが終わると、<strong>フロントエンド編と同じ一覧画面が Laravel で動きます。</strong>色分けとドラッグもここまでで揃います。
+    </div>
+  </section>
+
+  <section id="chapter1">
+    <h2>1. 仕事を3つに分ける ― MVC</h2>
+
+    <p>
+      <a href="advanced_class1.html">フロントエンド中級#11</a> で<strong>処理ごとにファイルを分けました。</strong>一覧・登録・更新を別のファイルにしました。<br>
+      MVC は、そこからもう一歩進んだ分け方です。<strong>1つの処理の中を、役割で分けます。</strong>
+    </p>
+
+    <div class="bk-mvc">
+      <div class="bk-mvc-item is-route">
+        <span class="bk-mvc-name">Route</span>
+        <span class="bk-mvc-role">受付</span>
+        <p>どのURLで来たかを見て、担当へ渡します</p>
+      </div>
+      <div class="bk-mvc-item is-ctrl">
+        <span class="bk-mvc-name">Controller</span>
+        <span class="bk-mvc-role">段取り</span>
+        <p>何を取ってきて、どの画面に渡すかを決めます</p>
+      </div>
+      <div class="bk-mvc-item is-model">
+        <span class="bk-mvc-name">Model</span>
+        <span class="bk-mvc-role">データ</span>
+        <p>DB とのやり取りを引き受けます</p>
+      </div>
+      <div class="bk-mvc-item is-view">
+        <span class="bk-mvc-name">View</span>
+        <span class="bk-mvc-role">見た目</span>
+        <p>渡された値を HTML にします</p>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">流れは一方向</span><br>
+      <div class="ad-code">ブラウザ → Route → Controller → Model → DB
+                       ↓
+                     View → ブラウザ</div>
+      Controller が<strong>真ん中に立ちます。</strong>Model に「取ってきて」と頼み、返ってきたものを View に渡します。<br>
+      <strong>View は DB を直接見ません。Model は HTML を書きません。</strong>
+    </div>
+
+    <h3>フロントエンド編では、1つのファイルに全部入っていた</h3>
+
+    <div class="ad-compare">
+      <div class="ad-compare-item is-ng">
+        <span class="ad-compare-label">index.php（フロントエンド編）</span>
+        <div class="ad-code">// DB に繋ぐ
+$pdo = new PDO(...);
+
+// SQL を書く
+$sql = 'SELECT ... LEFT JOIN ...';
+$stmt = $pdo-&gt;prepare($sql);
+
+// HTML を書く
+foreach ($rows as $row) {
+  echo '&lt;div&gt;' . h($row['name']);
+}</div>
+        <p><strong>接続・SQL・HTML が同じファイル</strong>にありました。短いうちは読めます。</p>
+      </div>
+      <div class="ad-compare-item is-ok">
+        <span class="ad-compare-label">Laravel</span>
+        <div class="ad-code">Sortable.php    ← DB のこと
+SortableController.php
+                ← 段取り
+sortable.blade.php
+                ← HTML のこと</div>
+        <p><strong>直したい場所がすぐ分かります。</strong>「色を変えたい」なら Blade、「並び順を変えたい」なら Controller です。</p>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">分けると、何が良いのか</span><br>
+      <strong>1. 直す場所が決まる。</strong>見た目の修正で、SQL を触る必要がありません。<br>
+      <strong>2. 同じものを使い回せる。</strong>Model は一覧でも登録でも同じものを使います。<br>
+      <strong>3. 人を分けて作れる。</strong>画面担当と処理担当が、別のファイルを触れます。<br>
+      <br>
+      <strong>ファイルが増えるのは、分かりにくくなったからではありません。</strong>役割ごとに置き場所を決めた結果です。
+    </div>
+  </section>
+
+  <section id="chapter2">
+    <h2>2. Model ― テーブルをクラスにする</h2>
+
+    <p>
+      Model は<strong>テーブル1つにつき1つ</strong>作ります。<code>sortables</code> テーブルなら <code>Sortable</code> クラスです。
+    </p>
+
+    <div class="bk-cmd"><span class="is-prompt">$</span> php artisan make:model Sortable
+<span class="is-prompt">$</span> php artisan make:model Department</div>
+
+    <div class="point">
+      <span class="label">ここでも単数形と複数形</span><br>
+      <code>Sortable</code> クラス → <code>sortables</code> テーブル。<strong>設定を書かなくても、Laravel が結び付けます。</strong><br>
+      クラス名は<strong>単数形・先頭大文字</strong>、テーブル名は<strong>複数形・小文字</strong>。この対応が規約です。
+    </div>
+
+    <h3>中身を書く</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">Sortable.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">app/Models/Sortable.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php</span>
+
+<span class="ad-k">namespace</span> <span class="ad-c">App\Models</span>;
+
+<span class="ad-k">use</span> <span class="ad-c">Illuminate\Database\Eloquent\Model</span>;
+
+<span class="ad-k">class</span> <span class="ad-c">Sortable</span> <span class="ad-k">extends</span> <span class="ad-c">Model</span>
+{
+    <span class="ad-cm">/** 作成日時・更新日時のカラムを持たないテーブル */</span>
+    <span class="ad-k">public</span> <span class="ad-v">$timestamps</span> = <span class="ad-k">false</span>;
+
+    <span class="ad-cm">/** 一括代入を許す項目 */</span>
+    <span class="ad-k">protected</span> <span class="ad-v">$fillable</span> = [<span class="ad-s">'name'</span>, <span class="ad-s">'department_id'</span>, <span class="ad-s">'left_x'</span>, <span class="ad-s">'top_y'</span>];
+}</pre>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">先頭の namespace と use は消さない</span><br>
+      <code>make:model</code> が書いてくれた<strong>1〜5行目はそのまま残してください。</strong>ここを消すと動きません。
+      <div class="ad-code">namespace App\Models;                          &lt;- このファイルの住所
+use Illuminate\Database\Eloquent\Model;        &lt;- 使うクラスの持ち込み宣言</div>
+      <strong><code>use</code> は「このファイルで、よそのクラスを短い名前で使う」という宣言</strong>です。<br>
+      これがあるから <code>Illuminate\Database\Eloquent\Model</code> と毎回書かずに、<code>Model</code> だけで済みます。
+    </div>
+
+    <div class="caution">
+      <span class="label">このあと出てくるコードでも同じ</span><br>
+      これから <code>BelongsTo</code>、<code>HasMany</code>、<code>Request</code>、<code>DB</code> といったクラス名が出てきます。<br>
+      <strong>出てきたら、そのつどファイルの先頭に <code>use</code> を足してください。</strong>教材のコードにも書いてあります。<br>
+      足し忘れると、こういうエラーになります。<strong>「そんなクラスは無い」と言われたら、まず <code>use</code> を疑ってください。</strong>
+      <div class="ad-code">Class "App\Models\HasMany" not found</div>
+    </div>
+
+    <p>
+      <strong>これだけで、DB の読み書きができるようになります。</strong>SQL は1行も書いていません。
+    </p>
+
+    <div class="ad-compare">
+      <div class="ad-compare-item is-ng">
+        <span class="ad-compare-label">フロントエンド編</span>
+        <div class="ad-code">$sql = 'SELECT * FROM sortables
+        ORDER BY id';
+$stmt = $pdo-&gt;prepare($sql);
+$stmt-&gt;execute();
+$rows = $stmt-&gt;fetchAll();</div>
+      </div>
+      <div class="ad-compare-item is-ok">
+        <span class="ad-compare-label">Eloquent</span>
+        <div class="ad-code">$sortables = Sortable::orderBy('id')-&gt;get();</div>
+        <p><strong>1行です。</strong>裏では同じ SQL が組み立てられて、実行されています。</p>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">Eloquent（エロクアント）</span><br>
+      Laravel の<strong>Model の仕組み</strong>の名前です。<br>
+      <strong>テーブルの1行が、オブジェクト1つ</strong>になります。カラムは<strong>プロパティ</strong>として読めます。
+      <div class="ad-code">$sortable-&gt;name           // name カラムの値
+$sortable-&gt;department_id  // department_id カラムの値</div>
+      <a href="advanced_class2.html#chapter2">フロントエンド中級#12</a> でやった<strong>クラスとオブジェクト</strong>が、そのまま DB の行になっていると考えてください。
+    </div>
+
+    <h3>よく使う書き方</h3>
+
+    <table>
+      <tr>
+        <th>Eloquent</th>
+        <th>やっていること</th>
+      </tr>
+      <tr>
+        <td><code>Sortable::all()</code></td>
+        <td>全件取ってくる</td>
+      </tr>
+      <tr>
+        <td><code>Sortable::orderBy('id')-&gt;get()</code></td>
+        <td><code>id</code> 順に並べて取ってくる</td>
+      </tr>
+      <tr>
+        <td><code>Sortable::find(3)</code></td>
+        <td><code>id</code> が 3 の<strong>1件</strong>を取ってくる</td>
+      </tr>
+      <tr>
+        <td><code>Sortable::where('department_id', 1)-&gt;get()</code></td>
+        <td>条件で絞る</td>
+      </tr>
+      <tr>
+        <td><code>Sortable::create([…])</code></td>
+        <td>1件登録する</td>
+      </tr>
+      <tr>
+        <td><code>$sortable-&gt;update([…])</code></td>
+        <td>その1件を更新する</td>
+      </tr>
+      <tr>
+        <td><code>$sortable-&gt;delete()</code></td>
+        <td>その1件を<strong>消す</strong></td>
+      </tr>
+    </table>
+
+    <h3>$fillable は何のためにあるのか</h3>
+
+    <p>
+      <code>create()</code> や <code>update()</code> は、<strong>配列をまとめて流し込みます。</strong>これを<strong>一括代入</strong>と呼びます。<br>
+      便利ですが、<strong>そのままだと危険です。</strong>
+    </p>
+
+    <div class="ad-compare">
+      <div class="ad-compare-item is-ng">
+        <span class="ad-compare-label">$fillable が無いと</span>
+        <div class="ad-code">// 攻撃者がフォームに
+// is_admin=1 を混ぜて送る
+
+Sortable::create($request-&gt;all());
+
+// 送られてきたものが
+// 全部そのまま入ってしまう</div>
+        <p><strong>入れるつもりのないカラムまで書き換えられます。</strong></p>
+      </div>
+      <div class="ad-compare-item is-ok">
+        <span class="ad-compare-label">$fillable があると</span>
+        <div class="ad-code">protected $fillable = [
+    'name', 'department_id',
+    'left_x', 'top_y',
+];
+
+// この4つ以外は、混ざっていても
+// 無視される</div>
+        <p><strong>受け付ける項目を、こちらが決めます。</strong></p>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">許可制で考える</span><br>
+      「危ないものを弾く」ではなく、<strong>「使うものだけを許す」</strong>という書き方です。<br>
+      弾く側で考えると、<strong>思いつかなかったものが漏れます。</strong>許す側で考えれば、書き忘れたものは通りません。<br>
+      <a href="advanced_5.html#chapter6">エスケープ</a>や <a href="advanced_6.html#chapter3">prepare</a> と同じで、<strong>仕組みで防ぐ</strong>という発想です。
+    </div>
+
+    <div class="note">
+      <span class="label">$timestamps = false の理由</span><br>
+      Laravel は既定で <code>created_at</code> と <code>updated_at</code> があるものとして動きます。<br>
+      今回のテーブルには<strong>そのカラムを作っていない</strong>ので、<code>false</code> にして止めます。<br>
+      <strong>これを書かないと</strong>、登録のときに「そんなカラムは無い」というエラーが出ます。
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習1</span><br>
+      <code>Sortable</code> と <code>Department</code> の Model を作ってください。<br>
+      <code>Department</code> にも <code>$timestamps = false;</code> が要ります。<strong>こちらの <code>$fillable</code> は要りません。</strong>登録も更新もしないからです。
+      <span class="ad-label">Department.php（穴埋め）</span>
+      <code class="ad-code hl"><span class="ad-k">class</span> <span class="ad-c">Department</span> <span class="ad-k">extends</span> <span class="ad-c"><span class="blank">xxxxxx</span></span>  <span class="ad-cm">/* Eloquent の親クラスは？ */</span>
+{
+    <span class="ad-k">public</span> <span class="ad-v">$timestamps</span> = <span class="ad-k"><span class="blank">xxxxxx</span></span>;  <span class="ad-cm">/* 日時カラムを持たないので */</span>
+}</code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="ad-label">Department.php</span>
+        <code class="ad-code"><span class="ad-k">class</span> <span class="ad-c">Department</span> <span class="ad-k">extends</span> <span class="ad-c">Model</span>
+{
+    <span class="ad-k">public</span> <span class="ad-v">$timestamps</span> = <span class="ad-k">false</span>;
+}</code>
+      </details>
+    </div>
+  </section>
+
+  <section id="chapter3">
+    <h2>3. Controller ― 受け取って、渡す</h2>
+
+    <p>
+      Controller は<strong>段取り役</strong>です。Model からデータを取り、View に渡します。
+    </p>
+
+    <div class="bk-cmd"><span class="is-prompt">$</span> php artisan make:controller SortableController</div>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">SortableController.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">app/Http/Controllers/SortableController.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php</span>
+
+<span class="ad-k">namespace</span> <span class="ad-c">App\Http\Controllers</span>;
+
+<span class="ad-k">use</span> <span class="ad-c">App\Models\Department</span>;
+<span class="ad-k">use</span> <span class="ad-c">App\Models\Sortable</span>;
+<span class="ad-k">use</span> <span class="ad-c">Illuminate\View\View</span>;
+
+<span class="ad-k">class</span> <span class="ad-c">SortableController</span> <span class="ad-k">extends</span> <span class="ad-c">Controller</span>
+{
+    <span class="ad-cm">/** 一覧を表示する */</span>
+    <span class="ad-k">public function</span> <span class="ad-f">index</span>(): <span class="ad-c">View</span>
+    {
+        <span class="ad-v">$sortables</span>   = <span class="ad-c">Sortable</span>::<span class="ad-f">orderBy</span>(<span class="ad-s">'id'</span>)-&gt;<span class="ad-f">get</span>();
+        <span class="ad-v">$departments</span> = <span class="ad-c">Department</span>::<span class="ad-f">orderBy</span>(<span class="ad-s">'id'</span>)-&gt;<span class="ad-f">get</span>();
+
+        <span class="ad-k">return</span> <span class="ad-f">view</span>(<span class="ad-s">'sortable'</span>, [
+            <span class="ad-s">'sortables'</span>   =&gt; <span class="ad-v">$sortables</span>,
+            <span class="ad-s">'departments'</span> =&gt; <span class="ad-v">$departments</span>,
+        ]);
+    }
+}</pre>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">view() の第2引数が、画面へ渡す値</span><br>
+      <div class="ad-code">return view('sortable', ['sortables' => $sortables]);
+                                ↑ここで付けた名前が
+Blade 側で $sortables として使える</div>
+      <strong>キーの名前が、そのまま変数名になります。</strong>
+    </div>
+
+    <div class="note">
+      <span class="label">Controller には SQL を書かない</span><br>
+      Controller の仕事は<strong>「何を取ってきて、どこへ渡すか」を決めること</strong>だけです。<br>
+      <strong>どう取ってくるか</strong>は Model の仕事、<strong>どう見せるか</strong>は View の仕事です。<br>
+      Controller が長くなってきたら、<strong>他の役割の仕事を抱え込んでいないか</strong>を疑ってください。
+    </div>
+
+    <h3>ルートを繋ぎ替える</h3>
+
+    <p>
+      前のページで <code>web.php</code> に <code>view('sortable')</code> と直接書きました。<strong>Controller を通すように変えます。</strong>
+    </p>
+
+    <div class="ad-compare">
+      <div class="ad-compare-item is-ng">
+        <span class="ad-compare-label">前のページ</span>
+        <div class="ad-code">Route::get('/', function () {
+    return view('sortable');
+});</div>
+        <p>画面は出ますが、<strong>データは渡せません。</strong></p>
+      </div>
+      <div class="ad-compare-item is-ok">
+        <span class="ad-compare-label">これから</span>
+        <div class="ad-code">Route::get('/', [SortableController::class, 'index'])
+    -&gt;name('sortable.index');</div>
+        <p><strong>Controller の <code>index</code> が動きます。</strong></p>
+      </div>
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習2</span><br>
+      <code>SortableController</code> を作り、<code>index</code> メソッドを書いてください。<br>
+      <code>routes/web.php</code> を書き換えて、<strong><code>route:list</code> に <code>SortableController@index</code> が出る</strong>ことを確認します。
+      <div class="bk-cmd"><span class="is-prompt">$</span> php artisan route:list --except-vendor</div>
+    </div>
+  </section>
+
+  <section id="chapter4">
+    <h2>4. リレーション ― JOIN を書かずに部署をたどる</h2>
+
+    <p>
+      画面には<strong>部署名</strong>を出します。<code>sortables</code> が持っているのは <code>department_id</code>（数字）だけです。
+    </p>
+
+    <div class="ad-compare">
+      <div class="ad-compare-item is-ng">
+        <span class="ad-compare-label">フロントエンド編</span>
+        <div class="ad-code">SELECT
+  sortables.*,
+  departments.department
+FROM sortables
+LEFT JOIN departments
+  ON sortables.department_id
+     = departments.id
+ORDER BY sortables.id</div>
+        <p><a href="advanced_7.html#chapter5"><strong>LEFT JOIN</strong></a> を自分で書きました。</p>
+      </div>
+      <div class="ad-compare-item is-ok">
+        <span class="ad-compare-label">Laravel</span>
+        <div class="ad-code">// Model に1つ書いておくと
+$sortable-&gt;department-&gt;department</div>
+        <p><strong>プロパティを辿るだけ</strong>で部署が取れます。</p>
+      </div>
+    </div>
+
+    <h3>Model に関係を書く</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">Sortable.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">app/Models/Sortable.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php</span>
+
+<span class="ad-k">namespace</span> <span class="ad-c">App\Models</span>;
+
+<span class="ad-k">use</span> <span class="ad-c">Illuminate\Database\Eloquent\Model</span>;
+<span class="ad-k">use</span> <span class="ad-c">Illuminate\Database\Eloquent\Relations\BelongsTo</span>;
+
+<span class="ad-k">class</span> <span class="ad-c">Sortable</span> <span class="ad-k">extends</span> <span class="ad-c">Model</span>
+{
+    <span class="ad-k">public</span> <span class="ad-v">$timestamps</span> = <span class="ad-k">false</span>;
+    <span class="ad-k">protected</span> <span class="ad-v">$fillable</span> = [<span class="ad-s">'name'</span>, <span class="ad-s">'department_id'</span>, <span class="ad-s">'left_x'</span>, <span class="ad-s">'top_y'</span>];
+
+    <span class="ad-cm">/** このメンバーが所属している部署 */</span>
+    <span class="ad-k">public function</span> <span class="ad-f">department</span>(): <span class="ad-c">BelongsTo</span>
+    {
+        <span class="ad-k">return</span> <span class="ad-v">$this</span>-&gt;<span class="ad-f">belongsTo</span>(<span class="ad-c">Department</span>::<span class="ad-k">class</span>);
+    }
+}</pre>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">belongsTo は「〜に属している」</span><br>
+      <strong>メンバーは、部署に属している。</strong>だから <code>Sortable</code> 側に <code>belongsTo</code> を書きます。<br>
+      Laravel は、メソッド名 <code>department</code> から <strong><code>department_id</code> カラムを探します。</strong>ここでも規約が効いています。
+    </div>
+
+    <h3>反対側からも書ける</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">Department.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">app/Models/Department.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php</span>
+
+<span class="ad-k">namespace</span> <span class="ad-c">App\Models</span>;
+
+<span class="ad-k">use</span> <span class="ad-c">Illuminate\Database\Eloquent\Model</span>;
+<span class="ad-k">use</span> <span class="ad-c">Illuminate\Database\Eloquent\Relations\HasMany</span>;
+
+<span class="ad-k">class</span> <span class="ad-c">Department</span> <span class="ad-k">extends</span> <span class="ad-c">Model</span>
+{
+    <span class="ad-k">public</span> <span class="ad-v">$timestamps</span> = <span class="ad-k">false</span>;
+
+    <span class="ad-cm">/** この部署に所属しているメンバー */</span>
+    <span class="ad-k">public function</span> <span class="ad-f">sortables</span>(): <span class="ad-c">HasMany</span>
+    {
+        <span class="ad-k">return</span> <span class="ad-v">$this</span>-&gt;<span class="ad-f">hasMany</span>(<span class="ad-c">Sortable</span>::<span class="ad-k">class</span>);
+    }
+}</pre>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th>書き方</th>
+        <th>意味</th>
+        <th>返るもの</th>
+      </tr>
+      <tr>
+        <td><code>belongsTo</code></td>
+        <td>1つに属している</td>
+        <td><strong>1件</strong>（<code>$sortable-&gt;department</code>）</td>
+      </tr>
+      <tr>
+        <td><code>hasMany</code></td>
+        <td>たくさん持っている</td>
+        <td><strong>複数件</strong>（<code>$department-&gt;sortables</code>）</td>
+      </tr>
+    </table>
+
+    <div class="note">
+      <span class="label">メソッド名の単数・複数</span><br>
+      <code>belongsTo</code> は<strong>単数形</strong>（<code>department</code>）、<code>hasMany</code> は<strong>複数形</strong>（<code>sortables</code>）で書きます。<br>
+      <strong>返ってくるものの数に合わせる</strong>と覚えてください。読む人が、名前だけで判断できます。
+    </div>
+
+    <h3>N+1 問題</h3>
+
+    <p>
+      リレーションは便利ですが、<strong>そのまま使うと SQL が大量に出ます。</strong>
+    </p>
+
+    <div class="ad-compare">
+      <div class="ad-compare-item is-ng">
+        <span class="ad-compare-label">そのまま書くと</span>
+        <div class="ad-code">$sortables = Sortable::get();
+
+@foreach ($sortables as $s)
+  {{ $s-&gt;department-&gt;department }}
+@endforeach</div>
+        <p>
+          一覧の<strong>1回</strong>＋メンバー<strong>12人ぶん12回</strong>＝<strong>13回</strong>。<br>
+          100人なら 101回です。
+        </p>
+      </div>
+      <div class="ad-compare-item is-ok">
+        <span class="ad-compare-label">with() を付けると</span>
+        <div class="ad-code">$sortables = Sortable::with('department')
+    -&gt;orderBy('id')-&gt;get();</div>
+        <p>
+          一覧の<strong>1回</strong>＋部署をまとめて取る<strong>1回</strong>＝<strong>2回</strong>。<br>
+          100人でも 2回のままです。
+        </p>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">N+1 という呼び名</span><br>
+      <strong>1回</strong>で一覧を取り、そのあと<strong>N件ぶん N回</strong>問い合わせるので <strong>N+1</strong> です。<br>
+      件数が少ないうちは気づきません。<strong>データが増えたときに、いきなり遅くなります。</strong><br>
+      <strong>リレーションを画面で使うなら <code>with()</code>。</strong>まずはこの形で覚えてください。
+    </div>
+
+    <div class="caution">
+      <span class="label">自分の目で確認する</span><br>
+      実際に何回問い合わせているかは、<strong>ログを見れば分かります。</strong><code>app/Providers/AppServiceProvider.php</code> に、一時的に書き足します。
+      <div class="ad-code">use Illuminate\Support\Facades\DB;   &lt;- ファイルの先頭。これを忘れると全画面が 500 になる
+
+public function boot(): void
+{
+    DB::listen(fn ($q) =&gt; logger($q-&gt;sql));
+}</div>
+      <code>storage/logs/laravel.log</code> に出ます。<strong><code>with()</code> の有無で行数が変わる</strong>のを、一度見ておくと納得できます。<br>
+      実際にやると、<strong>メンバーが12人なら、<code>with()</code> なしで <code>departments</code> に12回、ありで1回</strong>になります。<br>
+      <strong>見終わったら消してください。</strong>全リクエストのSQLがログに残り続けます。
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習3</span><br>
+      <code>Sortable</code> に <code>department()</code> を、<code>Department</code> に <code>sortables()</code> を書いてください。<br>
+      Controller の <code>index</code> も、<strong><code>with()</code> を付けた形</strong>に直します。
+      <span class="ad-label">SortableController.php（穴埋め）</span>
+      <code class="ad-code hl"><span class="ad-v">$sortables</span> = <span class="ad-c">Sortable</span>::<span class="ad-f"><span class="blank">xxxxxx</span></span>(<span class="ad-s">'<span class="blank">xxxxxx</span>'</span>)-&gt;<span class="ad-f">orderBy</span>(<span class="ad-s">'id'</span>)-&gt;<span class="ad-f">get</span>();
+<span class="ad-cm">/* 1つめ: N+1 を避けるメソッド  2つめ: Model に書いたメソッド名 */</span></code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="ad-label">SortableController.php</span>
+        <code class="ad-code"><span class="ad-v">$sortables</span> = <span class="ad-c">Sortable</span>::<span class="ad-f">with</span>(<span class="ad-s">'department'</span>)-&gt;<span class="ad-f">orderBy</span>(<span class="ad-s">'id'</span>)-&gt;<span class="ad-f">get</span>();</code>
+      </details>
+    </div>
+  </section>
+
+  <section id="chapter5">
+    <h2>5. 画面に出す ― ここまでを繋ぐ</h2>
+
+    <p>
+      Controller が渡した <code>$sortables</code> を、Blade で並べます。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">sortable.blade.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">resources/views/sortable.blade.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;div</span> <span class="ad-f">id</span>=<span class="ad-s">"drag-area"</span><span class="sy-tag">&gt;</span>
+  <span class="ad-at">@foreach</span> (<span class="ad-v">$sortables</span> <span class="ad-k">as</span> <span class="ad-v">$sortable</span>)
+    <span class="sy-tag">&lt;div</span> <span class="ad-f">class</span>=<span class="ad-s">"drag department{{ $sortable-&gt;department_id }}"</span>
+         <span class="ad-f">data-id</span>=<span class="ad-s">"{{ $sortable-&gt;id }}"</span>
+         <span class="ad-f">style</span>=<span class="ad-s">"left: {{ $sortable-&gt;left_x }}px; top: {{ $sortable-&gt;top_y }}px;"</span><span class="sy-tag">&gt;</span>
+      <span class="sy-tag">&lt;span</span> <span class="ad-f">class</span>=<span class="ad-s">"drag-id"</span><span class="sy-tag">&gt;</span>{{ <span class="ad-v">$sortable</span>-&gt;id }}<span class="sy-tag">&lt;/span&gt;</span>
+      {{ <span class="ad-v">$sortable</span>-&gt;name }}
+      <span class="sy-tag">&lt;span</span> <span class="ad-f">class</span>=<span class="ad-s">"drag-department"</span><span class="sy-tag">&gt;</span>{{ <span class="ad-v">$sortable</span>-&gt;department-&gt;department }}<span class="sy-tag">&lt;/span&gt;</span>
+    <span class="sy-tag">&lt;/div&gt;</span>
+  <span class="ad-at">@endforeach</span>
+<span class="sy-tag">&lt;/div&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">クラス名に値を混ぜる</span><br>
+      <code>class="drag department{{ $sortable-&gt;department_id }}"</code> で、<code>department1</code> や <code>department2</code> になります。<br>
+      <strong>フロントエンド編と同じ仕組み</strong>です。CSS 側は書き換えなくてそのまま使えます。
+    </div>
+
+    <div class="note">
+      <span class="label">$sortable-&gt;department-&gt;department が読みにくいとき</span><br>
+      <strong>前半</strong>が<strong>リレーション</strong>（部署のオブジェクト）、<strong>後半</strong>が<strong>カラム名</strong>です。
+      <div class="ad-code">$sortable -&gt; department -&gt; department
+  メンバー    部署          部署名</div>
+      たまたま同じ名前になっているだけです。<strong>カラム名が <code>name</code> なら <code>$sortable-&gt;department-&gt;name</code></strong> になります。
+    </div>
+
+    <div class="note">
+      <span class="label">CSS と jQuery は、もう読み込めています</span><br>
+      <a href="backend_2.html#chapter4">#2 の骨組み</a> で書いた <code>&lt;head&gt;</code> の中身が、そのまま効きます。<strong>足すものはありません。</strong>
+    </div>
+
+    <div class="caution">
+      <span class="label">ドラッグはまだ保存されません</span><br>
+      札は動きますが、<strong>リロードすると元の位置に戻ります。</strong>保存する処理をまだ書いていないからです。<br>
+      <code>js/sort.js</code> の Ajax 部分は、<strong>次のページで書き換えます。</strong>
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習4</span><br>
+      <code>sortable.blade.php</code> を仕上げて、<code>localhost:8026</code> を開いてください。<br>
+      <strong>12人が表示され、開発部と営業部で色が分かれていれば</strong>、ここまでは成功です。<br>
+      表示されないときは、<strong>どこで止まっているか</strong>を切り分けます。
+      <table>
+        <tr>
+          <th>症状</th>
+          <th>見るところ</th>
+        </tr>
+        <tr>
+          <td>真っ白・500</td>
+          <td><code>storage/logs/laravel.log</code> の最後</td>
+        </tr>
+        <tr>
+          <td>404</td>
+          <td><code>route:list</code> に出ているか</td>
+        </tr>
+        <tr>
+          <td>札が0件</td>
+          <td>phpMyAdmin で <code>sortables</code> にデータがあるか</td>
+        </tr>
+        <tr>
+          <td>色が付かない</td>
+          <td>ブラウザの検証で <code>department1</code> が入っているか</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="point">
+      <span class="label">このページでやったこと</span><br>
+      MVC で役割を分ける／Model でテーブルをクラスにする／Controller で段取りを書く／リレーションで JOIN を置き換える。<br>
+      <strong>SQL を1行も書かずに、一覧が出ました。</strong>
+    </div>
+
+    <div class="note">
+      <span class="label">次のページでは</span><br>
+      <strong>登録</strong>と<strong>更新</strong>を作ります。バリデーション、CSRF、Ajax。<br>
+      そのあと、<strong>ここまでの内容だけで作れるアプリ</strong>を、自分の手で組み立ててもらいます。
+    </div>
+  </section>
+
+</main>
+
+<nav class="page-nav">
+  <a class="page-prev" href="backend_2.html">
+    <span class="page-nav-label">前のページ</span>
+    <span class="page-nav-title">バックエンド編#2</span>
+    <span class="page-nav-sub">テーブルを作って画面を出す ― migration と Blade</span>
+  </a>
+  <a class="page-next" href="backend_4.html">
+    <span class="page-nav-label">次のページ</span>
+    <span class="page-nav-title">バックエンド編#4</span>
+    <span class="page-nav-sub">登録と更新 ― バリデーション・CSRF・Ajax</span>
+  </a>
+</nav>
+
+<footer></footer>
+
+<!-- ▼ 共通スクリプト。章ナビ・コピーボタン・先頭へ戻るが自動で付く（編集不要） -->
+<script src="../js/training.js"></script>
+
+</body>
+</html>

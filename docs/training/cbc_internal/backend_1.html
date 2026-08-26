@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>バックエンド編#1</title>
+  <link rel="stylesheet" href="../css/training.css">
+
+  <!-- ▼ バックエンド編で共通のスタイル -->
+  <link rel="stylesheet" href="../css/backend_common.css">
+
+  <!-- ▼ 開いたときに、ページの先頭から読み始められるようにする。
+       ブラウザが前回の位置へ戻すより先に動かす必要があるため、
+       training.js とは分けて <head> で読み込んでいる -->
+  <script src="../js/scroll-reset.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>バックエンド編#1</h1>
+    <p>フレームワークとは ― Laravel を動かす</p>
+  </div>
+</header>
+
+<main>
+
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol>
+      <li><a href="#chapter1">フレームワークとは何か</a></li>
+      <li><a href="#chapter2">Laravel を動かす</a></li>
+      <li><a href="#chapter3">フォルダの見方</a></li>
+      <li><a href="#chapter4">artisan ― 手を動かす道具</a></li>
+    </ol>
+
+    <div class="note">
+      <span class="label">読む前に</span><br>
+      <a href="advanced_class2.html">フロントエンド中級#12</a> で、同じアプリを<strong>3回作りました</strong>。1枚に全部書き、ファイルを分け、クラスにまとめました。<br>
+      このページからは<strong>4回目</strong>です。今度は <strong>Laravel</strong> というフレームワークで作り直します。<br>
+      作るものは同じです。<strong>変わるのは書き方だけ</strong>。だから「同じことが、こう書ける」という見方で読んでください。
+    </div>
+
+    <div class="exercise">
+      <span class="label">課題</span><br>
+      このページは<strong>環境を動かすところまで</strong>です。コードはまだ書きません。<br>
+      章の途中に<strong>演習が2つ</strong>あります（この色の枠です）。
+    </div>
+
+    <div class="note">
+      <span class="label">CBC の #1〜#3 にあたります</span><br>
+      CBC では MAMP を使って環境を作りますが、<strong>この研修では Docker で用意してあります</strong>。<br>
+      インストール作業は要りません。<strong>すでにあるものを動かすところから</strong>始めます。
+    </div>
+  </section>
+
+  <section id="chapter1">
+    <h2>1. フレームワークとは何か</h2>
+
+    <p>
+      いままで書いてきたコードを思い出してください。<strong>毎回、同じことを書いていました。</strong>
+    </p>
+
+    <div class="ad-code">DB につなぐ
+エラーの設定をする
+SQL を書く
+prepare して execute する
+取ってきた配列を foreach で回す
+htmlspecialchars で囲む</div>
+
+    <div class="point">
+      <span class="label">どのアプリでも必要になるもの</span><br>
+      DB接続、フォームの受け取り、エスケープ、ページの組み立て。<strong>作るものが違っても、この土台は同じ</strong>です。<br>
+      <strong>その土台をあらかじめ用意しておいたもの</strong>が、フレームワークです。
+    </div>
+
+    <h3>骨組みだけ、先にできている</h3>
+
+    <p>
+      framework は<strong>「骨組み」</strong>という意味です。家でいえば、柱と梁ができている状態。<strong>あとは間取りを決めて、内装をやる</strong>だけになります。
+    </p>
+
+    <div class="ad-compare">
+      <div class="ad-compare-item is-ng">
+        <span class="ad-compare-label">素の PHP</span>
+        <div class="ad-code">DB接続を自分で書く
+SQLを自分で書く
+エスケープを自分で書く
+ルーティングを自分で作る
+ファイル構成を自分で決める</div>
+        <p><strong>全部できる。</strong>ただし<strong>全部やらないといけない。</strong>書き忘れると事故になります。</p>
+      </div>
+      <div class="ad-compare-item is-ok">
+        <span class="ad-compare-label">Laravel</span>
+        <div class="ad-code">DB接続は設定ファイルに書くだけ
+SQLはメソッドで書ける
+エスケープは自動
+ルーティングの仕組みがある
+ファイルの置き場所が決まっている</div>
+        <p><strong>決まった場所に、決まった書き方で置く。</strong>そのぶん<strong>覚えることがあります。</strong></p>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">フレームワークは万能ではない</span><br>
+      「Laravel を使えば楽になる」というのは半分だけ正しいです。<strong>決まりごとを覚えるまでは、素の PHP より遅くなります。</strong><br>
+      それでも使うのは、<strong>人が増えても同じ形で書ける</strong>から、<strong>よくある事故を仕組みで防げる</strong>からです。<br>
+      1人で小さいものを作るなら、素の PHP のほうが速いこともあります。<strong>道具の使い分けです。</strong>
+    </div>
+
+    <div class="note">
+      <span class="label">なぜ Laravel なのか</span><br>
+      PHP のフレームワークは他にもあります（Symfony、CakePHP、CodeIgniter など）。<br>
+      Laravel は<strong>日本の求人でいちばん見かける</strong>ものです。情報も多く、困ったときに調べやすい。<strong>最初の1つとして選びやすい</strong>という理由です。
+    </div>
+
+    <h3>「規約」という考え方</h3>
+
+    <p>
+      Laravel には<strong>「こう書けば、こう動く」という決まり</strong>があります。設定を書かなくても、名前から推測してくれます。
+    </p>
+
+    <table>
+      <tr>
+        <th>作るもの</th>
+        <th>置き場所</th>
+        <th>対応するテーブル</th>
+      </tr>
+      <tr>
+        <td><code>Sortable</code> クラス</td>
+        <td><code>app/Models/Sortable.php</code></td>
+        <td><code>sortables</code>（複数形）</td>
+      </tr>
+      <tr>
+        <td><code>Department</code> クラス</td>
+        <td><code>app/Models/Department.php</code></td>
+        <td><code>departments</code></td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">単数形と複数形</span><br>
+      <strong>クラス名は単数、テーブル名は複数。</strong>これが Laravel の決まりです。<br>
+      <code>Sortable</code> と書けば、<strong>勝手に <code>sortables</code> テーブルを見に行きます。</strong>設定は書きません。<br>
+      フロントエンド編では <code>sortable</code>（単数）という名前でしたが、<strong>Laravel では複数形にします。</strong>規約に合わせたほうが、あとの記述が短くなります。
+    </div>
+
+    <div class="note">
+      <span class="label">設定より規約</span><br>
+      「Convention over Configuration」という言葉があります。<strong>いちいち設定を書かせるのではなく、決まりに従わせる</strong>という考え方です。<br>
+      決まりを覚えるまでは窮屈ですが、<strong>覚えたあとは書く量が減ります。</strong>
+    </div>
+  </section>
+
+  <section id="chapter2">
+    <h2>2. Laravel を動かす</h2>
+
+    <p>
+      環境は用意してあります。<strong>3つのコマンドで動きます。</strong>
+    </p>
+
+    <h3>コンテナを起動する</h3>
+
+    <p>
+      <code>05_laravel/docker/</code> に移動して、コンテナを立ち上げます。
+    </p>
+
+    <div class="bk-cmd"><span class="is-prompt">$</span> cd 05_laravel/docker
+<span class="is-prompt">$</span> docker compose -f docker-compose-dev.yml --env-file .env up -d</div>
+
+    <div class="note">
+      <span class="label">フロントエンド編とは別のポート</span><br>
+      <strong>同時に動かせます。</strong>ぶつからないように番号を分けてあります。
+      <table>
+        <tr>
+          <th></th>
+          <th>フロントエンド編</th>
+          <th>バックエンド編</th>
+        </tr>
+        <tr>
+          <td>画面</td>
+          <td>8001</td>
+          <td><strong>8026</strong></td>
+        </tr>
+        <tr>
+          <td>phpMyAdmin</td>
+          <td>8888</td>
+          <td><strong>8889</strong></td>
+        </tr>
+        <tr>
+          <td>DB</td>
+          <td>cri_sortable</td>
+          <td><strong>cbc_laravel</strong></td>
+        </tr>
+      </table>
+    </div>
+
+    <h3>ライブラリを入れる</h3>
+
+    <p>
+      Laravel は<strong>たくさんの部品の集まり</strong>でできています。その部品を取ってきます。
+    </p>
+
+    <div class="bk-cmd"><span class="is-prompt">$</span> docker exec training-laravel-web composer install</div>
+
+    <div class="point">
+      <span class="label">composer とは</span><br>
+      PHP の<strong>ライブラリ管理ツール</strong>です。<code>composer.json</code> に「何が必要か」が書いてあり、<code>composer install</code> でそれを取ってきます。<br>
+      取ってきたものは <code>vendor/</code> に入ります。<strong>8000 を超えるファイルになるので、Git には入れません</strong>（<code>.gitignore</code> に書いてあります）。<br>
+      他の人は <code>composer install</code> を打てば同じものが揃います。<strong>だから配布しなくていい</strong>のです。
+    </div>
+
+    <div class="caution">
+      <span class="label">数分かかります</span><br>
+      初回は 100 個近いライブラリを取ってきます。<strong>止まったように見えても待ってください。</strong><br>
+      <code>Generating optimized autoload files</code> と出れば終わりです。
+    </div>
+
+    <h3>テーブルを作る</h3>
+
+    <p>
+      Laravel は<strong>セッション（ログイン状態などを覚えておく仕組み）をDBに保存します。</strong>そのためのテーブルが要ります。
+    </p>
+
+    <div class="bk-cmd"><span class="is-prompt">$</span> docker exec training-laravel-web php artisan migrate</div>
+
+    <div class="caution">
+      <span class="label">Connection refused と出たら、待ってからもう一度</span><br>
+      <code>up -d</code> はコンテナを<strong>起動しただけ</strong>で、<strong>MySQL が受け付けられる状態になるまでには少し時間がかかります。</strong><br>
+      早すぎると、こうなります。
+      <div class="ad-code">SQLSTATE[HY000] [2002] Connection refused</div>
+      <strong>不具合ではありません。</strong>10秒ほど待って、もう一度打ってください。<br>
+      2回目以降は <code>composer install</code> が速く終わるので、<strong>ここに引っかかりやすくなります。</strong>
+    </div>
+
+    <div class="caution">
+      <span class="label">これを飛ばすとエラーになる</span><br>
+      先に画面を開くと、こうなります。
+      <div class="ad-screen">
+        <div class="ad-screen-bar">
+          <span class="win-dot red"></span>
+          <span class="win-dot yellow"></span>
+          <span class="win-dot green"></span>
+        </div>
+        <div class="ad-screen-body is-error">
+          SQLSTATE[42S02]: Base table or view not found:<br>
+          1146 Table 'cbc_laravel.sessions' doesn't exist
+        </div>
+      </div>
+      <strong>「sessions テーブルが無い」</strong>と言っています。<code>migrate</code> を実行すれば直ります。<br>
+      <strong>順番を守ってください。</strong>
+    </div>
+
+    <h3>画面を開く</h3>
+
+    <p>
+      ブラウザで <code>localhost:8026</code> を開きます。<strong>Laravel の初期画面</strong>が出れば成功です。
+    </p>
+
+    <div class="exercise">
+      <span class="label">演習1</span><br>
+      上の3つを順に実行して、<strong>Laravel の初期画面を表示してください。</strong><br>
+      表示できたら、<strong>わざと止めてみましょう。</strong><code>docker compose down</code> でコンテナを落として、画面が開かなくなることを確認します。<br>
+      もう一度 <code>up -d</code> で戻してください。<strong>2回目は速いはず</strong>です（<code>composer install</code> は不要）。
+    </div>
+
+    <div class="note">
+      <span class="label">動かないときに見る場所</span><br>
+      <strong>画面が真っ白</strong>… <code>storage/logs/laravel.log</code> にエラーが出ています。<br>
+      <strong>500 が出る</strong>… 画面にエラーの内容が出ます。<code>.env</code> の <code>APP_DEBUG=true</code> のときだけです。<br>
+      <strong>そもそも繋がらない</strong>… <code>docker ps</code> でコンテナが動いているか確認してください。
+    </div>
+  </section>
+
+  <section id="chapter3">
+    <h2>3. フォルダの見方</h2>
+
+    <p>
+      Laravel はファイルがたくさんあります。<strong>全部を覚える必要はありません。</strong>この研修で触るのは<strong>6つだけ</strong>です。
+    </p>
+
+    <div class="bk-tree">05_laravel/app/
+├── <span class="is-new">app/</span>
+│   ├── <span class="is-new">Models/</span>              ← DBとやり取りする
+│   └── <span class="is-new">Http/Controllers/</span>    ← 処理の流れを書く
+├── <span class="is-new">database/</span>
+│   ├── <span class="is-new">migrations/</span>          ← テーブルの設計図
+│   └── <span class="is-new">seeders/</span>             ← 最初に入れるデータ
+├── <span class="is-new">resources/views/</span>         ← 画面（Blade）
+├── <span class="is-new">routes/web.php</span>           ← URLと処理の対応
+├── public/                 ← 公開フォルダ（CSS・JS・画像）
+├── config/                 ← 設定
+├── storage/                ← ログ・キャッシュ
+├── vendor/                 ← composer で入れた部品
+└── .env                    ← 接続情報など</div>
+
+    <div class="point">
+      <span class="label">赤いところだけ触ります</span><br>
+      <strong>Models / Controllers / migrations / seeders / views / web.php。</strong>この6つです。<br>
+      それ以外は<strong>Laravel が用意したもの</strong>で、いまは触りません。
+    </div>
+
+    <h3>public だけが外から見える</h3>
+
+    <p>
+      ブラウザからアクセスできるのは <code>public/</code> の中<strong>だけ</strong>です。
+    </p>
+
+    <div class="ad-compare">
+      <div class="ad-compare-item is-ng">
+        <span class="ad-compare-label">フロントエンド編</span>
+        <div class="ad-code">htdocs/
+├── index.php        ← 見える
+├── config.php       ← 見える
+└── Controller/
+    └── Connect.php  ← 見える</div>
+        <p><strong>全部が公開フォルダの中</strong>にありました。DBのパスワードが書かれたファイルも、URLを打てば辿り着けます。</p>
+      </div>
+      <div class="ad-compare-item is-ok">
+        <span class="ad-compare-label">Laravel</span>
+        <div class="ad-code">app/
+├── public/
+│   └── index.php    ← 見える
+├── app/Models/      ← 見えない
+├── .env             ← 見えない
+└── vendor/          ← 見えない</div>
+        <p><strong>公開するものと、しないものが分かれています。</strong>設定ファイルは外から見えません。</p>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">入口は1つだけ</span><br>
+      どのURLを開いても、<strong>最初に動くのは <code>public/index.php</code> だけ</strong>です。<br>
+      そこから <code>routes/web.php</code> を見て、<strong>「このURLならこの処理」</strong>と振り分けます。<br>
+      フロントエンド編では <code>index.php</code> <code>sortable2/index.php</code> と<strong>ファイルの数だけ入口がありました。</strong>Laravel は1つです。
+    </div>
+
+    <div class="note">
+      <span class="label">.env は配布しないのが普通</span><br>
+      <code>.env</code> には<strong>DBのパスワード</strong>が書かれています。実務では <code>.gitignore</code> に入れて、<strong>Git に上げません。</strong><br>
+      この研修では学習用なので、<strong>あらかじめ入れてあります。</strong>実務ではそうしない、と覚えておいてください。
+    </div>
+  </section>
+
+  <section id="chapter4">
+    <h2>4. artisan ― 手を動かす道具</h2>
+
+    <p>
+      Laravel には <code>artisan</code>（アルチザン）というコマンドが付いています。<strong>ファイルを作ったり、DBを操作したり</strong>できます。
+    </p>
+
+    <div class="bk-cmd"><span class="is-prompt">$</span> docker exec training-laravel-web php artisan list</div>
+
+    <p>
+      使えるコマンドが一覧で出ます。<strong>この研修で使うのは、次のものです。</strong>
+    </p>
+
+    <table>
+      <tr>
+        <th>コマンド</th>
+        <th>やること</th>
+        <th>使う回</th>
+      </tr>
+      <tr>
+        <td><code>make:migration</code></td>
+        <td>テーブルの設計図を作る</td>
+        <td><a href="backend_2.html">#2</a></td>
+      </tr>
+      <tr>
+        <td><code>migrate</code></td>
+        <td>設計図どおりにテーブルを作る</td>
+        <td><a href="backend_2.html">#2</a></td>
+      </tr>
+      <tr>
+        <td><code>make:model</code></td>
+        <td>Model のファイルを作る</td>
+        <td><a href="backend_3.html">#3</a></td>
+      </tr>
+      <tr>
+        <td><code>make:controller</code></td>
+        <td>Controller のファイルを作る</td>
+        <td><a href="backend_3.html">#3</a></td>
+      </tr>
+      <tr>
+        <td><code>make:seeder</code></td>
+        <td>最初に入れるデータを作る</td>
+        <td><a href="backend_2.html">#2</a></td>
+      </tr>
+      <tr>
+        <td><code>route:list</code></td>
+        <td>URLの一覧を見る</td>
+        <td><a href="backend_2.html">#2</a></td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">なぜコマンドで作るのか</span><br>
+      手で新しいファイルを作ってもいいのですが、<strong>置き場所と書き出しが決まっています。</strong><br>
+      <code>make:model Sortable</code> と打てば、<strong>正しい場所に、正しい形で</strong>ファイルができます。<strong>名前空間の書き間違いも起きません。</strong>
+    </div>
+
+    <div class="caution">
+      <span class="label">コンテナの中で実行する</span><br>
+      <code>php artisan</code> は<strong>コンテナの中で動かします。</strong>手元のパソコンには PHP が入っていないかもしれません。<br>
+      毎回 <code>docker exec training-laravel-web</code> を頭に付けるか、コンテナに入ってから打ちます。
+      <div class="bk-cmd"><span class="is-prompt">$</span> docker exec -it training-laravel-web bash
+<span class="is-prompt">#</span> php artisan list      <span class="ad-cm"># これ以降は php artisan だけでいい</span>
+<span class="is-prompt">#</span> exit                   <span class="ad-cm"># 出るとき</span></div>
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習2</span><br>
+      <code>php artisan list</code> を実行して、<strong>コマンドの一覧を出してください。</strong><br>
+      次に <code>php artisan route:list</code> を打ってみましょう。<strong>いま登録されているURLが1つだけ</strong>あるはずです。<br>
+      それが <code>routes/web.php</code> に書かれているものです。<strong>ファイルを開いて見比べてください。</strong>
+      <span class="ad-label">routes/web.php</span>
+      <code class="ad-code"><span class="ad-k">use</span> <span class="ad-c">Illuminate\Support\Facades\Route</span>;
+
+<span class="ad-c">Route</span>::<span class="ad-f">get</span>(<span class="ad-s">'/'</span>, <span class="ad-k">function</span> () {
+    <span class="ad-k">return</span> <span class="ad-f">view</span>(<span class="ad-s">'welcome'</span>);
+});</code>
+    </div>
+
+    <div class="point">
+      <span class="label">この1行が読めれば十分です</span><br>
+      <code>Route::get('/', ...)</code> は<strong>「<code>/</code> を GET で開いたら、この処理」</strong>という意味です。<br>
+      <code>view('welcome')</code> は <code>resources/views/welcome.blade.php</code> を表示するということ。<br>
+      <strong>次のページから、ここを自分で書いていきます。</strong>
+    </div>
+
+    <div class="point">
+      <span class="label">このページでやったこと</span><br>
+      フレームワークとは何か／規約という考え方／Laravel を動かす／フォルダの見方／artisan。<br>
+      <strong>まだコードは書いていません。</strong>次のページから、テーブルを作って画面を出します。
+    </div>
+  </section>
+
+</main>
+
+<nav class="page-nav">
+  <a class="page-prev" href="advanced_class2.html">
+    <span class="page-nav-label">前のページ</span>
+    <span class="page-nav-title">フロントエンド中級#12</span>
+    <span class="page-nav-sub">クラスにまとめる</span>
+  </a>
+  <a class="page-next" href="backend_2.html">
+    <span class="page-nav-label">次のページ</span>
+    <span class="page-nav-title">バックエンド編#2</span>
+    <span class="page-nav-sub">テーブルを作って画面を出す ― migration と Blade</span>
+  </a>
+</nav>
+
+<footer></footer>
+
+<!-- ▼ 共通スクリプト。章ナビ・コピーボタン・先頭へ戻るが自動で付く（編集不要） -->
+<script src="../js/training.js"></script>
+
+</body>
+</html>
