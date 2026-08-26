@@ -1,0 +1,826 @@
+/* ============================================================
+   マークアップ中級#2（basic_2.html）専用のスタイル
+
+   全ページ共通の土台は training.css にあります。
+   ここに置くのは、このページだけで使う図やデモのスタイルです。
+   ============================================================ */
+/* ============================================================
+   共通の実演枠
+   ============================================================ */
+.rp-demo {
+  margin: 16px 0 22px;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+}
+
+.rp-samples {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 20px 0 26px;
+}
+
+.rp-label {
+  display: block;
+  margin-bottom: 7px;
+  color: #1e3a8a;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.rp-code {
+  display: block;
+  margin-bottom: 8px;
+  padding: 9px 12px;
+  border-radius: 6px;
+  background: #1e293b;
+  color: #e2e8f0;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+
+/* ============================================================
+   1章：画面幅で変わるレイアウトの見本
+   ============================================================ */
+.rp-screen {
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.rp-screen-bar {
+  padding: 6px 12px;
+  background: #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.rp-screen-body {
+  padding: 12px;
+}
+
+.rp-head {
+  padding: 10px;
+  border-radius: 6px;
+  background: #d1fae5;
+  color: #065f46;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.rp-cols {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.rp-cols.is-stacked {
+  flex-direction: column;
+}
+
+.rp-col-a,
+.rp-col-b {
+  flex: 1;
+  padding: 18px 10px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.rp-col-a {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.rp-col-b {
+  background: #fce7f3;
+  color: #9d174d;
+}
+
+/* 実際にこのページで幅に反応する箱 */
+.rp-live {
+  padding: 20px;
+  border-radius: 8px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: 15px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.rp-live::after {
+  content: "いまは PC 幅（769px 以上）です";
+  display: block;
+  margin-top: 6px;
+  font-size: 12.5px;
+  font-weight: 400;
+  color: #475569;
+}
+
+@media screen and (max-width: 768px) {
+  .rp-live {
+    background: #fef3c7;
+    color: #92400e;
+  }
+
+  .rp-live::after {
+    content: "いまは スマホ幅（768px 以下）です";
+  }
+}
+
+/* ============================================================
+   2章：nth 系の見本
+   ============================================================ */
+.nth-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.nth-box > div {
+  flex: 1 1 60px;
+  min-width: 0;
+  padding: 12px 6px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* 見本1: 3番目だけ */
+.nth-a > div:nth-child(3) {
+  border-color: #f472b6;
+  background: #fce7f3;
+  color: #9d174d;
+}
+
+/* 見本2: 奇数 */
+.nth-b > div:nth-child(odd) {
+  border-color: #f472b6;
+  background: #fce7f3;
+  color: #9d174d;
+}
+
+/* 見本3: 3の倍数 */
+.nth-c > div:nth-child(3n) {
+  border-color: #f472b6;
+  background: #fce7f3;
+  color: #9d174d;
+}
+
+/* 見本4: 5番目以降 */
+.nth-d > div:nth-child(n + 5) {
+  border-color: #f472b6;
+  background: #fce7f3;
+  color: #9d174d;
+}
+
+/* 見本5: 最初以外 */
+.nth-e > div:not(:first-child) {
+  border-color: #f472b6;
+  background: #fce7f3;
+  color: #9d174d;
+}
+
+/* child と of-type の違い用 */
+.nth-mix > * {
+  padding: 10px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 12.5px;
+  margin-bottom: 6px;
+}
+
+.nth-mix h4 {
+  font-weight: 700;
+}
+
+.nth-child-demo p:nth-child(3) {
+  border-color: #f472b6;
+  background: #fce7f3;
+  color: #9d174d;
+}
+
+.nth-type-demo p:nth-of-type(3) {
+  border-color: #f472b6;
+  background: #fce7f3;
+  color: #9d174d;
+}
+
+/* ============================================================
+   3章：::before / ::after の見本
+   ============================================================ */
+.icon-demo > div {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 13px;
+}
+
+.icon-demo > div + div {
+  margin-top: 6px;
+}
+
+.icon-arrow::before {
+  content: "→";
+  color: #2563eb;
+  font-weight: 700;
+}
+
+.icon-check::before {
+  content: "";
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #16a34a;
+  flex: none;
+}
+
+.icon-tag::after {
+  content: "NEW";
+  margin-left: auto;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #fee2e2;
+  color: #b91c1c;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* 矢印リスト */
+.arrow-list > li {
+  position: relative;
+  padding: 12px 34px 12px 12px;
+  border-bottom: 1px solid #e2e8f0;
+  color: #334155;
+  font-size: 13px;
+}
+
+.arrow-list > li:first-child {
+  border-top: 1px solid #e2e8f0;
+}
+
+.arrow-list > li::before {
+  display: block;
+  content: "";
+  position: absolute;
+  top: calc(50% - 4px);
+  right: 14px;
+  width: 7px;
+  height: 7px;
+  border-top: 2px solid #2563eb;
+  border-right: 2px solid #2563eb;
+  transform: rotate(45deg);
+}
+
+/* ホバーで出る矢印リスト */
+.hover-list > li {
+  position: relative;
+  padding: 12px 34px 12px 12px;
+  border-bottom: 1px solid #e2e8f0;
+  color: #334155;
+  font-size: 13px;
+  cursor: default;
+  transition: background 0.15s ease;
+}
+
+.hover-list > li:first-child {
+  border-top: 1px solid #e2e8f0;
+}
+
+.hover-list > li:hover {
+  background: #f8fafc;
+}
+
+.hover-list > li:hover::before {
+  display: block;
+  content: "";
+  position: absolute;
+  top: calc(50% - 4px);
+  right: 14px;
+  width: 7px;
+  height: 7px;
+  border-top: 2px solid #2563eb;
+  border-right: 2px solid #2563eb;
+  transform: rotate(45deg);
+}
+
+@media (max-width: 780px) {
+  /* 1fr だけだと中身の最小幅まで広がり、長いコード行が画面をはみ出す */
+  .rp-samples {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ============================================================
+   擬似要素の図解
+
+   図の中の顔文字は画像ではなく、この図自身の ::before / ::after で
+   出している。つまりこの図そのものが動く見本になっている。
+   ============================================================ */
+.pf-fig {
+  margin: 22px 0;
+  padding: 16px 16px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 15% 10%, rgba(239, 68, 68, 0.035), transparent 55%),
+    radial-gradient(circle at 85% 90%, rgba(59, 130, 246, 0.04), transparent 55%),
+    #ffffff;
+  text-align: center;
+  overflow-x: auto;
+}
+
+/* 矢印をブラウザの中の顔文字とぴたり揃えるための土台。
+   中の pf-ghost はブラウザ内と同じ中身・同じ疑似要素を持つので、
+   幅が1pxの狂いもなく一致する。見せずに場所だけ borrow している。 */
+.pf-anchor {
+  position: relative;
+  display: inline-block;
+}
+
+/* pf-ghost は見えないが高さは持つ。その高さに矢印を重ねて置くので、
+   padding は矢印がはみ出すぶんだけで足りる */
+.pf-anchor.top { padding-top: 10px; }
+.pf-anchor.bottom { padding-bottom: 58px; }
+
+.pf-ghost {
+  visibility: hidden;
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+.pf-note {
+  margin: 0 0 2px;
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* 上からの矢印。矢じり側（下端）を軸に倒すので、
+   どれだけ傾けても先端は顔文字を指したまま動かない */
+.pf-down {
+  position: absolute;
+  top: 2px;
+  width: 2px;
+  height: 28px;
+  background: #a8b2bf;
+  transform-origin: 50% 100%;
+}
+
+.pf-down::after {
+  content: "";
+  position: absolute;
+  bottom: -7px;
+  left: 50%;
+  margin-left: -5px;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 8px solid #a8b2bf;
+}
+
+/* 12px は顔文字の枠(26px)の中心 13px から線の太さ半分を引いた位置 */
+.pf-down.l {
+  left: 12px;
+  transform: rotate(-26deg);
+}
+
+.pf-down.r {
+  right: 12px;
+  transform: rotate(26deg);
+}
+
+.pf-code {
+  margin: 4px 0 12px;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 15px;
+  color: #1e293b;
+  white-space: nowrap;
+}
+
+/* --- ブラウザの枠 --- */
+.pf-browser {
+  max-width: 430px;
+  margin: 0 auto;
+  border: 1px solid #c4cad2;
+  border-radius: 11px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.1),
+    0 12px 30px rgba(15, 23, 42, 0.22);
+}
+
+.pf-bar {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  padding: 8px 10px 0;
+  background: linear-gradient(#dfe4ea, #d2d8e0);
+}
+
+.pf-dot {
+  flex: none;
+  width: 9px;
+  height: 9px;
+  margin-bottom: 8px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.18);
+}
+
+.pf-dot.r { background: radial-gradient(circle at 32% 26%, #ff9a90, #ff5f57 72%); }
+.pf-dot.y { background: radial-gradient(circle at 32% 26%, #ffdc85, #febc2e 72%); }
+.pf-dot.g { background: radial-gradient(circle at 32% 26%, #86e894, #28c840 72%); }
+
+/* タブ。足元の左右を radial-gradient で凹ませて、
+   実物のブラウザと同じ「バーに溶け込む」形にしている */
+.pf-tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 10px;
+  padding: 6px 9px 7px;
+  border-radius: 8px 8px 0 0;
+  background: #ffffff;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #334155;
+  white-space: nowrap;
+}
+
+.pf-tab::before,
+.pf-tab::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 8px;
+  height: 8px;
+}
+
+.pf-tab::before {
+  left: -8px;
+  background: radial-gradient(circle at 0 0, transparent 8px, #ffffff 8px);
+}
+
+.pf-tab::after {
+  right: -8px;
+  background: radial-gradient(circle at 100% 0, transparent 8px, #ffffff 8px);
+}
+
+/* タブのファビコン */
+.pf-fav {
+  flex: none;
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  background: linear-gradient(135deg, #7cb8fb, #2563eb);
+}
+
+/* タブの閉じるボタン */
+.pf-close {
+  position: relative;
+  flex: none;
+  width: 11px;
+  height: 11px;
+}
+
+.pf-close::before,
+.pf-close::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 1px;
+  left: 1px;
+  height: 1.5px;
+  margin-top: -0.75px;
+  border-radius: 1px;
+  background: #9aa3af;
+}
+
+.pf-close::before { transform: rotate(45deg); }
+.pf-close::after { transform: rotate(-45deg); }
+
+/* 新しいタブを開く＋ */
+.pf-newtab {
+  position: relative;
+  flex: none;
+  width: 16px;
+  height: 16px;
+  margin: 0 0 5px 10px;
+}
+
+.pf-newtab::before,
+.pf-newtab::after {
+  content: "";
+  position: absolute;
+  border-radius: 1px;
+  background: #7c8698;
+}
+
+.pf-newtab::before {
+  top: 50%;
+  right: 3px;
+  left: 3px;
+  height: 1.5px;
+  margin-top: -0.75px;
+}
+
+.pf-newtab::after {
+  top: 3px;
+  bottom: 3px;
+  left: 50%;
+  width: 1.5px;
+  margin-left: -0.75px;
+}
+
+/* --- アドレスバーの行 --- */
+.pf-url {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  background: #ffffff;
+  border-bottom: 1px solid #e4e8ed;
+}
+
+.pf-nav {
+  position: relative;
+  flex: none;
+  width: 14px;
+  height: 14px;
+}
+
+/* 戻る・進むの山形 */
+.pf-nav.back::before,
+.pf-nav.fwd::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-left: 1.5px solid #6b7280;
+  border-bottom: 1.5px solid #6b7280;
+}
+
+.pf-nav.back::before { transform: rotate(45deg); }
+.pf-nav.fwd::before { transform: rotate(-135deg); }
+
+/* 再読み込みの円弧と矢じり */
+.pf-nav.reload::before {
+  content: "";
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  bottom: 1px;
+  left: 1px;
+  border: 1.5px solid #6b7280;
+  border-top-color: transparent;
+  border-radius: 50%;
+  transform: rotate(35deg);
+}
+
+.pf-nav.reload::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 1px;
+  width: 0;
+  height: 0;
+  border-left: 2.5px solid transparent;
+  border-right: 2.5px solid transparent;
+  border-bottom: 4px solid #6b7280;
+  transform: rotate(72deg);
+}
+
+.pf-urlbar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 21px;
+  padding: 0 10px;
+  border: 1px solid #dbe0e6;
+  border-radius: 11px;
+  background: #f1f3f6;
+  font-size: 10.5px;
+  color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* 保護された通信を示す鍵 */
+.pf-lock {
+  position: relative;
+  flex: none;
+  width: 8px;
+  height: 10px;
+}
+
+.pf-lock::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 1.5px;
+  left: 1.5px;
+  height: 5px;
+  border: 1.2px solid #8a929e;
+  border-bottom: 0;
+  border-radius: 3px 3px 0 0;
+}
+
+.pf-lock::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 6px;
+  border-radius: 1.5px;
+  background: #8a929e;
+}
+
+/* 右端のメニュー */
+.pf-menu {
+  position: relative;
+  flex: none;
+  width: 14px;
+  height: 14px;
+}
+
+.pf-menu::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  width: 2.5px;
+  height: 2.5px;
+  margin-left: -1.25px;
+  border-radius: 50%;
+  background: #8a929e;
+  box-shadow: 0 4px 0 #8a929e, 0 8px 0 #8a929e;
+}
+
+.pf-view {
+  padding: 24px 16px;
+  font-size: 16px;
+  color: #1e293b;
+}
+
+/* ここが本題。HTMLには顔文字を1文字も書いていない */
+.pf-target {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.pf-target::before,
+.pf-target::after {
+  /* 1行目は全ブラウザ用。2行目は「読み上げ用の代わりの文字は空」という指定で、
+     これに対応していないブラウザは行ごと無視して1行目が残る。
+     顔文字は飾りなので、読み上げソフトには読ませない。 */
+  content: "😊";
+  content: "😊" / "";
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  line-height: 22px;
+  font-size: 15px;
+  text-align: center;
+  vertical-align: -6px;
+}
+
+.pf-target::before {
+  margin-right: 4px;
+  border: 2px dashed #ef4444;
+}
+
+.pf-target::after {
+  margin-left: 4px;
+  border: 2px dashed #3b82f6;
+}
+
+/* --- 下からの矢印とラベル --- */
+.pf-up {
+  position: absolute;
+  bottom: 50px;
+  width: 2px;
+  height: 32px;
+}
+
+.pf-up::before {
+  content: "";
+  position: absolute;
+  top: 7px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: currentColor;
+}
+
+.pf-up::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-left: -5px;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 8px solid currentColor;
+}
+
+.pf-name {
+  position: absolute;
+  bottom: 23px;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+
+/* ::before と ::after の2つを束ねて、下の説明へつなぐ線。
+   左右の縦線はそれぞれのラベルの真下から下りてくる */
+.pf-join {
+  position: absolute;
+  right: 13px;
+  bottom: 9px;
+  left: 13px;
+  height: 9px;
+  border-right: 2px solid #cbd2db;
+  border-bottom: 2px solid #cbd2db;
+  border-left: 2px solid #cbd2db;
+  border-radius: 0 0 7px 7px;
+}
+
+.pf-join::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 2px;
+  height: 7px;
+  margin-left: -1px;
+  background: #cbd2db;
+}
+
+.pf-up.l,
+.pf-name.l {
+  color: #ef4444;
+}
+
+.pf-up.r,
+.pf-name.r {
+  color: #3b82f6;
+}
+
+.pf-up.l { left: 12px; }
+.pf-up.r { right: 12px; }
+
+/* ラベルは矢印の真下に中心を合わせる */
+.pf-name.l {
+  left: 13px;
+  transform: translateX(-50%);
+}
+
+.pf-name.r {
+  right: 13px;
+  transform: translateX(50%);
+}
+
+.pf-cap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: #64748b;
+}
+
