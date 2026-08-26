@@ -898,7 +898,7 @@ while ( $iの最大数 ) {
     </div>
 
     <p>
-      <code>$name</code> という1 つの変数に、3 つの値を入れることができました。配列には代入した順に番号が振られ、<strong>最初は 0 番</strong>です。
+      <code>$name</code> という1 つの変数に、3 つの値を入れることができました。この例のようにキーを書かずに要素を並べると、<strong>先頭から順に 0, 1, 2 と番号が振られます</strong>。
     </p>
 
     <div class="vscode">
@@ -940,10 +940,10 @@ print_r (<span class="sy-attr">$name</span>);   <span class="sy-com">/* print_r(
 
     <h3 id="chapter6-index">添字でデータを出力</h3>
     <p>
-      配列の中の1 つの要素を取り出すには<strong>添字</strong> <code>[ ]</code>（インデックス＝通し番号）を使います。配列に書いた順に 0, 1, 2… と自動的に振られるので、その数字を指定します。
+      配列の中の1 つの要素を取り出すには<strong>添字</strong> <code>[ ]</code>（インデックス＝通し番号）を使います。この例のようにキーを書かずに要素を並べた場合、<strong>先頭から順に 0, 1, 2 と番号が振られる</strong>ので、その数字を指定します。
     </p>
 
-    <figure class="idxfig" role="img" aria-label="1つの変数 $name の中に、0から順に番号がついた区画が並び、それぞれに値が入っている様子">
+    <figure class="idxfig" role="img" aria-label="1つの変数 $name の中に、0, 1, 2 と番号がついた区画が並び、それぞれに値が入っている様子">
       <div class="idxfig-canvas">
         <svg class="idxfig-svg" viewBox="0 0 560 238" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
@@ -973,7 +973,7 @@ print_r (<span class="sy-attr">$name</span>);   <span class="sy-com">/* print_r(
           <text x="310.0" y="230" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b" font-family="ui-monospace,Menlo,monospace">$name</text>
         </svg>
       </div>
-      <figcaption>配列は 1 つの変数の中に区画が並んだもの。番号は <strong>0 から</strong> 始まる</figcaption>
+      <figcaption>配列は 1 つの変数の中に区画が並んだもの。上の例では番号が <strong>0, 1, 2</strong> と振られている</figcaption>
     </figure>
 
     <div class="vscode">
@@ -1012,6 +1012,11 @@ print_r (<span class="sy-attr">$name</span>);   <span class="sy-com">/* print_r(
       <div class="chrome-viewport">
         山田太郎<br>-----------<br>佐藤花子<br>-----------<br>鈴木一郎
         </div>
+    </div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      この番号は、自分でキーを指定したり、あとから要素を減らしたりすると <code>0</code>, <code>1</code>, <code>2</code> と続かなくなることがあります。いまは「必ず 0, 1, 2 と続くとは限らない」とだけ知っておけば十分です。
     </div>
 
     <p>
@@ -1541,7 +1546,7 @@ echo '&lt;/table&gt;';
     </div>
     <div class="caution">
       <span class="label">注意</span><br>
-      配列の添字は <code>[0]</code> から始まります。配列はそのまま <code>echo</code> できないので、出力するときは添字を付けてください。中身をすべて確認したいときは <code>print_r()</code> を使います。
+      配列はそのまま <code>echo</code> できないので、出力するときは添字を付けてください。中身をすべて確認したいときは <code>print_r()</code> を使います。
     </div>
 
     <h4>データを取り出す構文（ループ処理）</h4>
