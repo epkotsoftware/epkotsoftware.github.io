@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>マークアップ中級#1</title>
+  <title>マークアップ初級#1</title>
   <link rel="stylesheet" href="../css/training.css">
 
   <!-- ▼ このページ専用のスタイル（通信の流れ図） -->
@@ -18,7 +18,7 @@
 
 <header>
   <div class="header-inner">
-    <h1>マークアップ中級#1</h1>
+    <h1>マークアップ初級#1</h1>
     <p>インターネットの仕組みを理解しよう</p>
   </div>
 </header>
@@ -208,10 +208,17 @@
       つまり「サーバーにファイルを上げる（アップロードする）」＝「ページを公開する」作業の道具です。
     </p>
 
+    <div class="caution">
+      <span class="label">サーバーの契約は要りません</span><br>
+      この章は<strong>考え方を知るところ</strong>です。<strong>いま自分でサーバーを借りる必要はありません。</strong><br>
+      画面や手順を載せていますが、<strong>そのとおりに操作するものではなく、読んで流れをつかむためのもの</strong>です。<br>
+      自分のサイトを公開したくなったときに、このページを見直してください。
+    </div>
+
     <div class="note">
       <span class="label">この章の位置づけ</span><br>
-      FTPは<strong>いちばん基本的なやり方</strong>です。この章ではこれを実際に動かして、<strong>「ファイルを置くと公開される」という仕組みを目で見ます</strong>。<br>
-      いまの現場で使われているのは、これを安全にした<strong>SFTP</strong>と、手作業そのものをやめた<strong>push</strong>です。どちらも章の終わりで扱います。
+      FTPは<strong>いちばん基本的なやり方</strong>です。この章では、<strong>「ファイルを置くと公開される」という仕組みを図で追います</strong>。<br>
+      いまの現場では、これを安全にした<strong>SFTP</strong>や、転送そのものを自動化する仕組みが使われます。章の終わりで触れます。
     </div>
 
     <div class="ftp-fig">
@@ -262,16 +269,17 @@
     </div>
 
     <div class="note">
-      <span class="label">ソフトは Cyberduck</span><br>
+      <span class="label">FTPソフトの代表例</span><br>
       無料のFTPソフト
       <a href="https://cyberduck.io/" target="_blank" rel="noopener noreferrer">Cyberduck（公式サイト）</a>
-      を使います。Windows・Mac どちらでも動きます。
+      が知られています。<br>
+      <strong>いま入れる必要はありません。</strong>この先の画面は、そのソフトの見た目を載せたものです。
     </div>
 
     <h3>接続に必要な情報</h3>
 
     <p>
-      サーバーを契約すると、次の情報がもらえます。この3点セットを入力すると接続できます。
+      サーバーを契約すると、次の3つが渡されます。これを入力すると接続できます。<strong>いま用意する必要はありません。</strong>
     </p>
 
     <table>
@@ -294,16 +302,17 @@
     </table>
 
     <div class="note">
-      <span class="label">サーバーはどれを借りるか</span><br>
-      月1,000円程度のレンタルサーバーで十分です。<br>
-      AWSのようなクラウドサーバーもありますが、いまの段階では<strong>オーバースペック</strong>です。まずは普通のレンタルサーバーで仕組みを覚えます。
+      <span class="label">将来、自分で借りるときは</span><br>
+      個人のサイトや小さなアプリなら、<strong>月1,000円程度のレンタルサーバー</strong>で足ります。<br>
+      AWSのようなクラウドもありますが、その規模では<strong>過剰な設備</strong>になります。<strong>名前だけ覚えておけば十分です。</strong><br>
+      くり返しますが、<strong>研修の中で契約する場面はありません。</strong>
     </div>
 
     <h3>接続先を登録する</h3>
 
     <p>
-      Cyberduckを開いたら、まず<strong>ブックマーク</strong>（接続先の登録）を1件つくります。<br>
-      左下の <code>+</code> を押すと登録画面が開くので、そこにさきほどの情報を入れます。
+      実際に使うときは、Cyberduckを開いて、まず<strong>ブックマーク</strong>（接続先の登録）を1件つくります。<br>
+      左下の <code>+</code> を押すと登録画面が開き、そこにさきほどの情報を入れる、という流れです。
     </p>
 
     <div class="gui-stack">
@@ -441,11 +450,17 @@
 
     <div class="note">
       <span class="label">赤い枠が入力する場所</span><br>
-      手で入れるのは<strong>サーバ</strong>と<strong>ユーザ名</strong>だけです。ポートは <code>21</code> のまま、詳細設定もさわりません。<br>
+      手で入れることになるのは<strong>サーバ</strong>と<strong>ユーザ名</strong>だけで、ポートは <code>21</code> のまま、詳細設定もさわりません。<br>
       パスワード欄がないのは、<strong>接続するときに聞かれる</strong>ためです。
     </div>
 
-    <h3>アップロードの流れ</h3>
+    <h3>公開するときの流れ</h3>
+
+    <div class="caution">
+      <span class="label">この5つは、いまやる作業ではありません</span><br>
+      <strong>将来、自分でサーバーを借りて公開するときの流れ</strong>です。<br>
+      ここでは<strong>「こういう順番で進む」ということだけ</strong>つかんでください。
+    </div>
 
     <table>
       <tr>
@@ -478,7 +493,7 @@
 
     <p>
       接続すると、サーバーの中身がそのまま一覧で見えます。ここにはほかの人のフォルダも並んでいます。<br>
-      メニューの<strong>「ファイル」→「新規フォルダ」</strong>で、自分のフォルダを1つ作ります。フォルダ名は<strong>メールアドレスの <code>@</code> より左側</strong>です。
+      メニューの<strong>「ファイル」→「新規フォルダ」</strong>で自分のフォルダを1つ作る、というのがここでの操作です。フォルダ名は<strong>メールアドレスの <code>@</code> より左側</strong>にします。
     </p>
 
     <div class="gui-stack">
@@ -578,59 +593,56 @@
 
     <div class="note">
       <span class="label">作ったあと</span><br>
-      サーバーにできた<strong>自分の名前のフォルダ</strong>へ、手元のフォルダごとドラッグしてコピーします。<br>
-      終わったら、<strong>自分のフォルダ名を付けたURL</strong>をブラウザで開いて、ページが表示されるか確かめます。
+      サーバーにできた<strong>自分の名前のフォルダ</strong>へ、手元のフォルダごとドラッグしてコピーする。<br>
+      そのあと<strong>自分のフォルダ名を付けたURL</strong>をブラウザで開くと、ページが表示される。<br>
+      ここまでが<strong>「公開する」ということの中身</strong>です。
     </div>
 
-    <h3>いまの現場では ― pushすると公開される</h3>
+    <h3>転送のやり方</h3>
 
     <p>
-      ここまで見たのは、<strong>人が手でファイルを置く</strong>やり方です。いまの現場では、<strong>Gitに push すると自動で公開される</strong>仕組みが主流になりました。手元で書いたコードを送るだけで、あとは機械がサーバーへ配ってくれます。
-    </p>
-
-    <p>
-      とはいえ、<strong>サーバーの中で起きていることは同じ</strong>です。決められたフォルダにファイルが置かれ、そのURLで見えるようになる。違うのは<strong>「だれが置くか」だけ</strong>です。
+      ファイルをサーバーへ送る方法は、いくつかあります。<strong>どれを使うかは、現場ごとに決まっています。</strong>
     </p>
 
     <table>
       <tr>
         <th>やり方</th>
-        <th>だれが置くか</th>
         <th>どういうものか</th>
       </tr>
       <tr>
         <td>FTP</td>
-        <td>人</td>
         <td>いちばん古い方式。<strong>通信が暗号化されない</strong></td>
       </tr>
       <tr>
         <td>SFTP</td>
-        <td>人</td>
-        <td>FTPを<strong>暗号化したもの</strong>。手作業で上げるならこちら</td>
-      </tr>
-      <tr>
-        <td>push</td>
-        <td>機械</td>
-        <td>いまの主流。<strong>履歴が残る</strong></td>
+        <td>FTPを<strong>暗号化したもの</strong>。手で上げるならこちら</td>
       </tr>
     </table>
 
     <div class="caution">
       <span class="label">FTPは選ばない</span><br>
       FTPは中身が<strong>そのまま流れる</strong>ため、パスワードもファイルの中身も覗ける状態です。<br>
-      Cyberduck は <strong>SFTP（SSHを使った暗号化通信）</strong>にも対応しているので、<strong>選べるなら SFTP</strong> にしてください。
+      Cyberduck は <strong>SFTP（SSHを使った暗号化通信）</strong>にも対応しています。<strong>選べる場面では SFTP</strong> が使われます。
     </div>
 
     <div class="note">
-      <span class="label">なぜ機械に任せるのか</span><br>
-      手で上げると、<strong>上げ忘れ・古いファイルの上書き・誰が変えたか分からない</strong>といった事故が起きます。<br>
-      pushなら<strong>履歴が残り、間違えても戻せます</strong>。これはSEOやデザインより先に、仕事として効いてくる部分です。
+      <span class="label">転送は自動化できる</span><br>
+      ここまでは<strong>人が手で上げる</strong>やり方です。転送は<strong>仕組みを組んで自動化することもできます。</strong><br>
+      たとえば、決められた場所にコードを送ると、そこから先の転送を機械がやる、といった形です。FTP・SFTP のどちらでも組めます。<br>
+      <strong>自動化されているかどうかは、現場によります。</strong>手で上げている現場もあります。
     </div>
 
     <div class="point">
-      <span class="label">このページがその実例です</span><br>
-      いま読んでいるこの研修ページも、<strong>誰かがFTPでアップロードしたものではありません</strong>。pushされたファイルが、そのまま公開されています。<strong>課題を提出するときのpushと、同じ仕組み</strong>です。<br>
-      この章でFTPの画面を見ておくと、そのとき裏でなにが起きているのかが分かります。<strong>決められたフォルダにファイルが置かれている</strong>。それを機械が代わりにやっているだけです。
+      <span class="label">サーバーの中で起きていることは同じ</span><br>
+      手で上げても、機械が上げても、<strong>決められたフォルダにファイルが置かれ、そのURLで見えるようになる</strong>という点は変わりません。<br>
+      この章で画面を見ておくと、<strong>自動化された仕組みの裏で何が起きているのか</strong>が分かります。
+    </div>
+
+    <div class="caution">
+      <span class="label">この章でやることは、ありません</span><br>
+      <strong>サーバーの契約も、ソフトのインストールも、接続も不要です。</strong><br>
+      ここで持って帰るのは、<strong>「ファイルが決められた場所に置かれると、URLで見えるようになる」</strong>という一点だけです。<br>
+      手を動かすのは、<a href="basic_2.html">次のページ</a> からになります。
     </div>
   </section>
 
@@ -721,13 +733,14 @@
 
     <div class="point">
       <span class="label">理解ポイント</span><br>
-      <strong>きれいな写真やデザインは、ホームページの目的ではありません。</strong>それらは上の3つを伝えるための手段です。<br>
-      この視点は、コーディングの実務でも「なんのためのページか」を考える癖として効いてきます。
+      <strong>見た目も中身も、どちらもサイトの価値をつくります。</strong>写真やデザインが人の印象を決めることもあれば、載っている情報そのものが決め手になることもあります。<br>
+      大事なのは、<strong>上の3つを関わる人どうしで共有しておくこと</strong>です。共有できていれば、デザインも文章も構造も、同じ方向に効いてきます。<br>
+      書く側にとっては、<strong>「なんのためのページか」を確かめてから作る</strong>という習慣として残ります。
     </div>
 
     <div class="note">
       <span class="label">次のページへ</span><br>
-      仕組みが分かったので、次は<strong>手を動かす回</strong>です。<a href="basic_2.html">マークアップ中級#2（初めてのレスポンシブコーディング）</a> では、画面の大きさに合わせて見え方が変わるページの作り方を学びます。<br>
+      仕組みが分かったので、次は<strong>手を動かす回</strong>です。<a href="basic_2.html">マークアップ初級#2（初めてのレスポンシブコーディング）</a> では、画面の大きさに合わせて見え方が変わるページの作り方を学びます。<br>
       さきほどの「スマホで見られること」を、実際に手を動かして実現する回です。
     </div>
   </section>
@@ -737,12 +750,12 @@
 <nav class="page-nav">
   <a class="page-prev" href="beginner_7.html">
     <span class="page-nav-label">前のページ</span>
-    <span class="page-nav-title">コーダー初級#7</span>
+    <span class="page-nav-title">コーダー中級#7</span>
     <span class="page-nav-sub">昔ながらの横並びと、要素の狙い方</span>
   </a>
   <a class="page-next" href="basic_2.html">
     <span class="page-nav-label">次のページ</span>
-    <span class="page-nav-title">マークアップ中級#2</span>
+    <span class="page-nav-title">マークアップ初級#2</span>
     <span class="page-nav-sub">初めてのレスポンシブコーディング</span>
   </a>
 </nav>
