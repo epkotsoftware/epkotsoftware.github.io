@@ -1,0 +1,606 @@
+/* ============================================================
+   マークアップ中級#3（basic_3.html）専用のスタイル
+
+   全ページ共通の土台は training.css にあります。
+   ここに置くのは、このページだけで使う図やデモのスタイルです。
+   ============================================================ */
+/* ============================================================
+   共通の実演枠
+   ============================================================ */
+.bd-demo {
+  margin: 16px 0 22px;
+  padding: 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+}
+
+.bd-samples {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 20px 0 26px;
+}
+
+.bd-label {
+  display: block;
+  margin-bottom: 7px;
+  color: #1e3a8a;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.bd-code {
+  display: block;
+  margin-bottom: 8px;
+  padding: 9px 12px;
+  border-radius: 6px;
+  background: #1e293b;
+  color: #e2e8f0;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+
+/* ============================================================
+   進め方の4段階カード
+   ============================================================ */
+.step-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin: 18px 0;
+}
+
+.step-card {
+  padding: 14px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05);
+}
+
+.step-no {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 22px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #1e40af, #4c1d95);
+  color: #ffffff;
+  font-size: 11.5px;
+  font-weight: 700;
+}
+
+.step-ttl {
+  display: block;
+  margin-top: 8px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.step-txt {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #64748b;
+}
+
+/* ============================================================
+   枠線コーディングの実演（チェックで切替）
+   ============================================================ */
+.wire-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+/* チェックの四角。ラベル自身に描く */
+.wire-toggle::before {
+  content: "";
+  width: 15px;
+  height: 15px;
+  border: 2px solid #94a3b8;
+  border-radius: 4px;
+  flex: none;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.wire-toggle:hover {
+  border-color: #93c5fd;
+  background: #eff6ff;
+}
+
+/* チェックが入ったときの見た目 */
+.wire-check:checked + .wire-toggle {
+  border-color: #2563eb;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.wire-check:checked + .wire-toggle::before {
+  border-color: #2563eb;
+  background: #2563eb;
+}
+
+.wire-page {
+  margin-top: 12px;
+  background: #ffffff;
+}
+
+.wire-page * {
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.wire-header,
+.wire-nav,
+.wire-main,
+.wire-footer {
+  border: 2px solid transparent;
+  margin: 2px;
+  padding: 10px;
+}
+
+.wire-nav ul {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  border: 2px solid transparent;
+  margin: 2px;
+  padding: 6px;
+}
+
+.wire-nav li,
+.wire-main h2,
+.wire-header h1 {
+  border: 1px solid transparent;
+  margin: 2px;
+  padding: 4px 8px;
+}
+
+.wire-cols {
+  display: flex;
+  gap: 10px;
+  border: 2px solid transparent;
+  margin: 2px;
+  padding: 6px;
+}
+
+.wire-cols > div {
+  flex: 1;
+  border: 2px solid transparent;
+  margin: 2px;
+  padding: 18px 8px;
+  text-align: center;
+  font-size: 12.5px;
+  color: #64748b;
+}
+
+/* チェックが入ったら診断用の枠線を出す */
+.wire-check:checked ~ .wire-page .wire-header,
+.wire-check:checked ~ .wire-page .wire-nav,
+.wire-check:checked ~ .wire-page .wire-main,
+.wire-check:checked ~ .wire-page .wire-footer {
+  border-color: #ef4444;
+}
+
+.wire-check:checked ~ .wire-page .wire-nav ul,
+.wire-check:checked ~ .wire-page .wire-cols,
+.wire-check:checked ~ .wire-page .wire-cols > div {
+  border-color: #3b82f6;
+}
+
+.wire-check:checked ~ .wire-page .wire-nav li,
+.wire-check:checked ~ .wire-page .wire-main h2,
+.wire-check:checked ~ .wire-page .wire-header h1 {
+  border-color: #22c55e;
+}
+
+.wire-check {
+  display: none;
+}
+
+.wire-legend {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.wire-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.wire-legend i {
+  width: 14px;
+  height: 0;
+  border-top: 3px solid;
+  display: inline-block;
+}
+
+.lg-red { color: #ef4444; }
+.lg-blue { color: #3b82f6; }
+.lg-green { color: #22c55e; }
+
+/* ============================================================
+   ブレイクポイントの帯
+   ============================================================ */
+.bp-bar {
+  display: flex;
+  margin: 16px 0 8px;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.bp-bar > div {
+  padding: 12px 6px;
+  line-height: 1.6;
+}
+
+.bp-sp {
+  flex: 1;
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.bp-tb {
+  flex: 2;
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.bp-pc {
+  flex: 2;
+  background: #d1fae5;
+  color: #065f46;
+}
+
+@media (max-width: 900px) {
+  .step-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 780px) {
+  .bd-samples {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 520px) {
+  .step-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* ============================================================
+   段階ごとの「この時点での見え方」
+
+   2章のワイヤーフレーム図に続けて、3章以降でも
+   その段階まで書いたときの表示を実物で見せる。
+   コードを写したあと、手元と見比べられるようにするため。
+
+   教材ページ自身のCSSが中に効いてしまわないよう、
+   プレビューの中だけ pv- で始まるクラスを使っている。
+   （実際に書くHTMLのタグ名やクラス名はコード枠のほうを見る）
+   ============================================================ */
+.pv{
+  margin:22px 0 26px;
+  border:1px solid #e2e8f0;
+  border-radius:10px;
+  overflow:hidden;
+  background:#fff;
+}
+
+.pv-bar{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:9px 14px;
+  background:#f1f5f9;
+  border-bottom:1px solid #e2e8f0;
+  color:#475569;
+  font-size:12.5px;
+  font-weight:700;
+}
+
+.pv-bar::before{
+  content:"";
+  width:9px;height:9px;border-radius:50%;
+  background:#22c55e;
+  flex:none;
+}
+
+.pv-body{
+  padding:0;
+  background:#fff;
+}
+
+/* すべての段階で共通の下地。ブラウザの既定を打ち消した状態 */
+.pv-el{
+  display:block;
+  margin:0;padding:0;
+  font-family:"Hiragino Sans","Yu Gothic",sans-serif;
+  line-height:1.2;
+  color:#1e293b;
+}
+
+.pv-h2{font-size:24px;font-weight:700;}
+.pv-p{font-size:15px;line-height:1.8;}
+.pv-btn{font-size:15px;color:#2563eb;text-decoration:underline;}
+.pv-img{font-size:12px;color:#94a3b8;}
+
+/* ---------- 段階2：中身を入れただけ ----------
+   幅も高さも指定していないので、上から順に縦に積まれる */
+.pv-stage2{padding:18px 20px;}
+.pv-stage2 .pv-el + .pv-el{margin-top:10px;}
+.pv-stage2 .pv-empty{
+  min-height:22px;
+  color:#cbd5e1;font-size:12px;
+}
+
+/* ---------- 段階3：レイアウトを組んだ ----------
+   flex で横に並び、幅と高さが決まる。まだ色は無い */
+.pv-stage3 .pv-philosophy{
+  display:flex;
+  height:210px;
+}
+.pv-stage3 .pv-left,
+.pv-stage3 .pv-right{
+  width:50%;
+  padding:18px 20px;
+}
+.pv-stage3 .pv-left{
+  display:flex;flex-direction:column;justify-content:center;
+}
+.pv-stage3 .pv-left .pv-el + .pv-el{margin-top:10px;}
+.pv-stage3 .pv-right{
+  border:1px dashed #cbd5e1;
+  display:flex;align-items:center;justify-content:center;
+  color:#94a3b8;font-size:12px;
+}
+.pv-stage3 .pv-list{
+  display:flex;
+  width:90%;
+  margin:22px auto;
+  gap:15px;
+}
+.pv-stage3 .pv-list > div{
+  width:calc(100% / 4 - 15px);
+  border:1px dashed #cbd5e1;
+  padding:14px 10px;
+  font-size:12px;color:#64748b;text-align:center;
+}
+
+/* ---------- 段階4：画像と装飾を入れた ----------
+   ここで初めて色・背景・余白が付く */
+.pv-stage4 .pv-philosophy{display:flex;height:230px;}
+.pv-stage4 .pv-left,
+.pv-stage4 .pv-right{width:50%;}
+.pv-stage4 .pv-left{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:0 30px;background:#faf7f2;
+}
+.pv-stage4 .pv-left .pv-h2{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:26px;font-weight:400;letter-spacing:.24em;color:#1c1917;
+}
+.pv-stage4 .pv-left .pv-p{
+  font-size:12.5px;line-height:2;color:#57534e;margin-top:14px;
+}
+.pv-stage4 .pv-left .pv-btn{
+  align-self:flex-start;
+  margin-top:20px;padding:10px 26px;
+  border:1px solid #1c1917;color:#1c1917;text-decoration:none;
+  font-family:Georgia,serif;font-size:11px;letter-spacing:.24em;
+}
+.pv-stage4 .pv-right{
+  background:linear-gradient(135deg,#5c4a38,#2b211a);
+  display:flex;align-items:center;justify-content:center;
+  color:#d6c5ac;font-size:11px;letter-spacing:.1em;
+}
+.pv-stage4 .pv-news{padding:30px 0 34px;}
+.pv-stage4 .pv-news-title{
+  text-align:center;font-family:Georgia,serif;
+  font-size:22px;letter-spacing:.24em;color:#1c1917;
+}
+.pv-stage4 .pv-list{display:flex;width:90%;margin:20px auto 0;gap:15px;}
+.pv-stage4 .pv-list > div{width:calc(100% / 4 - 15px);}
+.pv-stage4 .pv-thumb{
+  aspect-ratio:4/3;
+  background:linear-gradient(135deg,#e7ddd0,#cbbba6);
+}
+.pv-stage4 .pv-list p{
+  margin-top:9px;font-size:11.5px;line-height:1.6;color:#44403c;
+}
+
+/* ---------- 段階5：レスポンシブ ----------
+   ラジオボタンで枠の幅を切り替える。JavaScriptは使わない。
+   本物のメディアクエリは「画面の幅」で切り替わるが、
+   ページの中に置いた枠は画面より狭くならないので同じ条件を作れない。
+   そこで、幅ごとの見え方をクラスで再現している。
+   考え方を見せるための図であって、実際に書くのはメディアクエリのほう。 */
+.rs-pick{display:none;}
+
+.rs-tabs{
+  display:flex;
+  gap:8px;
+  padding:12px 14px;
+  background:#f8fafc;
+  border-bottom:1px solid #e2e8f0;
+  flex-wrap:wrap;
+}
+
+.rs-tabs label{
+  padding:8px 16px;
+  border:1px solid #cbd5e1;
+  border-radius:999px;
+  background:#fff;
+  color:#475569;
+  font-size:12.5px;
+  cursor:pointer;
+  transition:background .15s ease, color .15s ease, border-color .15s ease;
+}
+
+.rs-tabs label:hover{border-color:#93c5fd;color:#1d4ed8;}
+
+/* 選ばれているタブを塗る */
+#rs-pc:checked    ~ .rs-tabs label[for="rs-pc"],
+#rs-tab:checked   ~ .rs-tabs label[for="rs-tab"],
+#rs-sp:checked    ~ .rs-tabs label[for="rs-sp"]{
+  border-color:transparent;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  color:#fff;
+  font-weight:700;
+}
+
+.rs-stage{
+  padding:20px;
+  background:#eef2f7;
+  display:flex;
+  justify-content:center;
+}
+
+/* 枠の幅。ここが「画面の幅」の代わり */
+.rs-frame{
+  width:100%;
+  background:#fff;
+  box-shadow:0 2px 14px rgba(15,23,42,.1);
+  transition:width .3s ease;
+  overflow:hidden;
+}
+
+#rs-tab:checked ~ .rs-stage .rs-frame{width:700px;}
+#rs-sp:checked  ~ .rs-stage .rs-frame{width:340px;}
+
+.rs-meta{
+  padding:10px 14px;
+  background:#0f172a;
+  color:#93c5fd;
+  font-family:Consolas,Monaco,"Courier New",monospace;
+  font-size:12px;
+}
+
+/* いま効いているメディアクエリを出す */
+#rs-pc:checked  ~ .rs-meta::after{content:"画面幅 1216px 以上 ― どのメディアクエリも効いていない（PC版そのまま）";}
+#rs-tab:checked ~ .rs-meta::after{content:"画面幅 1215px 以下 ― @media screen and (max-width: 1215px) が効いている";}
+#rs-sp:checked  ~ .rs-meta::after{content:"画面幅 768px 以下 ― 1215px と 768px の両方が効いている";}
+
+/* 枠の中身。PC版が既定 */
+.rs-head{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 20px;background:#1c1917;color:#fff;
+}
+.rs-logo{font-family:Georgia,serif;font-size:14px;letter-spacing:.2em;}
+.rs-nav{display:flex;gap:16px;font-size:11px;letter-spacing:.1em;color:#d6d3d1;}
+.rs-philo{display:flex;height:180px;}
+.rs-philo-l,.rs-philo-r{width:50%;}
+.rs-philo-l{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:0 22px;background:#faf7f2;
+}
+.rs-philo-l b{
+  font-family:Georgia,serif;font-weight:400;
+  font-size:19px;letter-spacing:.22em;color:#1c1917;
+}
+.rs-philo-l span{font-size:11.5px;line-height:1.9;color:#57534e;margin-top:9px;}
+.rs-philo-r{
+  background:linear-gradient(135deg,#5c4a38,#2b211a);
+  display:flex;align-items:center;justify-content:center;
+  color:#d6c5ac;font-size:10.5px;
+}
+.rs-news{padding:22px 0 26px;}
+.rs-news-t{
+  text-align:center;font-family:Georgia,serif;
+  font-size:16px;letter-spacing:.22em;color:#1c1917;
+}
+.rs-list{display:flex;flex-wrap:wrap;width:90%;margin:16px auto 0;gap:12px 0;justify-content:space-between;}
+.rs-list > div{width:calc(100% / 4 - 12px);}
+.rs-thumb{aspect-ratio:4/3;background:linear-gradient(135deg,#e7ddd0,#cbbba6);}
+.rs-list p{margin-top:7px;font-size:10.5px;line-height:1.5;color:#44403c;}
+
+/* --- 1215px 以下で効く分 --- */
+#rs-tab:checked ~ .rs-stage .rs-nav,
+#rs-sp:checked  ~ .rs-stage .rs-nav{gap:10px;font-size:10px;}
+#rs-tab:checked ~ .rs-stage .rs-head,
+#rs-sp:checked  ~ .rs-stage .rs-head{padding:12px 14px;}
+
+/* --- 768px 以下で効く分 --- */
+#rs-sp:checked ~ .rs-stage .rs-head{display:block;text-align:center;}
+#rs-sp:checked ~ .rs-stage .rs-nav{justify-content:center;margin-top:9px;}
+#rs-sp:checked ~ .rs-stage .rs-philo{flex-direction:column;height:auto;}
+#rs-sp:checked ~ .rs-stage .rs-philo-l,
+#rs-sp:checked ~ .rs-stage .rs-philo-r{width:100%;}
+#rs-sp:checked ~ .rs-stage .rs-philo-l{padding:26px 20px;}
+#rs-sp:checked ~ .rs-stage .rs-philo-r{height:110px;}
+#rs-sp:checked ~ .rs-stage .rs-list > div{width:calc(100% / 2 - 2%);}
+
+@media screen and (max-width: 780px){
+  .rs-stage{padding:12px;}
+  #rs-tab:checked ~ .rs-stage .rs-frame{width:100%;}
+}
+
+/* ---------- 7章：これから作るもの の一覧 ---------- */
+.pv-map{padding:6px 0;}
+
+.pv-map-row{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:13px 20px;
+  border-bottom:1px solid #f1f5f9;
+  font-size:13.5px;
+  color:#475569;
+}
+
+.pv-map-row:last-child{border-bottom:0;}
+
+.pv-map-n{
+  flex:none;
+  width:24px;height:24px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  color:#fff;
+  font-size:12px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+}
+
+.pv-map-row b{
+  flex:none;
+  width:132px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-weight:400;
+  font-size:15px;
+  letter-spacing:.16em;
+  color:#1c1917;
+}
+
+@media screen and (max-width: 780px){
+  .pv-map-row{flex-wrap:wrap;gap:8px 12px;}
+  .pv-map-row b{width:auto;}
+}
