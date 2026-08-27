@@ -898,7 +898,7 @@ while ( $iの最大数 ) {
     </div>
 
     <p>
-      <code>$name</code> という1 つの変数に、3 つの値を入れることができました。この例のようにキーを書かずに要素を並べると、<strong>先頭から順に 0, 1, 2 と番号が振られます</strong>。
+      <code>$name</code> という1 つの変数に、3 つの値を入れることができました。
     </p>
 
     <div class="vscode">
@@ -940,7 +940,7 @@ print_r (<span class="sy-attr">$name</span>);   <span class="sy-com">/* print_r(
 
     <h3 id="chapter6-index">添字でデータを出力</h3>
     <p>
-      配列の中の1 つの要素を取り出すには<strong>添字</strong> <code>[ ]</code>（インデックス＝通し番号）を使います。この例のようにキーを書かずに要素を並べた場合、<strong>先頭から順に 0, 1, 2 と番号が振られる</strong>ので、その数字を指定します。
+      配列の中の1 つの要素を取り出すには<strong>添字</strong> <code>[ ]</code>（インデックス＝通し番号）を使います。この例のようにキーを書かずに要素を並べた場合、先頭から順に 0, 1, 2 と番号が振られるので、その数字を指定します。
     </p>
 
     <figure class="idxfig" role="img" aria-label="1つの変数 $name の中に、0, 1, 2 と番号がついた区画が並び、それぞれに値が入っている様子">
@@ -973,7 +973,7 @@ print_r (<span class="sy-attr">$name</span>);   <span class="sy-com">/* print_r(
           <text x="310.0" y="230" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b" font-family="ui-monospace,Menlo,monospace">$name</text>
         </svg>
       </div>
-      <figcaption>配列は 1 つの変数の中に区画が並んだもの。上の例では番号が <strong>0, 1, 2</strong> と振られている</figcaption>
+      <figcaption>配列は 1 つの変数の中に区画が並んだもの。番号を指定して 1 つずつ取り出せる</figcaption>
     </figure>
 
     <div class="vscode">
@@ -1014,11 +1014,6 @@ print_r (<span class="sy-attr">$name</span>);   <span class="sy-com">/* print_r(
         </div>
     </div>
 
-    <div class="note">
-      <span class="label">補足</span><br>
-      この番号は、自分でキーを指定したり、あとから要素を減らしたりすると <code>0</code>, <code>1</code>, <code>2</code> と続かなくなることがあります。いまは「必ず 0, 1, 2 と続くとは限らない」とだけ知っておけば十分です。
-    </div>
-
     <p>
       <code>array</code> を使わずに、直接添字を指定して値を代入することもできます。
     </p>
@@ -1045,6 +1040,11 @@ print_r (<span class="sy-attr">$name</span>);   <span class="sy-com">/* print_r(
 <span class="sy-tag">echo</span> <span class="sy-attr">$name</span>[<span class="sy-num">2</span>];  <span class="sy-com">/* suzuki が出力されます */</span>
 <span class="sy-tag">?&gt;</span></pre>
       </div>
+    </div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      番号はいつも <code>0</code> から始まるとは限りません。ほかの数字を指定すればそこから始まり、あとから要素を減らすと途中が抜けます。
     </div>
 
     <h3 id="chapter6-assoc">連想配列</h3>
