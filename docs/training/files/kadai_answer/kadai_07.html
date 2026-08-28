@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>CBC JavaScript</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/kadai_07.css">
+  <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+</head>
+<script>
+  /* 消費税を出す関数。演習3で作り、演習4でも使い回します */
+  function tax(price) {
+    const TAX_RATE = 0.08;
+    return Math.round(price * TAX_RATE);
+  }
+
+  $(function () {
+
+    /* 1. 変数を使う（足し算）
+       .val() が返すのは文字なので、Number() で数値に直してから足します */
+    $('.num-a, .num-b').on('change', function () {
+      const numA = Number($('.num-a').val());
+      const numB = Number($('.num-b').val());
+      $('#total').text(numA + numB);
+    });
+
+    /* 2. 変数を使う（円周の計算）
+       3.14 は式に直接書かず、名前を付けてから使います */
+    $('.num-c').on('change', function () {
+      const PI = 3.14;
+      const num = $('.num-c').val();
+      $('#pi').text((num * PI).toFixed(1));
+    });
+
+    /* 3. 関数を使う（消費税） */
+    $('.price').on('change', function () {
+      const price = Number($('.price').val());
+      $('.tax-out').text(tax(price));
+    });
+
+    /* 4. コンソールで確かめる
+       画面には四捨五入した後、コンソールには四捨五入する前を出します */
+    $('.price2').on('change', function () {
+      const price = Number($('.price2').val());
+      console.log(price * 0.08);
+      $('.tax-out2').text(tax(price));
+    });
+
+    /* 5. モーダルウィンドウ
+       表示の切り替えはクラスの付け外しだけ。位置や色はCSSに書きます */
+    $('.modal-open').on('click', function () {
+      $('.modal-overlay').addClass('is-open');
+    });
+
+    $('.modal-close').on('click', function () {
+      $('.modal-overlay').removeClass('is-open');
+    });
+
+  });
+</script>
+<body>
+  <header>
+    <h1>マークアップ編課題：#7 変数と関数・モーダルウィンドウを作ろう</h1>
+  </header>
+  <main>
+    <section>
+      <h2>1. 変数を使う（足し算）</h2>
+      <p>
+        <input type="number" class="num-a"> + <input type="number" class="num-b"> = <span id="total"></span>
+      </p>
+    </section>
+    <section>
+      <h2>2. 変数を使う（円周の計算）</h2>
+      <p>
+        <input type="number" class="num-c"> cm × 3.14 = <span id="pi"></span> cm
+      </p>
+    </section>
+    <section>
+      <h2>3. 関数を使う（消費税）</h2>
+      <p>
+        <input type="number" class="price"> 円の消費税は <span class="tax-out"></span> 円
+      </p>
+    </section>
+    <section>
+      <h2>4. コンソールで確かめる</h2>
+      <p>
+        <input type="number" class="price2"> 円の消費税は <span class="tax-out2"></span> 円
+      </p>
+      <p class="note_text">
+        1234 のように端数の出る金額を入れて、開発者ツールの Console を見てください。98.72 が出ます。
+      </p>
+    </section>
+    <section>
+      <h2>5. モーダルウィンドウ</h2>
+      <button type="button" class="modal-open">モーダルを開く</button>
+      <div class="modal-overlay">
+        <div class="modal-content">
+          <p>モーダルウィンドウの中身</p>
+          <button type="button" class="modal-close">閉じる</button>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,82 @@
+/* ------------------------------------------------------------
+   kadai_07.html 専用のスタイル
+
+   common.css は共通ファイルなので触りません。
+   このページで使う見た目だけを、ここに書きます。
+   ------------------------------------------------------------ */
+
+/* ------------------------------------------------------------
+   入力欄と結果の表示（1〜4で共通）
+   ------------------------------------------------------------ */
+input[type="number"] {
+  width: 110px;
+  padding: 6px 10px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+#total,
+#pi,
+.tax-out,
+.tax-out2 {
+  display: inline-block;
+  min-width: 60px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: #f1f5f9;
+  color: #1d4ed8;
+  font-weight: 700;
+  text-align: right;
+}
+
+.note_text {
+  color: #64748b;
+  font-size: 13px;
+}
+
+/* ------------------------------------------------------------
+   5. モーダルウィンドウ
+
+   overlay は position: fixed で画面全体を覆います。
+   最初は opacity と visibility で隠しておき、
+   is-open が付いたときだけ見せます。
+   ------------------------------------------------------------ */
+.modal-open,
+.modal-close {
+  padding: 8px 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.55);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+.modal-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  width: min(420px, 90%);
+  padding: 24px;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.modal-content p {
+  margin-bottom: 12px;
+}
