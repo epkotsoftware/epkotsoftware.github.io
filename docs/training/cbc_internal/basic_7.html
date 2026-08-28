@@ -193,10 +193,75 @@
       次に<strong>エラーにはならないけれど、揃えたほうがいい書き方</strong>です。
     </p>
 
+    <p>
+      2語以上をつなぐとき、書き方にはいくつか流儀があります。<strong>それぞれに名前が付いています。</strong>
+    </p>
+
+    <table>
+      <tr>
+        <th>呼び方</th>
+        <th>つなぎ方</th>
+        <th>例</th>
+        <th>主に使われる場所</th>
+      </tr>
+      <tr>
+        <td><strong>キャメルケース</strong></td>
+        <td>2語目から頭を大文字</td>
+        <td><code>userName</code></td>
+        <td><strong>JavaScript の変数・関数</strong></td>
+      </tr>
+      <tr>
+        <td><strong>パスカルケース</strong></td>
+        <td>1語目から頭を大文字</td>
+        <td><code>UserName</code></td>
+        <td>クラス名</td>
+      </tr>
+      <tr>
+        <td><strong>スネークケース</strong></td>
+        <td><code>_</code> でつなぐ</td>
+        <td><code>user_name</code></td>
+        <td>PHP の変数、データベースのカラム名</td>
+      </tr>
+      <tr>
+        <td><strong>ケバブケース</strong></td>
+        <td><code>-</code> でつなぐ</td>
+        <td><code>user-name</code></td>
+        <td>CSS のクラス名、HTML の <code>id</code></td>
+      </tr>
+    </table>
+
     <div class="note">
-      <span class="label">キャメルケース</span><br>
-      2語以上をつなぐときは、<strong>2語目から頭を大文字にします</strong>。<code>userName</code>、<code>totalPrice</code> のような書き方です。ラクダのこぶに見えることから<strong>キャメルケース</strong>と呼ばれます。<br>
-      <code>user_name</code> のようにアンダースコアでつないでも<strong>動きはします</strong>が、<strong>JavaScriptではキャメルケースが標準</strong>です。こちらに揃えてください。
+      <span class="label">名前の由来</span><br>
+      <strong>キャメル</strong>はラクダ。<code>userName</code> の出っぱりが<strong>こぶ</strong>に見えることから。<br>
+      <strong>パスカル</strong>は Pascal というプログラミング言語から。<strong>アッパーキャメルケース</strong>とも呼ばれます。<br>
+      <strong>スネーク</strong>は蛇。<code>_</code> が地を這う姿に見えることから。<br>
+      <strong>ケバブ</strong>は串焼き。<code>-</code> が串に刺さった具に見えることから。<strong>チェーンケース</strong>とも呼ばれます。
+    </div>
+
+    <div class="point">
+      <span class="label">ケバブケースは、もう書いています</span><br>
+      CSS のプロパティ名を思い出してください。<code>font-size</code>、<code>text-align</code>、<code>background-color</code>。<strong>すべてケバブケース</strong>です。<br>
+      <a href="beginner_2.html">コーダー初級#2</a> から書いてきたものに、<strong>名前が付いているだけ</strong>です。
+    </div>
+
+    <div class="note">
+      <span class="label">スネークケースは、このあと出てきます</span><br>
+      <strong>PHP の変数</strong>や<strong>データベースのカラム名</strong>で使われます。<code>user_name</code>、<code>total_price</code> のような書き方です。<br>
+      <strong>フロントエンドエンジニア編</strong>でデータベースを扱うときに出てきます。いまは<strong>「そういう書き方もある」</strong>と知っておけば十分です。
+    </div>
+
+    <div class="caution">
+      <span class="label">JavaScript ではキャメルケース</span><br>
+      <code>user_name</code> と書いても<strong>動きはします</strong>。ただし <strong>JavaScript ではキャメルケースが標準</strong>です。こちらに揃えてください。<br>
+      <strong>ケバブケースは使えません。</strong>上の表のとおり <code>-</code> は引き算と区別できないためです。<br>
+      <code>user-name</code> と書くと、<strong><code>user</code> から <code>name</code> を引く</strong>という意味になってしまいます。
+    </div>
+
+    <div class="note">
+      <span class="label">なぜ揃えるのか</span><br>
+      1人で書くなら、どれでも動きます。<strong>揃える理由は、読む人のため</strong>です。<br>
+      名前の形が揃っていれば、<code>userName</code> を見た瞬間に「これは変数だ」と分かります。<strong>形そのものが情報になる</strong>ということです。<br>
+      現場では<strong>そのプロジェクトの書き方に合わせます。</strong>自分の好みより、周りとの統一が優先されます。
     </div>
 
     <div class="caution">
@@ -774,7 +839,7 @@ $(<span class="v">'.price'</span>).on(<span class="v">'change'</span>, <span cla
 
     <h3>CSSで位置と見た目を決める</h3>
     <p>
-      <strong>位置合わせはCSSの仕事です。</strong><a href="beginner_5.html#chapter2">コーダー初級#5</a> でやった <code>flex</code> と、<code>position: fixed</code> を組み合わせます。
+      <strong>位置合わせはCSSの仕事です。</strong><a href="beginner_5.html#chapter2">コーダー中級#5</a> でやった <code>flex</code> と、<code>position: fixed</code> を組み合わせます。
     </p>
 
     <div class="vscode">
@@ -836,7 +901,7 @@ $(<span class="v">'.price'</span>).on(<span class="v">'change'</span>, <span cla
 
     <div class="note">
       <span class="label">position: fixed とは</span><br>
-      <a href="beginner_6.html#chapter3">コーダー初級#6</a> で <code>relative</code> と <code>absolute</code> を扱いました。<code>fixed</code> はその仲間で、<strong>画面そのものを基準にする</strong>指定です。<br>
+      <a href="beginner_6.html#chapter3">コーダー中級#6</a> で <code>relative</code> と <code>absolute</code> を扱いました。<code>fixed</code> はその仲間で、<strong>画面そのものを基準にする</strong>指定です。<br>
       ページをスクロールしても位置が変わりません。画面全体を覆いたいモーダルには、これがぴったりです。
     </div>
 
@@ -1008,7 +1073,7 @@ $(<span class="v">'.price'</span>).on(<span class="v">'change'</span>, <span cla
       <strong><code>kadai_07.html</code> に「モーダルウィンドウ」のセクションを作って</strong>実装します。このページの総仕上げです。<br>
       ボタンを押すと<strong>画面の中央にウィンドウが開き、中の「閉じる」ボタンで閉じる</strong>ようにしてください。<br>
       画面を覆う背景と、中身のウィンドウの2つが要ります。<strong>開くボタンに <code>class="modal-open"</code>、背景に <code>class="modal-overlay"</code>、中身に <code>class="modal-content"</code></strong> を付けてください。表示の切り替えはクラスの付け外しで行い、位置や色はCSSに書きます。<br>
-      重なり順で崩れたら <a href="beginner_6.html#chapter4">コーダー初級#6</a> の <code>z-index</code> を見返してください。
+      重なり順で崩れたら <a href="beginner_6.html#chapter4">コーダー中級#6</a> の <code>z-index</code> を見返してください。
       <span class="js-label">HTML（セクションの中）</span>
       <code class="js-code hl">&lt;button type=<span class="v">"button"</span> class=<span class="v">"modal-open"</span>&gt;モーダルを開く&lt;/button&gt;
 &lt;div class=<span class="v">"modal-overlay"</span>&gt;
