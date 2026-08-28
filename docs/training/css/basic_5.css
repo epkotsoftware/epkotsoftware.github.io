@@ -1,0 +1,143 @@
+/* ============================================================
+   マークアップ中級#5（basic_5.html）専用のスタイル
+
+   全ページ共通の土台は training.css にあります。
+   ここに置くのは、このページだけで使う図やデモのスタイルです。
+   ============================================================ */
+
+/* 参照のズレを見せる表 */
+.ref-demo td {
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 12px;
+}
+
+.ref-ok { color: #15803d; font-weight: 700; }
+.ref-ng { color: #b91c1c; font-weight: 700; }
+
+kbd {
+  display: inline-block;
+  padding: 2px 7px;
+  border: 1px solid #cbd5e1;
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  background: #f8fafc;
+  color: #334155;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 12px;
+}
+
+/* ============================================================
+   7章：カレンダーの実演
+   ============================================================ */
+.cal-months {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+
+.cal-months > div {
+  flex: 1 1 90px;
+  min-width: 0;
+  padding: 10px 6px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #f8fafc;
+  color: #334155;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.cal-months > div:first-child {
+  border-color: #93c5fd;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+/* 手順で作るのと同じ横長カレンダー。1日〜31日が横に並び、
+   1つの月が「日にち・曜日・祝日名」の3行を使う。 */
+.cal-grid {
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 12px;
+}
+
+.cal-grid th,
+.cal-grid td {
+  width: 26px;
+  border: 1px solid #cbd5e1;
+  padding: 4px 0;
+  text-align: center;
+}
+
+.cal-grid th {
+  background: #e2e8f0;
+  color: #475569;
+  font-weight: 700;
+}
+
+/* 行の見出し（年月・曜・祝）。ここだけ幅を広く取る */
+.cal-grid th.cal-lbl {
+  width: 84px;
+  padding: 4px 8px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* 月の先頭行。区切りが分かるよう上の罫線を太く */
+.cal-grid tr.cal-head > * {
+  border-top: 2px solid #94a3b8;
+}
+
+.cal-grid tr.cal-head th.cal-lbl {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.cal-grid td.is-sun {
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.cal-grid td.is-sat {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.cal-grid td.is-holiday {
+  background: #fee2e2;
+  color: #b91c1c;
+  font-weight: 700;
+}
+
+.cal-grid td.is-empty {
+  background: #f8fafc;
+}
+
+/* 祝日名。マスより長いので、Excel と同じように隣へはみ出させる */
+.cal-grid td.cal-hol {
+  position: relative;
+  overflow: visible;
+}
+
+.cal-grid td.cal-hol > span {
+  position: absolute;
+  top: 50%;
+  left: 3px;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  color: #b91c1c;
+  font-size: 11px;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+/* 配置表の「これから作る」印 — 7章 */
+.xl-todo {
+  color: #b45309;
+  font-weight: 700;
+  white-space: nowrap;
+}
