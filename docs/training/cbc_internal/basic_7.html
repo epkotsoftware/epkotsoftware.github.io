@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>マークアップ中級#7</title>
+  <link rel="stylesheet" href="../css/training.css">
+
+  <!-- ▼ このページ専用のスタイル -->
+  <link rel="stylesheet" href="../css/basic_7.css">
+
+  <!-- ▼ 開いたときに、ページの先頭から読み始められるようにする。
+       ブラウザが前回の位置へ戻すより先に動かす必要があるため、
+       training.js とは分けて <head> で読み込んでいる -->
+  <script src="../js/scroll-reset.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>マークアップ中級#7</h1>
+    <p>プログラムの土台 ― 変数と関数</p>
+  </div>
+</header>
+
+<main>
+
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol>
+      <li><a href="#chapter1">変数 ― 値に名前を付ける</a></li>
+      <li><a href="#chapter2">関数 ― 処理に名前を付ける</a></li>
+      <li><a href="#chapter3">コンソールで中身を確かめる</a></li>
+      <li><a href="#chapter4">モーダルウィンドウを作る</a></li>
+    </ol>
+
+    <div class="note">
+      <span class="label">読む前に</span><br>
+      <a href="basic_6.html#chapter4">マークアップ中級#6</a> で <code>function() { … }</code> という書き方が出てきました。<strong>その正体がこのページです。</strong><br>
+      変数と関数は、どのプログラミング言語にも出てくる<strong>いちばん基本の道具</strong>です。ここを押さえると、#6のコードが「呪文」から「読める文章」に変わります。
+    </div>
+
+    <div class="exercise">
+      <span class="label">課題</span><br>
+      章の途中に<strong>演習が5つ</strong>あります（この色の枠です）。<br>
+      最後まで読んでからまとめてやるのではなく、<strong>出てきたその場で <code>kadai_07.html</code> に書いてください</strong>。<br>
+      <code>kadai_07.html</code> は最初、TODOコメント1行だけの<strong>ほぼ空のファイル</strong>です。<strong><code>kadai_06.html</code> の作りを手本に、ページの骨組みから自分で組み立てます</strong>。ページ専用のCSSファイルと、書く場所のセクションも自分で作ってください（ファイル名は自分で決める）。<br>
+      課題ファイルの場所は、課題リポジトリの <code>02_basic/htdocs/kadai_07.html</code> です。コードは #6 で覚えた <code>$(function(){ })</code> の中に書きます。
+    </div>
+
+    <div class="note">
+      <span class="label">演習のコードは穴埋めになっています</span><br>
+      演習には書きかけのコードが載っています。<code class="hl"><span class="blank">xxxxxx</span></code> と<strong>黄色くなっているところを埋めてみましょう</strong>。<br>
+      横のコメントがヒントです。すぐ下に「答え」の折りたたみを置いていますが、<strong>先に自分で考えてから</strong>開いてください。
+    </div>
+
+<div class="js-offline" id="js-offline">
+      <strong>jQueryを読み込めませんでした。</strong><br>
+      このページはインターネット経由でjQueryを読み込みます。オフラインで開いている場合、見本が動きません。ネットに繋がった状態で開き直してください。
+    </div>
+  </section>
+
+  <section id="chapter1">
+    <h2>1. 変数 ― 値に名前を付ける</h2>
+
+    <p>
+      <strong>値に名前を付けて、取っておく仕組み</strong>です。付けた名前を書けば、いつでもその値を呼び出せます。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">main.js — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">main.js</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3</div>
+        <pre class="vscode-code"><span class="sy-str">const</span> <span class="sy-attr">userName</span> = <span class="sy-str">'田中'</span>;
+
+<span class="sy-com">// これ以降、userName と書けば '田中' のこと</span></pre>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th>部分</th>
+        <th>意味</th>
+      </tr>
+      <tr>
+        <td><code>const</code></td>
+        <td>これから変数を作る、という合図</td>
+      </tr>
+      <tr>
+        <td><code>userName</code></td>
+        <td>付ける<strong>名前</strong>（自分で決める）</td>
+      </tr>
+      <tr>
+        <td><code>=</code></td>
+        <td><strong>入れる</strong>という意味（等しい、ではない）</td>
+      </tr>
+      <tr>
+        <td><code>'田中'</code></td>
+        <td>入れる<strong>値</strong></td>
+      </tr>
+    </table>
+
+    <div class="caution">
+      <span class="label">= は「等しい」ではない</span><br>
+      算数の <code>=</code> は「左と右が等しい」という意味ですが、プログラムの <code>=</code> は<strong>「右の値を、左の名前に入れる」</strong>という意味です。<br>
+      向きがあります。<strong>右から左へ入れる</strong>、と覚えてください。
+    </div>
+
+    <h3>const と let</h3>
+    <p>
+      変数を作る書き方は2つあります。違いは<strong>あとから値を入れ替えられるかどうか</strong>だけです。
+    </p>
+
+    <table>
+      <tr>
+        <th>書き方</th>
+        <th>あとから入れ替え</th>
+        <th>使いどころ</th>
+      </tr>
+      <tr>
+        <td><code>const</code></td>
+        <td><strong>できない</strong></td>
+        <td><strong>基本はこちら</strong></td>
+      </tr>
+      <tr>
+        <td><code>let</code></td>
+        <td>できる</td>
+        <td>入れ替える必要があるときだけ</td>
+      </tr>
+    </table>
+
+    <div class="js-samples">
+      <div>
+        <span class="js-label js-label-ng">✕ const は入れ替えられない</span>
+        <code class="js-code hl"><span class="k">const</span> <span class="p">count</span> = <span class="n">1</span>;
+<span class="p">count</span> = <span class="n">2</span>;  <span class="c">// エラーになる</span></code>
+      </div>
+      <div>
+        <span class="js-label js-label-ok">○ let なら入れ替えられる</span>
+        <code class="js-code hl"><span class="k">let</span> <span class="p">count</span> = <span class="n">1</span>;
+<span class="p">count</span> = <span class="n">2</span>;  <span class="c">// これはOK</span></code>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      <strong>迷ったら <code>const</code> を使ってください。</strong>そして「入れ替えないと書けない」となったときだけ <code>let</code> に変えます。<br>
+      なぜかというと、<code>const</code> にしておくと<strong>「この値は途中で変わらない」と保証される</strong>からです。後からコードを読む人（未来の自分を含む）が、値の変化を追いかけずに済みます。
+    </div>
+
+    <div class="note">
+      <span class="label">var という書き方</span><br>
+      古いコードでは <code>var</code> という書き方を見かけます。これは <code>const</code> と <code>let</code> が使えるようになる前の書き方です。<br>
+      <strong>いま新しく書くなら使いません</strong>が、既存のサイトを直すときには出てきます。「昔の <code>let</code> のようなもの」と考えておけば読めます。
+    </div>
+
+    <h3>名前の付け方</h3>
+    <p>
+      まず<strong>守らないとエラーになる決まり</strong>です。
+    </p>
+
+    <table>
+      <tr>
+        <th>決まり</th>
+        <th>例</th>
+      </tr>
+      <tr>
+        <td>使えるのは英数字と <code>_</code> <code>$</code></td>
+        <td>✕ <code>user-name</code>（ハイフンは使えない）</td>
+      </tr>
+      <tr>
+        <td><strong>数字から始められない</strong></td>
+        <td>✕ <code>1stName</code></td>
+      </tr>
+      <tr>
+        <td>大文字と小文字は<strong>別物</strong></td>
+        <td><code>name</code> と <code>Name</code> は違う変数</td>
+      </tr>
+    </table>
+
+    <p>
+      次に<strong>エラーにはならないけれど、揃えたほうがいい書き方</strong>です。
+    </p>
+
+    <p>
+      2語以上をつなぐとき、書き方にはいくつか流儀があります。<strong>それぞれに名前が付いています。</strong>
+    </p>
+
+    <table>
+      <tr>
+        <th>呼び方</th>
+        <th>つなぎ方</th>
+        <th>例</th>
+        <th>主に使われる場所</th>
+      </tr>
+      <tr>
+        <td><strong>キャメルケース</strong></td>
+        <td>2語目から頭を大文字</td>
+        <td><code>userName</code></td>
+        <td><strong>JavaScript の変数・関数</strong></td>
+      </tr>
+      <tr>
+        <td><strong>パスカルケース</strong></td>
+        <td>1語目から頭を大文字</td>
+        <td><code>UserName</code></td>
+        <td>クラス名</td>
+      </tr>
+      <tr>
+        <td><strong>スネークケース</strong></td>
+        <td><code>_</code> でつなぐ</td>
+        <td><code>user_name</code></td>
+        <td>PHP の変数、データベースのカラム名</td>
+      </tr>
+      <tr>
+        <td><strong>ケバブケース</strong></td>
+        <td><code>-</code> でつなぐ</td>
+        <td><code>user-name</code></td>
+        <td>CSS のクラス名、HTML の <code>id</code></td>
+      </tr>
+    </table>
+
+    <div class="note">
+      <span class="label">名前の由来</span><br>
+      <strong>キャメル</strong>はラクダ。<code>userName</code> の出っぱりが<strong>こぶ</strong>に見えることから。<br>
+      <strong>パスカル</strong>は Pascal というプログラミング言語から。<strong>アッパーキャメルケース</strong>とも呼ばれます。<br>
+      <strong>スネーク</strong>は蛇。<code>_</code> が地を這う姿に見えることから。<br>
+      <strong>ケバブ</strong>は串焼き。<code>-</code> が串に刺さった具に見えることから。<strong>チェーンケース</strong>とも呼ばれます。
+    </div>
+
+    <div class="point">
+      <span class="label">ケバブケースは、もう書いています</span><br>
+      CSS のプロパティ名を思い出してください。<code>font-size</code>、<code>text-align</code>、<code>background-color</code>。<strong>すべてケバブケース</strong>です。<br>
+      <a href="beginner_2.html">コーダー初級#2</a> から書いてきたものに、<strong>名前が付いているだけ</strong>です。
+    </div>
+
+    <div class="note">
+      <span class="label">スネークケースは、このあと出てきます</span><br>
+      <strong>PHP の変数</strong>や<strong>データベースのカラム名</strong>で使われます。<code>user_name</code>、<code>total_price</code> のような書き方です。<br>
+      <strong>フロントエンドエンジニア編</strong>でデータベースを扱うときに出てきます。いまは<strong>「そういう書き方もある」</strong>と知っておけば十分です。
+    </div>
+
+    <div class="caution">
+      <span class="label">JavaScript ではキャメルケース</span><br>
+      <code>user_name</code> と書いても<strong>動きはします</strong>。ただし <strong>JavaScript ではキャメルケースが標準</strong>です。こちらに揃えてください。<br>
+      <strong>ケバブケースは使えません。</strong>上の表のとおり <code>-</code> は引き算と区別できないためです。<br>
+      <code>user-name</code> と書くと、<strong><code>user</code> から <code>name</code> を引く</strong>という意味になってしまいます。
+    </div>
+
+    <div class="note">
+      <span class="label">なぜ揃えるのか</span><br>
+      1人で書くなら、どれでも動きます。<strong>揃える理由は、読む人のため</strong>です。<br>
+      名前の形が揃っていれば、<code>userName</code> を見た瞬間に「これは変数だ」と分かります。<strong>形そのものが情報になる</strong>ということです。<br>
+      現場では<strong>そのプロジェクトの書き方に合わせます。</strong>自分の好みより、周りとの統一が優先されます。
+    </div>
+
+    <div class="caution">
+      <span class="label">名前は中身が分かるものに</span><br>
+      <code>a</code> や <code>data</code> のような名前は、あとから読むと何が入っているか分かりません。<strong><code>userName</code>、<code>totalPrice</code> のように、中身が分かる名前</strong>を付けてください。<br>
+      名前を考える時間は無駄ではありません。<strong>読み返す時間のほうが、書く時間よりずっと長い</strong>からです。
+    </div>
+
+    <h3>動かしてみる</h3>
+    <p>
+      入力した名前を変数に入れて、画面に出します。<strong>入力欄に文字を入れてボタンを押してください。</strong>
+    </p>
+
+    <div class="js-samples">
+      <div>
+        <span class="js-label">コード</span>
+        <code class="js-code hl"><span class="f">$</span>(<span class="v">'#greet-btn'</span>).<span class="f">on</span>(<span class="v">'click'</span>, <span class="k">function</span>() {
+  <span class="c">// 入力された値を変数に入れる</span>
+  <span class="k">const</span> <span class="p">userName</span> = <span class="f">$</span>(<span class="v">'#name-input'</span>).<span class="f">val</span>();
+
+  <span class="c">// 変数を使って文章を作る</span>
+  <span class="f">$</span>(<span class="v">'#greet-out'</span>).<span class="f">text</span>(<span class="v">`</span><span class="v">${</span><span class="p">userName</span><span class="v">}さん、こんにちは`</span>);
+});</code>
+      </div>
+      <div>
+        <span class="js-label">動く見本</span>
+        <div class="js-demo">
+          <input type="text" class="js-input" id="name-input" placeholder="名前を入れてください" value="田中">
+          <div class="js-btns" style="margin-top: 10px;">
+            <button type="button" class="js-btn" id="greet-btn">あいさつする</button>
+          </div>
+          <div class="js-out" id="greet-out">ここに結果が出ます</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">.val() とは</span><br>
+      <strong>入力欄に入っている値</strong>を取り出すメソッドです。<code>input</code> や <code>select</code> に使います。<br>
+      <code>.text()</code> が「タグの中の文字」を扱うのに対して、<code>.val()</code> は「入力された値」を扱います。<strong>対象が違うので使い分けます。</strong>
+    </div>
+
+    <div class="point">
+      <span class="label">バッククォートの書き方</span><br>
+      <code>`${userName}さん、こんにちは`</code> の記号は、シングルクォート <code>'</code> ではなく<strong>バッククォート <code>`</code></strong> です。キーボードの左上あたりにあります。<br>
+      この書き方だと、<strong><code>${ }</code> の中に変数を直接埋め込めます</strong>。文字と変数を <code>+</code> でつなぐより読みやすいので、いまはこちらが主流です。
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習1</span><br>
+      <strong><code>kadai_07.html</code> に「変数を使う（足し算）」のセクションを作って</strong>実装します。<br>
+      数値を入れる欄を2つ置き、<strong>入力すると合計が表示される</strong>ようにしてください。イベントは <code>'change'</code> を使います。<br>
+      数値の入力欄は <code>&lt;input type="number" class="好きな名前"&gt;</code> と書きます（閉じタグのないタグです）。結果を出す場所は <code>&lt;span&gt;</code> を置いて、<code>.text()</code> で書き換えます。<br>
+      <strong>入力欄と結果を出す場所の見た目も、自分で決めます。</strong>何も書かないとブラウザの初期状態のままで、本文から浮きます。<strong>ページ専用のCSSファイル</strong>に書いてください（<code>common.css</code> には書きません）。ここで整えておくと、<strong>演習2〜4の入力欄にもそのまま効きます</strong>。<br>
+      取り出した値は必ず変数に入れてから使ってください。<strong><code>.val()</code> が返すのは文字です。</strong>そのまま <code>+</code> でつなぐと <code>2 + 3</code> が <code>5</code> ではなく <code>'23'</code> になります。数値に直す方法は次の章で扱います。
+      <span class="js-label">HTML（セクションの中）</span>
+      <code class="js-code hl">&lt;p&gt;
+  &lt;input type=<span class="v">"number"</span> class=<span class="v">"num-a"</span>&gt; + &lt;input type=<span class="v">"number"</span> class=<span class="v">"num-b"</span>&gt; = &lt;span id=<span class="v">"total"</span>&gt;&lt;/span&gt;
+&lt;/p&gt;</code>
+      <span class="js-label">jQuery（穴埋め ― まず自分で考える）</span>
+      <code class="js-code hl">$(<span class="v">'.num-a, .num-b'</span>).on(<span class="v">'change'</span>, <span class="k">function</span>() {
+  <span class="k">const</span> numA = $(<span class="v">'.num-a'</span>).<span class="blank">xxxxxx</span>();  <span class="c">/* 入力欄の値を取り出すメソッドは？（1章） */</span>
+  <span class="k">const</span> numB = $(<span class="v">'.num-b'</span>).<span class="blank">xxxxxx</span>();
+  $(<span class="v">'#total'</span>).text(numA + numB);
+});</code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="js-label">CSS（ページ専用のCSSファイル）</span>
+        <code class="js-code hl"><span class="s">input[type="number"] </span>{
+  <span class="p">width</span>: <span class="v">110px</span>;
+  <span class="p">padding</span>: <span class="v">6px 10px</span>;
+  <span class="p">border</span>: <span class="v">1px solid #cbd5e1</span>;
+  <span class="p">border-radius</span>: <span class="v">8px</span>;
+  <span class="p">font-size</span>: <span class="v">14px</span>;
+}
+
+<span class="s">#total,
+#pi,
+.tax-out,
+.tax-out2 </span>{
+  <span class="p">display</span>: <span class="v">inline-block</span>;
+  <span class="p">min-width</span>: <span class="v">60px</span>;
+  <span class="p">padding</span>: <span class="v">4px 10px</span>;
+  <span class="p">border-radius</span>: <span class="v">8px</span>;
+  <span class="p">background</span>: <span class="v">#f1f5f9</span>;
+  <span class="p">color</span>: <span class="v">#1d4ed8</span>;
+  <span class="p">font-weight</span>: <span class="v">700</span>;
+  <span class="p">text-align</span>: <span class="v">right</span>;
+}
+
+<span class="s">.note_text </span>{
+  <span class="p">color</span>: <span class="v">#64748b</span>;
+  <span class="p">font-size</span>: <span class="v">13px</span>;
+}</code>
+        <span class="js-label">jQuery</span>
+        <code class="js-code hl">$(<span class="v">'.num-a, .num-b'</span>).on(<span class="v">'change'</span>, <span class="k">function</span>() {
+  <span class="k">const</span> numA = $(<span class="v">'.num-a'</span>).val();
+  <span class="k">const</span> numB = $(<span class="v">'.num-b'</span>).val();
+  <span class="c">// このままだと 12 + 30 が '1230' になる。直し方は演習3で</span>
+  $(<span class="v">'#total'</span>).text(numA + numB);
+});</code>
+      </details>
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習2</span><br>
+      <strong><code>kadai_07.html</code> に「変数を使う（円周の計算）」のセクションを作って</strong>実装します。<br>
+      数値を1つ入れると、<strong>その数値に 3.14 を掛けた結果が表示される</strong>ようにしてください。<br>
+      <code>3.14</code> を計算式に直接書かず、<strong><code>const</code> で名前を付けてから使ってください</strong>。あとから読む人に、その数字が何なのかが伝わります。<br>
+      そのまま掛けると <code>31.400000000000002</code> のような長い端数が出ることがあります（コンピュータの小数計算の癖です）。結果に <code>.toFixed(1)</code> を付けると「31.4」の形に整えられます。
+      <span class="js-label">HTML</span>
+      <code class="js-code hl">&lt;p&gt;
+  &lt;input type=<span class="v">"number"</span> class=<span class="v">"num-c"</span>&gt; cm × 3.14 = &lt;span id=<span class="v">"pi"</span>&gt;&lt;/span&gt; cm
+&lt;/p&gt;</code>
+      <span class="js-label">jQuery（穴埋め ― まず自分で考える）</span>
+      <code class="js-code hl">$(<span class="v">'.num-c'</span>).on(<span class="v">'change'</span>, <span class="k">function</span>() {
+  <span class="k">const</span> PI = 3.14;
+  <span class="k">const</span> num = $(<span class="v">'.num-c'</span>).val();
+  $(<span class="v">'#pi'</span>).text((num * PI).<span class="blank">xxxxxx</span>(1));  <span class="c">/* 桁を整えるメソッドは？（この演習の説明にある） */</span>
+});</code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="js-label">jQuery</span>
+        <code class="js-code hl">$(<span class="v">'.num-c'</span>).on(<span class="v">'change'</span>, <span class="k">function</span>() {
+  <span class="k">const</span> PI = 3.14;
+  <span class="k">const</span> num = $(<span class="v">'.num-c'</span>).val();
+  $(<span class="v">'#pi'</span>).text((num * PI).toFixed(1));
+});</code>
+      </details>
+    </div>
+  </section>
+
+  <section id="chapter2">
+    <h2>2. 関数 ― 処理に名前を付ける</h2>
+
+    <p>
+      変数が「値に名前を付ける」ものなら、関数は<strong>「処理のまとまりに名前を付ける」</strong>ものです。
+    </p>
+    <p>
+      名前を付けておくと、<strong>何度でも呼び出せます</strong>。同じ処理を何回も書かずに済みます。
+    </p>
+
+    <h3>作り方と呼び出し方</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">main.js — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">main.js</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7</div>
+        <pre class="vscode-code"><span class="sy-com">// 作る（この時点では、まだ動かない）</span>
+<span class="sy-str">function</span> <span class="sy-attr">sayHello</span>() {
+  <span class="sy-attr">console</span>.<span class="sy-attr">log</span>(<span class="sy-str">'こんにちは'</span>);
+}
+
+<span class="sy-com">// 呼び出す（ここで初めて動く）</span>
+<span class="sy-attr">sayHello</span>();</pre>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      <strong>作っただけでは動きません。</strong>呼び出して初めて中身が実行されます。<br>
+<a href="basic_6.html#chapter4">マークアップ中級#6</a> で <code>$('.btn').on('click', function() { … })</code> と書きましたよね。あれは<strong>「クリックされたときに呼び出してください」とjQueryに預けている</strong>状態です。だから書いた瞬間には動かなかったのです。
+    </div>
+
+    <h3>材料を渡す ― 引数</h3>
+    <p>
+      関数に<strong>材料を渡せます</strong>。渡す値のことを <strong>引数（ひきすう）</strong> と呼びます。
+    </p>
+
+    <div class="js-samples">
+      <div>
+        <span class="js-label">材料なし</span>
+        <code class="js-code hl"><span class="k">function</span> <span class="f">sayHello</span>() {
+  <span class="f">console</span>.<span class="f">log</span>(<span class="v">'こんにちは'</span>);
+}
+
+<span class="f">sayHello</span>();
+<span class="c">// → こんにちは</span></code>
+      </div>
+      <div>
+        <span class="js-label">材料あり（引数）</span>
+        <code class="js-code hl"><span class="k">function</span> <span class="f">sayHello</span>(<span class="p">name</span>) {
+  <span class="f">console</span>.<span class="f">log</span>(<span class="v">`</span><span class="v">${</span><span class="p">name</span><span class="v">}さん、こんにちは`</span>);
+}
+
+<span class="f">sayHello</span>(<span class="v">'田中'</span>);
+<span class="c">// → 田中さん、こんにちは</span></code>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">引数は入れ物の名前</span><br>
+      <code>function sayHello(name)</code> の <code>name</code> は、<strong>渡された値を受け取る入れ物</strong>です。関数の中でだけ使える変数、と考えてください。<br>
+      呼び出すときに <code>sayHello('田中')</code> と書くと、<code>name</code> の中身が <code>'田中'</code> になります。
+    </div>
+
+    <h3>結果を返す ― 戻り値</h3>
+    <p>
+      関数は<strong>計算した結果を返せます</strong>。返す値のことを <strong>戻り値（もどりち）</strong> と呼び、<code>return</code> で指定します。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">main.js — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">main.js</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7</div>
+        <pre class="vscode-code"><span class="sy-com">// 税込価格を計算して返す</span>
+<span class="sy-str">function</span> <span class="sy-attr">withTax</span>(<span class="sy-attr">price</span>) {
+  <span class="sy-str">return</span> <span class="sy-attr">Math</span>.<span class="sy-attr">floor</span>(<span class="sy-attr">price</span> * <span class="sy-num">1.1</span>);
+}
+
+<span class="sy-str">const</span> <span class="sy-attr">total</span> = <span class="sy-attr">withTax</span>(<span class="sy-num">1000</span>);
+<span class="sy-com">// total の中身は 1100</span></pre>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      <code>return</code> があると、<strong>関数を呼び出した場所が、その値に置き換わります</strong>。<br>
+      <code>withTax(1000)</code> と書いた場所が <code>1100</code> になる、というイメージです。だから <code>const total = withTax(1000);</code> で <code>total</code> に <code>1100</code> が入ります。
+    </div>
+
+    <div class="note">
+      <span class="label">Math.floor とは</span><br>
+      <strong>小数点以下を切り捨てる</strong>命令です。<code>1000 * 1.1</code> は <code>1100.0000000000002</code> のような値になることがあるため、切り捨てて整数にしています。<br>
+      いまは「そういう命令がある」とだけ知っておけば十分です。
+    </div>
+
+    <h3>動かしてみる</h3>
+    <p>
+      金額を入れると税込価格を返す関数です。<strong>数字を入れてボタンを押してください。</strong>
+    </p>
+
+    <div class="js-samples">
+      <div>
+        <span class="js-label">コード</span>
+        <code class="js-code hl"><span class="c">// 税込価格を計算する関数</span>
+<span class="k">function</span> <span class="f">withTax</span>(<span class="p">price</span>) {
+  <span class="k">return</span> <span class="f">Math</span>.<span class="f">floor</span>(<span class="p">price</span> * <span class="n">1.1</span>);
+}
+
+<span class="f">$</span>(<span class="v">'#tax-btn'</span>).<span class="f">on</span>(<span class="v">'click'</span>, <span class="k">function</span>() {
+  <span class="k">const</span> <span class="p">price</span> = <span class="f">Number</span>(<span class="f">$</span>(<span class="v">'#price-input'</span>).<span class="f">val</span>());
+  <span class="k">const</span> <span class="p">total</span> = <span class="f">withTax</span>(<span class="p">price</span>);
+
+  <span class="f">$</span>(<span class="v">'#tax-out'</span>).<span class="f">text</span>(<span class="v">`税込 </span><span class="v">${</span><span class="p">total</span><span class="v">} 円`</span>);
+});</code>
+      </div>
+      <div>
+        <span class="js-label">動く見本</span>
+        <div class="js-demo">
+          <input type="number" class="js-input" id="price-input" placeholder="金額" value="1000">
+          <div class="js-btns" style="margin-top: 10px;">
+            <button type="button" class="js-btn" id="tax-btn">税込を計算</button>
+          </div>
+          <div class="js-out" id="tax-out">ここに結果が出ます</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">Number() が必要な理由</span><br>
+      入力欄から <code>.val()</code> で取り出した値は、<strong>数字を入れても「文字」として扱われます</strong>。<br>
+      文字のまま計算すると、<code>'1000' * 1.1</code> のように意図しない結果になることがあります。<code>Number()</code> で<strong>数値に変換してから</strong>計算してください。<br>
+      これは実務でも本当によくハマるところです。
+    </div>
+
+    <h3>もうひとつの書き方 ― アロー関数</h3>
+    <p>
+      同じ関数を、こう書くこともできます。<strong>いまのJavaScriptではこちらもよく使われます。</strong>
+    </p>
+
+    <div class="js-samples">
+      <div>
+        <span class="js-label">function で書く</span>
+        <code class="js-code hl"><span class="k">function</span> <span class="f">withTax</span>(<span class="p">price</span>) {
+  <span class="k">return</span> <span class="f">Math</span>.<span class="f">floor</span>(<span class="p">price</span> * <span class="n">1.1</span>);
+}</code>
+      </div>
+      <div>
+        <span class="js-label">アロー関数で書く（同じ意味）</span>
+        <code class="js-code hl"><span class="k">const</span> <span class="f">withTax</span> = (<span class="p">price</span>) => {
+  <span class="k">return</span> <span class="f">Math</span>.<span class="f">floor</span>(<span class="p">price</span> * <span class="n">1.1</span>);
+};</code>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">名前の由来</span><br>
+      <code>=&gt;</code> が矢印（arrow）に見えることから<strong>アロー関数</strong>と呼ばれます。<br>
+      どちらの書き方でも結果は同じです。既存のコードでは両方出てくるので、<strong>読めるようにしておいてください。</strong>
+    </div>
+
+    <div class="caution">
+      <span class="label">jQueryのイベントでは function を使う</span><br>
+      <strong>ここは重要です。</strong><a href="basic_6.html#chapter4">マークアップ中級#6</a> で使った <code>$(this)</code> は、<strong>アロー関数の中では正しく動きません</strong>。<br>
+      アロー関数は <code>this</code> を持たない仕組みになっているためです。<strong>jQueryのイベントを書くときは <code>function() { … }</code> を使ってください。</strong>
+    </div>
+
+    <div class="js-samples">
+      <div>
+        <span class="js-label js-label-ok">○ function なら $(this) が使える</span>
+        <code class="js-code hl"><span class="f">$</span>(<span class="v">'.btn'</span>).<span class="f">on</span>(<span class="v">'click'</span>, <span class="k">function</span>() {
+  <span class="f">$</span>(<span class="k">this</span>).<span class="f">addClass</span>(<span class="v">'active'</span>);
+});</code>
+      </div>
+      <div>
+        <span class="js-label js-label-ng">✕ アロー関数だと this がずれる</span>
+        <code class="js-code hl"><span class="f">$</span>(<span class="v">'.btn'</span>).<span class="f">on</span>(<span class="v">'click'</span>, () => {
+  <span class="f">$</span>(<span class="k">this</span>).<span class="f">addClass</span>(<span class="v">'active'</span>);
+  <span class="c">// this がボタンを指さない</span>
+});</code>
+      </div>
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習3</span><br>
+      <strong><code>kadai_07.html</code> に「関数を使う（消費税）」のセクションを作って</strong>実装します。<br>
+      金額を入れると<strong>消費税額が表示される</strong>ようにしてください。税率は <strong>8%</strong> で計算します（2章の例の「税込価格 ×1.1」とは<strong>別の計算</strong>です）。<strong>税額の計算は関数に切り出し</strong>、<code>return</code> で結果を返す形にします。<br>
+      掛け算をすると小数が出ます。<code>Math.round()</code> に渡すと四捨五入できます。<br>
+      演習1で入力値が文字のままだった問題も、ここで <code>Number()</code> を使って直しておいてください。
+      <span class="js-label">HTML</span>
+      <code class="js-code hl">&lt;p&gt;
+  &lt;input type=<span class="v">"number"</span> class=<span class="v">"price"</span>&gt; 円の消費税は &lt;span class=<span class="v">"tax-out"</span>&gt;&lt;/span&gt; 円
+&lt;/p&gt;</code>
+      <span class="js-label">jQuery（穴埋め ― まず自分で考える）</span>
+      <code class="js-code hl"><span class="k">function</span> tax(price) {
+  <span class="k">const</span> TAX_RATE = <span class="blank">xxxxxx</span>;  <span class="c">/* 8%を小数で書くと？ */</span>
+  <span class="k">return</span> Math.<span class="blank">xxxxxx</span>(price * TAX_RATE);  <span class="c">/* 四捨五入するメソッドは？（この演習の説明にある） */</span>
+}
+
+$(<span class="v">'.price'</span>).on(<span class="v">'change'</span>, <span class="k">function</span>() {
+  <span class="k">const</span> price = <span class="blank">xxxxxx</span>($(<span class="v">'.price'</span>).val());  <span class="c">/* 文字を数値に直す関数は？（2章） */</span>
+  $(<span class="v">'.tax-out'</span>).text(tax(price));
+});</code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="js-label">jQuery</span>
+        <code class="js-code hl"><span class="k">function</span> tax(price) {
+  <span class="k">const</span> TAX_RATE = 0.08;
+  <span class="k">return</span> Math.round(price * TAX_RATE);
+}
+
+$(<span class="v">'.price'</span>).on(<span class="v">'change'</span>, <span class="k">function</span>() {
+  <span class="k">const</span> price = Number($(<span class="v">'.price'</span>).val());
+  $(<span class="v">'.tax-out'</span>).text(tax(price));
+});</code>
+        <span class="js-label">演習1の直し方（Number で数値にしてから足す）</span>
+        <code class="js-code hl"><span class="k">const</span> numA = Number($(<span class="v">'.num-a'</span>).val());
+<span class="k">const</span> numB = Number($(<span class="v">'.num-b'</span>).val());</code>
+      </details>
+    </div>
+  </section>
+
+  <section id="chapter3">
+    <h2>3. コンソールで中身を確かめる</h2>
+
+    <p>
+      プログラムが思った通りに動かないとき、<strong>いちばん最初にやること</strong>です。「いま変数に何が入っているか」を目で確かめます。
+    </p>
+
+    <h3>console.log で出す</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">main.js — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">main.js</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4</div>
+        <pre class="vscode-code"><span class="sy-str">const</span> <span class="sy-attr">userName</span> = <span class="sy-str">'田中'</span>;
+
+<span class="sy-com">// 中身を確認する</span>
+<span class="sy-attr">console</span>.<span class="sy-attr">log</span>(<span class="sy-attr">userName</span>);</pre>
+      </div>
+    </div>
+
+    <h3>どこに出るのか</h3>
+    <p>
+      画面には出ません。<strong>ブラウザの開発者ツール</strong>という画面に出ます。
+    </p>
+
+    <table>
+      <tr>
+        <th>操作</th>
+        <th>やり方</th>
+      </tr>
+      <tr>
+        <td>開発者ツールを開く</td>
+        <td><strong>F12</strong> キー、または右クリック →「検証」</td>
+      </tr>
+      <tr>
+        <td>コンソールを見る</td>
+        <td>上のタブから <strong>Console</strong> を選ぶ</td>
+      </tr>
+      <tr>
+        <td>閉じる</td>
+        <td>もう一度 <strong>F12</strong></td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">まず開くクセをつける</span><br>
+      動かないときは、<strong>とにかく開発者ツールを開いてください。</strong>赤い文字でエラーが出ていることがほとんどです。<br>
+      エラーメッセージは英語ですが、<strong>そのままコピーして検索すれば答えが見つかります。</strong>読めなくても構いません。「エラーが出ている」と気づけるかどうかが分かれ目です。
+    </div>
+
+    <h3>動かしてみる</h3>
+    <p>
+      下のボタンは、<strong>本物の <code>console.log()</code> を実行します。</strong>F12で開発者ツールを開いてから押すと、Consoleタブに出るのが確認できます。<br>
+      同じ内容を、下の黒い枠にも表示しています。
+    </p>
+
+    <div class="js-demo">
+      <div class="js-btns">
+        <button type="button" class="js-btn" id="log-string">文字を出す</button>
+        <button type="button" class="js-btn" id="log-number">数値を出す</button>
+        <button type="button" class="js-btn" id="log-boolean">真偽値を出す</button>
+        <button type="button" class="js-btn is-sub" id="log-clear">枠を消す</button>
+      </div>
+      <div class="js-console" id="console-out">
+        <div class="js-console-line js-console-empty">ボタンを押すと、ここに出力されます</div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">色が違うのはなぜ</span><br>
+      本物の開発者ツールでは、<strong>値の種類ごとに色が変わります</strong>。上の枠でも同じように色分けしています。<br>
+      文字は<strong>オレンジ</strong>、数値は<strong>緑</strong>、<code>true</code> / <code>false</code> は<strong>青</strong>。この違いが分かると、<strong>「数値のつもりが文字だった」という間違いに気づけます</strong>。2章の <code>Number()</code> の話がここに繋がります。
+    </div>
+
+    <h3>値の種類</h3>
+    <p>
+      いま出てきた3つが、基本の種類です。
+    </p>
+
+    <table>
+      <tr>
+        <th>種類</th>
+        <th>呼び方</th>
+        <th>例</th>
+      </tr>
+      <tr>
+        <td>文字</td>
+        <td>文字列（string）</td>
+        <td><code>'田中'</code>　<code>'こんにちは'</code></td>
+      </tr>
+      <tr>
+        <td>数値</td>
+        <td>数値（number）</td>
+        <td><code>1000</code>　<code>1.1</code></td>
+      </tr>
+      <tr>
+        <td>はい / いいえ</td>
+        <td>真偽値（boolean）</td>
+        <td><code>true</code>　<code>false</code></td>
+      </tr>
+    </table>
+
+    <div class="caution">
+      <span class="label">'1000' と 1000 は違う</span><br>
+      クォートで囲むと<strong>文字</strong>、囲まないと<strong>数値</strong>です。見た目は似ていますが、まったくの別物です。<br>
+      <code>'10' + 5</code> は <code>15</code> ではなく <code>'105'</code> になります。文字として<strong>くっつけられてしまう</strong>からです。<br>
+      この事故を防ぐのが、2章で出てきた <code>Number()</code> です。
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習4</span><br>
+      <strong><code>kadai_07.html</code> に「コンソールで確かめる」のセクションを作って</strong>実装します。<br>
+      演習3と同じ消費税の計算をして、<strong>四捨五入する前の値を <code>console.log()</code> で出して</strong>ください。画面に表示するのは四捨五入した後の値です。<br>
+      ブラウザの開発者ツールを開き、<strong>Console に小数が出ていることを自分の目で確認してください</strong>。画面の表示だけでは、四捨五入が効いているかどうか分かりません。<br>
+      1000円のような割り切れる金額では小数が出ません。<strong>1234円</strong>のように端数の出る金額で試してください（<code>98.72</code> が出ます）。
+      <span class="js-label">HTML</span>
+      <code class="js-code hl">&lt;p&gt;
+  &lt;input type=<span class="v">"number"</span> class=<span class="v">"price2"</span>&gt; 円の消費税は &lt;span class=<span class="v">"tax-out2"</span>&gt;&lt;/span&gt; 円
+&lt;/p&gt;
+&lt;p class=<span class="v">"note_text"</span>&gt;
+  1234 のように端数の出る金額を入れて、開発者ツールの Console を見てください。98.72 が出ます。
+&lt;/p&gt;</code>
+      <span class="js-label">jQuery（穴埋め ― tax は演習3で作った関数をそのまま使う）</span>
+      <code class="js-code hl">$(<span class="v">'.price2'</span>).on(<span class="v">'change'</span>, <span class="k">function</span>() {
+  <span class="k">const</span> price = Number($(<span class="v">'.price2'</span>).val());
+  console.log(<span class="blank">xxxxxx</span>);  <span class="c">/* 四捨五入する前の式を書く（税率 0.08 を直接掛ける） */</span>
+  $(<span class="v">'.tax-out2'</span>).text(tax(price));
+});</code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="js-label">jQuery</span>
+        <code class="js-code hl">$(<span class="v">'.price2'</span>).on(<span class="v">'change'</span>, <span class="k">function</span>() {
+  <span class="k">const</span> price = Number($(<span class="v">'.price2'</span>).val());
+  console.log(price * 0.08);
+  $(<span class="v">'.tax-out2'</span>).text(tax(price));
+});</code>
+      </details>
+    </div>
+  </section>
+
+  <section id="chapter4">
+    <h2>4. モーダルウィンドウを作る</h2>
+
+    <p>
+      画面の上に重なって出てくる小窓のことです。<strong>ここまでの内容を全部使って作ります。</strong>
+    </p>
+
+    <h3>まずHTML</h3>
+    <p>
+      <strong>覆う部分</strong>と<strong>中身の小窓</strong>の2段構造にします。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.html — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.html</div>
+        <div class="vscode-tab">style.css</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8</div>
+        <pre class="vscode-code">&lt;<span class="sy-tag">button</span> <span class="sy-attr">class</span>=<span class="sy-str">"open"</span>&gt;開く&lt;/<span class="sy-tag">button</span>&gt;
+
+&lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"overlay"</span>&gt;
+  &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"modal"</span>&gt;
+    &lt;<span class="sy-tag">p</span>&gt;ここが中身です&lt;/<span class="sy-tag">p</span>&gt;
+    &lt;<span class="sy-tag">button</span> <span class="sy-attr">class</span>=<span class="sy-str">"close"</span>&gt;閉じる&lt;/<span class="sy-tag">button</span>&gt;
+  &lt;/<span class="sy-tag">div</span>&gt;
+&lt;/<span class="sy-tag">div</span>&gt;</pre>
+      </div>
+    </div>
+
+    <h3>CSSで位置と見た目を決める</h3>
+    <p>
+      <strong>位置合わせはCSSの仕事です。</strong><a href="beginner_5.html#chapter2">コーダー中級#5</a> でやった <code>flex</code> と、<code>position: fixed</code> を組み合わせます。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">style.css — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab">index.html</div>
+        <div class="vscode-tab is-active">style.css</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</div>
+        <pre class="vscode-code"><span class="sy-sel">.overlay</span> {
+  <span class="sy-com">/* 画面全体を覆う */</span>
+  <span class="sy-attr">position</span>: <span class="sy-str">fixed</span>;
+  <span class="sy-attr">inset</span>: <span class="sy-num">0</span>;
+  <span class="sy-attr">background</span>: <span class="sy-str">rgba(15, 23, 42, 0.55)</span>;
+
+  <span class="sy-com">/* 中身を上下左右の中央に置く */</span>
+  <span class="sy-attr">display</span>: <span class="sy-str">flex</span>;
+  <span class="sy-attr">align-items</span>: <span class="sy-str">center</span>;
+  <span class="sy-attr">justify-content</span>: <span class="sy-str">center</span>;
+
+  <span class="sy-com">/* 閉じているときは見えない・触れない */</span>
+  <span class="sy-attr">opacity</span>: <span class="sy-num">0</span>;
+  <span class="sy-attr">visibility</span>: <span class="sy-str">hidden</span>;
+  <span class="sy-attr">transition</span>: <span class="sy-str">opacity 0.2s, visibility 0.2s</span>;
+}
+
+<span class="sy-sel">.overlay.is-open</span> {
+  <span class="sy-attr">opacity</span>: <span class="sy-num">1</span>;
+  <span class="sy-attr">visibility</span>: <span class="sy-str">visible</span>;
+}</pre>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">position: fixed とは</span><br>
+      <a href="beginner_6.html#chapter3">コーダー中級#6</a> で <code>relative</code> と <code>absolute</code> を扱いました。<code>fixed</code> はその仲間で、<strong>画面そのものを基準にする</strong>指定です。<br>
+      ページをスクロールしても位置が変わりません。画面全体を覆いたいモーダルには、これがぴったりです。
+    </div>
+
+    <div class="note">
+      <span class="label">inset: 0 とは</span><br>
+      <code>top: 0; right: 0; bottom: 0; left: 0;</code> を<strong>1行にまとめた書き方</strong>です。<code>position: fixed</code> と組み合わせると<strong>画面いっぱいに広がります</strong>。<br>
+      4つ別々に書いても同じですが、いまは <code>inset</code> でまとめて書けます。
+    </div>
+
+    <h3>jQueryはクラスを付け外しするだけ</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">main.js — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">main.js</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7</div>
+        <pre class="vscode-code"><span class="sy-attr">$</span>(<span class="sy-str">'.open'</span>).<span class="sy-attr">on</span>(<span class="sy-str">'click'</span>, <span class="sy-str">function</span>() {
+  <span class="sy-attr">$</span>(<span class="sy-str">'.overlay'</span>).<span class="sy-attr">addClass</span>(<span class="sy-str">'is-open'</span>);
+});
+
+<span class="sy-attr">$</span>(<span class="sy-str">'.close'</span>).<span class="sy-attr">on</span>(<span class="sy-str">'click'</span>, <span class="sy-str">function</span>() {
+  <span class="sy-attr">$</span>(<span class="sy-str">'.overlay'</span>).<span class="sy-attr">removeClass</span>(<span class="sy-str">'is-open'</span>);
+});</pre>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">役割を分ける</span><br>
+      <strong>位置・大きさ・見え方はCSS。開くか閉じるかの切り替えだけがjQuery。</strong><br>
+      昔は要素の幅や高さをJavaScriptで計算して中央に置いていましたが、いまは <code>flex</code> で済みます。<strong>CSSでできることはCSSでやる</strong>と、コードが短くなり、壊れにくくなります。
+    </div>
+
+    <h3>大きさを測るメソッド</h3>
+    <p>
+      いまは使わずに済みましたが、<strong>要素の大きさを測るメソッド</strong>もあります。既存のサイトでは、これで位置を計算しているコードをよく見かけます。
+    </p>
+
+    <table>
+      <tr>
+        <th>メソッド</th>
+        <th>測る範囲</th>
+      </tr>
+      <tr>
+        <td><code>.width()</code> / <code>.height()</code></td>
+        <td><strong>中身だけ</strong>（余白と枠線を含まない）</td>
+      </tr>
+      <tr>
+        <td><code>.outerWidth()</code> / <code>.outerHeight()</code></td>
+        <td><strong>余白と枠線も含めた</strong>外側の大きさ</td>
+      </tr>
+    </table>
+
+    <div class="js-samples">
+      <div>
+        <span class="js-label">コード</span>
+        <code class="js-code hl"><span class="k">const</span> <span class="p">$box</span> = <span class="f">$</span>(<span class="v">'#box'</span>);
+
+<span class="f">console</span>.<span class="f">log</span>(<span class="p">$box</span>.<span class="f">width</span>());
+<span class="f">console</span>.<span class="f">log</span>(<span class="p">$box</span>.<span class="f">outerWidth</span>());</code>
+      </div>
+      <div>
+        <span class="js-label">動く見本</span>
+        <div class="js-demo">
+          <div class="js-size-box" id="size-box">中身の幅 + 余白16px + 枠線4px</div>
+          <div class="js-btns" style="margin-top: 12px;">
+            <button type="button" class="js-btn" id="size-btn">大きさを測る</button>
+          </div>
+          <div class="js-out" id="size-out">ここに結果が出ます</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">数字が違う理由</span><br>
+      同じ箱を測っているのに、<strong>数字が変わります</strong>。<code>.width()</code> は中身だけ、<code>.outerWidth()</code> は<strong>そこに余白（padding）と枠線（border）を足した外側の大きさ</strong>を返すからです。<br>
+      「どこまでを大きさと数えるか」が違うだけです。<br>
+      なお、実際の数値は<strong>小数で返ることがあります</strong>。上の見本は、見やすいように整数へ丸めて表示しています。
+    </div>
+
+    <div class="caution">
+      <span class="label">いまは出番が減りました</span><br>
+      これらは<strong>JavaScriptで位置を計算していた時代のもの</strong>です。いまは <code>flex</code> や <code>position</code> でCSS側に任せられるので、<strong>新しく書くときに使う場面はほとんどありません</strong>。<br>
+      既存のサイトで見かけたときに<strong>「大きさを測っているんだな」と読めれば十分</strong>です。
+    </div>
+
+    <h3>動かしてみる</h3>
+    <p>
+      実際に開きます。<strong>画面全体が覆われるので、「閉じる」か背景をクリックすると戻ります。</strong>
+    </p>
+
+    <div class="js-demo">
+      <button type="button" class="js-btn" id="modal-open">モーダルを開く</button>
+    </div>
+
+    <div class="note">
+      <span class="label">背景クリックで閉じる</span><br>
+      上の見本は、<strong>暗い背景の部分をクリックしても閉じます</strong>。よく使われる作りなので、コードも載せておきます。<br>
+      <code>e.target</code> は「実際にクリックされた要素」を指します。それが覆う部分そのものだったとき（＝小窓の外側だったとき）だけ閉じる、という書き方です。
+    </div>
+
+    <div class="js-code hl" style="white-space: pre; max-width: 100%;"><span class="f">$</span>(<span class="v">'.overlay'</span>).<span class="f">on</span>(<span class="v">'click'</span>, <span class="k">function</span>(<span class="p">e</span>) {
+  <span class="c">// 小窓の中をクリックしたときは閉じない</span>
+  <span class="k">if</span> (<span class="p">e</span>.<span class="p">target</span> === <span class="k">this</span>) {
+    <span class="f">$</span>(<span class="k">this</span>).<span class="f">removeClass</span>(<span class="v">'is-open'</span>);
+  }
+});</div>
+
+    <h3>まとめ</h3>
+    <table>
+      <tr>
+        <th>覚えること</th>
+        <th>書き方</th>
+      </tr>
+      <tr>
+        <td>値に名前を付ける</td>
+        <td><code>const 名前 = 値;</code></td>
+      </tr>
+      <tr>
+        <td>あとで入れ替える値</td>
+        <td><code>let 名前 = 値;</code></td>
+      </tr>
+      <tr>
+        <td>処理に名前を付ける</td>
+        <td><code>function 名前() { … }</code></td>
+      </tr>
+      <tr>
+        <td>材料を渡す</td>
+        <td><code>function 名前(引数) { … }</code></td>
+      </tr>
+      <tr>
+        <td>結果を返す</td>
+        <td><code>return 値;</code></td>
+      </tr>
+      <tr>
+        <td>中身を確かめる</td>
+        <td><code>console.log(値);</code></td>
+      </tr>
+      <tr>
+        <td>文字に変数を埋め込む</td>
+        <td><code>`${変数}です`</code>（バッククォート）</td>
+      </tr>
+      <tr>
+        <td>文字を数値にする</td>
+        <td><code>Number(値)</code></td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      ここで出てきた<strong>変数・関数・引数・戻り値</strong>は、JavaScriptだけのものではありません。<strong>PHPでも、他のどの言語でも、同じ考え方が出てきます。</strong><br>
+      書き方の細かい違いはありますが、<strong>「値に名前を付ける」「処理に名前を付けて呼び出す」という構造は共通</strong>です。ここを掴んでおくと、次の言語を学ぶときの負担がまったく違います。
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習5</span><br>
+      <strong><code>kadai_07.html</code> に「モーダルウィンドウ」のセクションを作って</strong>実装します。このページの総仕上げです。<br>
+      ボタンを押すと<strong>画面の中央にウィンドウが開き、中の「閉じる」ボタンで閉じる</strong>ようにしてください。<br>
+      画面を覆う背景と、中身のウィンドウの2つが要ります。<strong>開くボタンに <code>class="modal-open"</code>、背景に <code>class="modal-overlay"</code>、中身に <code>class="modal-content"</code></strong> を付けてください。表示の切り替えはクラスの付け外しで行い、位置や色はCSSに書きます。<br>
+      重なり順で崩れたら <a href="beginner_6.html#chapter4">コーダー中級#6</a> の <code>z-index</code> を見返してください。
+      <span class="js-label">HTML（セクションの中）</span>
+      <code class="js-code hl">&lt;button type=<span class="v">"button"</span> class=<span class="v">"modal-open"</span>&gt;モーダルを開く&lt;/button&gt;
+&lt;div class=<span class="v">"modal-overlay"</span>&gt;
+  &lt;div class=<span class="v">"modal-content"</span>&gt;
+    &lt;p&gt;モーダルウィンドウの中身&lt;/p&gt;
+    &lt;button type=<span class="v">"button"</span> class=<span class="v">"modal-close"</span>&gt;閉じる&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code>
+      <span class="js-label">CSS（ページ専用のCSSファイル・穴埋め ― まず自分で考える）</span>
+      <code class="js-code hl"><span class="s">.modal-overlay </span>{
+  <span class="p">position</span>: <span class="v"><span class="blank">xxxxxx</span></span>;  <span class="c">/* 画面全体に貼り付ける指定は？（4章） */</span>
+  <span class="p">inset</span>: <span class="v">0</span>;
+  <span class="p">display</span>: <span class="v">flex</span>;
+  <span class="p">align-items</span>: <span class="v">center</span>;
+  <span class="p">justify-content</span>: <span class="v">center</span>;
+  <span class="p">background</span>: <span class="v">rgba(15, 23, 42, 0.55)</span>;
+  <span class="p">opacity</span>: <span class="v">0</span>;
+  <span class="p">visibility</span>: <span class="v">hidden</span>;
+  <span class="p">transition</span>: <span class="v">opacity 0.2s, visibility 0.2s</span>;
+}
+
+<span class="s">.modal-overlay.is-open </span>{
+  <span class="p">opacity</span>: <span class="v">1</span>;
+  <span class="p">visibility</span>: <span class="v">visible</span>;
+}
+
+<span class="s">.modal-content </span>{
+  <span class="p">width</span>: <span class="v">min(420px, 90%)</span>;
+  <span class="p">padding</span>: <span class="v">24px</span>;
+  <span class="p">border-radius</span>: <span class="v">12px</span>;
+  <span class="p">background</span>: <span class="v">#ffffff</span>;
+}</code>
+      <span class="js-label">jQuery（穴埋め）</span>
+      <code class="js-code hl">$(<span class="v">'.modal-open'</span>).on(<span class="v">'click'</span>, <span class="k">function</span>() {
+  $(<span class="v">'.modal-overlay'</span>).<span class="blank">xxxxxx</span>(<span class="v">'is-open'</span>);  <span class="c">/* クラスを付けるメソッドは？（#6の5章） */</span>
+});
+
+$(<span class="v">'.modal-close'</span>).on(<span class="v">'click'</span>, <span class="k">function</span>() {
+  $(<span class="v">'.modal-overlay'</span>).<span class="blank">xxxxxx</span>(<span class="v">'is-open'</span>);  <span class="c">/* クラスを外すメソッドは？ */</span>
+});</code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="js-label">CSS（ページ専用のCSSファイル）</span>
+        <code class="js-code hl"><span class="s">.modal-open,
+.modal-close </span>{
+  <span class="p">padding</span>: <span class="v">8px 16px</span>;
+  <span class="p">border</span>: <span class="v">1px solid #cbd5e1</span>;
+  <span class="p">border-radius</span>: <span class="v">8px</span>;
+  <span class="p">background</span>: <span class="v">#ffffff</span>;
+  <span class="p">font-weight</span>: <span class="v">700</span>;
+  <span class="p">cursor</span>: <span class="v">pointer</span>;
+}
+
+<span class="s">.modal-overlay </span>{
+  <span class="p">position</span>: <span class="v">fixed</span>;
+  <span class="p">inset</span>: <span class="v">0</span>;
+  <span class="p">z-index</span>: <span class="v">50</span>;
+  <span class="p">display</span>: <span class="v">flex</span>;
+  <span class="p">align-items</span>: <span class="v">center</span>;
+  <span class="p">justify-content</span>: <span class="v">center</span>;
+  <span class="p">background</span>: <span class="v">rgba(15, 23, 42, 0.55)</span>;
+  <span class="p">opacity</span>: <span class="v">0</span>;
+  <span class="p">visibility</span>: <span class="v">hidden</span>;
+  <span class="p">transition</span>: <span class="v">opacity 0.2s, visibility 0.2s</span>;
+}
+
+<span class="s">.modal-overlay.is-open </span>{
+  <span class="p">opacity</span>: <span class="v">1</span>;
+  <span class="p">visibility</span>: <span class="v">visible</span>;
+}
+
+<span class="s">.modal-content </span>{
+  <span class="p">width</span>: <span class="v">min(420px, 90%)</span>;
+  <span class="p">padding</span>: <span class="v">24px</span>;
+  <span class="p">border-radius</span>: <span class="v">12px</span>;
+  <span class="p">background</span>: <span class="v">#ffffff</span>;
+}
+<span class="s">.modal-content p </span>{
+  <span class="p">margin-bottom</span>: <span class="v">12px</span>;
+}</code>
+        <span class="js-label">jQuery</span>
+        <code class="js-code hl">$(<span class="v">'.modal-open'</span>).on(<span class="v">'click'</span>, <span class="k">function</span>() {
+  $(<span class="v">'.modal-overlay'</span>).addClass(<span class="v">'is-open'</span>);
+});
+
+$(<span class="v">'.modal-close'</span>).on(<span class="v">'click'</span>, <span class="k">function</span>() {
+  $(<span class="v">'.modal-overlay'</span>).removeClass(<span class="v">'is-open'</span>);
+});</code>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<nav class="page-nav">
+  <a class="page-prev" href="basic_6.html">
+    <span class="page-nav-label">前のページ</span>
+    <span class="page-nav-title">マークアップ中級#6</span>
+    <span class="page-nav-sub">JavaScriptを短く書く道具 ― jQueryの基本</span>
+  </a>
+</nav>
+
+<footer></footer>
+
+<!-- ▼ モーダルの本体。画面全体を覆うので main の外に置く -->
+<div class="js-modal-overlay" id="modal-overlay">
+  <div class="js-modal">
+    <h4>モーダルウィンドウ</h4>
+    <p>
+      これが小窓です。背景の暗い部分をクリックしても閉じます。<br>
+      位置合わせはCSS、開閉の切り替えだけがjQueryの担当です。
+    </p>
+    <button type="button" class="js-btn" id="modal-close">閉じる</button>
+  </div>
+</div>
+
+<!-- ▼ jQuery本体 -->
+<script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+
+<!-- ▼ 共通スクリプト。章ナビ・コピーボタン・先頭へ戻るが自動で付く（編集不要） -->
+<script src="../js/training.js"></script>
+
+<!-- ▼ このページの見本を動かすスクリプト。
+     本文に載せているコードと同じ書き方で実装している -->
+<script>
+  if (!window.jQuery) {
+    document.getElementById('js-offline').style.display = 'block';
+  } else {
+
+    /* 1章：入力された値を変数に入れて表示する */
+    $('#greet-btn').on('click', function () {
+      const userName = $('#name-input').val();
+      $('#greet-out').text(`${userName}さん、こんにちは`);
+    });
+
+    /* 2章：税込価格を計算する関数 */
+    function withTax(price) {
+      return Math.floor(price * 1.1);
+    }
+
+    $('#tax-btn').on('click', function () {
+      const price = Number($('#price-input').val());
+      const total = withTax(price);
+      $('#tax-out').text(`税込 ${total} 円`);
+    });
+
+    /* 3章：console.log を実行しつつ、枠にも同じ内容を出す */
+    const $consoleOut = $('#console-out');
+
+    function printLog(value) {
+      // 本物のコンソールにも出す
+      console.log(value);
+
+      // 値の種類で色を変える（本物の開発者ツールに寄せている）
+      const typeName = typeof value;
+      const shown = typeName === 'string' ? `'${value}'` : String(value);
+
+      $consoleOut
+        .find('.js-console-empty')
+        .remove();
+
+      $consoleOut.append(
+        $('<div>')
+          .addClass(`js-console-line js-t-${typeName}`)
+          .text(shown)
+      );
+
+      // 追加した行が見えるよう、いちばん下までスクロールする
+      $consoleOut.scrollTop($consoleOut[0].scrollHeight);
+    }
+
+    $('#log-string').on('click', function () {
+      printLog('こんにちは');
+    });
+
+    $('#log-number').on('click', function () {
+      printLog(1000);
+    });
+
+    $('#log-boolean').on('click', function () {
+      printLog(true);
+    });
+
+    $('#log-clear').on('click', function () {
+      $consoleOut.html(
+        '<div class="js-console-line js-console-empty">ボタンを押すと、ここに出力されます</div>'
+      );
+    });
+
+    /* 4章：大きさを測る。中身だけか、余白と枠線も含めるかの違いを見せる */
+    $('#size-btn').on('click', function () {
+      const $box = $('#size-box');
+      // 環境によっては小数で返るため、表示は整数に丸める
+      const w = Math.round($box.width());
+      const outer = Math.round($box.outerWidth());
+      $('#size-out').text(`width: ${w}px / outerWidth: ${outer}px`);
+    });
+
+    /* 4章：モーダルの開閉。クラスを付け外しするだけ */
+    $('#modal-open').on('click', function () {
+      $('#modal-overlay').addClass('is-open');
+    });
+
+    $('#modal-close').on('click', function () {
+      $('#modal-overlay').removeClass('is-open');
+    });
+
+    /* 背景（覆う部分そのもの）をクリックしたときだけ閉じる */
+    $('#modal-overlay').on('click', function (e) {
+      if (e.target === this) {
+        $(this).removeClass('is-open');
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
