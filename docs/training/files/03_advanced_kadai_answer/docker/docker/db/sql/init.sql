@@ -1,0 +1,39 @@
+SET CHARACTER_SET_CLIENT=utf8;
+SET CHARACTER_SET_CONNECTION=utf8;
+
+-- -- cri_sortable
+-- DROP DATABASE IF EXISTS `cri_sortable`;
+-- CREATE DATABASE `cri_sortable`;
+-- -- cri_sortable.sortable
+-- CREATE TABLE `cri_sortable`.`sortable` (
+--   `id` int unsigned NOT NULL AUTO_INCREMENT,
+--   `name` text NOT NULL,
+--   `left_x` int unsigned DEFAULT NULL,
+--   `top_y` int unsigned DEFAULT NULL,
+--   `department_id` int unsigned DEFAULT NULL,
+--   PRIMARY KEY (`id`)
+-- ) ENGINE=InnoDB;
+-- INSERT INTO `cri_sortable`.`sortable` (`id`,`name`,`left_x`,`top_y`,`department_id`) VALUES
+--  ("1","佐藤","810","56","1")
+-- ,("2","鈴木","631","302","1")
+-- ,("3","高橋","788","326","1")
+-- ,("4","田中","79","150","1")
+-- ,("5","伊藤","590","96","1")
+-- ,("6","渡辺","389","410","1")
+-- ,("7","山本","222","91","2")
+-- ,("8","中村","824","170","2")
+-- ,("9","小林","79","250","2")
+-- ,("10","加藤","452","93","2")
+-- ,("11","吉田","422","263","2")
+-- ,("12","山田","229","320","2")
+-- ;
+-- -- cri_sortable.departments
+-- CREATE TABLE `cri_sortable`.`departments` (
+--   `id` int unsigned NOT NULL AUTO_INCREMENT,
+--   `department` varchar(20) NOT NULL,
+--   PRIMARY KEY (`id`)
+-- ) ENGINE=InnoDB;
+-- INSERT INTO `cri_sortable`.`departments` (`id`,`department`) VALUES
+--  ("1","開発部")
+-- ,("2","営業部")
+-- ;

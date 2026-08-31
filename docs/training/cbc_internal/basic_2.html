@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>マークアップ中級#2</title>
+  <link rel="stylesheet" href="../css/training.css">
+
+  <!-- ▼ このページ専用のスタイル（レスポンシブの実演） -->
+  <link rel="stylesheet" href="../css/basic_2.css">
+
+  <!-- ▼ 開いたときに、ページの先頭から読み始められるようにする。
+       ブラウザが前回の位置へ戻すより先に動かす必要があるため、
+       training.js とは分けて <head> で読み込んでいる -->
+  <script src="../js/scroll-reset.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>マークアップ中級#2</h1>
+    <p>初めてのレスポンシブコーディング</p>
+  </div>
+</header>
+
+<main>
+
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol>
+      <li><a href="#chapter1">レスポンシブとは何か</a></li>
+      <li><a href="#chapter2">メディアクエリの書き方</a></li>
+      <li><a href="#chapter3">HTMLをレスポンシブにする</a></li>
+      <li><a href="#chapter4">数えて選ぶ ― nth 系の疑似クラス</a></li>
+      <li><a href="#chapter5">CSSで要素を作る ― ::before / ::after</a></li>
+    </ol>
+
+    <div class="note">
+      <span class="label">読む前に</span><br>
+      このページの見本は<strong>実際に動きます</strong>。とくに1章と3章は、<strong>ブラウザの横幅を変えながら</strong>読んでください。<br>
+      ウィンドウの右端をつかんで狭めると、その場で表示が切り替わります。
+    </div>
+  </section>
+
+  <section id="chapter1">
+    <h2>1. レスポンシブとは何か</h2>
+
+    <p>
+      <strong>画面の大きさに合わせて、同じページの見え方が変わる</strong>ことです。<strong>レスポンシブ（responsive）</strong>は「反応する」という意味の英単語です。
+    </p>
+
+    <div class="point">
+      <span class="label">ここが肝心</span><br>
+      パソコン用とスマホ用で<strong>HTMLを2つ作るのではありません</strong>。<strong>HTMLは1つのまま、CSSだけで見え方を変えます</strong>。<br>
+      同じ中身が、環境に合わせて並び方や大きさを変える。これがレスポンシブです。
+    </div>
+
+    <h3>同じHTMLが、幅で変わる</h3>
+
+    <div class="rp-samples">
+      <div>
+        <span class="rp-label">PC（広いとき）</span>
+        <div class="rp-screen">
+          <div class="rp-screen-bar">画面幅 1200px</div>
+          <div class="rp-screen-body">
+            <div class="rp-head">ヘッダー</div>
+            <div class="rp-cols">
+              <div class="rp-col-a">左のエリア</div>
+              <div class="rp-col-b">右のエリア</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="rp-label">スマホ（狭いとき）</span>
+        <div class="rp-screen">
+          <div class="rp-screen-bar">画面幅 375px</div>
+          <div class="rp-screen-body">
+            <div class="rp-head">ヘッダー</div>
+            <div class="rp-cols is-stacked">
+              <div class="rp-col-a">左のエリア</div>
+              <div class="rp-col-b">右のエリア</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>
+      ヘッダーは<strong>幅いっぱいのまま</strong>で、その下の2つは<strong>横並びから縦積みに変わっています</strong>。HTMLの中身は左右とも同じです。
+    </p>
+
+    <h3>この枠は本当に反応します</h3>
+
+    <div class="rp-demo">
+      <div class="rp-live">画面幅で色が変わる箱</div>
+    </div>
+
+    <div class="note">
+      <span class="label">試してみてください</span><br>
+      ブラウザの<strong>右端をつかんで、ウィンドウを狭くしてください</strong>。768px を下回った瞬間に、上の箱の色と文字が変わります。<br>
+      この切り替えを起こしているのが、次の章で扱う<strong>メディアクエリ</strong>です。
+    </div>
+
+    <div class="note">
+      <span class="label">CSSで変えられるもの</span><br>
+      幅に応じて変えられるのは、並び方だけではありません。<strong>大きさ・色・余白・文字サイズ</strong>のほか、<strong>要素を丸ごと見せる／隠す</strong>こともできます。
+    </div>
+  </section>
+
+  <section id="chapter2">
+    <h2>2. メディアクエリの書き方</h2>
+
+    <p>
+      <strong>メディアクエリ</strong>は「画面幅がこの条件のときだけ、このCSSを使う」と書く仕組みです。基本の形はこれだけです。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">style.css — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">style.css</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5</div>
+        <pre class="vscode-code"><span class="sy-attr">@media</span> <span class="sy-str">screen</span> <span class="sy-attr">and</span> (画面幅の条件) {
+  <span class="sy-sel">セレクタ</span> {
+    <span class="sy-attr">プロパティ</span>: <span class="sy-str">値</span>;
+  }
+}</pre>
+      </div>
+    </div>
+
+    <h3>条件の書き方は3つ</h3>
+
+    <table>
+      <tr>
+        <th>書き方</th>
+        <th>意味</th>
+      </tr>
+      <tr>
+        <td><code>(min-width: 1024px)</code></td>
+        <td>画面幅が <strong>1024px 以上</strong>のとき</td>
+      </tr>
+      <tr>
+        <td><code>(max-width: 768px)</code></td>
+        <td>画面幅が <strong>768px 以下</strong>のとき</td>
+      </tr>
+      <tr>
+        <td><code>(min-width: 768px) and (max-width: 1024px)</code></td>
+        <td>画面幅が <strong>768px 〜 1024px</strong> のあいだ</td>
+      </tr>
+    </table>
+
+    <div class="note">
+      <span class="label">min と max</span><br>
+      <code>min-width</code> は「<strong>最小でもこの幅</strong>」＝ これ以上のとき。<code>max-width</code> は「<strong>最大でもこの幅</strong>」＝ これ以下のとき。<br>
+      日本語の「以上・以下」と逆に感じやすいので、<strong>min = 広いほう、max = 狭いほう</strong>と覚えると混乱しません。
+    </div>
+
+    <h3>全部つなげるとこうなる</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">style.css — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">style.css</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</div>
+        <pre class="vscode-code"><span class="sy-sel">.contents</span> {
+  <span class="sy-com">/* 基準になるCSS（PCとSPのどちらを基準にするかは自分で決める） */</span>
+  <span class="sy-attr">width</span>: <span class="sy-num">95%</span>;
+  <span class="sy-attr">font-size</span>: <span class="sy-num">14px</span>;
+}
+
+<span class="sy-com">/* 画面幅が 1024px 以上のときに適用される */</span>
+<span class="sy-attr">@media</span> <span class="sy-str">screen</span> <span class="sy-attr">and</span> (<span class="sy-attr">min-width</span>: <span class="sy-num">1024px</span>) {
+  <span class="sy-sel">.contents</span> {
+    <span class="sy-attr">display</span>: <span class="sy-str">flex</span>;
+    <span class="sy-attr">width</span>: <span class="sy-num">1200px</span>;
+    <span class="sy-attr">font-size</span>: <span class="sy-num">18px</span>;
+  }
+}
+
+<span class="sy-com">/* 画面幅が 768px 以下のときに適用される */</span>
+<span class="sy-attr">@media</span> <span class="sy-str">screen</span> <span class="sy-attr">and</span> (<span class="sy-attr">max-width</span>: <span class="sy-num">768px</span>) {
+  <span class="sy-sel">.contents</span> {
+    <span class="sy-attr">width</span>: <span class="sy-num">100%</span>;
+  }
+}</pre>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">上書きされている</span><br>
+      基準のCSSが<strong>先に読まれ</strong>、条件に合ったときだけ<strong>あとから上書き</strong>されます。<a href="beginner_7.html#chapter3">コーダー初級#7</a> でやった「あとに書いたほうが勝つ」がそのまま効いています。<br>
+      だから<strong>条件に合わないときは、基準のCSSがそのまま残ります</strong>。
+    </div>
+
+    <h3>ブレイクポイント</h3>
+
+    <p>
+      デザインを切り替える<strong>境目の幅</strong>のことを<strong>ブレイクポイント</strong>と呼びます。「768px を境にスマホ用にする」の 768px がそれです。
+    </p>
+
+    <div class="note">
+      <span class="label">どちらを基準に書くか</span><br>
+      Googleは2018年4月から<strong>モバイルファーストインデックス</strong>を導入し、検索の評価は<strong>スマホ版のページを基準</strong>にしています。<br>
+      ただし<strong>コーディングの手順としては、まず広い画面（PC）で作り、あとからメディアクエリでスマホ向けの制限を足していく</strong>進め方が一般的です。評価の話と、作る順番の話は別、と切り分けてください。
+    </div>
+  </section>
+
+  <section id="chapter3">
+    <h2>3. HTMLをレスポンシブにする</h2>
+
+    <h3>まず準備</h3>
+
+    <table>
+      <tr>
+        <th>手順</th>
+        <th>やること</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>いま作っているフォルダを<strong>複製</strong>し、名前のうしろに <code>_resp</code> を付ける</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>複製したほうで作業する（元は残しておく）</td>
+      </tr>
+    </table>
+
+    <h3>忘れると何も起きない ― viewport</h3>
+
+    <p>
+      <strong>これを書かないと、メディアクエリを書いてもスマホで効きません。</strong><code>&lt;head&gt;</code> の中に1行入れます。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.html — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.html</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1</div>
+        <pre class="vscode-code">&lt;<span class="sy-tag">meta</span> <span class="sy-attr">name</span>=<span class="sy-str">"viewport"</span> <span class="sy-attr">content</span>=<span class="sy-str">"width=device-width, initial-scale=1"</span>&gt;</pre>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th>指定</th>
+        <th>値</th>
+        <th>意味</th>
+      </tr>
+      <tr>
+        <td><code>width</code></td>
+        <td><code>device-width</code></td>
+        <td>表示幅を<strong>その端末の幅に合わせる</strong></td>
+      </tr>
+      <tr>
+        <td><code>initial-scale</code></td>
+        <td><code>1.0</code></td>
+        <td>最初の拡大率を<strong>100%</strong>にする</td>
+      </tr>
+      <tr>
+        <td><code>minimum-scale</code></td>
+        <td><code>1.0</code></td>
+        <td>100%より小さく縮められないようにする</td>
+      </tr>
+      <tr>
+        <td><code>user-scalable</code></td>
+        <td><code>no</code></td>
+        <td>ユーザーの拡大縮小を禁止する</td>
+      </tr>
+    </table>
+
+    <div class="caution">
+      <span class="label">なぜ必要か</span><br>
+      スマホのブラウザは、指定がないと<strong>「本当はPC画面ですよ」というフリをして</strong>ページを縮小表示します。実際は375pxなのに980px相当として扱われるため、<strong>「768px以下」の条件に一生当てはまりません</strong>。<br>
+      レスポンシブが効かないときは、まずこの1行があるかを疑ってください。
+    </div>
+
+    <div class="note">
+      <span class="label">user-scalable="no" は慎重に</span><br>
+      拡大を禁止すると、<strong>目の見えづらい人が文字を大きくできなくなります</strong>。アクセシビリティの観点から、いまは指定しないほうがよい場面が多いです。
+    </div>
+
+    <h3>画面幅を変えて確認する</h3>
+
+    <table>
+      <tr>
+        <th>操作</th>
+        <th>やり方</th>
+      </tr>
+      <tr>
+        <td>開発者ツールを開く</td>
+        <td><strong>F12</strong>（Macは <code>⌘ + option + i</code>）</td>
+      </tr>
+      <tr>
+        <td>レスポンシブモードにする</td>
+        <td>ツール左上の<strong>スマホとタブレットのアイコン</strong>を押す</td>
+      </tr>
+      <tr>
+        <td>幅を変える</td>
+        <td>上部の数値を書き換える、または枠の端をドラッグ</td>
+      </tr>
+    </table>
+
+    <div class="caution">
+      <span class="label">これはあくまで目安</span><br>
+      ブラウザのレスポンシブモードは<strong>それらしく見せているだけ</strong>です。実案件では<strong>実機での確認が欠かせません</strong>。実機でしか出ない崩れがあります。
+    </div>
+
+    <h3>書き方のコツ ― 差分だけ書く</h3>
+
+    <p>
+      メディアクエリの中に<strong>同じ値をもう一度書かない</strong>。<strong>画面幅で変わる値だけ</strong>を書きます。
+    </p>
+
+    <div class="rp-samples">
+      <div>
+        <span class="rp-label">✕ 全部書き直している</span>
+        <code class="rp-code hl"><span class="s">.header__wrap</span> {
+  <span class="p">width</span>: <span class="v">85%</span>;
+  <span class="p">margin</span>: <span class="v">0 auto</span>;
+  <span class="p">display</span>: <span class="v">flex</span>;
+  <span class="p">justify-content</span>: <span class="v">space-between</span>;
+}
+
+<span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">768px</span>) {
+  <span class="s">.header__wrap</span> {
+    <span class="p">width</span>: <span class="v">100%</span>;
+    <span class="p">margin</span>: <span class="v">0 auto</span>;      <span class="c">/* 同じ */</span>
+    <span class="p">display</span>: <span class="v">flex</span>;         <span class="c">/* 同じ */</span>
+    <span class="p">flex-direction</span>: <span class="v">column</span>;
+  }
+}</code>
+      </div>
+      <div>
+        <span class="rp-label">○ 変わる値だけ</span>
+        <code class="rp-code hl"><span class="s">.header__wrap</span> {
+  <span class="p">width</span>: <span class="v">85%</span>;
+  <span class="p">margin</span>: <span class="v">0 auto</span>;
+  <span class="p">display</span>: <span class="v">flex</span>;
+  <span class="p">justify-content</span>: <span class="v">space-between</span>;
+}
+
+<span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">768px</span>) {
+  <span class="s">.header__wrap</span> {
+    <span class="p">width</span>: <span class="v">100%</span>;
+    <span class="p">flex-direction</span>: <span class="v">column</span>;
+  }
+}</code>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">なぜ差分だけにするか</span><br>
+      同じ値を2箇所に書くと、<strong>直すときも2箇所直すことになります</strong>。片方だけ直して食い違うのが、よくある事故です。<br>
+      <strong>「基準のCSS＋上書き」</strong>という関係を保っておけば、直す場所は常に1箇所で済みます。
+    </div>
+
+    <div class="note">
+      <span class="label">書く場所をどこにするか</span><br>
+      上の例のように<strong>そのクラスのすぐ下</strong>にメディアクエリを置く書き方だと、関係するCSSがまとまって読みやすくなります。<br>
+      CSSファイルの<strong>末尾にまとめて置く</strong>書き方もあります。どちらでも動きますが、<strong>1つのファイルの中では統一</strong>してください。
+    </div>
+
+    <h3>1ページ分を通して見る</h3>
+
+    <p>
+      実際のサイト1ページ分のCSSです。<strong>基準のCSSのすぐ下にメディアクエリを置く</strong>書き方で、header から footer まで通しています。<strong>暗記するものではありません。</strong>「差分だけ書く」がどう積み重なるかを、量として眺めてください。
+    </p>
+
+    <details class="kotae">
+      <summary>1ページ分のCSSを開く</summary>
+      <span class="rp-label">style.css（全体）</span>
+      <code class="rp-code hl"><span class="k">@charset</span> <span class="v">"UTF-8"</span>;
+<span class="c">/******************************
+ 初期設定
+******************************/</span>
+<span class="s">body</span> {
+  <span class="p">color</span>: <span class="v">#060606</span>;
+  <span class="p">font-size</span>: <span class="v">16px</span>;
+  <span class="p">font-family</span>: <span class="v">sans-serif</span>;
+  <span class="p">letter-spacing</span>: <span class="v">0.06em</span>;
+}
+<span class="s">a</span> {
+  <span class="p">text-decoration</span>: <span class="v">none</span>;
+  <span class="p">color</span>: <span class="v">#060606</span>;
+}
+
+<span class="c">/******************************
+ header
+******************************/</span>
+<span class="s">.header</span> {
+  <span class="p">width</span>: <span class="v">100%</span>;
+  <span class="p">padding</span>: <span class="v">10px</span>;
+  <span class="p">box-shadow</span>: <span class="v">0 5px 15px rgba(0,0,0,.15)</span>;
+}
+<span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">768px</span>) {
+  <span class="s">.header</span> {
+    <span class="p">padding</span>: <span class="v">10px 0</span>;
+  }
+}
+
+<span class="s">.header__wrap</span> {
+  <span class="p">width</span>: <span class="v">85%</span>;
+  <span class="p">margin</span>: <span class="v">0 auto</span>;
+  <span class="p">display</span>: <span class="v">flex</span>;
+  <span class="p">justify-content</span>: <span class="v">space-between</span>;
+  <span class="p">align-items</span>: <span class="v">center</span>;
+}
+<span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">768px</span>) {
+  <span class="s">.header__wrap</span> {
+    <span class="p">flex-direction</span>: <span class="v">column</span>;
+    <span class="p">width</span>: <span class="v">100%</span>;
+  }
+}
+
+<span class="s">.header__logo</span> {
+  <span class="p">width</span>: <span class="v">54px</span>;
+  <span class="p">height</span>: <span class="v">76px</span>;
+}
+<span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">768px</span>) {
+  <span class="s">.header__logo</span> {
+    <span class="p">width</span>: <span class="v">40px</span>;
+    <span class="p">margin-bottom</span>: <span class="v">20px</span>;
+  }
+}
+
+<span class="s">.header__menu ul</span> {
+  <span class="p">display</span>: <span class="v">flex</span>;
+}
+<span class="s">.header__menu ul li</span> {
+  <span class="p">width</span>: <span class="v">80px</span>;
+}
+<span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">768px</span>) {
+  <span class="s">.header__menu ul li</span> {
+    <span class="p">width</span>: <span class="v">calc(100% / 4)</span>;
+  }
+}
+
+<span class="s">.header__menu ul li a</span> {
+  <span class="p">display</span>: <span class="v">block</span>;
+  <span class="p">width</span>: <span class="v">100%</span>;
+  <span class="p">text-align</span>: <span class="v">center</span>;
+}
+<span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">768px</span>) {
+  <span class="s">.header__menu ul li a</span> {
+    <span class="p">font-size</span>: <span class="v">13px</span>;
+  }
+}
+
+<span class="c">/******************************
+ main
+******************************/</span>
+<span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">768px</span>) {
+  <span class="s">.main</span> {
+    <span class="p">padding-top</span>: <span class="v">110px</span>;
+  }
+}
+<span class="s">.main section</span> {
+  <span class="p">width</span>: <span class="v">85%</span>;
+  <span class="p">margin</span>: <span class="v">0 auto 60px</span>;
+}
+
+<span class="c">/* キービジュアル */</span>
+<span class="s">.main__kv</span> {
+  <span class="p">width</span>: <span class="v">auto</span>;
+  <span class="p">height</span>: <span class="v">70vh</span>;
+  <span class="p">display</span>: <span class="v">flex</span>;
+  <span class="p">align-items</span>: <span class="v">center</span>;
+  <span class="p">background</span>: <span class="v">url(../images/top_kv.jpg) center/cover no-repeat</span>;
+  <span class="p">font</span>: <span class="v">normal 24px/1.8 sans-serif</span>;
+  <span class="p">padding-left</span>: <span class="v">10%</span>;
+}
+<span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">768px</span>) {
+  <span class="s">.main__kv</span> {
+    <span class="p">height</span>: <span class="v">50vh</span>;
+    <span class="p">font-size</span>: <span class="v">18px</span>;
+  }
+}
+
+<span class="c">/* about */</span>
+<span class="s">.main__about</span> {
+  <span class="p">padding</span>: <span class="v">0 10px 80px</span>;
+}
+<span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">768px</span>) {
+  <span class="s">.main__about</span> {
+    <span class="p">padding</span>: <span class="v">40px 0 120px</span>;
+  }
+}
+
+<span class="s">.main__about--ttl</span> {
+  <span class="p">margin-bottom</span>: <span class="v">60px</span>;
+  <span class="p">text-align</span>: <span class="v">center</span>;
+  <span class="p">font-size</span>: <span class="v">28px</span>;
+  <span class="p">letter-spacing</span>: <span class="v">4px</span>;
+}
+<span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">768px</span>) {
+  <span class="s">.main__about--ttl</span> {
+    <span class="p">margin-bottom</span>: <span class="v">30px</span>;
+    <span class="p">font-size</span>: <span class="v">20px</span>;
+  }
+}
+
+<span class="s">.main__about--logo</span> {
+  <span class="p">width</span>: <span class="v">40%</span>;
+  <span class="p">margin</span>: <span class="v">0 auto</span>;
+}
+<span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">768px</span>) {
+  <span class="s">.main__about--logo</span> {
+    <span class="p">width</span>: <span class="v">30%</span>;
+  }
+}
+
+<span class="s">.main__about--txt</span> {
+  <span class="p">margin</span>: <span class="v">45px 0 60px</span>;
+  <span class="p">text-align</span>: <span class="v">center</span>;
+  <span class="p">padding</span>: <span class="v">0 20px</span>;
+  <span class="p">font</span>: <span class="v">normal 16px/2 sans-serif</span>;
+  <span class="p">letter-spacing</span>: <span class="v">4px</span>;
+}
+<span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">768px</span>) {
+  <span class="s">.main__about--txt</span> {
+    <span class="p">width</span>: <span class="v">80%</span>;
+    <span class="p">margin</span>: <span class="v">30px auto 40px</span>;
+    <span class="p">font-size</span>: <span class="v">13px</span>;
+  }
+}
+
+<span class="c">/* service */</span>
+<span class="s">.main__service</span> {
+  <span class="p">padding-bottom</span>: <span class="v">100px</span>;
+}
+<span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">768px</span>) {
+  <span class="s">.main__service</span> {
+    <span class="p">padding-bottom</span>: <span class="v">60px</span>;
+  }
+}
+
+<span class="s">.main__service--message</span> {
+  <span class="p">margin-bottom</span>: <span class="v">95px</span>;
+  <span class="p">display</span>: <span class="v">flex</span>;
+}
+<span class="s">.main__service--message h2</span> {
+  <span class="p">flex</span>: <span class="v">1</span>;
+  <span class="p">font-size</span>: <span class="v">50px</span>;
+  <span class="p">font-weight</span>: <span class="v">bold</span>;
+}
+<span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">768px</span>) {
+  <span class="s">.main__service--message h2</span> {
+    <span class="p">font-size</span>: <span class="v">30px</span>;
+    <span class="p">text-align</span>: <span class="v">center</span>;
+  }
+}
+
+<span class="s">.main__service--message p</span> {
+  <span class="p">flex</span>: <span class="v">2</span>;
+  <span class="p">font-size</span>: <span class="v">16px</span>;
+  <span class="p">line-height</span>: <span class="v">2.2</span>;
+  <span class="p">letter-spacing</span>: <span class="v">2px</span>;
+}
+<span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">768px</span>) {
+  <span class="s">.main__service--message p</span> {
+    <span class="p">font-size</span>: <span class="v">14px</span>;
+    <span class="p">margin-top</span>: <span class="v">30px</span>;
+  }
+}
+
+<span class="s">.main__service--list</span> {
+  <span class="p">display</span>: <span class="v">flex</span>;
+}
+<span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">768px</span>) {
+  <span class="s">.main__service--list</span> {
+    <span class="p">flex-direction</span>: <span class="v">column</span>;
+  }
+}
+
+<span class="s">.main__service--list li</span> {
+  <span class="p">flex</span>: <span class="v">1</span>;
+  <span class="p">margin-right</span>: <span class="v">2%</span>;
+}
+<span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">768px</span>) {
+  <span class="s">.main__service--list li</span> {
+    <span class="p">width</span>: <span class="v">100%</span>;
+    <span class="p">margin-bottom</span>: <span class="v">30px</span>;
+  }
+}
+
+<span class="s">.main__service--list li img</span> {
+  <span class="p">width</span>: <span class="v">100%</span>;
+  <span class="p">display</span>: <span class="v">block</span>;
+}
+<span class="s">.main__service--list h3</span> {
+  <span class="p">margin</span>: <span class="v">50px 0 30px 0</span>;
+}
+<span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">768px</span>) {
+  <span class="s">.main__service--list h3</span> {
+    <span class="p">margin</span>: <span class="v">10px 0</span>;
+    <span class="p">font-size</span>: <span class="v">16px</span>;
+  }
+}
+
+<span class="c">/* news */</span>
+<span class="s">.main__news</span> {
+  <span class="p">padding</span>: <span class="v">0 20px 0</span>;
+}
+<span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">768px</span>) {
+  <span class="s">.main__news</span> {
+    <span class="p">padding</span>: <span class="v">50px 0 0</span>;
+  }
+}
+
+<span class="s">.main__news--ttl</span> {
+  <span class="p">margin-bottom</span>: <span class="v">16px</span>;
+  <span class="p">font-size</span>: <span class="v">48px</span>;
+}
+<span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">768px</span>) {
+  <span class="s">.main__news--ttl</span> {
+    <span class="p">font-size</span>: <span class="v">30px</span>;
+    <span class="p">text-align</span>: <span class="v">center</span>;
+  }
+}
+
+<span class="s">.main__news--list li</span> {
+  <span class="p">border-bottom</span>: <span class="v">1px solid #e8ecee</span>;
+}
+<span class="s">.main__news--list li:first-child</span> {
+  <span class="p">border-top</span>: <span class="v">1px solid #e8ecee</span>;
+}
+<span class="s">.main__news--list li a</span> {
+  <span class="p">display</span>: <span class="v">block</span>;
+  <span class="p">padding</span>: <span class="v">50px 20px</span>;
+}
+<span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">768px</span>) {
+  <span class="s">.main__news--list li a</span> {
+    <span class="p">padding</span>: <span class="v">24px 12px</span>;
+  }
+}
+<span class="s">.main__news--list li a:hover</span> {
+  <span class="p">background</span>: <span class="v">#e8ecee</span>;
+}
+
+<span class="s">.main__news--item</span> {
+  <span class="p">display</span>: <span class="v">flex</span>;
+}
+<span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">768px</span>) {
+  <span class="s">.main__news--item</span> {
+    <span class="p">flex-direction</span>: <span class="v">column</span>;
+    <span class="p">line-height</span>: <span class="v">1.6</span>;
+  }
+}
+
+<span class="s">.main__news--day</span> {
+  <span class="p">width</span>: <span class="v">264px</span>;
+  <span class="p">display</span>: <span class="v">flex</span>;
+  <span class="p">align-items</span>: <span class="v">center</span>;
+  <span class="p">margin-right</span>: <span class="v">32px</span>;
+}
+<span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">768px</span>) {
+  <span class="s">.main__news--day</span> {
+    <span class="p">width</span>: <span class="v">100%</span>;
+    <span class="p">margin-bottom</span>: <span class="v">8px</span>;
+  }
+}
+
+<span class="c">/******************************
+ footer
+******************************/</span>
+<span class="s">.footer</span> {
+  <span class="p">padding</span>: <span class="v">90px 0 70px</span>;
+  <span class="p">border-top</span>: <span class="v">1px solid #e8ecee</span>;
+}
+<span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">768px</span>) {
+  <span class="s">.footer</span> {
+    <span class="p">padding-top</span>: <span class="v">50px</span>;
+  }
+}
+
+<span class="s">.footer__logo</span> {
+  <span class="p">width</span>: <span class="v">100px</span>;
+  <span class="p">margin</span>: <span class="v">0 auto</span>;
+}
+
+<span class="s">.footer__copyright</span> {
+  <span class="p">margin-top</span>: <span class="v">30px</span>;
+  <span class="p">text-align</span>: <span class="v">center</span>;
+  <span class="p">color</span>: <span class="v">#b5b5b5</span>;
+  <span class="p">font-size</span>: <span class="v">11px</span>;
+}</code>
+    </details>
+
+    <div class="point">
+      <span class="label">眺めて気づいてほしいこと</span><br>
+      量は多いですが、<strong>やっていることは3つの繰り返し</strong>だけです。<strong>幅を <code>100%</code> にする／<code>flex-direction: column</code> で縦積みにする／文字を小さくする</strong>。<br>
+      そして<strong>メディアクエリの中には、変わる値しか書かれていません</strong>。この形が最後まで崩れていないことを確認してください。
+    </div>
+
+    <div class="note">
+      <span class="label">身につくまでの時間</span><br>
+      メディアクエリの挙動が体に入るまで、<strong>2〜4時間</strong>ほど触る想定です。幅を変えながら、どの値がどう効くかを目で追ってください。
+    </div>
+  </section>
+
+  <section id="chapter4">
+    <h2>4. 数えて選ぶ ― nth 系の疑似クラス</h2>
+
+    <p>
+      <strong>「何番目か」で要素を選ぶ</strong>書き方です。HTMLにクラスを増やさずに、CSSだけで狙い撃ちできます。
+    </p>
+
+    <h3>基本 ― nth-child(n)</h3>
+
+    <div class="rp-samples">
+      <div>
+        <span class="rp-label">CSS</span>
+        <code class="rp-code hl"><span class="s">.box &gt; div:nth-child(3)</span> {
+  <span class="p">background</span>: <span class="v">#fce7f3</span>;
+}</code>
+      </div>
+      <div>
+        <span class="rp-label">結果（3番目だけ変わる）</span>
+        <div class="rp-demo">
+          <div class="nth-box nth-a">
+            <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>数え方のバリエーション</h3>
+
+    <table>
+      <tr>
+        <th>書き方</th>
+        <th>選ばれるもの</th>
+      </tr>
+      <tr>
+        <td><code>:nth-child(3)</code></td>
+        <td>3番目</td>
+      </tr>
+      <tr>
+        <td><code>:nth-child(odd)</code></td>
+        <td>奇数番目（1, 3, 5…）</td>
+      </tr>
+      <tr>
+        <td><code>:nth-child(even)</code></td>
+        <td>偶数番目（2, 4, 6…）</td>
+      </tr>
+      <tr>
+        <td><code>:nth-child(3n)</code></td>
+        <td>3の倍数（3, 6, 9…）</td>
+      </tr>
+      <tr>
+        <td><code>:nth-child(n + 5)</code></td>
+        <td>5番目以降すべて</td>
+      </tr>
+      <tr>
+        <td><code>:first-child</code></td>
+        <td>最初</td>
+      </tr>
+      <tr>
+        <td><code>:last-child</code></td>
+        <td>最後</td>
+      </tr>
+      <tr>
+        <td><code>:nth-last-child(3)</code></td>
+        <td><strong>うしろから</strong>3番目</td>
+      </tr>
+      <tr>
+        <td><code>:not(:first-child)</code></td>
+        <td>最初<strong>以外</strong>すべて</td>
+      </tr>
+    </table>
+
+    <div class="rp-samples">
+      <div>
+        <span class="rp-label">:nth-child(odd) ― 奇数</span>
+        <div class="rp-demo">
+          <div class="nth-box nth-b">
+            <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="rp-label">:nth-child(3n) ― 3の倍数</span>
+        <div class="rp-demo">
+          <div class="nth-box nth-c">
+            <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rp-samples">
+      <div>
+        <span class="rp-label">:nth-child(n + 5) ― 5番目以降</span>
+        <div class="rp-demo">
+          <div class="nth-box nth-d">
+            <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="rp-label">:not(:first-child) ― 最初以外</span>
+        <div class="rp-demo">
+          <div class="nth-box nth-e">
+            <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3>child と of-type の違い</h3>
+
+    <p>
+      ここが<strong>いちばん間違えるところ</strong>です。同じHTMLに対して、番号の数え方が変わります。
+    </p>
+
+    <table>
+      <tr>
+        <th>書き方</th>
+        <th>数え方</th>
+      </tr>
+      <tr>
+        <td><code>:nth-child(n)</code></td>
+        <td><strong>種類に関係なく</strong>、兄弟全部をまとめて数える</td>
+      </tr>
+      <tr>
+        <td><code>:nth-of-type(n)</code></td>
+        <td><strong>同じタグだけ</strong>を数える</td>
+      </tr>
+    </table>
+
+    <div class="rp-samples">
+      <div>
+        <span class="rp-label">p:nth-child(3) ― 全部で3番目のp</span>
+        <div class="rp-demo">
+          <div class="nth-mix nth-child-demo">
+            <h4>見出し（h4）</h4>
+            <p>1つ目のp</p>
+            <p>2つ目のp</p>
+            <p>3つ目のp</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="rp-label">p:nth-of-type(3) ― pだけで3番目</span>
+        <div class="rp-demo">
+          <div class="nth-mix nth-type-demo">
+            <h4>見出し（h4）</h4>
+            <p>1つ目のp</p>
+            <p>2つ目のp</p>
+            <p>3つ目のp</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">同じ「3」でも違うものが選ばれる</span><br>
+      左は <code>h4</code> を1番目として数えるので、<strong>3番目＝2つ目のp</strong>。右は <code>p</code> だけ数えるので <strong>3番目＝3つ目のp</strong> です。<br>
+      <strong>兄弟に別のタグが混ざっているときは <code>of-type</code></strong>、と覚えておくと事故が減ります。
+    </div>
+  </section>
+
+  <section id="chapter5">
+    <h2>5. CSSで要素を作る ― ::before / ::after</h2>
+
+    <p>
+      <strong>HTMLに書いていない要素を、CSSだけで作り出す</strong>仕組みです。<strong>疑似要素</strong>と呼びます。装飾のためだけのアイコンや記号を、HTMLを汚さずに置けます。
+    </p>
+
+    <div class="pf-fig">
+      <p class="pf-note">ココに画像はない</p>
+
+      <div class="pf-anchor top">
+        <span class="pf-ghost pf-target">なにか文字があるよ</span>
+        <i class="pf-down l"></i>
+        <i class="pf-down r"></i>
+      </div>
+
+      <p class="pf-code">&lt;div class="test"&gt;なにか文字があるよ&lt;/div&gt;</p>
+
+      <div class="pf-browser">
+        <div class="pf-bar">
+          <span class="pf-dot r"></span>
+          <span class="pf-dot y"></span>
+          <span class="pf-dot g"></span>
+          <span class="pf-tab"><i class="pf-fav"></i>練習<i class="pf-close"></i></span>
+          <i class="pf-newtab"></i>
+        </div>
+        <div class="pf-url">
+          <i class="pf-nav back"></i>
+          <i class="pf-nav fwd"></i>
+          <i class="pf-nav reload"></i>
+          <span class="pf-urlbar"><i class="pf-lock"></i>index.html</span>
+          <i class="pf-menu"></i>
+        </div>
+        <div class="pf-view">
+          <span class="pf-target">なにか文字があるよ</span>
+        </div>
+      </div>
+
+      <div class="pf-anchor bottom">
+        <span class="pf-ghost pf-target">なにか文字があるよ</span>
+        <i class="pf-up l"></i>
+        <b class="pf-name l">::before</b>
+        <i class="pf-up r"></i>
+        <b class="pf-name r">::after</b>
+        <i class="pf-join"></i>
+      </div>
+
+      <p class="pf-cap">この2つをCSSで設定します</p>
+    </div>
+
+    <div class="point">
+      <span class="label">この図そのものが見本です</span><br>
+      図に出ている<strong>顔文字は画像ではありません</strong>。HTMLには「なにか文字があるよ」としか書いておらず、<strong>顔文字も赤と青の点線の枠も、いま説明している <code>::before</code> と <code>::after</code> で出しています</strong>。<br>
+      このページのHTMLをいくら探しても、顔文字は1文字も見つかりません。
+    </div>
+
+    <table>
+      <tr>
+        <th>書き方</th>
+        <th>できる場所</th>
+      </tr>
+      <tr>
+        <td><code>::before</code></td>
+        <td>その要素の<strong>中身の前</strong></td>
+      </tr>
+      <tr>
+        <td><code>::after</code></td>
+        <td>その要素の<strong>中身の後ろ</strong></td>
+      </tr>
+    </table>
+
+    <div class="caution">
+      <span class="label">content がないと何も出ない</span><br>
+      <strong><code>content</code> プロパティは絶対に必要です。</strong>中身が空でよくても <code>content: '';</code> と書きます。<br>
+      これを忘れると、いくら大きさや色を指定しても<strong>何も表示されません</strong>。うまくいかないときの第一容疑者です。
+    </div>
+
+    <div class="note">
+      <span class="label">コロンは2つ</span><br>
+      疑似<strong>要素</strong>は <code>::</code>（2つ）、疑似<strong>クラス</strong>（<code>:hover</code> や <code>:nth-child</code>）は <code>:</code>（1つ）で書き分けます。<br>
+      古いコードでは <code>:before</code> と1つで書かれていることもあります。<strong>昔の書き方がいまも動くよう残されているだけ</strong>なので、新しく書くなら2つにしてください。<br>
+      1つで動くのは <code>:before</code> <code>:after</code> <code>:first-line</code> <code>:first-letter</code> の<strong>4つだけ</strong>です。あとから増えた <code>::placeholder</code> や <code>::marker</code> は、<code>::</code> でないと効きません。
+    </div>
+
+    <h3>アイコンを付ける</h3>
+
+    <div class="rp-samples">
+      <div>
+        <span class="rp-label">CSS</span>
+        <code class="rp-code hl"><span class="s">.icon-arrow::before</span> {
+  <span class="p">content</span>: <span class="v">'→'</span>;
+  <span class="p">color</span>: <span class="v">#2563eb</span>;
+}
+
+<span class="s">.icon-check::before</span> {
+  <span class="p">content</span>: <span class="v">''</span>;      <span class="c">/* 空でも必要 */</span>
+  <span class="p">width</span>: <span class="v">14px</span>;
+  <span class="p">height</span>: <span class="v">14px</span>;
+  <span class="p">border-radius</span>: <span class="v">50%</span>;
+  <span class="p">background</span>: <span class="v">#16a34a</span>;
+}
+
+<span class="s">.icon-tag::after</span> {
+  <span class="p">content</span>: <span class="v">'NEW'</span>;
+  <span class="p">margin-left</span>: <span class="v">auto</span>;
+}</code>
+      </div>
+      <div>
+        <span class="rp-label">結果</span>
+        <div class="rp-demo icon-demo">
+          <div class="icon-arrow">矢印が前に付きます（::before）</div>
+          <div class="icon-check">緑の丸が前に付きます（::before）</div>
+          <div class="icon-tag">タグが後ろに付きます（::after）</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">大きさを指定したいとき</span><br>
+      疑似要素は<strong>最初はインライン扱い</strong>なので、そのままでは <code>width</code> や <code>height</code> が効きません。<br>
+      <strong><code>display: block;</code>（または親を <code>flex</code>）</strong>にすると大きさを指定できます。上の緑の丸は、親が <code>display: flex</code> なので効いています。
+    </div>
+
+    <h3>線だけで矢印を作る</h3>
+
+    <p>
+      画像を使わずに、<strong>境界線2本を45度回して</strong>矢印にする定番の書き方です。
+    </p>
+
+    <div class="rp-samples">
+      <div>
+        <span class="rp-label">CSS</span>
+        <code class="rp-code hl"><span class="s">.list &gt; li</span> {
+  <span class="p">position</span>: <span class="v">relative</span>;   <span class="c">/* 親を基準にする */</span>
+  <span class="p">border-bottom</span>: <span class="v">1px solid #e2e8f0</span>;
+}
+
+<span class="s">.list &gt; li::before</span> {
+  <span class="p">display</span>: <span class="v">block</span>;
+  <span class="p">content</span>: <span class="v">''</span>;
+  <span class="p">position</span>: <span class="v">absolute</span>;
+  <span class="p">top</span>: <span class="v">calc(50% - 4px)</span>;
+  <span class="p">right</span>: <span class="v">14px</span>;
+  <span class="p">width</span>: <span class="v">7px</span>;
+  <span class="p">height</span>: <span class="v">7px</span>;
+  <span class="p">border-top</span>: <span class="v">2px solid #2563eb</span>;
+  <span class="p">border-right</span>: <span class="v">2px solid #2563eb</span>;
+  <span class="p">transform</span>: <span class="v">rotate(45deg)</span>;
+}</code>
+      </div>
+      <div>
+        <span class="rp-label">結果</span>
+        <div class="rp-demo">
+          <ul class="arrow-list">
+            <li>リスト1</li>
+            <li>リスト2</li>
+            <li>リスト3</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">仕組み</span><br>
+      正方形の<strong>上と右にだけ線を引く</strong>と「⌐」の形になります。それを <code>rotate(45deg)</code> で45度回すと、矢印の先端に見えます。<br>
+      位置決めは <a href="beginner_6.html#chapter3">コーダー初級#6</a> の <code>position: relative</code> と <code>absolute</code> の組み合わせです。
+    </div>
+
+    <h3>ホバーしたときだけ出す</h3>
+
+    <p>
+      疑似クラス（<code>:hover</code>）と疑似要素（<code>::before</code>）は<strong>つなげて書けます</strong>。
+    </p>
+
+    <div class="rp-samples">
+      <div>
+        <span class="rp-label">CSS</span>
+        <code class="rp-code hl"><span class="s">.list-hover &gt; li:hover::before</span> {
+  <span class="p">display</span>: <span class="v">block</span>;
+  <span class="p">content</span>: <span class="v">''</span>;
+  <span class="p">position</span>: <span class="v">absolute</span>;
+  <span class="p">top</span>: <span class="v">calc(50% - 4px)</span>;
+  <span class="p">right</span>: <span class="v">14px</span>;
+  <span class="p">width</span>: <span class="v">7px</span>;
+  <span class="p">height</span>: <span class="v">7px</span>;
+  <span class="p">border-top</span>: <span class="v">2px solid #2563eb</span>;
+  <span class="p">border-right</span>: <span class="v">2px solid #2563eb</span>;
+  <span class="p">transform</span>: <span class="v">rotate(45deg)</span>;
+}</code>
+      </div>
+      <div>
+        <span class="rp-label">結果（マウスを乗せてください）</span>
+        <div class="rp-demo">
+          <ul class="hover-list">
+            <li>リスト1</li>
+            <li>リスト2</li>
+            <li>リスト3</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">読み下し方</span><br>
+      <code>.list-hover &gt; li:hover::before</code> は「<strong><code>.list-hover</code> の直下の <code>li</code> に、マウスが乗っているとき、その中身の前に作る要素</strong>」です。<br>
+      長いセレクタは、<strong>左から順に日本語にしていく</strong>と必ず読めます。
+    </div>
+
+    <div class="note">
+      <span class="label">次のページへ</span><br>
+      部品は揃いました。次の <a href="basic_3.html">マークアップ中級#3（レスポンシブサイトをコーディングする方法）</a> では、<strong>1ページを丸ごと作るときの進め方</strong>を扱います。
+    </div>
+  </section>
+
+</main>
+
+<nav class="page-nav">
+  <a class="page-prev" href="basic_1.html">
+    <span class="page-nav-label">前のページ</span>
+    <span class="page-nav-title">マークアップ中級#1</span>
+    <span class="page-nav-sub">インターネットの仕組みを理解しよう</span>
+  </a>
+  <a class="page-next" href="basic_3.html">
+    <span class="page-nav-label">次のページ</span>
+    <span class="page-nav-title">マークアップ中級#3</span>
+    <span class="page-nav-sub">レスポンシブサイトをコーディングする方法</span>
+  </a>
+</nav>
+
+<footer></footer>
+
+<!-- ▼ 共通スクリプト。章ナビ・コピーボタン・先頭へ戻るが自動で付く（編集不要） -->
+<script src="../js/training.js"></script>
+
+</body>
+</html>

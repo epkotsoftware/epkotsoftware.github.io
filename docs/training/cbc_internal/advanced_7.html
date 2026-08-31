@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>フロントエンド中級#7</title>
+  <link rel="stylesheet" href="../css/training.css">
+
+  <!-- ▼ フロント編で共通のスタイル -->
+  <link rel="stylesheet" href="../css/advanced_common.css">
+
+  <!-- ▼ このページ専用のスタイル -->
+  <link rel="stylesheet" href="../css/advanced_7.css">
+
+  <!-- ▼ 開いたときに、ページの先頭から読み始められるようにする。
+       ブラウザが前回の位置へ戻すより先に動かす必要があるため、
+       training.js とは分けて <head> で読み込んでいる -->
+  <script src="../js/scroll-reset.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>フロントエンド中級#7</h1>
+    <p>ドラッグした位置を保存する ― Ajax</p>
+  </div>
+</header>
+
+<main>
+
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol>
+      <li><a href="#chapter1">ドラッグできるようにする</a></li>
+      <li><a href="#chapter2">Ajax ― 画面を切り替えずに送る</a></li>
+      <li><a href="#chapter3">受け取って更新する</a></li>
+      <li><a href="#chapter4">動かないときの調べ方</a></li>
+      <li><a href="#chapter5">所属を足す ― テーブルを分ける</a></li>
+    </ol>
+
+    <div class="note">
+      <span class="label">読む前に</span><br>
+      <a href="advanced_6.html">フロントエンド中級#6</a> までで、<strong>読む</strong>と<strong>書く</strong>ができました。ここでその2つを組み合わせて、<strong>アプリらしい動き</strong>を作ります。<br>
+      札をマウスで動かすと、<strong>画面はそのままなのに位置が保存される。</strong>ページが再読み込みされないので、動いていることが目に見えません。<strong>「見えないものを確かめる方法」</strong>も、このページで扱います。
+    </div>
+
+    <div class="exercise">
+      <span class="label">課題</span><br>
+      <code>03_advanced/htdocs/index.php</code> の仕上げです。<br>
+      章の途中に<strong>演習が4つ</strong>あります（この色の枠です）。出てきたその場で書いてください。<br>
+      <strong>このページまで終われば、1つ目の画面が完成</strong>します。チェックリストの5項目が全部そろいます。
+    </div>
+
+    <div class="note">
+      <span class="label">演習のコードは穴埋めになっています</span><br>
+      演習には書きかけのコードが載っています。<code class="hl"><span class="blank">xxxxxx</span></code> と<strong>黄色くなっているところを埋めてみましょう</strong>。<br>
+      横のコメントがヒントです。すぐ下に「答え」の折りたたみを置いていますが、<strong>先に自分で考えてから</strong>開いてください。
+    </div>
+  </section>
+
+  <section id="chapter1">
+    <h2>1. ドラッグできるようにする</h2>
+
+    <p>
+      マウスで札をつかんで動かせるようにします。<strong>自分で作ると大変ですが、部品が用意されています。</strong>
+    </p>
+
+    <div class="note">
+      <span class="label">jQuery UI</span><br>
+      <a href="basic_6.html">マークアップ中級#6</a> で使った jQuery に、<strong>あとから足して使う部品集</strong>です。ドラッグ・並べ替え・日付選択などが入っています。<br>
+      jQuery 本体とは<strong>別のファイル</strong>なので、2つとも読み込みます。
+    </div>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;script</span> <span class="sy-attr">src</span>=<span class="sy-str">"https://code.jquery.com/jquery-4.0.0.min.js"</span><span class="sy-tag">&gt;&lt;/script&gt;</span>
+<span class="sy-tag">&lt;script</span> <span class="sy-attr">src</span>=<span class="sy-str">"https://code.jquery.com/ui/1.14.2/jquery-ui.min.js"</span><span class="sy-tag">&gt;&lt;/script&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">順番が決まっている</span><br>
+      <strong>jQuery 本体が先、jQuery UI があと。</strong>逆にすると、UI 側が「jQuery が無い」と言って動きません。<br>
+      <a href="basic_6.html#chapter2">マークアップ中級#6</a> で「本体が先、自分のコードがあと」とやりました。<strong>同じ理由です。</strong>
+    </div>
+
+    <div class="note">
+      <span class="label">自分のコードは &lt;script&gt; の中に書く</span><br>
+      この2本を読み込んだあと、<strong>同じ <code>&lt;head&gt;</code> の中に <code>&lt;script&gt; … &lt;/script&gt;</code> を1つ足して</strong>、そこに自分のコードを書きます。<br>
+      <a href="basic_6.html">マークアップ中級#6</a> では <code>js/main.js</code> という別ファイルを作りました。<strong>ここでは1枚のファイルにまとめて書きます。</strong>別ファイルに切り出すのは <a href="advanced_class1.html">#11</a> でやります。
+    </div>
+
+    <h3>draggable を付ける</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6</div>
+        <pre class="vscode-code">$(<span class="ad-k">function</span> () {
+    $(<span class="ad-s">'.drag'</span>).<span class="ad-f">draggable</span>({
+        containment: <span class="ad-s">'#drag-area'</span>,
+        cursor: <span class="ad-s">'move'</span>
+    });
+});</pre>
+      </div>
+    </div>
+
+    <p>
+      <strong>これだけで動きます。</strong>札をつかんで動かせるようになりました。
+    </p>
+
+    <table>
+      <tr>
+        <th>指定</th>
+        <th>意味</th>
+      </tr>
+      <tr>
+        <td><code>containment</code></td>
+        <td><strong>動ける範囲。</strong>指定した要素の外へは出られません</td>
+      </tr>
+      <tr>
+        <td><code>cursor</code></td>
+        <td>つかんでいる間のマウスカーソルの形</td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">containment を付ける理由</span><br>
+      付けないと、<strong>画面のどこへでも持っていけます。</strong>枠の外に置かれると、保存された座標が枠と合わなくなります。<br>
+      <code>left_x</code> が 3000 のような値になると、次に開いたとき<strong>画面の外に表示されて見えなくなります。</strong>
+    </div>
+
+    <div class="note">
+      <span class="label">draggable と sortable</span><br>
+      jQuery UI には似た名前の <code>sortable</code> もあります。<strong>役割が違います。</strong><br>
+      <code>sortable</code> は<strong>並べ替え</strong>。リストの順番を入れ替えるときに使います。<br>
+      <code>draggable</code> は<strong>自由配置</strong>。好きな位置に置けます。今回はこちらです。<br>
+      テーブル名が <code>sortable</code> なので紛らわしいのですが、<strong>使っているのは draggable</strong> です。
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習1</span><br>
+      札を<strong>マウスで動かせる</strong>ようにしてください。<br>
+      動かせたら、<strong>枠の外に出られないこと</strong>も確かめましょう。<br>
+      この時点では<strong>再読み込みすると元に戻ります。</strong>まだ保存していないので、それで正しいです。
+      <span class="ad-label">index.php（穴埋め）</span>
+      <code class="ad-code hl">$(<span class="ad-k">function</span> () {
+    $(<span class="ad-s">'.drag'</span>).<span class="ad-f"><span class="blank">xxxxxx</span></span>({  <span class="ad-cm">/* 自由に動かせるようにするメソッドは？（この章） */</span>
+        <span class="blank">xxxxxx</span>: <span class="ad-s">'#drag-area'</span>,  <span class="ad-cm">/* 動ける範囲を決める指定は？ */</span>
+        cursor: <span class="ad-s">'move'</span>
+    });
+});</code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="ad-label">index.php</span>
+        <code class="ad-code hl">$(<span class="ad-s">'.drag'</span>).<span class="ad-f">draggable</span>({
+    containment: <span class="ad-s">'#drag-area'</span>,
+    cursor: <span class="ad-s">'move'</span>
+});</code>
+      </details>
+    </div>
+  </section>
+
+  <section id="chapter2">
+    <h2>2. Ajax ― 画面を切り替えずに送る</h2>
+
+    <p>
+      動かせるようになりましたが、<strong>再読み込みすると元に戻ります。</strong>位置を保存していないからです。
+    </p>
+
+    <h3>いままでのやり方だと困る</h3>
+
+    <p>
+      <a href="advanced_6.html">#6</a> で作った登録フォームは、ボタンを押すと<strong>ページ全体が読み込み直されました。</strong>同じやり方で位置を保存すると、こうなります。
+    </p>
+
+    <div class="ad-compare">
+      <div class="ad-compare-item is-ng">
+        <span class="ad-compare-label">フォーム送信で保存すると</span>
+        <code class="ad-code hl"><span class="ad-cm">札を動かす
+  ↓
+ページ全体が読み込み直される
+  ↓
+画面が一瞬白くなる
+  ↓
+スクロール位置も戻る</span></code>
+        <p><strong>1つ動かすたびに画面がちらつきます。</strong>使い物になりません。</p>
+      </div>
+      <div class="ad-compare-item is-ok">
+        <span class="ad-compare-label">Ajax で保存すると</span>
+        <code class="ad-code hl"><span class="ad-cm">札を動かす
+  ↓
+裏でサーバーへ送られる
+  ↓
+画面はそのまま
+  ↓
+何も起きていないように見える</span></code>
+        <p><strong>動かした感覚のまま、保存されています。</strong></p>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">Ajax（エイジャックス）</span><br>
+      <a href="advanced_5.html">#5</a> で名前だけ出しました。<code>Asynchronous JavaScript And XML</code> の頭文字です。<br>
+      <strong>非同期</strong>というのは、<strong>「返事を待たずに、先へ進む」</strong>という意味です。<br>
+      送信ボタンを押したときは、サーバーの返事が来るまでブラウザは何もできません。<strong>Ajax は待ちません。</strong>送るだけ送って、画面はそのまま操作を続けられます。返事が来たら、そのときに受け取ります。
+    </div>
+
+    <h3>座標を取り出す</h3>
+
+    <p>
+      ドラッグが終わった瞬間に、<strong>いまどこにあるか</strong>を調べます。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11</div>
+        <pre class="vscode-code">$(<span class="ad-s">'.drag'</span>).<span class="ad-f">draggable</span>({
+    containment: <span class="ad-s">'#drag-area'</span>,
+    cursor: <span class="ad-s">'move'</span>,
+
+    <span class="ad-cm">// ドラッグが終わったときに動く</span>
+    stop: <span class="ad-k">function</span> () {
+        <span class="ad-k">const</span> id   = $(<span class="ad-k">this</span>).<span class="ad-f">data</span>(<span class="ad-s">'id'</span>);
+        <span class="ad-k">const</span> left = $(<span class="ad-k">this</span>).<span class="ad-f">position</span>().left;
+        <span class="ad-k">const</span> top  = $(<span class="ad-k">this</span>).<span class="ad-f">position</span>().top;
+    }
+});</pre>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th>書き方</th>
+        <th>やっていること</th>
+      </tr>
+      <tr>
+        <td><code>stop:</code></td>
+        <td><strong>離した瞬間</strong>に動く。動かしている最中ではありません</td>
+      </tr>
+      <tr>
+        <td><code>$(this)</code></td>
+        <td><strong>いま動かした札。</strong>どれを動かしたか分かります</td>
+      </tr>
+      <tr>
+        <td><code>.position()</code></td>
+        <td>親から見た位置。<code>.left</code> <code>.top</code> で取り出せます</td>
+      </tr>
+      <tr>
+        <td><code>.data('id')</code></td>
+        <td>HTML の <code>data-id</code> 属性の値。<strong>どのレコードか</strong>を知るのに使います</td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">$(this) が使えるのは function だから</span><br>
+      <a href="basic_7.html#chapter2">マークアップ中級#7</a> で、<strong>アロー関数の中では <code>$(this)</code> がずれる</strong>という話をしました。<br>
+      ここも <code>function () { }</code> で書いています。<strong>アロー関数にすると動きません。</strong>
+    </div>
+
+    <div class="note">
+      <span class="label">data-id をHTMLに持たせる</span><br>
+      どの札がどのレコードなのか、JavaScript から分かるようにしておきます。<br>
+      <code class="hl"><span class="sy-tag">&lt;div</span> <span class="sy-attr">class</span>=<span class="sy-str">"drag"</span> <span class="sy-attr">data-id</span>=<span class="sy-str">"&lt;?= (int)$row['id'] ?&gt;"</span><span class="sy-tag">&gt;</span></code><br>
+      <strong><code>data-</code> で始まる属性</strong>は、自由に付けられます。HTMLの決まった属性ではなく、<strong>「自分で使うための入れ物」</strong>です。
+    </div>
+
+    <h3>送る</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11</div>
+        <pre class="vscode-code">$.<span class="ad-f">ajax</span>({
+    type: <span class="ad-s">'POST'</span>,
+    url : <span class="ad-s">'index.php'</span>,
+    data: { id: id, left: left, top: top }
+})
+.<span class="ad-f">done</span>(<span class="ad-k">function</span> () {
+    <span class="ad-f">console</span>.<span class="ad-f">log</span>(<span class="ad-s">'保存しました'</span>);
+})
+.<span class="ad-f">fail</span>(<span class="ad-k">function</span> (xhr) {
+    <span class="ad-f">console</span>.<span class="ad-f">log</span>(<span class="ad-s">'失敗:'</span>, xhr.status);
+});</pre>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th>部分</th>
+        <th>意味</th>
+      </tr>
+      <tr>
+        <td><code>type</code></td>
+        <td>送り方。<strong>更新なので POST</strong>（<a href="advanced_6.html#chapter1">#6の1章</a>）</td>
+      </tr>
+      <tr>
+        <td><code>url</code></td>
+        <td><strong>どこへ送るか。</strong>自分自身に送っています</td>
+      </tr>
+      <tr>
+        <td><code>data</code></td>
+        <td>送る中身。<strong>ここの名前が <code>$_POST['id']</code> になります</strong></td>
+      </tr>
+      <tr>
+        <td><code>.done()</code></td>
+        <td><strong>返事が来たら</strong>動く</td>
+      </tr>
+      <tr>
+        <td><code>.fail()</code></td>
+        <td><strong>失敗したら</strong>動く</td>
+      </tr>
+    </table>
+
+    <div class="caution">
+      <span class="label">url は相対で書く</span><br>
+      <code>'http://localhost:8001/'</code> のように<strong>全部書いてしまうと、環境が変わった瞬間に動かなくなります。</strong>ポート番号が違う人の環境で止まります。<br>
+      <strong><code>'index.php'</code> だけで届きます。</strong>いま開いているページと同じ場所を見に行くからです。
+    </div>
+
+    <div class="point">
+      <span class="label">.done() が要る理由</span><br>
+      Ajax は<strong>返事を待ちません。</strong>送ったらすぐ次の行へ進みます。<br>
+      なので「送ったあとにやりたいこと」を、そのまま下に書いても<strong>返事が来る前に実行されてしまいます。</strong><br>
+      <code>.done()</code> に入れておけば、<strong>返事が来たときに呼び出してもらえます。</strong>マークアップ中級#6 で <code>.on('click', …)</code> に処理を預けたのと同じ形です。
+    </div>
+
+    <div class="caution">
+      <span class="label">.fail() を必ず書く</span><br>
+      書かないと、<strong>失敗しても何も起きません。</strong>画面は何も言わないので、保存できていないことに気づけません。<br>
+      <strong>「動かないのに、エラーも出ない」</strong>の原因の大半がこれです。
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習2</span><br>
+      <strong>先に <code>index.php</code> の札に <code>data-id</code> を足してください。</strong>これが無いと、次の演習で「どのレコードか」が分からなくなります。<br>
+      そのうえで、札を離したときに<strong>座標をコンソールに出す</strong>ところまで作ってください。まだ送信はしません。<br>
+      開発者ツールの Console を開いて、動かすたびに数字が変わるのを確かめましょう。
+      <span class="ad-label">index.php（穴埋め）</span>
+      <code class="ad-code hl">$(<span class="ad-s">'.drag'</span>).<span class="ad-f">draggable</span>({
+    containment: <span class="ad-s">'#drag-area'</span>,
+
+    <span class="blank">xxxxxx</span>: <span class="ad-k">function</span> () {  <span class="ad-cm">/* 離した瞬間に動く指定は？（この章） */</span>
+        <span class="ad-k">const</span> id   = $(<span class="ad-k">this</span>).<span class="ad-f">data</span>(<span class="ad-s">'id'</span>);
+        <span class="ad-k">const</span> left = $(<span class="ad-k">this</span>).<span class="ad-f"><span class="blank">xxxxxx</span></span>().left;  <span class="ad-cm">/* 親から見た位置を返すメソッドは？ */</span>
+        <span class="ad-k">const</span> top  = $(<span class="ad-k">this</span>).<span class="ad-f">position</span>().top;
+
+        <span class="ad-f">console</span>.<span class="ad-f">log</span>(id, left, top);
+    }
+});</code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="ad-label">index.php</span>
+        <code class="ad-code hl">stop: <span class="ad-k">function</span> () {
+    <span class="ad-k">const</span> left = $(<span class="ad-k">this</span>).<span class="ad-f">position</span>().left;</code>
+      </details>
+    </div>
+  </section>
+
+  <section id="chapter3">
+    <h2>3. 受け取って更新する</h2>
+
+    <p>
+      送る側ができたので、<strong>受ける側</strong>を書きます。同じ <code>index.php</code> の中です。
+    </p>
+
+    <div class="caution">
+      <span class="label">1つのファイルが2つの役目を持つ</span><br>
+      <code>index.php</code> は、いま<strong>3通りの開かれ方</strong>をします。<br>
+      <strong>1. ふつうに開く</strong>（GET）… 一覧を表示する<br>
+      <strong>2. 登録ボタン</strong>（POST・name あり）… 登録して、リダイレクト<br>
+      <strong>3. Ajax</strong>（POST・id あり）… 座標を更新して、画面は返さない<br>
+      <strong>どれで来たのかを見分けて、処理を分けます。</strong>
+    </div>
+
+    <h3>Ajax で来たときだけ処理する</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14</div>
+        <pre class="vscode-code"><span class="ad-k">if</span> (<span class="ad-f">isset</span>(<span class="ad-v">$_POST</span>[<span class="ad-s">'id'</span>])) {
+    <span class="ad-v">$stmt</span> = <span class="ad-v">$pdo</span>-&gt;<span class="ad-f">prepare</span>(
+        <span class="ad-s">'UPDATE sortable
+         SET left_x = :left, top_y = :top
+         WHERE id = :id'</span>
+    );
+    <span class="ad-v">$stmt</span>-&gt;<span class="ad-f">execute</span>([
+        <span class="ad-s">':left'</span> =&gt; (<span class="ad-k">int</span>)<span class="ad-v">$_POST</span>[<span class="ad-s">'left'</span>],
+        <span class="ad-s">':top'</span>  =&gt; (<span class="ad-k">int</span>)<span class="ad-v">$_POST</span>[<span class="ad-s">'top'</span>],
+        <span class="ad-s">':id'</span>   =&gt; (<span class="ad-k">int</span>)<span class="ad-v">$_POST</span>[<span class="ad-s">'id'</span>],
+    ]);
+
+    <span class="ad-k">exit</span>;
+}</pre>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th>部分</th>
+        <th>やっていること</th>
+      </tr>
+      <tr>
+        <td><code>isset($_POST['id'])</code></td>
+        <td><strong>id が送られてきたか。</strong>Ajax のときだけ true になります</td>
+      </tr>
+      <tr>
+        <td><code>UPDATE … WHERE id</code></td>
+        <td>その1件だけを書き換える</td>
+      </tr>
+      <tr>
+        <td><code>(int)</code></td>
+        <td><strong>数値に変換。</strong>座標なので数値以外は来ないはずです</td>
+      </tr>
+      <tr>
+        <td><code>exit;</code></td>
+        <td><strong>ここで終わる。</strong>この先のHTMLを出力しません</td>
+      </tr>
+    </table>
+
+    <div class="caution">
+      <span class="label">WHERE を書き忘れると全部書き換わる</span><br>
+      <code>UPDATE sortable SET left_x = 100</code> とだけ書くと、<strong>全部の札が同じ位置に飛びます。</strong><br>
+      DELETE でも同じです。<code>WHERE</code> の無い <code>DELETE FROM sortable</code> は、<strong>テーブルの中身を全部消します。</strong><br>
+      <strong>UPDATE と DELETE を書くときは、まず WHERE から書く。</strong>これで事故が減ります。
+    </div>
+
+    <div class="point">
+      <span class="label">なぜ exit が要るのか</span><br>
+      書かないと、<strong>更新したあとで一覧のHTMLも出力されます。</strong>Ajax はそれを受け取りますが、使い道がありません。<br>
+      無駄な通信になりますし、<strong>返ってきた中身を見て「成功したか」を判断したいとき</strong>に邪魔になります。<br>
+      <strong>Ajax への返事は、必要なものだけ返す。</strong>
+    </div>
+
+    <div class="note">
+      <span class="label">isset とは</span><br>
+      <strong>その変数が存在するか</strong>を調べます。<code>is set</code>（設定されているか）という意味です。<br>
+      <a href="advanced_6.html#chapter2">#6</a> で使った <code>?? ''</code> は「無かったら空文字」でしたが、こちらは<strong>「あるかどうか」だけを true / false で返します。</strong>
+    </div>
+
+    <h3>書く場所に注意</h3>
+
+    <p>
+      この処理は、<strong>HTMLより前</strong>に置きます。
+    </p>
+
+    <div class="ad-compare">
+      <div class="ad-compare-item is-ok">
+        <span class="ad-compare-label">○ 正しい順番</span>
+        <code class="ad-code hl"><span class="ad-cm">&lt;?php
+  DB接続
+  Ajax の処理  ← exit で終わる
+  登録の処理    ← リダイレクト
+  一覧を取得
+?&gt;
+&lt;html&gt; … 表示 … &lt;/html&gt;</span></code>
+      </div>
+      <div class="ad-compare-item is-ng">
+        <span class="ad-compare-label">✕ HTMLのあとに書く</span>
+        <code class="ad-code hl"><span class="ad-cm">&lt;html&gt; … 表示 … &lt;/html&gt;
+&lt;?php
+  Ajax の処理  ← もう遅い
+?&gt;</span></code>
+        <p>先にHTMLが出てしまうので、<strong>Ajax が余計なものを受け取ります。</strong></p>
+      </div>
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習3</span><br>
+      ドラッグした位置が<strong>DBに保存される</strong>ようにしてください。<br>
+      できたら、札を動かして<strong>ページを再読み込み</strong>します。<strong>動かした場所に残っていれば成功</strong>です。<br>
+      うまくいかないときは、次の章の調べ方を先に読んでください。
+      <span class="ad-label">index.php（穴埋め）</span>
+      <code class="ad-code hl"><span class="ad-k">if</span> (<span class="ad-f"><span class="blank">xxxxxx</span></span>(<span class="ad-v">$_POST</span>[<span class="ad-s">'id'</span>])) {  <span class="ad-cm">/* 送られてきたかを調べる関数は？（この章） */</span>
+    <span class="ad-v">$stmt</span> = <span class="ad-v">$pdo</span>-&gt;<span class="ad-f">prepare</span>(
+        <span class="ad-s">'UPDATE sortable SET left_x = :left, top_y = :top <span class="blank">xxxxxx</span> id = :id'</span>  <span class="ad-cm">/* 1件だけに絞る句は？ */</span>
+    );
+    <span class="ad-v">$stmt</span>-&gt;<span class="ad-f">execute</span>([
+        <span class="ad-s">':left'</span> =&gt; (<span class="ad-k">int</span>)<span class="ad-v">$_POST</span>[<span class="ad-s">'left'</span>],
+        <span class="ad-s">':top'</span>  =&gt; (<span class="ad-k">int</span>)<span class="ad-v">$_POST</span>[<span class="ad-s">'top'</span>],
+        <span class="ad-s">':id'</span>   =&gt; (<span class="ad-k">int</span>)<span class="ad-v">$_POST</span>[<span class="ad-s">'id'</span>],
+    ]);
+
+    <span class="ad-k"><span class="blank">xxxxxx</span></span>;  <span class="ad-cm">/* ここで処理を終わらせる命令は？ */</span>
+}</code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="ad-label">index.php</span>
+        <code class="ad-code hl"><span class="ad-k">if</span> (<span class="ad-f">isset</span>(<span class="ad-v">$_POST</span>[<span class="ad-s">'id'</span>])) {
+    … <span class="ad-s">'UPDATE sortable SET left_x = :left, top_y = :top WHERE id = :id'</span> …
+
+    <span class="ad-k">exit</span>;
+}</code>
+      </details>
+    </div>
+  </section>
+
+  <section id="chapter4">
+    <h2>4. 動かないときの調べ方</h2>
+
+    <p>
+      Ajax は<strong>画面が何も変わらない</strong>ので、うまくいっているのか失敗しているのか、見ただけでは分かりません。<strong>ここでつまずく人がいちばん多いところです。</strong>
+    </p>
+
+    <div class="point">
+      <span class="label">目で見る手段を持つ</span><br>
+      「なんとなく動かない」で悩む時間が、いちばんもったいないです。<strong>3つの見る場所</strong>を覚えてください。<br>
+      これが分かれば、<strong>どこで止まっているかを切り分けられます。</strong>
+    </div>
+
+    <h3>1. Network タブ ― 送れているか</h3>
+
+    <p>
+      <kbd>F12</kbd> で開発者ツールを開き、<strong>Network</strong> タブを選びます。その状態で札を動かしてください。
+    </p>
+
+    <div class="ad-screen">
+      <div class="ad-screen-bar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+      </div>
+      <div class="ad-screen-body is-network">
+        <div class="ad-net-head">
+          <span>Name</span><span>Status</span><span>Type</span>
+        </div>
+        <div class="ad-net-row is-ok">
+          <span>index.php</span><span>200</span><span>xhr</span>
+        </div>
+      </div>
+    </div>
+
+    <p>
+      <strong>行が1つ増えれば、送れています。</strong>増えなければ、そもそも送信されていません。
+    </p>
+
+    <table>
+      <tr>
+        <th>Status</th>
+        <th>意味</th>
+        <th>疑うところ</th>
+      </tr>
+      <tr>
+        <td><strong>200</strong></td>
+        <td>成功</td>
+        <td>送信はできている。PHP側を調べる</td>
+      </tr>
+      <tr>
+        <td><strong>404</strong></td>
+        <td>見つからない</td>
+        <td><code>url</code> の書き方が違う</td>
+      </tr>
+      <tr>
+        <td><strong>500</strong></td>
+        <td>サーバー側でエラー</td>
+        <td>PHPのエラー。<strong>Response を見る</strong></td>
+      </tr>
+      <tr>
+        <td>行が出ない</td>
+        <td>送信されていない</td>
+        <td>JavaScript が止まっている。Console を見る</td>
+      </tr>
+    </table>
+
+    <div class="note">
+      <span class="label">Response で中身が見られる</span><br>
+      行をクリックすると、<strong>タブが開きます。</strong><br>
+      <strong>Payload</strong>（または Form Data）… <strong>何を送ったか</strong>。<code>id</code> <code>left</code> <code>top</code> が入っているか確かめられます。<br>
+      <strong>Response</strong> … <strong>何が返ってきたか</strong>。PHPのエラーが出ていれば、ここに文字で見えます。
+    </div>
+
+    <div class="caution">
+      <span class="label">500 のときは Response を必ず見る</span><br>
+      <code>.fail()</code> は「失敗した」としか教えてくれません。<strong>何が起きたかは Response に書いてあります。</strong><br>
+      <a href="advanced_5.html#chapter3">#5</a> で <code>display_errors</code> を入れたのは、このためでもあります。入れていないと、Response が真っ白で何も分かりません。
+    </div>
+
+    <h3>2. Console タブ ― JavaScript が動いているか</h3>
+
+    <p>
+      Network に何も出ないときは、<strong>そこまで到達していません。</strong>JavaScript のどこかで止まっています。
+    </p>
+
+    <div class="ad-samples">
+      <div>
+        <span class="ad-label">よくあるエラー</span>
+        <code class="ad-code hl"><span class="ad-cm">Uncaught TypeError:
+$(...).draggable is not a function</span></code>
+        <p style="margin-top:8px;font-size:12.5px">jQuery UI が読み込めていません。<code>&lt;script&gt;</code> の順番か、URLを確認してください。</p>
+      </div>
+      <div>
+        <span class="ad-label">よくあるエラー</span>
+        <code class="ad-code hl"><span class="ad-cm">Uncaught ReferenceError:
+$ is not defined</span></code>
+        <p style="margin-top:8px;font-size:12.5px">jQuery 本体が読み込めていません。自分のコードが先に書かれていないか確認してください。</p>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">console.log を置いて、どこまで来たか調べる</span><br>
+      エラーが出ていないのに動かないときは、<strong>処理が呼ばれていない</strong>可能性があります。<br>
+      <code>stop:</code> の先頭に <code>console.log('ここまで来た')</code> を置いてみてください。<strong>出なければ、そもそも呼ばれていません。</strong><br>
+      <a href="basic_7.html#chapter3">マークアップ中級#7</a> でやった使い方です。
+    </div>
+
+    <h3>3. DBを直接見る ― 本当に保存されたか</h3>
+
+    <p>
+      Network が 200 で、Console にもエラーが無い。それでも<strong>再読み込みすると位置が戻る。</strong>このときは、DBまで届いていません。
+    </p>
+
+    <div class="note">
+      <span class="label">phpMyAdmin で確かめる</span><br>
+      ブラウザで <code>localhost:8888</code> を開くと、DBの中身が直接見られます。<br>
+      <code>cri_sortable</code> → <code>sortable</code> テーブルを開いて、<strong><code>left_x</code> と <code>top_y</code> の値が変わっているか</strong>を確認してください。<br>
+      <strong>画面の表示ではなく、データそのものを見る。</strong>ここが最後の確かめ方です。
+    </div>
+
+    <div class="ad-flow">
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">1</span>
+        <strong>Console</strong>
+        <span>JavaScript は<br>動いているか</span>
+      </div>
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">2</span>
+        <strong>Network</strong>
+        <span>送れているか<br>何が返ったか</span>
+      </div>
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">3</span>
+        <strong>phpMyAdmin</strong>
+        <span>DBに<br>届いているか</span>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">つまずきの原因は、ほぼこの4つ</span><br>
+      <strong>1. 名前が違う</strong> … <code>data: { left: … }</code> と <code>$_POST['left']</code> が一致していない<br>
+      <strong>2. url が違う</strong> … 絶対URLを書いている、パスが間違っている<br>
+      <strong>3. exit を忘れた</strong> … 一覧のHTMLまで返している<br>
+      <strong>4. WHERE の id が届いていない</strong> … <code>data-id</code> を書き忘れて、<code>undefined</code> が送られている<br>
+      <strong>どれも Network タブの Payload を見れば分かります。</strong>
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習4</span><br>
+      <strong>わざと壊して、調べ方を試してください。</strong><br>
+      <strong>1.</strong> <code>url</code> を <code>'index2.php'</code> のような存在しない名前に変える → Network で <strong>404</strong> を確認<br>
+      <strong>2.</strong> 元に戻して、<code>data</code> の <code>left</code> を <code>lefto</code> に変える → Payload の名前が変わるのを確認。<br>
+      　　このとき <code>$_POST['left']</code> が受け取れず、<code>(int)null</code> つまり <code>0</code> が保存されます。リロードすると札が左端に飛びます（<code>top</code> のほうは保存されています）。<br>
+      　　Response には <code>Warning: Undefined array key "left"</code> が出ています。受け取る名前がずれると、エラーにならずに別の値が入る、という例です<br>
+      <strong>3.</strong> 元に戻して、正しく動くことを確認<br>
+      <br>
+      <strong>壊れた状態を自分で作れると、直せるようになります。</strong>
+    </div>
+  </section>
+
+  <section id="chapter5">
+    <h2>5. 所属を足す ― テーブルを分ける</h2>
+
+    <p>
+      ここまでで、<strong>動くものができました。</strong>ここからは<strong>すでに動いているものに、あとから機能を足します。</strong>
+    </p>
+
+    <div class="point">
+      <span class="label">実務ではこちらが普通</span><br>
+      最初から完成形を作ることは、まずありません。<strong>作って、動かして、あとから足す。</strong>この繰り返しです。<br>
+      「開発部と営業部で見た目を分けたい」という要望が来た、と思って進めてください。
+    </div>
+
+    <h3>カラムを足すか、テーブルを足すか</h3>
+
+    <p>
+      所属を持たせる方法は2つあります。<strong>どちらが良いか、先に考えてみてください。</strong>
+    </p>
+
+    <div class="ad-compare">
+      <div class="ad-compare-item">
+        <span class="ad-compare-label">A. カラムを足す</span>
+        <code class="ad-code hl"><span class="ad-cm">sortable
+  id
+  name
+  left_x
+  top_y
+  department  ← '開発部' / '営業部'</span></code>
+        <p>簡単。ですが<strong>同じ文字が何度も入ります。</strong></p>
+      </div>
+      <div class="ad-compare-item">
+        <span class="ad-compare-label">B. テーブルを分ける</span>
+        <code class="ad-code hl"><span class="ad-cm">sortable          departments
+  id                id
+  name              department
+  left_x
+  top_y
+  department_id  ────→  id</span></code>
+        <p><strong>番号で繋ぎます。</strong>今回はこちらでいきます。</p>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">なぜ分けるのか</span><br>
+      <strong>1. 書き間違いが起きない。</strong>「開発部」「開発」「開発部 」のような揺れが混ざりません。番号でしか入らないからです。<br>
+      <strong>2. 名前を変えるのが1箇所で済む。</strong>「開発部」を「プロダクト部」にしたくなったとき、A なら全レコードを書き換えます。B なら <code>departments</code> の1行だけです。<br>
+      <strong>3. 選択肢が増えても困らない。</strong>種類を足したいとき、B なら1行足すだけです。
+    </div>
+
+    <div class="caution">
+      <span class="label">正規化</span><br>
+      いまやったように<strong>「繰り返し出てくるものを、別のテーブルに分ける」</strong>ことを正規化といいます。<br>
+      データベース設計の基本の考え方で、<strong>実務では必ず出てきます。</strong>いまは「同じ文字が何度も出てきたら、分けられないか考える」とだけ覚えてください。
+    </div>
+
+    <h3>2つのテーブルをつなぐ ― JOIN</h3>
+
+    <p>
+      分けたので、<strong>取り出すときに繋ぎ直します。</strong>
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4</div>
+        <pre class="vscode-code"><span class="ad-s">'SELECT s.*, g.department AS department_name
+ FROM sortable AS s
+ LEFT JOIN departments AS g ON s.department_id = g.id
+ ORDER BY s.id'</span></pre>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th>部分</th>
+        <th>意味</th>
+      </tr>
+      <tr>
+        <td><code>AS s</code></td>
+        <td><strong>短い別名を付ける。</strong>以降 <code>s.name</code> のように書けます</td>
+      </tr>
+      <tr>
+        <td><code>LEFT JOIN departments</code></td>
+        <td><code>departments</code> を繋げる</td>
+      </tr>
+      <tr>
+        <td><code>ON s.department_id = g.id</code></td>
+        <td><strong>どう繋ぐか。</strong>番号が一致する行を結びます</td>
+      </tr>
+      <tr>
+        <td><code>g.department AS department_name</code></td>
+        <td>取り出すときに<strong>別名を付ける</strong></td>
+      </tr>
+    </table>
+
+    <div class="caution">
+      <span class="label">別名を付けておく理由</span><br>
+      いまは <code>sortable.name</code>（人の名前）と <code>departments.department</code>（部署名）で<strong>名前が違う</strong>ので、そのままでも取れます。<br>
+      ですが<strong>両方が <code>name</code> だったら、あとに書いたほうで上書きされます。</strong><code>$row['name']</code> が急に「開発部」になる、という事故が起きます。<br>
+      <strong>JOIN したときは、取り出す側に別名を付けておく。</strong>これを習慣にしておくと、テーブルが増えても困りません。
+    </div>
+
+    <div class="note">
+      <span class="label">LEFT JOIN と JOIN</span><br>
+      <strong>LEFT JOIN</strong> … 左（<code>sortable</code>）の行は<strong>必ず残す</strong>。相手が無ければ <code>null</code> が入ります。<br>
+      <strong>JOIN</strong> … 両方に揃っている行<strong>だけ</strong>返します。<br>
+      所属が未設定の札があったとき、<strong>JOIN だと画面から消えます。</strong>LEFT JOIN なら残ります。<strong>消えないほうが安全なので、こちらを使います。</strong>
+    </div>
+
+    <h3>見た目を分ける</h3>
+
+    <p>
+      取れた所属を、<strong>クラス名に変えて</strong>出します。
+    </p>
+
+    <div class="ad-samples">
+      <div>
+        <span class="ad-label">HTML（PHPで出力）</span>
+        <code class="ad-code hl"><span class="sy-tag">&lt;div</span> <span class="sy-attr">class</span>=<span class="sy-str">"drag department&lt;?= (int)$row['department_id'] ?&gt;"</span>
+     <span class="sy-attr">data-id</span>=<span class="sy-str">"&lt;?= (int)$row['id'] ?&gt;"</span><span class="sy-tag">&gt;</span></code>
+      </div>
+      <div>
+        <span class="ad-label">CSS（自分のCSSファイル）</span>
+        <code class="ad-code hl"><span class="sy-sel">.department1</span> { <span class="sy-attr">border-left-color</span>: <span class="sy-str">#2563eb</span>; }
+<span class="sy-sel">.department2</span> { <span class="sy-attr">border-left-color</span>: <span class="sy-str">#db2777</span>; }</code>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">色はCSSに書く</span><br>
+      <a href="basic_6.html">マークアップ中級#6</a> でやった考え方と同じです。<strong>PHPはクラス名を出すだけ。色を決めるのはCSS。</strong><br>
+      PHPの中に <code>style="border-left-color: blue"</code> と書いてしまうと、<strong>色を変えたいときにPHPを触ることになります。</strong>役割を分けておけば、CSSだけで済みます。
+    </div>
+
+    <h3>登録フォームにも足す</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;select</span> <span class="sy-attr">name</span>=<span class="sy-str">"department_id"</span><span class="sy-tag">&gt;</span>
+  <span class="sy-tag">&lt;option</span> <span class="sy-attr">value</span>=<span class="sy-str">"1"</span><span class="sy-tag">&gt;</span>開発部<span class="sy-tag">&lt;/option&gt;</span>
+  <span class="sy-tag">&lt;option</span> <span class="sy-attr">value</span>=<span class="sy-str">"2"</span><span class="sy-tag">&gt;</span>営業部<span class="sy-tag">&lt;/option&gt;</span>
+<span class="sy-tag">&lt;/select&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">value に番号を入れる</span><br>
+      画面に出るのは「開発部」ですが、<strong>送られるのは <code>1</code></strong> です。<code>value</code> が送信される値になります。<br>
+      これで <code>department_id</code> にそのまま入れられます。
+    </div>
+
+    <div class="caution">
+      <span class="label">選択肢もDBから作れる</span><br>
+      いまは <code>option</code> を手で書いていますが、<strong><code>departments</code> テーブルから取り出して並べることもできます。</strong><br>
+      そうしておけば、種類を足したときにHTMLを直さずに済みます。<strong>余裕があればやってみてください。</strong>
+    </div>
+
+    <div class="note">
+      <span class="label">作るテーブルの形</span><br>
+      <code>departments</code> は<strong>2カラムだけ</strong>です。<code>id</code> と <code>department</code>。<br>
+      <code>sortable</code> に足す <code>department_id</code> は、<strong><code>departments.id</code> と同じ型</strong>にします。型が違うと繋がらないことがあります。<br>
+      <strong>すでに入っている12件にも、忘れずに値を入れてください。</strong>空のままだと <code>LEFT JOIN</code> しても所属が付きません。
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習5</span><br>
+      <strong>所属の機能を足してください。</strong>やることは4つです。<br>
+      <strong>1.</strong> <code>departments</code> テーブルを作り、開発部・営業部を入れる<br>
+      <strong>2.</strong> <code>sortable</code> に <code>department_id</code> カラムを足す（既存の12件にも値を入れておく）<br>
+      <strong>3.</strong> 一覧の SQL を <code>LEFT JOIN</code> に書き換え、クラス名を出し分ける<br>
+      <strong>4.</strong> 登録フォームに選択欄を足し、<code>INSERT</code> に <code>department_id</code> を含める<br>
+      <br>
+      できたら、<strong>開発部・営業部それぞれで登録</strong>して、<strong>見た目が分かれること</strong>を確かめてください。
+      <span class="ad-label">SQL（穴埋め）</span>
+      <code class="ad-code hl"><span class="ad-s">'SELECT s.*, g.department <span class="blank">xxxxxx</span> department_name  <span class="ad-cm">/* 別名を付ける書き方は？（この章） */</span>
+ FROM sortable AS s
+ <span class="blank">xxxxxx</span> departments AS g <span class="blank">xxxxxx</span> s.department_id = g.id  <span class="ad-cm">/* 繋ぎ方と、繋ぐ条件を書く語は？ */</span>
+ ORDER BY s.id'</span></code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="ad-label">SQL</span>
+        <code class="ad-code hl"><span class="ad-s">'SELECT s.*, g.department AS department_name
+ FROM sortable AS s
+ LEFT JOIN departments AS g ON s.department_id = g.id
+ ORDER BY s.id'</span></code>
+      </details>
+    </div>
+
+    <div class="point">
+      <span class="label">このページでやったこと</span><br>
+      <strong>draggable でドラッグ／Ajax で裏に送る／UPDATE で更新する／Network と Console で調べる／テーブルを分けて JOIN で繋ぐ</strong>。<br>
+      とくに<strong>調べ方</strong>は、この先ずっと使います。<strong>「動かない」で止まらず、どこで止まっているかを切り分けられる</strong>ようになってください。
+    </div>
+
+    <div class="note">
+      <span class="label">1つ目の画面が完成しました</span><br>
+      <code>03_advanced/htdocs/index.php</code> が、チェックリストの5項目を全部満たしているはずです。<br>
+      <strong>次のページからは、同じものをもう一度作ります。</strong>動くものはできているので、今度は<strong>「どう書くか」</strong>を良くしていきます。
+    </div>
+  </section>
+
+</main>
+
+<nav class="page-nav">
+  <a class="page-prev" href="advanced_6.html">
+    <span class="page-nav-label">前のページ</span>
+    <span class="page-nav-title">フロントエンド中級#6</span>
+    <span class="page-nav-sub">フォームから登録する ― POST と INSERT</span>
+  </a>
+  <a class="page-next" href="advanced_class1.html">
+    <span class="page-nav-label">次のページ</span>
+    <span class="page-nav-title">フロントエンド中級#8</span>
+    <span class="page-nav-sub">ファイルを機能別に分ける</span>
+  </a>
+</nav>
+
+<!-- ▼ 共通スクリプト。章ナビ・コピーボタン・先頭へ戻るが自動で付く（編集不要） -->
+<script src="../js/training.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>フロントエンド中級#8</title>
+  <link rel="stylesheet" href="../css/training.css">
+
+  <!-- ▼ フロント編で共通のスタイル -->
+  <link rel="stylesheet" href="../css/advanced_common.css">
+
+  <!-- ▼ このページ専用のスタイル -->
+  <link rel="stylesheet" href="../css/advanced_class1.css">
+
+  <!-- ▼ 開いたときに、ページの先頭から読み始められるようにする。
+       ブラウザが前回の位置へ戻すより先に動かす必要があるため、
+       training.js とは分けて <head> で読み込んでいる -->
+  <script src="../js/scroll-reset.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>フロントエンド中級#8</h1>
+    <p>ファイルを機能別に分ける</p>
+  </div>
+</header>
+
+<main>
+
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol>
+      <li><a href="#chapter1">1枚に全部書くと、どうなるか</a></li>
+      <li><a href="#chapter2">処理ごとにファイルを分ける</a></li>
+      <li><a href="#chapter3">読み込む ― require</a></li>
+      <li><a href="#chapter4">分けたあとの形</a></li>
+    </ol>
+
+    <div class="note">
+      <span class="label">読む前に</span><br>
+      <a href="advanced_7.html">フロントエンド中級#7</a> で、<strong>動くものができました。</strong>ここからは<strong>同じものを、もう一度作ります。</strong><br>
+      動きは1つも変わりません。変えるのは<strong>「どう書くか」</strong>だけです。<strong>動くものを、読めるものにする</strong>のがこのページの目的です。
+    </div>
+
+    <div class="exercise">
+      <span class="label">課題</span><br>
+      作るのは <code>03_advanced/htdocs/sortable2/index.php</code> です。<strong>新しいフォルダを作って、そこに置きます。</strong><br>
+      いま動いている <code>index.php</code> は<strong>そのまま残してください。</strong>消さずに、隣に作ります。<br>
+      章の途中に<strong>演習が2つ</strong>あります（この色の枠です）。
+    </div>
+
+    <div class="note">
+      <span class="label">演習のコードは穴埋めになっています</span><br>
+      演習には書きかけのコードが載っています。<code class="hl"><span class="blank">xxxxxx</span></code> と<strong>黄色くなっているところを埋めてみましょう</strong>。<br>
+      横のコメントがヒントです。すぐ下に「答え」の折りたたみを置いていますが、<strong>先に自分で考えてから</strong>開いてください。
+    </div>
+  </section>
+
+  <section id="chapter1">
+    <h2>1. 1枚に全部書くと、どうなるか</h2>
+
+    <p>
+      いまの <code>index.php</code> を開いてみてください。<strong>1つのファイルに、何もかもが入っています。</strong>
+    </p>
+
+    <div class="ac1-one">
+      <span class="ac1-one-name">index.php</span>
+      <ul>
+        <li>DB接続の設定</li>
+        <li>Ajax で来たときの更新処理</li>
+        <li>登録ボタンで来たときの処理</li>
+        <li>一覧を取り出す SQL</li>
+        <li>HTML（フォーム）</li>
+        <li>HTML（札の一覧）</li>
+        <li>JavaScript（ドラッグと Ajax）</li>
+      </ul>
+    </div>
+
+    <p>
+      いまはこれで動いています。問題ありません。ですが、<strong>この先どうなるか</strong>を考えてみてください。
+    </p>
+
+    <div class="point">
+      <span class="label">機能が増えるとどうなるか</span><br>
+      削除ボタンを付けたい。→ 処理が1つ増える<br>
+      名前を編集したい。→ また増える<br>
+      並び順を変えたい。→ また増える<br>
+      <br>
+      そのたびに <code>index.php</code> が長くなります。<strong>300行、500行と伸びていきます。</strong>
+    </div>
+
+    <h3>長いファイルの何が困るのか</h3>
+
+    <table>
+      <tr>
+        <th>困ること</th>
+        <th>中身</th>
+      </tr>
+      <tr>
+        <td>探せない</td>
+        <td>「登録の処理はどこだ」と、毎回スクロールして探すことになります</td>
+      </tr>
+      <tr>
+        <td>直すのが怖い</td>
+        <td>1箇所直すと、関係ないところが壊れないか心配になります</td>
+      </tr>
+      <tr>
+        <td>使い回せない</td>
+        <td>DB接続を別のページでも使いたいのに、コピーするしかありません</td>
+      </tr>
+      <tr>
+        <td>2人で触れない</td>
+        <td>同じファイルを2人が直すと、ぶつかります</td>
+      </tr>
+    </table>
+
+    <div class="caution">
+      <span class="label">コピーが増えるのがいちばん怖い</span><br>
+      DB接続を <code>sortable2/index.php</code> にもコピーしたとします。ここで<strong>パスワードが変わったら、両方直す必要があります。</strong><br>
+      片方だけ直して、もう片方を忘れる。<strong>これが事故になります。</strong><br>
+      <strong>同じものが2箇所にある状態を作らない。</strong>これがこのページの目的です。
+    </div>
+
+    <div class="note">
+      <span class="label">いまは分けなくても困っていない</span><br>
+      正直に言うと、この規模なら1枚でも書けます。<strong>困っていないのに分けるのは、やりすぎとも言えます。</strong><br>
+      ですが<strong>分ける練習は、小さいうちにやったほうが楽</strong>です。500行になってから分けるのは、かなり骨が折れます。<br>
+      「なぜ分けるのか」を体で覚えるために、いまやっておきます。
+    </div>
+  </section>
+
+  <section id="chapter2">
+    <h2>2. 処理ごとにファイルを分ける</h2>
+
+    <p>
+      どう分けるか。<strong>「1つの処理に、1つのファイル」</strong>にします。
+    </p>
+
+    <div class="ac1-roles">
+      <div class="ac1-role">
+        <span class="ac1-role-file">config/config.php</span>
+        <span class="ac1-role-what">つなぐ</span>
+        <p>接続情報と <code>$pdo</code> の用意</p>
+      </div>
+      <div class="ac1-role">
+        <span class="ac1-role-file">function/insert.php</span>
+        <span class="ac1-role-what">登録する</span>
+        <p>フォームの送り先</p>
+      </div>
+      <div class="ac1-role">
+        <span class="ac1-role-file">function/update.php</span>
+        <span class="ac1-role-what">更新する</span>
+        <p>Ajax の送り先</p>
+      </div>
+      <div class="ac1-role">
+        <span class="ac1-role-file">index.php</span>
+        <span class="ac1-role-what">見せる</span>
+        <p>一覧の取得とHTMLの組み立て</p>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">ここが今までと違うところ</span><br>
+      <code>function/insert.php</code> と <code>function/update.php</code> は、<strong>読み込んで使うファイルではありません。</strong><br>
+      <strong>直接アクセスされるファイル</strong>です。フォームの <code>action</code> と Ajax の <code>url</code> が、この2つを指します。<br>
+      いままで <code>index.php</code> が3つの役目を持っていたのを、<strong>URLごと分けた</strong>と考えてください。
+    </div>
+
+    <div class="ad-compare">
+      <div class="ad-compare-item is-ng">
+        <span class="ad-compare-label">これまで（1枚）</span>
+        <code class="ad-code">index.php
+  ├ Ajax で来たら → 更新
+  ├ POST で来たら → 登録
+  └ それ以外     → 一覧
+
+送り先はどれも index.php</code>
+      </div>
+      <div class="ad-compare-item is-ok">
+        <span class="ad-compare-label">これから（分ける）</span>
+        <code class="ad-code">index.php               → 一覧
+function/insert.php     → 登録
+function/update.php     → 更新
+
+送り先が別々のURLになる</code>
+      </div>
+    </div>
+
+    <h3>作るフォルダとファイル</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">エクスプローラー</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">sortable2</div>
+      </div>
+      <div class="vscode-body">
+        <pre class="vscode-code">sortable2/
+├── index.php              画面の組み立て
+├── config/
+│   └── config.php         DB接続
+├── function/
+│   ├── insert.php         登録する
+│   └── update.php         座標を更新する
+├── css/
+│   └── style.css
+└── js/
+    └── sort.js            ドラッグと Ajax</pre>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">JavaScript もファイルに出す</span><br>
+      <a href="advanced_7.html">#7</a> では <code>index.php</code> の <code>&lt;head&gt;</code> の中に <code>&lt;script&gt;</code> で直接書きました。<strong>それを <code>js/sort.js</code> に移します。</strong><br>
+      <code>index.php</code> 側は <code>&lt;script src="js/sort.js" defer&gt;&lt;/script&gt;</code> の1行になります。<code>defer</code> は「HTMLを読み終えてから動かす」という指定です。<br>
+      今回の <code>sort.js</code> は <code>$(function () {</code> で全体を包んでいるので、これが無くても動きます。DOM の読み込み待ちは、その包みが引き受けているためです。<code>$(function () {</code> を使わずに書く場合は、<code>defer</code> が必要になります。<br>
+      <code>css/style.css</code> は<strong>そのままコピーで構いません。</strong>中身は変えません。
+    </div>
+
+    <h3>config/config.php を作る</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">config.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">config/config.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php</span>
+<span class="ad-f">ini_set</span>(<span class="ad-s">'display_errors'</span>, <span class="ad-s">'1'</span>);
+<span class="ad-f">error_reporting</span>(<span class="ad-c">E_ALL</span>);
+
+<span class="ad-k">const</span> <span class="ad-c">DB_DSN</span>  = <span class="ad-s">'mysql:host=mysql; dbname=cri_sortable; charset=utf8mb4'</span>;
+<span class="ad-k">const</span> <span class="ad-c">DB_USER</span> = <span class="ad-s">'root'</span>;
+<span class="ad-k">const</span> <span class="ad-c">DB_PASS</span> = <span class="ad-s">'root'</span>;
+
+<span class="ad-v">$pdo</span> = <span class="ad-k">new</span> <span class="ad-c">PDO</span>(<span class="ad-c">DB_DSN</span>, <span class="ad-c">DB_USER</span>, <span class="ad-c">DB_PASS</span>, [
+    <span class="ad-c">PDO</span>::<span class="ad-c">ATTR_ERRMODE</span>            =&gt; <span class="ad-c">PDO</span>::<span class="ad-c">ERRMODE_EXCEPTION</span>,
+    <span class="ad-c">PDO</span>::<span class="ad-c">ATTR_DEFAULT_FETCH_MODE</span> =&gt; <span class="ad-c">PDO</span>::<span class="ad-c">FETCH_ASSOC</span>,
+    <span class="ad-c">PDO</span>::<span class="ad-c">ATTR_EMULATE_PREPARES</span>   =&gt; <span class="ad-k">false</span>,
+]);</pre>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">閉じタグを書かない</span><br>
+      <strong>PHPだけのファイルには、最後の <code>?&gt;</code> を書きません。</strong><br>
+      書いてしまうと、そのあとの<strong>改行や空白まで出力されます。</strong><a href="advanced_6.html#chapter4">#6</a> で出た <code>headers already sent</code> の原因になります。<br>
+      <code>index.php</code> のように<strong>途中からHTMLが始まるファイルは別</strong>です。そちらは <code>?&gt;</code> で閉じます。
+    </div>
+
+    <div class="note">
+      <span class="label">ATTR_EMULATE_PREPARES を false に</span><br>
+      1行増えています。<code>prepare</code> を<strong>PHP側のふりではなく、DB側に本当にやらせる</strong>という指定です。<br>
+      既定では PHP が真似をすることがあり、そのぶん取りこぼしが起きます。<strong>付けておくほうが安全です。</strong>
+    </div>
+
+    <h3>function/insert.php を作る</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">insert.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">function/insert.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php</span>
+<span class="ad-k">require_once</span> <span class="ad-c">__DIR__</span> . <span class="ad-s">'/../config/config.php'</span>;
+
+<span class="ad-v">$name</span> = <span class="ad-f">trim</span>(<span class="ad-v">$_POST</span>[<span class="ad-s">'name'</span>] ?? <span class="ad-s">''</span>);
+
+<span class="ad-k">if</span> (<span class="ad-v">$name</span> !== <span class="ad-s">''</span>) {
+    <span class="ad-v">$stmt</span> = <span class="ad-v">$pdo</span>-&gt;<span class="ad-f">prepare</span>(
+        <span class="ad-s">'INSERT INTO sortable (name, department_id, left_x, top_y)
+         VALUES (:name, :department_id, 20, 20)'</span>
+    );
+    <span class="ad-v">$stmt</span>-&gt;<span class="ad-f">execute</span>([
+        <span class="ad-s">':name'</span>      =&gt; <span class="ad-v">$name</span>,
+        <span class="ad-s">':department_id'</span> =&gt; (<span class="ad-k">int</span>)(<span class="ad-v">$_POST</span>[<span class="ad-s">'department_id'</span>] ?? <span class="ad-n">0</span>),
+    ]);
+}
+
+<span class="ad-cm">// 登録が終わったら、呼び出し元の画面へ戻す</span>
+<span class="ad-f">header</span>(<span class="ad-s">'Location: ../index.php'</span>);
+<span class="ad-k">exit</span>;</pre>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">中身は #6 で書いたものと同じ</span><br>
+      <code>prepare</code> と <code>execute</code> の部分は、<a href="advanced_6.html#chapter3">#6</a> で書いたものをそのまま持ってきただけです。<strong>新しいことは何もしていません。</strong><br>
+      違うのは<strong>置き場所</strong>だけ。<code>index.php</code> の中にあったものが、専用のファイルに移りました。
+    </div>
+
+    <div class="caution">
+      <span class="label">最後に必ず戻す</span><br>
+      このファイルは<strong>画面を持ちません。</strong>処理だけして終わります。<br>
+      <code>header('Location: ../index.php')</code> を書かないと、<strong>真っ白なページのまま止まります。</strong>登録はできているのに、何も起きていないように見えます。<br>
+      <a href="advanced_6.html#chapter4">#6</a> でやった <strong>PRG パターン</strong>です。今回はファイルが分かれたので、戻り先が <code>../index.php</code> になります。
+    </div>
+
+    <div class="note">
+      <span class="label">../ は「1つ上のフォルダ」</span><br>
+      <code>function/insert.php</code> から見ると、<code>index.php</code> は<strong>1つ上</strong>にあります。だから <code>../index.php</code>。<br>
+      <code>config/config.php</code> も同じで、<code>function/</code> から見ると <code>../config/config.php</code> です。
+    </div>
+
+    <h3>function/update.php を作る</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">update.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">function/update.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php</span>
+<span class="ad-k">require_once</span> <span class="ad-c">__DIR__</span> . <span class="ad-s">'/../config/config.php'</span>;
+
+<span class="ad-cm">// Ajax から送られてきた座標を保存する</span>
+<span class="ad-k">if</span> (<span class="ad-f">isset</span>(<span class="ad-v">$_POST</span>[<span class="ad-s">'id'</span>])) {
+    <span class="ad-v">$stmt</span> = <span class="ad-v">$pdo</span>-&gt;<span class="ad-f">prepare</span>(
+        <span class="ad-s">'UPDATE sortable
+         SET left_x = :left, top_y = :top
+         WHERE id = :id'</span>
+    );
+    <span class="ad-v">$stmt</span>-&gt;<span class="ad-f">execute</span>([
+        <span class="ad-s">':left'</span> =&gt; (<span class="ad-k">int</span>)<span class="ad-v">$_POST</span>[<span class="ad-s">'left'</span>],
+        <span class="ad-s">':top'</span>  =&gt; (<span class="ad-k">int</span>)<span class="ad-v">$_POST</span>[<span class="ad-s">'top'</span>],
+        <span class="ad-s">':id'</span>   =&gt; (<span class="ad-k">int</span>)<span class="ad-v">$_POST</span>[<span class="ad-s">'id'</span>],
+    ]);
+}</pre>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">こちらは戻さない</span><br>
+      <code>insert.php</code> には <code>header</code> と <code>exit</code> がありましたが、<strong>こちらにはありません。</strong><br>
+      Ajax は<strong>画面を切り替えないから</strong>です。返事の中身も使わないので、何も出さずに終わります。<br>
+      <a href="advanced_7.html#chapter3">#7</a> で <code>exit;</code> を書いたのと同じ理由です。今回はファイルの終わりが、そのまま処理の終わりになります。
+    </div>
+
+    <div class="caution">
+      <span class="label">送り先が変わる</span><br>
+      <code>js/sort.js</code> の <code>url</code> を<strong>書き換える必要があります。</strong><br>
+      <code>url: 'index.php'</code> → <code>url: './function/update.php'</code><br>
+      ここを直し忘れると、<strong>ドラッグしても保存されません。</strong>Network タブでは <code>index.php</code> に飛んでいるのが見えます。
+    </div>
+  </section>
+
+  <section id="chapter3">
+    <h2>3. 読み込む ― require</h2>
+
+    <p>
+      分けたファイルを、使う側から読み込みます。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php</span>
+<span class="ad-k">require_once</span> <span class="ad-c">__DIR__</span> . <span class="ad-s">'/config/config.php'</span>;</pre>
+      </div>
+    </div>
+
+    <p>
+      これで、読み込んだ先に書いてあるものが、<strong>そのまま使えるようになります。</strong><code>config.php</code> で作った <code>$pdo</code> が、この <code>index.php</code> でも使えます。
+    </p>
+
+    <div class="point">
+      <span class="label">その場に貼り付けられる、と考える</span><br>
+      <code>require</code> は、<strong>そのファイルの中身を、書いた場所に貼り付ける</strong>ような動きをします。<br>
+      だから <code>config.php</code> を読み込めば、そこで作られた <code>$pdo</code> が使えます。別のファイルにあるのに使えるのは、<strong>貼り付けられているから</strong>です。
+    </div>
+
+    <h3>4つの書き方がある</h3>
+
+    <table>
+      <tr>
+        <th>書き方</th>
+        <th>無かったら</th>
+        <th>2回目は</th>
+      </tr>
+      <tr>
+        <td><code>require</code></td>
+        <td>止まる</td>
+        <td>また読む</td>
+      </tr>
+      <tr>
+        <td><code>require_once</code></td>
+        <td>止まる</td>
+        <td>読まない</td>
+      </tr>
+      <tr>
+        <td><code>include</code></td>
+        <td>警告だけ出して続く</td>
+        <td>また読む</td>
+      </tr>
+      <tr>
+        <td><code>include_once</code></td>
+        <td>警告だけ出して続く</td>
+        <td>読まない</td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">迷ったら require_once</span><br>
+      <strong>無いと動かないものには <code>require</code></strong> を使います。DB接続が読み込めていないのに先へ進んでも、意味の分からないエラーが出るだけです。<strong>その場で止まったほうが、原因が分かります。</strong><br>
+      <code>_once</code> は「1回だけ」という意味です。同じものを2回読み込むとエラーになることがあるので、<strong>付けておくと安全</strong>です。
+    </div>
+
+    <div class="caution">
+      <span class="label">__DIR__ を付ける</span><br>
+      <code>require_once 'config/config.php'</code> とだけ書くと、<strong>どこから呼ばれたかで探す場所が変わります。</strong><br>
+      <code>__DIR__</code> は<strong>「このファイルが置かれているフォルダ」</strong>です。これを基準にすれば、どこから呼ばれても指す場所が変わりません。<br>
+      ここを間違えると <code>Failed to open stream</code> というエラーが出ます。<strong>ファイルが増えるほど起きやすい</strong>ので、最初から付けておいてください。
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習1</span><br>
+      <code>sortable2/</code> フォルダを作り、<strong><code>config/config.php</code> を分けてください。</strong><br>
+      <code>index.php</code> から <code>require_once</code> で読み込んで、<strong>一覧が表示されるところまで</strong>動かします。<br>
+      動いたら、<code>config.php</code> のファイル名を<strong>わざと変えてみてください。</strong>どんなエラーが出るか見ておきます。
+      <span class="ad-label">index.php（穴埋め）</span>
+      <code class="ad-code hl"><span class="sy-tag">&lt;?php</span>
+<span class="ad-k"><span class="blank">xxxxxx</span></span> <span class="ad-c">__DIR__</span> . <span class="ad-s">'/config/config.php'</span>;  <span class="ad-cm">/* 無いと止まる・1回だけ読む書き方は？（この章） */</span>
+
+<span class="ad-v">$rows</span> = <span class="ad-v">$pdo</span>-&gt;<span class="ad-f">query</span>(
+    <span class="ad-s">'SELECT s.*, g.department
+     FROM sortable AS s
+     LEFT JOIN departments AS g ON s.department_id = g.id
+     ORDER BY s.id'</span>
+)-&gt;<span class="ad-f">fetchAll</span>();</code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="ad-label">index.php</span>
+        <code class="ad-code hl"><span class="ad-k">require_once</span> <span class="ad-c">__DIR__</span> . <span class="ad-s">'/config/config.php'</span>;</code>
+      </details>
+    </div>
+  </section>
+
+  <section id="chapter4">
+    <h2>4. 分けたあとの形</h2>
+
+    <p>
+      全部分け終わると、<code>index.php</code> はこうなります。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php</span>
+<span class="ad-k">require_once</span> <span class="ad-c">__DIR__</span> . <span class="ad-s">'/config/config.php'</span>;
+
+<span class="ad-v">$rows</span> = <span class="ad-v">$pdo</span>-&gt;<span class="ad-f">query</span>(
+    <span class="ad-s">'SELECT s.*, g.department
+     FROM sortable AS s
+     LEFT JOIN departments AS g ON s.department_id = g.id
+     ORDER BY s.id'</span>
+)-&gt;<span class="ad-f">fetchAll</span>();
+
+<span class="ad-v">$departments</span> = <span class="ad-v">$pdo</span>-&gt;<span class="ad-f">query</span>(<span class="ad-s">'SELECT * FROM departments ORDER BY id'</span>)-&gt;<span class="ad-f">fetchAll</span>();
+<span class="sy-tag">?&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">PHPが12行になった</span><br>
+      <strong>登録も更新も、ここには書かれていません。</strong>「つないで、一覧を取って、画面を出す」だけです。<br>
+      登録の中身が気になったら <code>function/insert.php</code> を開けばいい。<strong>読む順番を、自分で選べるようになりました。</strong>
+    </div>
+
+    <h3>送り先を書き換える</h3>
+
+    <p>
+      分けたぶん、<strong>フォームと Ajax の送り先</strong>を新しいファイルに向けます。
+    </p>
+
+    <div class="ad-compare">
+      <div class="ad-compare-item is-ng">
+        <span class="ad-compare-label">これまで</span>
+        <code class="ad-code">&lt;form action=""&gt;
+
+$.ajax({ url: 'index.php' })</code>
+        <p>どちらも自分自身に送っていた</p>
+      </div>
+      <div class="ad-compare-item is-ok">
+        <span class="ad-compare-label">これから</span>
+        <code class="ad-code">&lt;form action="./function/insert.php"&gt;
+
+$.ajax({ url: './function/update.php' })</code>
+        <p>それぞれの担当ファイルへ送る</p>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">ここを忘れると動かない</span><br>
+      ファイルを分けただけでは<strong>登録もドラッグも効きません。</strong>送り先が古いままだからです。<br>
+      <strong>分けたら、呼ぶ側も直す。</strong>セットで覚えてください。
+    </div>
+
+    <h3>動きは1つも変わっていない</h3>
+
+    <div class="ad-compare">
+      <div class="ad-compare-item is-ok">
+        <span class="ad-compare-label">index.php（1枚）</span>
+        <code class="ad-code">一覧が出る
+登録できる
+ドラッグで保存される
+部署で色が違う</code>
+      </div>
+      <div class="ad-compare-item is-ok">
+        <span class="ad-compare-label">sortable2/index.php</span>
+        <code class="ad-code">一覧が出る
+登録できる
+ドラッグで保存される
+部署で色が違う</code>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">これが大事なところ</span><br>
+      画面から見ると、<strong>何も変わっていません。</strong>チェックリストの項目も同じです。<br>
+      <strong>使う人にとって同じものを、作る人にとって良い形にする。</strong>これを<strong>リファクタリング</strong>といいます。<br>
+      実務では「動いているものを触るな」と言われることもありますが、<strong>触れる状態を保っておかないと、いずれ手が出せなくなります。</strong>
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習2</span><br>
+      <strong>残りも全部分けてください。</strong>やることは4つです。<br>
+      <strong>1.</strong> <code>function/insert.php</code> と <code>function/update.php</code> を作る<br>
+      <strong>2.</strong> <code>css/style.css</code> をコピーし、<code>index.php</code> の中の JavaScript を <code>js/sort.js</code> に出す<br>
+      <strong>3.</strong> フォームの <code>action</code> を <code>./function/insert.php</code> に変える<br>
+      <strong>4.</strong> <code>js/sort.js</code> の <code>url</code> を <code>./function/update.php</code> に変える<br>
+      <br>
+      <strong>チェックリストの5項目が、すべて通ることを確認してください。</strong>動きが変わっていたら、どこかで間違えています。
+      <span class="ad-label">js/sort.js（穴埋め）</span>
+      <code class="ad-code hl">$.<span class="ad-f">ajax</span>({
+    type: <span class="ad-s">'POST'</span>,
+    url : <span class="ad-s">'<span class="blank">xxxxxx</span>'</span>,  <span class="ad-cm">/* 座標を受け取るファイルはどこ？（2章） */</span>
+    data: { id: id, left: left, top: top }
+})</code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="ad-label">js/sort.js</span>
+        <code class="ad-code hl">url : <span class="ad-s">'./function/update.php'</span>,</code>
+      </details>
+    </div>
+
+    <div class="point">
+      <span class="label">このページでやったこと</span><br>
+      処理ごとにファイルを分ける／<code>require_once</code> で読み込む／送り先をそれぞれのファイルに向ける／動きを変えずに形を変える。<br>
+      <strong>「同じものを2箇所に書かない」「1つのファイルは1つのことだけ」。</strong>この2つが、分けるときの基準です。
+    </div>
+
+    <div class="note">
+      <span class="label">次のページでは</span><br>
+      ファイルは分かれましたが、<strong>まだ引っかかるところがあります。</strong><br>
+      <code>insert.php</code> も <code>update.php</code> も、1行目で<strong>同じ <code>config.php</code> を読み込んで</strong>います。そして中では <code>$pdo</code> を直接触っています。<br>
+      <strong>「つなぐ」も「登録する」も、まとめて1つの部品にできないか。</strong>それを解くのが<strong>クラス</strong>です。
+    </div>
+  </section>
+
+
+</main>
+
+<nav class="page-nav">
+  <a class="page-prev" href="advanced_7.html">
+    <span class="page-nav-label">前のページ</span>
+    <span class="page-nav-title">フロントエンド中級#7</span>
+    <span class="page-nav-sub">ドラッグした位置を保存する ― Ajax</span>
+  </a>
+  <a class="page-next" href="advanced_class2.html">
+    <span class="page-nav-label">次のページ</span>
+    <span class="page-nav-title">フロントエンド中級#9</span>
+    <span class="page-nav-sub">クラスにまとめる</span>
+  </a>
+</nav>
+
+<!-- ▼ 共通スクリプト。章ナビ・コピーボタン・先頭へ戻るが自動で付く（編集不要） -->
+<script src="../js/training.js"></script>
+
+</body>
+</html>

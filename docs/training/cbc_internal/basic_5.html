@@ -1,0 +1,1634 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>マークアップ中級#5</title>
+  <link rel="stylesheet" href="../css/training.css">
+
+  <!-- ▼ このページ専用のスタイル（成績表の実演） -->
+  <link rel="stylesheet" href="../css/basic_5.css">
+
+  <!-- ▼ 開いたときに、ページの先頭から読み始められるようにする。
+       ブラウザが前回の位置へ戻すより先に動かす必要があるため、
+       training.js とは分けて <head> で読み込んでいる -->
+  <script src="../js/scroll-reset.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>マークアップ中級#5</h1>
+    <p>初めてのエクセル関数 ― 成績表を作る</p>
+  </div>
+</header>
+
+<main>
+
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol>
+      <li><a href="#chapter1">IF の復習</a></li>
+      <li><a href="#chapter2">OR ― どれか1つでも</a></li>
+      <li><a href="#chapter3">絶対参照 ― ズレてほしくないとき</a></li>
+      <li><a href="#chapter4">AND とネスト ― 力技の限界</a></li>
+      <li><a href="#chapter5">COUNTIF ― 数えて判定する</a></li>
+      <li><a href="#chapter6">条件式のまとめ</a></li>
+      <li><a href="#chapter7">（発展）オートカレンダーを作る</a></li>
+    </ol>
+
+    <div class="note">
+      <span class="label">読む前に</span><br>
+      <a href="basic_4.html">中級#4</a> の続きです。今度は<strong>成績表</strong>を作りながら、条件のつくり方を深めます。<br>
+      使うのは<strong>中級#4 でダウンロードしたファイルの「成績表」シート</strong>です（<a href="basic_4.html#chapter1">まだの方はこちら</a>）。<br>
+      このページの見本も<strong>点数を打ち替えると判定が変わります</strong>。とくに4章と5章は、同じ問題を<strong>2通りの解き方</strong>で見比べてください。
+    </div>
+  </section>
+
+  <section id="chapter1">
+    <h2>1. IF の復習</h2>
+
+    <p>
+      これから作るのは、この成績表です。<strong>黄色いセルが、自分で式を入れるところ</strong>です。
+    </p>
+
+    <div class="ex">
+      <div class="ex-grid">
+        <table>
+          <colgroup>
+            <col class="ex-rownum">
+            <col class="ex-a">
+            <col class="ex-b">
+            <col><col><col><col><col><col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th>1</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><th>2</th><td></td><td></td><td colspan="3" class="ex-merge">科目</td><td colspan="3" class="ex-merge">判定</td></tr>
+            <tr>
+              <th>3</th><td></td><td></td>
+              <td class="ex-mid">英語</td><td class="ex-mid">数学</td><td class="ex-mid">国語</td>
+              <td class="ex-mid">英語が50点以下なら<br>「Oh No…」</td>
+              <td class="ex-mid">3教科で1つでも50点以下<br>があると「不合格」</td>
+              <td class="ex-mid">60点以上が2科目以上あれば<br>「よく出来ました!」</td>
+            </tr>
+            <tr><th>4</th><td></td><td>谷沢 博樹</td><td class="ex-num">49</td><td class="ex-num">100</td><td class="ex-num">65</td><td class="ex-fill ex-mid">Oh No…</td><td class="ex-fill ex-mid">不合格</td><td class="ex-fill ex-mid">よく出来ました!</td></tr>
+            <tr><th>5</th><td></td><td>田島 昌史</td><td class="ex-num">56</td><td class="ex-num">56</td><td class="ex-num">100</td><td class="ex-fill"></td><td class="ex-fill ex-mid">合格!</td><td class="ex-fill"></td></tr>
+            <tr><th>6</th><td></td><td>大葉 勇人</td><td class="ex-num">60</td><td class="ex-num">42</td><td class="ex-num">87</td><td class="ex-fill"></td><td class="ex-fill ex-mid">不合格</td><td class="ex-fill ex-mid">よく出来ました!</td></tr>
+            <tr><th>7</th><td></td><td>都月 隆</td><td class="ex-num">64</td><td class="ex-num">70</td><td class="ex-num">60</td><td class="ex-fill"></td><td class="ex-fill ex-mid">合格!</td><td class="ex-fill ex-mid">よく出来ました!</td></tr>
+            <tr><th>8</th><td></td><td>炭 達也</td><td class="ex-num">0</td><td class="ex-num">87</td><td class="ex-num">95</td><td class="ex-fill ex-mid">Oh No…</td><td class="ex-fill ex-mid">不合格</td><td class="ex-fill ex-mid">よく出来ました!</td></tr>
+            <tr><th>9</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><th>10</th><td></td><td>合格点</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><th>11</th><td></td><td class="ex-mid ex-mark">60点</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p>
+      F・G・H の3列を、それぞれ違う関数で埋めていきます。<strong>右へ行くほど条件が複雑</strong>になります。<br>
+      赤で囲った <strong>B11 の「合格点」</strong>は、3章で使います。ここを直すだけで表全体の判定が変わる、という作りにするためです。
+    </p>
+
+    <p>
+      まずは1列目から。英語の点数が50点以下だったら、警告を出す。<a href="basic_4.html#chapter3">中級#4</a> でやった <code>IF</code> をそのまま使います。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">数式バー</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">警告を出す</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1</div>
+        <pre class="vscode-code">=IF(C4&lt;=50, <span class="sy-str">"Oh No..."</span>, <span class="sy-str">""</span>)</pre>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th>部分</th>
+        <th>意味</th>
+      </tr>
+      <tr>
+        <td><code>C4&lt;=50</code></td>
+        <td><strong>条件</strong>。C4 が50以下なら</td>
+      </tr>
+      <tr>
+        <td><code>"Oh No..."</code></td>
+        <td>条件に<strong>合ったとき</strong>の答え</td>
+      </tr>
+      <tr>
+        <td><code>""</code></td>
+        <td>条件に<strong>合わなかったとき</strong>の答え（空白）</td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">IF は必ず3つセット</span><br>
+      <strong>条件・合ったとき・合わなかったとき</strong>。この3つが揃って1つの式です。<br>
+      3つ目を書き忘れると、条件に合わなかったとき <code>FALSE</code> という文字が表示されてしまいます。
+    </div>
+  </section>
+
+  <section id="chapter2">
+    <h2>2. OR ― どれか1つでも</h2>
+
+    <p>
+      3教科のうち<strong>どれか1つでも</strong>50点以下なら「不合格」にしたい。条件が3つあるとき、<code>IF</code> だけでは書きづらくなります。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">数式バー</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">OR の書き方</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3</div>
+        <pre class="vscode-code">=OR(条件1, 条件2, 条件3, ...)
+
+=IF( OR(C4&lt;=50, D4&lt;=50, E4&lt;=50), <span class="sy-str">"不合格"</span>, <span class="sy-str">"合格!"</span> )</pre>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">OR は「または」</span><br>
+      <strong>並べた条件のうち、1つでも当てはまれば「真」</strong>になります。全部外れたときだけ「偽」です。<br>
+      日本語の<strong>「AまたはBまたはC」</strong>と同じ意味だと思ってください。
+    </div>
+
+    <div class="caution">
+      <span class="label">空白にしていい場合と、いけない場合がある</span><br>
+      1章の <code>IF</code> は、条件に合わないとき <code>""</code>（空白）を返していました。ここでは <strong><code>"合格!"</code> を返しています</strong>。この違いには理由があります。<br>
+      <br>
+      <strong>F列は「警告を出す」列</strong>です。50点より上なら、出すものがありません。だから空白で正しい。<br>
+      <strong>G列は「合否を出す」列</strong>です。不合格でないなら合格であって、<strong>空白では判定していないのと同じ</strong>になります。<br>
+      <br>
+      <code>""</code> と書くかどうかは、<strong>その列が何を出す列なのか</strong>で決まります。「とりあえず空白」と書くと、あとで見た人が「式が入っていないのか、条件に合わなかったのか」を区別できなくなります。
+    </div>
+
+    <div class="note">
+      <span class="label">IF の中に入れる</span><br>
+      <code>OR()</code> は<strong>単体では「TRUE」か「FALSE」しか返しません</strong>。「不合格」という文字を出したいので、<strong><code>IF</code> の条件の場所に置いて</strong>使います。<br>
+      <strong>関数の中に関数を入れる</strong>この書き方を、次の章で本格的に使います。
+    </div>
+  </section>
+
+  <section id="chapter3">
+    <h2>3. 絶対参照 ― ズレてほしくないとき</h2>
+
+    <p>
+      合格点を <strong>B11</strong> のセルにまとめて書いておきたい。そうすれば、合格ラインを変えたいとき<strong>1箇所直すだけ</strong>で済みます。
+    </p>
+
+    <p>
+      ところが、ここで問題が起きます。<a href="basic_4.html#chapter2">中級#4</a> でやったオートフィルは、<strong>参照を自動でズラす</strong>のでした。
+    </p>
+
+    <div class="xl-scroll">
+      <table class="xl-sheet ref-demo">
+        <thead>
+          <tr>
+            <th></th>
+            <th>書いた式</th>
+            <th>1つ下にコピーすると</th>
+            <th>結果</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="xl-name">相対参照</td>
+            <td>=C4&gt;=B11</td>
+            <td>=C5&gt;=<span class="ref-ng">B12</span></td>
+            <td class="xl-name"><span class="ref-ng">合格点がズレて空セルを見てしまう</span></td>
+          </tr>
+          <tr>
+            <td class="xl-name">絶対参照</td>
+            <td>=C4&gt;=$B$11</td>
+            <td>=C5&gt;=<span class="ref-ok">$B$11</span></td>
+            <td class="xl-name"><span class="ref-ok">合格点は固定されたまま</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>$ を付けると固定される</h3>
+
+    <table>
+      <tr>
+        <th>書き方</th>
+        <th>意味</th>
+      </tr>
+      <tr>
+        <td><code>A1</code></td>
+        <td><strong>相対参照</strong>。コピーするとズレる</td>
+      </tr>
+      <tr>
+        <td><code>$A$1</code></td>
+        <td><strong>絶対参照</strong>。列も行も固定</td>
+      </tr>
+      <tr>
+        <td><code>$A1</code></td>
+        <td>列だけ固定（行はズレる）</td>
+      </tr>
+      <tr>
+        <td><code>A$1</code></td>
+        <td>行だけ固定（列はズレる）</td>
+      </tr>
+    </table>
+
+    <div class="note">
+      <span class="label">$ は「動くな」の印</span><br>
+      <strong><code>$</code> のすぐ<u>後ろ</u>にあるものが固定されます。</strong><code>$A</code> なら列A、<code>$1</code> なら行1。<br>
+      入力中に <kbd>F4</kbd> キーを押すと、<code>A1</code> → <code>$A$1</code> → <code>A$1</code> → <code>$A1</code> と順番に切り替わります。
+    </div>
+
+    <div class="point">
+      <span class="label">この考え方には名前が付いている</span><br>
+      合格点を1箇所にまとめて、全部の式からそこを見る。この形を<strong>変数</strong>と呼びます。<a href="basic_7.html">中級#7</a> で本格的に扱う考え方を、いまエクセルで先に体験していることになります。<br>
+      <strong>同じ値を何度も書かない。1箇所を直せば全部変わるようにする。</strong>エクセルでもプログラムでも、良い作りの条件は同じです。
+    </div>
+  </section>
+
+  <section id="chapter4">
+    <h2>4. AND とネスト ― 力技の限界</h2>
+
+    <p>
+      今度は<strong>「3教科のうち2教科以上が合格点」なら「よく出来ました！」</strong>と出したい。まず素直に考えてみます。
+    </p>
+
+    <div class="point">
+      <span class="label">AND は「かつ」</span><br>
+      <code>OR</code> が「どれか1つでも」なのに対して、<strong><code>AND</code> は並べた条件が<u>全部</u>当てはまったときだけ「真」</strong>になります。
+    </div>
+
+    <h3>素直に考えると</h3>
+
+    <p>
+      「2教科以上」ということは、組み合わせは<strong>3通り</strong>です。「国語と数学」「国語と英語」「数学と英語」。これを全部 <code>AND</code> で書いて、<code>IF</code> でつなぎます。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">数式バー</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">力技バージョン</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13</div>
+        <pre class="vscode-code">=IF(
+  AND(C5&gt;=$B$11, D5&gt;=$B$11),
+  <span class="sy-str">"よく出来ました！"</span>,
+  IF(
+    AND(C5&gt;=$B$11, E5&gt;=$B$11),
+    <span class="sy-str">"よく出来ました！"</span>,
+    IF(
+      AND(D5&gt;=$B$11, E5&gt;=$B$11),
+      <span class="sy-str">"よく出来ました！"</span>,
+      <span class="sy-str">""</span>
+    )
+  )
+)</pre>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">ネストとは</span><br>
+      <strong>関数の中に、同じ関数を入れ子にすること</strong>を<strong>ネスト</strong>と呼びます（nest ＝ 巣）。<br>
+      上の式は <code>IF</code> の「合わなかったとき」の場所に、また <code>IF</code> を書いています。これで「ダメならこっちを試す」を繋げています。
+    </div>
+
+    <div class="caution">
+      <span class="label">これは良い書き方ではない</span><br>
+      動きはします。しかし<strong>読みづらく、直しづらい</strong>。教科が4つに増えたら組み合わせは6通りになり、式は倍の長さになります。<br>
+      そして <strong>IF のネストは最大7層まで</strong>という制限もあります。力技には限界があります。
+    </div>
+
+    <div class="point">
+      <span class="label">「動くけど、良くない」を見抜く</span><br>
+      プログラムでも同じ状況が必ず起きます。<strong>動くコードと、良いコードは違います。</strong><br>
+      「これ、条件が増えたらどうなる？」と自問したときに<strong>嫌な予感がしたら、たいてい別のやり方があります</strong>。次の章がその答えです。
+    </div>
+  </section>
+
+  <section id="chapter5">
+    <h2>5. COUNTIF ― 数えて判定する</h2>
+
+    <p>
+      発想を変えます。<strong>「2教科以上が合格点」＝「合格点を超えた教科の<u>数</u>が2つ以上」</strong>。<br>
+      組み合わせを並べるのではなく、<strong>数えればいい</strong>のです。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">数式バー</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">COUNTIF の書き方</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3</div>
+        <pre class="vscode-code">=COUNTIF(範囲, <span class="sy-str">"検索条件"</span>)
+
+=COUNTIF(C4:E4, <span class="sy-str">"&gt;=60"</span>)   <span class="sy-com">← 60点以上がいくつあるか数える</span></pre>
+      </div>
+    </div>
+
+    <h3>さっきの式が、これだけになる</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">数式バー</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">COUNTIF バージョン</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5</div>
+        <pre class="vscode-code">=IF(
+  COUNTIF(C4:E4, <span class="sy-str">"&gt;="</span> &amp; $B$11) &gt;= 2,
+  <span class="sy-str">"よく出来ました！"</span>,
+  <span class="sy-str">""</span>
+)</pre>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">"&gt;=" &amp; $B$11 の意味</span><br>
+      検索条件は<strong>文字として渡します</strong>。合格点をセルから取りたいので、<strong><code>"&gt;="</code> という文字と、B11の中身をつなげて</strong>います。<br>
+      <code>&amp;</code> でつなぐのは <a href="basic_4.html#chapter5">中級#4</a> の TEXT でやったのと同じです。B11 が 60 なら、結果は <code>"&gt;=60"</code> という文字になります。
+    </div>
+
+    <h3>2つの式を並べて試す</h3>
+
+    <p>
+      点数を打ち替えてください。<strong>力技バージョンと COUNTIF バージョンが、常に同じ答えを出す</strong>ことが確認できます。
+    </p>
+
+    <div class="xl-demo">
+      <div class="xl-row">
+        <label for="in-goukaku">合格点（B11）</label>
+        <input type="number" class="xl-input" id="in-goukaku" value="60">
+      </div>
+      <div class="xl-row">
+        <label for="in-kokugo">国語（C4）</label>
+        <input type="number" class="xl-input" id="in-kokugo" value="75">
+        <label for="in-suugaku">数学（D4）</label>
+        <input type="number" class="xl-input" id="in-suugaku" value="82">
+        <label for="in-eigo">英語（E4）</label>
+        <input type="number" class="xl-input" id="in-eigo" value="45">
+      </div>
+
+      <div class="xl-scroll">
+        <table class="xl-sheet">
+          <thead>
+            <tr>
+              <th>調べていること</th>
+              <th>結果</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="xl-name">合格点以上の教科は何個あるか</td>
+              <td class="xl-out" id="out-count">-</td>
+            </tr>
+            <tr>
+              <td class="xl-name">2科目以上あれば「よく出来ました!」 ― 力技（IF + AND）</td>
+              <td id="out-nest">-</td>
+            </tr>
+            <tr>
+              <td class="xl-name">同じ判定を COUNTIF で</td>
+              <td id="out-countif">-</td>
+            </tr>
+            <tr>
+              <td class="xl-name">1つでも合格点未満なら「不合格」（OR）</td>
+              <td id="out-or">-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">同じ答えなら、短いほうが正しい</span><br>
+      13行が5行になりました。しかも<strong>教科が10個に増えても、この式は1文字も変わりません</strong>（範囲を <code>C4:L4</code> にするだけ）。<br>
+      <strong>力技で解けたあと、「もっと短くならないか」と考える</strong>。この一手間が、書ける人と書けない人を分けます。
+    </div>
+
+    <h3>検索条件の書き方</h3>
+
+    <table>
+      <tr>
+        <th>書き方</th>
+        <th>数えるもの</th>
+      </tr>
+      <tr>
+        <td><code>COUNTIF(C4:E4, "&gt;=60")</code></td>
+        <td>60以上</td>
+      </tr>
+      <tr>
+        <td><code>COUNTIF(C4:E4, "&gt;60")</code></td>
+        <td>60より大きい（60は含まない）</td>
+      </tr>
+      <tr>
+        <td><code>COUNTIF(A1:D6, "合格")</code></td>
+        <td>「合格」という文字</td>
+      </tr>
+      <tr>
+        <td><code>COUNTIF(C4:E4, "文字?")</code></td>
+        <td>「文字」＋<strong>任意の1字</strong></td>
+      </tr>
+      <tr>
+        <td><code>COUNTIF(C4:E4, "*文字")</code></td>
+        <td>「文字」で<strong>終わる</strong>もの</td>
+      </tr>
+    </table>
+
+    <div class="note">
+      <span class="label">? と * はワイルドカード</span><br>
+      <strong><code>?</code> は「なんでもいい1文字」</strong>、<strong><code>*</code> は「なんでもいい0文字以上」</strong>です。<br>
+      検索するときの「あいまい指定」で、これもプログラムの世界で広く使われる記法です。
+    </div>
+  </section>
+
+  <section id="chapter6">
+    <h2>6. 条件式のまとめ</h2>
+
+    <h3>真と偽</h3>
+
+    <p>
+      条件の答えは、必ず<strong>2つのどちらか</strong>です。
+    </p>
+
+    <table>
+      <tr>
+        <th>呼び方</th>
+        <th>表示</th>
+        <th>意味</th>
+      </tr>
+      <tr>
+        <td>真（しん）</td>
+        <td><code>TRUE</code></td>
+        <td>条件に当てはまる</td>
+      </tr>
+      <tr>
+        <td>偽（ぎ）</td>
+        <td><code>FALSE</code></td>
+        <td>条件に当てはまらない</td>
+      </tr>
+    </table>
+
+    <div class="note">
+      <span class="label">これにも名前が付いている</span><br>
+      「はい」か「いいえ」しかない値のことを<strong>真偽値（boolean）</strong>と呼びます。<code>TRUE</code> / <code>FALSE</code> がそれです。<br>
+      プログラムでも同じ言葉が出てきます（<a href="basic_7.html">中級#7</a>）。エクセルで先に体験しておくと、そこで戸惑いません。
+    </div>
+
+    <h3>比較の記号</h3>
+
+    <table>
+      <tr>
+        <th>記号</th>
+        <th>読み方</th>
+        <th>例</th>
+        <th>意味</th>
+      </tr>
+      <tr>
+        <td><code>=</code></td>
+        <td>等しい</td>
+        <td><code>=2</code></td>
+        <td>2と同じ</td>
+      </tr>
+      <tr>
+        <td><code>&lt;&gt;</code></td>
+        <td>等しくない</td>
+        <td><code>&lt;&gt;2</code></td>
+        <td>2以外</td>
+      </tr>
+      <tr>
+        <td><code>&gt;</code></td>
+        <td>より大きい</td>
+        <td><code>&gt;2</code></td>
+        <td>2より大きい（2は含まない）</td>
+      </tr>
+      <tr>
+        <td><code>&lt;</code></td>
+        <td>より小さい</td>
+        <td><code>&lt;2</code></td>
+        <td>2より小さい（2は含まない）</td>
+      </tr>
+      <tr>
+        <td><code>&gt;=</code></td>
+        <td>以上</td>
+        <td><code>&gt;=2</code></td>
+        <td>2以上（2を含む）</td>
+      </tr>
+      <tr>
+        <td><code>&lt;=</code></td>
+        <td>以下</td>
+        <td><code>&lt;=2</code></td>
+        <td>2以下（2を含む）</td>
+      </tr>
+    </table>
+
+    <div class="caution">
+      <span class="label">「より大きい」と「以上」は違う</span><br>
+      <strong>合格点が60点のとき、ちょうど60点は合格か</strong>。<code>&gt;=60</code> なら合格、<code>&gt;60</code> なら不合格です。<br>
+      この1文字の違いで結果が変わります。<strong>境目の値でテストする</strong>癖をつけてください。バグの多くは境目に潜んでいます。
+    </div>
+
+    <h3>空白の判定</h3>
+
+    <div class="xl-samples">
+      <div>
+        <span class="xl-label">空白なら空白、そうでなければ計算</span>
+        <code class="xl-code hl">=<span class="f">IF</span>(<span class="r">A1</span>=<span class="v">""</span>, <span class="v">""</span>, <span class="r">B1</span>-<span class="r">C1</span>)</code>
+      </div>
+      <div>
+        <span class="xl-label">データがあれば空白、なければ計算</span>
+        <code class="xl-code hl">=<span class="f">IF</span>(<span class="r">A1</span>&gt;<span class="v">""</span>, <span class="v">""</span>, <span class="r">B1</span>-<span class="r">C1</span>)</code>
+      </div>
+    </div>
+
+    <h3>数値のまま「点」を付ける</h3>
+
+    <p>
+      <strong>60</strong> と入っているセルを <strong>60点</strong> と見せたい。でも計算にも使いたい。
+    </p>
+
+    <div class="caution">
+      <span class="label">「60点」と打ってはいけない</span><br>
+      セルに <code>60点</code> と直接打つと、それは<strong>文字</strong>になります。<strong>計算に使えなくなり、COUNTIF でも数えられません</strong>。<br>
+      <a href="basic_4.html#chapter4">中級#4</a> の <code>#VALUE!</code> エラーの原因はこれです。
+    </div>
+
+    <table>
+      <tr>
+        <th>手順</th>
+        <th>やること</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>セルを選んで<strong>右クリック → セルの書式設定</strong></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><strong>表示形式 → ユーザー定義</strong>を選ぶ</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>種類の欄に <code>#,##0"点"</code> と入力する</td>
+      </tr>
+    </table>
+
+    <div class="fmt">
+      <div class="fmt-tabs">
+        <span class="fmt-tab is-on">表示形式</span>
+        <span class="fmt-tab">配置</span>
+        <span class="fmt-tab">フォント</span>
+        <span class="fmt-tab">罫線</span>
+        <span class="fmt-tab">塗りつぶし</span>
+        <span class="fmt-tab">保護</span>
+      </div>
+
+      <div class="fmt-body">
+        <div class="fmt-side">
+          <div class="fmt-cap">分類:</div>
+          <div class="fmt-list">
+            <div>標準</div>
+            <div>数値</div>
+            <div>通貨</div>
+            <div>会計</div>
+            <div>日付</div>
+            <div>時刻</div>
+            <div>パーセンテージ</div>
+            <div>分数</div>
+            <div>指数</div>
+            <div>文字列</div>
+            <div>その他</div>
+            <div class="is-on">ユーザー定義</div>
+          </div>
+        </div>
+
+        <div class="fmt-main">
+          <div class="fmt-sample">
+            <div class="fmt-cap">サンプル</div>
+            <b>60点</b>
+          </div>
+
+          <div class="fmt-cap">種類:</div>
+          <div class="fmt-input">#,##0"点"</div>
+
+          <div class="fmt-choices">
+            <div class="is-on">#,##0"点"</div>
+            <div>0;[赤]0</div>
+            <div>0"年"</div>
+            <div>0"月"</div>
+            <div>0"日"</div>
+            <div>0_</div>
+            <div>#,##0;"△ "#,##0</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p>
+      数字の最後に <code>""</code>（ダブルクォーテーション）で好きな単位を入れます。見た目は「60点」ですが、<strong>セルの中身は数値の 60 のまま</strong>です。<br>
+      左の一覧に <code>0"年"</code> <code>0"月"</code> <code>0"日"</code> があるとおり、単位は自由に決められます。
+    </p>
+
+    <div class="point">
+      <span class="label">中身と見た目を分ける</span><br>
+      <strong>セルの中身は数値のまま、見た目だけ「点」を付ける</strong>。これが正しいやり方です。<br>
+      <strong>データと表示は別物</strong>。この考え方は、このあとずっと出てきます。<a href="basic_6.html">中級#6</a> では「見た目はCSS、動きはjQuery」という形で、同じ分け方をすることになります。
+    </div>
+
+    <div class="point">
+      <span class="label">2ページで身についたこと</span><br>
+      <strong>条件で分ける（IF）／複数条件（OR・AND）／値を固定する（絶対参照）／数えて判定する（COUNTIF）</strong>。<br>
+      そして<strong>「力技で解けたあと、短くできないか考える」</strong>という姿勢。ここから先のプログラミングで、ずっと使う考え方です。
+    </div>
+
+  </section>
+
+  <section id="chapter7">
+    <h2>7. （発展）オートカレンダーを作る</h2>
+
+    <div class="caution">
+      <span class="label">この章は自由学習です</span><br>
+      マークアップ編は<strong>すべての課題提出まで1日〜4日</strong>を目安としています。<br>
+      <strong>先にマークアップ編を読み終え、課題をすべて提出し終えてください。</strong>そのうえで目安の日数に収まりそうであれば、取り組んでみてください。<br>
+      <strong>ここは提出課題ではありません。</strong>読むだけでも構いません。
+    </div>
+
+    <details class="kotae">
+      <summary>オートカレンダーの作り方を開く</summary>
+
+    <p>
+      作るのは、<strong>年月を入れると5ヶ月分のカレンダーが自動で出てくる表</strong>です。日付も曜日も祝日も、すべて式で出します。<br>
+      ここでやることは<strong>「小さな部品を組み合わせて、大きな仕組みを作る」</strong>という、プログラミングそのものの体験です。
+    </p>
+
+    <div class="note">
+      <span class="label">この章のファイル</span><br>
+      <a href="../files/basic_calendar.xlsx" download>ここからオートカレンダー用のエクセルファイルをダウンロード</a>して、手を動かしながら読んでください。<br>
+      <br>
+      <strong>枠だけが入っています。</strong>行と列の見出し、1〜28の数字、祝日の一覧表、列幅までは用意してあるので、<strong>あなたが入れるのは式だけ</strong>です。<br>
+      開いた時点では<strong>28日までしか入っていません</strong>。29・30・31 は月によって無いので、<strong>式で出します</strong>。<br>
+      年月は <strong>AH4・AI4 の黄色いマス</strong>に入っています。<strong>この2つを書き換えれば、何年何月からでも5ヶ月ぶんが出ます。</strong>10月専用のシートではありません。
+    </div>
+
+    <h3>まず、どこに何が置いてあるかを見る</h3>
+
+    <p>
+      ファイルを開くと、この形になっています。<strong>このあと出てくる式は、すべてこの配置を前提</strong>にしているので、先に場所を頭に入れてください。
+    </p>
+
+    <p>
+      作るのは<strong>横長のカレンダー</strong>です。左から1日・2日・3日…と並び、<strong>1つの月に3行</strong>使います。<strong>日にち・曜日・祝日名</strong>の3行です。
+    </p>
+
+    <div class="ex">
+      <div class="ex-grid">
+        <table>
+          <colgroup>
+            <col class="ex-rownum">
+            <col class="ex-a">
+            <col><col><col><col><col>
+            <col class="ex-a">
+            <col><col>
+          </colgroup>
+          <thead>
+            <tr>
+              <th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>…</th><th>AF</th><th>AG</th><th>AH</th><th>AI</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><th>3</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="ex-mid ex-band">月</td><td class="ex-mid ex-band">年</td></tr>
+            <tr><th class="is-on">4</th><td class="ex-mid ex-band">日</td><td class="ex-mid ex-fill">1</td><td class="ex-mid ex-fill">2</td><td class="ex-mid ex-fill">3</td><td class="ex-mid ex-fill">…</td><td class="ex-mid">式</td><td></td><td class="ex-mid ex-fill">10</td><td class="ex-mid ex-fill">2026</td></tr>
+            <tr><th>5</th><td class="ex-mid ex-band">曜</td><td class="ex-mid">式</td><td class="ex-mid">式</td><td class="ex-mid">式</td><td class="ex-mid">…</td><td class="ex-mid">式</td><td></td><td></td><td></td></tr>
+            <tr><th>6</th><td class="ex-mid ex-band">祝</td><td class="ex-mid">式</td><td class="ex-mid">式</td><td class="ex-mid">式</td><td class="ex-mid">…</td><td class="ex-mid">式</td><td></td><td></td><td></td></tr>
+            <tr><th>7</th><td class="ex-mid ex-band">日</td><td class="ex-mid">1</td><td class="ex-mid">2</td><td class="ex-mid">3</td><td class="ex-mid">…</td><td class="ex-mid">式</td><td></td><td class="ex-mid">式</td><td class="ex-mid">式</td></tr>
+            <tr><th>8</th><td class="ex-mid ex-band">曜</td><td class="ex-mid">式</td><td class="ex-mid">式</td><td class="ex-mid">式</td><td class="ex-mid">…</td><td class="ex-mid">式</td><td></td><td></td><td></td></tr>
+            <tr><th>9</th><td class="ex-mid ex-band">祝</td><td class="ex-mid">式</td><td class="ex-mid">式</td><td class="ex-mid">式</td><td class="ex-mid">…</td><td class="ex-mid">式</td><td></td><td></td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p>
+      上の3行（行4〜6）が<strong>1ヶ月目</strong>、次の3行（行7〜9）が<strong>2ヶ月目</strong>。同じ調子で <strong>行16〜18 の5ヶ月目</strong>まで並んでいます。
+    </p>
+
+    <table>
+      <tr>
+        <th>場所</th>
+        <th>状態</th>
+        <th>中身</th>
+      </tr>
+      <tr>
+        <td><strong>A列・AH3・AI3</strong></td>
+        <td>入っています</td>
+        <td>行と列の見出し。<code>日</code> <code>曜</code> <code>祝</code> と <code>月</code> <code>年</code>。<strong>式では使いません</strong></td>
+      </tr>
+      <tr>
+        <td><strong>AH4・AI4</strong></td>
+        <td>入っています</td>
+        <td><strong>スタートの年月</strong>。いまは <code>10</code> と <code>2026</code> ですが、<strong>ここを書き換えれば何年何月からでも出せます</strong></td>
+      </tr>
+      <tr>
+        <td><strong>B4 〜 AC4</strong></td>
+        <td>入っています</td>
+        <td><strong>1〜28 の数字</strong>。どの月にも必ずあるので、そのまま使えます</td>
+      </tr>
+      <tr>
+        <td><strong>AK5 〜 AL26</strong></td>
+        <td>入っています</td>
+        <td><strong>祝日の一覧表</strong>。2026年1月〜2027年2月ぶん</td>
+      </tr>
+      <tr>
+        <td><strong>AD4 〜 AF4</strong></td>
+        <td class="xl-todo">これから</td>
+        <td><strong>29・30・31</strong>。月によって無いので、式で判定します</td>
+      </tr>
+      <tr>
+        <td><strong>B5 〜 AF5</strong></td>
+        <td class="xl-todo">これから</td>
+        <td>1ヶ月目の<strong>曜日</strong>。式で出します</td>
+      </tr>
+      <tr>
+        <td><strong>B6 〜 AF6</strong></td>
+        <td class="xl-todo">これから</td>
+        <td>1ヶ月目の<strong>祝日名</strong>。式で出します</td>
+      </tr>
+      <tr>
+        <td><strong>AH7・AI7</strong></td>
+        <td class="xl-todo">これから</td>
+        <td>2ヶ月目の<strong>月と年</strong>。式で出します。AH10・AH13・AH16 も同じ式です</td>
+      </tr>
+      <tr>
+        <td><strong>行7〜18</strong></td>
+        <td class="xl-todo">これから</td>
+        <td>2〜5ヶ月目。<strong>1ヶ月目の3行をコピーして貼るだけ</strong>です</td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">遠いセルへは「名前ボックス」で飛ぶ</span><br>
+      画面の左上、<strong>列見出しのすぐ上</strong>に <code>A1</code> と表示されている細長い欄があります。これが<strong>名前ボックス</strong>です。<br>
+      ここに <code>AH7</code> と打って Enter を押すと、<strong>そのセルに一発で移動できます</strong>。AD列や AH列を横スクロールで探し回る必要はありません。
+    </div>
+
+    <div class="point">
+      <span class="label">2ヶ月目からは、コピーして貼るだけ</span><br>
+      Excel の式は<strong>貼り付けた場所に合わせて、見に行くセルが自動でずれます</strong>。<br>
+      だから <strong>1ヶ月目の3行（B4〜AF6）を作り込んでから、B7・B10・B13・B16 に貼る</strong>と、それぞれが自分の月を見るカレンダーになります。5ヶ月目まで一気に完成です。<br>
+      これが<a href="#chapter3">3章でやった相対参照</a>の正体です。<strong>同じ式を書き直さずに使い回す</strong>ための仕組みでした。
+    </div>
+
+    <div class="note">
+      <span class="label">なぜ AH と AI なのか</span><br>
+      日にちは B列から <strong>AF列</strong>まで伸びます。<strong>その右に1列あけて</strong>置いているので、日にちのマスと重なりません。作業用の値は、表の邪魔にならないところへ。<br>
+      別の場所でも構いませんが、そのときは<strong>式の中のセル番地を全部そこに読み替えて</strong>ください。まずは同じ場所で作るのが安全です。
+    </div>
+
+    <h3>スタート月から5ヶ月先を自動で出す</h3>
+
+    <p>
+      「2026年10月」と入れたら、<strong>11月・12月・1月・2月</strong>と続けたい。単純に <code>+1</code> していくと、<strong>12月の次が13月</strong>になってしまいます。
+    </p>
+
+    <div class="point">
+      <span class="label">考え方 ― 12を超えたら1に戻す</span><br>
+      これは<strong>「割った余りを使う」</strong>と解けます。13 ÷ 12 の余りは 1、14 ÷ 12 の余りは 2。<br>
+      この「余りを求める」関数が <strong><code>MOD</code></strong>（モッド）です。
+    </div>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">数式バー</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">次の月を出す（AH7）</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5</div>
+        <pre class="vscode-code">=IF(
+   AH4 + 1 = 12,
+   AH4 + 1,
+   MOD( (AH4 + 1), 12)
+)</pre>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">なぜ 12 だけ特別扱いなのか</span><br>
+      <code>MOD(12, 12)</code> の答えは <strong>0</strong> です。0月では困るので、<strong>12のときだけ余りを使わず、そのまま12を出す</strong>ようにしています。<br>
+      こういう<strong>「1箇所だけ例外がある」</strong>のは、プログラムでもよくあることです。IF で逃がします。
+    </div>
+
+    <div class="caution">
+      <span class="label">ここは $ を付けない</span><br>
+      <code>AH4</code> は<strong>ふつうの相対参照</strong>です。AH7 に入れた式を AH10 に貼ると <code>AH7</code> を見るようになり、<strong>前の月から数えて次の月</strong>が出ます。<br>
+      ここを <code>$AH$4</code> と固定してしまうと、<strong>2ヶ月目も3ヶ月目も同じ11月</strong>になってしまいます。
+    </div>
+
+    <h3>年をまたぐときに年号を進める</h3>
+
+    <p>
+      12月の次は1月。このとき<strong>年を1つ増やす</strong>必要があります。判定は「<strong>前の月より今の月が小さくなったら、年が変わった</strong>」です。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">数式バー</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">年の繰り上げ（AI7）</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5</div>
+        <pre class="vscode-code">=IF(
+   AH4 &lt; AH7,
+   AI4,
+   AI4 + 1
+)</pre>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">読み方</span><br>
+      <code>AH4</code> は<strong>前の月</strong>、<code>AH7</code> は<strong>今の月</strong>。11 → 12 のように増えているなら年はそのまま、12 → 1 のように<strong>小さくなったら年を1つ進めます</strong>。<br>
+      ここも相対参照なので、AI10 に貼れば「AH7 と AH10 を見比べる」に自動でずれます。
+    </div>
+
+    <div class="point">
+      <span class="label">いまは2ヶ月目だけでかまいません</span><br>
+      3ヶ月目から先は、<strong>最後の節でまとめて貼ります</strong>。ここでは AH7・AI7 の2つができていれば十分です。<br>
+      AH4・AI4（1ヶ月目）だけは手入力のままです。<strong>ここを書き換えるとカレンダー全体が動きます。</strong>
+    </div>
+
+    <h3>月ごとに変わる「月末」の処理</h3>
+
+    <p>
+      31日まである月、30日で終わる月、2月。<strong>29日以降のマスをどうするか</strong>が問題になります。
+    </p>
+
+    <div class="point">
+      <span class="label">考え方 ― 存在しない日付は繰り上がる</span><br>
+      <code>DATE</code> 関数は<strong>存在しない日付を渡すと、翌月に繰り上げて解釈します</strong>。<br>
+      たとえば <code>DATE(2026, 2, 29)</code>（2026年2月29日）は存在しないので、<strong>3月1日</strong>として扱われます。
+    </div>
+
+    <div class="xl-samples">
+      <div>
+        <span class="xl-label">存在する日付</span>
+        <code class="xl-code hl">=<span class="f">DAY</span>(<span class="f">DATE</span>(<span class="n">2026</span>, <span class="n">10</span>, <span class="n">31</span>))
+
+<span class="c">→ 31 が返る
+   （10月31日は存在する）</span></code>
+      </div>
+      <div>
+        <span class="xl-label">存在しない日付</span>
+        <code class="xl-code hl">=<span class="f">DAY</span>(<span class="f">DATE</span>(<span class="n">2026</span>, <span class="n">2</span>, <span class="n">29</span>))
+
+<span class="c">→ 1 が返る
+   （3月1日に繰り上がる）</span></code>
+      </div>
+    </div>
+
+    <p>
+      この性質を使えば、<strong>「29日を入れて、返ってきた日が29なら存在する」</strong>と判定できます。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">数式バー</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">29日のマス（AD4）</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5</div>
+        <pre class="vscode-code">=IF(
+  DAY(DATE($AI4, $AH4, 29)) = 29,
+  29,
+  <span class="sy-str">""</span>
+)</pre>
+      </div>
+    </div>
+
+    <p>
+      同じ形で <strong>30日・31日</strong>のマスも作ります。<strong>数字を差し替えるだけ</strong>です。
+    </p>
+
+    <div class="xl-samples">
+      <div>
+        <span class="xl-label">30日のマス（AE4）</span>
+        <code class="xl-code hl">=<span class="k">IF</span>(<span class="f">DAY</span>(<span class="f">DATE</span>(<span class="r">$AI4</span>, <span class="r">$AH4</span>, <span class="n">30</span>)) = <span class="n">30</span>, <span class="n">30</span>, <span class="v">""</span>)</code>
+      </div>
+      <div>
+        <span class="xl-label">31日のマス（AF4）</span>
+        <code class="xl-code hl">=<span class="k">IF</span>(<span class="f">DAY</span>(<span class="f">DATE</span>(<span class="r">$AI4</span>, <span class="r">$AH4</span>, <span class="n">31</span>)) = <span class="n">31</span>, <span class="n">31</span>, <span class="v">""</span>)</code>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">1〜28日は判定が要らない</span><br>
+      <strong>どの月にも必ずある</strong>からです。だから B4〜AC4 には数字がそのまま入っています。<br>
+      判定が必要なのは <strong>29・30・31 の3つだけ</strong>です。2月なら3つとも空、4月なら31だけ空、10月なら3つとも出ます。
+    </div>
+
+    <div class="caution">
+      <span class="label">10月は31日まであるのに、なぜ数字で打たないのか</span><br>
+      1ヶ月目が10月なら、たしかに29・30・31 はぜんぶ存在します。<strong>数字で打っても、1ヶ月目だけを見れば正しく見えます。</strong><br>
+      ですが、この3行は<strong>あとで2月のところにコピーします</strong>。数字で打ってあると、<strong>2月にも 29・30・31 がそのまま貼りついて消えません</strong>。式にしておけば、貼った先の月を見て自分で消えてくれます。<br>
+      <strong>「いま正しい」ではなく「どこに貼っても正しい」を作る。</strong>これはプログラムを書くときの考え方そのものです。
+    </div>
+
+    <div class="caution">
+      <span class="label">$ の付け方に注意</span><br>
+      <code>$AI4</code> <code>$AH4</code> は<strong>列だけ固定</strong>しています。AI列・AH列は動かさず、<strong>下へコピーすると行が動く</strong>という書き方です。<br>
+      あとで3行まるごとコピーしたとき、これが <code>$AI7</code> <code>$AH7</code> にずれて、<strong>2ヶ月目が自分の年月を見る</strong>ようになります。<a href="#chapter3">3章の絶対参照</a>が、ここで効いてきます。
+    </div>
+
+    <div class="note">
+      <span class="label">DAY と DATE</span><br>
+      <strong><code>DATE(年, 月, 日)</code></strong> は3つの数字から<strong>日付データ</strong>を作ります。<br>
+      <strong><code>DAY(日付)</code></strong> はその日付から<strong>「日」の部分だけ</strong>を取り出します。組み合わせて「その日付が本当に存在するか」を調べています。
+    </div>
+
+    <h3>曜日を自動で出す</h3>
+
+    <p>
+      日付から曜日を出すには、<code>DATE</code> で作った日付を<strong>表示形式で曜日に見せます</strong>。<br>
+      日にちの行のすぐ下、<strong>B5 から右へ</strong>入れていきます。
+    </p>
+
+    <div class="xl-samples">
+      <div>
+        <span class="xl-label">式（B5）</span>
+        <code class="xl-code hl">=<span class="k">IF</span>(<span class="r">B4</span> = <span class="v">""</span>, <span class="v">""</span>, <span class="f">DATE</span>(<span class="r">$AI4</span>, <span class="r">$AH4</span>, <span class="r">B4</span>))</code>
+      </div>
+      <div>
+        <span class="xl-label">表示形式（ユーザー定義）</span>
+        <code class="xl-code hl"><span class="v">aaa</span>
+
+<span class="c">→ 月・火・水… と表示される
+   aaaa なら「月曜日」</span></code>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">入れたら AF5 まで右へオートフィル</span><br>
+      <code>$AI4</code> <code>$AH4</code> と列を固定してあるので、<strong>右へ伸ばしても年月は動かず、日にちだけ B4→C4→D4 と進みます</strong>。
+    </div>
+
+    <div class="caution">
+      <span class="label">なぜ IF で囲むのか</span><br>
+      2月の30日のように<strong>日にちのマスが空</strong>のとき、<code>DATE(2026, 2, "")</code> は<strong>エラーになります</strong>。<br>
+      そこで「上のマスが空なら、こっちも空」と先に逃がしています。<a href="basic_4.html#chapter4">中級#4</a> のエラー表で見た <code>#VALUE!</code> を、<strong>出る前に止めている</strong>わけです。
+    </div>
+
+    <div class="caution">
+      <span class="label">Googleスプレッドシートでは違う</span><br>
+      スプレッドシートには <code>aaa</code> の表示形式がありません。<strong><code>TEXT</code> 関数</strong>を使って <code>=TEXT(DATE(...), "ddd")</code> のように書きます。<br>
+      <a href="basic_4.html#chapter5">中級#4</a> で出てきた <code>TEXT</code> が、ここでも効いてきます。
+    </div>
+
+    <h3>祝日を自動で出す</h3>
+
+    <p>
+      あらかじめ<strong>祝日の一覧表</strong>を用意しておき、その中に日付があるかを調べます。ここで <code>COUNTIF</code> が再登場します。
+    </p>
+
+    <p>
+      この表は<strong>ファイルの AK列・AL列にすでに入っています</strong>。<strong>名前ボックスに <code>AK5</code> と打って Enter</strong> で見に行けます。<br>
+      いちばん右の<strong>備考は説明用</strong>なので、シートには入れていません。
+    </p>
+
+    <div class="xl-scroll">
+      <table class="xl-sheet">
+        <thead>
+          <tr>
+            <th>AK列（日付）</th>
+            <th>AL列（祝日名）</th>
+            <th>備考</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>2026/1/1</td><td>元日</td><td class="xl-name">毎年1月1日</td></tr>
+          <tr><td>2026/1/12</td><td>成人の日</td><td class="xl-name">1月の第2月曜日</td></tr>
+          <tr><td>2026/2/11</td><td>建国記念の日</td><td class="xl-name">毎年2月11日</td></tr>
+          <tr><td>2026/2/23</td><td>天皇誕生日</td><td class="xl-name">毎年2月23日</td></tr>
+          <tr><td>2026/3/20</td><td>春分の日</td><td class="xl-name">年によって20日か21日</td></tr>
+          <tr><td>2026/4/29</td><td>昭和の日</td><td class="xl-name">毎年4月29日</td></tr>
+          <tr><td>2026/5/3</td><td>憲法記念日</td><td class="xl-name">毎年5月3日</td></tr>
+          <tr><td>2026/5/4</td><td>みどりの日</td><td class="xl-name">毎年5月4日</td></tr>
+          <tr><td>2026/5/5</td><td>こどもの日</td><td class="xl-name">毎年5月5日</td></tr>
+          <tr><td>2026/5/6</td><td>振替休日</td><td class="xl-name">5/3が日曜のため</td></tr>
+          <tr><td>2026/7/20</td><td>海の日</td><td class="xl-name">7月の第3月曜日</td></tr>
+          <tr><td>2026/8/11</td><td>山の日</td><td class="xl-name">毎年8月11日</td></tr>
+          <tr><td>2026/9/21</td><td>敬老の日</td><td class="xl-name">9月の第3月曜日</td></tr>
+          <tr><td>2026/9/22</td><td>国民の休日</td><td class="xl-name">祝日に挟まれた平日</td></tr>
+          <tr><td>2026/9/23</td><td>秋分の日</td><td class="xl-name">年によって22日か23日</td></tr>
+          <tr><td>2026/10/12</td><td>スポーツの日</td><td class="xl-name">10月の第2月曜日</td></tr>
+          <tr><td>2026/11/3</td><td>文化の日</td><td class="xl-name">毎年11月3日</td></tr>
+          <tr><td>2026/11/23</td><td>勤労感謝の日</td><td class="xl-name">毎年11月23日</td></tr>
+          <tr><td>2027/1/1</td><td>元日</td><td class="xl-name">毎年1月1日</td></tr>
+          <tr><td>2027/1/11</td><td>成人の日</td><td class="xl-name">1月の第2月曜日</td></tr>
+          <tr><td>2027/2/11</td><td>建国記念の日</td><td class="xl-name">毎年2月11日</td></tr>
+          <tr><td>2027/2/23</td><td>天皇誕生日</td><td class="xl-name">毎年2月23日</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="caution">
+      <span class="label">祝日には「動くもの」がある</span><br>
+      備考の列を見てください。<strong>日付が毎年同じものと、毎年変わるものがあります</strong>。<br>
+      <strong>第N月曜日</strong>のもの（成人の日・海の日・敬老の日・スポーツの日）は、いわゆるハッピーマンデーです。<strong>春分・秋分の日</strong>は天文計算で決まるので、年によって1日ずれます。<br>
+      さらに<strong>国民の休日</strong>という決まりがあり、祝日に挟まれた平日は自動的に休みになります。2026年9月22日がそれで、21日（敬老の日）と23日（秋分の日）に挟まれているため休みです。<br>
+      <strong>振替休日</strong>もあります。祝日が日曜に当たると、翌月曜が休みになる決まりです。2026年は5月3日（憲法記念日）が日曜なので、5月6日が振替休日になります。<br>
+      <strong>この表は2026年1月から2027年2月までぶんです。</strong>2026年10月スタートなら5ヶ月ぶん足ります。別の期間を扱うなら、その年の祝日を調べて足してください。
+    </div>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">数式バー</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">祝日名を出す（B6）</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7</div>
+        <pre class="vscode-code">=IF(B4 = <span class="sy-str">""</span>,
+  <span class="sy-str">""</span>,
+  IF(
+    COUNTIF($AK$5:$AK$39, B5),
+    VLOOKUP(B5, $AK$5:$AL$39, 2, 0),
+    <span class="sy-str">""</span>
+  )
+)</pre>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">AF6 まで右へオートフィル</span><br>
+      <code>B5</code> は<strong>1つ上の曜日のマス</strong>です。あそこには <code>DATE</code> で作った<strong>日付そのもの</strong>が入っていて、表示形式で曜日に見せているだけでした。<br>
+      <strong>すでに作ってあるものを使い回す。</strong>同じ <code>DATE</code> を2回書かずに済みます。
+    </div>
+
+    <table>
+      <tr>
+        <th>部分</th>
+        <th>やっていること</th>
+      </tr>
+      <tr>
+        <td><code>COUNTIF(AK5:AK39, 日付)</code></td>
+        <td>祝日リストの中に、その日付が<strong>あるか数える</strong>（あれば1以上）</td>
+      </tr>
+      <tr>
+        <td><code>VLOOKUP(日付, AK5:AL39, 2, 0)</code></td>
+        <td>見つかったら、その行の<strong>2列目（祝日名）を取ってくる</strong></td>
+      </tr>
+    </table>
+
+    <div class="note">
+      <span class="label">VLOOKUP とは</span><br>
+      <strong>表を縦に検索して、同じ行の別の列の値を取ってくる</strong>関数です。V は Vertical（縦）の意味。<br>
+      <code>VLOOKUP(探す値, 探す範囲, 何列目を返すか, 検索方法)</code> という形です。最後の <code>0</code> は<strong>「完全に一致するものだけ」</strong>という指定で、実務ではほぼ常に <code>0</code> を使います。
+    </div>
+
+    <div class="point">
+      <span class="label">なぜ COUNTIF を先に使うのか</span><br>
+      <code>VLOOKUP</code> は<strong>見つからないと <code>#N/A</code> エラー</strong>を出します（<a href="basic_4.html#chapter4">中級#4</a> のエラー表参照）。<br>
+      そこで<strong>先に COUNTIF で「あるかどうか」を確かめてから</strong> VLOOKUP を呼んでいます。これも<strong>エラーを先に防ぐ</strong>という同じ考え方です。
+    </div>
+
+    <h3>土日と祝日に色を付ける</h3>
+
+    <p>
+      色付けは式ではなく<strong>条件付き書式</strong>で行います。「この条件を満たしたら、この色にする」というルールを登録します。
+    </p>
+
+    <table>
+      <tr>
+        <th>手順</th>
+        <th>やること</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td><strong>B4 〜 AF4</strong>（1ヶ月目の日にちの行）を選ぶ</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><strong>条件付き書式 → 新しいルール → 数式を使用して…</strong></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>数式を入れて、色を指定する</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>3つぶん（祝日・日曜・土曜）を、<strong>この順で</strong>登録する</td>
+      </tr>
+    </table>
+
+    <div class="xl-samples">
+      <div>
+        <span class="xl-label">祝日を判定</span>
+        <code class="xl-code hl">=<span class="k">AND</span>(<span class="r">B4</span> &lt;&gt; <span class="v">""</span>, <span class="f">COUNTIF</span>(<span class="r">$AK$5:$AK$39</span>, <span class="r">B5</span>) &gt; <span class="n">0</span>)
+
+<span class="c">日にちがあって、かつ
+祝日リストに載っていたら</span></code>
+      </div>
+      <div>
+        <span class="xl-label">日曜日を判定</span>
+        <code class="xl-code hl">=<span class="f">WEEKDAY</span>(<span class="r">B5</span>) = <span class="n">1</span>
+
+<span class="c">既定では 1 が日曜日</span></code>
+      </div>
+      <div>
+        <span class="xl-label">土曜日を判定</span>
+        <code class="xl-code hl">=<span class="f">WEEKDAY</span>(<span class="r">B5</span>) = <span class="n">7</span>
+
+<span class="c">同じ数え方で 7 が土曜日</span></code>
+      </div>
+      <div>
+        <span class="xl-label">月曜始まりにしたいとき</span>
+        <code class="xl-code hl">=<span class="f">WEEKDAY</span>(<span class="r">B5</span>, <span class="n">2</span>) = <span class="n">1</span>
+
+<span class="c">第2引数に 2 を渡すと
+1 が月曜日になる</span></code>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">なぜ B5 を見るのか</span><br>
+      色を付けたいのは<strong>日にちの行</strong>ですが、そこに入っているのは <code>1</code> <code>2</code> という<strong>ただの数字</strong>。曜日は分かりません。<br>
+      1つ下の <strong>B5 には日付そのもの</strong>が入っているので、そちらを見て判定します。ここでも<strong>作ったものを使い回して</strong>います。
+    </div>
+
+    <div class="caution">
+      <span class="label">祝日だけ AND が付いている理由</span><br>
+      <code>COUNTIF</code> は<strong>「空っぽ」を探すと、空のセルを数えてしまいます</strong>。2月の30日のように日にちが無いマスでは B5 も空なので、祝日リストの空行を数えて<strong>「見つかった」と判定してしまう</strong>のです。<br>
+      そうなると<strong>存在しない日まで祝日の色になります</strong>。だから先に <code>B4 &lt;&gt; ""</code>（日にちがある）を確かめています。<br>
+      曜日のほうは <code>WEEKDAY("")</code> がエラーになり、条件を満たさない扱いになるので、この心配は要りません。
+    </div>
+
+    <div class="caution">
+      <span class="label">$ を付けない</span><br>
+      <code>B5</code> はどこも固定しません。条件付き書式は<strong>選んだ範囲の左上を基準に、セルごとに参照がズレます</strong>。<br>
+      C4 のマスでは <code>C5</code>、D4 のマスでは <code>D5</code>。<strong>それぞれが自分の真下を見る</strong>ようになります。<a href="#chapter3">3章の相対参照</a>が、ここでも効いています。
+    </div>
+
+    <div class="point">
+      <span class="label">ここまでで1ヶ月目が完成</span><br>
+      色まで付いたら、1ヶ月目の3行はもう<strong>完成品</strong>です。残り4ヶ月ぶんは、次の節でまとめて片付けます。
+    </div>
+
+    <h3>残り4ヶ月ぶんを一気に作る</h3>
+
+    <p>
+      新しく書く式は<strong>もうありません</strong>。1ヶ月目をコピーして貼るだけです。
+    </p>
+
+    <table>
+      <tr>
+        <th>手順</th>
+        <th>やること</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td><strong>AH7 〜 AI7</strong> を選んでコピーし、<strong>AH10・AH13・AH16</strong> に貼り付け</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td><strong>B4 〜 AF6</strong>（1ヶ月目の3行）を選んでコピー</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td><strong>B7・B10・B13・B16</strong> にそれぞれ貼り付け</td>
+      </tr>
+    </table>
+
+    <div class="caution">
+      <span class="label">順番を守ってください</span><br>
+      <strong>先に年月（AH列・AI列）を埋めます。</strong>年月が空のまま日にちを貼ると、<code>DATE(0, 0, 29)</code> のような式になり、<strong>画面いっぱいにエラーが並びます</strong>。<br>
+      式は<strong>参照先が先にできていること</strong>を前提に動きます。作る順番にも意味がある、というのはプログラムでも同じです。
+    </div>
+
+    <div class="point">
+      <span class="label">式も色も、まとめて付いてくる</span><br>
+      ふつうのコピーなら、<strong>数式・表示形式・条件付き書式が全部いっしょに運ばれます</strong>。<br>
+      そして参照が自動でずれるので、<strong>行7に貼ったものは行7の年月を、行10に貼ったものは行10の年月を</strong>見るようになります。
+    </div>
+
+    <div class="caution">
+      <span class="label">うまくいかないときは</span><br>
+      <strong>ぜんぶ同じ月になる</strong> → AH7 の式を <code>$AH$4</code> と固定していないか確認してください。<code>$</code> は要りません。<br>
+      <strong>曜日のところが日付のまま</strong> → 表示形式が <code>aaa</code> になっていません。貼り付け先で設定し直してください。<br>
+      <strong>29〜31 が全部出てしまう</strong> → 日にちの式が <code>$AI4</code> ではなく <code>$AI$4</code> になっていないか確認してください。
+    </div>
+
+    <h3>実際に動かしてみる</h3>
+
+    <p>
+      年と月を変えると、<strong>ここまでの式が全部つながって</strong>カレンダーができます。<strong>2月</strong>や、<strong>うるう年（2028年など）</strong>を入れて、日数が変わることを確かめてください。<br>
+      2026年9月を出すと <strong>21・22・23日が3連休</strong>、10月を出すと <strong>12日がスポーツの日</strong>になります。上の祝日表と見比べてください。
+    </p>
+
+    <div class="note">
+      <span class="label">この見本と、自分で作る表の違い</span><br>
+      形は同じです。<strong>1つの月が日にち・曜日・祝日名の3行</strong>で、それが5ヶ月ぶん積まれています。<strong>自分の表と並べて見比べられます。</strong><br>
+      違うのは中身の作り方です。この見本は<strong>祝日を計算で出しています</strong>。だから年を変えても、ハッピーマンデーや春分・秋分の日が自動でついてきます。<br>
+      いっぽう<strong>手順どおりに作る表は、AK列の祝日一覧を引いています</strong>。書いたのは2026年1月〜2027年2月ぶんなので、<strong>その範囲だけ正しく出ます</strong>。2027年3月より先に動かすと、祝日が1つも出なくなります。<br>
+      実務でもこの2通りがあります。<strong>表を用意するほうが作りは簡単、計算で出すほうが手間はかかるが強い</strong>。どちらが良いかは、その表を何年使うかで決まります。
+    </div>
+
+    <div class="xl-demo">
+      <div class="xl-row">
+        <input type="number" class="xl-input" id="cal-year" value="2026" aria-label="年">
+        <label for="cal-year">年（AI4）</label>
+        <input type="number" class="xl-input" id="cal-month" value="10" min="1" max="12" aria-label="月">
+        <label for="cal-month">月（AH4）</label>
+      </div>
+
+      <span class="xl-label">MOD で出した5ヶ月分</span>
+      <div class="cal-months" id="cal-months"></div>
+
+      <span class="xl-label" style="margin-top: 14px;">DATE・DAY・WEEKDAY で組み立てたカレンダー</span>
+      <div class="xl-scroll">
+        <table class="cal-grid" id="cal-grid"></table>
+      </div>
+      <p style="margin-top: 8px; font-size: 12.5px; color: #64748b;">
+        赤いマスは祝日です。ハッピーマンデーも春分・秋分の日も計算で出しているので、年を変えても正しい日に付いてきます。<br>
+        横に長いので、<strong>右へスクロール</strong>すると月末まで見られます。
+      </p>
+    </div>
+
+    <div class="note">
+      <span class="label">出来たら答え合わせしてみましょう</span><br>
+      <a href="../files/basic_calendar_answer.xlsx" download>式まで入った完成版はこちら</a>。自分の表と見比べてみてください。<br>
+      <br>
+      うまくいかないところがあれば、<strong>そのセルをクリックして数式バーを見比べる</strong>のがいちばん早いです。<code>$</code> の位置が1つ違うだけ、ということがよくあります。
+    </div>
+
+    <div class="point">
+      <span class="label">この章でやったこと</span><br>
+      <strong>MOD（余り）／DATE・DAY（日付の組み立てと分解）／WEEKDAY（曜日）／VLOOKUP（表の検索）／条件付き書式</strong>。<br>
+      どれも単体では小さな部品です。それを<strong>IF でつなぎ合わせると、カレンダーという「動く仕組み」になる</strong>。プログラムを書くというのは、まさにこの作業です。
+    </div>
+
+    </details>
+
+    <div class="note">
+      <span class="label">次のページへ</span><br>
+      ここからは本格的にプログラムを書きます。<a href="basic_6.html">マークアップ中級#6（jQueryの基本）</a> で、実際にページを動かしていきます。
+    </div>
+  </section>
+
+</main>
+
+<nav class="page-nav">
+  <a class="page-prev" href="basic_4.html">
+    <span class="page-nav-label">前のページ</span>
+    <span class="page-nav-title">マークアップ中級#4</span>
+    <span class="page-nav-sub">簡単にエクセル関数を理解しよう</span>
+  </a>
+  <a class="page-next" href="basic_6.html">
+    <span class="page-nav-label">次のページ</span>
+    <span class="page-nav-title">マークアップ中級#6</span>
+    <span class="page-nav-sub">JavaScriptを短く書く道具 ― jQueryの基本</span>
+  </a>
+</nav>
+
+<footer></footer>
+
+<!-- ▼ 共通スクリプト。章ナビ・コピーボタン・先頭へ戻るが自動で付く（編集不要） -->
+<script src="../js/training.js"></script>
+
+<!-- ▼ このページの見本を動かすスクリプト -->
+<script>
+  (function () {
+    var $ = function (id) { return document.getElementById(id); };
+
+    function badge(el, text, state) {
+      el.innerHTML = '<span class="xl-judge is-' + state + '">' + text + '</span>';
+    }
+
+    function calc() {
+      var pass = Number($('in-goukaku').value);
+      var k = Number($('in-kokugo').value);
+      var s = Number($('in-suugaku').value);
+      var e = Number($('in-eigo').value);
+
+      // COUNTIF(C4:E4, ">=" & $B$11)
+      var count = [k, s, e].filter(function (v) { return v >= pass; }).length;
+      $('out-count').textContent = count + ' 教科';
+
+      // 力技バージョン: IF(AND(k,s)) / IF(AND(k,e)) / IF(AND(s,e))
+      var nest = '';
+      if (k >= pass && s >= pass) { nest = 'よく出来ました！'; }
+      else if (k >= pass && e >= pass) { nest = 'よく出来ました！'; }
+      else if (s >= pass && e >= pass) { nest = 'よく出来ました！'; }
+
+      // COUNTIF バージョン
+      var byCount = (count >= 2) ? 'よく出来ました！' : '';
+
+      if (nest === '') {
+        badge($('out-nest'), '（空白）', 'none');
+      } else {
+        badge($('out-nest'), nest, 'pass');
+      }
+
+      if (byCount === '') {
+        badge($('out-countif'), '（空白）', 'none');
+      } else {
+        badge($('out-countif'), byCount, 'pass');
+      }
+
+      // OR: どれか1つでも合格点未満
+      var anyLow = (k < pass) || (s < pass) || (e < pass);
+      if (anyLow) {
+        badge($('out-or'), '不合格', 'fail');
+      } else {
+        badge($('out-or'), '合格!', 'pass');
+      }
+    }
+
+    ['in-goukaku', 'in-kokugo', 'in-suugaku', 'in-eigo'].forEach(function (id) {
+      var el = $(id);
+      if (!el) { return; }
+      el.addEventListener('input', calc);
+      el.addEventListener('change', calc);
+    });
+
+    calc();
+
+    /* ============================================================
+       7章：オートカレンダー
+       ============================================================ */
+
+      /* 祝日の判定。
+         AK5:AL39 の祝日表にあたるもの。日本の祝日には3種類ある。
+
+           1. 日付が固定のもの … 元日（1/1）など。表に書けば済む
+           2. ハッピーマンデー … 「第2月曜日」のように毎年日付が動く
+           3. 春分・秋分の日   … 天文計算で決まるので毎年ずれる
+
+         さらに「国民の休日」がある。祝日と祝日に挟まれた平日は休みになる。
+         2026年9月なら 21日（敬老の日）と 23日（秋分の日）に挟まれた
+         22日が自動的に休みになる。                                  */
+
+      // 1. 日付が固定のもの
+      var FIXED_HOLIDAYS = {
+        '1-1': '元日',
+        '2-11': '建国記念の日',
+        '2-23': '天皇誕生日',
+        '4-29': '昭和の日',
+        '5-3': '憲法記念日',
+        '5-4': 'みどりの日',
+        '5-5': 'こどもの日',
+        '8-11': '山の日',
+        '11-3': '文化の日',
+        '11-23': '勤労感謝の日'
+      };
+
+      // 2. ハッピーマンデー。月・第何週・名前
+      var MONDAY_HOLIDAYS = [
+        [1, 2, '成人の日'],
+        [7, 3, '海の日'],
+        [9, 3, '敬老の日'],
+        [10, 2, 'スポーツの日']
+      ];
+
+      // その月の「第n月曜日」が何日かを出す
+      function nthMonday(year, month, nth) {
+        var first = new Date(year, month - 1, 1).getDay();   // 0=日 1=月
+        var firstMonday = 1 + ((8 - first) % 7);
+        return firstMonday + (nth - 1) * 7;
+      }
+
+      // 3. 春分・秋分の日。国立天文台の近似式（1980〜2099年に有効）
+      function equinox(year, isSpring) {
+        var base = isSpring ? 20.8431 : 23.2488;
+        return Math.floor(base + 0.242194 * (year - 1980) - Math.floor((year - 1980) / 4));
+      }
+
+      // 振替休日と国民の休日を見ずに判定する。下の holidayName と、その中の遡り処理から呼ぶ
+      function isBaseHoliday(y, m, d) {
+        if (FIXED_HOLIDAYS[m + '-' + d]) { return true; }
+        for (var i = 0; i < MONDAY_HOLIDAYS.length; i++) {
+          var h = MONDAY_HOLIDAYS[i];
+          if (m === h[0] && d === nthMonday(y, m, h[1])) { return true; }
+        }
+        if (m === 3 && d === equinox(y, true))  { return true; }
+        if (m === 9 && d === equinox(y, false)) { return true; }
+        return false;
+      }
+
+      // その日が祝日なら名前を返す。祝日でなければ空文字
+      function holidayName(year, month, day) {
+        var fixed = FIXED_HOLIDAYS[month + '-' + day];
+        if (fixed) { return fixed; }
+
+        for (var i = 0; i < MONDAY_HOLIDAYS.length; i++) {
+          var h = MONDAY_HOLIDAYS[i];
+          if (month === h[0] && day === nthMonday(year, month, h[1])) { return h[2]; }
+        }
+
+        if (month === 3 && day === equinox(year, true))  { return '春分の日'; }
+        if (month === 9 && day === equinox(year, false)) { return '秋分の日'; }
+
+        var dow = new Date(year, month - 1, day).getDay();
+
+        /* 振替休日。祝日が日曜に当たると、その次で祝日でない日が休みになる。
+           2026年5月なら 3日(日)が憲法記念日、4日・5日も祝日なので、
+           振替休日は 6日(水)まで押し出される。だから1日前だけ見るのでは足りず、
+           祝日が続くかぎりさかのぼって、日曜の祝日に行き着くかを調べる。 */
+        var back = new Date(year, month - 1, day - 1);
+        while (isBaseHoliday(back.getFullYear(), back.getMonth() + 1, back.getDate())) {
+          if (back.getDay() === 0) { return '振替休日'; }
+          back = new Date(back.getFullYear(), back.getMonth(), back.getDate() - 1);
+        }
+
+        // 国民の休日。前後がどちらも祝日の平日は休みになる
+        if (dow !== 0 && dow !== 6) {
+          var bf = new Date(year, month - 1, day - 1);
+          var af = new Date(year, month - 1, day + 1);
+          if (isBaseHoliday(bf.getFullYear(), bf.getMonth() + 1, bf.getDate()) &&
+              isBaseHoliday(af.getFullYear(), af.getMonth() + 1, af.getDate())) { return '国民の休日'; }
+        }
+
+        return '';
+      }
+
+    // 本文の式 =IF(W4+1=12, W4+1, MOD(W4+1, 12)) をそのまま写したもの
+    function nextMonth(m) {
+      return (m + 1 === 12) ? (m + 1) : ((m + 1) % 12);
+    }
+
+    function drawMonths(year, month) {
+      var box = $('cal-months');
+      if (!box) { return; }
+      box.innerHTML = '';
+      var y = year, m = month;
+      for (var i = 0; i < 5; i++) {
+        var d = document.createElement('div');
+        d.textContent = y + '年' + m + '月';
+        box.appendChild(d);
+        var prev = m;
+        m = nextMonth(m);
+        // 前の月より小さくなったら年を繰り上げる
+        if (m < prev) { y = y + 1; }
+      }
+    }
+
+    /* 手順で作るのと同じ形。1つの月が3行（日にち・曜日・祝日名）で、
+       それが5ヶ月ぶん縦に積まれる。列は1日〜31日の横並び。 */
+    function drawCalendar(year, month) {
+      var grid = $('cal-grid');
+      if (!grid) { return; }
+
+      var DOW = ['日', '月', '火', '水', '木', '金', '土'];
+      var html = '<thead><tr><th class="cal-lbl"></th>';
+      for (var d = 1; d <= 31; d++) { html += '<th>' + d + '</th>'; }
+      html += '</tr></thead><tbody>';
+
+      var y = year, m = month;
+      for (var i = 0; i < 5; i++) {
+        var rowDay = '', rowDow = '', rowHol = '';
+
+        for (var day = 1; day <= 31; day++) {
+          // AD4 の式にあたる。DAY(DATE(y, m, day)) === day なら、その日は存在する
+          var probe = new Date(y, m - 1, day);
+          if (probe.getDate() !== day) {
+            rowDay += '<td class="is-empty"></td>';
+            rowDow += '<td class="is-empty"></td>';
+            rowHol += '<td class="is-empty"></td>';
+            continue;
+          }
+
+          var w = probe.getDay();
+          var hname = holidayName(y, m, day);
+          var cls = hname ? ' class="is-holiday"'
+                  : (w === 0 ? ' class="is-sun"' : (w === 6 ? ' class="is-sat"' : ''));
+
+          // 色を付けるのは日にちの行だけ。手順の条件付き書式と同じ範囲にそろえている
+          rowDay += '<td' + cls + (hname ? ' title="' + hname + '"' : '') + '>' + day + '</td>';
+          rowDow += '<td>' + DOW[w] + '</td>';
+          // 祝日名は狭いので、Excel と同じように隣のマスへはみ出して表示する
+          rowHol += '<td class="cal-hol">' +
+                    (hname ? '<span>' + hname + '</span>' : '') + '</td>';
+        }
+
+        html += '<tr class="cal-head"><th class="cal-lbl">' + y + '年' + m + '月</th>' + rowDay + '</tr>'
+              + '<tr><th class="cal-lbl">曜</th>' + rowDow + '</tr>'
+              + '<tr><th class="cal-lbl">祝</th>' + rowHol + '</tr>';
+
+        var prev = m;
+        m = nextMonth(m);
+        if (m < prev) { y = y + 1; }
+      }
+
+      html += '</tbody>';
+      grid.innerHTML = html;
+    }
+
+    function drawAll() {
+      var y = Number($('cal-year').value);
+      var m = Number($('cal-month').value);
+      if (!y || m < 1 || m > 12) { return; }
+      drawMonths(y, m);
+      drawCalendar(y, m);
+    }
+
+    ['cal-year', 'cal-month'].forEach(function (id) {
+      var el = $(id);
+      if (!el) { return; }
+      el.addEventListener('input', drawAll);
+      el.addEventListener('change', drawAll);
+    });
+
+    drawAll();
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>マークアップ初級#3</title>
+  <link rel="stylesheet" href="../css/training.css">
+
+  <!-- ▼ このページ専用のスタイル（制作手順の実演） -->
+  <link rel="stylesheet" href="../css/basic_3.css">
+
+  <!-- ▼ 開いたときに、ページの先頭から読み始められるようにする。
+       ブラウザが前回の位置へ戻すより先に動かす必要があるため、
+       training.js とは分けて <head> で読み込んでいる -->
+  <script src="../js/scroll-reset.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>マークアップ初級#3</h1>
+    <p>レスポンシブサイトをコーディングする方法</p>
+  </div>
+</header>
+
+<main>
+
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol>
+      <li><a href="#chapter1">作る順番を決める</a></li>
+      <li><a href="#chapter2">段階1 ― 枠線コーディング</a></li>
+      <li><a href="#chapter3">段階2 ― 中身を入れる</a></li>
+      <li><a href="#chapter4">段階3 ― レイアウトを組む</a></li>
+      <li><a href="#chapter5">段階4 ― 画像を入れて仕上げる</a></li>
+      <li><a href="#chapter6">段階5 ― レスポンシブにする</a></li>
+      <li><a href="#chapter7">通しで作ってみる</a></li>
+    </ol>
+
+    <div class="note">
+      <span class="label">読む前に</span><br>
+      ここまでで、HTML・CSS・flex・レスポンシブの<strong>部品</strong>は揃いました。このページで扱うのは<strong>「どういう順番で作るか」</strong>です。<br>
+      1ページ分を丸ごと作るとき、<strong>いきなり上から書き始めると必ず行き詰まります</strong>。プロがやっている進め方をなぞります。
+    </div>
+  </section>
+
+  <section id="chapter1">
+    <h2>1. 作る順番を決める</h2>
+
+    <p>
+      デザインを渡されて、いきなりHTMLを上から書き始める。これが<strong>いちばんよくある失敗</strong>です。途中で構造がおかしいことに気づいて、大きく書き直すことになります。
+    </p>
+
+    <p>
+      <strong>大きいところから小さいところへ</strong>、<strong>形から見た目へ</strong>。この順番で進めます。
+    </p>
+
+    <div class="step-list">
+      <div class="step-card">
+        <span class="step-no">01</span>
+        <span class="step-ttl">大枠を作る</span>
+        <span class="step-txt">header / nav / main / footer だけ書く。枠線を付けて形を確認する</span>
+      </div>
+      <div class="step-card">
+        <span class="step-no">02</span>
+        <span class="step-ttl">中身を入れる</span>
+        <span class="step-txt">見出し・文章・リストを書き、クラス名を付ける。まだ見た目は整えない</span>
+      </div>
+      <div class="step-card">
+        <span class="step-no">03</span>
+        <span class="step-ttl">レイアウトを組む</span>
+        <span class="step-txt">幅・高さ・flex で配置だけ決める。色や飾りはまだ</span>
+      </div>
+      <div class="step-card">
+        <span class="step-no">04</span>
+        <span class="step-ttl">画像と装飾</span>
+        <span class="step-txt">画像・色・余白を入れてPC版を完成させる</span>
+      </div>
+    </div>
+
+    <p>
+      そして最後に<strong>段階5：メディアクエリでレスポンシブにする</strong>。PC版が完成してから、狭い画面向けの上書きを足していきます。
+    </p>
+
+    <div class="point">
+      <span class="label">なぜこの順番なのか</span><br>
+      <strong>あとの段階ほど、直すのが簡単だからです。</strong>色や余白は最後に何度でも変えられますが、HTMLの構造は後から変えると全部のCSSが道連れになります。<br>
+      <strong>取り返しのつかないものから順に、確実に固めていく。</strong>これはコーディングに限らず、ものづくり全般に共通する考え方です。
+    </div>
+
+    <div class="note">
+      <span class="label">その前に ― 紙に描く</span><br>
+      手を動かす前に、<strong>紙にデザインの枠を描いてみてください。</strong>「ここが横並び」「ここは3つ均等」と線を引くだけで十分です。<br>
+      この作業をすると、<strong>HTMLの構造がそのまま見えてきます</strong>。頭の中だけで組み立てようとすると、必ずどこかで迷います。
+    </div>
+  </section>
+
+  <section id="chapter2">
+    <h2>2. 段階1 ― 枠線コーディング</h2>
+
+    <p>
+      まず<strong>大枠のタグだけ</strong>を書きます。中身は空のままで構いません。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.html — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.html</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15</div>
+        <pre class="vscode-code">&lt;!DOCTYPE <span class="sy-tag">html</span>&gt;
+&lt;<span class="sy-tag">html</span> <span class="sy-attr">lang</span>=<span class="sy-str">"ja"</span>&gt;
+&lt;<span class="sy-tag">head</span>&gt;
+  &lt;<span class="sy-tag">meta</span> <span class="sy-attr">charset</span>=<span class="sy-str">"UTF-8"</span>&gt;
+  &lt;<span class="sy-tag">title</span>&gt;Responsive Site Sample&lt;/<span class="sy-tag">title</span>&gt;
+  &lt;<span class="sy-tag">link</span> <span class="sy-attr">rel</span>=<span class="sy-str">"stylesheet"</span> <span class="sy-attr">href</span>=<span class="sy-str">"css/reset.css"</span>&gt;
+  &lt;<span class="sy-tag">link</span> <span class="sy-attr">rel</span>=<span class="sy-str">"stylesheet"</span> <span class="sy-attr">href</span>=<span class="sy-str">"css/style.css"</span>&gt;
+&lt;/<span class="sy-tag">head</span>&gt;
+&lt;<span class="sy-tag">body</span>&gt;
+&lt;<span class="sy-tag">header</span>&gt;&lt;/<span class="sy-tag">header</span>&gt;
+&lt;<span class="sy-tag">nav</span>&gt;&lt;/<span class="sy-tag">nav</span>&gt;
+&lt;<span class="sy-tag">main</span>&gt;&lt;/<span class="sy-tag">main</span>&gt;
+&lt;<span class="sy-tag">footer</span>&gt;&lt;/<span class="sy-tag">footer</span>&gt;
+&lt;/<span class="sy-tag">body</span>&gt;
+&lt;/<span class="sy-tag">html</span>&gt;</pre>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">reset.css を用意する</span><br>
+      1行目で読み込んでいる <code>reset.css</code> は、<strong>ブラウザごとに違う既定のスタイルを打ち消す</strong>ためのものです。余白や文字サイズの初期値はブラウザによって微妙に違うので、これを最初に読み込んで<strong>同じ見た目から書き始めます</strong>。<br>
+      <a href="../files/reset.css" download>reset.css をダウンロード</a>して、<code>css</code> フォルダに入れてください。<br>
+      読み込む順番は <strong><code>reset.css</code> → <code>style.css</code></strong> です。逆にすると、自分で書いたスタイルが打ち消されます。
+    </div>
+
+    <h3>診断用の枠線を付ける</h3>
+
+    <p>
+      この段階では、<strong>色も余白も付けません</strong>。代わりに<strong>枠線だけ</strong>を付けて、いま何がどこにあるかを目で見えるようにします。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">style.css — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">style.css</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15</div>
+        <pre class="vscode-code"><span class="sy-com">/* 大きい入れ物は赤 */</span>
+<span class="sy-sel">header, footer, nav, main</span> {
+  <span class="sy-attr">margin</span>: <span class="sy-num">2px</span>;
+  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> <span class="sy-str">solid</span> <span class="sy-str">#F00</span>;
+}
+<span class="sy-com">/* 中くらいの入れ物は青 */</span>
+<span class="sy-sel">div, ul</span> {
+  <span class="sy-attr">margin</span>: <span class="sy-num">2px</span>;
+  <span class="sy-attr">border</span>: <span class="sy-num">2px</span> <span class="sy-str">solid</span> <span class="sy-str">#00F</span>;
+}
+<span class="sy-com">/* 中身は緑 */</span>
+<span class="sy-sel">li, form, img, h1, h2</span> {
+  <span class="sy-attr">margin</span>: <span class="sy-num">2px</span>;
+  <span class="sy-attr">border</span>: <span class="sy-num">1px</span> <span class="sy-str">solid</span> <span class="sy-str">#0f0</span>;
+}</pre>
+      </div>
+    </div>
+
+    <h3>実際に切り替えてみる</h3>
+
+    <p>
+      下のスイッチを押すと、枠線が付いた状態と外した状態を行き来できます。<strong>枠線があると構造が見え、外すとただの文字の並びに見える</strong>のが分かります。
+    </p>
+
+    <div class="bd-demo">
+      <input type="checkbox" id="wire-check" class="wire-check">
+      <label class="wire-toggle" for="wire-check">診断用の枠線を表示する</label>
+
+      <div class="wire-page">
+        <div class="wire-header">
+          <h1>サイトのロゴ</h1>
+        </div>
+        <div class="wire-nav">
+          <ul>
+            <li>HOME</li>
+            <li>ABOUT</li>
+            <li>NEWS</li>
+            <li>CONTACT</li>
+          </ul>
+        </div>
+        <div class="wire-main">
+          <h2>見出し</h2>
+          <div class="wire-cols">
+            <div>カラム1</div>
+            <div>カラム2</div>
+            <div>カラム3</div>
+          </div>
+        </div>
+        <div class="wire-footer">
+          フッター
+        </div>
+      </div>
+
+      <div class="wire-legend">
+        <span class="lg-red"><i></i>赤 = header / nav / main / footer</span>
+        <span class="lg-blue"><i></i>青 = div / ul</span>
+        <span class="lg-green"><i></i>緑 = li / h1 / h2 / img</span>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">なぜ枠線を付けるのか</span><br>
+      CSSでレイアウトを組んでいると、<strong>「思った場所に出ない」</strong>ことが必ず起きます。原因は<strong>入れ物の大きさが想像と違う</strong>ことがほとんどです。<br>
+      枠線を出しておけば、<strong>その入れ物が実際どこからどこまでなのかが一目で分かります</strong>。デバッグの時間が桁違いに変わります。
+    </div>
+
+    <div class="caution">
+      <span class="label">最後に必ず消す</span><br>
+      この枠線は<strong>作業用</strong>です。完成前に削除するか、コメントアウトしてください。<br>
+      消し忘れて納品してしまう事故が実際にあります。<strong>枠線用のCSSは、まとめて1箇所に書いておく</strong>と消し忘れません。
+    </div>
+  </section>
+
+  <section id="chapter3">
+    <h2>3. 段階2 ― 中身を入れる</h2>
+
+    <p>
+      大枠ができたら、<strong>その中に文章構造を入れていきます</strong>。見出し、文章、リスト、リンク。同時に<strong>クラス名も付けます</strong>。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.html — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.html</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10</div>
+        <pre class="vscode-code">&lt;<span class="sy-tag">section</span> <span class="sy-attr">class</span>=<span class="sy-str">"philosophy"</span>&gt;
+  &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"philosophy__left"</span>&gt;
+    &lt;<span class="sy-tag">h2</span> <span class="sy-attr">class</span>=<span class="sy-str">"philosophy__left-title"</span>&gt;PHILOSOPHY&lt;/<span class="sy-tag">h2</span>&gt;
+    &lt;<span class="sy-tag">p</span>&gt;ここに文章が入ります&lt;/<span class="sy-tag">p</span>&gt;
+    &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"philosophy__button"</span>&gt;
+      &lt;<span class="sy-tag">a</span> <span class="sy-attr">href</span>=<span class="sy-str">"#"</span>&gt;MORE&lt;/<span class="sy-tag">a</span>&gt;
+    &lt;/<span class="sy-tag">div</span>&gt;
+  &lt;/<span class="sy-tag">div</span>&gt;
+  &lt;<span class="sy-tag">div</span> <span class="sy-attr">class</span>=<span class="sy-str">"philosophy__right"</span>&gt;&lt;/<span class="sy-tag">div</span>&gt;
+&lt;/<span class="sy-tag">section</span>&gt;</pre>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">クラス名の付け方</span><br>
+      上の例は <code>ブロック__要素</code> という書き方です。<strong><code>philosophy</code> の中の <code>left</code></strong> だから <code>philosophy__left</code>。<br>
+      こう書くと、CSSを見ただけで<strong>どこの何なのかが分かります</strong>。<code>.left</code> だけだと、サイト中のどこの左なのか分かりません。
+    </div>
+
+    <div class="caution">
+      <span class="label">中身が空のdivがある</span><br>
+      <code>philosophy__right</code> は中身が空です。<strong>これは背景画像を入れるための箱</strong>だからです。<br>
+      画像を <code>&lt;img&gt;</code> で置くか、CSSの背景として置くかは<strong>意味で決めます</strong>。飾りなら背景、内容として意味があるなら <code>&lt;img&gt;</code> です。
+    </div>
+
+    <div class="pv">
+      <div class="pv-bar">ここまで書いた時点での見え方</div>
+      <div class="pv-body pv-stage2">
+        <span class="pv-el pv-h2">PHILOSOPHY</span>
+        <span class="pv-el pv-p">ここに文章が入ります</span>
+        <span class="pv-el pv-btn">MORE</span>
+        <span class="pv-el pv-empty">（ここが philosophy__right。中身が空なので、まだ何も見えない）</span>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">この段階では見た目が崩れていて正しい</span><br>
+      上のとおり、<strong>文字が縦にずらっと並んだ状態</strong>になります。<strong>それで合っています。</strong><br>
+      横に並べる指示も、幅の指定も、まだ1文字も書いていません。<code>philosophy__right</code> は中身が空なので、高さも生まれず<strong>画面上に存在しないように見えます</strong>。<br>
+      いまやっているのは<strong>構造を決める作業</strong>であって、見た目を作る作業ではありません。ここで見た目が気になって色を付け始めると、順番が崩れます。
+    </div>
+  </section>
+
+  <section id="chapter4">
+    <h2>4. 段階3 ― レイアウトを組む</h2>
+
+    <p>
+      構造ができたら、<strong>幅・高さ・flex</strong> で配置を決めます。まだ色や飾りは付けません。
+    </p>
+
+    <div class="bd-samples">
+      <div>
+        <span class="bd-label">CSS</span>
+        <code class="bd-code hl"><span class="c">/* ヘッダーの中身を中央に、横幅を決める */</span>
+<span class="s">.header__contents</span> {
+  <span class="p">width</span>: <span class="v">1200px</span>;
+  <span class="p">margin</span>: <span class="v">43px auto 88px</span>;
+  <span class="p">display</span>: <span class="v">flex</span>;
+  <span class="p">justify-content</span>: <span class="v">center</span>;
+}
+
+<span class="c">/* ナビを均等に並べる */</span>
+<span class="s">nav ul</span> {
+  <span class="p">width</span>: <span class="v">1200px</span>;
+  <span class="p">margin</span>: <span class="v">0 auto</span>;
+  <span class="p">display</span>: <span class="v">flex</span>;
+  <span class="p">justify-content</span>: <span class="v">space-around</span>;
+}</code>
+      </div>
+      <div>
+        <span class="bd-label">CSS（左右2分割）</span>
+        <code class="bd-code hl"><span class="s">.philosophy</span> {
+  <span class="p">display</span>: <span class="v">flex</span>;
+  <span class="p">height</span>: <span class="v">680px</span>;
+}
+
+<span class="s">.philosophy__left</span>,
+<span class="s">.philosophy__right</span> {
+  <span class="p">width</span>: <span class="v">50%</span>;
+}</code>
+      </div>
+    </div>
+
+    <h3>等分に並べる ― calc</h3>
+
+    <p>
+      「4つ均等に並べたい。でも間に余白も欲しい」。このときに使うのが <code>calc()</code> です。
+    </p>
+
+    <div class="bd-samples">
+      <div>
+        <span class="bd-label">CSS</span>
+        <code class="bd-code hl"><span class="s">.news__list</span> {
+  <span class="p">width</span>: <span class="v">90%</span>;
+  <span class="p">margin</span>: <span class="v">0 auto</span>;
+  <span class="p">display</span>: <span class="v">flex</span>;
+}
+
+<span class="c">/* 4等分から、余白ぶんを引く */</span>
+<span class="s">.news__list li</span> {
+  <span class="p">width</span>: <span class="v">calc(100% / 4 - 15px)</span>;
+}</code>
+      </div>
+      <div>
+        <span class="bd-label">読み方</span>
+        <code class="bd-code hl"><span class="c">calc(100% / 4 - 15px)
+
+  100%     … 親の幅いっぱい
+  / 4      … それを4つに割る
+  - 15px   … 余白のぶんだけ狭くする
+
+CSSの中で計算ができる。
+単位が違っても混ぜられるのが
+calc の強み（% と px）。</span></code>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">記号の前後にスペースが要る</span><br>
+      <code>calc(100%/4-15px)</code> のように<strong>詰めて書くと動きません</strong>。<code>-</code> と <code>+</code> の前後には<strong>必ず半角スペース</strong>を入れてください。<br>
+      マイナス記号が「引き算」なのか「マイナスの値」なのか、区別できなくなるためです。
+    </div>
+
+    <div class="pv">
+      <div class="pv-bar">ここまで書いた時点での見え方</div>
+      <div class="pv-body pv-stage3">
+        <div class="pv-philosophy">
+          <div class="pv-left">
+            <span class="pv-el pv-h2">PHILOSOPHY</span>
+            <span class="pv-el pv-p">ここに文章が入ります</span>
+            <span class="pv-el pv-btn">MORE</span>
+          </div>
+          <div class="pv-right">philosophy__right（高さが決まったので、空でも場所を取る）</div>
+        </div>
+        <div class="pv-list">
+          <div>お知らせ1</div>
+          <div>お知らせ2</div>
+          <div>お知らせ3</div>
+          <div>お知らせ4</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">形だけが決まった状態</span><br>
+      縦に積まれていた文字が<strong>左右に分かれ</strong>、お知らせが<strong>4つ横に並びました</strong>。ここまでで<strong>色は1つも指定していません</strong>。<br>
+      点線は、いま枠がどこにあるかを示すために引いたものです。実際の画面には出ません。<br>
+      <code>philosophy__right</code> は中身が空のままですが、<code>height: 680px</code> と <code>width: 50%</code> が効いたので<strong>場所を取るようになりました</strong>。ここに次の段階で背景画像を入れます。
+    </div>
+  </section>
+
+  <section id="chapter5">
+    <h2>5. 段階4 ― 画像を入れて仕上げる</h2>
+
+    <p>
+      配置が決まったら、画像・色・余白を入れてPC版を完成させます。
+    </p>
+
+    <h3>背景画像の書き方</h3>
+
+    <div class="bd-samples">
+      <div>
+        <span class="bd-label">CSS</span>
+        <code class="bd-code hl"><span class="s">.philosophy__right</span> {
+  <span class="p">background</span>: <span class="v">url(../img/bg.jpg) center/cover no-repeat</span>;
+}</code>
+      </div>
+      <div>
+        <span class="bd-label">分解して読む</span>
+        <code class="bd-code hl"><span class="c">url(../img/bg.jpg)  … 画像の場所
+center              … 中央を基準に配置
+/cover              … 枠を埋めるまで拡大
+no-repeat           … 繰り返さない</span></code>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">cover と contain</span><br>
+      <strong><code>cover</code></strong> は<strong>枠を完全に埋める</strong>まで拡大します。はみ出た部分は切れます。<strong>背景写真はほぼこれ</strong>です。<br>
+      <strong><code>contain</code></strong> は<strong>画像全体が見える</strong>ように収めます。枠との比率が違うと余白ができます。ロゴなど、切れては困るものに使います。
+    </div>
+
+    <div class="caution">
+      <span class="label">パスの ../ に注意</span><br>
+      <code>url(../img/bg.jpg)</code> の <code>../</code> は「<strong>1つ上の階層へ</strong>」という意味です。<br>
+      CSSファイルが <code>css/</code> の中にあるので、そこから1つ上に戻って <code>img/</code> を探しています。<strong>基準はHTMLではなくCSSファイルの場所</strong>です。ここは間違えやすいところです。
+    </div>
+
+    <h3>img で置くか、背景で置くか</h3>
+
+    <table>
+      <tr>
+        <th>置き方</th>
+        <th>使う場面</th>
+      </tr>
+      <tr>
+        <td><code>&lt;img&gt;</code> タグ</td>
+        <td>商品写真、記事のサムネイルなど<strong>内容として意味がある</strong>もの</td>
+      </tr>
+      <tr>
+        <td>CSS の <code>background</code></td>
+        <td>飾りの背景、模様など<strong>なくても意味が通じる</strong>もの</td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">判断の基準</span><br>
+      <strong>「その画像が表示されなかったとき、意味が伝わらなくなるか」</strong>で決めます。<br>
+      伝わらなくなるなら <code>&lt;img&gt;</code> で置いて <code>alt</code> を書く。飾りなら背景。この判断はSEOとアクセシビリティの両方に効きます。
+    </div>
+
+    <div class="pv">
+      <div class="pv-bar">ここまで書いた時点での見え方（PC版の完成）</div>
+      <div class="pv-body pv-stage4">
+        <div class="pv-philosophy">
+          <div class="pv-left">
+            <span class="pv-el pv-h2">PHILOSOPHY</span>
+            <span class="pv-el pv-p">ここに文章が入ります。段階3までは形だけでしたが、色と余白が入ると読み物として成立します。</span>
+            <span class="pv-el pv-btn">MORE</span>
+          </div>
+          <div class="pv-right">背景画像（cover で枠を埋める）</div>
+        </div>
+        <div class="pv-news">
+          <div class="pv-news-title">NEWS</div>
+          <div class="pv-list">
+            <div><div class="pv-thumb"></div><p>お知らせのタイトル</p></div>
+            <div><div class="pv-thumb"></div><p>お知らせのタイトル</p></div>
+            <div><div class="pv-thumb"></div><p>お知らせのタイトル</p></div>
+            <div><div class="pv-thumb"></div><p>お知らせのタイトル</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">ここでPC版は完成</span><br>
+      <strong>HTMLは段階2から1行も変えていません。</strong>足したのはCSSだけです。<br>
+      段階3で形が決まり、段階4で色と画像が入った。<strong>この順番で作ると、あとから直すのが簡単になります</strong>。色を変えたくなっても、構造には手を触れずに済むからです。<br>
+      残るはレスポンシブだけです。
+    </div>
+  </section>
+
+  <section id="chapter6">
+    <h2>6. 段階5 ― レスポンシブにする</h2>
+
+    <p>
+      PC版が完成してから、<strong>狭い画面向けの上書き</strong>を足していきます。
+    </p>
+
+    <h3>ブレイクポイントを3段にする</h3>
+
+    <div class="bp-bar">
+      <div class="bp-sp">スマホ<br>〜480px</div>
+      <div class="bp-tb">タブレット<br>768px 〜 1215px</div>
+      <div class="bp-pc">PC<br>1215px 〜</div>
+    </div>
+
+    <table>
+      <tr>
+        <th>対象</th>
+        <th>幅</th>
+        <th>主な変更</th>
+      </tr>
+      <tr>
+        <td>PC</td>
+        <td>1215px 以上</td>
+        <td>基準のCSS（そのまま）</td>
+      </tr>
+      <tr>
+        <td>タブレット</td>
+        <td>768px 〜 1215px</td>
+        <td>固定幅をやめて <code>100%</code> にする</td>
+      </tr>
+      <tr>
+        <td>スマホ</td>
+        <td>768px 以下</td>
+        <td>横並びを縦積みに変える</td>
+      </tr>
+    </table>
+
+    <div class="bd-samples">
+      <div>
+        <span class="bd-label">タブレット ― 幅を可変にする</span>
+        <code class="bd-code hl"><span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">1215px</span>) {
+  <span class="s">.header__contents</span> {
+    <span class="p">width</span>: <span class="v">100%</span>;
+  }
+  <span class="s">nav ul</span> {
+    <span class="p">width</span>: <span class="v">100%</span>;
+  }
+}</code>
+      </div>
+      <div>
+        <span class="bd-label">スマホ ― 縦積みにする</span>
+        <code class="bd-code hl"><span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">768px</span>) {
+  <span class="s">.philosophy</span> {
+    <span class="p">flex-direction</span>: <span class="v">column</span>;
+  }
+  <span class="s">.philosophy__left</span>,
+  <span class="s">.philosophy__right</span> {
+    <span class="p">width</span>: <span class="v">100%</span>;
+  }
+  <span class="c">/* 4列 → 2列 */</span>
+  <span class="s">.news__list li</span> {
+    <span class="p">width</span>: <span class="v">calc(100% / 2 - 2%)</span>;
+  }
+}</code>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">やっていることは3つだけ</span><br>
+      レスポンシブ対応の中身は、ほとんどがこの3つです。<br>
+      <strong>1. 固定幅（1200px）を <code>100%</code> にする</strong>／<strong>2. 横並び（flex）を縦積み（column）にする</strong>／<strong>3. 列の数を減らす（4列→2列）</strong>。<br>
+      新しい技術ではなく、<a href="basic_2.html#chapter2">初級#2</a> でやったメディアクエリの使い分けです。
+    </div>
+
+    <h3>幅を切り替えて確かめる</h3>
+
+    <p>
+      ボタンを押すと、枠の幅が変わります。<strong>中のHTMLは1つ</strong>で、幅に応じてCSSが切り替わっているだけです。
+    </p>
+
+    <div class="pv">
+      <div class="pv-bar">ここまで書いた時点での見え方（完成）</div>
+
+      <input type="radio" name="rs" id="rs-pc" class="rs-pick" checked>
+      <input type="radio" name="rs" id="rs-tab" class="rs-pick">
+      <input type="radio" name="rs" id="rs-sp" class="rs-pick">
+
+      <div class="rs-tabs">
+        <label for="rs-pc">PC（1216px〜）</label>
+        <label for="rs-tab">タブレット（〜1215px）</label>
+        <label for="rs-sp">スマホ（〜768px）</label>
+      </div>
+
+      <div class="rs-meta"></div>
+
+      <div class="rs-stage">
+        <div class="rs-frame">
+          <div class="rs-head">
+            <div class="rs-logo">SAMPLE RESTAURANT</div>
+            <div class="rs-nav"><span>HOME</span><span>PHILOSOPHY</span><span>MENU</span><span>NEWS</span><span>CONTACT</span></div>
+          </div>
+          <div class="rs-philo">
+            <div class="rs-philo-l">
+              <b>PHILOSOPHY</b>
+              <span>ここに文章が入ります。幅が狭くなると、この左右2分割が縦積みに変わります。</span>
+            </div>
+            <div class="rs-philo-r">背景画像</div>
+          </div>
+          <div class="rs-news">
+            <div class="rs-news-t">NEWS</div>
+            <div class="rs-list">
+              <div><div class="rs-thumb"></div><p>お知らせのタイトル</p></div>
+              <div><div class="rs-thumb"></div><p>お知らせのタイトル</p></div>
+              <div><div class="rs-thumb"></div><p>お知らせのタイトル</p></div>
+              <div><div class="rs-thumb"></div><p>お知らせのタイトル</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">この図の作り</span><br>
+      この枠は<strong>幅ごとの見え方を再現したもの</strong>で、実際のメディアクエリではありません。ページの中に置いた枠は画面より狭くならないので、同じ条件が作れないためです。<br>
+      本物は<strong>ブラウザの幅そのもの</strong>で切り替わります。自分の手元では、ウィンドウの端をつかんで狭めるか、<a href="beginner_5.html">検証ツール</a>で確認してください。
+    </div>
+
+    <div class="caution">
+      <span class="label">タブレットを飛ばさない</span><br>
+      PCとスマホだけ作って、<strong>タブレット幅で崩れる</strong>のはよくある事故です。<br>
+      1200px固定のまま幅900pxの画面で見ると、<strong>横スクロールが発生します</strong>。確認は最低3サイズ（PC・タブレット・スマホ）でおこなってください。
+    </div>
+
+    <div class="note">
+      <span class="label">確認の手順</span><br>
+      開発者ツール（<strong>F12</strong>）のレスポンシブモードで、<strong>幅をゆっくり狭めながら</strong>見てください。<br>
+      崩れるのは<strong>切り替わる瞬間</strong>ではなく、<strong>切り替わる直前の幅</strong>であることが多いです。1215pxちょうどではなく、1220pxあたりを重点的に見ます。
+    </div>
+
+  </section>
+
+  <section id="chapter7">
+    <h2>7. 通しで作ってみる</h2>
+
+    <p>
+      ここまでの5段階を、<strong>1ページ分まとめて</strong>見ます。レストランのトップページを想定した<strong>4つのセクション</strong>です。
+    </p>
+
+    <div class="pv">
+      <div class="pv-bar">これから作るもの</div>
+      <div class="pv-body pv-map">
+        <div class="pv-map-row"><span class="pv-map-n">1</span><b>PHILOSOPHY</b>左右2分割。左に文章、右に背景画像</div>
+        <div class="pv-map-row"><span class="pv-map-n">2</span><b>MENU</b>3枚のカードを横に並べる</div>
+        <div class="pv-map-row"><span class="pv-map-n">3</span><b>NEWS</b>お知らせを4列で並べる</div>
+        <div class="pv-map-row"><span class="pv-map-n">4</span><b>ACCESS</b>店舗情報と地図を左右に置く</div>
+      </div>
+    </div>
+
+    <p>
+      並べ方は<strong>3種類しかありません</strong>。「左右に分ける」「同じものを横に並べる」「情報を縦に積む」。<strong>どれも <code>flex</code> で作れます</strong>。4つのセクションは、この組み合わせでできています。
+    </p>
+
+    <div class="note">
+      <span class="label">写して動かす</span><br>
+      下のコードは<strong>そのまま使えます</strong>。画像のパスだけは自分の環境に合わせてください。<br>
+      いきなり全部書くのではなく、<strong>段階1から順に</strong>足していくのが練習になります。<strong>セクション1つずつ</strong>作って、そのつど表示を確かめると崩れにくくなります。
+    </div>
+
+    <h3>段階1〜2 ― HTML</h3>
+
+    <details class="kotae">
+      <summary>HTML を開く</summary>
+      <span class="bd-label">index.html</span>
+      <code class="bd-code hl">&lt;<span class="s">section</span> class=<span class="v">"philosophy"</span>&gt;
+  &lt;<span class="s">div</span> class=<span class="v">"philosophy__left"</span>&gt;
+    &lt;<span class="s">h2</span> class=<span class="v">"philosophy__left-title"</span>&gt;PHILOSOPHY&lt;/<span class="s">h2</span>&gt;
+    &lt;<span class="s">p</span>&gt;ここに理念の文章が入ります&lt;/<span class="s">p</span>&gt;
+    &lt;<span class="s">div</span> class=<span class="v">"philosophy__button"</span>&gt;
+      &lt;<span class="s">a</span> href=<span class="v">"#"</span>&gt;MORE&lt;/<span class="s">a</span>&gt;
+    &lt;/<span class="s">div</span>&gt;
+  &lt;/<span class="s">div</span>&gt;
+  <span class="c">&lt;!-- 背景画像を入れるための空の箱 --&gt;</span>
+  &lt;<span class="s">div</span> class=<span class="v">"philosophy__right"</span>&gt;&lt;/<span class="s">div</span>&gt;
+&lt;/<span class="s">section</span>&gt;
+
+&lt;<span class="s">section</span> class=<span class="v">"menu"</span>&gt;
+  &lt;<span class="s">h2</span> class=<span class="v">"menu__title"</span>&gt;MENU&lt;/<span class="s">h2</span>&gt;
+  &lt;<span class="s">ul</span> class=<span class="v">"menu__list"</span>&gt;
+    &lt;<span class="s">li</span>&gt;
+      &lt;<span class="s">div</span> class=<span class="v">"menu__img"</span>&gt;
+        &lt;<span class="s">img</span> src=<span class="v">"./img/menu01.jpg"</span> alt=<span class="v">"前菜の盛り合わせ"</span>&gt;
+      &lt;/<span class="s">div</span>&gt;
+      &lt;<span class="s">div</span> class=<span class="v">"menu__body"</span>&gt;
+        &lt;<span class="s">h3</span>&gt;ANTIPASTO&lt;/<span class="s">h3</span>&gt;
+        &lt;<span class="s">p</span>&gt;料理の説明が入ります&lt;/<span class="s">p</span>&gt;
+      &lt;/<span class="s">div</span>&gt;
+    &lt;/<span class="s">li</span>&gt;
+    <span class="c">&lt;!-- li をあと2つ繰り返す --&gt;</span>
+  &lt;/<span class="s">ul</span>&gt;
+&lt;/<span class="s">section</span>&gt;
+
+&lt;<span class="s">section</span> class=<span class="v">"news"</span>&gt;
+  &lt;<span class="s">h2</span> class=<span class="v">"news__title"</span>&gt;NEWS&lt;/<span class="s">h2</span>&gt;
+  &lt;<span class="s">ul</span> class=<span class="v">"news__list"</span>&gt;
+    &lt;<span class="s">li</span>&gt;
+      &lt;<span class="s">a</span> href=<span class="v">"#"</span>&gt;
+        &lt;<span class="s">div</span> class=<span class="v">"news__list-img"</span>&gt;
+          &lt;<span class="s">img</span> src=<span class="v">"./img/news01.jpg"</span> alt=<span class="v">""</span>&gt;
+        &lt;/<span class="s">div</span>&gt;
+        &lt;<span class="s">p</span>&gt;お知らせのタイトル&lt;/<span class="s">p</span>&gt;
+      &lt;/<span class="s">a</span>&gt;
+    &lt;/<span class="s">li</span>&gt;
+    <span class="c">&lt;!-- li をあと3つ繰り返す --&gt;</span>
+  &lt;/<span class="s">ul</span>&gt;
+&lt;/<span class="s">section</span>&gt;
+
+&lt;<span class="s">section</span> class=<span class="v">"access"</span>&gt;
+  &lt;<span class="s">h2</span> class=<span class="v">"access__title"</span>&gt;ACCESS&lt;/<span class="s">h2</span>&gt;
+  &lt;<span class="s">div</span> class=<span class="v">"access__inner"</span>&gt;
+    &lt;<span class="s">dl</span> class=<span class="v">"access__info"</span>&gt;
+      &lt;<span class="s">dt</span>&gt;ADDRESS&lt;/<span class="s">dt</span>&gt;
+      &lt;<span class="s">dd</span>&gt;東京都サンプル区サンプル1-2-3&lt;/<span class="s">dd</span>&gt;
+      &lt;<span class="s">dt</span>&gt;OPEN&lt;/<span class="s">dt</span>&gt;
+      &lt;<span class="s">dd</span>&gt;11:30 - 22:00&lt;/<span class="s">dd</span>&gt;
+    &lt;/<span class="s">dl</span>&gt;
+    &lt;<span class="s">div</span> class=<span class="v">"access__map"</span>&gt;
+      &lt;<span class="s">img</span> src=<span class="v">"./img/map.jpg"</span> alt=<span class="v">"店舗の地図"</span>&gt;
+    &lt;/<span class="s">div</span>&gt;
+  &lt;/<span class="s">div</span>&gt;
+&lt;/<span class="s">section</span>&gt;</code>
+    </details>
+
+    <div class="point">
+      <span class="label">4つとも同じ形をしている</span><br>
+      <code>section</code> の中に<strong>見出しと、並べるものの入れ物</strong>。これだけです。<br>
+      MENU と NEWS は <code>ul</code> の中に <code>li</code> を並べ、PHILOSOPHY と ACCESS は <code>div</code> を左右に置く。<strong>覚えることは増えていません</strong>。</div>
+
+    <h3>段階3〜5 ― CSS</h3>
+
+    <details class="kotae">
+      <summary>CSS を開く</summary>
+      <span class="bd-label">style.css</span>
+      <code class="bd-code hl"><span class="c">/* ---------- philosophy ---------- */</span>
+<span class="s">.philosophy</span> {
+  <span class="p">display</span>: <span class="v">flex</span>;
+  <span class="p">height</span>: <span class="v">680px</span>;
+}
+
+<span class="s">.philosophy__left</span>,
+<span class="s">.philosophy__right</span> {
+  <span class="p">width</span>: <span class="v">50%</span>;
+}
+
+<span class="c">/* 空の箱に背景画像を入れる */</span>
+<span class="s">.philosophy__right</span> {
+  <span class="p">background</span>: <span class="v">url(../img/philosophy_bg.jpg) center/cover no-repeat</span>;
+}
+
+<span class="c">/* ---------- menu ---------- */</span>
+<span class="s">.menu__list</span> {
+  <span class="p">width</span>: <span class="v">90%</span>;
+  <span class="p">margin</span>: <span class="v">40px auto 0</span>;
+  <span class="p">display</span>: <span class="v">flex</span>;
+}
+
+<span class="c">/* 3等分。数が違うだけで news と同じ考え方 */</span>
+<span class="s">.menu__list li</span> {
+  <span class="p">width</span>: <span class="v">calc(100% / 3 - 20px)</span>;
+  <span class="p">margin-right</span>: <span class="v">30px</span>;
+}
+
+<span class="c">/* 最後の1つだけ右の余白を消す */</span>
+<span class="s">.menu__list li:last-child</span> {
+  <span class="p">margin-right</span>: <span class="v">0</span>;
+}
+
+<span class="s">.menu__list li img</span> {
+  <span class="p">width</span>: <span class="v">100%</span>;
+  <span class="p">display</span>: <span class="v">block</span>;
+}
+
+<span class="c">/* ---------- news ---------- */</span>
+<span class="s">.news__list</span> {
+  <span class="p">width</span>: <span class="v">90%</span>;
+  <span class="p">margin</span>: <span class="v">40px auto 0</span>;
+  <span class="p">display</span>: <span class="v">flex</span>;
+  <span class="c">/* 引いた余白ぶんを、すき間として均等に配る */</span>
+  <span class="p">justify-content</span>: <span class="v">space-between</span>;
+}
+
+<span class="c">/* 4等分から余白のぶんを引く */</span>
+<span class="s">.news__list li</span> {
+  <span class="p">width</span>: <span class="v">calc(100% / 4 - 15px)</span>;
+}
+
+<span class="s">.news__list li img</span> {
+  <span class="p">width</span>: <span class="v">100%</span>;
+  <span class="p">display</span>: <span class="v">block</span>;
+}
+
+<span class="c">/* ---------- access ---------- */</span>
+<span class="c">/* philosophy と同じ「左右に分ける」形 */</span>
+<span class="s">.access__inner</span> {
+  <span class="p">width</span>: <span class="v">90%</span>;
+  <span class="p">margin</span>: <span class="v">40px auto 0</span>;
+  <span class="p">display</span>: <span class="v">flex</span>;
+  <span class="p">align-items</span>: <span class="v">center</span>;
+}
+
+<span class="s">.access__info</span> {
+  <span class="p">width</span>: <span class="v">45%</span>;
+}
+
+<span class="s">.access__map</span> {
+  <span class="p">width</span>: <span class="v">55%</span>;
+}
+
+<span class="s">.access__map img</span> {
+  <span class="p">width</span>: <span class="v">100%</span>;
+  <span class="p">display</span>: <span class="v">block</span>;
+}
+
+<span class="c">/* ---------- タブレット（1215px以下） ---------- */</span>
+<span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">1215px</span>) {
+  <span class="s">.header__contents</span> {
+    <span class="p">width</span>: <span class="v">100%</span>;
+  }
+  <span class="s">nav ul</span> {
+    <span class="p">width</span>: <span class="v">100%</span>;
+  }
+}
+
+<span class="c">/* ---------- スマホ（768px以下） ---------- */</span>
+<span class="k">@media</span> screen <span class="k">and</span> (<span class="p">max-width</span>: <span class="n">768px</span>) {
+  <span class="s">.header__contents</span> {
+    <span class="p">display</span>: <span class="v">block</span>;
+    <span class="p">margin-top</span>: <span class="v">240px</span>;
+  }
+
+  <span class="c">/* 左右2分割 → 縦積み */</span>
+  <span class="s">.philosophy</span> {
+    <span class="p">flex-direction</span>: <span class="v">column</span>;
+  }
+  <span class="s">.philosophy__left</span>,
+  <span class="s">.philosophy__right</span> {
+    <span class="p">width</span>: <span class="v">100%</span>;
+  }
+
+  <span class="c">/* 4列 → 2列。折り返しを許可しないと4つのまま潰れる */</span>
+  <span class="s">.news__list</span> {
+    <span class="p">flex-wrap</span>: <span class="v">wrap</span>;
+  }
+  <span class="s">.news__list li</span> {
+    <span class="p">width</span>: <span class="v">calc(100% / 2 - 2%)</span>;
+    <span class="p">margin-bottom</span>: <span class="v">20px</span>;
+  }
+
+  <span class="c">/* 3列 → 縦積み */</span>
+  <span class="s">.menu__list</span> {
+    <span class="p">flex-direction</span>: <span class="v">column</span>;
+  }
+  <span class="s">.menu__list li</span> {
+    <span class="p">width</span>: <span class="v">100%</span>;
+    <span class="p">margin</span>: <span class="v">0 0 24px</span>;
+  }
+
+  <span class="c">/* 左右 → 縦積み */</span>
+  <span class="s">.access__inner</span> {
+    <span class="p">flex-direction</span>: <span class="v">column</span>;
+  }
+  <span class="s">.access__info</span>,
+  <span class="s">.access__map</span> {
+    <span class="p">width</span>: <span class="v">100%</span>;
+  }
+}</code>
+    </details>
+
+    <div class="point">
+      <span class="label">段階の対応を確かめる</span><br>
+      HTMLには<strong>色も大きさも書かれていません</strong>（段階1〜2）。CSSの前半が<strong>配置</strong>（段階3）、<code>background</code> が<strong>画像</strong>（段階4）、<code>@media</code> が<strong>レスポンシブ</strong>（段階5）。<br>
+      <strong>役割ごとにきれいに分かれている</strong>ことが、この順番で作った結果です。
+    </div>
+
+    <div class="point">
+      <span class="label">4セクションでも、やっていることは同じ</span><br>
+      セクションが2つから4つに増えましたが、<strong>新しい書き方は1つも出てきていません</strong>。<br>
+      MENU は「<code>calc(100% / 3)</code> で3等分」、ACCESS は「<code>display: flex</code> で左右に分ける」。どちらも<strong>PHILOSOPHY と NEWS で使ったものの数違い</strong>です。<br>
+      スマホ版で足したのも<strong>「横並びをやめて縦積みにする」だけ</strong>。覚えることは増えません。
+    </div>
+
+    <div class="caution">
+      <span class="label">素材について</span><br>
+      <code>reset.css</code> は <a href="../files/reset.css" download>ここからダウンロード</a>できます（2章でも案内しています）。<br>
+      <strong>画像は研修で配布されるもの</strong>を使ってください。上のコードの <code>./img/news01.jpg</code> などは、<strong>自分の環境のパスに置き換える</strong>必要があります。<br>
+      画像が出ないときは、<strong>パスの <code>../</code> が正しいか</strong>を最初に疑ってください（5章参照）。
+    </div>
+
+    <div class="note">
+      <span class="label">次のページへ</span><br>
+      ここまでで、HTML・CSS の制作は一区切りです。次の <a href="basic_4.html">マークアップ中級#4（簡単にエクセル関数を理解しよう）</a> からは、<strong>プログラミングの考え方</strong>をエクセルで先に体験します。
+    </div>
+  </section>
+
+</main>
+
+<nav class="page-nav">
+  <a class="page-prev" href="basic_2.html">
+    <span class="page-nav-label">前のページ</span>
+    <span class="page-nav-title">マークアップ初級#2</span>
+    <span class="page-nav-sub">初めてのレスポンシブコーディング</span>
+  </a>
+  <a class="page-next" href="basic_4.html">
+    <span class="page-nav-label">次のページ</span>
+    <span class="page-nav-title">マークアップ中級#4</span>
+    <span class="page-nav-sub">簡単にエクセル関数を理解しよう</span>
+  </a>
+</nav>
+
+<footer></footer>
+
+<!-- ▼ 共通スクリプト。章ナビ・コピーボタン・先頭へ戻るが自動で付く（編集不要） -->
+<script src="../js/training.js"></script>
+
+</body>
+</html>

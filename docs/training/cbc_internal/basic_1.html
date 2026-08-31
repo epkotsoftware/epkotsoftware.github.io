@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>マークアップ初級#1</title>
+  <link rel="stylesheet" href="../css/training.css">
+
+  <!-- ▼ このページ専用のスタイル（通信の流れ図） -->
+  <link rel="stylesheet" href="../css/basic_1.css">
+
+  <!-- ▼ 開いたときに、ページの先頭から読み始められるようにする。
+       ブラウザが前回の位置へ戻すより先に動かす必要があるため、
+       training.js とは分けて <head> で読み込んでいる -->
+  <script src="../js/scroll-reset.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>マークアップ初級#1</h1>
+    <p>インターネットの仕組みを理解しよう</p>
+  </div>
+</header>
+
+<main>
+
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol>
+      <li><a href="#chapter1">インターネットの仕組み</a></li>
+      <li><a href="#chapter2">FTP接続</a></li>
+      <li><a href="#chapter3">SEOについて</a></li>
+    </ol>
+
+    <div class="note">
+      <span class="label">読む前に</span><br>
+      このページでは<strong>コードは書きません、読むだけです</strong>。<br>
+      あなたが作ったページが<strong>世界中から見られるようになるまでの裏側</strong>（サーバー・通信・検索）を知りましょう。
+    </div>
+  </section>
+
+  <section id="chapter1">
+    <h2>1. インターネットの仕組み</h2>
+
+    <p>
+      いま自分のパソコンの中にあるHTMLファイルは、<strong>自分にしか見えません</strong>。パソコンの中身は基本的に非公開だからです。
+    </p>
+    <p>
+      世界中の人に見てもらうには、<strong>Webサーバー</strong>という「公開するための置き場所」にファイルを置きます。Webサーバーには<strong>グローバルIPアドレス</strong>という、世界で1つの住所（数字）が割り当てられていて、そこに置いたものは誰からでも届く状態になります。
+    </p>
+
+    <h3>名前と住所 ― ドメインとIPアドレス</h3>
+
+    <table>
+      <tr>
+        <th>呼び方</th>
+        <th>正体</th>
+        <th>例</th>
+      </tr>
+      <tr>
+        <td>ドメイン名</td>
+        <td>人間が覚えるための<strong>名前</strong></td>
+        <td><code>google.com</code></td>
+      </tr>
+      <tr>
+        <td>グローバルIPアドレス</td>
+        <td>機械が使う<strong>住所（数字）</strong></td>
+        <td><code>142.250.199.110</code> のような数字の並び</td>
+      </tr>
+    </table>
+
+    <p>
+      ブラウザにドメイン名を打つと、<strong>DNS</strong>という仕組みが名前を数字の住所に変換してくれます。電話帳のようなものです。レンタルサーバーを借りると、ドメイン名とサーバーのIPを結びつける設定はサーバー側がやってくれます。
+    </p>
+
+    <h3>リクエストの流れ</h3>
+
+    <p>
+      ページが表示されるまでに、裏ではこれだけの経由地を通っています。
+    </p>
+
+    <div class="net-fig">
+      <div class="net-flow">
+        <div class="net-node">
+          <div class="net-icon ic-pc">
+            <span class="scr"></span>
+            <span class="base"></span>
+          </div>
+          <span class="net-title">あなたのPC</span>
+          <span class="net-sub">ブラウザに<br><code>google.com</code> と入力</span>
+        </div>
+
+        <div class="net-link">
+          <span class="lane go"><i></i></span>
+          <span class="lane back"><i></i></span>
+        </div>
+
+        <div class="net-node">
+          <div class="net-icon ic-router">
+            <span class="ant a"></span>
+            <span class="ant b"></span>
+            <span class="body"></span>
+            <span class="led l1"></span>
+            <span class="led l2"></span>
+            <span class="led l3"></span>
+          </div>
+          <span class="net-title">プロバイダ</span>
+          <span class="net-sub">インターネットへの<br>入り口</span>
+        </div>
+
+        <div class="net-link d2">
+          <span class="lane go"><i></i></span>
+          <span class="lane back"><i></i></span>
+        </div>
+
+        <div class="net-node">
+          <div class="net-icon ic-dns">
+            <span class="book"></span>
+            <span class="spine"></span>
+            <span class="line n1"></span>
+            <span class="line n2"></span>
+            <span class="line n3"></span>
+          </div>
+          <span class="net-title">DNS</span>
+          <span class="net-sub">名前を数字の住所に<br>変換する</span>
+        </div>
+
+        <div class="net-link d3">
+          <span class="lane go"><i></i></span>
+          <span class="lane back"><i></i></span>
+        </div>
+
+        <div class="net-node">
+          <div class="net-icon ic-server">
+            <span class="unit u1"></span>
+            <span class="unit u2"></span>
+            <span class="unit u3"></span>
+          </div>
+          <span class="net-title">Webサーバー</span>
+          <span class="net-sub">ページのデータを<br>持っている場所</span>
+        </div>
+      </div>
+
+      <div class="net-way">
+        <b>往路</b>
+        <span>「このページが見たい」という<strong>リクエスト</strong>が、<strong>PCからサーバーへ</strong>順に送られます。</span>
+      </div>
+      <div class="net-way" style="border-top: none; padding-top: 0; margin-top: 6px;">
+        <b class="back">復路</b>
+        <span>サーバーが返した<strong>HTML・CSS・画像</strong>が<strong>同じ経路を逆にたどって戻り</strong>、ブラウザが画面に組み立てます。</span>
+      </div>
+    </div>
+
+    <h3>経由地を自分の目で見る</h3>
+
+    <p>
+      実際にいくつの機器を通ってサイトに届いているか、コマンドで確かめられます。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">コマンドプロンプト</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">Windows</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1</div>
+        <pre class="vscode-code">tracert google.com</pre>
+      </div>
+    </div>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">ターミナル</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">Mac</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1</div>
+        <pre class="vscode-code">traceroute -I google.com</pre>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">見方</span><br>
+      1行が1つの経由地です。行が増えるほど、たくさんの機器をバケツリレーして届いていることになります。<br>
+      途中で「要求がタイムアウトしました」や <code>*</code> が出る行があっても異常ではありません（応答を返さない機器があるだけです）。途中でやめたいときは <strong>Ctrl + C</strong> です。
+    </div>
+  </section>
+
+  <section id="chapter2">
+    <h2>2. FTP接続</h2>
+
+    <p>
+      <strong>FTP（File Transfer Protocol／ファイル転送プロトコル）</strong>は、自分のパソコンとWebサーバーの間で<strong>ファイルをやり取りするための決まりごと</strong>です。ふだんの会話では、その決まりごとを使う<strong>FTPソフトのこと</strong>を指して「FTP」と呼ぶことが多いです。
+    </p>
+    <p>
+      つまり「サーバーにファイルを上げる（アップロードする）」＝「ページを公開する」作業の道具です。
+    </p>
+
+    <div class="caution">
+      <span class="label">サーバーの契約は要りません</span><br>
+      この章は<strong>考え方を知るところ</strong>です。<strong>いま自分でサーバーを借りる必要はありません。</strong><br>
+      画面や手順を載せていますが、<strong>そのとおりに操作するものではなく、読んで流れをつかむためのもの</strong>です。<br>
+      自分のサイトを公開したくなったときに、このページを見直してください。
+    </div>
+
+    <div class="note">
+      <span class="label">この章の位置づけ</span><br>
+      FTPは<strong>いちばん基本的なやり方</strong>です。この章では、<strong>「ファイルを置くと公開される」という仕組みを図で追います</strong>。<br>
+      いまの現場では、これを安全にした<strong>SFTP</strong>や、転送そのものを自動化する仕組みが使われます。章の終わりで触れます。
+    </div>
+
+    <div class="ftp-fig">
+      <div class="ftp-side">
+        <div class="ftp-pc">
+          <span class="frame">
+            <span class="win">
+              <span class="bar"></span>
+              <span class="row r1"></span>
+              <span class="row r2"></span>
+              <span class="row r3"></span>
+            </span>
+            <span class="win two">
+              <span class="bar"></span>
+            </span>
+          </span>
+          <span class="stand"></span>
+          <span class="foot"></span>
+        </div>
+        <span class="ftp-cap">開発者<small>DEVELOPER</small></span>
+      </div>
+
+      <div class="ftp-wire">
+        <div class="ftp-arrow up">
+          <b>アップロード</b>
+        </div>
+        <div class="ftp-arrow down">
+          <b>ダウンロード</b>
+        </div>
+        <p class="ftp-ops">
+          手元のファイルをサーバーへ送る。<br>
+          サーバーのファイルを手元へ取り出す。削除もできる。
+        </p>
+      </div>
+
+      <div class="ftp-side">
+        <div class="ftp-rack">
+          <span class="box"></span>
+          <span class="slot s1"></span>
+          <span class="slot s2"></span>
+          <span class="slot s3"></span>
+          <span class="slot s4"></span>
+          <span class="slot s5"></span>
+          <span class="slot s6"></span>
+        </div>
+        <span class="ftp-cap">Webサーバー<small>SERVER</small></span>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">FTPソフトの代表例</span><br>
+      無料のFTPソフト
+      <a href="https://cyberduck.io/" target="_blank" rel="noopener noreferrer">Cyberduck（公式サイト）</a>
+      が知られています。<br>
+      <strong>いま入れる必要はありません。</strong>この先の画面は、そのソフトの見た目を載せたものです。
+    </div>
+
+    <h3>接続に必要な情報</h3>
+
+    <p>
+      サーバーを契約すると、次の3つが渡されます。これを入力すると接続できます。<strong>いま用意する必要はありません。</strong>
+    </p>
+
+    <table>
+      <tr>
+        <th>項目</th>
+        <th>例</th>
+      </tr>
+      <tr>
+        <td>ホスト名（サーバーの場所）</td>
+        <td><code>******.******.jp</code></td>
+      </tr>
+      <tr>
+        <td>ユーザー名</td>
+        <td><code>*****@****.com</code></td>
+      </tr>
+      <tr>
+        <td>パスワード</td>
+        <td><code>**********</code></td>
+      </tr>
+    </table>
+
+    <div class="note">
+      <span class="label">将来、自分で借りるときは</span><br>
+      個人のサイトや小さなアプリなら、<strong>月1,000円程度のレンタルサーバー</strong>で足ります。<br>
+      AWSのようなクラウドもありますが、その規模では<strong>過剰な設備</strong>になります。<strong>名前だけ覚えておけば十分です。</strong><br>
+      くり返しますが、<strong>研修の中で契約する場面はありません。</strong>
+    </div>
+
+    <h3>接続先を登録する</h3>
+
+    <p>
+      実際に使うときは、Cyberduckを開いて、まず<strong>ブックマーク</strong>（接続先の登録）を1件つくります。<br>
+      左下の <code>+</code> を押すと登録画面が開き、そこにさきほどの情報を入れる、という流れです。
+    </p>
+
+    <div class="gui-stack">
+      <div class="gui-win fig-bm-list">
+        <div class="gui-bar">
+          <span class="win-dot red"></span>
+          <span class="win-dot yellow"></span>
+          <span class="win-dot green"></span>
+          <span class="gui-bar-title">ブックマーク</span>
+        </div>
+
+        <div class="gui-list pad">
+          <div class="gui-item tall is-on">
+            <span class="gui-icon lg folder" style="color: #4aa3f0;"><i></i></span>
+            <span class="gui-cell">
+              <b>Beginner</b>
+              <small>ftp://******.******.jp</small>
+            </span>
+            <span class="gui-led is-on"></span>
+          </div>
+          <div class="gui-item tall">
+            <span class="gui-icon lg folder" style="color: #4aa3f0;"><i></i></span>
+            <span class="gui-cell">
+              <b>Basic</b>
+              <small>ftp://******.******.jp</small>
+            </span>
+            <span class="gui-led"></span>
+          </div>
+        </div>
+
+        <div class="gui-foot">
+          <span class="gui-btn mini is-mark">＋</span>
+          <span class="gui-btn mini"><span class="gui-icon sm pencil"><i></i></span></span>
+          <span class="gui-btn mini">－</span>
+          <span class="gui-count">2 ブックマーク</span>
+        </div>
+      </div>
+
+      <div class="gui-win fig-bm-edit">
+        <div class="gui-bar">
+          <span class="win-dot red"></span>
+          <span class="win-dot yellow"></span>
+          <span class="win-dot green"></span>
+          <span class="gui-bar-title">
+            <span class="gui-icon sm lock" style="color: #b08c3a;"></span>Beginner
+          </span>
+        </div>
+
+        <div class="gui-form">
+          <div class="gui-frow">
+            <span class="gui-popup lead">
+              <span class="gui-icon sm globe" style="color: #64748b;"><i></i></span>
+              FTP（ファイル転送プロトコル）
+              <span class="gui-chev"></span>
+            </span>
+          </div>
+
+          <div class="gui-frow">
+            <span class="gui-label">ニックネーム</span>
+            <span class="gui-input">Beginner</span>
+          </div>
+          <div class="gui-frow">
+            <span class="gui-label">URL</span>
+            <span class="gui-text">ftp://******.******.jp</span>
+          </div>
+          <div class="gui-frow">
+            <span class="gui-label">サーバ</span>
+            <span class="gui-input is-mark">******.******.jp</span>
+            <span class="gui-label short">ポート</span>
+            <span class="gui-input short">21</span>
+          </div>
+          <div class="gui-frow">
+            <span class="gui-label">ユーザ名</span>
+            <span class="gui-input is-mark">*****@****.com</span>
+          </div>
+          <div class="gui-frow">
+            <span class="gui-label"></span>
+            <span class="gui-check">Anonymous ログイン</span>
+          </div>
+          <div class="gui-frow">
+            <span class="gui-label">SSH Private Key</span>
+            <span class="gui-popup">なし<span class="gui-chev"></span></span>
+          </div>
+          <div class="gui-frow">
+            <span class="gui-label">クライアント証明書</span>
+            <span class="gui-popup">なし<span class="gui-chev"></span></span>
+          </div>
+
+          <details class="gui-more">
+            <summary>詳細設定</summary>
+
+            <div class="gui-frow">
+              <span class="gui-label">パス</span>
+              <span class="gui-input"></span>
+            </div>
+            <div class="gui-frow">
+              <span class="gui-label">Web URL</span>
+              <span class="gui-text">http://******.******.jp/</span>
+            </div>
+            <div class="gui-frow">
+              <span class="gui-label">ダウンロード先のパス</span>
+              <span class="gui-popup lead">
+                <span class="gui-icon sm folder" style="color: #4aa3f0;"><i></i></span>
+                Desktop
+                <span class="gui-chev"></span>
+              </span>
+            </div>
+            <div class="gui-frow">
+              <span class="gui-label">ファイルの転送</span>
+              <span class="gui-popup">Open multiple connections<span class="gui-chev"></span></span>
+            </div>
+            <div class="gui-frow">
+              <span class="gui-label">時間帯</span>
+              <span class="gui-popup">Asia/Tokyo<span class="gui-chev"></span></span>
+            </div>
+            <div class="gui-frow">
+              <span class="gui-label">エンコーディング</span>
+              <span class="gui-popup">UTF-8<span class="gui-chev"></span></span>
+            </div>
+            <div class="gui-frow">
+              <span class="gui-label">接続モード</span>
+              <span class="gui-popup">デフォルト<span class="gui-chev"></span></span>
+            </div>
+            <div class="gui-frow">
+              <span class="gui-label">メモ</span>
+              <span class="gui-memo"></span>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+    <p class="gui-note">
+      画面はイメージです。バージョンによって配色や項目の並びは多少変わります。
+    </p>
+
+    <div class="note">
+      <span class="label">赤い枠が入力する場所</span><br>
+      手で入れることになるのは<strong>サーバ</strong>と<strong>ユーザ名</strong>だけで、ポートは <code>21</code> のまま、詳細設定もさわりません。<br>
+      パスワード欄がないのは、<strong>接続するときに聞かれる</strong>ためです。
+    </div>
+
+    <h3>公開するときの流れ</h3>
+
+    <div class="caution">
+      <span class="label">この5つは、いまやる作業ではありません</span><br>
+      <strong>将来、自分でサーバーを借りて公開するときの流れ</strong>です。<br>
+      ここでは<strong>「こういう順番で進む」ということだけ</strong>つかんでください。
+    </div>
+
+    <table>
+      <tr>
+        <th>手順</th>
+        <th>やること</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Cyberduck 左下の <strong>[+]</strong> から新規接続を作る</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>ホスト名・ユーザー名・パスワードを入力して接続する</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>サーバー側に<strong>新規フォルダ</strong>を作る（名前はメールアドレスの @ より左側）</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>作ったフォルダに、公開したいファイルをコピー（アップロード）する</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>ブラウザでそのURLを開き、表示されることを確認する</td>
+      </tr>
+    </table>
+
+    <h3>サーバーに自分のフォルダを作る</h3>
+
+    <p>
+      接続すると、サーバーの中身がそのまま一覧で見えます。ここにはほかの人のフォルダも並んでいます。<br>
+      メニューの<strong>「ファイル」→「新規フォルダ」</strong>で自分のフォルダを1つ作る、というのがここでの操作です。フォルダ名は<strong>メールアドレスの <code>@</code> より左側</strong>にします。
+    </p>
+
+    <div class="gui-stack">
+      <div class="gui-win">
+        <div class="gui-bar">
+          <span class="win-dot red"></span>
+          <span class="win-dot yellow"></span>
+          <span class="win-dot green"></span>
+          <span class="gui-bar-title">
+            <span class="gui-icon sm lock" style="color: #b08c3a;"></span>Beginner
+          </span>
+        </div>
+
+        <div class="gui-toolbar">
+          <span class="gui-tool"><span class="gui-icon globe" style="color: #4a90d9;"><i></i></span>新規接続</span>
+          <span class="gui-search"><span class="gui-chev"></span></span>
+          <span class="gui-tool"><span class="gui-icon gear"><i></i></span>アクション</span>
+          <span class="gui-tool"><span class="gui-icon refresh"></span>更新</span>
+          <span class="gui-tool"><span class="gui-icon pencil"><i></i></span>編集</span>
+          <span class="gui-tool is-right"><span class="gui-icon eject"></span>接続解除</span>
+        </div>
+
+        <div class="gui-listhead">
+          <span class="gui-cell">ファイル名</span>
+          <span class="gui-cell num">サイズ</span>
+          <span class="gui-cell date">更新日時</span>
+        </div>
+
+        <div class="gui-list">
+          <div class="gui-item">
+            <span class="gui-disc"></span>
+            <span class="gui-icon sm folder" style="color: #4aa3f0;"><i></i></span>
+            <span class="gui-cell"><span class="gui-mask w1"></span></span>
+            <span class="gui-cell num">--</span>
+            <span class="gui-cell date">2026/04/06 09:41</span>
+          </div>
+          <div class="gui-item">
+            <span class="gui-disc"></span>
+            <span class="gui-icon sm folder" style="color: #4aa3f0;"><i></i></span>
+            <span class="gui-cell"><span class="gui-mask w2"></span></span>
+            <span class="gui-cell num">--</span>
+            <span class="gui-cell date">2026/04/06 09:41</span>
+          </div>
+          <div class="gui-item">
+            <span class="gui-disc"></span>
+            <span class="gui-icon sm folder" style="color: #4aa3f0;"><i></i></span>
+            <span class="gui-cell"><span class="gui-mask w3"></span></span>
+            <span class="gui-cell num">--</span>
+            <span class="gui-cell date">2026/04/13 14:02</span>
+          </div>
+          <div class="gui-item">
+            <span class="gui-disc"></span>
+            <span class="gui-icon sm folder" style="color: #4aa3f0;"><i></i></span>
+            <span class="gui-cell"><span class="gui-mask w4"></span></span>
+            <span class="gui-cell num">--</span>
+            <span class="gui-cell date">2026/04/13 14:02</span>
+          </div>
+          <div class="gui-item">
+            <span class="gui-disc"></span>
+            <span class="gui-icon sm folder" style="color: #4aa3f0;"><i></i></span>
+            <span class="gui-cell"><span class="gui-mask w2"></span></span>
+            <span class="gui-cell num">--</span>
+            <span class="gui-cell date">2026/04/20 18:35</span>
+          </div>
+          <div class="gui-item">
+            <span class="gui-disc"></span>
+            <span class="gui-icon sm folder" style="color: #4aa3f0;"><i></i></span>
+            <span class="gui-cell"><span class="gui-mask w3"></span></span>
+            <span class="gui-cell num">--</span>
+            <span class="gui-cell date">2026/04/20 18:35</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="gui-sheet fig-fm-dialog">
+        <div class="gui-sheet-body">
+          <span class="gui-icon xl folder" style="--bg: #f2f3f5; color: #6fb2ee;">
+            <i></i><b class="gui-badge-plus"></b>
+          </span>
+          <span class="gui-sheet-text">
+            <b>新規フォルダを作成</b>
+            <small>新規フォルダの名前を入力してください</small>
+            <span class="gui-input block is-focus">yourName<i class="gui-caret"></i></span>
+          </span>
+        </div>
+        <div class="gui-sheet-foot">
+          <span class="gui-help">?</span>
+          <span class="gui-btn">キャンセル</span>
+          <span class="gui-btn is-primary">作成</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="gui-note">
+      画面はイメージです。ほかの人のフォルダ名は伏せてあります。
+    </p>
+
+    <div class="note">
+      <span class="label">作ったあと</span><br>
+      サーバーにできた<strong>自分の名前のフォルダ</strong>へ、手元のフォルダごとドラッグしてコピーする。<br>
+      そのあと<strong>自分のフォルダ名を付けたURL</strong>をブラウザで開くと、ページが表示される。<br>
+      ここまでが<strong>「公開する」ということの中身</strong>です。
+    </div>
+
+    <h3>転送のやり方</h3>
+
+    <p>
+      ファイルをサーバーへ送る方法は、いくつかあります。<strong>どれを使うかは、現場ごとに決まっています。</strong>
+    </p>
+
+    <table>
+      <tr>
+        <th>やり方</th>
+        <th>どういうものか</th>
+      </tr>
+      <tr>
+        <td>FTP</td>
+        <td>いちばん古い方式。<strong>通信が暗号化されない</strong></td>
+      </tr>
+      <tr>
+        <td>SFTP</td>
+        <td>FTPを<strong>暗号化したもの</strong>。手で上げるならこちら</td>
+      </tr>
+    </table>
+
+    <div class="caution">
+      <span class="label">FTPは選ばない</span><br>
+      FTPは中身が<strong>そのまま流れる</strong>ため、パスワードもファイルの中身も覗ける状態です。<br>
+      Cyberduck は <strong>SFTP（SSHを使った暗号化通信）</strong>にも対応しています。<strong>選べる場面では SFTP</strong> が使われます。
+    </div>
+
+    <div class="note">
+      <span class="label">転送は自動化できる</span><br>
+      ここまでは<strong>人が手で上げる</strong>やり方です。転送は<strong>仕組みを組んで自動化することもできます。</strong><br>
+      たとえば、決められた場所にコードを送ると、そこから先の転送を機械がやる、といった形です。FTP・SFTP のどちらでも組めます。<br>
+      <strong>自動化されているかどうかは、現場によります。</strong>手で上げている現場もあります。
+    </div>
+
+    <div class="point">
+      <span class="label">サーバーの中で起きていることは同じ</span><br>
+      手で上げても、機械が上げても、<strong>決められたフォルダにファイルが置かれ、そのURLで見えるようになる</strong>という点は変わりません。<br>
+      この章で画面を見ておくと、<strong>自動化された仕組みの裏で何が起きているのか</strong>が分かります。
+    </div>
+
+    <div class="caution">
+      <span class="label">この章でやることは、ありません</span><br>
+      <strong>サーバーの契約も、ソフトのインストールも、接続も不要です。</strong><br>
+      ここで持って帰るのは、<strong>「ファイルが決められた場所に置かれると、URLで見えるようになる」</strong>という一点だけです。<br>
+      手を動かすのは、<a href="basic_2.html">次のページ</a> からになります。
+    </div>
+  </section>
+
+  <section id="chapter3">
+    <h2>3. SEOについて</h2>
+
+    <p>
+      <strong>SEO（Search Engine Optimization／検索エンジン最適化）</strong>は、検索結果で自分のサイトを見つけてもらいやすくする取り組みです。
+    </p>
+
+    <div class="note">
+      <span class="label">ここでの目標</span><br>
+      SEOの対策は、<strong>実際にサイトを作るときに、案件ごとに考えるもの</strong>です。<br>
+      ここでは<strong>「そういうものがある」と知っておく</strong>ところまでで十分です。
+    </div>
+
+    <h3>検索エンジンが見ていること</h3>
+
+    <p>
+      大きく<strong>「技術」と「中身」</strong>の2つです。
+    </p>
+
+    <p>
+      <strong>技術</strong>は、<strong>正しいHTMLの構造</strong>・<strong>スマホで見られること</strong>・<strong>表示の速さ</strong>・<strong>HTTPSであること</strong>。ここは書く人の担当です。1つめは <a href="beginner_1.html">コーダー初級#1</a> でやった「正しいマークアップ」そのもので、それがそのままSEOの土台になります。
+    </p>
+
+    <p>
+      <strong>中身</strong>は、<strong>その人にしか書けない、正確で役に立つ内容かどうか</strong>。書いた人の<strong>経験・専門性・権威性・信頼性</strong>の4つで見られます。どこかで見た内容をまとめ直しただけのページが上がらなくなったのは、このためです。
+    </p>
+
+    <div class="caution">
+      <span class="label">小手先のテクニックは使わない</span><br>
+      キーワードの詰め込みや、中身の薄い記事を大量に作る手口は、いまは<strong>逆効果</strong>です。<br>
+      検索エンジンは<strong>「人のために作られたページかどうか」</strong>を見ています。数を稼ぐための自動生成記事は、スパムとして扱われます。
+    </div>
+
+    <h3>いま起きている変化</h3>
+
+    <p>
+      検索結果の上に<strong>AIの回答が表示され、その根拠としてサイトが引用される</strong>形が増えました。ChatGPTのようなAIサービスに直接たずねる人も増えています。
+    </p>
+
+    <p>
+      ただし<strong>やることは変わりません</strong>。構造の正しいHTMLで、誰が書いたか分かる、独自で正確な内容を置く。<strong>人にとって読みやすいページは、AIにとっても読みやすいページ</strong>です。
+    </p>
+
+    <h3>Google が掲げる 10 の事実</h3>
+
+    <p>
+      細かい手法は毎年変わりますが、<strong>「人の役に立つページを上に出したい」という原則は変わりません</strong>。それは公式の
+      <a href="https://about.google/philosophy/" target="_blank" rel="noopener noreferrer">「Google が掲げる 10 の事実」</a>
+      にまとまっています。20年以上前に書かれたものですが、いま読んでも古びていません。
+    </p>
+
+    <ol>
+      <li>ユーザーに焦点を絞れば、他のものはみな後からついてくる</li>
+      <li>1つのことをとことん極めてうまくやるのが一番</li>
+      <li>遅いより速いほうがいい</li>
+      <li>ウェブ上の民主主義は機能する</li>
+      <li>情報を探したくなるのはパソコンの前にいるときだけではない</li>
+      <li>悪事を働かなくてもお金は稼げる</li>
+      <li>世の中にはまだまだ情報があふれている</li>
+      <li>情報のニーズはすべての国境を越える</li>
+      <li>スーツがなくても真剣に仕事はできる</li>
+      <li>「すばらしい」では足りない</li>
+    </ol>
+
+    <h3>サイトを作るときに明確にすること</h3>
+
+    <table>
+      <tr>
+        <th>観点</th>
+        <th>問い</th>
+      </tr>
+      <tr>
+        <td>業界内の位置付け</td>
+        <td>そのサイトは、どこにあるのか</td>
+      </tr>
+      <tr>
+        <td>既存サービスとの差別化</td>
+        <td>すでにあるものと、なにが違うのか</td>
+      </tr>
+      <tr>
+        <td>ユーザー体験</td>
+        <td>訪れた人は、なにができて、どう感じるのか</td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      <strong>見た目も中身も、どちらもサイトの価値をつくります。</strong>写真やデザインが人の印象を決めることもあれば、載っている情報そのものが決め手になることもあります。<br>
+      大事なのは、<strong>上の3つを関わる人どうしで共有しておくこと</strong>です。共有できていれば、デザインも文章も構造も、同じ方向に効いてきます。<br>
+      書く側にとっては、<strong>「なんのためのページか」を確かめてから作る</strong>という習慣として残ります。
+    </div>
+
+    <div class="note">
+      <span class="label">次のページへ</span><br>
+      仕組みが分かったので、次は<strong>手を動かす回</strong>です。<a href="basic_2.html">マークアップ初級#2（初めてのレスポンシブコーディング）</a> では、画面の大きさに合わせて見え方が変わるページの作り方を学びます。<br>
+      さきほどの「スマホで見られること」を、実際に手を動かして実現する回です。
+    </div>
+  </section>
+
+</main>
+
+<nav class="page-nav">
+  <a class="page-prev" href="beginner_8.html">
+    <span class="page-nav-label">前のページ</span>
+    <span class="page-nav-title">コーダー上級#1</span>
+    <span class="page-nav-sub">1ページをまるごと作る ― 実践コーディング</span>
+  </a>
+  <a class="page-next" href="basic_2.html">
+    <span class="page-nav-label">次のページ</span>
+    <span class="page-nav-title">マークアップ初級#2</span>
+    <span class="page-nav-sub">初めてのレスポンシブコーディング</span>
+  </a>
+</nav>
+
+<footer></footer>
+
+<!-- ▼ 共通スクリプト。章ナビ・先頭へ戻るが自動で付く（編集不要） -->
+<script src="../js/training.js"></script>
+
+</body>
+</html>
