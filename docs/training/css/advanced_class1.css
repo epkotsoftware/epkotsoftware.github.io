@@ -1,0 +1,96 @@
+/* ============================================================
+   フロントエンド中級#11（advanced_class1.html）専用のスタイル
+
+   フロント編で共通のものは advanced_common.css にあります。
+   ここに置くのは、このページだけで使うものです。
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1枚のファイルに何もかも入っている状態（1章）
+
+   1つの箱の中に中身が積み上がっているのを見せる
+   ------------------------------------------------------------ */
+.ac1-one {
+  margin: 18px 0 24px;
+  padding: 16px 18px;
+  border: 2px solid #fecaca;
+  border-radius: 12px;
+  background: #fef2f2;
+}
+
+.ac1-one-name {
+  display: block;
+  margin-bottom: 8px;
+  color: #b91c1c;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.ac1-one ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.ac1-one li {
+  margin: 3px 0;
+  font-size: 12.5px;
+  line-height: 1.8;
+}
+
+/* ------------------------------------------------------------
+   分けたあとの役割ぶんけ（2章）
+
+   ファイル名・何をするか・ひとこと の3段で並べる
+   ------------------------------------------------------------ */
+.ac1-roles {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 18px 0 26px;
+}
+
+.ac1-role {
+  padding: 14px 16px;
+  border: 1px solid #e2e8f0;
+  border-left-width: 4px;
+  border-radius: 10px;
+  background: #f8fafc;
+}
+
+/* 順番に色を変えて、役割が違うことを見せる */
+.ac1-role:nth-child(1) { border-left-color: #2563eb; background: #eff6ff; }
+.ac1-role:nth-child(2) { border-left-color: #7c3aed; background: #f5f3ff; }
+.ac1-role:nth-child(3) { border-left-color: #d97706; background: #fffbeb; }
+.ac1-role:nth-child(4) { border-left-color: #16a34a; background: #f0fdf4; }
+
+.ac1-role-file {
+  display: block;
+  color: #0f172a;
+  font-family: Consolas, Monaco, "Courier New", monospace;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+
+.ac1-role-what {
+  display: block;
+  margin-top: 2px;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.ac1-role p {
+  margin: 6px 0 0;
+  font-size: 12.5px;
+  line-height: 1.8;
+}
+
+/* ------------------------------------------------------------
+   スマホ
+   ------------------------------------------------------------ */
+@media (max-width: 780px) {
+  .ac1-roles {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

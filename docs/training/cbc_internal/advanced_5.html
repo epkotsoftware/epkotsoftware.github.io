@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>フロントエンド中級#5</title>
+  <link rel="stylesheet" href="../css/training.css">
+
+  <!-- ▼ フロント編で共通のスタイル -->
+  <link rel="stylesheet" href="../css/advanced_common.css">
+
+  <!-- ▼ 開いたときに、ページの先頭から読み始められるようにする。
+       ブラウザが前回の位置へ戻すより先に動かす必要があるため、
+       training.js とは分けて <head> で読み込んでいる -->
+  <script src="../js/scroll-reset.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>フロントエンド中級#5</h1>
+    <p>データベースにつなぐ ― PDO と SELECT</p>
+  </div>
+</header>
+
+<main>
+
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol>
+      <li><a href="#chapter1">これから作るもの</a></li>
+      <li><a href="#chapter2">データベースを作る</a></li>
+      <li><a href="#chapter3">データベースにつなぐ ― PDO</a></li>
+      <li><a href="#chapter4">エラーを見えるようにする</a></li>
+      <li><a href="#chapter5">データを取り出す ― SELECT</a></li>
+      <li><a href="#chapter6">画面に出す ― foreach とエスケープ</a></li>
+    </ol>
+
+    <div class="note">
+      <span class="label">読む前に</span><br>
+      ここからは<strong>サーバー側のプログラム</strong>です。マークアップ編で書いた JavaScript はブラウザの中で動きましたが、PHP は<strong>サーバーの中で動いて、その結果をブラウザへ送ります</strong>。<br>
+      同じ「プログラムを書く」でも、動く場所が違います。ここを押さえると、あとの <strong>Ajax</strong> の話がすっと入ります。
+    </div>
+
+      <span class="label">Ajax（エイジャックス）</span><br>
+      <strong>#7 で出てくる言葉です。</strong>読み方が分かりにくいので、先に出しておきます。<br>
+      <code>Asynchronous JavaScript And XML</code> の頭文字で、<strong>「非同期の JavaScript」</strong>という意味です。名前に XML とありますが、いまはほとんど使いません。当時の名残です。<br>
+      <br>
+      <strong>非同期</strong>というのは、<strong>画面を切り替えずに、裏でサーバーとやり取りする</strong>ということです。<br>
+      このページで作る画面は、開いた時点でDBから読み込みます。ですが #7 で名札をドラッグしたときは、<strong>画面はそのままなのに、裏で位置が保存されます</strong>。これが Ajax です。<br>
+      いまは<strong>「そういう名前のものが出てくる」</strong>とだけ知っておいてください。
+
+    <div class="exercise">
+      <span class="label">課題</span><br>
+      このページで作るのは <code>03_advanced/htdocs/index.php</code> です。<br>
+      章の途中に<strong>演習が3つ</strong>あります（この色の枠です）。出てきたその場で書いてください。<br>
+      完成は <a href="advanced_7.html">フロントエンド中級#7</a> までかかります。
+    </div>
+
+    <div class="note">
+      <span class="label">演習のコードは穴埋めになっています</span><br>
+      演習には書きかけのコードが載っています。<code class="hl"><span class="blank">xxxxxx</span></code> と<strong>黄色くなっているところを埋めてみましょう</strong>。<br>
+      横のコメントがヒントです。すぐ下に「答え」の折りたたみを置いていますが、<strong>先に自分で考えてから</strong>開いてください。
+    </div>
+  </section>
+
+  <section id="chapter1">
+    <h2>1. これから作るもの</h2>
+
+    <p>
+      名前の入った札を<strong>マウスでドラッグして動かせる</strong>画面を作ります。動かした位置は、<strong>その場でデータベースに保存されます</strong>。次に開いたとき、名札は前と同じ場所にあります。
+    </p>
+
+    <div class="ad-flow">
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">#5</span>
+        <strong>いまここ</strong>
+        <span>DBにつないで、一覧を出す</span>
+      </div>
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">#6</span>
+        <strong>次</strong>
+        <span>フォームから登録する</span>
+      </div>
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">#7</span>
+        <strong>その次</strong>
+        <span>ドラッグした位置を保存する</span>
+      </div>
+    </div>
+
+    <p>
+      3ページかけて1つのアプリを作ります。<br>
+      <strong>このページで作るのは、まず「DBから読んで画面に出す」ところまで</strong>です。
+    </p>
+
+    <div class="point">
+      <span class="label">PHP はどこで動くのか</span><br>
+      マークアップ編で書いた JavaScript は<strong>ブラウザの中</strong>で動きました。ボタンを押すと、その場で画面が変わりましたね。<br>
+      PHP は違います。<strong>サーバーの中で動いて、出来上がったHTMLをブラウザへ送ります。</strong>ブラウザに届いた時点で、PHPのコードはもう残っていません。<br>
+      だから<strong>ブラウザの開発者ツールでPHPのコードは見られません</strong>。見えるのは「PHPが出力したHTML」だけです。
+    </div>
+
+    <div class="note">
+      <span class="label">使うテーブル</span><br>
+      <code>cri_sortable</code> というデータベースに、<code>sortable</code> テーブルを<strong>これから作ります</strong>。作業は次の2章で行います。
+    </div>
+
+    <table>
+      <tr>
+        <th>カラム</th>
+        <th>型</th>
+        <th>中身</th>
+      </tr>
+      <tr>
+        <td><code>id</code></td>
+        <td>int</td>
+        <td>連番。自動で振られます</td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td>text</td>
+        <td>札に出す名前</td>
+      </tr>
+      <tr>
+        <td><code>left_x</code></td>
+        <td>int</td>
+        <td>左からの位置（px）</td>
+      </tr>
+      <tr>
+        <td><code>top_y</code></td>
+        <td>int</td>
+        <td>上からの位置（px）</td>
+      </tr>
+    </table>
+
+    <div class="caution">
+      <span class="label">位置を「数値」で持つ</span><br>
+      画面上のどこに置いたかを、<strong>左から何px・上から何px</strong>という数値で記録します。<br>
+      あとで <code>style="left: 120px; top: 80px;"</code> のように書き出して、その位置に表示します。CSSの <code>position</code> を使うので、<a href="beginner_6.html">コーダー中級#6</a> でやった内容がここで活きてきます。
+    </div>
+  </section>
+
+  <section id="chapter2">
+    <h2>2. データベースを作る</h2>
+
+    <p>
+      つなぐ前に、<strong>つなぐ先を用意します。</strong>ここは phpMyAdmin という画面から、マウスで作れます。
+    </p>
+
+    <div class="point">
+      <span class="label">3つの言葉</span><br>
+      <strong>データベース</strong> … 入れ物のいちばん外側。今回は <code>cri_sortable</code> という名前で作ります。<br>
+      <strong>テーブル</strong> … 表のこと。Excel のシート1枚だと思ってください。今回は <code>sortable</code>。<br>
+      <strong>カラム</strong> … 表の列。「名前」「位置」など、何を入れるかを決めます。<br>
+      <strong>レコード</strong> … 表の行。1件のデータです。
+    </div>
+
+    <h3>phpMyAdmin を開く</h3>
+
+    <p>
+      ブラウザで <code>localhost:8888</code> を開いてください。<strong>DBの中身を画面から触れる道具</strong>です。
+    </p>
+
+    <div class="note">
+      <span class="label">ポート番号は環境ごとに違う</span><br>
+      <code>8888</code> は <code>docker/.env</code> の <code>PORT_PHPMYADMIN</code> で決まっています。<strong>開かないときは、まずそこを確認してください。</strong><br>
+      アプリの画面は <code>PORT_WEB</code>（既定は <code>8001</code>）です。<strong>2つは別のポート</strong>なので取り違えないように。
+    </div>
+
+    <h3>データベースを作る</h3>
+
+    <p>
+      左の一覧の上にある「新規作成」から、名前に <code>cri_sortable</code> と入れて作成します。
+    </p>
+
+    <div class="caution">
+      <span class="label">名前は1文字も変えない</span><br>
+      このあと書くPHPが <code>dbname=cri_sortable</code> を見に行きます。<strong>綴りが違うと <code>Unknown database</code> で止まります。</strong><br>
+      <code>cri_sortable</code>。コピーして貼るのが確実です。
+    </div>
+
+    <h3>テーブルを作る</h3>
+
+    <p>
+      作ったデータベースを開いて、テーブル名 <code>sortable</code>、カラム数 <strong>4</strong> で作成します。
+    </p>
+
+    <table>
+      <tr>
+        <th>名前</th>
+        <th>データ型</th>
+        <th>属性</th>
+        <th>NULL</th>
+        <th>A_I</th>
+        <th>何を入れるか</th>
+      </tr>
+      <tr>
+        <td><code>id</code></td>
+        <td>INT</td>
+        <td>UNSIGNED</td>
+        <td></td>
+        <td>✔</td>
+        <td>連番</td>
+      </tr>
+      <tr>
+        <td><code>name</code></td>
+        <td>TEXT</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>札に出す名前</td>
+      </tr>
+      <tr>
+        <td><code>left_x</code></td>
+        <td>INT</td>
+        <td>UNSIGNED</td>
+        <td>✔</td>
+        <td></td>
+        <td>左からの位置（px）</td>
+      </tr>
+      <tr>
+        <td><code>top_y</code></td>
+        <td>INT</td>
+        <td>UNSIGNED</td>
+        <td>✔</td>
+        <td></td>
+        <td>上からの位置（px）</td>
+      </tr>
+    </table>
+
+    <p>
+      <code>id</code> の行だけ、インデックスに <strong>PRIMARY</strong> を選びます。
+    </p>
+
+    <div class="point">
+      <span class="label">指定の意味</span><br>
+      <strong>UNSIGNED</strong> … マイナスを使わない。位置も連番も負にならないので、そのぶん大きい数まで入ります。<br>
+      <strong>NULL</strong> … 空を許すかどうか。<code>left_x</code> と <code>top_y</code> は<strong>まだ置いていない札</strong>があり得るので許します。<br>
+      <strong>A_I</strong>（AUTO_INCREMENT）… 入れるたびに番号を自動で振る。<code>id</code> を自分で決めなくて済みます。<br>
+      <strong>PRIMARY</strong> … この列で1行を見分ける、という印。重複できなくなります。
+    </div>
+
+    <div class="caution">
+      <span class="label">left_x と top_y の NULL を忘れやすい</span><br>
+      ここにチェックを入れ忘れると <code>NOT NULL</code> になり、<strong>位置を指定せずに登録できなくなります。</strong><br>
+      <a href="advanced_6.html">#6</a> で登録を作るときに <code>Field 'left_x' doesn't have a default value</code> というエラーで気づくことになります。<strong>いま入れておいてください。</strong>
+    </div>
+
+    <div class="note">
+      <span class="label">SQLで作ることもできる</span><br>
+      画面で1つずつ選ぶかわりに、<strong>SQLタブに文を貼って実行</strong>しても同じものが作れます。<br>
+      実務ではこちらが主流です。<strong>作った手順が文として残る</strong>ので、他の人が同じものを作り直せます。
+    </div>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">phpMyAdmin — SQL</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">SQL</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7</div>
+        <pre class="vscode-code"><span class="ad-k">CREATE TABLE</span> `cri_sortable`.`sortable` (
+  `id`     <span class="ad-c">INT UNSIGNED</span> <span class="ad-k">NOT NULL AUTO_INCREMENT</span>,
+  `name`   <span class="ad-c">TEXT</span> <span class="ad-k">NOT NULL</span>,
+  `left_x` <span class="ad-c">INT UNSIGNED</span> <span class="ad-k">NULL</span>,
+  `top_y`  <span class="ad-c">INT UNSIGNED</span> <span class="ad-k">NULL</span>,
+  <span class="ad-k">PRIMARY KEY</span> (`id`)
+) <span class="ad-k">ENGINE</span> = InnoDB;</pre>
+      </div>
+    </div>
+
+    <h3>データを入れる</h3>
+
+    <p>
+      12件を手で打つのは大変なので、<strong>用意してあるファイルから一括で入れます。</strong>
+    </p>
+
+    <div class="ad-flow">
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">1</span>
+        <span><code>htdocs/dummy.csv</code> を用意<br>（課題フォルダに入っています）</span>
+      </div>
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">2</span>
+        <span><code>sortable</code> を開いて<br>「インポート」タブ</span>
+      </div>
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">3</span>
+        <span>形式に <strong>CSV</strong> を選んで<br>実行</span>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">CSV とは</span><br>
+      Comma-Separated Values の略で、<strong>カンマ区切りのただのテキスト</strong>です。開くとこうなっています。<br>
+      <code>"1","佐藤","810","56"</code><br>
+      左から <code>id</code> <code>name</code> <code>left_x</code> <code>top_y</code> の順に並んでいます。<strong>テーブルのカラムの順番と合っている</strong>から、そのまま取り込めます。
+    </div>
+
+    <div class="caution">
+      <span class="label">入ったか必ず確かめる</span><br>
+      インポートのあと「表示」タブを開いて、<strong>12件そろっているか</strong>見てください。<br>
+      文字が化けているなら、インポート画面の文字セットが <code>utf-8</code> になっているか確認します。<br>
+      <strong>ここでデータが入っていないと、この先ずっと空の画面と向き合うことになります。</strong>
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習1</span><br>
+      <code>cri_sortable</code> と <code>sortable</code> を作り、<code>dummy.csv</code> を取り込んでください。<br>
+      <strong>12件が表示されれば完了です。</strong><br>
+      できたら「SQL」タブで <code>SELECT * FROM sortable;</code> を実行してみましょう。<strong>次の章から、これをPHPで書きます。</strong>
+      <span class="ad-label">SQL（穴埋め）</span>
+      <code class="ad-code hl"><span class="ad-k">SELECT</span> <span class="blank">xxxxxx</span> <span class="ad-k">FROM</span> sortable;  <span class="ad-cm">-- 全部のカラムを表す記号は？</span></code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="ad-label">SQL</span>
+        <code class="ad-code hl"><span class="ad-k">SELECT</span> * <span class="ad-k">FROM</span> sortable;</code>
+      </details>
+    </div>
+  </section>
+
+  <section id="chapter3">
+    <h2>3. データベースにつなぐ ― PDO</h2>
+
+    <p>
+      PHP からデータベースを触るには、<strong>まず「つなぐ」</strong>という作業が要ります。この接続を作ってくれるのが <strong>PDO</strong> です。
+    </p>
+
+    <div class="note">
+      <span class="label">PDO とは</span><br>
+      <strong>PHP Data Objects</strong> の略です。「PHPからデータを扱うための部品」という意味になります。<br>
+      MySQL 専用の書き方（<code>mysqli</code>）もありますが、<strong>PDO なら PostgreSQL や SQLite でも同じ書き方が使えます</strong>。つなぎ先が変わっても、コードをほとんど直さずに済みます。
+    </div>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php</span>
+<span class="ad-k">const</span> <span class="ad-c">DB_DSN</span>  = <span class="ad-s">'mysql:host=mysql; dbname=cri_sortable; charset=utf8mb4'</span>;
+<span class="ad-k">const</span> <span class="ad-c">DB_USER</span> = <span class="ad-s">'root'</span>;
+<span class="ad-k">const</span> <span class="ad-c">DB_PASS</span> = <span class="ad-s">'root'</span>;
+
+<span class="ad-v">$pdo</span> = <span class="ad-k">new</span> <span class="ad-f">PDO</span>(<span class="ad-c">DB_DSN</span>, <span class="ad-c">DB_USER</span>, <span class="ad-c">DB_PASS</span>);</pre>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th>部分</th>
+        <th>意味</th>
+      </tr>
+      <tr>
+        <td><code>mysql:</code></td>
+        <td>どの種類のDBか</td>
+      </tr>
+      <tr>
+        <td><code>host=mysql</code></td>
+        <td><strong>どこにあるか。</strong>ここが重要です（下で説明します）</td>
+      </tr>
+      <tr>
+        <td><code>dbname=cri_sortable</code></td>
+        <td>どのデータベースか</td>
+      </tr>
+      <tr>
+        <td><code>charset=utf8mb4</code></td>
+        <td>文字コード。日本語と絵文字が扱えます</td>
+      </tr>
+    </table>
+
+    <div class="caution">
+      <span class="label">host が localhost ではない</span><br>
+      ふつう「同じパソコンの中」なら <code>localhost</code> と書きます。ですがここでは <strong><code>mysql</code></strong> です。<br>
+      この研修では <strong>PHP と MySQL が別々のコンテナ</strong>で動いています。PHPから見ると MySQL は「別のマシン」なので、<code>localhost</code> では届きません。<br>
+      <code>mysql</code> というのは、<code>docker-compose-dev.yml</code> で決めた<strong>MySQLコンテナの名前</strong>です。Docker が名前で住所を引けるようにしてくれています。
+    </div>
+
+    <div class="note">
+      <span class="label">DSN とは</span><br>
+      <strong>Data Source Name</strong> の略で、「どこの、なんというデータに、どうつなぐか」を1行で書いたものです。<br>
+      住所と部屋番号をまとめて書いた宛名、と考えてください。
+    </div>
+
+    <div class="point">
+      <span class="label">const と define</span><br>
+      古い教材では <code>define('DB_DSN', '...')</code> という書き方を見かけます。どちらも<strong>定数</strong>（あとから変えられない値）を作るものです。<br>
+      <strong>いま新しく書くなら <code>const</code> を使ってください。</strong>短く書けて、<a href="basic_7.html#chapter1">マークアップ中級#7</a> でやった <code>const</code> と見た目も揃います。
+    </div>
+  </section>
+
+  <section id="chapter4">
+    <h2>4. エラーを見えるようにする</h2>
+
+    <p>
+      PHP は、<strong>設定によってはエラーを画面に出しません</strong>。真っ白な画面が出て、何が起きたか分からない。これが一番つらい状態です。
+    </p>
+
+    <div class="ad-compare">
+      <div class="ad-compare-item is-ng">
+        <span class="ad-compare-label">設定しないと</span>
+        <div class="ad-screen">
+          <div class="ad-screen-bar">
+            <span class="win-dot red"></span>
+            <span class="win-dot yellow"></span>
+            <span class="win-dot green"></span>
+          </div>
+          <div class="ad-screen-body is-blank">（真っ白）</div>
+        </div>
+        <p>何が悪いのか分からない</p>
+      </div>
+      <div class="ad-compare-item is-ok">
+        <span class="ad-compare-label">設定すると</span>
+        <div class="ad-screen">
+          <div class="ad-screen-bar">
+            <span class="win-dot red"></span>
+            <span class="win-dot yellow"></span>
+            <span class="win-dot green"></span>
+          </div>
+          <div class="ad-screen-body is-error">Fatal error: Uncaught PDOException:<br>SQLSTATE[HY000] [1045]<br>Access denied for user 'root'</div>
+        </div>
+        <p>パスワードが違う、と分かる</p>
+      </div>
+    </div>
+
+    <p>
+      <strong>ファイルの先頭に2行足すだけ</strong>です。開発中は必ず入れてください。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php</span>
+<span class="ad-f">ini_set</span>(<span class="ad-s">'display_errors'</span>, <span class="ad-s">'1'</span>);   <span class="ad-cm">// エラーを画面に出す</span>
+<span class="ad-f">error_reporting</span>(<span class="ad-c">E_ALL</span>);          <span class="ad-cm">// すべての種類を対象にする</span></pre>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">本番では外す</span><br>
+      エラーメッセージには<strong>ファイルの場所やDBの情報が含まれます</strong>。そのまま公開すると、攻撃の手がかりを与えることになります。<br>
+      <strong>開発中だけ出す。</strong>実際のサービスでは、画面には出さずログに残します。
+    </div>
+
+    <h3>PDO のエラーも出るようにする</h3>
+
+    <p>
+      上の2行は「PHPのエラー」を出す設定です。<strong>PDO には、別にもう1つ指定が要ります。</strong>
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4</div>
+        <pre class="vscode-code"><span class="ad-v">$pdo</span> = <span class="ad-k">new</span> <span class="ad-f">PDO</span>(<span class="ad-c">DB_DSN</span>, <span class="ad-c">DB_USER</span>, <span class="ad-c">DB_PASS</span>, [
+    <span class="ad-c">PDO::ATTR_ERRMODE</span>            =&gt; <span class="ad-c">PDO::ERRMODE_EXCEPTION</span>,
+    <span class="ad-c">PDO::ATTR_DEFAULT_FETCH_MODE</span> =&gt; <span class="ad-c">PDO::FETCH_ASSOC</span>,
+]);</pre>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th>指定</th>
+        <th>何が変わるか</th>
+      </tr>
+      <tr>
+        <td><code>ERRMODE_EXCEPTION</code></td>
+        <td>SQLに失敗したとき、<strong>その場で止まってエラーを出す</strong>。指定しないと、失敗しても黙って進みます</td>
+      </tr>
+      <tr>
+        <td><code>FETCH_ASSOC</code></td>
+        <td>取り出した行を <code>$row['name']</code> の形で扱えるようにする</td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">なぜ「黙って進む」と困るのか</span><br>
+      SQLが失敗しているのに気づかず、<strong>その先の処理が空っぽのデータで動きます</strong>。<br>
+      画面には何も出ないか、意味の分からない別のエラーが出ます。<strong>本当の原因から遠い場所で問題が起きる</strong>ので、探すのに時間がかかります。<br>
+      <code>ERRMODE_EXCEPTION</code> を入れておけば、<strong>失敗した行で止まってくれます</strong>。
+    </div>
+
+    <div class="note">
+      <span class="label">PHP 8 では既定でこうなっています</span><br>
+      じつは PHP 8 以降、<code>ERRMODE_EXCEPTION</code> は指定しなくてもこの動きです。<br>
+      それでも<strong>書いておくことを勧めます</strong>。読む人に「例外で止める方針だ」と伝わりますし、古いPHPで動かすことになっても同じように動きます。
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習2</span><br>
+      <code>03_advanced/htdocs/index.php</code> を作り、<strong>DBに接続するところまで</strong>書いてください。<br>
+      接続できたか確かめるため、最後に <code>echo '接続成功';</code> を入れて、ブラウザで開いてみましょう。<br>
+      <strong>わざと失敗させてみるのも大事です。</strong><code>dbname</code> を存在しない名前に変えて、どんなエラーが出るか見てください。
+      <span class="ad-label">index.php（穴埋め）</span>
+      <code class="ad-code hl"><span class="sy-tag">&lt;?php</span>
+<span class="ad-f">ini_set</span>(<span class="ad-s">'display_errors'</span>, <span class="ad-s">'1'</span>);
+<span class="ad-f">error_reporting</span>(<span class="ad-c">E_ALL</span>);
+
+<span class="ad-k">const</span> <span class="ad-c">DB_DSN</span>  = <span class="ad-s">'mysql:host=<span class="blank">xxxxxx</span>; dbname=cri_sortable; charset=utf8mb4'</span>;  <span class="ad-cm">/* コンテナの名前は？（2章） */</span>
+<span class="ad-k">const</span> <span class="ad-c">DB_USER</span> = <span class="ad-s">'root'</span>;
+<span class="ad-k">const</span> <span class="ad-c">DB_PASS</span> = <span class="ad-s">'root'</span>;
+
+<span class="ad-v">$pdo</span> = <span class="ad-k">new</span> <span class="ad-f">PDO</span>(<span class="ad-c">DB_DSN</span>, <span class="ad-c">DB_USER</span>, <span class="ad-c">DB_PASS</span>, [
+    <span class="ad-c">PDO::ATTR_ERRMODE</span>            =&gt; <span class="ad-c">PDO::<span class="blank">xxxxxx</span></span>,  <span class="ad-cm">/* 失敗したら止める指定は？（この章） */</span>
+    <span class="ad-c">PDO::ATTR_DEFAULT_FETCH_MODE</span> =&gt; <span class="ad-c">PDO::FETCH_ASSOC</span>,
+]);
+
+<span class="ad-k">echo</span> <span class="ad-s">'接続成功'</span>;</code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="ad-label">index.php</span>
+        <code class="ad-code hl"><span class="ad-k">const</span> <span class="ad-c">DB_DSN</span> = <span class="ad-s">'mysql:host=mysql; dbname=cri_sortable; charset=utf8mb4'</span>;
+
+<span class="ad-c">PDO::ATTR_ERRMODE</span> =&gt; <span class="ad-c">PDO::ERRMODE_EXCEPTION</span>,</code>
+      </details>
+    </div>
+  </section>
+
+  <section id="chapter5">
+    <h2>5. データを取り出す ― SELECT</h2>
+
+    <p>
+      つながったので、中身を読みます。<strong>SQL</strong> という言葉でデータベースに命令します。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2</div>
+        <pre class="vscode-code"><span class="ad-v">$stmt</span> = <span class="ad-v">$pdo</span>-&gt;<span class="ad-f">query</span>(<span class="ad-s">'SELECT * FROM sortable ORDER BY id'</span>);
+<span class="ad-v">$rows</span> = <span class="ad-v">$stmt</span>-&gt;<span class="ad-f">fetchAll</span>();</pre>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th>部分</th>
+        <th>やっていること</th>
+      </tr>
+      <tr>
+        <td><code>SELECT *</code></td>
+        <td>全部のカラムを取る（<code>*</code> は「すべて」）</td>
+      </tr>
+      <tr>
+        <td><code>FROM sortable</code></td>
+        <td><code>sortable</code> テーブルから</td>
+      </tr>
+      <tr>
+        <td><code>ORDER BY id</code></td>
+        <td><code>id</code> の小さい順に並べる</td>
+      </tr>
+      <tr>
+        <td><code>fetchAll()</code></td>
+        <td>結果を<strong>まとめて配列で受け取る</strong></td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">ORDER BY を書く理由</span><br>
+      書かないと、<strong>どんな順番で返ってくるか保証されません。</strong>たまたま id 順に見えても、データが増えたときに崩れることがあります。<br>
+      <strong>順番が意味を持つなら、必ず書く。</strong>これは実務でも同じです。
+    </div>
+
+    <h3>取れたものを確かめる</h3>
+
+    <p>
+      <code>$rows</code> に何が入っているか、目で見ておきましょう。
+    </p>
+
+    <div class="ad-samples">
+      <div>
+        <span class="ad-label">コード</span>
+        <code class="ad-code hl"><span class="ad-f">var_dump</span>(<span class="ad-v">$rows</span>);</code>
+      </div>
+      <div>
+        <span class="ad-label">出力（見やすく整形）</span>
+        <code class="ad-code hl"><span class="ad-cm">array(12) {
+  [0] =&gt; array(4) {
+    'id'     =&gt; int(1)
+    'name'   =&gt; string(6) "佐藤"
+    'left_x' =&gt; int(810)
+    'top_y'  =&gt; int(56)
+  }
+  [1] =&gt; array(4) { … }
+}</span></code>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">配列の配列になっている</span><br>
+      <strong>外側が「行の並び」、内側が「1行の中身」</strong>です。<br>
+      <code>$rows[0]['name']</code> と書けば1件目の名前が取れます。この形になっているのは、接続のときに <code>FETCH_ASSOC</code> を指定したからです。
+    </div>
+
+    <div class="note">
+      <span class="label">型が付いて返ってくる</span><br>
+      <code>int(810)</code> <code>string(6)</code> のように、<strong>カラムの型がそのまま反映されます。</strong>数値のカラムは数値、文字のカラムは文字です。<br>
+      ただし<strong>これはDBから読んだときの話</strong>です。<a href="advanced_6.html">次のページ</a>で扱う<strong>フォームから送られてきた値は、数字を入力しても文字</strong>になります。<a href="basic_7.html#chapter3">マークアップ中級#7</a> でやった <code>'10' + 5</code> の問題は、そちらで起きます。
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習3</span><br>
+      <code>sortable</code> テーブルの中身を取り出して、<code>var_dump()</code> で表示してください。<br>
+      取れたら、<strong>1件目の名前だけ</strong>を <code>echo</code> で出してみましょう。
+      <span class="ad-label">index.php（穴埋め）</span>
+      <code class="ad-code hl"><span class="ad-v">$stmt</span> = <span class="ad-v">$pdo</span>-&gt;<span class="ad-f">query</span>(<span class="ad-s">'SELECT * FROM sortable ORDER BY id'</span>);
+<span class="ad-v">$rows</span> = <span class="ad-v">$stmt</span>-&gt;<span class="ad-f"><span class="blank">xxxxxx</span></span>();  <span class="ad-cm">/* 結果をまとめて配列で受け取るメソッドは？（この章） */</span>
+
+<span class="ad-f">var_dump</span>(<span class="ad-v">$rows</span>);
+<span class="ad-k">echo</span> <span class="ad-v">$rows</span>[<span class="ad-n">0</span>][<span class="ad-s">'<span class="blank">xxxxxx</span>'</span>];  <span class="ad-cm">/* 名前のカラム名は？（1章の表） */</span></code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="ad-label">index.php</span>
+        <code class="ad-code hl"><span class="ad-v">$rows</span> = <span class="ad-v">$stmt</span>-&gt;<span class="ad-f">fetchAll</span>();
+
+<span class="ad-k">echo</span> <span class="ad-v">$rows</span>[<span class="ad-n">0</span>][<span class="ad-s">'name'</span>];</code>
+      </details>
+    </div>
+  </section>
+
+  <section id="chapter6">
+    <h2>6. 画面に出す ― foreach とエスケープ</h2>
+
+    <p>
+      配列で受け取ったので、あとは<strong>1件ずつ回して並べる</strong>だけです。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</div>
+        <pre class="vscode-code"><span class="ad-cm">// ここまでが PHP の処理。ここから下が画面</span>
+<span class="sy-tag">?&gt;</span>
+<span class="sy-tag">&lt;!DOCTYPE</span> <span class="sy-attr">html</span><span class="sy-tag">&gt;</span>
+<span class="sy-tag">&lt;html</span> <span class="sy-attr">lang</span>=<span class="sy-str">"ja"</span><span class="sy-tag">&gt;</span>
+<span class="sy-tag">&lt;head&gt;</span>
+  <span class="sy-tag">&lt;meta</span> <span class="sy-attr">charset</span>=<span class="sy-str">"UTF-8"</span><span class="sy-tag">&gt;</span>
+  <span class="sy-tag">&lt;title&gt;</span>メンバー配置<span class="sy-tag">&lt;/title&gt;</span>
+  <span class="sy-tag">&lt;link</span> <span class="sy-attr">rel</span>=<span class="sy-str">"stylesheet"</span> <span class="sy-attr">href</span>=<span class="sy-str">"css/style.css"</span><span class="sy-tag">&gt;</span>
+<span class="sy-tag">&lt;/head&gt;</span>
+<span class="sy-tag">&lt;body&gt;</span>
+
+<span class="sy-tag">&lt;div</span> <span class="sy-attr">id</span>=<span class="sy-str">"drag-area"</span><span class="sy-tag">&gt;</span>
+<span class="sy-tag">&lt;?php</span> <span class="ad-k">foreach</span> (<span class="ad-v">$rows</span> <span class="ad-k">as</span> <span class="ad-v">$row</span>): <span class="sy-tag">?&gt;</span>
+    <span class="sy-tag">&lt;div</span> <span class="sy-attr">class</span>=<span class="sy-str">"drag"</span>
+         <span class="sy-attr">style</span>=<span class="sy-str">"left: &lt;?= (int)$row['left_x'] ?&gt;px; top: &lt;?= (int)$row['top_y'] ?&gt;px;"</span><span class="sy-tag">&gt;</span>
+      <span class="sy-tag">&lt;?=</span> <span class="ad-f">htmlspecialchars</span>(<span class="ad-v">$row</span>[<span class="ad-s">'name'</span>]) <span class="sy-tag">?&gt;</span>
+    <span class="sy-tag">&lt;/div&gt;</span>
+<span class="sy-tag">&lt;?php</span> <span class="ad-k">endforeach</span>; <span class="sy-tag">?&gt;</span>
+<span class="sy-tag">&lt;/div&gt;</span>
+
+<span class="sy-tag">&lt;/body&gt;</span>
+<span class="sy-tag">&lt;/html&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">PHPを閉じてから HTML を書く</span><br>
+      ファイルの先頭で <code>&lt;?php</code> と開いたままなので、<strong>HTMLを書く前に <code>?&gt;</code> で閉じます。</strong>閉じないと、HTMLがPHPのコードとして読まれてエラーになります。<br>
+      <strong>CSSファイルの読み込みも忘れずに。</strong><code>&lt;link&gt;</code> を書かないと、位置の指定が効かず<strong>札が縦に並ぶだけ</strong>になります。
+    </div>
+
+    <div class="note">
+      <span class="label">HTMLの中でPHPを書くときの形</span><br>
+      <code>{ }</code> ではなく <strong><code>foreach ( … ):</code> 〜 <code>endforeach;</code></strong> と書いています。<br>
+      HTMLが混ざると <code>}</code> がどこの閉じか分からなくなるためです。<strong>終わりに名前が付いている</strong>ので読み違えません。
+    </div>
+
+    <div class="point">
+      <span class="label">&lt;?= は echo の短い書き方</span><br>
+      <code>&lt;?php echo $row['name']; ?&gt;</code> と <code>&lt;?= $row['name'] ?&gt;</code> は同じ意味です。<br>
+      <strong>値を出すだけのときは短いほうを使います。</strong>HTMLの中に何度も出てくるので、短いほうが読みやすくなります。
+    </div>
+
+    <h3>htmlspecialchars を必ず通す</h3>
+
+    <p>
+      名前をそのまま出してはいけません。<strong>ここが一番大事なところです。</strong>
+    </p>
+
+    <div class="ad-compare">
+      <div class="ad-compare-item is-ng">
+        <span class="ad-compare-label">そのまま出す</span>
+        <code class="ad-code hl"><span class="sy-tag">&lt;?=</span> <span class="ad-v">$row</span>[<span class="ad-s">'name'</span>] <span class="sy-tag">?&gt;</span></code>
+        <p>名前に <code>&lt;script&gt;</code> が入っていたら、<strong>そのまま実行されます</strong></p>
+      </div>
+      <div class="ad-compare-item is-ok">
+        <span class="ad-compare-label">エスケープする</span>
+        <code class="ad-code hl"><span class="sy-tag">&lt;?=</span> <span class="ad-f">htmlspecialchars</span>(<span class="ad-v">$row</span>[<span class="ad-s">'name'</span>]) <span class="sy-tag">?&gt;</span></code>
+        <p><code>&lt;</code> が <code>&amp;lt;</code> に変わり、<strong>ただの文字として表示されます</strong></p>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">XSS</span><br>
+      <a href="basic_6.html#chapter2">マークアップ中級#6</a> で、jQuery の <code>.html()</code> の危険として出てきました。<strong>同じ攻撃です。</strong><br>
+      DBに入っている名前を、誰かが自由に登録できるなら、そこにスクリプトを仕込めます。次のページでフォームを作るので、<strong>いま身につけておいてください</strong>。<br>
+      <strong>「外から来た値を画面に出すときは、必ずエスケープする」</strong>と覚えます。
+    </div>
+
+    <div class="note">
+      <span class="label">数値は (int) で囲む</span><br>
+      <code>left_x</code> と <code>top_y</code> は <code>(int)</code> を付けて<strong>数値に変換</strong>してから出しています。<br>
+      文字のまま <code>style</code> に入れると、変な値が混ざったときにCSSが壊れます。<strong>数値であるべき場所は、数値にしてから使う。</strong>
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習4</span><br>
+      <code>sortable</code> の中身を<strong>画面に並べて表示</strong>してください。<br>
+      それぞれが <code>left_x</code> <code>top_y</code> の位置に置かれるようにします。CSSは自分で作ってください（<code>position</code> の指定が要ります）。<br>
+      表示できたら、<strong>DBの <code>name</code> を <code>&lt;b&gt;test&lt;/b&gt;</code> に書き換えて</strong>開いてみましょう。太字にならず、タグがそのまま出れば正しくエスケープできています。
+      <span class="ad-label">CSS（ページ専用のCSSファイル・穴埋め）</span>
+      <code class="ad-code hl"><span class="sy-sel">#drag-area</span> {
+  <span class="sy-attr">position</span>: <span class="sy-str">relative</span>;   <span class="ad-cm">/* 子の位置の基準になる側 */</span>
+  <span class="sy-attr">width</span>: <span class="sy-str">900px</span>;    <span class="ad-cm">/* 座標は最大 824 まである */</span>
+  <span class="sy-attr">height</span>: <span class="sy-str">500px</span>;   <span class="ad-cm">/* 同じく最大 410 */</span>
+  <span class="sy-attr">border</span>: <span class="sy-str">1px solid #cbd5e1</span>;
+}
+
+<span class="sy-sel">.drag</span> {
+  <span class="sy-attr">position</span>: <span class="sy-str"><span class="blank">xxxxxx</span></span>;   <span class="ad-cm">/* 親を基準に自由に置ける指定は？（コーダー中級#6） */</span>
+  <span class="sy-attr">padding</span>: <span class="sy-str">8px 14px</span>;
+  <span class="sy-attr">border</span>: <span class="sy-str">2px solid #94a3b8</span>;
+  <span class="sy-attr">background</span>: <span class="sy-str">#ffffff</span>;
+}</code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="ad-label">CSS</span>
+        <code class="ad-code hl"><span class="sy-sel">.drag</span> {
+  <span class="sy-attr">position</span>: <span class="sy-str">absolute</span>;
+}</code>
+      </details>
+    </div>
+
+    <div class="point">
+      <span class="label">このページでやったこと</span><br>
+      <strong>PDOでつなぐ／エラーを見えるようにする／SELECTで取り出す／foreachで並べる／エスケープする</strong>。<br>
+      どれもこの先ずっと使います。とくに<strong>エスケープは、書き忘れると事故になる</strong>ところです。手が覚えるまで書いてください。
+    </div>
+
+  </section>
+
+</main>
+
+<nav class="page-nav">
+  <a class="page-prev" href="advanced_4.html">
+    <span class="page-nav-label">前のページ</span>
+    <span class="page-nav-title">フロントエンド初級#4</span>
+    <span class="page-nav-sub">PHPを便利にするいろんな記号</span>
+  </a>
+  <a class="page-next" href="advanced_6.html">
+    <span class="page-nav-label">次のページ</span>
+    <span class="page-nav-title">フロントエンド中級#6</span>
+    <span class="page-nav-sub">フォームから登録する ― POST と INSERT</span>
+  </a>
+</nav>
+
+<!-- ▼ 共通スクリプト。章ナビ・コピーボタン・先頭へ戻るが自動で付く（編集不要） -->
+<script src="../js/training.js"></script>
+
+</body>
+</html>

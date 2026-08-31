@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>フロントエンド中級#6</title>
+  <link rel="stylesheet" href="../css/training.css">
+
+  <!-- ▼ フロント編で共通のスタイル -->
+  <link rel="stylesheet" href="../css/advanced_common.css">
+
+  <!-- ▼ このページ専用のスタイル -->
+  <link rel="stylesheet" href="../css/advanced_6.css">
+
+  <!-- ▼ 開いたときに、ページの先頭から読み始められるようにする。
+       ブラウザが前回の位置へ戻すより先に動かす必要があるため、
+       training.js とは分けて <head> で読み込んでいる -->
+  <script src="../js/scroll-reset.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>フロントエンド中級#6</h1>
+    <p>フォームから登録する ― POST と INSERT</p>
+  </div>
+</header>
+
+<main>
+
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol>
+      <li><a href="#chapter1">フォームを作る</a></li>
+      <li><a href="#chapter2">送られた値を受け取る</a></li>
+      <li><a href="#chapter3">安全に登録する ― prepare</a></li>
+      <li><a href="#chapter4">二重登録を防ぐ</a></li>
+    </ol>
+
+    <div class="note">
+      <span class="label">読む前に</span><br>
+      <a href="advanced_5.html">フロントエンド中級#5</a> で、DBから読んで画面に出すところまで作りました。<strong>このページでは逆に、画面からDBへ書き込みます。</strong><br>
+      読むだけなら壊れませんが、<strong>書き込みは違います。</strong>やり方を間違えると、テーブルの中身を全部消されることもあります。ここは丁寧にいきます。
+    </div>
+
+    <div class="exercise">
+      <span class="label">課題</span><br>
+      前のページで作った <code>03_advanced/htdocs/index.php</code> の続きです。<br>
+      章の途中に<strong>演習が3つ</strong>あります（この色の枠です）。出てきたその場で書いてください。
+    </div>
+
+    <div class="note">
+      <span class="label">演習のコードは穴埋めになっています</span><br>
+      演習には書きかけのコードが載っています。<code class="hl"><span class="blank">xxxxxx</span></code> と<strong>黄色くなっているところを埋めてみましょう</strong>。<br>
+      横のコメントがヒントです。すぐ下に「答え」の折りたたみを置いていますが、<strong>先に自分で考えてから</strong>開いてください。
+    </div>
+  </section>
+
+  <section id="chapter1">
+    <h2>1. フォームを作る</h2>
+
+    <p>
+      名前を入力して<strong>登録ボタンを押すと、DBに追加される</strong>ようにします。まずは入力欄から作ります。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;form</span> <span class="sy-attr">method</span>=<span class="sy-str">"post"</span> <span class="sy-attr">action</span>=<span class="sy-str">""</span><span class="sy-tag">&gt;</span>
+  <span class="sy-tag">&lt;input</span> <span class="sy-attr">type</span>=<span class="sy-str">"text"</span> <span class="sy-attr">name</span>=<span class="sy-str">"name"</span><span class="sy-tag">&gt;</span>
+  <span class="sy-tag">&lt;button</span> <span class="sy-attr">type</span>=<span class="sy-str">"submit"</span><span class="sy-tag">&gt;</span>登録<span class="sy-tag">&lt;/button&gt;</span>
+<span class="sy-tag">&lt;/form&gt;</span></pre>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th>部分</th>
+        <th>意味</th>
+      </tr>
+      <tr>
+        <td><code>method="post"</code></td>
+        <td><strong>どうやって送るか。</strong>下で説明します</td>
+      </tr>
+      <tr>
+        <td><code>action=""</code></td>
+        <td><strong>どこへ送るか。</strong>空にすると<strong>自分自身</strong>に送られます</td>
+      </tr>
+      <tr>
+        <td><code>name="name"</code></td>
+        <td><strong>受け取るときの名前。</strong>PHP側で <code>$_POST['name']</code> になります</td>
+      </tr>
+      <tr>
+        <td><code>type="submit"</code></td>
+        <td>押すとフォームを送信するボタン</td>
+      </tr>
+    </table>
+
+    <div class="caution">
+      <span class="label">name が無いと届かない</span><br>
+      <code>&lt;input&gt;</code> に <code>name</code> を書き忘れると、<strong>入力しても値が送られません。</strong>画面上は何も変わらないので、気づきにくいところです。<br>
+      <strong>「動かないときは、まず name を確認する」</strong>と覚えてください。
+    </div>
+
+    <h3>GET と POST</h3>
+
+    <p>
+      送り方は2つあります。<strong>今回は POST を使います。</strong>
+    </p>
+
+    <div class="ad-compare">
+      <div class="ad-compare-item">
+        <span class="ad-compare-label">GET</span>
+        <code class="ad-code hl"><span class="ad-cm">index.php?name=佐藤</span></code>
+        <p>
+          <strong>URLに値が付く。</strong><br>
+          ブックマークできる。履歴に残る。<br>
+          検索など<strong>「取ってくる」</strong>ときに使う。
+        </p>
+      </div>
+      <div class="ad-compare-item">
+        <span class="ad-compare-label">POST</span>
+        <code class="ad-code hl"><span class="ad-cm">index.php</span></code>
+        <p>
+          <strong>URLに出ない。</strong>裏側で送られる。<br>
+          長いデータも送れる。<br>
+          登録や更新など<strong>「変える」</strong>ときに使う。
+        </p>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">なぜ登録は POST なのか</span><br>
+      GET だと <strong>URLをコピーして誰かに送っただけで、その人の画面でも登録が走ります。</strong>ブラウザの「戻る」でも、もう一度登録されます。<br>
+      <strong>データを変える操作は POST。</strong>これは決まりごとではなく、事故を防ぐための決まりです。<br>
+      パスワードのように<strong>人に見せたくない値</strong>も、URLに出ないPOSTで送ります。
+    </div>
+
+    <div class="caution">
+      <span class="label">POST なら安全、ではない</span><br>
+      URLに出ないだけで、<strong>通信の中身は誰でも見られます。</strong>開発者ツールのNetworkタブを開けば、送った値がそのまま表示されます。<br>
+      本当に守るなら <strong>HTTPS</strong>（通信そのものを暗号化する仕組み）が要ります。<strong>POST は「隠す」ためのものではありません。</strong>
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習1</span><br>
+      <code>index.php</code> に<strong>名前を入力するフォーム</strong>を追加してください。<br>
+      入力欄と登録ボタンを1つずつ置きます。見た目は自分のCSSファイルに書いてください。<br>
+      作れたら、<strong>何か入力して登録ボタンを押し</strong>、開発者ツールの Network タブで送られているか見てみましょう。まだDBには入りません。
+      <span class="ad-label">index.php（穴埋め）</span>
+      <code class="ad-code hl"><span class="sy-tag">&lt;form</span> <span class="sy-attr">method</span>=<span class="sy-str">"<span class="blank">xxxxxx</span>"</span> <span class="sy-attr">action</span>=<span class="sy-str">""</span><span class="sy-tag">&gt;</span>  <span class="ad-cm">&lt;!-- 登録に使う送り方は？（この章） --&gt;</span>
+  <span class="sy-tag">&lt;input</span> <span class="sy-attr">type</span>=<span class="sy-str">"text"</span> <span class="sy-attr"><span class="blank">xxxxxx</span></span>=<span class="sy-str">"name"</span><span class="sy-tag">&gt;</span>  <span class="ad-cm">&lt;!-- PHP側で受け取るための属性は？ --&gt;</span>
+  <span class="sy-tag">&lt;button</span> <span class="sy-attr">type</span>=<span class="sy-str">"submit"</span><span class="sy-tag">&gt;</span>登録<span class="sy-tag">&lt;/button&gt;</span>
+<span class="sy-tag">&lt;/form&gt;</span></code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="ad-label">index.php</span>
+        <code class="ad-code hl"><span class="sy-tag">&lt;form</span> <span class="sy-attr">method</span>=<span class="sy-str">"post"</span> <span class="sy-attr">action</span>=<span class="sy-str">""</span><span class="sy-tag">&gt;</span>
+  <span class="sy-tag">&lt;input</span> <span class="sy-attr">type</span>=<span class="sy-str">"text"</span> <span class="sy-attr">name</span>=<span class="sy-str">"name"</span><span class="sy-tag">&gt;</span></code>
+      </details>
+    </div>
+  </section>
+
+  <section id="chapter2">
+    <h2>2. 送られた値を受け取る</h2>
+
+    <p>
+      送られた値は <code>$_POST</code> という配列に入っています。<strong>PHPが自動で用意してくれる</strong>ので、自分で作る必要はありません。
+    </p>
+
+    <div class="ad-samples">
+      <div>
+        <span class="ad-label">HTML側</span>
+        <code class="ad-code hl"><span class="sy-tag">&lt;input</span> <span class="sy-attr">type</span>=<span class="sy-str">"text"</span> <span class="sy-attr">name</span>=<span class="sy-str">"name"</span><span class="sy-tag">&gt;</span></code>
+      </div>
+      <div>
+        <span class="ad-label">PHP側</span>
+        <code class="ad-code hl"><span class="ad-v">$_POST</span>[<span class="ad-s">'name'</span>]</code>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">名前が一致していないと届かない</span><br>
+      HTML側の <code>name="name"</code> と、PHP側の <code>$_POST['name']</code>。<strong>この2つは必ず同じ文字にします。</strong><br>
+      片方だけ直して、もう片方を直し忘れる。これが登録できない原因の大半です。
+    </div>
+
+    <h3>押されたときだけ処理する</h3>
+
+    <p>
+      ページを開いただけでは登録したくありません。<strong>ボタンが押されたときだけ</strong>動くようにします。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3</div>
+        <pre class="vscode-code"><span class="ad-k">if</span> (<span class="ad-v">$_SERVER</span>[<span class="ad-s">'REQUEST_METHOD'</span>] === <span class="ad-s">'POST'</span>) {
+    <span class="ad-cm">// ここに登録の処理を書く</span>
+}</pre>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">$_SERVER['REQUEST_METHOD']</span><br>
+      <strong>いまどうやって開かれたか</strong>が入っています。<br>
+      URLを直接叩いて開いたときは <code>'GET'</code>、フォームの送信ボタンで来たときは <code>'POST'</code> です。<br>
+      これで<strong>「ボタンが押されて来た」と分かります。</strong>
+    </div>
+
+    <div class="note">
+      <span class="label">== ではなく ===</span><br>
+      <a href="advanced_4.html">フロントエンド初級#4</a> で出てきた比較です。<strong>イコールが2つと3つで意味が違います。</strong><br>
+      <code>==</code> は<strong>「だいたい同じ」</strong>。型が違っても、変換して同じなら通します。<code>'1' == 1</code> は <code>true</code> です。<br>
+      <code>===</code> は<strong>「型まで同じ」</strong>。<code>'1' === 1</code> は <code>false</code> になります。<br>
+      <strong>迷ったら <code>===</code> を使ってください。</strong>思わぬ値が通り抜けて、原因の分からない不具合になります。この教材では最後まで <code>===</code> と <code>!==</code> しか使いません。
+    </div>
+
+    <h3>空のまま送られたら</h3>
+
+    <p>
+      何も入力せずにボタンを押されることがあります。<strong>空の名前を登録しても意味がありません。</strong>
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7</div>
+        <pre class="vscode-code"><span class="ad-k">if</span> (<span class="ad-v">$_SERVER</span>[<span class="ad-s">'REQUEST_METHOD'</span>] === <span class="ad-s">'POST'</span>) {
+    <span class="ad-v">$name</span> = <span class="ad-f">trim</span>(<span class="ad-v">$_POST</span>[<span class="ad-s">'name'</span>] ?? <span class="ad-s">''</span>);
+
+    <span class="ad-k">if</span> (<span class="ad-v">$name</span> !== <span class="ad-s">''</span>) {
+        <span class="ad-cm">// ここで登録する</span>
+    }
+}</pre>
+      </div>
+    </div>
+
+
+    <div class="caution">
+      <span class="label">書く場所は、HTMLより上</span><br>
+      この <code>if</code> は、ファイルの<strong>いちばん上の <code>&lt;?php</code> ブロックの中</strong>に書きます。#5 で書いた <code>$pdo-&gt;query(...)</code> より<strong>前</strong>です。<br>
+      フォームを足した勢いで <code>&lt;/form&gt;</code> の下に書くと、次の章で<br>
+      <code>Warning: Cannot modify header information - headers already sent</code><br>
+      というエラーが出ます。<strong>登録の処理は上、画面は下。</strong>この順番を崩さないでください。
+    </div>
+
+    <div class="ad-place">
+      <div class="ad-place-item is-php">
+        <span class="ad-place-tag">&lt;?php  ここから</span>
+        <span class="ad-place-line">DBにつなぐ（#5で書いた）</span>
+        <span class="ad-place-line is-new">送られた値を受け取る　← いま書くのはここ</span>
+        <span class="ad-place-line">一覧を取ってくる（#5で書いた）</span>
+        <span class="ad-place-tag">?&gt;  ここまで</span>
+      </div>
+      <div class="ad-place-item is-html">
+        <span class="ad-place-tag">HTML</span>
+        <span class="ad-place-line is-new">&lt;form&gt;　← 演習1で足した</span>
+        <span class="ad-place-line">&lt;div id="drag-area"&gt; の foreach</span>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th>書き方</th>
+        <th>やっていること</th>
+      </tr>
+      <tr>
+        <td><code>?? ''</code></td>
+        <td><strong>もし無かったら空文字にする。</strong>キーが存在しないときのエラーを防ぎます</td>
+      </tr>
+      <tr>
+        <td><code>trim()</code></td>
+        <td><strong>前後の空白を削る。</strong>スペースだけ入力された場合に空とみなせます</td>
+      </tr>
+      <tr>
+        <td><code>!== ''</code></td>
+        <td>空でなければ通す</td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">?? は「無かったら」</span><br>
+      <strong>null合体演算子</strong>といいます。<code>$a ?? $b</code> で「<code>$a</code> があればそれ、無ければ <code>$b</code>」という意味です。<br>
+      <code>$_POST['name']</code> は、フォームを通らずにアクセスされたとき<strong>存在しません。</strong>そのまま使うとエラーになるので、<code>?? ''</code> で受け止めます。
+    </div>
+
+    <div class="caution">
+      <span class="label">送られてくる値は、全部「文字」</span><br>
+      <a href="advanced_5.html#chapter2">#5</a> でDBから読んだときは <code>int(810)</code> のように型が付いていました。<strong>フォームから来る値は違います。</strong><br>
+      数字だけを入力しても、<code>$_POST['name']</code> は <code>string</code> です。<strong>HTMLには型が無いからです。</strong><br>
+      <a href="basic_7.html">マークアップ中級#7</a> でやった <code>'10' + 5</code> の問題は、ここで起きます。<strong>数として扱いたいときは <code>(int)</code> を付けて変換します。</strong>この書き方は <a href="advanced_7.html">#7</a> でも何度も出てきます。
+    </div>
+
+    <div class="caution">
+      <span class="label">入力チェックは、必ずPHP側でもやる</span><br>
+      HTMLには <code>required</code> という属性があり、これを付けると<strong>ブラウザが空のまま送らせません。</strong>便利ですが、<strong>それだけでは足りません。</strong><br>
+      開発者ツールで <code>required</code> を消せば、空のまま送れてしまいます。フォームを通さず直接データを送ることもできます。<br>
+      <strong>ブラウザ側のチェックは親切のため。PHP側のチェックは安全のため。</strong>両方要ります。
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習2</span><br>
+      ボタンが押されたときだけ、<strong>入力された名前を画面に表示</strong>してください。まだDBには入れません。<br>
+      空のまま押したときは、<strong>何も表示されない</strong>ようにします。<br>
+      表示するときは <a href="advanced_5.html#chapter5">#5でやった <code>htmlspecialchars</code></a> を忘れずに。
+      <span class="ad-label">index.php（穴埋め）</span>
+      <code class="ad-code hl"><span class="ad-k">if</span> (<span class="ad-v">$_SERVER</span>[<span class="ad-s">'REQUEST_METHOD'</span>] === <span class="ad-s">'<span class="blank">xxxxxx</span>'</span>) {  <span class="ad-cm">/* ボタンで来たときの値は？（この章） */</span>
+    <span class="ad-v">$name</span> = <span class="ad-f"><span class="blank">xxxxxx</span></span>(<span class="ad-v">$_POST</span>[<span class="ad-s">'name'</span>] ?? <span class="ad-s">''</span>);  <span class="ad-cm">/* 前後の空白を削る関数は？ */</span>
+
+    <span class="ad-k">if</span> (<span class="ad-v">$name</span> !== <span class="ad-s">''</span>) {
+        <span class="ad-k">echo</span> <span class="ad-f">htmlspecialchars</span>(<span class="ad-v">$name</span>);
+    }
+}</code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="ad-label">index.php</span>
+        <code class="ad-code hl"><span class="ad-k">if</span> (<span class="ad-v">$_SERVER</span>[<span class="ad-s">'REQUEST_METHOD'</span>] === <span class="ad-s">'POST'</span>) {
+    <span class="ad-v">$name</span> = <span class="ad-f">trim</span>(<span class="ad-v">$_POST</span>[<span class="ad-s">'name'</span>] ?? <span class="ad-s">''</span>);</code>
+      </details>
+    </div>
+  </section>
+
+  <section id="chapter3">
+    <h2>3. 安全に登録する ― prepare</h2>
+
+    <p>
+      いよいよDBに書き込みます。ですがその前に、<strong>絶対にやってはいけない書き方</strong>を先に見てください。
+    </p>
+
+    <h3>やってはいけない書き方</h3>
+
+    <div class="ad-compare">
+      <div class="ad-compare-item is-ng">
+        <span class="ad-compare-label">✕ 値をそのまま繋ぐ</span>
+        <code class="ad-code hl"><span class="ad-v">$sql</span> = <span class="ad-s">"INSERT INTO sortable (name)
+        VALUES ('"</span> . <span class="ad-v">$name</span> . <span class="ad-s">"')"</span>;
+
+<span class="ad-v">$pdo</span>-&gt;<span class="ad-f">query</span>(<span class="ad-v">$sql</span>);</code>
+        <p><strong>動きます。</strong>ですが、これで作ると<strong>テーブルを消されます。</strong></p>
+      </div>
+      <div class="ad-compare-item is-ok">
+        <span class="ad-compare-label">○ prepare を使う</span>
+        <code class="ad-code hl"><span class="ad-v">$stmt</span> = <span class="ad-v">$pdo</span>-&gt;<span class="ad-f">prepare</span>(
+    <span class="ad-s">'INSERT INTO sortable (name)
+     VALUES (:name)'</span>
+);
+<span class="ad-v">$stmt</span>-&gt;<span class="ad-f">execute</span>([<span class="ad-s">':name'</span> =&gt; <span class="ad-v">$name</span>]);</code>
+        <p>値がどんな文字でも、<strong>SQLとしては解釈されません。</strong></p>
+      </div>
+    </div>
+
+    <h3>なぜ消されるのか</h3>
+
+    <p>
+      左の書き方だと、入力された文字が<strong>そのままSQLの一部になります。</strong>名前の欄にこう入れられたらどうなるか、追ってみてください。
+    </p>
+
+    <div class="ad-attack">
+      <div class="ad-attack-step">
+        <span class="ad-attack-num">1</span>
+        <div>
+          <strong>入力された文字</strong>
+          <code class="ad-code hl"><span class="ad-s">'); DROP TABLE sortable; --</span></code>
+        </div>
+      </div>
+      <div class="ad-attack-arrow">↓ そのまま繋がれる</div>
+      <div class="ad-attack-step">
+        <span class="ad-attack-num">2</span>
+        <div>
+          <strong>出来上がったSQL</strong>
+          <code class="ad-code hl">INSERT INTO sortable (name) VALUES (<span class="ad-attack-hl">''); DROP TABLE sortable; --</span>')</code>
+        </div>
+      </div>
+      <div class="ad-attack-arrow">↓ DBはこう読む</div>
+      <div class="ad-attack-step is-danger">
+        <span class="ad-attack-num">3</span>
+        <div>
+          <strong>2つの命令として実行される</strong>
+          <code class="ad-code hl">INSERT INTO sortable (name) VALUES ('');
+<span class="ad-attack-hl">DROP TABLE sortable;</span>
+<span class="ad-cm">-- ')  ← ここから後ろはコメント扱いで無視される</span></code>
+        </div>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">SQLインジェクション</span><br>
+      <strong>injection</strong> は「注入」という意味です。値のふりをして<strong>SQLの命令を注入される</strong>ので、この名前が付いています。<br>
+      テーブルを消される、他人のデータを抜かれる、パスワードを書き換えられる。<strong>実際に起きている事故で、いまも起き続けています。</strong><br>
+      <a href="basic_6.html#chapter2">マークアップ中級#6</a> で出てきた <strong>XSS</strong> と同じ構造です。<strong>外から来た文字を、そのまま信じて使った</strong>のが原因です。
+    </div>
+
+    <h3>prepare は何をしているのか</h3>
+
+    <p>
+      <code>prepare</code> は、<strong>SQLの骨組みだけを先にDBへ渡します。</strong>値はあとから別便で送ります。
+    </p>
+
+    <div class="ad-flow">
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">1</span>
+        <strong>prepare</strong>
+        <span>骨組みを渡す<br><code>VALUES (:name)</code></span>
+      </div>
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">2</span>
+        <strong>DBが解析</strong>
+        <span>「ここは値の置き場所」<br>と決まる</span>
+      </div>
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">3</span>
+        <strong>execute</strong>
+        <span>値を送る<br>もう命令にはならない</span>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">順番が守ってくれる</span><br>
+      <strong>SQLの形が先に決まっている</strong>ので、あとから来た値がどんな文字でも、命令として読まれることはありません。<code>DROP TABLE</code> と入力されても、<strong>そういう名前として登録されるだけ</strong>です。<br>
+      「危ない文字を消す」のではなく、<strong>「値と命令を最初から分けておく」</strong>という考え方です。
+    </div>
+
+    <div class="note">
+      <span class="label">:name のような書き方</span><br>
+      <strong>プレースホルダ</strong>といいます。「あとで値が入る場所」という印です。<br>
+      <code>?</code> を使う書き方もありますが、<strong>名前が付いているほうが読みやすい</strong>ので、こちらを勧めます。値が増えたときに順番を間違えません。
+    </div>
+
+    <div class="ad-samples">
+      <div>
+        <span class="ad-label">名前付き（勧める）</span>
+        <code class="ad-code hl"><span class="ad-s">'… VALUES (:name, :left)'</span>
+
+<span class="ad-v">$stmt</span>-&gt;<span class="ad-f">execute</span>([
+    <span class="ad-s">':name'</span> =&gt; <span class="ad-v">$name</span>,
+    <span class="ad-s">':left'</span> =&gt; <span class="ad-v">$left</span>,
+]);</code>
+      </div>
+      <div>
+        <span class="ad-label">? を使う書き方</span>
+        <code class="ad-code hl"><span class="ad-s">'… VALUES (?, ?)'</span>
+
+<span class="ad-v">$stmt</span>-&gt;<span class="ad-f">execute</span>([
+    <span class="ad-v">$name</span>,
+    <span class="ad-v">$left</span>,
+]);
+<span class="ad-cm">// 順番を間違えると入れ違う</span></code>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">迷ったら prepare</span><br>
+      「値が混ざらないから <code>query</code> でいい」と判断できるうちはいいのですが、<strong>判断を間違えると事故になります。</strong><br>
+      <strong>外から来た値が1つでも入るなら prepare。</strong>実務では「全部 prepare にしておけ」という方針の現場も多くあります。
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習3</span><br>
+      入力された名前を、<strong>実際にDBへ登録</strong>してください。<br>
+      登録できたら画面を開き直して、<strong>一覧に増えているか</strong>確認します。<br>
+      確認できたら、名前の欄に <code>'); DROP TABLE sortable; --</code> と入れてみてください。<strong>そういう名前の札が1つ増えるだけ</strong>なら、正しく書けています。<br>
+      登録した札は <strong>すべて同じ場所（左上）に重なります。</strong>これは <code>left_x</code> と <code>top_y</code> に同じ値を入れているためです。ドラッグして動かせるようにするのは、次のページでやります。
+      <span class="ad-label">index.php（穴埋め）</span>
+      <code class="ad-code hl"><span class="ad-k">if</span> (<span class="ad-v">$name</span> !== <span class="ad-s">''</span>) {
+    <span class="ad-v">$stmt</span> = <span class="ad-v">$pdo</span>-&gt;<span class="ad-f"><span class="blank">xxxxxx</span></span>(<span class="ad-s">'INSERT INTO sortable (name, left_x, top_y) VALUES (:name, 20, 20)'</span>);  <span class="ad-cm">/* 骨組みを先に渡すメソッドは？ */</span>
+    <span class="ad-v">$stmt</span>-&gt;<span class="ad-f"><span class="blank">xxxxxx</span></span>([<span class="ad-s">':name'</span> =&gt; <span class="ad-v">$name</span>]);  <span class="ad-cm">/* 値を送って実行するメソッドは？ */</span>
+}</code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="ad-label">index.php</span>
+        <code class="ad-code hl"><span class="ad-v">$stmt</span> = <span class="ad-v">$pdo</span>-&gt;<span class="ad-f">prepare</span>(<span class="ad-s">'INSERT INTO sortable (name, left_x, top_y) VALUES (:name, 20, 20)'</span>);
+<span class="ad-v">$stmt</span>-&gt;<span class="ad-f">execute</span>([<span class="ad-s">':name'</span> =&gt; <span class="ad-v">$name</span>]);</code>
+      </details>
+    </div>
+  </section>
+
+  <section id="chapter4">
+    <h2>4. 二重登録を防ぐ</h2>
+
+    <p>
+      登録できたと思います。ですが<strong>1つ問題が残っています。</strong>登録したあと、ブラウザで再読み込みしてみてください。
+    </p>
+
+    <div class="ad-screen">
+      <div class="ad-screen-bar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+      </div>
+      <div class="ad-screen-body is-dialog">
+        <strong>フォームを再送信しますか？</strong><br>
+        <span>このページを表示するには、以前入力したデータを再送信する必要があります。</span>
+      </div>
+    </div>
+
+    <p>
+      この確認が出て、<strong>OKを押すともう1件登録されます。</strong>同じ名前の札が2つ、3つと増えていきます。
+    </p>
+
+    <div class="point">
+      <span class="label">なぜこうなるのか</span><br>
+      ブラウザは<strong>「直前にやったこと」を覚えていて、再読み込みでもう一度やります。</strong><br>
+      登録ボタンで来た場合、直前にやったことは<strong>「POSTで送信した」</strong>です。だから再読み込みすると、また送信されます。<br>
+      戻るボタンで戻ってきたときも同じことが起きます。
+    </div>
+
+    <h3>登録したら、自分自身へ飛ばす</h3>
+
+    <p>
+      解き方はひとつです。<strong>登録が終わったら、すぐに別のアクセスに切り替えます。</strong>
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">index.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7</div>
+        <pre class="vscode-code"><span class="ad-k">if</span> (<span class="ad-v">$name</span> !== <span class="ad-s">''</span>) {
+    <span class="ad-v">$stmt</span> = <span class="ad-v">$pdo</span>-&gt;<span class="ad-f">prepare</span>(<span class="ad-s">'INSERT INTO sortable (name, left_x, top_y) VALUES (:name, 20, 20)'</span>);
+    <span class="ad-v">$stmt</span>-&gt;<span class="ad-f">execute</span>([<span class="ad-s">':name'</span> =&gt; <span class="ad-v">$name</span>]);
+
+    <span class="ad-f">header</span>(<span class="ad-s">'Location: index.php'</span>);
+    <span class="ad-k">exit</span>;
+}</pre>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th>行</th>
+        <th>やっていること</th>
+      </tr>
+      <tr>
+        <td><code>header('Location: …')</code></td>
+        <td>ブラウザに<strong>「そのURLへ行き直して」</strong>と伝えます</td>
+      </tr>
+      <tr>
+        <td><code>exit;</code></td>
+        <td><strong>ここで止める。</strong>書かないと、この先の処理も動いてしまいます</td>
+      </tr>
+    </table>
+
+    <div class="ad-compare">
+      <div class="ad-compare-item is-ng">
+        <span class="ad-compare-label">✕ そのまま表示</span>
+        <code class="ad-code hl"><span class="ad-cm">POST で来る
+  ↓
+登録する
+  ↓
+そのまま画面を出す
+
+再読み込み → また POST</span></code>
+      </div>
+      <div class="ad-compare-item is-ok">
+        <span class="ad-compare-label">○ 飛ばしてから表示</span>
+        <code class="ad-code hl"><span class="ad-cm">POST で来る
+  ↓
+登録する
+  ↓
+GET で開き直させる
+  ↓
+画面を出す
+
+再読み込み → GET のまま</span></code>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">PRG パターン</span><br>
+      <strong>POST → Redirect → GET</strong> の頭文字です。「ポスト・リダイレクト・ゲット」と読みます。<br>
+      <strong>Redirect</strong>（リダイレクト）は「別のURLへ行き直させる」ことです。<br>
+      登録・更新・削除では、<strong>ほぼ必ずこの形にします。</strong>フレームワークを使うようになっても、考え方は変わりません。
+    </div>
+
+    <div class="caution">
+      <span class="label">header より前に出力しない</span><br>
+      <code>header()</code> は、<strong>画面に何か出す前でないと動きません。</strong>1文字でも先に出ていると、こんなエラーが出ます。<br>
+      <code class="hl"><span class="ad-cm">Warning: Cannot modify header information - headers already sent</span></code><br>
+      <strong>&lt;?php より前の空行や空白</strong>でも出力扱いになります。エラーが出たら、まずファイルの先頭を確かめてください。
+    </div>
+
+    <div class="point">
+      <span class="label">このページでやったこと</span><br>
+      <strong>フォームを作る／POSTで送る／$_POSTで受け取る／prepareで安全に登録する／リダイレクトで二重登録を防ぐ</strong>。<br>
+      とくに <strong>prepare</strong> は、書き忘れると<strong>事故になります。</strong>#5 の <code>htmlspecialchars</code> と合わせて、この2つは手が覚えるまで書いてください。
+    </div>
+
+  </section>
+
+</main>
+
+<nav class="page-nav">
+  <a class="page-prev" href="advanced_5.html">
+    <span class="page-nav-label">前のページ</span>
+    <span class="page-nav-title">フロントエンド中級#5</span>
+    <span class="page-nav-sub">データベースにつなぐ ― PDO と SELECT</span>
+  </a>
+  <a class="page-next" href="advanced_7.html">
+    <span class="page-nav-label">次のページ</span>
+    <span class="page-nav-title">フロントエンド中級#7</span>
+    <span class="page-nav-sub">ドラッグした位置を保存する ― Ajax</span>
+  </a>
+</nav>
+
+
+<!-- ▼ 共通スクリプト。章ナビ・コピーボタン・先頭へ戻るが自動で付く（編集不要） -->
+<script src="../js/training.js"></script>
+
+</body>
+</html>

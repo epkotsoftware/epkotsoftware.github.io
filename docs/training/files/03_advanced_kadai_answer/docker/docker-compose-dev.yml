@@ -1,0 +1,46 @@
+# docker-compose.yml
+version: "3.1"
+
+services:
+  web:
+    container_name: "${NAME_PREFIX}-web"
+    hostname: "${NAME_PREFIX}-web"
+    build:
+      context: "./docker/php"
+    ports:
+      - "${IP}:${PORT_WEB}:80"
+    volumes:
+      - "../htdocs:/var/www/html"
+    environment:
+      - "TZ=Asia/Tokyo"
+    restart: always
+  db:
+    platform: linux/x86_64 # M1チップ対応
+    container_name: "${NAME_PREFIX}-mysql"
+    hostname: ${DB_HOST_NAME}
+    image: mysql:8.4.11
+    ports:
+      - "${IP}:${PORT_DB}:3306"
+    volumes:
+        - "mysql_data_volume:/var/lib/mysql" # volumes -> mysql_data_volume
+        - "./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf"
+        - "./docker/db/sql:/docker-entrypoint-initdb.d"
+    environment:
+      - "MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}"
+      - "TZ=Asia/Tokyo"
+    restart: always
+  phpmyadmin:
+    container_name: "${NAME_PREFIX}-phpmyadmin"
+    hostname: "${NAME_PREFIX}-phpmyadmin"
+    image: phpmyadmin:5.2.3
+    ports:
+      - "${IP}:${PORT_PHPMYADMIN}:80"
+    environment:
+      - "PMA_HOST=${DB_HOST_NAME}" # db -> hostname
+      - "PMA_USER=root"
+      - "PMA_PASSWORD=${DB_ROOT_PASSWORD}" # db -> environment -> MYSQL_ROOT_PASSWORD
+      - "TZ=Asia/Tokyo"
+    restart: always
+volumes:
+  mysql_data_volume:
+    name: "${NAME_PREFIX}-mysql-volume"

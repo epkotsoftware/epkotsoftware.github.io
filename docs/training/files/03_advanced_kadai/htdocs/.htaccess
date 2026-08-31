@@ -1,0 +1,6 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^vendor/(.*)$ - [R=404,L]
+    RewriteRule ^composer.json$ - [R=404,L]
+    RewriteRule ^composer.lock$ - [R=404,L]
+</IfModule>
