@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>フロントエンド中級#11</title>
+  <title>フロントエンド中級#8</title>
   <link rel="stylesheet" href="../css/training.css">
 
   <!-- ▼ フロント編で共通のスタイル -->
@@ -21,7 +21,7 @@
 
 <header>
   <div class="header-inner">
-    <h1>フロントエンド中級#11</h1>
+    <h1>フロントエンド中級#8</h1>
     <p>ファイルを機能別に分ける</p>
   </div>
 </header>
@@ -218,7 +218,8 @@ function/update.php     → 更新
     <div class="note">
       <span class="label">JavaScript もファイルに出す</span><br>
       <a href="advanced_7.html">#7</a> では <code>index.php</code> の <code>&lt;head&gt;</code> の中に <code>&lt;script&gt;</code> で直接書きました。<strong>それを <code>js/sort.js</code> に移します。</strong><br>
-      <code>index.php</code> 側は <code>&lt;script src="js/sort.js" defer&gt;&lt;/script&gt;</code> の1行になります。<code>defer</code> は<strong>「HTMLを読み終えてから動かす」</strong>という指定です。これが無いと、まだ画面に無い <code>.drag</code> を探しにいって空振りします。<br>
+      <code>index.php</code> 側は <code>&lt;script src="js/sort.js" defer&gt;&lt;/script&gt;</code> の1行になります。<code>defer</code> は「HTMLを読み終えてから動かす」という指定です。<br>
+      今回の <code>sort.js</code> は <code>$(function () {</code> で全体を包んでいるので、これが無くても動きます。DOM の読み込み待ちは、その包みが引き受けているためです。<code>$(function () {</code> を使わずに書く場合は、<code>defer</code> が必要になります。<br>
       <code>css/style.css</code> は<strong>そのままコピーで構いません。</strong>中身は変えません。
     </div>
 
@@ -602,14 +603,14 @@ $.ajax({ url: './function/update.php' })</code>
         <code class="ad-code">一覧が出る
 登録できる
 ドラッグで保存される
-男女で色が違う</code>
+部署で色が違う</code>
       </div>
       <div class="ad-compare-item is-ok">
         <span class="ad-compare-label">sortable2/index.php</span>
         <code class="ad-code">一覧が出る
 登録できる
 ドラッグで保存される
-男女で色が違う</code>
+部署で色が違う</code>
       </div>
     </div>
 
@@ -667,7 +668,7 @@ $.ajax({ url: './function/update.php' })</code>
   </a>
   <a class="page-next" href="advanced_class2.html">
     <span class="page-nav-label">次のページ</span>
-    <span class="page-nav-title">フロントエンド中級#12</span>
+    <span class="page-nav-title">フロントエンド中級#9</span>
     <span class="page-nav-sub">クラスにまとめる</span>
   </a>
 </nav>

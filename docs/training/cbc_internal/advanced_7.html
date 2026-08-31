@@ -731,7 +731,9 @@ $ is not defined</span></code>
       <span class="label">演習4</span><br>
       <strong>わざと壊して、調べ方を試してください。</strong><br>
       <strong>1.</strong> <code>url</code> を <code>'index2.php'</code> のような存在しない名前に変える → Network で <strong>404</strong> を確認<br>
-      <strong>2.</strong> 元に戻して、<code>data</code> の <code>left</code> を <code>lefto</code> に変える → Payload の名前が変わるのを確認。位置が保存されなくなることも確かめる<br>
+      <strong>2.</strong> 元に戻して、<code>data</code> の <code>left</code> を <code>lefto</code> に変える → Payload の名前が変わるのを確認。<br>
+      　　このとき <code>$_POST['left']</code> が受け取れず、<code>(int)null</code> つまり <code>0</code> が保存されます。リロードすると札が左端に飛びます（<code>top</code> のほうは保存されています）。<br>
+      　　Response には <code>Warning: Undefined array key "left"</code> が出ています。受け取る名前がずれると、エラーにならずに別の値が入る、という例です<br>
       <strong>3.</strong> 元に戻して、正しく動くことを確認<br>
       <br>
       <strong>壊れた状態を自分で作れると、直せるようになります。</strong>
@@ -872,15 +874,15 @@ $ is not defined</span></code>
       </div>
       <div>
         <span class="ad-label">CSS（自分のCSSファイル）</span>
-        <code class="ad-code hl"><span class="sy-sel">.department1</span> { <span class="sy-attr">border-color</span>: <span class="sy-str">#2563eb</span>; }
-<span class="sy-sel">.department2</span> { <span class="sy-attr">border-color</span>: <span class="sy-str">#dc2626</span>; }</code>
+        <code class="ad-code hl"><span class="sy-sel">.department1</span> { <span class="sy-attr">border-left-color</span>: <span class="sy-str">#2563eb</span>; }
+<span class="sy-sel">.department2</span> { <span class="sy-attr">border-left-color</span>: <span class="sy-str">#db2777</span>; }</code>
       </div>
     </div>
 
     <div class="point">
       <span class="label">色はCSSに書く</span><br>
       <a href="basic_6.html">マークアップ中級#6</a> でやった考え方と同じです。<strong>PHPはクラス名を出すだけ。色を決めるのはCSS。</strong><br>
-      PHPの中に <code>style="border-color: blue"</code> と書いてしまうと、<strong>色を変えたいときにPHPを触ることになります。</strong>役割を分けておけば、CSSだけで済みます。
+      PHPの中に <code>style="border-left-color: blue"</code> と書いてしまうと、<strong>色を変えたいときにPHPを触ることになります。</strong>役割を分けておけば、CSSだけで済みます。
     </div>
 
     <h3>登録フォームにも足す</h3>
@@ -973,7 +975,7 @@ $ is not defined</span></code>
   </a>
   <a class="page-next" href="advanced_class1.html">
     <span class="page-nav-label">次のページ</span>
-    <span class="page-nav-title">フロントエンド中級#11</span>
+    <span class="page-nav-title">フロントエンド中級#8</span>
     <span class="page-nav-sub">ファイルを機能別に分ける</span>
   </a>
 </nav>
