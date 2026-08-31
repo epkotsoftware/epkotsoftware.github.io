@@ -76,7 +76,7 @@ Excelをお持ちでない方は、無料のOffice OnlineでもOKです。
 
 - [研修進捗](https://github.com/epkotsoftware/training-docs/blob/main/training/progress/README.md)
 
-- _
+- **これより下は過去の記事で廃止予定です。閲覧する必要はありません。**
 - _
 - _
 - _
