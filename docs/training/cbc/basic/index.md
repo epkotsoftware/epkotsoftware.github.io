@@ -44,9 +44,9 @@ Excelをお持ちでない方は、無料のOffice OnlineでもOKです。
 
 - 基礎2（マークアップエンジニア 中級）#6, 7 jQuery
   - <https://epkotsoftware.github.io/training/cbc_internal/basic_6.html>
-      → 「`02_basic/htdocs/kadai_06.html`」
-  - <https://epkotsoftware.github.io/training/cbc_internal/basic_7.html>  
-      → 「`02_basic/htdocs/kadai_07.html`」
+    -   → 「`02_basic/htdocs/kadai_06.html`」
+  - <https://epkotsoftware.github.io/training/cbc_internal/basic_7.html>
+    - → 「`02_basic/htdocs/kadai_07.html`」
 
 **※ `css/common.css` はindex.htmlにも使われているCSSファイルで、共通で使うスタイルを想定しています。**  
 　**ページ固有のスタイルは入れないように注意しましょう（よくあるのが #change_btn 等のスタイルを入れてしまっている）。**
@@ -58,9 +58,9 @@ Excelをお持ちでない方は、無料のOffice OnlineでもOKです。
   - 任意: 「`#4 オートカレンダーを作る`」
 - jQuery課題
   - 必須
-    - 「`#7 簡単な機能をjQueryで実装しよう`」  
+    - 「`#6 簡単な機能をjQueryで実装しよう`」  
       → 「`02_basic/htdocs/kadai_06.html`」
-    - 「`#8 変数を使う`」、「`#9 関数を使う`」、「`#10 コンソールでデータの確認`」、「`#11 モーダルウィンドウを作ろう`」  
+    - 「`#7 変数と関数、モーダルウィンドウを作ろう`」  
       見た目も`kadai_06.html`と似せましょう。
       → 「`02_basic/htdocs/kadai_07.html`」
 
@@ -73,6 +73,64 @@ Excelをお持ちでない方は、無料のOffice OnlineでもOKです。
 ## 研修進捗資料の更新
 
 課題提出した日付で「研修進捗」資料の更新をお願いします。
+
+- [研修進捗](https://github.com/epkotsoftware/training-docs/blob/main/training/progress/README.md)
+
+- _
+- _
+- _
+- _
+
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## ここから先は旧リンクです。廃止されます。読む必要はありません
 
@@ -119,4 +177,3 @@ Excelをお持ちでない方は、無料のOffice OnlineでもOKです。
       → 「`02_basic/htdocs/kadai_08.html`」
 
 
-- [研修進捗](https://github.com/epkotsoftware/training-docs/blob/main/training/progress/README.md)
