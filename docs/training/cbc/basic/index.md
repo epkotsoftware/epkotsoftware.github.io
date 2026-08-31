@@ -1,8 +1,8 @@
-# マークアップエンジニア編
+# マークアップ編
 
 ## はじめに
 
-マークアップエンジニア編は課題提出がありますので予めご確認下さい。  
+マークアップ編は課題提出がありますので予めご確認下さい。  
 つまずいたら質問する前に[トラブルシューティング](./../../troubleshoot/index.md)を参照してください。
 
 - [研修課題提出](https://github.com/epkotsoftware/training-docs/blob/main/submission/README.md#研修課題提出)
@@ -21,8 +21,60 @@
 
 ## 基礎
 
-基礎1は読むだけです。  
+マークアップ初級は読むだけです。  
 課題提出はありません。
+
+- マークアップ 初級 #1~3
+  - <https://epkotsoftware.github.io/training/cbc_internal/basic_1.html>
+  - <https://epkotsoftware.github.io/training/cbc_internal/basic_2.html>
+  - <https://epkotsoftware.github.io/training/cbc_internal/basic_3.html>
+
+## Excel
+
+[CBC](https://cbc-study.com/)の基礎コースをやっていきましょう。  
+Excelをお持ちでない方は、無料のOffice OnlineでもOKです。
+
+- Microsoft Office Online (Excel)
+  - <https://www.office.com/launch/excel>
+- 基礎2（マークアップエンジニア 中級）#4, 5 Excel
+  - <https://epkotsoftware.github.io/training/cbc_internal/basic_4.html>
+  - <https://epkotsoftware.github.io/training/cbc_internal/basic_5.html>
+
+## jQuery
+
+- 基礎2（マークアップエンジニア 中級）#6, 7 jQuery
+  - <https://epkotsoftware.github.io/training/cbc_internal/basic_6.html>
+      → 「`02_basic/htdocs/kadai_06.html`」
+  - <https://epkotsoftware.github.io/training/cbc_internal/basic_7.html>  
+      → 「`02_basic/htdocs/kadai_07.html`」
+
+**※ `css/common.css` はindex.htmlにも使われているCSSファイルで、共通で使うスタイルを想定しています。**  
+　**ページ固有のスタイルは入れないように注意しましょう（よくあるのが #change_btn 等のスタイルを入れてしまっている）。**
+
+## 課題
+
+- 作成したエクセルファイル
+  - 必須: 「`#2 エクセル関数（売上票を作る）`」、「`#3 エクセル関数（成績表を作る）`」
+  - 任意: 「`#4 オートカレンダーを作る`」
+- jQuery課題
+  - 必須
+    - 「`#7 簡単な機能をjQueryで実装しよう`」  
+      → 「`02_basic/htdocs/kadai_06.html`」
+    - 「`#8 変数を使う`」、「`#9 関数を使う`」、「`#10 コンソールでデータの確認`」、「`#11 モーダルウィンドウを作ろう`」  
+      見た目も`kadai_06.html`と似せましょう。
+      → 「`02_basic/htdocs/kadai_07.html`」
+
+## 課題提出
+
+以下を参照してください。
+
+- [研修課題提出](https://github.com/epkotsoftware/training-docs/blob/main/submission/README.md#研修課題提出)
+
+## 研修進捗資料の更新
+
+課題提出した日付で「研修進捗」資料の更新をお願いします。
+
+## ここから先は旧リンクです。廃止されます。読む必要はありません
 
 - 基礎1（マークアップエンジニア 初級）
   - <https://cbc-study.com/training/basic/page1>
@@ -66,14 +118,5 @@ Excelをお持ちでない方は、無料のOffice OnlineでもOKです。
       見た目も`kadai_07.html`と似せましょう。
       → 「`02_basic/htdocs/kadai_08.html`」
 
-## 課題提出
-
-以下を参照してください。
-
-- [研修課題提出](https://github.com/epkotsoftware/training-docs/blob/main/submission/README.md#研修課題提出)
-
-## 研修進捗資料の更新
-
-課題提出した日付で「研修進捗」資料の更新をお願いします。
 
 - [研修進捗](https://github.com/epkotsoftware/training-docs/blob/main/training/progress/README.md)
