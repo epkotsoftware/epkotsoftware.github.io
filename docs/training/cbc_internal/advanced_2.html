@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ▼ ページごとに変更 -->
+  <title>フロントエンド初級#2</title>
+  <link rel="stylesheet" href="../css/training.css" />
+
+  <!-- ▼ このページ専用のスタイル -->
+  <link rel="stylesheet" href="../css/advanced_2.css" />
+
+  <!-- ▼ 開いたときに、ページの先頭から読み始められるようにする。
+       ブラウザが前回の位置へ戻すより先に動かす必要があるため、
+       training.js とは分けて <head> で読み込んでいる -->
+  <script src="../js/scroll-reset.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>フロントエンド初級#2</h1>
+    <p>PHP の基本と変数</p>
+  </div>
+</header>
+
+<main>
+
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol start="2">
+      <li><a href="#chapter2">PHP について</a></li>
+      <li><a href="#chapter3">PHP の変数</a></li>
+    </ol>
+  </section>
+
+
+  <section id="chapter2">
+    <h2>2. PHP について</h2>
+
+    <p class="lead">
+      ここからはサーバー側で動く言語「PHP」を学びます。これまでの HTML・CSS はブラウザが表示するためのものでしたが、PHP はサーバーの中で動き、状況に応じて表示する内容を組み立てます。
+    </p>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      環境と、ファイルを置く場所（<code>03_advanced/htdocs/</code>）については前のページで扱いました。
+    </div>
+
+    <h3>PHP とは</h3>
+    <p>
+      PHP は、HTML や CSS のようなマークアップ言語ではなく、スクリプト言語の一種です。スクリプト言語とは、比較的単純なプログラムを記述するための簡易的なプログラミング言語のことで、JavaScript やシェルスクリプト、Python なども同じ仲間です。
+    </p>
+    <p>
+      PHP は Web サーバーにインストールして使う <strong>サーバーサイド</strong> の言語です。データベース（データを表の形でためておく仕組み）からデータを取り出したり、書き込んだりできます。そうして得たデータをもとに、状況に応じて HTML を組み立てます。このような<strong>動的な Web ページ</strong>を作るのが得意です。
+    </p>
+    <p>
+      用語や書き方は、その都度おぼえていきましょう。
+    </p>
+
+    <h3>PHP の記述場所とコメント</h3>
+    <p>
+      PHP のプログラムは、HTML の中に書くことができます。<code>&lt;?php</code> で始まり <code>?&gt;</code> で終わる範囲が PHP として扱われ、その外側はそのまま HTML として出力されます。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-attr">$stmt</span> = <span class="sy-str">&#039;こんにちは&#039;</span>;
+<span class="sy-tag">?&gt;
+</span>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id=&quot;main&quot;&gt;
+  <span class="sy-tag">&lt;?php
+</span>    <span class="sy-tag">echo</span> <span class="sy-attr">$stmt</span>.<span class="sy-str">&#039;&lt;br&gt;&#039;</span>;
+    <span class="sy-tag">echo</span> <span class="sy-str">&#039;Hello World&#039;</span>;
+  <span class="sy-tag">?&gt;
+</span>  &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+      </div>
+    </div>
+
+    <p>
+      このファイルを <code>index.php</code> という名前で <code>03_advanced/htdocs/</code> に保存し、ブラウザで <code>http://localhost:8001/index.php</code> を開いてみましょう。<code>&lt;?php ... ?&gt;</code> の中で <code>echo</code> した文字が、HTML の中に埋め込まれて表示されます。
+    </p>
+
+    <div class="chrome">
+      <div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">ブラウザ</div></div>
+      <div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">http://localhost:8001/index.php</div></div>
+      <div class="chrome-viewport">
+        こんにちは<br>Hello World
+        </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">注意</span><br>
+      PHP は <code>.php</code> という拡張子のファイルでないと実行されません。<code>.html</code> のまま保存すると、コードがそのまま文字として表示されてしまいます。
+    </div>
+
+    <h3>コメントアウトの方法</h3>
+    <p>
+      プログラムを一時的に動かないようにすることを <strong>コメントアウト</strong> といいます。コメントアウトした部分は実行されず、メモや注釈としても使えます。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-com">/*  下のコードをコメントアウトする
+$name = &#039;山田太郎&#039;;
+echo &quot;hello $name&lt;br&gt;&quot;;
+*/</span>
+
+<span class="sy-tag">echo</span> <span class="sy-str">&#039;こんにちは&#039;</span>;   <span class="sy-com">// 一行コメント（注釈文）</span>
+<span class="sy-com">//echo &#039;こんにちは&#039;; // 一行コメントアウト</span>
+<span class="sy-com">#echo &#039;こんにちは&#039;;  // 一行コメントアウト</span>
+
+<span class="sy-com">/* 
+複数行の
+コメント
+記述にも使えます。
+*/</span>
+<span class="sy-tag">?&gt;</span></pre>
+      </div>
+    </div>
+
+    <p>
+      なお、コードの中に出てくる <code>.</code>（ドット）は、文字列どうしをつなぐ記号です。<code>$stmt . 'さん'</code> と書くと、変数の中身と「さん」がつながって出力されます。この記号はフロントエンド初級#4 でまとめて扱います。
+    </p>
+
+    <p>
+      このように <code>/* 〜 */</code>、<code>//</code>、<code>#</code> の 3 種類の書き方があります。<code>/* 〜 */</code> は複数行、<code>//</code> と <code>#</code> はその行の終わりまでがコメントになります。
+    </p>
+
+    <p>
+      さきほど作った <code>index.php</code> を上のコードに書き換えて、コメントアウトした行が実行されないことを確かめてみましょう。<code>//</code> を外すと、その行が動き出します。
+    </p>
+
+    <h3>文字の出力（echo と print）</h3>
+    <p>
+      文字列や変数をブラウザに出力するには <code>echo</code> と <code>print</code> を使います。出力する文字は、シングルクオーテーション <code>' '</code> かダブルクオーテーション <code>" "</code> で囲みます。この 2 つには違いがあるので気をつけましょう。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-tag">echo</span> <span class="sy-str">&#039;おはよう!&lt;br&gt;&#039;</span>;
+<span class="sy-tag">print</span> <span class="sy-str">&#039;こんにちは!&#039;</span>;
+  <span class="sy-tag">echo</span> <span class="sy-str">&#039;&lt;br&gt;&#039;</span>;
+<span class="sy-attr">$name</span> = <span class="sy-str">&#039;山田太郎&#039;</span>;
+<span class="sy-tag">echo</span> <span class="sy-str">"</span><span class="sy-str">hello </span><span class="sy-attr">$name</span><span class="sy-str">&lt;br&gt;</span><span class="sy-str">"</span>;
+<span class="sy-tag">echo</span> <span class="sy-str">&#039;hello $name&#039;</span>;
+<span class="sy-tag">?&gt;</span></pre>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th>囲み方</th>
+        <th>変数・エスケープ文字</th>
+        <th>例：<code>$name</code> が「山田太郎」のとき</th>
+      </tr>
+      <tr>
+        <td><code>" "</code></td>
+        <td>展開する（<code>\n</code> 改行・<code>\t</code> タブなども有効）</td>
+        <td><code>"hello $name"</code> → hello 山田太郎</td>
+      </tr>
+      <tr>
+        <td><code>' '</code></td>
+        <td>展開しない。書いたままそのまま出力</td>
+        <td><code>'hello $name'</code> → hello $name</td>
+      </tr>
+    </table>
+
+    <div class="chrome">
+      <div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">ブラウザ</div></div>
+      <div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">http://localhost:8001/index.php</div></div>
+      <div class="chrome-viewport">
+        おはよう!<br>こんにちは!<br>hello 山田太郎<br>hello $name
+        </div>
+    </div>
+
+    <p>
+      <code>echo</code> と <code>print</code> は、一度に渡せる値の数が違います。
+    </p>
+
+    <table>
+      <tr>
+        <th></th>
+        <th>渡せる数</th>
+        <th>使い方</th>
+      </tr>
+      <tr>
+        <td><code>echo</code></td>
+        <td>複数</td>
+        <td><code>echo 'a', 'b';</code></td>
+      </tr>
+      <tr>
+        <td><code>print</code></td>
+        <td>1 つだけ</td>
+        <td><code>print 'a';</code></td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      違いはありますが、普段は <code>echo</code> を使えば十分です。迷ったら <code>echo</code> と覚えておきましょう。
+    </div>
+  </section>
+
+
+  <section id="chapter3">
+    <h2>3. PHP の変数</h2>
+
+    <h3>変数とは</h3>
+    <p>
+      変数は、値（数字や文字などのデータ）を入れておく<strong>箱（ボックス）</strong>のようなものです。段ボールにみかんを入れて友だちに送り、友だちがそれを取り出して使う。そんなイメージです。みかんをデータに置き換えたものが変数です。
+    </p>
+
+    <figure class="boxfig" role="img" aria-label="開いた段ボール箱に、文字・日本語・数字といったさまざまなデータが上から入っていく様子">
+      <div class="boxfig-canvas">
+        <svg class="boxfig-svg" viewBox="0 0 450 132" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <marker id="boxArrow" viewBox="0 0 12 10" refX="10.5" refY="5"
+                    markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+              <path d="M1 1.2 L10.5 5 L1 8.8" fill="none" stroke="#be123c"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </marker>
+          </defs>
+        
+              <g>
+                <!-- 開いたフタ（左右に倒れている） -->
+                <path d="M34 52 L18 32 L56 38 L75 52 Z"
+                      fill="#e0a856" stroke="#8a5a1d" stroke-width="1.6" stroke-linejoin="round"/>
+                <path d="M116 52 L132 32 L94 38 L75 52 Z"
+                      fill="#e0a856" stroke="#8a5a1d" stroke-width="1.6" stroke-linejoin="round"/>
+                <!-- 箱の内側（奥の面）を暗く見せる -->
+                <path d="M34 52 L75 61 L116 52 Z"
+                      fill="#b3762c" stroke="#8a5a1d" stroke-width="1.6" stroke-linejoin="round"/>
+                <!-- 箱の本体 -->
+                <path d="M34 52 L34 108 L75 117 L75 61 Z"
+                      fill="#c98b3a" stroke="#8a5a1d" stroke-width="1.6" stroke-linejoin="round"/>
+                <path d="M75 61 L75 117 L116 108 L116 52 Z"
+                      fill="#b3762c" stroke="#8a5a1d" stroke-width="1.6" stroke-linejoin="round"/>
+              </g>
+        
+              <path d="M112 30 Q108 52 78 64"
+                    fill="none" stroke="#be123c" stroke-width="2.2"
+                    stroke-linecap="round" marker-end="url(#boxArrow)"/>
+              <text x="75.0" y="20" text-anchor="middle" font-size="13" font-weight="600" fill="#be123c"
+                    font-family="ui-monospace,Menlo,Consolas,monospace">'root'</text>
+        
+              <g>
+                <!-- 開いたフタ（左右に倒れている） -->
+                <path d="M184 52 L168 32 L206 38 L225 52 Z"
+                      fill="#e0a856" stroke="#8a5a1d" stroke-width="1.6" stroke-linejoin="round"/>
+                <path d="M266 52 L282 32 L244 38 L225 52 Z"
+                      fill="#e0a856" stroke="#8a5a1d" stroke-width="1.6" stroke-linejoin="round"/>
+                <!-- 箱の内側（奥の面）を暗く見せる -->
+                <path d="M184 52 L225 61 L266 52 Z"
+                      fill="#b3762c" stroke="#8a5a1d" stroke-width="1.6" stroke-linejoin="round"/>
+                <!-- 箱の本体 -->
+                <path d="M184 52 L184 108 L225 117 L225 61 Z"
+                      fill="#c98b3a" stroke="#8a5a1d" stroke-width="1.6" stroke-linejoin="round"/>
+                <path d="M225 61 L225 117 L266 108 L266 52 Z"
+                      fill="#b3762c" stroke="#8a5a1d" stroke-width="1.6" stroke-linejoin="round"/>
+              </g>
+        
+              <path d="M262 30 Q258 52 228 64"
+                    fill="none" stroke="#be123c" stroke-width="2.2"
+                    stroke-linecap="round" marker-end="url(#boxArrow)"/>
+              <text x="225.0" y="20" text-anchor="middle" font-size="13" font-weight="600" fill="#be123c"
+                    font-family="ui-monospace,Menlo,Consolas,monospace">'あいう'</text>
+        
+              <g>
+                <!-- 開いたフタ（左右に倒れている） -->
+                <path d="M334 52 L318 32 L356 38 L375 52 Z"
+                      fill="#e0a856" stroke="#8a5a1d" stroke-width="1.6" stroke-linejoin="round"/>
+                <path d="M416 52 L432 32 L394 38 L375 52 Z"
+                      fill="#e0a856" stroke="#8a5a1d" stroke-width="1.6" stroke-linejoin="round"/>
+                <!-- 箱の内側（奥の面）を暗く見せる -->
+                <path d="M334 52 L375 61 L416 52 Z"
+                      fill="#b3762c" stroke="#8a5a1d" stroke-width="1.6" stroke-linejoin="round"/>
+                <!-- 箱の本体 -->
+                <path d="M334 52 L334 108 L375 117 L375 61 Z"
+                      fill="#c98b3a" stroke="#8a5a1d" stroke-width="1.6" stroke-linejoin="round"/>
+                <path d="M375 61 L375 117 L416 108 L416 52 Z"
+                      fill="#b3762c" stroke="#8a5a1d" stroke-width="1.6" stroke-linejoin="round"/>
+              </g>
+        
+              <path d="M412 30 Q408 52 378 64"
+                    fill="none" stroke="#be123c" stroke-width="2.2"
+                    stroke-linecap="round" marker-end="url(#boxArrow)"/>
+              <text x="375.0" y="20" text-anchor="middle" font-size="13" font-weight="600" fill="#be123c"
+                    font-family="ui-monospace,Menlo,Consolas,monospace">12</text>
+        </svg>
+      </div>
+      <ul class="boxfig-names">
+          <li>文字</li>
+          <li>日本語</li>
+          <li>数字</li>
+      </ul>
+      <figcaption>変数は「値を入れておく箱」。どんな種類のデータでも入れられる</figcaption>
+    </figure>
+    <p>
+      計算の途中や結果を入れておき、別の場所で使い回せる、プログラミングに欠かせない機能です。変数は中身をあとから変えられます。逆に、一度入れたら変えられないものは<strong>定数</strong>と呼びます。
+    </p>
+
+    <h3>変数の作り方（宣言）</h3>
+    <p>
+      ある値を変数として扱いたいときは、名前の先頭に <code>$</code>（ドルマーク）を付けて <code>$変数名</code> という形にします。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-attr">$hoge</span>;
+<span class="sy-attr">$username</span>;
+<span class="sy-attr">$_username</span>;
+$<span class="sy-num">1</span>username; <span class="sy-com">/*←NG*/</span>
+<span class="sy-tag">?&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">注意</span><br>
+      変数名を<strong>数字から始めることはできません</strong>。名前は英字か <code>_</code> から始めましょう。上の <code>$1username</code> は<strong>書いた時点でファイル全体が動かなくなる</strong>種類のエラー（文法エラー）なので、実際に試すときはこの行を消してください。
+    </div>
+
+    <p>
+      定数の作り方は変数とは異なり、<code>define</code> 関数か <code>const</code> を使います。<strong>関数</strong>とは、あらかじめ PHP に用意されている命令のまとまりのことです（自分で作る方法は先の研修で扱います）。定数は学習を進める中で詳しく扱います。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-tag">define</span>(<span class="sy-str">&#039;username&#039;</span>, <span class="sy-str">&#039;おなまえ&#039;</span>);
+<span class="sy-tag">const</span> username = <span class="sy-str">&#039;おなまえ&#039;</span>;
+<span class="sy-tag">?&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      上のコードは、同じ名前の定数を 2 通りの方法で定義しているため警告が出ます。ここでは「定数には define と const の 2 つの書き方がある」ことだけ押さえれば十分です。
+    </div>
+
+    <h3>変数の代入</h3>
+    <p>
+      変数を作っただけでは中身は空です。数字や文字などの値を入れて活用します。値を入れることを<strong>代入</strong>といい、<code>=</code>（イコール）を使います。右辺の値が左辺の変数に入る、という向きです。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-attr">$username</span> = <span class="sy-str">&#039;root&#039;</span>;
+<span class="sy-tag">echo</span> <span class="sy-attr">$username</span>;
+
+<span class="sy-tag">echo</span> <span class="sy-str">&#039;&lt;br&gt;&#039;</span>;
+
+<span class="sy-attr">$moji</span> = <span class="sy-str">&#039;あいう&#039;</span>;
+<span class="sy-tag">echo</span> <span class="sy-attr">$moji</span>;
+
+<span class="sy-tag">echo</span> <span class="sy-str">&#039;&lt;br&gt;&#039;</span>;
+
+<span class="sy-attr">$number</span> = <span class="sy-num">12</span>;
+<span class="sy-tag">echo</span> <span class="sy-attr">$number</span>;
+<span class="sy-tag">?&gt;</span></pre>
+      </div>
+    </div>
+
+    <figure class="varmap">
+      <table>
+        <tr>
+          <th>変数名</th>
+          <th>中に入っている値</th>
+          <th>データの種類</th>
+        </tr>
+        <tr>
+          <td><code class="varmap-name">$username</code></td>
+          <td><code class="varmap-value">'root'</code></td>
+          <td>文字</td>
+        </tr>
+        <tr>
+          <td><code class="varmap-name">$moji</code></td>
+          <td><code class="varmap-value">'あいう'</code></td>
+          <td>日本語の文字</td>
+        </tr>
+        <tr>
+          <td><code class="varmap-name">$number</code></td>
+          <td><code class="varmap-value">12</code></td>
+          <td>数字</td>
+        </tr>
+      </table>
+      <figcaption>コードを実行したあと、それぞれの変数が持っている中身</figcaption>
+    </figure>
+
+    <p>
+      変数にはどんなデータでも入れられます。
+    </p>
+
+    <h3>変数の出力</h3>
+    <p>
+      変数の中身を確認するには、<code>echo</code> で変数を出力します。
+    </p>
+
+    <div class="chrome">
+      <div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">ブラウザ</div></div>
+      <div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">http://localhost:8001/index.php</div></div>
+      <div class="chrome-viewport">
+        root<br>あいう<br>12
+        </div>
+    </div>
+
+    <p>
+      変数に入れておいた <code>root</code>、<code>あいう</code>、<code>12</code> が、そのまま出力されました。
+    </p>
+  </section>
+
+</main>
+
+<nav class="page-nav">
+  <a class="page-prev" href="advanced_1.html">
+    <span class="page-nav-label">前のページ</span>
+    <span class="page-nav-title">フロントエンド初級#1</span>
+    <span class="page-nav-sub">Web 開発環境を知る</span>
+  </a>
+  <a class="page-next" href="advanced_3.html">
+    <span class="page-nav-label">次のページ</span>
+    <span class="page-nav-title">フロントエンド初級#3</span>
+    <span class="page-nav-sub">条件分岐・ループ・配列</span>
+  </a>
+</nav>
+
+<footer></footer>
+
+<!-- ▼ 共通スクリプト。章ナビ・コピーボタン・先頭へ戻るが自動で付く（編集不要） -->
+<script src="../js/training.js"></script>
+
+</body>
+</html>

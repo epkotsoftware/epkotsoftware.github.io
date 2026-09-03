@@ -1,0 +1,87 @@
+/* ============================================================
+   フロントエンド初級#2 専用スタイル
+   共通スタイル（training.css）にないもののみを定義する。
+
+   このページの図（.varmap）は「どの変数に何が入っているか」を
+   名前と値の対で示す。開発ツール（デバッガや var_dump）と同じ
+   並べ方にして、後の章の print_r や配列の表と地続きにする。
+   ============================================================ */
+
+.varmap {
+  margin: 18px 0;
+}
+
+.varmap table {
+  margin: 0;
+}
+
+/* 変数名は青、値は赤。図の外の本文と同じ意味づけ */
+.varmap-name {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.varmap-value {
+  color: #be123c;
+  font-weight: 600;
+}
+
+.varmap figcaption {
+  margin-top: 8px;
+  color: #475569;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* ------------------------------------------------------------
+   「変数とは」の節に置く箱の図
+   本文の「値を入れておく箱」という比喩を、そのまま絵で示す。
+   実際の代入結果は、あとの節の .varmap（表）で確認する。
+   ------------------------------------------------------------ */
+
+.boxfig {
+  margin: 18px 0;
+  padding: 16px 16px 12px;
+  background: #f5f7fa;
+  border: 1px solid #dde3ea;
+  border-radius: 10px;
+}
+
+.boxfig-canvas {
+  max-width: 470px;
+  margin: 0 auto;
+}
+
+.boxfig-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* 箱の下のラベル。SVGの3セルと同じ3等分で位置を合わせる */
+.boxfig-names {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  max-width: 470px;
+  margin: 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.boxfig-names li {
+  margin: 0 6px;
+  padding: 5px 4px;
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 5px;
+  color: #334155;
+  font-size: 13px;
+  text-align: center;
+}
+
+.boxfig figcaption {
+  margin-top: 10px;
+  color: #475569;
+  font-size: 13px;
+  text-align: center;
+}

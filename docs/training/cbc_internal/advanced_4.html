@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ▼ ページごとに変更 -->
+  <title>フロントエンド初級#4</title>
+  <link rel="stylesheet" href="../css/training.css" />
+
+  <!-- ▼ このページ専用のスタイル -->
+  <link rel="stylesheet" href="../css/advanced_4.css" />
+
+  <!-- ▼ 開いたときに、ページの先頭から読み始められるようにする。
+       ブラウザが前回の位置へ戻すより先に動かす必要があるため、
+       training.js とは分けて <head> で読み込んでいる -->
+  <script src="../js/scroll-reset.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>フロントエンド初級#4</h1>
+    <p>PHP を便利にするいろんな記号</p>
+  </div>
+</header>
+
+<main>
+
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol start="8">
+      <li><a href="#chapter8">PHP を便利にするいろんな記号</a></li>
+    </ol>
+  </section>
+
+
+  <section id="chapter8">
+    <h2>8. PHP を便利にするいろんな記号</h2>
+
+    <p class="lead">
+      ここまでで変数・条件分岐・ループ・配列を扱ってきました。この章では、それらを書くときに使う記号（演算子）をまとめて覚えます。
+    </p>
+
+    <h3>変数をつなげる</h3>
+    <p>
+      文字列や変数をつなぐには <code>.</code>（ドット）を使います。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-attr">$name</span>    = <span class="sy-str">&#039;山田太郎&#039;</span>;
+<span class="sy-attr">$message</span> = <span class="sy-str">&#039;こんにちは!&#039;</span>;
+
+<span class="sy-tag">echo</span> <span class="sy-attr">$name</span> . <span class="sy-attr">$message</span> . <span class="sy-str">&#039;&lt;br&gt;&#039;</span>;         <span class="sy-com">/* 山田太郎こんにちは! */</span>
+<span class="sy-tag">echo</span> <span class="sy-attr">$name</span> . <span class="sy-str">&#039;さん&#039;</span> . <span class="sy-attr">$message</span> . <span class="sy-str">&#039;&lt;br&gt;&#039;</span>;  <span class="sy-com">/* 山田太郎さんこんにちは! */</span>
+
+<span class="sy-attr">$aisatsu</span>  = <span class="sy-str">&#039;おはようございます、&#039;</span>;
+<span class="sy-attr">$aisatsu</span> .= <span class="sy-str">&#039;寒いですね&#039;</span>. <span class="sy-attr">$name</span> . <span class="sy-str">&#039;。&#039;</span>;
+<span class="sy-tag">echo</span> <span class="sy-attr">$aisatsu</span> . <span class="sy-str">&#039;&lt;br&gt;&#039;</span>;                 <span class="sy-com">/* おはようございます、寒いですね山田太郎。 */</span>
+<span class="sy-tag">?&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="chrome">
+      <div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">ブラウザ</div></div>
+      <div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">http://localhost:8001/index.php</div></div>
+      <div class="chrome-viewport">
+        山田太郎こんにちは!<br>山田太郎さんこんにちは!<br>おはようございます、寒いですね山田太郎。
+      </div>
+    </div>
+
+    <p>
+      <code>$aisatsu .= '寒いですね'</code> は <code>$aisatsu = $aisatsu . '寒いですね'</code> を略した書き方です。もとの中身の後ろに付け足す、という意味になります。
+    </p>
+
+    <h3>足し算、引き算、掛け算、割り算</h3>
+    <p>
+      簡単な四則演算（+ - × ÷）をさせるための記号です。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-attr">$a</span> = <span class="sy-num">2</span>;
+<span class="sy-attr">$b</span> = <span class="sy-num">5</span>;
+
+<span class="sy-tag">echo</span> (<span class="sy-attr">$a</span> + <span class="sy-num">3</span>) . <span class="sy-str">&#039;&lt;br&gt;&#039;</span>;    <span class="sy-com">/* 2+3 = 5 */</span>
+<span class="sy-tag">echo</span> -<span class="sy-attr">$b</span> . <span class="sy-str">&#039;&lt;br&gt;&#039;</span>;         <span class="sy-com">/* -5 */</span>
+<span class="sy-tag">echo</span> (<span class="sy-attr">$b</span> - <span class="sy-num">3</span>) . <span class="sy-str">&#039;&lt;br&gt;&#039;</span>;    <span class="sy-com">/* 5-3 = 2 */</span>
+<span class="sy-tag">echo</span> (<span class="sy-attr">$a</span> * <span class="sy-attr">$b</span>) . <span class="sy-str">&#039;&lt;br&gt;&#039;</span>;   <span class="sy-com">/* 2*5 = 10 */</span>
+<span class="sy-tag">echo</span> (<span class="sy-attr">$a</span> / <span class="sy-attr">$b</span>) . <span class="sy-str">&#039;&lt;br&gt;&#039;</span>;   <span class="sy-com">/* 2/5 = 0.4 */</span>
+<span class="sy-tag">echo</span> (<span class="sy-attr">$a</span> % <span class="sy-attr">$b</span>) . <span class="sy-str">&#039;&lt;br&gt;&#039;</span>;   <span class="sy-com">/* 2%5 = 2 */</span>
+<span class="sy-tag">echo</span> (<span class="sy-attr">$a</span> ** <span class="sy-attr">$b</span>) . <span class="sy-str">&#039;&lt;br&gt;&#039;</span>;  <span class="sy-com">/* 2**5 = 32 */</span>
+<span class="sy-tag">?&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="chrome">
+      <div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">ブラウザ</div></div>
+      <div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">http://localhost:8001/index.php</div></div>
+      <div class="chrome-viewport">
+        5<br>-5<br>2<br>10<br>0.4<br>2<br>32
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th>例</th>
+        <th>名前</th>
+        <th>結果</th>
+      </tr>
+      <tr>
+        <td><code>$a + $b</code></td>
+        <td>足し算（加算）</td>
+        <td><code>$a</code> および <code>$b</code> の合計</td>
+      </tr>
+      <tr>
+        <td><code>-$a</code></td>
+        <td>負（正）にする</td>
+        <td>プラスをマイナスに、マイナスをプラスに変更</td>
+      </tr>
+      <tr>
+        <td><code>$a - $b</code></td>
+        <td>引き算（減算）</td>
+        <td><code>$a</code> および <code>$b</code> の差</td>
+      </tr>
+      <tr>
+        <td><code>$a * $b</code></td>
+        <td>掛け算（乗算）</td>
+        <td><code>$a</code> および <code>$b</code> の積</td>
+      </tr>
+      <tr>
+        <td><code>$a / $b</code></td>
+        <td>割り算（除算）</td>
+        <td><code>$a</code> および <code>$b</code> の商</td>
+      </tr>
+      <tr>
+        <td><code>$a % $b</code></td>
+        <td>剰余</td>
+        <td><code>$a</code> を <code>$b</code> で割った余り</td>
+      </tr>
+      <tr>
+        <td><code>$a ** $b</code></td>
+        <td>累乗</td>
+        <td><code>$a</code> の <code>$b</code> 乗</td>
+      </tr>
+    </table>
+
+    <h3>変数に代入する</h3>
+    <p>
+      文字や数字を代入するための記号です。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-attr">$a</span> = <span class="sy-num">3</span>;
+<span class="sy-tag">echo</span> <span class="sy-attr">$a</span> . <span class="sy-str">&#039;&lt;br&gt;&#039;</span>;  <span class="sy-com">/* 3 */</span>
+
+<span class="sy-attr">$b</span> = <span class="sy-num">5</span>;
+<span class="sy-attr">$c</span> = <span class="sy-num">8</span>;
+<span class="sy-attr">$b</span> += <span class="sy-attr">$c</span>; <span class="sy-com">/* $b+$cの値を、$bに代入 */</span>
+<span class="sy-tag">echo</span> <span class="sy-attr">$b</span> . <span class="sy-str">&#039;&lt;br&gt;&#039;</span>;  <span class="sy-com">/* 13 */</span>
+<span class="sy-tag">?&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="chrome">
+      <div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">ブラウザ</div></div>
+      <div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">http://localhost:8001/index.php</div></div>
+      <div class="chrome-viewport">
+        3<br>13
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      <code>$a = 3</code> は「<code>$a</code> は 3 と等しい」ではなく、<strong><code>$a</code> という箱の中に 3 を入れる</strong>という意味です。<code>$b += $c</code> は <code>$b = $b + $c</code> の略で、もとの値に足し込みます。
+    </div>
+
+    <h3>1 ずつ足す（引く）</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-attr">$i</span> = <span class="sy-num">5</span>;
+<span class="sy-tag">echo</span> ++<span class="sy-attr">$i</span> . <span class="sy-str">&#039;&lt;br&gt;&#039;</span>;  <span class="sy-com">/* 6 */</span>
+
+<span class="sy-attr">$i</span> = <span class="sy-num">10</span>;
+<span class="sy-tag">echo</span> <span class="sy-attr">$i</span>++ . <span class="sy-str">&#039;&lt;br&gt;&#039;</span>;  <span class="sy-com">/* 10 */</span>
+<span class="sy-tag">echo</span> <span class="sy-attr">$i</span> . <span class="sy-str">&#039;&lt;br&gt;&#039;</span>;    <span class="sy-com">/* 11 */</span>
+
+<span class="sy-attr">$i</span> = <span class="sy-num">20</span>;
+<span class="sy-tag">echo</span> --<span class="sy-attr">$i</span> . <span class="sy-str">&#039;&lt;br&gt;&#039;</span>;  <span class="sy-com">/* 19 */</span>
+
+<span class="sy-attr">$i</span> = <span class="sy-num">50</span>;
+<span class="sy-tag">echo</span> <span class="sy-attr">$i</span>-- . <span class="sy-str">&#039;&lt;br&gt;&#039;</span>;  <span class="sy-com">/* 50 */</span>
+<span class="sy-tag">echo</span> <span class="sy-attr">$i</span> . <span class="sy-str">&#039;&lt;br&gt;&#039;</span>;    <span class="sy-com">/* 49 */</span>
+<span class="sy-tag">?&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="chrome">
+      <div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">ブラウザ</div></div>
+      <div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">http://localhost:8001/index.php</div></div>
+      <div class="chrome-viewport">
+        6<br>10<br>11<br>19<br>50<br>49
+      </div>
+    </div>
+
+    <p>
+      変数の中身が数値の場合、<code>$i++</code> は <code>$i = $i + 1</code> と同じ動作です。<code>++</code> をインクリメント、<code>--</code> をデクリメントと呼びます。
+    </p>
+
+    <table>
+      <tr>
+        <th>例</th>
+        <th>結果</th>
+      </tr>
+      <tr>
+        <td><code>++$i</code></td>
+        <td><code>$i</code> に 1 を加え、<code>$i</code> を返します</td>
+      </tr>
+      <tr>
+        <td><code>$i++</code></td>
+        <td><code>$i</code> を返し、<code>$i</code> に 1 を加えます</td>
+      </tr>
+      <tr>
+        <td><code>--$i</code></td>
+        <td><code>$i</code> から 1 を引き、<code>$i</code> を返します</td>
+      </tr>
+      <tr>
+        <td><code>$i--</code></td>
+        <td><code>$i</code> を返し、<code>$i</code> から 1 を引きます</td>
+      </tr>
+    </table>
+
+    <div class="caution">
+      <span class="label">注意</span><br>
+      記号を<strong>前に付けるか後ろに付けるかで結果が変わります</strong>。上の実行結果で <code>$i = 10</code> のとき <code>echo $i++</code> が <code>10</code>、その次の <code>echo $i</code> が <code>11</code> になっているのは、<strong>先に値を返してから</strong> 1 を足しているためです。
+    </div>
+
+    <h3>条件を 2 つにする</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-attr">$math</span>    = <span class="sy-num">48</span>; <span class="sy-com">/* 数学 */</span>
+<span class="sy-attr">$english</span> = <span class="sy-num">87</span>; <span class="sy-com">/* 英語 */</span>
+
+<span class="sy-tag">if</span> (<span class="sy-attr">$math</span> &gt; <span class="sy-num">50</span> || <span class="sy-attr">$english</span> &gt; <span class="sy-num">60</span>){   <span class="sy-com">/* 条件: 数学は50点より上、英語は60点より上、どちらかが真なら。という式 */</span>
+  <span class="sy-tag">echo</span> <span class="sy-str">&quot;合格です&quot;</span>;	<span class="sy-com">/* 条件のどちらかがtrueならこの文が実行 */</span>
+}<span class="sy-tag">else</span>{
+  <span class="sy-tag">echo</span> <span class="sy-str">&quot;不合格です&quot;</span>;	<span class="sy-com">/* 条件のどちらもfalseならこの文が実行 */</span>
+}
+<span class="sy-tag">?&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="chrome">
+      <div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">ブラウザ</div></div>
+      <div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">http://localhost:8001/index.php</div></div>
+      <div class="chrome-viewport">
+        合格です
+      </div>
+    </div>
+
+    <p>
+      上の例では <code>$math</code> は 50 を下回っているので <code>false</code> ですが、<code>$english</code> は <code>true</code> になります。<code>||</code> はどちらか一方が真であれば真になるため、「合格です」が出力されます。
+    </p>
+    <p>
+      両方を満たすときだけ通したいなら <code>||</code> を <code>&amp;&amp;</code> に変えて <code>if ($math &gt; 50 &amp;&amp; $english &gt; 60)</code> と書きます。この例では <code>$math</code> が 50 以下なので、今度は「不合格です」のほうが実行されます。
+    </p>
+
+    <table>
+      <tr>
+        <th>例</th>
+        <th>結果</th>
+      </tr>
+      <tr>
+        <td><code>$a and $b</code></td>
+        <td><code>$a</code> および <code>$b</code> が共に TRUE なら TRUE</td>
+      </tr>
+      <tr>
+        <td><code>$a &amp;&amp; $b</code></td>
+        <td><code>$a</code> および <code>$b</code> が共に TRUE なら TRUE</td>
+      </tr>
+      <tr>
+        <td><code>$a or $b</code></td>
+        <td><code>$a</code> または <code>$b</code> のどちらかが TRUE なら TRUE</td>
+      </tr>
+      <tr>
+        <td><code>$a || $b</code></td>
+        <td><code>$a</code> または <code>$b</code> のどちらかが TRUE なら TRUE</td>
+      </tr>
+      <tr>
+        <td><code>$a xor $b</code></td>
+        <td>どちらかが TRUE で、かつ両方とも TRUE でない場合に TRUE</td>
+      </tr>
+      <tr>
+        <td><code>! $a</code></td>
+        <td><code>$a</code> が TRUE でない場合 TRUE</td>
+      </tr>
+    </table>
+
+    <div class="caution">
+      <span class="label">注意</span><br>
+      <code>and</code> と <code>&amp;&amp;</code>、<code>or</code> と <code>||</code> は表では同じ意味ですが、<code>=</code>（代入）との優先順位が違います。<code>$result = $a and $b;</code> と書くと、<code>and</code> より先に代入が行われるため、<code>&amp;&amp;</code> に置き換えたときと結果が変わります。まずは <code>&amp;&amp;</code> と <code>||</code> を使ってください。
+    </div>
+
+    <h3>データの型を比較する</h3>
+    <p>
+      <strong>型</strong>とは、データの種類のことです。ここでは「文字としての <code>1</code>」と「数字としての <code>1</code>」は別物だという点だけ押さえてください。型の一覧は次の節でまとめます。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-attr">$a</span> = <span class="sy-str">&#039;1&#039;</span>; <span class="sy-com">/* string型（文字列） */</span>
+<span class="sy-attr">$b</span> = <span class="sy-num">1</span>;   <span class="sy-com">/* integer型（整数）*/</span>
+
+<span class="sy-tag">if</span>(<span class="sy-attr">$a</span> == <span class="sy-attr">$b</span>){
+  <span class="sy-tag">echo</span> <span class="sy-str">&#039;真&lt;br&gt;&#039;</span>;  <span class="sy-com">/* どちらも`1`となりこの文が実行される */</span>
+}<span class="sy-tag">else</span>{
+  <span class="sy-tag">echo</span> <span class="sy-str">&#039;偽&lt;br&gt;&#039;</span>;
+}
+
+<span class="sy-tag">if</span>(<span class="sy-attr">$a</span> === <span class="sy-attr">$b</span>){
+  <span class="sy-tag">echo</span> <span class="sy-str">&#039;真&lt;br&gt;&#039;</span>;
+}<span class="sy-tag">else</span>{
+  <span class="sy-tag">echo</span> <span class="sy-str">&#039;偽&lt;br&gt;&#039;</span>;  <span class="sy-com">/* 型が違うので、この文が実行される */</span>
+}
+<span class="sy-tag">?&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="chrome">
+      <div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">ブラウザ</div></div>
+      <div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">http://localhost:8001/index.php</div></div>
+      <div class="chrome-viewport">
+        真<br>偽
+      </div>
+    </div>
+
+    <p>
+      左辺の値を右辺の値と比較して、その結果を <code>true</code> と <code>false</code> で返します。上の例はどちらも「1」ですが、<code>$a</code> は<strong>文字としての「1」</strong>、<code>$b</code> は<strong>数字としての 1</strong> です。
+    </p>
+
+    <table>
+      <tr>
+        <th>記号</th>
+        <th>意味</th>
+        <th>結果</th>
+      </tr>
+      <tr>
+        <td><code>=</code></td>
+        <td>右辺の値を左辺に代入</td>
+        <td>比較ではない</td>
+      </tr>
+      <tr>
+        <td><code>==</code></td>
+        <td>等しい（データ型を無視）</td>
+        <td>等しいと true</td>
+      </tr>
+      <tr>
+        <td><code>===</code></td>
+        <td>等しい（データ型も含む）</td>
+        <td>等しいと true</td>
+      </tr>
+      <tr>
+        <td><code>!=</code></td>
+        <td>等しくない</td>
+        <td>等しくないと true（<code>&lt;&gt;</code> も同じ）</td>
+      </tr>
+      <tr>
+        <td><code>!==</code></td>
+        <td>等しくない（データ型も含む）</td>
+        <td>等しくないと true</td>
+      </tr>
+      <tr>
+        <td><code>$a &gt; $b</code></td>
+        <td><code>$a</code> が <code>$b</code> より大きい</td>
+        <td>大きいと true</td>
+      </tr>
+      <tr>
+        <td><code>$a &gt;= $b</code></td>
+        <td><code>$a</code> が <code>$b</code> より大きいか等しい</td>
+        <td>大きいか等しいと true</td>
+      </tr>
+      <tr>
+        <td><code>$a &lt; $b</code></td>
+        <td><code>$a</code> が <code>$b</code> より小さい</td>
+        <td>小さいと true</td>
+      </tr>
+      <tr>
+        <td><code>$a &lt;= $b</code></td>
+        <td><code>$a</code> が <code>$b</code> より小さいか等しい</td>
+        <td>小さいか等しいと true</td>
+      </tr>
+    </table>
+
+    <p>
+      上の実行結果が「真偽」となるのは、<code>'1' == 1</code> が真、<code>'1' === 1</code> が偽になるためです。
+    </p>
+
+    <h3>データの型を知ろう</h3>
+    <p>
+      データ型とは、データの性質（種類）のことです。
+    </p>
+
+    <table>
+      <tr>
+        <th>型</th>
+        <th>例</th>
+        <th>説明</th>
+      </tr>
+      <tr>
+        <td>文字型</td>
+        <td><code>'Hello!'</code>　<code>'1'</code></td>
+        <td>string（ストリング）。文字として認識される文字列のこと</td>
+      </tr>
+      <tr>
+        <td>整数型</td>
+        <td><code>1</code>, <code>100</code></td>
+        <td>integer（インテジャー）。足し算・引き算ができる数字</td>
+      </tr>
+      <tr>
+        <td>浮動小数点数型</td>
+        <td><code>1.4142</code>, <code>-0.08</code>, <code>120.5</code></td>
+        <td>float（フロート）。どこかに小数点が入るような数字</td>
+      </tr>
+      <tr>
+        <td>論理型</td>
+        <td><code>TRUE</code>　<code>FALSE</code></td>
+        <td>boolean（ブーリアン）。正しいか、誤っているか</td>
+      </tr>
+      <tr>
+        <td>配列型</td>
+        <td><code>array('りんご', 'apple')</code></td>
+        <td>array（アレイ）</td>
+      </tr>
+      <tr>
+        <td>オブジェクト型</td>
+        <td><code>$obj = new someclass();</code></td>
+        <td>object（オブジェクト）</td>
+      </tr>
+      <tr>
+        <td>ヌル型</td>
+        <td><code>NULL</code></td>
+        <td>null（ヌル）。無とか空。ゼロではない</td>
+      </tr>
+    </table>
+
+    <p>
+      このうち<strong>オブジェクト型</strong>は、この研修では扱いません。いまは「こういう型もある」と知っておけば十分です。
+    </p>
+
+    <h3>if 文を簡単に。三項演算子</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-attr">$lang</span> = <span class="sy-str">&#039;English&#039;</span>;
+<span class="sy-attr">$message</span> = <span class="sy-attr">$lang</span> === <span class="sy-str">&#039;Japanese&#039;</span> ? <span class="sy-str">&#039;こんにちは&#039;</span> : <span class="sy-str">&#039;Hello&#039;</span>;
+
+<span class="sy-tag">echo</span> <span class="sy-attr">$message</span>;  <span class="sy-com">/* Helloが出力されます */</span>
+<span class="sy-tag">?&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="chrome">
+      <div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">ブラウザ</div></div>
+      <div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">http://localhost:8001/index.php</div></div>
+      <div class="chrome-viewport">
+        Hello
+      </div>
+    </div>
+
+    <p>
+      書き方は <code>条件式 ? 真の式 : 偽の式</code> です。上の例は「<code>$lang</code> が <code>'Japanese'</code> であれば <code>'こんにちは'</code>、そうでなければ <code>'Hello'</code>」を <code>$message</code> に代入する式です。
+    </p>
+    <p>
+      <code>if</code> 文に似ていますが、あくまで式（値）を返すだけです。<code>if</code> のように複雑な処理は書けませんが、単純な分岐をシンプルに書けます。
+    </p>
+
+    <h3>演算子の名前</h3>
+    <p>
+      ここで扱った記号は<strong>演算子</strong>と呼ばれ、それぞれに名称が付いています。まずは機能を先に身につけて、名称はおいおい覚えていきましょう。
+    </p>
+
+    <table>
+      <tr>
+        <th>記号</th>
+        <th>名称</th>
+        <th>説明</th>
+      </tr>
+      <tr>
+        <td><code>+ - * / % **</code></td>
+        <td>代数演算子</td>
+        <td>簡単な四則演算をさせるための記号</td>
+      </tr>
+      <tr>
+        <td><code>=</code></td>
+        <td>代入演算子</td>
+        <td>文字や数字を代入するための記号</td>
+      </tr>
+      <tr>
+        <td><code>.</code></td>
+        <td>結合演算子</td>
+        <td>左と右のものをつなぐ</td>
+      </tr>
+      <tr>
+        <td><code>.=</code></td>
+        <td>結合代入演算子</td>
+        <td><code>$a .= $b</code> の結果は <code>$a = $a . $b</code>（文字列の結合）</td>
+      </tr>
+      <tr>
+        <td><code>+= -= *=</code></td>
+        <td>算術代入演算子</td>
+        <td><code>$a += $b</code> の結果は <code>$a = $a + $b</code></td>
+      </tr>
+      <tr>
+        <td><code>== === != !== &gt; &gt;= &lt; &lt;=</code></td>
+        <td>比較演算子</td>
+        <td>2 つの値をくらべて、真か偽かを返す記号</td>
+      </tr>
+      <tr>
+        <td><code>and || &amp;&amp;</code></td>
+        <td>論理演算子</td>
+        <td>条件の複数指定</td>
+      </tr>
+      <tr>
+        <td><code>++ --</code></td>
+        <td>加算子／減算子</td>
+        <td>1 つずつ足す（引く）</td>
+      </tr>
+      <tr>
+        <td><code>? :</code></td>
+        <td>三項演算子</td>
+        <td><code>if 〜 else</code> を 1 行で書き、条件によって値を返す記号</td>
+      </tr>
+    </table>
+  </section>
+
+</main>
+
+<nav class="page-nav">
+  <a class="page-prev" href="advanced_3.html">
+    <span class="page-nav-label">前のページ</span>
+    <span class="page-nav-title">フロントエンド初級#3</span>
+    <span class="page-nav-sub">条件分岐・ループ・配列</span>
+  </a>
+  <a class="page-next" href="advanced_5.html">
+    <span class="page-nav-label">次のページ</span>
+    <span class="page-nav-title">フロントエンド中級#5</span>
+    <span class="page-nav-sub">アプリの土台とデータベース接続</span>
+  </a>
+</nav>
+
+<footer></footer>
+
+<!-- ▼ 共通スクリプト。章ナビ・コピーボタン・先頭へ戻るが自動で付く（編集不要） -->
+<script src="../js/training.js"></script>
+
+</body>
+</html>
