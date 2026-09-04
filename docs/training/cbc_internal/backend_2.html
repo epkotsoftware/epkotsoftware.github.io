@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>バックエンド編#2</title>
+  <link rel="stylesheet" href="../css/training.css">
+
+  <!-- ▼ バックエンド編で共通のスタイル -->
+  <link rel="stylesheet" href="../css/backend_common.css">
+
+  <!-- ▼ 開いたときに、ページの先頭から読み始められるようにする。
+       ブラウザが前回の位置へ戻すより先に動かす必要があるため、
+       training.js とは分けて <head> で読み込んでいる -->
+  <script src="../js/scroll-reset.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>バックエンド編#2</h1>
+    <p>テーブルを作って画面を出す ― migration と Blade</p>
+  </div>
+</header>
+
+<main>
+
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol>
+      <li><a href="#chapter1">テーブルの設計図を作る ― migration</a></li>
+      <li><a href="#chapter2">最初のデータを入れる ― seeder</a></li>
+      <li><a href="#chapter3">URLと処理をつなぐ ― ルーティング</a></li>
+      <li><a href="#chapter4">画面を作る ― Blade</a></li>
+    </ol>
+
+    <div class="note">
+      <span class="label">読む前に</span><br>
+      フロントエンド編では、テーブルを <strong>phpMyAdmin の画面から手で作りました。</strong>データも <code>dummy.csv</code> を取り込みました。<br>
+      Laravel では<strong>どちらもコードで書きます。</strong>手順が残るので、他の人が同じものを作り直せます。
+    </div>
+
+    <div class="caution">
+      <span class="label">artisan はコンテナの中で打ちます</span><br>
+      このページから <code>$ php artisan …</code> と書きますが、<strong>手元のパソコンでそのまま打っても動きません。</strong><br>
+      <a href="backend_1.html#chapter4">#1の4章</a> のとおり、<strong>先にコンテナへ入ってください。</strong>
+      <div class="bk-cmd"><span class="is-prompt">$</span> docker exec -it training-laravel-web bash</div>
+    </div>
+
+    <div class="exercise">
+      <span class="label">課題</span><br>
+      作るのは <code>05_laravel/app/</code> の中です。<br>
+      章の途中に<strong>演習が4つ</strong>あります（この色の枠です）。出てきたその場で書いてください。<br>
+      このページが終わると、<strong>フロントエンド編と同じ画面が Laravel で出ます。</strong>
+    </div>
+
+    <div class="note">
+      <span class="label">演習のコードは穴埋めになっています</span><br>
+      演習には書きかけのコードが載っています。<code class="hl"><span class="blank">xxxxxx</span></code> と<strong>黄色くなっているところを埋めてみましょう</strong>。<br>
+      横のコメントがヒントです。すぐ下に「答え」の折りたたみを置いていますが、<strong>先に自分で考えてから</strong>開いてください。
+    </div>
+  </section>
+
+  <section id="chapter1">
+    <h2>1. テーブルの設計図を作る ― migration</h2>
+
+    <p>
+      migration（マイグレーション）は<strong>テーブルの設計図</strong>です。「どんなカラムを持つか」を PHP で書きます。
+    </p>
+
+    <div class="ad-compare">
+      <div class="ad-compare-item is-ng">
+        <span class="ad-compare-label">フロントエンド編</span>
+        <div class="ad-code">phpMyAdmin の画面で
+カラム名を打ち込む
+型を選ぶ
+NULL にチェックを入れる</div>
+        <p><strong>手順が残りません。</strong>他の人が同じものを作るには、口で説明するしかありません。</p>
+      </div>
+      <div class="ad-compare-item is-ok">
+        <span class="ad-compare-label">Laravel</span>
+        <div class="ad-code">migration ファイルに書く
+  ↓
+php artisan migrate
+  ↓
+テーブルができる</div>
+        <p><strong>手順がファイルとして残ります。</strong>Git に入れておけば、他の人はコマンド1つで同じものを作れます。</p>
+      </div>
+    </div>
+
+    <h3>ファイルを作る</h3>
+
+    <p>
+      まず<strong>部署のテーブル</strong>から作ります。メンバーが所属する先なので、こちらが先です。
+    </p>
+
+    <div class="bk-cmd"><span class="is-prompt">$</span> php artisan make:migration create_departments_table</div>
+
+    <p>
+      <code>database/migrations/</code> に、日付の付いたファイルができます。
+    </p>
+
+    <div class="bk-cmd">2026_08_25_000001_create_departments_table.php</div>
+
+    <div class="point">
+      <span class="label">なぜ日付が付くのか</span><br>
+      migration は<strong>作った順に実行されます。</strong>ファイル名の日付が、その順番を決めています。<br>
+      <strong>部署 → メンバー</strong>の順でないと困ります。メンバーの側が「部署の id を参照する」と書くので、部署が先に無いとエラーになります。
+    </div>
+
+    <h3>中身を書く</h3>
+
+    <div class="caution">
+      <span class="label">中身は、もう半分できています</span><br>
+      開いてみると、<strong>いくつか先に書かれています。</strong>ファイル名から推測して、Laravel が用意したものです。
+      <div class="ad-code">Schema::create('departments', function (Blueprint $table) {   &lt;- テーブル名も入っている
+    $table-&gt;id();
+    $table-&gt;timestamps();          &lt;- 今回は使わない。消してください
+});</div>
+      <strong><code>$table-&gt;timestamps();</code> は消してください。</strong>これを残すと <code>created_at</code> と <code>updated_at</code> の2カラムができます。<br>
+      今回のテーブルには要りません。<a href="backend_3.html#chapter2">#3</a> で <code>$timestamps = false;</code> と書くのは、<strong>この2つが無いからです。</strong>
+    </div>
+
+    <p>
+      消したあとの、<strong>完成した形</strong>です。<code>/** … */</code> のコメントは消して構いません。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">create_departments_table.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">database/migrations/…_create_departments_table.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php</span>
+
+<span class="ad-k">use</span> <span class="ad-c">Illuminate\Database\Migrations\Migration</span>;
+<span class="ad-k">use</span> <span class="ad-c">Illuminate\Database\Schema\Blueprint</span>;
+<span class="ad-k">use</span> <span class="ad-c">Illuminate\Support\Facades\Schema</span>;
+
+<span class="ad-k">return new class extends</span> <span class="ad-c">Migration</span>
+{
+    <span class="ad-k">public function</span> <span class="ad-f">up</span>(): <span class="ad-k">void</span>
+    {
+        <span class="ad-c">Schema</span>::<span class="ad-f">create</span>(<span class="ad-s">'departments'</span>, <span class="ad-k">function</span> (<span class="ad-c">Blueprint</span> <span class="ad-v">$table</span>) {
+            <span class="ad-v">$table</span>-&gt;<span class="ad-f">id</span>();
+            <span class="ad-v">$table</span>-&gt;<span class="ad-f">string</span>(<span class="ad-s">'department'</span>, <span class="ad-n">20</span>);
+        });
+    }
+
+    <span class="ad-k">public function</span> <span class="ad-f">down</span>(): <span class="ad-k">void</span>
+    {
+        <span class="ad-c">Schema</span>::<span class="ad-f">dropIfExists</span>(<span class="ad-s">'departments'</span>);
+    }
+};</pre>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th>書き方</th>
+        <th>できるもの</th>
+      </tr>
+      <tr>
+        <td><code>$table-&gt;id()</code></td>
+        <td><code>id</code> カラム。<strong>主キー・自動採番・符号なし</strong>がまとめて付きます</td>
+      </tr>
+      <tr>
+        <td><code>$table-&gt;string('department', 20)</code></td>
+        <td><code>VARCHAR(20)</code> の <code>department</code> カラム</td>
+      </tr>
+      <tr>
+        <td><code>up()</code></td>
+        <td><code>migrate</code> したときに動く</td>
+      </tr>
+      <tr>
+        <td><code>down()</code></td>
+        <td><strong>取り消したいとき</strong>に動く（<code>migrate:rollback</code>）</td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">id() の1行が持っている意味</span><br>
+      フロントエンド編では、こう書きました。
+      <div class="ad-code">`id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+PRIMARY KEY (`id`)</div>
+      Laravel では <code>$table-&gt;id();</code> だけです。<strong>よく使う組み合わせに名前が付いている</strong>と考えてください。
+    </div>
+
+    <div class="note">
+      <span class="label">down() を書く理由</span><br>
+      作ったものを<strong>元に戻せるように</strong>しておきます。カラムを足したあとで「やっぱりやめる」となったとき、<code>migrate:rollback</code> で戻せます。<br>
+      実務では、間違えた migration を戻すのに使います。<strong>いまは「戻す用の記述」とだけ覚えておいてください。</strong>
+    </div>
+
+    <h3>メンバーのテーブル</h3>
+
+    <p>
+      次に <code>sortables</code> を作ります。<strong>部署への参照</strong>が入るのが、フロントエンド編との違いです。
+    </p>
+
+    <div class="bk-cmd"><span class="is-prompt">$</span> php artisan make:migration create_sortables_table</div>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">create_sortables_table.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">database/migrations/…_create_sortables_table.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10</div>
+        <pre class="vscode-code"><span class="ad-k">public function</span> <span class="ad-f">up</span>(): <span class="ad-k">void</span>
+{
+    <span class="ad-c">Schema</span>::<span class="ad-f">create</span>(<span class="ad-s">'sortables'</span>, <span class="ad-k">function</span> (<span class="ad-c">Blueprint</span> <span class="ad-v">$table</span>) {
+        <span class="ad-v">$table</span>-&gt;<span class="ad-f">id</span>();
+        <span class="ad-v">$table</span>-&gt;<span class="ad-f">string</span>(<span class="ad-s">'name'</span>, <span class="ad-n">50</span>);
+        <span class="ad-v">$table</span>-&gt;<span class="ad-f">foreignId</span>(<span class="ad-s">'department_id'</span>)-&gt;<span class="ad-f">constrained</span>();
+        <span class="ad-v">$table</span>-&gt;<span class="ad-f">unsignedInteger</span>(<span class="ad-s">'left_x'</span>)-&gt;<span class="ad-f">nullable</span>();
+        <span class="ad-v">$table</span>-&gt;<span class="ad-f">unsignedInteger</span>(<span class="ad-s">'top_y'</span>)-&gt;<span class="ad-f">nullable</span>();
+    });
+}</pre>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">foreignId()-&gt;constrained() が2つのことをする</span><br>
+      <strong>1.</strong> <code>department_id</code> というカラムを作る<br>
+      <strong>2.</strong> <code>departments.id</code> への<strong>外部キー制約</strong>を張る<br>
+      <br>
+      テーブル名は<strong>カラム名から推測</strong>されます。<code>department_id</code> → <code>departments</code>。ここでも<strong>単数形と複数形の規約</strong>が効いています。
+    </div>
+
+    <h3>外部キー制約とは</h3>
+
+    <p>
+      <strong>「この値は、相手のテーブルに必ず存在すること」</strong>というルールです。DB が守ってくれます。
+    </p>
+
+    <div class="ad-compare">
+      <div class="ad-compare-item is-ng">
+        <span class="ad-compare-label">存在しない部署IDを入れると</span>
+        <div class="ad-code">INSERT INTO sortables
+  (name, department_id)
+VALUES ('テスト', 99);
+
+ERROR 1452
+Cannot add or update a child row:
+a foreign key constraint fails</div>
+        <p><strong>拒否されます。</strong>入りません。</p>
+      </div>
+      <div class="ad-compare-item is-ng">
+        <span class="ad-compare-label">使われている部署を消すと</span>
+        <div class="ad-code">DELETE FROM departments
+WHERE id = 1;
+
+ERROR 1451
+Cannot delete or update a parent row:
+a foreign key constraint fails</div>
+        <p><strong>こちらも拒否されます。</strong>所属しているメンバーがいる部署は消せません。</p>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">フロントエンド編との違い</span><br>
+      フロントエンド編では、この制約を<strong>張っていませんでした。</strong>だから <code>department_id</code> に存在しない番号を入れられました。<br>
+      入れてしまうと、<code>LEFT JOIN</code> しても部署名が取れず、<strong>色の付かない札</strong>ができます。<br>
+      <strong>アプリ側で気をつけるのではなく、DBに守らせる。</strong>これができると、事故が減ります。
+    </div>
+
+    <h3>実行する</h3>
+
+    <div class="bk-cmd"><span class="is-prompt">$</span> php artisan migrate
+
+<span class="is-out">  INFO  Running migrations.</span>
+<span class="is-out">  2026_08_25_000001_create_departments_table ....... DONE</span>
+<span class="is-out">  2026_08_25_000002_create_sortables_table ......... DONE</span></div>
+
+    <div class="caution">
+      <span class="label">やり直したいとき</span><br>
+      書き間違えたら、<strong>全部消して作り直す</strong>のがいちばん確実です。
+      <div class="bk-cmd"><span class="is-prompt">$</span> php artisan migrate:fresh</div>
+      <strong>テーブルを全部落としてから作り直します。</strong>データも消えます。<strong>学習中はこれで構いません。</strong><br>
+      実務のデータが入っている環境では<strong>絶対に打たないでください。</strong>
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習1</span><br>
+      <code>departments</code> と <code>sortables</code> の migration を作り、<strong><code>migrate</code> を実行してください。</strong><br>
+      phpMyAdmin（<code>localhost:8889</code>）で、<strong>2つのテーブルができていること</strong>を確認します。<br>
+      できたら、<code>sortables</code> の<strong>構造</strong>を見てください。<code>department_id</code> に<strong>外部キーが張られている</strong>はずです。
+      <span class="ad-label">create_sortables_table.php（穴埋め）</span>
+      <code class="ad-code hl"><span class="ad-c">Schema</span>::<span class="ad-f">create</span>(<span class="ad-s">'sortables'</span>, <span class="ad-k">function</span> (<span class="ad-c">Blueprint</span> <span class="ad-v">$table</span>) {  <span class="ad-cm">/* ここは Laravel が書いてくれている */</span>
+    <span class="ad-v">$table</span>-&gt;<span class="ad-f">id</span>();
+    <span class="ad-cm">// $table-&gt;<span class="blank">xxxxxx</span>();   ← 消す行はどれ？（この章）</span>
+    <span class="ad-v">$table</span>-&gt;<span class="ad-f">string</span>(<span class="ad-s">'name'</span>, <span class="ad-n">50</span>);
+    <span class="ad-v">$table</span>-&gt;<span class="ad-f">foreignId</span>(<span class="ad-s">'department_id'</span>)-&gt;<span class="ad-f"><span class="blank">xxxxxx</span></span>();  <span class="ad-cm">/* 外部キーを張るメソッドは？ */</span>
+    <span class="ad-v">$table</span>-&gt;<span class="ad-f">unsignedInteger</span>(<span class="ad-s">'left_x'</span>)-&gt;<span class="ad-f">nullable</span>();
+    <span class="ad-v">$table</span>-&gt;<span class="ad-f">unsignedInteger</span>(<span class="ad-s">'top_y'</span>)-&gt;<span class="ad-f">nullable</span>();
+});</code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="ad-label">create_sortables_table.php</span>
+        <code class="ad-code"><span class="ad-cm">// 消す行は timestamps()</span>
+<span class="ad-c">Schema</span>::<span class="ad-f">create</span>(<span class="ad-s">'sortables'</span>, <span class="ad-k">function</span> (<span class="ad-c">Blueprint</span> <span class="ad-v">$table</span>) {
+    <span class="ad-v">$table</span>-&gt;<span class="ad-f">id</span>();
+    <span class="ad-v">$table</span>-&gt;<span class="ad-f">string</span>(<span class="ad-s">'name'</span>, <span class="ad-n">50</span>);
+    <span class="ad-v">$table</span>-&gt;<span class="ad-f">foreignId</span>(<span class="ad-s">'department_id'</span>)-&gt;<span class="ad-f">constrained</span>();
+    ...
+});</code>
+      </details>
+    </div>
+  </section>
+
+  <section id="chapter2">
+    <h2>2. 最初のデータを入れる ― seeder</h2>
+
+    <p>
+      テーブルはできましたが、<strong>中身が空</strong>です。フロントエンド編の12人を入れます。
+    </p>
+
+    <div class="point">
+      <span class="label">seed は「種」</span><br>
+      アプリを動かすのに<strong>最初から必要なデータ</strong>を入れる仕組みです。<br>
+      部署の一覧のような<strong>マスタデータ</strong>や、開発中に使う<strong>テスト用のデータ</strong>を入れます。
+    </div>
+
+    <div class="bk-cmd"><span class="is-prompt">$</span> php artisan make:seeder DepartmentSeeder
+<span class="is-prompt">$</span> php artisan make:seeder SortableSeeder</div>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">DepartmentSeeder.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">database/seeders/DepartmentSeeder.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php</span>
+
+<span class="ad-k">namespace</span> <span class="ad-c">Database\Seeders</span>;
+
+<span class="ad-k">use</span> <span class="ad-c">Illuminate\Database\Seeder</span>;
+<span class="ad-k">use</span> <span class="ad-c">Illuminate\Support\Facades\DB</span>;
+
+<span class="ad-k">class</span> <span class="ad-c">DepartmentSeeder</span> <span class="ad-k">extends</span> <span class="ad-c">Seeder</span>
+{
+    <span class="ad-k">public function</span> <span class="ad-f">run</span>(): <span class="ad-k">void</span>
+    {
+        <span class="ad-c">DB</span>::<span class="ad-f">table</span>(<span class="ad-s">'departments'</span>)-&gt;<span class="ad-f">insert</span>([
+            [<span class="ad-s">'id'</span> =&gt; <span class="ad-n">1</span>, <span class="ad-s">'department'</span> =&gt; <span class="ad-s">'開発部'</span>],
+            [<span class="ad-s">'id'</span> =&gt; <span class="ad-n">2</span>, <span class="ad-s">'department'</span> =&gt; <span class="ad-s">'営業部'</span>],
+        ]);
+    }
+}</pre>
+      </div>
+    </div>
+
+    <h3>呼び出す順番を決める</h3>
+
+    <p>
+      作った seeder は、<strong><code>DatabaseSeeder</code> に登録して呼び出します。</strong>
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">DatabaseSeeder.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">database/seeders/DatabaseSeeder.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7</div>
+        <pre class="vscode-code"><span class="ad-k">public function</span> <span class="ad-f">run</span>(): <span class="ad-k">void</span>
+{
+    <span class="ad-v">$this</span>-&gt;<span class="ad-f">call</span>([
+        <span class="ad-c">DepartmentSeeder</span>::<span class="ad-k">class</span>,
+        <span class="ad-c">SortableSeeder</span>::<span class="ad-k">class</span>,
+    ]);
+}</pre>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">ここでも順番が要る</span><br>
+      <strong>部署が先、メンバーがあと。</strong>逆にすると、外部キー制約で弾かれます。<br>
+      「まだ存在しない部署の id を参照した」ことになるからです。
+    </div>
+
+    <h3>実行する</h3>
+
+    <div class="bk-cmd"><span class="is-prompt">$</span> php artisan migrate:fresh --seed
+
+<span class="is-out">  INFO  Running migrations.</span>
+<span class="is-out">  INFO  Seeding database.</span>
+<span class="is-out">  Database\Seeders\DepartmentSeeder ......... DONE</span>
+<span class="is-out">  Database\Seeders\SortableSeeder ........... DONE</span></div>
+
+    <div class="point">
+      <span class="label">--seed を付けると、続けて実行される</span><br>
+      <code>migrate:fresh --seed</code> は<strong>「テーブルを作り直して、データも入れ直す」</strong>という意味です。<br>
+      学習中は<strong>この1本で何度でもやり直せます。</strong>
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習2</span><br>
+      <code>DepartmentSeeder</code> と <code>SortableSeeder</code> を作り、<strong>12人のデータを入れてください。</strong><br>
+      名前と座標は、フロントエンド編の <code>dummy.csv</code> と同じものを使います。<strong>部署は 1〜6 が開発部、7〜12 が営業部</strong>です。<br>
+      入ったら phpMyAdmin で確認しましょう。<strong>もう一度 <code>migrate:fresh --seed</code> を打っても、同じ状態に戻る</strong>ことも試してください。
+      <span class="ad-label">SortableSeeder.php（一部）</span>
+      <code class="ad-code"><span class="ad-c">DB</span>::<span class="ad-f">table</span>(<span class="ad-s">'sortables'</span>)-&gt;<span class="ad-f">insert</span>([
+    [<span class="ad-s">'id'</span> =&gt; <span class="ad-n">1</span>, <span class="ad-s">'name'</span> =&gt; <span class="ad-s">'佐藤'</span>, <span class="ad-s">'department_id'</span> =&gt; <span class="ad-n">1</span>, <span class="ad-s">'left_x'</span> =&gt; <span class="ad-n">810</span>, <span class="ad-s">'top_y'</span> =&gt; <span class="ad-n">56</span>],
+    [<span class="ad-s">'id'</span> =&gt; <span class="ad-n">2</span>, <span class="ad-s">'name'</span> =&gt; <span class="ad-s">'鈴木'</span>, <span class="ad-s">'department_id'</span> =&gt; <span class="ad-n">1</span>, <span class="ad-s">'left_x'</span> =&gt; <span class="ad-n">631</span>, <span class="ad-s">'top_y'</span> =&gt; <span class="ad-n">302</span>],
+    <span class="ad-cm">// … 12件</span>
+]);</code>
+    </div>
+
+    <div class="note">
+      <span class="label">SQL を直接流す方法もある</span><br>
+      phpMyAdmin の SQLタブに <code>INSERT</code> 文を貼っても、同じことができます。<strong>完成版に <code>import_sql/</code> として入れてあります。</strong><br>
+      ただし<strong>seeder のほうを勧めます。</strong>コードとして残るので、他の人が同じ状態を作れます。
+    </div>
+  </section>
+
+  <section id="chapter3">
+    <h2>3. URLと処理をつなぐ ― ルーティング</h2>
+
+    <p>
+      Laravel は<strong>入口が1つ</strong>でした。どのURLで来ても <code>public/index.php</code> が動きます。<br>
+      では「このURLならこの処理」を、どこで決めるのか。<strong><code>routes/web.php</code></strong> です。
+    </p>
+
+    <div class="ad-compare">
+      <div class="ad-compare-item is-ng">
+        <span class="ad-compare-label">フロントエンド編</span>
+        <div class="ad-code">index.php              → 一覧
+function/insert.php    → 登録
+function/update.php    → 更新</div>
+        <p><strong>ファイルの場所がそのままURL</strong>でした。ファイルを動かすとURLも変わります。</p>
+      </div>
+      <div class="ad-compare-item is-ok">
+        <span class="ad-compare-label">Laravel</span>
+        <div class="ad-code">Route::get('/', ...)
+Route::post('/sortable', ...)
+Route::patch('/sortable/{sortable}', ...)</div>
+        <p><strong>URLと処理を、自分で結びつけます。</strong>ファイルの場所とURLが切り離されています。</p>
+      </div>
+    </div>
+
+    <h3>書き方</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">web.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">routes/web.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php</span>
+
+<span class="ad-k">use</span> <span class="ad-c">App\Http\Controllers\SortableController</span>;
+<span class="ad-k">use</span> <span class="ad-c">Illuminate\Support\Facades\Route</span>;
+
+<span class="ad-c">Route</span>::<span class="ad-f">get</span>(<span class="ad-s">'/'</span>, [<span class="ad-c">SortableController</span>::<span class="ad-k">class</span>, <span class="ad-s">'index'</span>])-&gt;<span class="ad-f">name</span>(<span class="ad-s">'sortable.index'</span>);</pre>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th>部分</th>
+        <th>意味</th>
+      </tr>
+      <tr>
+        <td><code>Route::get</code></td>
+        <td><strong>GET</strong> で来たとき。<code>post</code> <code>patch</code> <code>delete</code> もあります</td>
+      </tr>
+      <tr>
+        <td><code>'/'</code></td>
+        <td>URL。<code>/sortable</code> なら <code>localhost:8026/sortable</code></td>
+      </tr>
+      <tr>
+        <td><code>[SortableController::class, 'index']</code></td>
+        <td><strong>どのクラスの、どのメソッドを動かすか</strong></td>
+      </tr>
+      <tr>
+        <td><code>-&gt;name('sortable.index')</code></td>
+        <td>このルートに<strong>名前を付ける</strong></td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">name を付ける理由</span><br>
+      画面から URL を書くとき、<strong>名前で呼べます。</strong>
+      <div class="ad-code">&lt;form action="/sortable"&gt;                      ← URLを直接書く
+&lt;form action="{{ route('sortable.store') }}"&gt;  ← 名前で書く</div>
+      URLを変えたくなったとき、<strong>名前で書いておけば <code>web.php</code> の1箇所を直すだけ</strong>で済みます。
+    </div>
+
+    <div class="note">
+      <span class="label">GET と POST の使い分けは同じ</span><br>
+      <a href="advanced_6.html#chapter1">フロントエンド中級#6</a> でやった話がそのまま当てはまります。<strong>取ってくるなら GET、変えるなら POST。</strong><br>
+      Laravel には <code>PATCH</code>（一部を変える）と <code>DELETE</code>（消す）もあります。<strong>やることが URL の書き方に出る</strong>ので、読む人に伝わりやすくなります。
+    </div>
+
+    <div class="caution">
+      <span class="label">このページでは Controller をまだ作りません</span><br>
+      上の書き方が<strong>本来の形</strong>ですが、<code>SortableController</code> は<strong>次のページで作ります。</strong><br>
+      このページでは、<strong>画面が出るところまで</strong>を確かめたいので、いったんこう書きます。
+      <div class="ad-code">Route::get('/', function () {
+    return view('sortable');
+});</div>
+      <strong>URL と処理をつなぐ</strong>という役割は同じです。渡す先が、関数か Controller かの違いだけです。
+    </div>
+
+    <h3>確認する</h3>
+
+    <div class="bk-cmd"><span class="is-prompt">$</span> php artisan route:list --except-vendor
+
+<span class="is-out">  GET|HEAD   /  ......... sortable.index › SortableController@index</span></div>
+
+    <div class="caution">
+      <span class="label">書いたのに動かないとき</span><br>
+      <strong><code>route:list</code> に出ているか</strong>を先に確認してください。出ていなければ、<code>web.php</code> の書き方が間違っています。<br>
+      出ているのに 404 なら、<strong>URLの打ち間違い</strong>です。
+    </div>
+  </section>
+
+  <section id="chapter4">
+    <h2>4. 画面を作る ― Blade</h2>
+
+    <p>
+      Blade（ブレード）は Laravel の<strong>テンプレート</strong>です。HTML の中に、PHP の値を埋め込みます。
+    </p>
+
+    <div class="ad-compare">
+      <div class="ad-compare-item is-ng">
+        <span class="ad-compare-label">フロントエンド編</span>
+        <div class="ad-code">&lt;?php foreach ($rows as $row): ?&gt;
+  &lt;div&gt;
+    &lt;?= htmlspecialchars($row['name']) ?&gt;
+  &lt;/div&gt;
+&lt;?php endforeach; ?&gt;</div>
+        <p><strong>エスケープを自分で書きます。</strong>忘れると XSS になります。</p>
+      </div>
+      <div class="ad-compare-item is-ok">
+        <span class="ad-compare-label">Blade</span>
+        <div class="ad-code">@foreach ($sortables as $sortable)
+  &lt;div&gt;
+    {{ $sortable-&gt;name }}
+  &lt;/div&gt;
+@endforeach</div>
+        <p><strong><code>{{ }}</code> は自動でエスケープされます。</strong>書き忘れが起きません。</p>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">{{ }} は htmlspecialchars を通す</span><br>
+      <code>{{ $sortable-&gt;name }}</code> は、内部で <code>htmlspecialchars</code> が呼ばれます。<br>
+      名前に <code>&lt;script&gt;</code> が入っていても、<strong>そのまま文字として表示されます。</strong><br>
+      <a href="advanced_5.html#chapter6">フロントエンド中級#5</a> で「手が覚えるまで書いてください」と言ったものが、<strong>仕組みで守られる</strong>ようになりました。
+    </div>
+
+    <div class="caution">
+      <span class="label">エスケープしない書き方もある</span><br>
+      <code>{!! $value !!}</code> と書くと<strong>エスケープされません。</strong>HTMLをそのまま出したいときに使います。<br>
+      <strong>外から来た値には絶対に使わないでください。</strong>XSS の入口になります。
+    </div>
+
+    <h3>よく使う書き方</h3>
+
+    <table>
+      <tr>
+        <th>Blade</th>
+        <th>PHP で書くと</th>
+      </tr>
+      <tr>
+        <td><code>{{ $name }}</code></td>
+        <td><code>&lt;?= htmlspecialchars($name) ?&gt;</code></td>
+      </tr>
+      <tr>
+        <td><code>@foreach ($rows as $row)</code> … <code>@endforeach</code></td>
+        <td><code>&lt;?php foreach (…): ?&gt;</code> … <code>&lt;?php endforeach; ?&gt;</code></td>
+      </tr>
+      <tr>
+        <td><code>@if ($a)</code> … <code>@endif</code></td>
+        <td><code>&lt;?php if (…): ?&gt;</code> … <code>&lt;?php endif; ?&gt;</code></td>
+      </tr>
+      <tr>
+        <td><code>@csrf</code></td>
+        <td>（あとで説明します）</td>
+      </tr>
+      <tr>
+        <td><code>{{ asset('css/style.css') }}</code></td>
+        <td><code>public/</code> の中のファイルへのパス</td>
+      </tr>
+    </table>
+
+    <div class="note">
+      <span class="label">ファイル名は .blade.php</span><br>
+      <code>resources/views/sortable.blade.php</code> のように置きます。<br>
+      呼び出すときは <code>view('sortable')</code>。<strong><code>.blade.php</code> は書きません。</strong>
+    </div>
+
+    <h3>CSS と JS の置き場所</h3>
+
+    <p>
+      ブラウザから読むファイルは <code>public/</code> に置きます。<strong>そこだけが外から見えるフォルダ</strong>でした。
+    </p>
+
+    <div class="bk-tree">app/
+├── public/
+│   ├── <span class="is-new">css/style.css</span>     ← フロントエンド編からコピー
+│   └── <span class="is-new">js/sort.js</span>        ← 同上（あとで書き換えます）
+└── resources/views/
+    └── <span class="is-new">sortable.blade.php</span></div>
+
+    <div class="point">
+      <span class="label">asset() で書く理由</span><br>
+      <code>&lt;link href="{{ asset('css/style.css') }}"&gt;</code> と書くと、<strong>正しいパスが自動で入ります。</strong><br>
+      サブディレクトリに置いたときや、本番で URL が変わったときも、<strong>書き換えずに済みます。</strong>
+    </div>
+
+    <h3>Blade の骨組み</h3>
+
+    <p>
+      最初に書くのは、<strong>これだけ</strong>です。<code>&lt;head&gt;</code> の中身と、空の <code>#drag-area</code>。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">sortable.blade.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">resources/views/sortable.blade.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;!DOCTYPE html&gt;</span>
+<span class="sy-tag">&lt;html</span> <span class="ad-f">lang</span>=<span class="ad-s">"ja"</span><span class="sy-tag">&gt;</span>
+<span class="sy-tag">&lt;head&gt;</span>
+  <span class="sy-tag">&lt;meta</span> <span class="ad-f">charset</span>=<span class="ad-s">"UTF-8"</span><span class="sy-tag">&gt;</span>
+  <span class="sy-tag">&lt;meta</span> <span class="ad-f">name</span>=<span class="ad-s">"viewport"</span> <span class="ad-f">content</span>=<span class="ad-s">"width=device-width, initial-scale=1.0"</span><span class="sy-tag">&gt;</span>
+  <span class="sy-tag">&lt;title&gt;</span>メンバー配置<span class="sy-tag">&lt;/title&gt;</span>
+  <span class="sy-tag">&lt;link</span> <span class="ad-f">rel</span>=<span class="ad-s">"stylesheet"</span> <span class="ad-f">href</span>=<span class="ad-s">"{{ asset('css/style.css') }}"</span><span class="sy-tag">&gt;</span>
+  <span class="sy-tag">&lt;script</span> <span class="ad-f">src</span>=<span class="ad-s">"https://code.jquery.com/jquery-4.0.0.min.js"</span><span class="sy-tag">&gt;&lt;/script&gt;</span>
+  <span class="sy-tag">&lt;script</span> <span class="ad-f">src</span>=<span class="ad-s">"https://code.jquery.com/ui/1.14.2/jquery-ui.min.js"</span><span class="sy-tag">&gt;&lt;/script&gt;</span>
+  <span class="sy-tag">&lt;script</span> <span class="ad-f">src</span>=<span class="ad-s">"{{ asset('js/sort.js') }}"</span> <span class="ad-f">defer</span><span class="sy-tag">&gt;&lt;/script&gt;</span>
+<span class="sy-tag">&lt;/head&gt;</span>
+<span class="sy-tag">&lt;body&gt;</span>
+
+<span class="sy-tag">&lt;header&gt;</span>
+  <span class="sy-tag">&lt;h1&gt;</span>メンバー配置<span class="sy-tag">&lt;/h1&gt;</span>
+<span class="sy-tag">&lt;/header&gt;</span>
+
+<span class="sy-tag">&lt;main&gt;</span>
+  <span class="sy-tag">&lt;div</span> <span class="ad-f">id</span>=<span class="ad-s">"drag-area"</span><span class="sy-tag">&gt;&lt;/div&gt;</span>
+<span class="sy-tag">&lt;/main&gt;</span>
+
+<span class="sy-tag">&lt;/body&gt;</span>
+<span class="sy-tag">&lt;/html&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">jQuery は CDN から読む</span><br>
+      フロントエンド編と<strong>同じものを、同じように読み込みます。</strong>ダウンロードは要りません。<br>
+      <code>jquery-ui</code> は<strong>ドラッグに使います。</strong>これが無いと札が動きません。
+    </div>
+
+    <div class="note">
+      <span class="label">中身は、このあと足していきます</span><br>
+      いまは <code>#drag-area</code> が空です。<strong>札も登録フォームもありません。</strong><br>
+      札は <a href="backend_3.html#chapter5">#3</a>、フォームは <a href="backend_4.html#chapter1">#4</a> で足します。
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習3</span><br>
+      <code>public/css/style.css</code> と <code>public/js/sort.js</code> を、<strong>フロントエンド編の <code>sortable3/</code> からコピーしてください。</strong><br>
+      <code>03_advanced/htdocs/sortable3/css/style.css</code> と <code>03_advanced/htdocs/sortable3/js/sort.js</code> です。<br>
+      <code>public/css/</code> と <code>public/js/</code> のフォルダは<strong>まだ無いので、自分で作ります。</strong><br>
+      中身はまだ変えません。<code>js/sort.js</code> は<strong>次のページで書き換えます。</strong>
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習4</span><br>
+      上の骨組みを <code>resources/views/sortable.blade.php</code> に書いてください。<strong>まだデータは表示しません。</strong><br>
+      <code>routes/web.php</code> を書き換えて、<code>localhost:8026</code> で<strong>この画面が出る</strong>ようにします。<br>
+      <strong>背景色が変わっていれば</strong>、CSS が読めています。
+      <span class="ad-label">routes/web.php（穴埋め）</span>
+      <code class="ad-code hl"><span class="ad-c">Route</span>::<span class="ad-f">get</span>(<span class="ad-s">'/'</span>, <span class="ad-k">function</span> () {
+    <span class="ad-k">return</span> <span class="ad-f"><span class="blank">xxxxxx</span></span>(<span class="ad-s">'sortable'</span>);  <span class="ad-cm">/* Blade を表示する関数は？（この章） */</span>
+});</code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="ad-label">routes/web.php</span>
+        <code class="ad-code"><span class="ad-k">return</span> <span class="ad-f">view</span>(<span class="ad-s">'sortable'</span>);</code>
+      </details>
+    </div>
+
+    <div class="point">
+      <span class="label">このページでやったこと</span><br>
+      migration でテーブルを作る／seeder でデータを入れる／ルーティングでURLと処理をつなぐ／Blade で画面を作る。<br>
+      <strong>まだ DB のデータは画面に出ていません。</strong>次のページで <strong>Model</strong> を作って、そこを繋ぎます。
+    </div>
+
+    <div class="note">
+      <span class="label">次のページでは</span><br>
+      Laravel の<strong>いちばん大事な考え方</strong>である <strong>MVC</strong> を扱います。<br>
+      いま作った Blade（View）と、これから作る Model・Controller が<strong>どう分担するのか</strong>。ここが分かると、Laravel の全体像が見えます。
+    </div>
+  </section>
+
+</main>
+
+<nav class="page-nav">
+  <a class="page-prev" href="backend_1.html">
+    <span class="page-nav-label">前のページ</span>
+    <span class="page-nav-title">バックエンド編#1</span>
+    <span class="page-nav-sub">フレームワークとは ― Laravel を動かす</span>
+  </a>
+  <a class="page-next" href="backend_3.html">
+    <span class="page-nav-label">次のページ</span>
+    <span class="page-nav-title">バックエンド編#3</span>
+    <span class="page-nav-sub">MVC ― Model と Controller で組み立てる</span>
+  </a>
+</nav>
+
+<footer></footer>
+
+<!-- ▼ 共通スクリプト。章ナビ・コピーボタン・先頭へ戻るが自動で付く（編集不要） -->
+<script src="../js/training.js"></script>
+
+</body>
+</html>

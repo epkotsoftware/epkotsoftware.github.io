@@ -1,0 +1,47 @@
+version: "3.1"
+
+services:
+  web:
+    container_name: "${NAME_PREFIX}-web"
+    hostname: "${NAME_PREFIX}-web"
+    build:
+      context: ./php
+    ports:
+      - "${IP}:${PORT_WEB}:80"
+    volumes:
+      - "../app:/var/www/app"
+      # vendor だけコンテナ側に置く。
+      # 8000 を超えるファイルを Windows のファイル共有ごしに読むと極端に遅くなるため。
+      # storage はここに置かない。中身が空になり Laravel が起動しなくなる
+      - "vendor_volume:/var/www/app/vendor"
+    working_dir: /var/www/app
+    restart: always
+  db:
+    platform: linux/x86_64 # M1チップ対応
+    container_name: "${NAME_PREFIX}-mysql"
+    hostname: ${DB_HOST_NAME}
+    image: mysql:8.4.11
+    restart: always
+    volumes:
+        - "mysql_data_volume:/var/lib/mysql"
+        - "./db:/docker-entrypoint-initdb.d"
+    environment:
+      - "MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}"
+    ports:
+      - "${IP}:${PORT_DB}:3306"
+  phpmyadmin:
+    container_name: "${NAME_PREFIX}-phpmyadmin"
+    hostname: "${NAME_PREFIX}-phpmyadmin"
+    image: phpmyadmin:5.2.3
+    restart: always
+    ports:
+      - "${IP}:${PORT_PHPMYADMIN}:80"
+    environment:
+      - "PMA_HOST=${DB_HOST_NAME}"
+      - "PMA_USER=root"
+      - "PMA_PASSWORD=${DB_ROOT_PASSWORD}"
+volumes:
+  mysql_data_volume:
+    name: "${NAME_PREFIX}-mysql-volume"
+  vendor_volume:
+    name: "${NAME_PREFIX}-vendor-volume"

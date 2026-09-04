@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>バックエンド編#4</title>
+  <link rel="stylesheet" href="../css/training.css">
+
+  <!-- ▼ バックエンド編で共通のスタイル -->
+  <link rel="stylesheet" href="../css/backend_common.css">
+
+  <!-- ▼ 開いたときに、ページの先頭から読み始められるようにする。
+       ブラウザが前回の位置へ戻すより先に動かす必要があるため、
+       training.js とは分けて <head> で読み込んでいる -->
+  <script src="../js/scroll-reset.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>バックエンド編#4</h1>
+    <p>登録と更新 ― バリデーション・CSRF・Ajax</p>
+  </div>
+</header>
+
+<main>
+
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol>
+      <li><a href="#chapter1">登録する ― バリデーション</a></li>
+      <li><a href="#chapter2">CSRF ― なぜトークンが要るのか</a></li>
+      <li><a href="#chapter3">更新する ― Ajax で位置を保存</a></li>
+      <li><a href="#chapter4">総合課題 ― タスク管理ツールを作る</a></li>
+    </ol>
+
+    <div class="note">
+      <span class="label">読む前に</span><br>
+      前のページで<strong>一覧が出ました。</strong>ここからは<strong>書き込む側</strong>です。<br>
+      <a href="advanced_6.html">フロントエンド中級#6</a> でやった<strong>フォーム・POST・PRG</strong>を、Laravel のやり方で書き直します。
+    </div>
+
+    <div class="exercise">
+      <span class="label">課題</span><br>
+      3章の途中に<strong>演習が3つ</strong>あります。ここまでで<strong>メンバー配置が完成します。</strong>登録・ドラッグ保存まで動きます。<br>
+      4章は<strong>総合課題</strong>です。ここまでの内容だけで、<strong>アプリを1つ、最初から作ります。</strong>答えは折りたたんであります。
+    </div>
+  </section>
+
+  <section id="chapter1">
+    <h2>1. 登録する ― バリデーション</h2>
+
+    <h3>まずフォームを作る</h3>
+
+    <p>
+      <a href="backend_3.html#chapter3">#3 の Controller</a> で <code>$departments</code> も画面へ渡していました。<strong>ここで使います。</strong><br>
+      <strong>置き場所は <code>&lt;main&gt;</code> の中、<code>#drag-area</code> の前</strong>です。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">sortable.blade.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">resources/views/sortable.blade.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;form</span> <span class="ad-f">method</span>=<span class="ad-s">"post"</span> <span class="ad-f">action</span>=<span class="ad-s">"{{ route('sortable.store') }}"</span> <span class="ad-f">class</span>=<span class="ad-s">"entry"</span><span class="sy-tag">&gt;</span>
+  <span class="ad-at">@csrf</span>
+  <span class="sy-tag">&lt;input</span> <span class="ad-f">type</span>=<span class="ad-s">"text"</span> <span class="ad-f">name</span>=<span class="ad-s">"name"</span> <span class="ad-f">placeholder</span>=<span class="ad-s">"名前を入力"</span> <span class="ad-f">required</span><span class="sy-tag">&gt;</span>
+
+  <span class="sy-tag">&lt;select</span> <span class="ad-f">name</span>=<span class="ad-s">"department_id"</span><span class="sy-tag">&gt;</span>
+    <span class="ad-at">@foreach</span> (<span class="ad-v">$departments</span> <span class="ad-k">as</span> <span class="ad-v">$department</span>)
+      <span class="sy-tag">&lt;option</span> <span class="ad-f">value</span>=<span class="ad-s">"{{ $department-&gt;id }}"</span><span class="sy-tag">&gt;</span>{{ <span class="ad-v">$department</span>-&gt;department }}<span class="sy-tag">&lt;/option&gt;</span>
+    <span class="ad-at">@endforeach</span>
+  <span class="sy-tag">&lt;/select&gt;</span>
+
+  <span class="sy-tag">&lt;button</span> <span class="ad-f">type</span>=<span class="ad-s">"submit"</span><span class="sy-tag">&gt;</span>登録<span class="sy-tag">&lt;/button&gt;</span>
+<span class="sy-tag">&lt;/form&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">部署の選択肢を、決め打ちにしない</span><br>
+      <code>&lt;option value="1"&gt;開発部&lt;/option&gt;</code> と直接書くこともできます。<strong>ただし、部署が増えたら書き足す必要があります。</strong><br>
+      <code>@foreach</code> で回しておけば、<strong><code>departments</code> テーブルに1行足すだけ</strong>で選択肢が増えます。<br>
+      <strong>画面に出るものは、できるだけ DB から作る。</strong>直す場所が1箇所で済みます。
+    </div>
+
+    <div class="note">
+      <span class="label">@csrf はいったん書くだけでいい</span><br>
+      いま書いても意味が分からないと思います。<strong>次の章で説明します。</strong><br>
+      <strong>これを書かないと登録が通りません。</strong>先に書いておいてください。
+    </div>
+
+    <h3>受け取る側を書く</h3>
+
+    <p>
+      フォームから送られてきた値を受け取ります。<strong>そのまま DB に入れてはいけません。</strong>
+    </p>
+
+    <div class="point">
+      <span class="label">送られてくるものは信用できない</span><br>
+      フォームに <code>maxlength="50"</code> と書いても、<strong>それはブラウザの中だけの話</strong>です。<br>
+      HTML を書き換えれば、いくらでも長い値を送れます。開発者ツールを開けば誰でもできます。<br>
+      <strong>受け取った側で必ず確かめる。</strong>これがバリデーションです。
+    </div>
+
+    <h3>validate() を書く</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">SortableController.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">app/Http/Controllers/SortableController.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17</div>
+        <pre class="vscode-code"><span class="ad-cm">// ファイルの先頭に、この2行を足す</span>
+<span class="ad-k">use</span> <span class="ad-c">Illuminate\Http\RedirectResponse</span>;
+<span class="ad-k">use</span> <span class="ad-c">Illuminate\Http\Request</span>;
+
+<span class="ad-cm">// クラスの中、index() の下に足す</span>
+<span class="ad-cm">/** 新しいメンバーを登録する */</span>
+<span class="ad-k">public function</span> <span class="ad-f">store</span>(<span class="ad-c">Request</span> <span class="ad-v">$request</span>): <span class="ad-c">RedirectResponse</span>
+{
+    <span class="ad-v">$validated</span> = <span class="ad-v">$request</span>-&gt;<span class="ad-f">validate</span>([
+        <span class="ad-s">'name'</span>          =&gt; [<span class="ad-s">'required'</span>, <span class="ad-s">'string'</span>, <span class="ad-s">'max:50'</span>],
+        <span class="ad-s">'department_id'</span> =&gt; [<span class="ad-s">'required'</span>, <span class="ad-s">'integer'</span>, <span class="ad-s">'exists:departments,id'</span>],
+    ]);
+
+    <span class="ad-c">Sortable</span>::<span class="ad-f">create</span>(<span class="ad-v">$validated</span> + [<span class="ad-s">'left_x'</span> =&gt; <span class="ad-n">20</span>, <span class="ad-s">'top_y'</span> =&gt; <span class="ad-n">20</span>]);
+
+    <span class="ad-k">return</span> <span class="ad-f">redirect</span>(<span class="ad-s">'/'</span>);
+}</pre>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th>ルール</th>
+        <th>意味</th>
+      </tr>
+      <tr>
+        <td><code>required</code></td>
+        <td>空では通さない</td>
+      </tr>
+      <tr>
+        <td><code>string</code></td>
+        <td>文字列であること</td>
+      </tr>
+      <tr>
+        <td><code>max:50</code></td>
+        <td>50文字まで</td>
+      </tr>
+      <tr>
+        <td><code>integer</code></td>
+        <td>整数であること</td>
+      </tr>
+      <tr>
+        <td><code>min:0</code> / <code>max:9999</code></td>
+        <td>数の範囲。<strong>上限も必ず付ける</strong></td>
+      </tr>
+      <tr>
+        <td><code>exists:departments,id</code></td>
+        <td><strong><code>departments</code> テーブルに、その <code>id</code> が実在すること</strong></td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">exists は DB を見に行く</span><br>
+      <code>department_id=99</code> のような<strong>存在しない部署</strong>が送られてきたら、ここで止まります。<br>
+      前のページで<strong>外部キー制約</strong>を張りました。<strong>DB でも弾かれます。</strong>二重に守っていることになります。<br>
+      <strong>DB のエラーは画面が真っ白になります。</strong>バリデーションで先に止めれば、<strong>直せる形でユーザーに返せます。</strong>
+    </div>
+
+    <div class="caution">
+      <span class="label">exists だけでは足りない ― integer も付ける</span><br>
+      <code>exists</code> は<strong>DBに問い合わせて確かめます。</strong>ただし MySQL は、比べるときに<strong>文字列を数値に読み替えます。</strong><br>
+      <code>1 OR 1=1</code> という文字列は、<strong>先頭の <code>1</code> だけが読まれて「1番の部署はある」と判定されます。</strong>そのまま登録に進み、DBが受け取れずに 500 になります。
+      <div class="ad-code">department_id = "1 OR 1=1"
+  → exists は通ってしまう
+  → insert で SQLSTATE[01000] 1265 Data truncated  → 500</div>
+      <strong><code>'integer'</code> を先に置けば、ここで止まります。</strong><br>
+      <strong>「型」と「存在」は別のチェックです。両方書いてください。</strong>
+    </div>
+
+    <div class="caution">
+      <span class="label">数には上限も付ける</span><br>
+      <code>min:0</code> だけだと、<strong>いくらでも大きい数を送れます。</strong>
+      <div class="ad-code">left = 99999999999
+  → integer も min:0 も通る
+  → unsignedInteger カラムの上限（4294967295）を超える
+  → SQLSTATE[22003] 1264 Out of range value  → 500</div>
+      <strong>カラムに入る範囲か、画面に収まる範囲か。どちらかで上限を決めてください。</strong><br>
+      札を置ける範囲は<strong>幅がおよそ 1000px、高さが 560px</strong> です。<code>max:9999</code> なら十分に収まります。
+    </div>
+
+    <h3>通らなかったとき、何が起きるか</h3>
+
+    <div class="ad-flow">
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">1</span>
+        <span><code>validate()</code> が例外を投げる</span>
+      </div>
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">2</span>
+        <span><strong>その先は動かない</strong></span>
+      </div>
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">3</span>
+        <span>元のページへ<strong>自動で戻される</strong></span>
+      </div>
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">4</span>
+        <span>エラー内容が<strong>画面で使える</strong></span>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">自分で if を書かなくていい</span><br>
+      <div class="ad-code">// フロントエンド編ではこう書いた
+if ($name === '') {
+  $errors[] = '名前を入力してください';
+}
+if (mb_strlen($name) &gt; 50) {
+  $errors[] = '50文字以内で入力してください';
+}
+if ($errors) { /* 戻す処理を自分で書く */ }</div>
+      <strong>戻す処理まで含めて、<code>validate()</code> の1行がやります。</strong>
+    </div>
+
+    <h3>エラーを画面に出す</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">sortable.blade.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">resources/views/sortable.blade.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3</div>
+        <pre class="vscode-code"><span class="ad-at">@error</span> (<span class="ad-s">'name'</span>)
+  <span class="sy-tag">&lt;p</span> <span class="ad-f">class</span>=<span class="ad-s">"error"</span><span class="sy-tag">&gt;</span>{{ <span class="ad-v">$message</span> }}<span class="sy-tag">&lt;/p&gt;</span>
+<span class="ad-at">@enderror</span></pre>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">置き場所</span><br>
+      <strong>フォームのすぐ下、<code>#drag-area</code> の前</strong>に入れます。<strong>入力し直す場所の近く</strong>に出すのが親切です。
+    </div>
+
+    <div class="caution">
+      <span class="label">CSS も1つ足します</span><br>
+      <code>public/css/style.css</code> に <code>.error</code> がありません。<strong>フロントエンド編ではエラー表示をしていなかった</strong>からです。<br>
+      このままだと素っ気ない文字が出るだけなので、末尾に足してください。
+      <div class="ad-code">.error {
+  margin: 0 0 16px;
+  padding: 10px 14px;
+  border-left: 4px solid #dc2626;
+  border-radius: 6px;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: 13px;
+}</div>
+    </div>
+
+    <div class="point">
+      <span class="label">$message はどこから来たのか</span><br>
+      <code>@error</code> の中でだけ使える変数です。<strong>その項目のエラー文が入っています。</strong><br>
+      文言は Laravel が用意しています。日本語にしたければ <code>lang/</code> に翻訳ファイルを置きますが、<strong>いまは既定のままで構いません。</strong>
+    </div>
+
+    <h3>登録できたら、リダイレクトする</h3>
+
+    <div class="ad-compare">
+      <div class="ad-compare-item is-ng">
+        <span class="ad-compare-label">そのまま画面を返すと</span>
+        <div class="ad-code">Sortable::create(...);
+return view('sortable', ...);</div>
+        <p><strong>リロードで二重登録</strong>されます。POST したままの状態だからです。</p>
+      </div>
+      <div class="ad-compare-item is-ok">
+        <span class="ad-compare-label">リダイレクトすると</span>
+        <div class="ad-code">Sortable::create(...);
+return redirect('/');</div>
+        <p><strong>GET でやり直し</strong>になります。リロードしても登録されません。</p>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">PRG は Laravel でも同じ</span><br>
+      <a href="advanced_6.html#chapter4">フロントエンド中級#6</a> でやった <strong>POST → Redirect → GET</strong> です。<br>
+      <code>header('Location: ...')</code> と <code>exit</code> を自分で書く代わりに、<strong><code>return redirect('/')</code> の1行</strong>になりました。<strong>考え方は変わりません。</strong>
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習1</span><br>
+      <code>store</code> メソッドを書き、<code>routes/web.php</code> に <strong><code>POST /sortable</code></strong> を足してください。<br>
+      Blade のフォームの <code>action</code> は <code>{{ route('sortable.store') }}</code> にします。
+      <span class="ad-label">routes/web.php（穴埋め）</span>
+      <code class="ad-code hl"><span class="ad-c">Route</span>::<span class="ad-f"><span class="blank">xxxxxx</span></span>(<span class="ad-s">'/sortable'</span>, [<span class="ad-c">SortableController</span>::<span class="ad-k">class</span>, <span class="ad-s">'store'</span>])
+    -&gt;<span class="ad-f">name</span>(<span class="ad-s">'sortable.<span class="blank">xxxxxx</span>'</span>);  <span class="ad-cm">/* 1つめ: 登録は GET？ POST？  2つめ: Blade の route() と揃える */</span></code>
+      <details class="kotae">
+        <summary>答え</summary>
+        <span class="ad-label">routes/web.php</span>
+        <code class="ad-code"><span class="ad-c">Route</span>::<span class="ad-f">post</span>(<span class="ad-s">'/sortable'</span>, [<span class="ad-c">SortableController</span>::<span class="ad-k">class</span>, <span class="ad-s">'store'</span>])-&gt;<span class="ad-f">name</span>(<span class="ad-s">'sortable.store'</span>);</code>
+      </details>
+      <strong>まだ動きません。</strong>次の章を読んでから試してください。
+    </div>
+  </section>
+
+  <section id="chapter2">
+    <h2>2. CSRF ― なぜトークンが要るのか</h2>
+
+    <p>
+      いまのままフォームを送ると、<strong>419</strong> というエラーが出ます。<strong>不具合ではありません。</strong>Laravel が止めています。
+    </p>
+
+    <div class="ad-screen">
+      <div class="ad-screen-bar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+      </div>
+      <div class="ad-screen-body is-error">419 | Page Expired</div>
+    </div>
+
+    <h3>何を防いでいるのか</h3>
+
+    <p>
+      <strong>CSRF</strong>（Cross-Site Request Forgery）は、<strong>他人のサイトから、あなたのアプリに勝手に POST させる</strong>攻撃です。
+    </p>
+
+    <div class="ad-flow">
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">1</span>
+        <span>利用者が、<strong>あなたのアプリにログインしている</strong></span>
+      </div>
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">2</span>
+        <span>その状態で<strong>攻撃者のページ</strong>を開く</span>
+      </div>
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">3</span>
+        <span>そのページが、裏で<strong>あなたのアプリへ POST</strong> する</span>
+      </div>
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">4</span>
+        <span>ブラウザは<strong>Cookie を自動で送る</strong>ので、本人の操作に見える</span>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">本人が操作した証拠にならない</span><br>
+      Cookie は<strong>「ログインしている人からのリクエスト」</strong>であることしか示しません。<br>
+      <strong>「その画面を開いて、自分で押した」</strong>ことは分からないのです。<br>
+      退会・送金・パスワード変更のような処理でこれをやられると、<strong>取り返しがつきません。</strong>
+    </div>
+
+    <h3>どう防ぐか</h3>
+
+    <div class="point">
+      <span class="label">自分の画面にしか渡していない合言葉を、一緒に送らせる</span><br>
+      <strong>1.</strong> 画面を出すとき、<strong>ランダムな文字列（トークン）</strong>を埋め込む<br>
+      <strong>2.</strong> 送信のとき、それも一緒に送らせる<br>
+      <strong>3.</strong> 受け取った側で<strong>照合する</strong><br>
+      <br>
+      攻撃者のページは<strong>この文字列を知りません。</strong>あなたのアプリの画面を読めないからです。<strong>だから通りません。</strong>
+    </div>
+
+    <h3>書き方は1行</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">sortable.blade.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">resources/views/sortable.blade.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;form</span> <span class="ad-f">method</span>=<span class="ad-s">"post"</span> <span class="ad-f">action</span>=<span class="ad-s">"{{ route('sortable.store') }}"</span><span class="sy-tag">&gt;</span>
+  <span class="ad-at">@csrf</span>
+  ...
+<span class="sy-tag">&lt;/form&gt;</span></pre>
+      </div>
+    </div>
+
+    <p>
+      <code>@csrf</code> は、こう展開されます。
+    </p>
+
+    <div class="ad-code">&lt;input type="hidden" name="_token" value="8Kq2…（毎回変わる長い文字列）"&gt;</div>
+
+    <div class="note">
+      <span class="label">POST のフォームには必ず書く</span><br>
+      <code>@csrf</code> の書き忘れは、<strong>Laravel を始めたときにいちばん多いつまずき</strong>です。<br>
+      <strong>419 が出たら、まず <code>@csrf</code> があるかを見てください。</strong>
+    </div>
+
+    <h3>Ajax の場合</h3>
+
+    <p>
+      フォームではないので、<strong><code>@csrf</code> は使えません。</strong>ヘッダで送ります。
+    </p>
+
+    <p>
+      まず、<strong>トークンを画面に埋め込みます。</strong>
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">sortable.blade.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">resources/views/sortable.blade.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;head&gt;</span>
+  <span class="sy-tag">&lt;meta</span> <span class="ad-f">name</span>=<span class="ad-s">"csrf-token"</span> <span class="ad-f">content</span>=<span class="ad-s">"{{ csrf_token() }}"</span><span class="sy-tag">&gt;</span>
+<span class="sy-tag">&lt;/head&gt;</span></pre>
+      </div>
+    </div>
+
+    <p>
+      次に、<strong>JavaScript 側でそれを読んで、ヘッダに付けます。</strong>
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">sort.js — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">public/js/sort.js</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6</div>
+        <pre class="vscode-code"><span class="ad-cm">// ファイルの先頭。以降の Ajax 全部に自動で付く</span>
+<span class="ad-v">$</span>.<span class="ad-f">ajaxSetup</span>({
+    <span class="ad-f">headers</span>: {
+        <span class="ad-s">'X-CSRF-TOKEN'</span>: <span class="ad-v">$</span>(<span class="ad-s">'meta[name="csrf-token"]'</span>).<span class="ad-f">attr</span>(<span class="ad-s">'content'</span>)
+    }
+});</pre>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">一度書けば、全部に効く</span><br>
+      <code>ajaxSetup</code> は<strong>そのページの Ajax すべてに適用されます。</strong>個々の <code>$.ajax</code> に書く必要はありません。<br>
+      <strong>共通の設定は1箇所にまとめる。</strong>書き忘れが起きなくなります。
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習2</span><br>
+      <code>@csrf</code> と <code>&lt;meta name="csrf-token"&gt;</code> を Blade に足してください。<br>
+      <strong>登録が通るようになります。</strong>新しいメンバーが左上（20, 20）に出れば成功です。<br>
+      <br>
+      通ったら、<strong>わざと壊してみてください。</strong>検証ツールで <code>_token</code> の値を書き換えて送ると、<strong>419 に戻ります。</strong>照合されていることが目で見えます。
+    </div>
+  </section>
+
+  <section id="chapter3">
+    <h2>3. 更新する ― Ajax で位置を保存</h2>
+
+    <p>
+      札をドラッグしたら、<strong>その位置を保存します。</strong><a href="advanced_7.html#chapter2">フロントエンド中級#7</a> でやった Ajax を、Laravel 側に繋ぎます。
+    </p>
+
+    <h3>ルートを足す</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">web.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">routes/web.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3</div>
+        <pre class="vscode-code"><span class="ad-c">Route</span>::<span class="ad-f">patch</span>(<span class="ad-s">'/sortable/{sortable}'</span>, [<span class="ad-c">SortableController</span>::<span class="ad-k">class</span>, <span class="ad-s">'update'</span>])
+    -&gt;<span class="ad-f">whereNumber</span>(<span class="ad-s">'sortable'</span>)
+    -&gt;<span class="ad-f">name</span>(<span class="ad-s">'sortable.update'</span>);</pre>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">{sortable} は URL の一部を受け取る</span><br>
+      <code>/sortable/3</code> でアクセスすると、<strong><code>{sortable}</code> に <code>3</code> が入ります。</strong><br>
+      <code>?id=3</code> ではなく<strong>URL そのものに含める</strong>のが、いまの主流の書き方です。<br>
+      <strong>「3番のメンバーを更新する」</strong>という意味が、URL を見るだけで分かります。
+    </div>
+
+    <h3>Controller で受ける</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">SortableController.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">app/Http/Controllers/SortableController.php</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19</div>
+        <pre class="vscode-code"><span class="ad-cm">// ファイルの先頭に、この1行を足す</span>
+<span class="ad-k">use</span> <span class="ad-c">Illuminate\Http\JsonResponse</span>;
+
+<span class="ad-cm">// クラスの中、store() の下に足す</span>
+<span class="ad-cm">/** ドラッグした位置を保存する（Ajax） */</span>
+<span class="ad-k">public function</span> <span class="ad-f">update</span>(<span class="ad-c">Request</span> <span class="ad-v">$request</span>, <span class="ad-c">Sortable</span> <span class="ad-v">$sortable</span>): <span class="ad-c">JsonResponse</span>
+{
+    <span class="ad-v">$validated</span> = <span class="ad-v">$request</span>-&gt;<span class="ad-f">validate</span>([
+        <span class="ad-s">'left'</span> =&gt; [<span class="ad-s">'required'</span>, <span class="ad-s">'integer'</span>, <span class="ad-s">'min:0'</span>, <span class="ad-s">'max:9999'</span>],
+        <span class="ad-s">'top'</span>  =&gt; [<span class="ad-s">'required'</span>, <span class="ad-s">'integer'</span>, <span class="ad-s">'min:0'</span>, <span class="ad-s">'max:9999'</span>],
+    ]);
+
+    <span class="ad-v">$sortable</span>-&gt;<span class="ad-f">update</span>([
+        <span class="ad-s">'left_x'</span> =&gt; <span class="ad-v">$validated</span>[<span class="ad-s">'left'</span>],
+        <span class="ad-s">'top_y'</span>  =&gt; <span class="ad-v">$validated</span>[<span class="ad-s">'top'</span>],
+    ]);
+
+    <span class="ad-k">return</span> <span class="ad-f">response</span>()-&gt;<span class="ad-f">json</span>([<span class="ad-s">'ok'</span> =&gt; <span class="ad-k">true</span>]);
+}</pre>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">Sortable $sortable と書くと、勝手に取ってきてくれる</span><br>
+      <strong><code>find()</code> を書いていません。</strong>それでも <code>$sortable</code> には 3番のメンバーが入っています。<br>
+      URL の <code>{sortable}</code> と、引数の <code>Sortable $sortable</code> が<strong>同じ名前</strong>だからです。Laravel がここを繋ぎます。<br>
+      <strong>存在しない id なら、自動で 404</strong> になります。「無かったら」の分岐も書かずに済みます。<br>
+      <br>
+      この仕組みを <strong>Route Model Binding</strong> と呼びます。
+    </div>
+
+    <div class="caution">
+      <span class="label">URL に入るものも決めておく ― whereNumber</span><br>
+      <code>{sortable}</code> は<strong>何でも受け取ります。</strong>数字とは限りません。<br>
+      <code>/sortable/3abc</code> と送られたら、Laravel は <code>'3abc'</code> のまま DB に問い合わせます。<strong>MySQL はこれを 3 と読み替えるので、3番が見つかってしまいます。</strong>
+      <div class="ad-code">PATCH /sortable/3abc   → 3番が更新されてしまう
+DELETE /task/2abc      → 2番が削除されてしまう</div>
+      <strong>壊されるわけではありません。</strong>3番を指定したのと同じ結果です。<br>
+      それでも、<strong>受け取るものは自分で決めておきます。</strong>想定外の値が奥まで入ってこないようにするためです。
+      <div class="ad-code">Route::patch('/sortable/{sortable}', [SortableController::class, 'update'])
+    -&gt;whereNumber('sortable')      &lt;- 数字だけ受け取る
+    -&gt;name('sortable.update');</div>
+      これを付けると <code>/sortable/3abc</code> は<strong>ルートにすら入らず 404</strong> になります。<br>
+      <strong>入口で弾く。</strong><a href="backend_3.html#chapter2">#3 の <code>$fillable</code></a> と同じ「許すものだけを決める」考え方です。
+    </div>
+
+    <div class="ad-compare">
+      <div class="ad-compare-item is-ng">
+        <span class="ad-compare-label">自分で書くと</span>
+        <div class="ad-code">$sortable = Sortable::find($id);
+if ($sortable === null) {
+    abort(404);
+}</div>
+      </div>
+      <div class="ad-compare-item is-ok">
+        <span class="ad-compare-label">Route Model Binding</span>
+        <div class="ad-code">public function update(
+    Request $request,
+    Sortable $sortable
+)</div>
+        <p><strong>引数に型を書くだけ</strong>です。</p>
+      </div>
+    </div>
+
+    <h3>返すのは HTML ではなく JSON</h3>
+
+    <div class="note">
+      <span class="label">Ajax の相手は JavaScript</span><br>
+      呼んでいるのが JavaScript なので、<strong>画面を返しても使い道がありません。</strong><br>
+      <code>response()-&gt;json([...])</code> で<strong>データだけ</strong>返します。成功したかどうかが分かれば十分です。
+    </div>
+
+    <h3>JavaScript 側</h3>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">sort.js — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs">
+        <div class="vscode-tab is-active">public/js/sort.js</div>
+      </div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18</div>
+        <pre class="vscode-code"><span class="ad-v">$</span>(<span class="ad-s">'.drag'</span>).<span class="ad-f">draggable</span>({
+    <span class="ad-f">containment</span>: <span class="ad-s">'#drag-area'</span>,
+    <span class="ad-f">cursor</span>: <span class="ad-s">'move'</span>,
+
+    <span class="ad-cm">// ドラッグが終わったときに動く</span>
+    <span class="ad-f">stop</span>: <span class="ad-k">function</span> () {
+        <span class="ad-k">const</span> <span class="ad-v">id</span>   = <span class="ad-v">$</span>(<span class="ad-k">this</span>).<span class="ad-f">data</span>(<span class="ad-s">'id'</span>);
+        <span class="ad-cm">// position() は小数を返すことがある。整数にしてから送る</span>
+        <span class="ad-k">const</span> <span class="ad-v">left</span> = <span class="ad-c">Math</span>.<span class="ad-f">round</span>(<span class="ad-v">$</span>(<span class="ad-k">this</span>).<span class="ad-f">position</span>().<span class="ad-v">left</span>);
+        <span class="ad-k">const</span> <span class="ad-v">top</span>  = <span class="ad-c">Math</span>.<span class="ad-f">round</span>(<span class="ad-v">$</span>(<span class="ad-k">this</span>).<span class="ad-f">position</span>().<span class="ad-v">top</span>);
+
+        <span class="ad-v">$</span>.<span class="ad-f">ajax</span>({
+            <span class="ad-f">type</span>: <span class="ad-s">'PATCH'</span>,
+            <span class="ad-f">url</span> : <span class="ad-s">'/sortable/'</span> + <span class="ad-v">id</span>,
+            <span class="ad-f">data</span>: { <span class="ad-f">left</span>: <span class="ad-v">left</span>, <span class="ad-f">top</span>: <span class="ad-v">top</span> }
+        });
+    }
+});</pre>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">Math.round を外すと 422 になる</span><br>
+      <code>position()</code> が返すのは <strong><code>132.995</code> のような小数</strong>です。画面の描画は小数単位で行われるからです。<br>
+      Controller 側は <code>integer</code> を要求しているので、<strong>小数のまま送るとバリデーションで弾かれます。</strong>
+      <div class="ad-code">PATCH /sortable/1  →  422 Unprocessable Content</div>
+      <strong>札は動くのに、リロードすると戻る。</strong>この症状が出たら、<strong>ブラウザの検証ツールでネットワークを見てください。</strong>
+    </div>
+
+    <div class="point">
+      <span class="label">PATCH という書き方</span><br>
+      <strong>一部だけを変える</strong>ときに使います。ここでは座標2つだけです。<br>
+      名前も部署も送っていません。<strong>変えないものは送らない。</strong>これが読む人への説明になります。
+    </div>
+
+    <div class="caution">
+      <span class="label">失敗したときのことも書く</span><br>
+      通信は<strong>失敗します。</strong>サーバーが落ちていることも、通信が切れることもあります。
+      <div class="ad-code">.fail(function (xhr) {
+    console.log('失敗:', xhr.status);
+});</div>
+      <strong>何も書かないと、失敗しても画面上は成功に見えます。</strong>札は動いたのに保存されていない、という状態です。
+    </div>
+
+    <div class="exercise">
+      <span class="label">演習3</span><br>
+      <code>update</code> メソッドとルートを書き、<code>sort.js</code> の Ajax を書き換えてください。<br>
+      札をドラッグして、<strong>リロードしても位置が残っていれば</strong>メンバー配置は完成です。<br>
+      <br>
+      phpMyAdmin で <code>sortables</code> を開き、<strong><code>left_x</code> と <code>top_y</code> が変わっている</strong>ことも確認してください。
+    </div>
+
+    <div class="point">
+      <span class="label">ここまでで、フロントエンド編と同じものができました</span><br>
+      画面は同じです。<strong>中身は、まるごと Laravel になりました。</strong>
+      <table>
+        <tr>
+          <th></th>
+          <th>フロントエンド編</th>
+          <th>Laravel</th>
+        </tr>
+        <tr>
+          <td>DB 接続</td>
+          <td><code>new PDO(...)</code> を書く</td>
+          <td><code>.env</code> に書く</td>
+        </tr>
+        <tr>
+          <td>テーブル作成</td>
+          <td>phpMyAdmin で手作業</td>
+          <td>migration</td>
+        </tr>
+        <tr>
+          <td>取得</td>
+          <td><code>prepare</code> + <code>execute</code></td>
+          <td>Eloquent</td>
+        </tr>
+        <tr>
+          <td>JOIN</td>
+          <td><code>LEFT JOIN</code> を書く</td>
+          <td>リレーション</td>
+        </tr>
+        <tr>
+          <td>エスケープ</td>
+          <td><code>htmlspecialchars</code></td>
+          <td><code>{{ }}</code></td>
+        </tr>
+        <tr>
+          <td>入力チェック</td>
+          <td><code>if</code> を並べる</td>
+          <td><code>validate()</code></td>
+        </tr>
+        <tr>
+          <td>なりすまし対策</td>
+          <td>なし</td>
+          <td><code>@csrf</code></td>
+        </tr>
+      </table>
+    </div>
+  </section>
+
+  <section id="chapter4">
+    <h2>4. 総合課題 ― タスク管理ツールを作る</h2>
+
+    <p>
+      ここからは<strong>自分で作ります。</strong>作るものと、詰まりやすいところを書きます。<br>
+      <strong>答えは折りたたんであります。</strong>先に自分で書いて、行き詰まったら開いてください。
+    </p>
+
+    <div class="exercise">
+      <span class="label">作るもの</span><br>
+      <strong>タスク管理ツール</strong>です。<code>localhost:8026/task</code> で動くようにします。
+      <table>
+        <tr>
+          <th>機能</th>
+          <th>やること</th>
+        </tr>
+        <tr>
+          <td>一覧</td>
+          <td>登録されているタスクを、<strong>古い順</strong>に並べる</td>
+        </tr>
+        <tr>
+          <td>追加</td>
+          <td>フォームから入力して登録する。<strong>登録日も残す</strong></td>
+        </tr>
+        <tr>
+          <td>完了</td>
+          <td>完了ボタンで<strong>その行を消す。Ajax で、画面は再読み込みしない</strong></td>
+        </tr>
+        <tr>
+          <td>0件のとき</td>
+          <td>「タスクはありません」と出す</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="note">
+      <span class="label">見た目は用意してあります</span><br>
+      <code>05_laravel/task_layout/</code> に <strong>HTML と CSS</strong> が入っています。
+      <div class="bk-tree">task_layout/
+├── index.html      ← Blade にする前の、素の HTML
+└── css/task.css    ← そのまま使う</div>
+      <strong>CSS は書かなくて構いません。</strong>この課題で身に付けるのは Laravel の書き方です。<br>
+      <code>index.html</code> を <strong><code>task.blade.php</code> に作り替えるところから</strong>始めてください。
+    </div>
+
+    <h3>作る順番</h3>
+
+    <div class="ad-flow">
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">1</span>
+        <span>migration を書いて <code>migrate</code></span>
+      </div>
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">2</span>
+        <span>Model を作る</span>
+      </div>
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">3</span>
+        <span>一覧だけ作って、<strong>phpMyAdmin で手入力したデータ</strong>が出るか見る</span>
+      </div>
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">4</span>
+        <span>追加を作る</span>
+      </div>
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">5</span>
+        <span>完了（Ajax）を作る</span>
+      </div>
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">6</span>
+        <span>0件のときの表示を足す</span>
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">一気に作らない</span><br>
+      <strong>1つ足すたびに動かしてください。</strong>まとめて書いてから動かすと、どこが原因か分からなくなります。<br>
+      <strong>3</strong> の段階で一覧が出れば、Model と Controller と View の繋がりは正しいと確認できます。そこから先の不具合は、<strong>足した部分にあります。</strong>
+    </div>
+
+    <div class="note">
+      <span class="label">ファイルは artisan で作ります</span><br>
+      <a href="backend_1.html#chapter4">#1の4章</a> のとおり、<strong>コンテナに入ってから</strong>打ちます。
+      <div class="bk-cmd"><span class="is-prompt">$</span> php artisan make:migration create_tasks_table
+<span class="is-prompt">$</span> php artisan make:model Task
+<span class="is-prompt">$</span> php artisan make:controller TaskController</div>
+      <code>public/css/task.css</code>、<code>public/js/task.js</code>、<code>resources/views/task.blade.php</code> は<strong>手で作ります。</strong>
+    </div>
+
+    <h3>1. テーブルを作る</h3>
+
+    <table>
+      <tr>
+        <th>カラム</th>
+        <th>型</th>
+        <th>備考</th>
+      </tr>
+      <tr>
+        <td><code>id</code></td>
+        <td>―</td>
+        <td><code>$table-&gt;id()</code></td>
+      </tr>
+      <tr>
+        <td><code>task</code></td>
+        <td><code>VARCHAR(100)</code></td>
+        <td>やることの中身</td>
+      </tr>
+      <tr>
+        <td><code>created_at</code></td>
+        <td><code>TIMESTAMP</code></td>
+        <td>登録日時。<strong>既定で現在時刻</strong>が入るようにする</td>
+      </tr>
+    </table>
+
+    <div class="note">
+      <span class="label">現在時刻を既定値にする</span><br>
+      <code>$table-&gt;timestamp('created_at')-&gt;useCurrent();</code> と書きます。<br>
+      <strong><code>INSERT</code> のときに日時を渡さなくても、DB が入れてくれます。</strong><br>
+      <strong><code>$table-&gt;timestamps();</code> は消すのを忘れずに。</strong><a href="backend_2.html#chapter1">#2 の1章</a> と同じです。
+    </div>
+
+    <details class="kotae">
+      <summary>答え ― create_tasks_table.php</summary>
+      <code class="ad-code"><span class="ad-k">public function</span> <span class="ad-f">up</span>(): <span class="ad-k">void</span>
+{
+    <span class="ad-c">Schema</span>::<span class="ad-f">create</span>(<span class="ad-s">'tasks'</span>, <span class="ad-k">function</span> (<span class="ad-c">Blueprint</span> <span class="ad-v">$table</span>) {
+        <span class="ad-v">$table</span>-&gt;<span class="ad-f">id</span>();
+        <span class="ad-v">$table</span>-&gt;<span class="ad-f">string</span>(<span class="ad-s">'task'</span>, <span class="ad-n">100</span>);
+        <span class="ad-v">$table</span>-&gt;<span class="ad-f">timestamp</span>(<span class="ad-s">'created_at'</span>)-&gt;<span class="ad-f">useCurrent</span>();
+    });
+}</code>
+    </details>
+
+    <h3>2. Model を作る</h3>
+
+    <div class="note">
+      <span class="label">日付を日時として扱う</span><br>
+      <code>$timestamps = false;</code> にすると、<strong><code>created_at</code> も「ただの文字列」</strong>になります。<code>format()</code> が使えません。<br>
+      Model に、こう書けば戻ります。
+      <div class="ad-code">protected function casts(): array
+{
+    return ['created_at' =&gt; 'datetime'];
+}</div>
+      <strong><code>{{ $task-&gt;created_at?-&gt;format('Y/m/d') }}</code></strong> と書けるようになります。
+    </div>
+
+    <div class="point">
+      <span class="label">?-&gt; は「null なら止まる」</span><br>
+      <code>$task-&gt;created_at</code> が <code>null</code> のとき、<code>-&gt;format()</code> はエラーになります。<br>
+      <code>?-&gt;</code> と書くと、<strong>null のときは何もせず null を返します。</strong>エラーになりません。
+    </div>
+
+    <details class="kotae">
+      <summary>答え ― Task.php</summary>
+      <code class="ad-code"><span class="ad-k">class</span> <span class="ad-c">Task</span> <span class="ad-k">extends</span> <span class="ad-c">Model</span>
+{
+    <span class="ad-cm">/** created_at だけ持ち、updated_at は持たないテーブル */</span>
+    <span class="ad-k">public</span> <span class="ad-v">$timestamps</span> = <span class="ad-k">false</span>;
+
+    <span class="ad-cm">/** 一括代入を許す項目 */</span>
+    <span class="ad-k">protected</span> <span class="ad-v">$fillable</span> = [<span class="ad-s">'task'</span>];
+
+    <span class="ad-cm">/** created_at を日時として扱う */</span>
+    <span class="ad-k">protected function</span> <span class="ad-f">casts</span>(): <span class="ad-k">array</span>
+    {
+        <span class="ad-k">return</span> [<span class="ad-s">'created_at'</span> =&gt; <span class="ad-s">'datetime'</span>];
+    }
+}</code>
+    </details>
+
+    <h3>3. Controller を作る</h3>
+
+    <p>
+      メソッドは3つです。<strong>やることは、ここまでに全部出てきています。</strong>
+    </p>
+
+    <table>
+      <tr>
+        <th>メソッド</th>
+        <th>やること</th>
+        <th>参考</th>
+      </tr>
+      <tr>
+        <td><code>index</code></td>
+        <td>全件取って View に渡す</td>
+        <td><a href="backend_3.html#chapter3">#3 の3章</a></td>
+      </tr>
+      <tr>
+        <td><code>store</code></td>
+        <td>バリデーションして登録、リダイレクト</td>
+        <td><a href="#chapter1">この#4 の1章</a></td>
+      </tr>
+      <tr>
+        <td><code>destroy</code></td>
+        <td>1件消して JSON を返す</td>
+        <td>下のヒント</td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">消すのは delete()</span><br>
+      <a href="backend_3.html#chapter2">#3 の Eloquent の表</a> にあります。<code>$task-&gt;delete();</code> の1行です。<br>
+      <strong>どの1件かは、引数で受け取れます。</strong><a href="#chapter3">この#4 の3章</a> でやった <strong>Route Model Binding</strong> です。
+      <div class="ad-code">public function destroy(Task $task): JsonResponse</div>
+      <code>find()</code> も「無かったら」の分岐も書きません。<strong>存在しない id は自動で 404</strong> になります。
+    </div>
+
+    <details class="kotae">
+      <summary>答え ― TaskController.php</summary>
+      <code class="ad-code"><span class="ad-k">use</span> <span class="ad-c">App\Models\Task</span>;
+<span class="ad-k">use</span> <span class="ad-c">Illuminate\Http\JsonResponse</span>;
+<span class="ad-k">use</span> <span class="ad-c">Illuminate\Http\RedirectResponse</span>;
+<span class="ad-k">use</span> <span class="ad-c">Illuminate\Http\Request</span>;
+<span class="ad-k">use</span> <span class="ad-c">Illuminate\View\View</span>;
+
+<span class="ad-k">class</span> <span class="ad-c">TaskController</span> <span class="ad-k">extends</span> <span class="ad-c">Controller</span>
+{
+    <span class="ad-cm">/** 一覧を表示する */</span>
+    <span class="ad-k">public function</span> <span class="ad-f">index</span>(): <span class="ad-c">View</span>
+    {
+        <span class="ad-v">$tasks</span> = <span class="ad-c">Task</span>::<span class="ad-f">orderBy</span>(<span class="ad-s">'id'</span>)-&gt;<span class="ad-f">get</span>();
+
+        <span class="ad-k">return</span> <span class="ad-f">view</span>(<span class="ad-s">'task'</span>, [<span class="ad-s">'tasks'</span> =&gt; <span class="ad-v">$tasks</span>]);
+    }
+
+    <span class="ad-cm">/** タスクを追加する */</span>
+    <span class="ad-k">public function</span> <span class="ad-f">store</span>(<span class="ad-c">Request</span> <span class="ad-v">$request</span>): <span class="ad-c">RedirectResponse</span>
+    {
+        <span class="ad-v">$validated</span> = <span class="ad-v">$request</span>-&gt;<span class="ad-f">validate</span>([
+            <span class="ad-s">'task'</span> =&gt; [<span class="ad-s">'required'</span>, <span class="ad-s">'string'</span>, <span class="ad-s">'max:100'</span>],
+        ]);
+
+        <span class="ad-c">Task</span>::<span class="ad-f">create</span>(<span class="ad-v">$validated</span>);
+
+        <span class="ad-k">return</span> <span class="ad-f">redirect</span>()-&gt;<span class="ad-f">route</span>(<span class="ad-s">'task.index'</span>);
+    }
+
+    <span class="ad-cm">/** 完了したタスクを消す（Ajax） */</span>
+    <span class="ad-k">public function</span> <span class="ad-f">destroy</span>(<span class="ad-c">Task</span> <span class="ad-v">$task</span>): <span class="ad-c">JsonResponse</span>
+    {
+        <span class="ad-v">$task</span>-&gt;<span class="ad-f">delete</span>();
+
+        <span class="ad-k">return</span> <span class="ad-f">response</span>()-&gt;<span class="ad-f">json</span>([<span class="ad-s">'ok'</span> =&gt; <span class="ad-k">true</span>]);
+    }
+}</code>
+    </details>
+
+    <h3>4. ルートを書く</h3>
+
+    <table>
+      <tr>
+        <th>メソッド</th>
+        <th>URL</th>
+        <th>処理</th>
+      </tr>
+      <tr>
+        <td><code>GET</code></td>
+        <td><code>/task</code></td>
+        <td>一覧</td>
+      </tr>
+      <tr>
+        <td><code>POST</code></td>
+        <td><code>/task</code></td>
+        <td>追加</td>
+      </tr>
+      <tr>
+        <td><code>DELETE</code></td>
+        <td><code>/task/{task}</code></td>
+        <td>完了（削除）。<strong><code>whereNumber</code> を忘れずに</strong></td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">同じ URL でも、メソッドが違えば別の処理</span><br>
+      <code>/task</code> が2つありますが、<strong>GET と POST で分かれます。</strong>衝突しません。<br>
+      <strong>URL は「何を」、メソッドは「どうする」</strong>を表しています。
+    </div>
+
+    <details class="kotae">
+      <summary>答え ― web.php に足す3行</summary>
+      <code class="ad-code"><span class="ad-c">Route</span>::<span class="ad-f">get</span>(<span class="ad-s">'/task'</span>, [<span class="ad-c">TaskController</span>::<span class="ad-k">class</span>, <span class="ad-s">'index'</span>])-&gt;<span class="ad-f">name</span>(<span class="ad-s">'task.index'</span>);
+<span class="ad-c">Route</span>::<span class="ad-f">post</span>(<span class="ad-s">'/task'</span>, [<span class="ad-c">TaskController</span>::<span class="ad-k">class</span>, <span class="ad-s">'store'</span>])-&gt;<span class="ad-f">name</span>(<span class="ad-s">'task.store'</span>);
+<span class="ad-c">Route</span>::<span class="ad-f">delete</span>(<span class="ad-s">'/task/{task}'</span>, [<span class="ad-c">TaskController</span>::<span class="ad-k">class</span>, <span class="ad-s">'destroy'</span>])-&gt;<span class="ad-f">whereNumber</span>(<span class="ad-s">'task'</span>)-&gt;<span class="ad-f">name</span>(<span class="ad-s">'task.destroy'</span>);</code>
+    </details>
+
+    <h3>5. Blade を作る</h3>
+
+    <p>
+      配布した <code>index.html</code> を <code>task.blade.php</code> に作り替えます。<strong>置き換えるのは4箇所</strong>です。
+    </p>
+
+    <table>
+      <tr>
+        <th>素の HTML</th>
+        <th>Blade</th>
+      </tr>
+      <tr>
+        <td><code>href="css/task.css"</code></td>
+        <td><code>href="{{ asset('css/task.css') }}"</code></td>
+      </tr>
+      <tr>
+        <td><code>action=""</code></td>
+        <td><code>action="{{ route('task.store') }}"</code> ＋ <code>@csrf</code></td>
+      </tr>
+      <tr>
+        <td>直書きの <code>&lt;p class="error"&gt;</code></td>
+        <td><code>@error('task')</code> … <code>@enderror</code></td>
+      </tr>
+      <tr>
+        <td>直書きの <code>&lt;li class="task"&gt;</code> 2件</td>
+        <td>ループで回す</td>
+      </tr>
+    </table>
+
+    <div class="point">
+      <span class="label">@forelse を使うと、0件の分岐も1つで書ける</span><br>
+      <code>@foreach</code> と <code>@if</code> を並べても書けますが、<strong>Blade には専用の書き方があります。</strong>
+      <div class="ad-code">@forelse ($tasks as $task)
+    ← 1件以上あるときに、件数ぶん繰り返す
+@empty
+    ← 0件のときだけ、ここが動く
+@endforelse</div>
+      <strong>「タスクはありません」は <code>@empty</code> の中</strong>に書きます。
+    </div>
+
+    <div class="note">
+      <span class="label">data-id を消さないこと</span><br>
+      <code>&lt;li class="task" data-id="1"&gt;</code> の <code>data-id</code> は、<strong>JavaScript が「どの行を消すか」を知るために使います。</strong><br>
+      ループの中で <code>data-id="{{ $task-&gt;id }}"</code> に置き換えてください。
+    </div>
+
+    <details class="kotae">
+      <summary>答え ― task.blade.php の main の中身</summary>
+      <code class="ad-code">&lt;form method="post" action="{{ route('task.store') }}" class="entry"&gt;
+  @csrf
+  &lt;input type="text" name="task" placeholder="やることを入力" maxlength="100" required&gt;
+  &lt;button type="submit"&gt;追加&lt;/button&gt;
+&lt;/form&gt;
+
+@error('task')
+  &lt;p class="error"&gt;{{ $message }}&lt;/p&gt;
+@enderror
+
+&lt;ul id="task-list"&gt;
+  @forelse ($tasks as $task)
+    &lt;li class="task" data-id="{{ $task-&gt;id }}"&gt;
+      &lt;span class="task-name"&gt;{{ $task-&gt;task }}&lt;/span&gt;
+      &lt;span class="task-date"&gt;{{ $task-&gt;created_at?-&gt;format('Y/m/d') }}&lt;/span&gt;
+      &lt;button type="button" class="done"&gt;完了&lt;/button&gt;
+    &lt;/li&gt;
+  @empty
+    &lt;li class="empty"&gt;タスクはありません&lt;/li&gt;
+  @endforelse
+&lt;/ul&gt;</code>
+    </details>
+
+    <div class="caution">
+      <span class="label">&lt;head&gt; も忘れずに</span><br>
+      <code>&lt;meta name="csrf-token"&gt;</code> と、<strong>jQuery と <code>js/task.js</code> の読み込み</strong>を足してください。<br>
+      <a href="backend_2.html#chapter4">#2 の骨組み</a> と同じ形です。<strong>今回 <code>jquery-ui</code> は要りません。</strong>ドラッグしないからです。
+    </div>
+
+    <h3>6. 完了ボタンを Ajax にする</h3>
+
+    <p>
+      <code>public/js/task.js</code> を新しく作ります。<strong>3つのことをします。</strong>
+    </p>
+
+    <div class="ad-flow">
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">1</span>
+        <span>CSRF トークンを Ajax に付ける</span>
+      </div>
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">2</span>
+        <span>押し間違いを防ぐ<strong>確認</strong>を出す</span>
+      </div>
+      <div class="ad-flow-item">
+        <span class="ad-flow-num">3</span>
+        <span><code>DELETE</code> を送って、<strong>その行を消す</strong></span>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">1. CSRF は sort.js と同じ</span><br>
+      <code>$.ajaxSetup</code> をそのまま持ってきてください。<a href="#chapter2">この#4 の2章</a> と同じです。
+    </div>
+
+    <div class="point">
+      <span class="label">2. 確認ダイアログ</span><br>
+      JavaScript には<strong>「はい／いいえ」を聞く関数</strong>があります。<code>window.alert</code> の仲間です。<br>
+      <strong>「JavaScript 確認ダイアログ」で調べてみてください。</strong><br>
+      「いいえ」なら<strong>そこで処理を止めます。</strong><code>return;</code> です。
+    </div>
+
+    <div class="caution">
+      <span class="label">3. ここが引っかかりやすい ― イベントの付け方</span><br>
+      素直に書くと、こうなります。
+      <div class="ad-code">$('.done').on('click', function () { … });</div>
+      <strong>これだと、あとから増えた行に効きません。</strong>ページを読み込んだ時点の <code>.done</code> にしか付かないからです。<br>
+      <strong>親に預けておくと、あとから増えた行にも効きます。</strong>
+      <div class="ad-code">$('#task-list').on('click', '.done', function () { … });
+                 ↑ずっとある親    ↑実際に押されるもの</div>
+      今回は「消す」だけなので気づきにくいですが、<strong>Ajax で行を足す作りにすると、すぐに困ります。</strong>覚えておいてください。
+    </div>
+
+    <div class="point">
+      <span class="label">押された行を掴む</span><br>
+      <code>$(this)</code> は<strong>押されたボタン</strong>です。行そのものではありません。
+      <div class="ad-code">const item = $(this).closest('.task');   // 押されたボタンから、親の行をたどる
+const id   = item.data('id');            // data-id の値を取る</div>
+      <code>closest()</code> は<strong>「自分から上へたどって、最初に見つかったもの」</strong>を返します。
+    </div>
+
+    <details class="kotae">
+      <summary>答え ― public/js/task.js</summary>
+      <code class="ad-code">$(function () {
+
+    // Laravel は POST・PATCH・DELETE に CSRF トークンを要求する
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    // 完了ボタン。あとから追加された行にも効くよう、親に預けておく
+    $('#task-list').on('click', '.done', function () {
+        const item = $(this).closest('.task');
+        const id   = item.data('id');
+        const name = item.find('.task-name').text();
+
+        // 押し間違いを防ぐ。いいえなら、ここで止まる
+        if (!window.confirm('「' + name + '」を完了にします。よろしいですか？')) {
+            return;
+        }
+
+        $.ajax({
+            type: 'DELETE',
+            url : '/task/' + id
+        })
+        .done(function () {
+            item.remove();
+
+            // 全部消えたら、空のときの表示に戻す
+            if ($('#task-list .task').length === 0) {
+                $('#task-list').append('&lt;li class="empty"&gt;タスクはありません&lt;/li&gt;');
+            }
+        })
+        .fail(function (xhr) {
+            console.log('失敗:', xhr.status);
+            window.alert('完了にできませんでした。');
+        });
+    });
+
+});</code>
+    </details>
+
+    <h3>詰まりやすいところ</h3>
+
+    <table>
+      <tr>
+        <th>症状</th>
+        <th>見るところ</th>
+      </tr>
+      <tr>
+        <td>「そんなクラスは無い」と出る</td>
+        <td>ファイル先頭の <code>use</code>（<code>Request</code> <code>RedirectResponse</code> <code>JsonResponse</code> <code>View</code>）</td>
+      </tr>
+      <tr>
+        <td>419 が出る</td>
+        <td><code>@csrf</code>／Ajax の <code>X-CSRF-TOKEN</code></td>
+      </tr>
+      <tr>
+        <td>登録で「updated_at が無い」</td>
+        <td>Model の <code>$timestamps = false;</code></td>
+      </tr>
+      <tr>
+        <td>登録しても空のまま入る</td>
+        <td>Model の <code>$fillable</code> に <code>task</code> があるか</td>
+      </tr>
+      <tr>
+        <td>日付の表示でエラー</td>
+        <td>Model の <code>casts()</code>。<code>created_at</code> が文字列のまま返っている</td>
+      </tr>
+      <tr>
+        <td>完了ボタンが効かない</td>
+        <td>イベントを親に預けているか／<code>type</code> が <code>DELETE</code> か／URL に id が入っているか</td>
+      </tr>
+      <tr>
+        <td>CSS が当たらない</td>
+        <td><code>task.css</code> を <code>public/css/</code> に置いたか／<code>asset()</code> で書いたか</td>
+      </tr>
+    </table>
+
+    <h3>余力があれば ― 画面を部品に分ける</h3>
+
+    <p>
+      いまの <code>task.blade.php</code> は<strong>フォームと一覧が1つのファイル</strong>に入っています。<br>
+      Blade は<strong>ファイルを分けて、呼び出すことができます。</strong>
+    </p>
+
+    <div class="bk-tree">resources/views/
+├── task.blade.php           ← 全体の枠だけ
+└── layouts/
+    ├── form.blade.php       ← 入力フォーム
+    └── list.blade.php       ← 一覧</div>
+
+    <div class="ad-code">&lt;main&gt;
+  @include('layouts.form')
+  @include('layouts.list')
+&lt;/main&gt;</div>
+
+    <div class="point">
+      <span class="label">@include はファイルを差し込む</span><br>
+      <code>layouts.form</code> は <code>resources/views/layouts/form.blade.php</code> のことです。<strong>フォルダの区切りが <code>.</code></strong> になります。<br>
+      渡した変数（<code>$tasks</code> など）は<strong>そのまま使えます。</strong>渡し直す必要はありません。
+    </div>
+
+    <div class="note">
+      <span class="label">なぜ分けるのか</span><br>
+      <a href="backend_3.html#chapter1">#3 の MVC</a> と同じ考え方です。<strong>役割ごとに置き場所を決めます。</strong><br>
+      画面が長くなってくると、1ファイルでは「どこを直せばいいか」が分からなくなります。<br>
+      <strong>同じ部品を複数の画面で使う</strong>ときにも効きます。ヘッダーやフッターがその典型です。
+    </div>
+
+    <div class="point">
+      <span class="label">バックエンド編で身に付いたこと</span><br>
+      規約に沿って書く／テーブルをコードで管理する／役割を分けて置く／仕組みで守る。<br>
+      <br>
+      <strong>Laravel の書き方を覚えたことより、この4つのほうが長く使えます。</strong>フレームワークが変わっても、考え方は変わりません。<br>
+      <strong>「なぜそう書くのか」を説明できるか。</strong>そこを持ち帰ってください。
+    </div>
+
+    <div class="caution">
+      <span class="label">バックエンド編の課題提出があります</span><br>
+      提出後、次へ進んでください。
+    </div>
+  </section>
+
+</main>
+
+<nav class="page-nav">
+  <a class="page-prev" href="backend_3.html">
+    <span class="page-nav-label">前のページ</span>
+    <span class="page-nav-title">バックエンド編#3</span>
+    <span class="page-nav-sub">MVC ― Model と Controller で組み立てる</span>
+  </a>
+</nav>
+
+<footer></footer>
+
+<!-- ▼ 共通スクリプト。章ナビ・コピーボタン・先頭へ戻るが自動で付く（編集不要） -->
+<script src="../js/training.js"></script>
+
+</body>
+</html>
