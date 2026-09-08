@@ -93,7 +93,9 @@
 
     <p>
       F・G・H・I の4列を、それぞれ違う関数で埋めていきます。<strong>右へ行くほど条件が複雑</strong>になります。<br>
-      赤で囲った <strong>B11 の「合格点」</strong>は、3章で使います。ここを直すだけで表全体の判定が変わる、という作りにするためです。
+      式はどの列も<strong>4行目に入れて、下へコピー</strong>します。3行目の黄色いマスには、その列が何を判定するのかを自分で書きます。<br>
+      赤で囲った <strong>B11 の「合格点」</strong>は、3章で使います。ここを直すだけで、合格点を見ている判定がまとめて変わる、という作りにするためです。<br>
+      F・G列の50点は<strong>警告を出すための別の基準</strong>なので、B11 とは連動しません。
     </p>
 
     <p>
@@ -311,13 +313,13 @@
 12
 13</div>
         <pre class="vscode-code">=IF(
-  AND(C5&gt;=$B$11, D5&gt;=$B$11),
+  AND(C4&gt;=$B$11, D4&gt;=$B$11),
   <span class="sy-str">"よく出来ました！"</span>,
   IF(
-    AND(C5&gt;=$B$11, E5&gt;=$B$11),
+    AND(C4&gt;=$B$11, E4&gt;=$B$11),
     <span class="sy-str">"よく出来ました！"</span>,
     IF(
-      AND(D5&gt;=$B$11, E5&gt;=$B$11),
+      AND(D4&gt;=$B$11, E4&gt;=$B$11),
       <span class="sy-str">"よく出来ました！"</span>,
       <span class="sy-str">""</span>
     )
@@ -1059,8 +1061,8 @@
 
     <div class="caution">
       <span class="label">Googleスプレッドシートでは違う</span><br>
-      スプレッドシートには <code>aaa</code> の表示形式がありません。<strong><code>TEXT</code> 関数</strong>を使って <code>=TEXT(DATE(...), "ddd")</code> のように書きます。<br>
-      <a href="basic_4.html#chapter5">中級#4</a> で出てきた <code>TEXT</code> が、ここでも効いてきます。
+      スプレッドシートには <code>aaa</code> の表示形式がありません。<strong>表示形式のカスタム数値形式で <code>ddd</code> を指定</strong>します。マスの中身は <code>DATE</code> のままにしておきます。<br>
+      ここで <code>TEXT</code> を使ってはいけません。<strong>マスの中身が文字に変わってしまい</strong>、このあとの祝日の検索が日付と一致しなくなります。
     </div>
 
     <h3>祝日を自動で出す</h3>
