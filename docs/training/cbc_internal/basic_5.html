@@ -42,7 +42,7 @@
       <span class="label">読む前に</span><br>
       <a href="basic_4.html">中級#4</a> の続きです。今度は<strong>成績表</strong>を作りながら、条件のつくり方を深めます。<br>
       使うのは<strong>中級#4 でダウンロードしたファイルの「成績表」シート</strong>です（<a href="basic_4.html#chapter1">まだの方はこちら</a>）。<br>
-      このページの見本も<strong>点数を打ち替えると判定が変わります</strong>。とくに4章と5章は、同じ問題を<strong>2通りの解き方</strong>で見比べてください。
+      このページの見本も<strong>点数を変えると判定が変わります</strong>。とくに4章と5章は、同じ問題を<strong>2通りの解き方</strong>で見比べてください。
     </div>
   </section>
 
@@ -55,43 +55,44 @@
 
     <div class="ex">
       <div class="ex-grid">
-        <table>
+        <table style="min-width:900px">
           <colgroup>
             <col class="ex-rownum">
             <col class="ex-a">
             <col class="ex-b">
-            <col><col><col><col><col><col>
+            <col style="width:56px"><col style="width:56px"><col style="width:56px"><col><col><col><col>
           </colgroup>
           <thead>
             <tr>
-              <th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th>
+              <th></th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th><th>G</th><th>H</th><th>I</th>
             </tr>
           </thead>
           <tbody>
-            <tr><th>1</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-            <tr><th>2</th><td></td><td></td><td colspan="3" class="ex-merge">科目</td><td colspan="3" class="ex-merge">判定</td></tr>
+            <tr><th>1</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><th>2</th><td></td><td></td><td colspan="3" class="ex-merge">科目</td><td colspan="3" class="ex-merge">判定</td><td></td></tr>
             <tr>
-              <th>3</th><td></td><td></td>
-              <td class="ex-mid">英語</td><td class="ex-mid">数学</td><td class="ex-mid">国語</td>
-              <td class="ex-mid">英語が50点以下なら<br>「Oh No…」</td>
-              <td class="ex-mid">3教科で1つでも50点以下<br>があると「不合格」</td>
-              <td class="ex-mid">60点以上が2科目以上あれば<br>「よく出来ました!」</td>
+              <th style="vertical-align:middle">3</th><td style="vertical-align:middle"></td><td style="vertical-align:middle"></td>
+              <td class="ex-mid" style="vertical-align:middle">英語</td><td class="ex-mid" style="vertical-align:middle">数学</td><td class="ex-mid" style="vertical-align:middle">国語</td>
+              <td class="ex-mid" style="vertical-align:middle">英語が50点以下なら<br>「Oh No…」</td>
+              <td class="ex-mid" style="vertical-align:middle">3教科で1つでも<br>50点以下があると<br>「不合格」</td>
+              <td class="ex-mid" style="vertical-align:middle">60点以上が<br>2科目以上あれば<br>「よく出来ました!」</td>
+              <td class="ex-mid" style="vertical-align:middle">別の関数で</td>
             </tr>
-            <tr><th>4</th><td></td><td>谷沢 博樹</td><td class="ex-num">49</td><td class="ex-num">100</td><td class="ex-num">65</td><td class="ex-fill ex-mid">Oh No…</td><td class="ex-fill ex-mid">不合格</td><td class="ex-fill ex-mid">よく出来ました!</td></tr>
-            <tr><th>5</th><td></td><td>田島 昌史</td><td class="ex-num">56</td><td class="ex-num">56</td><td class="ex-num">100</td><td class="ex-fill"></td><td class="ex-fill ex-mid">合格!</td><td class="ex-fill"></td></tr>
-            <tr><th>6</th><td></td><td>大葉 勇人</td><td class="ex-num">60</td><td class="ex-num">42</td><td class="ex-num">87</td><td class="ex-fill"></td><td class="ex-fill ex-mid">不合格</td><td class="ex-fill ex-mid">よく出来ました!</td></tr>
-            <tr><th>7</th><td></td><td>都月 隆</td><td class="ex-num">64</td><td class="ex-num">70</td><td class="ex-num">60</td><td class="ex-fill"></td><td class="ex-fill ex-mid">合格!</td><td class="ex-fill ex-mid">よく出来ました!</td></tr>
-            <tr><th>8</th><td></td><td>炭 達也</td><td class="ex-num">0</td><td class="ex-num">87</td><td class="ex-num">95</td><td class="ex-fill ex-mid">Oh No…</td><td class="ex-fill ex-mid">不合格</td><td class="ex-fill ex-mid">よく出来ました!</td></tr>
-            <tr><th>9</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-            <tr><th>10</th><td></td><td>合格点</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-            <tr><th>11</th><td></td><td class="ex-mid ex-mark">60点</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><th>4</th><td></td><td>谷沢 博樹</td><td class="ex-num">49</td><td class="ex-num">100</td><td class="ex-num">65</td><td class="ex-fill ex-mid">Oh No…</td><td class="ex-fill ex-mid">不合格</td><td class="ex-fill ex-mid">よく出来ました!</td><td class="ex-fill ex-mid">よく出来ました!</td></tr>
+            <tr><th>5</th><td></td><td>田島 昌史</td><td class="ex-num">56</td><td class="ex-num">56</td><td class="ex-num">100</td><td class="ex-fill"></td><td class="ex-fill ex-mid">合格!</td><td class="ex-fill"></td><td class="ex-fill"></td></tr>
+            <tr><th>6</th><td></td><td>大葉 勇人</td><td class="ex-num">60</td><td class="ex-num">42</td><td class="ex-num">87</td><td class="ex-fill"></td><td class="ex-fill ex-mid">不合格</td><td class="ex-fill ex-mid">よく出来ました!</td><td class="ex-fill ex-mid">よく出来ました!</td></tr>
+            <tr><th>7</th><td></td><td>都月 隆</td><td class="ex-num">64</td><td class="ex-num">70</td><td class="ex-num">60</td><td class="ex-fill"></td><td class="ex-fill ex-mid">合格!</td><td class="ex-fill ex-mid">よく出来ました!</td><td class="ex-fill ex-mid">よく出来ました!</td></tr>
+            <tr><th>8</th><td></td><td>炭 達也</td><td class="ex-num">0</td><td class="ex-num">87</td><td class="ex-num">95</td><td class="ex-fill ex-mid">Oh No…</td><td class="ex-fill ex-mid">不合格</td><td class="ex-fill ex-mid">よく出来ました!</td><td class="ex-fill ex-mid">よく出来ました!</td></tr>
+            <tr><th>9</th><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><th>10</th><td></td><td>合格点</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><th>11</th><td></td><td class="ex-mid ex-mark">60点</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
           </tbody>
         </table>
       </div>
     </div>
 
     <p>
-      F・G・H の3列を、それぞれ違う関数で埋めていきます。<strong>右へ行くほど条件が複雑</strong>になります。<br>
+      F・G・H・I の4列を、それぞれ違う関数で埋めていきます。<strong>右へ行くほど条件が複雑</strong>になります。<br>
       赤で囲った <strong>B11 の「合格点」</strong>は、3章で使います。ここを直すだけで表全体の判定が変わる、という作りにするためです。
     </p>
 
