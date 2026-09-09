@@ -233,7 +233,7 @@
 
     <div class="note">
       <span class="label">== ではなく ===</span><br>
-      <a href="advanced_4.html">フロントエンド初級#4</a> で出てきた比較です。<strong>イコールが2つと3つで意味が違います。</strong><br>
+      PHPの比較では、<strong>イコールが2つと3つで意味が違います。</strong><br>
       <code>==</code> は<strong>「だいたい同じ」</strong>。型が違っても、変換して同じなら通します。<code>'1' == 1</code> は <code>true</code> です。<br>
       <code>===</code> は<strong>「型まで同じ」</strong>。<code>'1' === 1</code> は <code>false</code> になります。<br>
       <strong>迷ったら <code>===</code> を使ってください。</strong>思わぬ値が通り抜けて、原因の分からない不具合になります。この教材では最後まで <code>===</code> と <code>!==</code> しか使いません。
@@ -325,8 +325,8 @@
     <div class="caution">
       <span class="label">送られてくる値は、全部「文字」</span><br>
       <a href="advanced_5.html#chapter2">#5</a> でDBから読んだときは <code>int(810)</code> のように型が付いていました。<strong>フォームから来る値は違います。</strong><br>
-      数字だけを入力しても、<code>$_POST['name']</code> は <code>string</code> です。<strong>HTMLには型が無いからです。</strong><br>
-      <a href="basic_7.html">マークアップ中級#7</a> でやった <code>'10' + 5</code> の問題は、ここで起きます。<strong>数として扱いたいときは <code>(int)</code> を付けて変換します。</strong>この書き方は <a href="advanced_7.html">#7</a> でも何度も出てきます。
+      数字だけを入力しても、<code>$_POST['name']</code> は <code>string</code> です。フォームの入力値をPHPが文字列として受け取るためです。<br>
+      ただし、PHPの <code>'10' + 5</code> は数値として加算され、<code>15</code> になります。文字列の連結には <code>.</code> を使います。<a href="basic_7.html">マークアップ中級#7</a> のJavaScriptとは演算子の動きが違います。座標のように<strong>整数として扱う値は <code>(int)</code> で変換します。</strong>この書き方は <a href="advanced_7.html">#7</a> でも使います。
     </div>
 
     <div class="caution">
@@ -495,6 +495,7 @@
     <div class="exercise">
       <span class="label">演習3</span><br>
       入力された名前を、<strong>実際にDBへ登録</strong>してください。<br>
+      演習2の <code>if ($name !== '') { ... }</code> を下のコードに置き換え、確認用の <code>echo</code> を残さないでください。外側の <code>if ($_SERVER['REQUEST_METHOD'] === 'POST') { ... }</code> は残します。<br>
       登録できたら画面を開き直して、<strong>一覧に増えているか</strong>確認します。<br>
       確認できたら、名前の欄に <code>'); DROP TABLE sortable; --</code> と入れてみてください。<strong>そういう名前の札が1つ増えるだけ</strong>なら、正しく書けています。<br>
       登録した札は <strong>すべて同じ場所（左上）に重なります。</strong>これは <code>left_x</code> と <code>top_y</code> に同じ値を入れているためです。ドラッグして動かせるようにするのは、次のページでやります。

@@ -1,2 +1,2 @@
 <?php
-echo "「#12 PHPアプリケーションをクラス化してみよう」で、このファイルを上書きしてください。 sortable3/index.php";
+echo "「#9 クラスにまとめる」で、このファイルを上書きしてください。 sortable3/index.php";
