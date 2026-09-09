@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>タスク管理</title>
+  <link rel="stylesheet" href="css/task.css">
+</head>
+<body>
+
+<header>
+  <h1>タスク管理</h1>
+</header>
+
+<main>
+  <!-- 入力フォーム -->
+  <form method="post" action="" class="entry">
+    <input type="text" name="task" placeholder="やることを入力" maxlength="100" required>
+    <button type="submit">追加</button>
+  </form>
+
+  <!-- 入力に不備があったときに出す -->
+  <p class="error">エラーメッセージがここに出ます</p>
+
+  <!-- 一覧。実際は登録された件数だけ並ぶ -->
+  <ul id="task-list">
+    <li class="task" data-id="1">
+      <span class="task-name">請求書を送る</span>
+      <span class="task-date">2026/08/26</span>
+      <button type="button" class="done">完了</button>
+    </li>
+    <li class="task" data-id="2">
+      <span class="task-name">日報を書く</span>
+      <span class="task-date">2026/08/26</span>
+      <button type="button" class="done">完了</button>
+    </li>
+  </ul>
+
+  <!-- 1件も無いときはこれだけを出す -->
+  <!--
+  <ul id="task-list">
+    <li class="empty">タスクはありません</li>
+  </ul>
+  -->
+</main>
+
+</body>
+</html>
