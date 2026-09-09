@@ -46,7 +46,7 @@
       章の途中に<strong>演習が5つ</strong>あります（この色の枠です）。<br>
       最後まで読んでからまとめてやるのではなく、<strong>出てきたその場で <code>kadai_07.html</code> に書いてください</strong>。<br>
       <code>kadai_07.html</code> は最初、TODOコメント1行だけの<strong>ほぼ空のファイル</strong>です。<strong><code>kadai_06.html</code> の作りを手本に、ページの骨組みから自分で組み立てます</strong>。ページ専用のCSSファイルと、書く場所のセクションも自分で作ってください（ファイル名は自分で決める）。<br>
-      課題ファイルの場所は、課題リポジトリの <code>02_basic/htdocs/kadai_07.html</code> です。コードは #6 で覚えた <code>$(function(){ })</code> の中に書きます。
+      課題ファイルの場所は、課題リポジトリの <code>02_basic/htdocs/kadai_07.html</code> です。演習1〜5のコードは、#6 で覚えた<strong>同じ1つの <code>$(function(){ })</code> の中</strong>にまとめて書きます。
     </div>
 
     <div class="note">
@@ -607,8 +607,9 @@
     <div class="exercise">
       <span class="label">演習3</span><br>
       <strong><code>kadai_07.html</code> に「関数を使う（消費税）」のセクションを作って</strong>実装します。<br>
-      金額を入れると<strong>消費税額が表示される</strong>ようにしてください。税率は <strong>8%</strong> で計算します（2章の例の「税込価格 ×1.1」とは<strong>別の計算</strong>です）。<strong>税額の計算は関数に切り出し</strong>、<code>return</code> で結果を返す形にします。<br>
+      金額を入れると<strong>消費税額が表示される</strong>ようにしてください。税率は <strong>10%</strong> で計算します（2章の例の「税込価格 ×1.1」とは<strong>別の計算</strong>です）。<strong>税額の計算は関数に切り出し</strong>、<code>return</code> で結果を返す形にします。<br>
       掛け算をすると小数が出ます。<code>Math.round()</code> に渡すと四捨五入できます。<br>
+      <code>tax()</code> は演習4でも使うため、<strong><code>.on()</code> の処理の外側</strong>に定義します。演習ごとに別の <code>$(function(){ })</code> で囲むと、演習4から呼び出せず <code>tax is not defined</code> エラーになります。<br>
       演習1で入力値が文字のままだった問題も、ここで <code>Number()</code> を使って直しておいてください。
       <span class="js-label">HTML</span>
       <code class="js-code hl">&lt;p&gt;
@@ -616,7 +617,7 @@
 &lt;/p&gt;</code>
       <span class="js-label">jQuery（穴埋め ― まず自分で考える）</span>
       <code class="js-code hl"><span class="k">function</span> tax(price) {
-  <span class="k">const</span> TAX_RATE = <span class="blank">xxxxxx</span>;  <span class="c">/* 8%を小数で書くと？ */</span>
+  <span class="k">const</span> TAX_RATE = <span class="blank">xxxxxx</span>;  <span class="c">/* 10%を小数で書くと？ */</span>
   <span class="k">return</span> Math.<span class="blank">xxxxxx</span>(price * TAX_RATE);  <span class="c">/* 四捨五入するメソッドは？（この演習の説明にある） */</span>
 }
 
@@ -628,7 +629,7 @@ $(<span class="v">'.price'</span>).on(<span class="v">'change'</span>, <span cla
         <summary>答え</summary>
         <span class="js-label">jQuery</span>
         <code class="js-code hl"><span class="k">function</span> tax(price) {
-  <span class="k">const</span> TAX_RATE = 0.08;
+  <span class="k">const</span> TAX_RATE = 0.10;
   <span class="k">return</span> Math.round(price * TAX_RATE);
 }
 
@@ -768,26 +769,37 @@ $(<span class="v">'.price'</span>).on(<span class="v">'change'</span>, <span cla
       <strong><code>kadai_07.html</code> に「コンソールで確かめる」のセクションを作って</strong>実装します。<br>
       演習3と同じ消費税の計算をして、<strong>四捨五入する前の値を <code>console.log()</code> で出して</strong>ください。画面に表示するのは四捨五入した後の値です。<br>
       ブラウザの開発者ツールを開き、<strong>Console に小数が出ていることを自分の目で確認してください</strong>。画面の表示だけでは、四捨五入が効いているかどうか分かりません。<br>
-      1000円のような割り切れる金額では小数が出ません。<strong>1234円</strong>のように端数の出る金額で試してください（<code>98.72</code> が出ます）。
+      1000円のような割り切れる金額では小数が出ません。<strong>1234円</strong>のように端数の出る金額で試してください（<code>123.4</code> が出ます）。
       <span class="js-label">HTML</span>
       <code class="js-code hl">&lt;p&gt;
   &lt;input type=<span class="v">"number"</span> class=<span class="v">"price2"</span>&gt; 円の消費税は &lt;span class=<span class="v">"tax-out2"</span>&gt;&lt;/span&gt; 円
 &lt;/p&gt;
 &lt;p class=<span class="v">"note_text"</span>&gt;
-  1234 のように端数の出る金額を入れて、開発者ツールの Console を見てください。98.72 が出ます。
+  1234 のように端数の出る金額を入れて、開発者ツールの Console を見てください。123.4 が出ます。
 &lt;/p&gt;</code>
       <span class="js-label">jQuery（穴埋め ― tax は演習3で作った関数をそのまま使う）</span>
       <code class="js-code hl">$(<span class="v">'.price2'</span>).on(<span class="v">'change'</span>, <span class="k">function</span>() {
   <span class="k">const</span> price = Number($(<span class="v">'.price2'</span>).val());
-  console.log(<span class="blank">xxxxxx</span>);  <span class="c">/* 四捨五入する前の式を書く（税率 0.08 を直接掛ける） */</span>
+  console.log(<span class="blank">xxxxxx</span>);  <span class="c">/* 四捨五入する前の式を書く（税率 0.10 を直接掛ける） */</span>
   $(<span class="v">'.tax-out2'</span>).text(tax(price));
 });</code>
       <details class="kotae">
         <summary>答え</summary>
-        <span class="js-label">jQuery</span>
-        <code class="js-code hl">$(<span class="v">'.price2'</span>).on(<span class="v">'change'</span>, <span class="k">function</span>() {
+        <span class="js-label">jQuery（演習3・4を合わせたコード）</span>
+        <p>すでに書いた演習3・4のjQueryを、次のコードに置き換えてください。ほかの演習と<strong>同じ <code>$(function(){ })</code> の中</strong>に書き、<code>tax()</code> を両方の処理から使います。</p>
+        <code class="js-code hl"><span class="k">function</span> tax(price) {
+  <span class="k">const</span> TAX_RATE = 0.10;
+  <span class="k">return</span> Math.round(price * TAX_RATE);
+}
+
+$(<span class="v">'.price'</span>).on(<span class="v">'change'</span>, <span class="k">function</span>() {
+  <span class="k">const</span> price = Number($(<span class="v">'.price'</span>).val());
+  $(<span class="v">'.tax-out'</span>).text(tax(price));
+});
+
+$(<span class="v">'.price2'</span>).on(<span class="v">'change'</span>, <span class="k">function</span>() {
   <span class="k">const</span> price = Number($(<span class="v">'.price2'</span>).val());
-  console.log(price * 0.08);
+  console.log(price * 0.10);
   $(<span class="v">'.tax-out2'</span>).text(tax(price));
 });</code>
       </details>
@@ -1073,10 +1085,12 @@ $(<span class="v">'.price'</span>).on(<span class="v">'change'</span>, <span cla
       <strong><code>kadai_07.html</code> に「モーダルウィンドウ」のセクションを作って</strong>実装します。このページの総仕上げです。<br>
       ボタンを押すと<strong>画面の中央にウィンドウが開き、中の「閉じる」ボタンで閉じる</strong>ようにしてください。<br>
       画面を覆う背景と、中身のウィンドウの2つが要ります。<strong>開くボタンに <code>class="modal-open"</code>、背景に <code>class="modal-overlay"</code>、中身に <code>class="modal-content"</code></strong> を付けてください。表示の切り替えはクラスの付け外しで行い、位置や色はCSSに書きます。<br>
-      重なり順で崩れたら <a href="beginner_6.html#chapter4">コーダー中級#6</a> の <code>z-index</code> を見返してください。
-      <span class="js-label">HTML（セクションの中）</span>
-      <code class="js-code hl">&lt;button type=<span class="v">"button"</span> class=<span class="v">"modal-open"</span>&gt;モーダルを開く&lt;/button&gt;
-&lt;div class=<span class="v">"modal-overlay"</span>&gt;
+      重なり順で崩れたら <a href="beginner_6.html#chapter4">コーダー中級#6</a> の <code>z-index</code> を見返してください。<br>
+      開くボタンはセクションの中に置き、背景と中身は <strong><code>&lt;/main&gt;</code> の後ろ、<code>&lt;/body&gt;</code> の前</strong>に置きます。セクション内に背景を置くと、セクションの表示アニメーション中に画面全体を覆えなくなるためです。
+      <span class="js-label">HTML（開くボタン：セクションの中）</span>
+      <code class="js-code hl">&lt;button type=<span class="v">"button"</span> class=<span class="v">"modal-open"</span>&gt;モーダルを開く&lt;/button&gt;</code>
+      <span class="js-label">HTML（背景と中身：&lt;/main&gt; の後ろ、&lt;/body&gt; の前）</span>
+      <code class="js-code hl">&lt;div class=<span class="v">"modal-overlay"</span>&gt;
   &lt;div class=<span class="v">"modal-content"</span>&gt;
     &lt;p&gt;モーダルウィンドウの中身&lt;/p&gt;
     &lt;button type=<span class="v">"button"</span> class=<span class="v">"modal-close"</span>&gt;閉じる&lt;/button&gt;
@@ -1086,6 +1100,7 @@ $(<span class="v">'.price'</span>).on(<span class="v">'change'</span>, <span cla
       <code class="js-code hl"><span class="s">.modal-overlay </span>{
   <span class="p">position</span>: <span class="v"><span class="blank">xxxxxx</span></span>;  <span class="c">/* 画面全体に貼り付ける指定は？（4章） */</span>
   <span class="p">inset</span>: <span class="v">0</span>;
+  <span class="p">z-index</span>: <span class="v">50</span>;
   <span class="p">display</span>: <span class="v">flex</span>;
   <span class="p">align-items</span>: <span class="v">center</span>;
   <span class="p">justify-content</span>: <span class="v">center</span>;

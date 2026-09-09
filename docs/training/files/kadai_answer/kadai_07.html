@@ -7,11 +7,10 @@
   <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/kadai_07.css">
   <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
-</head>
 <script>
   /* 消費税を出す関数。演習3で作り、演習4でも使い回します */
   function tax(price) {
-    const TAX_RATE = 0.08;
+    const TAX_RATE = 0.10;
     return Math.round(price * TAX_RATE);
   }
 
@@ -43,7 +42,7 @@
        画面には四捨五入した後、コンソールには四捨五入する前を出します */
     $('.price2').on('change', function () {
       const price = Number($('.price2').val());
-      console.log(price * 0.08);
+      console.log(price * 0.10);
       $('.tax-out2').text(tax(price));
     });
 
@@ -59,6 +58,7 @@
 
   });
 </script>
+</head>
 <body>
   <header>
     <h1>マークアップ編課題：#7 変数と関数・モーダルウィンドウを作ろう</h1>
@@ -88,19 +88,19 @@
         <input type="number" class="price2"> 円の消費税は <span class="tax-out2"></span> 円
       </p>
       <p class="note_text">
-        1234 のように端数の出る金額を入れて、開発者ツールの Console を見てください。98.72 が出ます。
+        1234 のように端数の出る金額を入れて、開発者ツールの Console を見てください。123.4 が出ます。
       </p>
     </section>
     <section>
       <h2>5. モーダルウィンドウ</h2>
       <button type="button" class="modal-open">モーダルを開く</button>
-      <div class="modal-overlay">
-        <div class="modal-content">
-          <p>モーダルウィンドウの中身</p>
-          <button type="button" class="modal-close">閉じる</button>
-        </div>
-      </div>
     </section>
   </main>
+  <div class="modal-overlay">
+    <div class="modal-content">
+      <p>モーダルウィンドウの中身</p>
+      <button type="button" class="modal-close">閉じる</button>
+    </div>
+  </div>
 </body>
 </html>
