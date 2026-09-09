@@ -657,7 +657,8 @@ public function boot(): void
     DB::listen(fn ($q) =&gt; logger($q-&gt;sql));
 }</div>
       <code>storage/logs/laravel.log</code> に出ます。<strong><code>with()</code> の有無で行数が変わる</strong>のを、一度見ておくと納得できます。<br>
-      実際にやると、<strong>メンバーが12人なら、<code>with()</code> なしで <code>departments</code> に12回、ありで1回</strong>になります。<br>
+      上の比較は、<strong>メンバー一覧とリレーションの取得だけ</strong>を数えています。この教材の Controller には、選択欄用の <code>Department::orderBy('id')->get()</code> もあり、<code>departments</code> を別に1回取得します。<br>
+      そのため、掲載コードでメンバー12人を表示したときの <strong><code>departments</code> の SELECT は、<code>with()</code> なしで13回、ありで2回</strong>です。ログでは <code>departments</code> の SELECT を数えて比較してください。<br>
       <strong>見終わったら消してください。</strong>全リクエストのSQLがログに残り続けます。
     </div>
 
@@ -741,7 +742,7 @@ public function boot(): void
     <div class="caution">
       <span class="label">ドラッグはまだ保存されません</span><br>
       札は動きますが、<strong>リロードすると元の位置に戻ります。</strong>保存する処理をまだ書いていないからです。<br>
-      <code>js/sort.js</code> の Ajax 部分は、<strong>次のページで書き換えます。</strong>
+      #2で旧PHP向けの送信処理を外しているため、この段階では Ajax 通信は行いません。<strong>次の <a href="backend_4.html#chapter3">#4の3章</a> で Laravel 向けの送信処理を追加します。</strong>
     </div>
 
     <div class="exercise">

@@ -349,7 +349,7 @@ return redirect('/');</div>
         <span class="ad-label">routes/web.php</span>
         <code class="ad-code"><span class="ad-c">Route</span>::<span class="ad-f">post</span>(<span class="ad-s">'/sortable'</span>, [<span class="ad-c">SortableController</span>::<span class="ad-k">class</span>, <span class="ad-s">'store'</span>])-&gt;<span class="ad-f">name</span>(<span class="ad-s">'sortable.store'</span>);</code>
       </details>
-      <strong>まだ動きません。</strong>次の章を読んでから試してください。
+      ここまでで<strong>登録処理がそろいました。</strong>次の章で、フォームに書いた <code>@csrf</code> の役割を確認します。
     </div>
   </section>
 
@@ -357,7 +357,7 @@ return redirect('/');</div>
     <h2>2. CSRF ― なぜトークンが要るのか</h2>
 
     <p>
-      いまのままフォームを送ると、<strong>419</strong> というエラーが出ます。<strong>不具合ではありません。</strong>Laravel が止めています。
+      1章のフォームには、すでに <code>@csrf</code> を書いてあります。ここでは、フォームで送る <strong>CSRF トークンの役割</strong>と、検証に失敗したときに出る <strong>419</strong> を確認します。
     </p>
 
     <div class="ad-screen">
@@ -516,8 +516,8 @@ return redirect('/');</div>
 
     <div class="exercise">
       <span class="label">演習2</span><br>
-      <code>@csrf</code> と <code>&lt;meta name="csrf-token"&gt;</code> を Blade に足してください。<br>
-      <strong>登録が通るようになります。</strong>新しいメンバーが左上（20, 20）に出れば成功です。<br>
+      フォームに1章で書いた <code>@csrf</code> があることを確認し、Blade の <code>&lt;head&gt;</code> に <code>&lt;meta name="csrf-token"&gt;</code> を足してください。<code>sort.js</code> に上の <code>$.ajaxSetup()</code> があることも確認します。<br>
+      <strong>登録を試してください。</strong>新しいメンバーが左上（20, 20）に出れば成功です。<br>
       <br>
       通ったら、<strong>わざと壊してみてください。</strong>検証ツールで <code>_token</code> の値を書き換えて送ると、<strong>419 に戻ります。</strong>照合されていることが目で見えます。
     </div>
@@ -740,7 +740,7 @@ if ($sortable === null) {
 
     <div class="exercise">
       <span class="label">演習3</span><br>
-      <code>update</code> メソッドとルートを書き、<code>sort.js</code> の Ajax を書き換えてください。<br>
+      <code>update</code> メソッドとルートを書き、<strong><code>sort.js</code> の <code>$(function () { ... })</code> の中にある <code>$('.drag').draggable({ ... });</code> を、この章の「JavaScript 側」のコードに置き換えてください。</strong>2章で追加した <code>$.ajaxSetup()</code> は残します。<br>
       札をドラッグして、<strong>リロードしても位置が残っていれば</strong>メンバー配置は完成です。<br>
       <br>
       phpMyAdmin で <code>sortables</code> を開き、<strong><code>left_x</code> と <code>top_y</code> が変わっている</strong>ことも確認してください。
@@ -1072,9 +1072,13 @@ if ($sortable === null) {
       <strong>URL は「何を」、メソッドは「どうする」</strong>を表しています。
     </div>
 
+    <p><code>routes/web.php</code> の先頭に <code>use App\Http\Controllers\TaskController;</code> を追加し、タスク用の3つのルートを書き足します。既存の <code>use</code> とメンバー配置のルートは残してください。</p>
+
     <details class="kotae">
-      <summary>答え ― web.php に足す3行</summary>
-      <code class="ad-code"><span class="ad-c">Route</span>::<span class="ad-f">get</span>(<span class="ad-s">'/task'</span>, [<span class="ad-c">TaskController</span>::<span class="ad-k">class</span>, <span class="ad-s">'index'</span>])-&gt;<span class="ad-f">name</span>(<span class="ad-s">'task.index'</span>);
+      <summary>答え ― web.php に追加するコード</summary>
+      <code class="ad-code"><span class="ad-k">use</span> <span class="ad-c">App\Http\Controllers\TaskController</span>;
+
+<span class="ad-c">Route</span>::<span class="ad-f">get</span>(<span class="ad-s">'/task'</span>, [<span class="ad-c">TaskController</span>::<span class="ad-k">class</span>, <span class="ad-s">'index'</span>])-&gt;<span class="ad-f">name</span>(<span class="ad-s">'task.index'</span>);
 <span class="ad-c">Route</span>::<span class="ad-f">post</span>(<span class="ad-s">'/task'</span>, [<span class="ad-c">TaskController</span>::<span class="ad-k">class</span>, <span class="ad-s">'store'</span>])-&gt;<span class="ad-f">name</span>(<span class="ad-s">'task.store'</span>);
 <span class="ad-c">Route</span>::<span class="ad-f">delete</span>(<span class="ad-s">'/task/{task}'</span>, [<span class="ad-c">TaskController</span>::<span class="ad-k">class</span>, <span class="ad-s">'destroy'</span>])-&gt;<span class="ad-f">whereNumber</span>(<span class="ad-s">'task'</span>)-&gt;<span class="ad-f">name</span>(<span class="ad-s">'task.destroy'</span>);</code>
     </details>

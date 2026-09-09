@@ -591,9 +591,9 @@ Route::patch('/sortable/{sortable}', ...)</div>
 
     <h3>確認する</h3>
 
-    <div class="bk-cmd"><span class="is-prompt">$</span> php artisan route:list --except-vendor
+    <div class="bk-cmd"><span class="is-prompt">$</span> php artisan route:list --except-vendor</div>
 
-<span class="is-out">  GET|HEAD   /  ......... sortable.index › SortableController@index</span></div>
+    <p><strong><code>GET|HEAD</code> の <code>/</code> が登録されていること</strong>を確認します。この段階では無名関数を使い、ルート名も付けていないので、<code>sortable.index</code> や <code>SortableController@index</code> は表示されません。</p>
 
     <div class="caution">
       <span class="label">書いたのに動かないとき</span><br>
@@ -780,7 +780,8 @@ Route::patch('/sortable/{sortable}', ...)</div>
       <code>public/css/style.css</code> と <code>public/js/sort.js</code> を、<strong>フロントエンド編の <code>sortable3/</code> からコピーしてください。</strong><br>
       <code>03_advanced/htdocs/sortable3/css/style.css</code> と <code>03_advanced/htdocs/sortable3/js/sort.js</code> です。<br>
       <code>public/css/</code> と <code>public/js/</code> のフォルダは<strong>まだ無いので、自分で作ります。</strong><br>
-      中身はまだ変えません。<code>js/sort.js</code> は<strong>次のページで書き換えます。</strong>
+      <code>js/sort.js</code> の <code>stop: function () { ... }</code> の中にある、<strong><code>$.ajax({ ... })</code> から <code>.done()</code>・<code>.fail()</code> までの送信処理だけを削除</strong>してください。古い送り先 <code>./function/update.php</code> は Laravel では使いません。<br>
+      <code>$(function () { ... })</code>、<code>draggable</code> の設定、<code>stop</code> と座標の取得は残します。<strong>Laravel 向けの送信処理は <a href="backend_4.html#chapter3">#4の3章</a> で追加します。</strong>
     </div>
 
     <div class="exercise">

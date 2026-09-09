@@ -261,8 +261,11 @@ SQLはメソッドで書ける
     <div class="exercise">
       <span class="label">演習1</span><br>
       上の3つを順に実行して、<strong>Laravel の初期画面を表示してください。</strong><br>
-      表示できたら、<strong>わざと止めてみましょう。</strong><code>docker compose down</code> でコンテナを落として、画面が開かなくなることを確認します。<br>
-      もう一度 <code>up -d</code> で戻してください。<strong>2回目は速いはず</strong>です（<code>composer install</code> は不要）。
+      表示できたら、<strong>わざと止めてみましょう。</strong><code>05_laravel/docker/</code> で次のコマンドを実行します。
+      <div class="bk-cmd"><span class="is-prompt">$</span> docker compose -f docker-compose-dev.yml --env-file .env down</div>
+      画面が開かなくなることを確認したら、同じ場所で起動し直してください。
+      <div class="bk-cmd"><span class="is-prompt">$</span> docker compose -f docker-compose-dev.yml --env-file .env up -d</div>
+      <strong>2回目は速いはず</strong>です（<code>composer install</code> は不要）。
     </div>
 
     <div class="note">
@@ -412,8 +415,8 @@ SQLはメソッドで書ける
     <div class="exercise">
       <span class="label">演習2</span><br>
       <code>php artisan list</code> を実行して、<strong>コマンドの一覧を出してください。</strong><br>
-      次に <code>php artisan route:list</code> を打ってみましょう。<strong>いま登録されているURLが1つだけ</strong>あるはずです。<br>
-      それが <code>routes/web.php</code> に書かれているものです。<strong>ファイルを開いて見比べてください。</strong>
+      次に <code>php artisan route:list</code> を打ってみましょう。<strong><code>GET|HEAD</code> の <code>/</code> の行</strong>を探してください。<br>
+      起動確認用の <code>/up</code> など、フレームワークが追加するルートも表示されます。<strong><code>/</code> の行を、<code>routes/web.php</code> のコードと見比べてください。</strong>
       <span class="ad-label">routes/web.php</span>
       <code class="ad-code"><span class="ad-k">use</span> <span class="ad-c">Illuminate\Support\Facades\Route</span>;
 

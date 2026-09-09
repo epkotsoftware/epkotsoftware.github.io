@@ -28,10 +28,11 @@ header h1 {
 }
 
 main {
-  /* 座標は最大 824。札の幅を足しても収まるように広げてある */
+  /* 保存座標を保ち、狭い画面では配置領域を横スクロールする */
   max-width: 1060px;
   margin: 0 auto;
   padding: 20px 24px 32px;
+  overflow-x: auto;
 }
 
 /* ------------------------------------------------------------
@@ -85,6 +86,7 @@ main {
    ------------------------------------------------------------ */
 #drag-area {
   position: relative;
+  min-width: 1012px;
   height: 560px;
   border-radius: 12px;
   background: #ffffff;
