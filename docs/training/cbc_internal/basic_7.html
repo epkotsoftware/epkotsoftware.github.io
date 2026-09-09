@@ -1085,10 +1085,12 @@ $(<span class="v">'.price2'</span>).on(<span class="v">'change'</span>, <span cl
       <strong><code>kadai_07.html</code> に「モーダルウィンドウ」のセクションを作って</strong>実装します。このページの総仕上げです。<br>
       ボタンを押すと<strong>画面の中央にウィンドウが開き、中の「閉じる」ボタンで閉じる</strong>ようにしてください。<br>
       画面を覆う背景と、中身のウィンドウの2つが要ります。<strong>開くボタンに <code>class="modal-open"</code>、背景に <code>class="modal-overlay"</code>、中身に <code>class="modal-content"</code></strong> を付けてください。表示の切り替えはクラスの付け外しで行い、位置や色はCSSに書きます。<br>
-      重なり順で崩れたら <a href="beginner_6.html#chapter4">コーダー中級#6</a> の <code>z-index</code> を見返してください。
-      <span class="js-label">HTML（セクションの中）</span>
-      <code class="js-code hl">&lt;button type=<span class="v">"button"</span> class=<span class="v">"modal-open"</span>&gt;モーダルを開く&lt;/button&gt;
-&lt;div class=<span class="v">"modal-overlay"</span>&gt;
+      重なり順で崩れたら <a href="beginner_6.html#chapter4">コーダー中級#6</a> の <code>z-index</code> を見返してください。<br>
+      開くボタンはセクションの中に置き、背景と中身は <strong><code>&lt;/main&gt;</code> の後ろ、<code>&lt;/body&gt;</code> の前</strong>に置きます。セクション内に背景を置くと、セクションの表示アニメーション中に画面全体を覆えなくなるためです。
+      <span class="js-label">HTML（開くボタン：セクションの中）</span>
+      <code class="js-code hl">&lt;button type=<span class="v">"button"</span> class=<span class="v">"modal-open"</span>&gt;モーダルを開く&lt;/button&gt;</code>
+      <span class="js-label">HTML（背景と中身：&lt;/main&gt; の後ろ、&lt;/body&gt; の前）</span>
+      <code class="js-code hl">&lt;div class=<span class="v">"modal-overlay"</span>&gt;
   &lt;div class=<span class="v">"modal-content"</span>&gt;
     &lt;p&gt;モーダルウィンドウの中身&lt;/p&gt;
     &lt;button type=<span class="v">"button"</span> class=<span class="v">"modal-close"</span>&gt;閉じる&lt;/button&gt;
