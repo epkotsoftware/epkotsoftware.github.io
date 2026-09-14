@@ -1,0 +1,2060 @@
+<!doctype html>
+<!-- 作成者: NULL-N -->
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; frame-src data:; base-uri 'none'; form-action 'none'">
+<title>AIを使いはじめる。</title>
+<style>
+:root{color-scheme:dark;--ink:#f5f5f7;--muted:#b5b5bc;--accent:#2997ff}
+*{box-sizing:border-box}
+body{margin:0;background:#000;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+a:focus-visible{outline:3px solid var(--accent);outline-offset:6px;border-radius:4px}
+.welcome{min-height:100vh;min-height:100svh;display:grid;place-items:center;padding:64px 32px;background:radial-gradient(ellipse at 50% 0,#19191e 0,transparent 70%)}
+.welcome[hidden]{display:none}
+.welcome-inner{width:100%;max-width:880px}
+.welcome-date{margin:0 0 12px;color:var(--accent);font-size:clamp(14px,1.7vw,17px);font-weight:600;line-height:1.7}
+.welcome h1{margin:0 0 16px;font-size:clamp(34px,6.5vw,72px);font-weight:750;line-height:1.25;letter-spacing:-.045em}
+.welcome-subtitle{margin:0 0 36px;color:var(--muted);font-size:clamp(15px,1.8vw,19px);line-height:1.8}
+.welcome-copy{max-width:640px;margin:0;color:var(--muted);font-size:clamp(16px,1.8vw,19px);line-height:1.9;text-wrap:pretty}
+.welcome-copy.welcome-update{font-size:14px;line-height:1.85}
+#welcome-audience{margin-bottom:28px;font-size:16px;line-height:1.8}
+.welcome-enter{display:inline-flex;align-items:center;justify-content:center;gap:24px;min-height:54px;margin-top:38px;padding:15px 26px;border-radius:999px;background:var(--ink);color:#1d1d1f;font-size:16px;font-weight:650;line-height:1.5;text-decoration:none;touch-action:manipulation}
+.welcome-enter:hover{background:#dcdce1}
+.welcome-enter:focus-visible{border-radius:999px}
+.welcome-enter svg{width:20px;height:20px;flex-shrink:0}
+.liability-note{margin:24px 0 0;padding-top:18px;border-top:1px solid #35353b;color:var(--muted);font-size:14px;line-height:1.85}
+.liability-note strong{color:var(--ink);font-weight:600}
+#guide-liability{margin-top:32px}
+@media print{.liability-note{border-color:#ddd;color:#555;font-size:10pt}.liability-note strong{color:#111}}
+@media(max-width:600px){.welcome{padding:64px 24px 48px}.welcome-subtitle{margin-bottom:28px}.welcome-enter{margin-top:30px}}
+@media print{.welcome{display:none}#guide-content[hidden]{display:block}}
+.skip{position:absolute;left:18px;top:-80px;background:#fff;color:#000;padding:12px;z-index:100}
+.skip:focus{top:18px}
+.guide-nav{position:sticky;top:0;z-index:40;border-bottom:1px solid #35353b;background:#171719;color:#f5f5f7}
+.guide-nav-inner{display:flex;align-items:center;gap:10px;max-width:1100px;height:68px;margin:0 auto;padding:8px 32px}
+.guide-nav-label{flex-shrink:0;margin-right:4px;font-size:12px;font-weight:650;color:#b5b5bc}
+.guide-nav-links{display:flex;align-items:center;gap:4px;min-width:0;flex:1;margin:0;padding:3px 0;overflow-x:auto;overscroll-behavior-x:contain;list-style:none;scrollbar-width:thin;scrollbar-color:#66666f #171719}
+.guide-nav-links::-webkit-scrollbar{height:3px}
+.guide-nav-links::-webkit-scrollbar-thumb{border-radius:3px;background:#66666f}
+.guide-nav-links li{flex-shrink:0}
+.guide-nav-links a{display:block;min-height:40px;padding:11px 12px;border-radius:8px;color:#f5f5f7;font-size:12px;line-height:1.5;text-decoration:none;white-space:nowrap}
+.guide-nav-links a:hover{background:#333338}
+.guide-nav-links a[aria-current="location"]{background:#2997ff;color:#071827;box-shadow:inset 0 -2px 0 #a3d3ff}
+.guide-nav-links a:focus-visible{outline:2px solid #2997ff;outline-offset:-2px}
+.guide-nav-links a[aria-current="location"]:focus-visible{outline-color:#071827}
+.guide-nav-arrow{display:grid;place-items:center;flex-shrink:0;width:34px;height:40px;padding:0;border:1px solid #55555c;border-radius:8px;background:#29292e;color:#f5f5f7;cursor:pointer}
+.guide-nav-arrow svg{width:18px;height:18px}
+.guide-nav-arrow[hidden]{display:none}
+.guide-nav-arrow:disabled{opacity:.35;cursor:default}
+.guide-nav-arrow:focus-visible,.guide-nav-links:focus-visible{outline:2px solid #2997ff;outline-offset:2px}
+#guide-main [id]{scroll-margin-top:88px}
+.verify-checks{display:grid;gap:14px;margin:24px 0 0;padding-left:24px;color:#f5f5f7;font-size:16px;line-height:1.9}
+.verify-guide{padding-bottom:20px}
+@media(max-width:600px){.guide-nav-inner{padding-right:12px;padding-left:12px;gap:6px}.guide-nav-label{margin-right:0}.guide-nav-links a{padding-right:10px;padding-left:10px}.verify-checks{font-size:14px}}
+@media print{.guide-nav{display:none}.verify-checks{color:#111;font-size:11pt}#guide-main [id]{scroll-margin-top:0}}
+main{max-width:1100px;margin:0 auto;padding:40px 32px 48px}
+.content{width:100%}
+h1{font-size:clamp(34px,4.5vw,52px);line-height:1.2;letter-spacing:-.045em;margin:0 0 28px;font-weight:750}
+.guide-heading{margin-bottom:36px}
+.guide-heading h1{margin-bottom:12px}
+.guide-subtitle{margin:0;color:var(--muted);font-size:16px;line-height:1.8}
+#models-title{margin:0 0 22px;font-size:clamp(25px,3vw,34px);line-height:1.4;letter-spacing:-.04em}
+@media print{.guide-heading{margin-bottom:8mm}.guide-subtitle{font-size:11pt;color:#555}#models-title{font-size:20pt}}
+.company{display:grid;grid-template-columns:150px minmax(0,1fr);align-items:baseline;gap:18px}
+.company+.company{margin-top:18px}
+.company h2{margin:0;font-size:19px;line-height:1.5;font-weight:600;color:var(--muted)}
+.models{display:flex;flex-wrap:wrap;gap:8px 28px;list-style:none;margin:0;padding:0;font-size:clamp(27px,3.5vw,42px);line-height:1.25;letter-spacing:-.035em;font-weight:700}
+.models li{white-space:nowrap}
+.conditions{margin-top:32px;padding:28px 30px 30px;border-radius:24px;background:#f5f5f7;color:#1d1d1f}
+.conditions h2{margin:0;font-size:clamp(24px,3vw,34px);line-height:1.4;letter-spacing:-.04em;font-weight:750}
+.emphasis{color:#0066cc}
+.lead{margin:10px 0 22px;color:#515154;font-size:15px;line-height:1.8}
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.plan{background:#fff;padding:22px 24px;border-radius:18px}
+.plan h3{font-size:26px;line-height:1.2;letter-spacing:-.03em;margin:0 0 18px}
+.plan h3 a{text-decoration:none}
+.plan h3 a:hover{color:#0066cc}
+.plan dl{margin:0}
+.plan dl>div{display:grid;grid-template-columns:125px minmax(0,1fr);gap:10px;align-items:baseline}
+.plan dl>div+div{margin-top:12px}
+.plan dt{font-size:15px;font-weight:700;line-height:1.6}
+.plan dd{margin:0;color:#515154;font-size:15px;line-height:1.6}
+.rollout{font-size:11px;color:#65656b;margin:12px 0 0}
+@media(max-width:850px){.plan dl>div{grid-template-columns:1fr;gap:2px}}
+@media(max-width:600px){
+main{padding:28px 20px 32px}
+h1{margin-bottom:24px}
+.company{grid-template-columns:1fr;gap:6px}
+.company h2{font-size:15px}
+.company+.company{margin-top:20px}
+.models{gap:8px 20px;font-size:30px}
+.conditions{padding:22px 20px;margin-top:26px;border-radius:20px}
+.conditions h2{font-size:25px}
+.lead{font-size:14px;margin-bottom:18px}
+.plans{grid-template-columns:1fr;gap:12px}
+.plan{padding:20px;border-radius:14px}
+.plan h3{font-size:24px;margin-bottom:14px}
+.plan dl>div{grid-template-columns:110px minmax(0,1fr);gap:8px}
+.plan dt,.plan dd{font-size:14px}
+}
+@media print{
+@page{size:A4 portrait;margin:15mm}
+body{background:#fff;color:#111}
+main{padding:0;max-width:none}
+.skip{display:none}
+h1{font-size:28pt;margin-bottom:8mm}
+.company{grid-template-columns:32mm 1fr;gap:4mm}
+.company h2{color:#555;font-size:12pt}
+.models{font-size:23pt;gap:3mm 6mm}
+.company+.company{margin-top:6mm}
+.conditions{margin-top:10mm;padding:7mm;border:1px solid #ddd;background:#fff}
+.conditions h2{font-size:20pt}
+.lead{font-size:10pt}
+.plans{grid-template-columns:1fr 1fr;gap:5mm}
+.plan{border:1px solid #ddd;padding:5mm;break-inside:avoid}
+.plan h3{font-size:19pt}
+.plan dl>div{grid-template-columns:1fr;gap:1mm}
+.plan dt,.plan dd{font-size:11pt}
+}
+.pricing{margin-top:20px;padding-top:17px;border-top:1px solid #e5e5ea}
+.pricing h4{margin:0 0 12px;color:#515154;font-size:12px;font-weight:600;line-height:1.5}
+.pricing h4 a{text-decoration:none}
+.pricing h4 a:hover{text-decoration:underline}
+.plan .price-list>div{grid-template-columns:minmax(0,1fr) auto;gap:12px}
+.plan .price-list>div+div{margin-top:7px}
+.plan .price-list dt{font-size:14px;font-weight:500}
+.plan .price-list dd{color:#1d1d1f;font-size:20px;font-weight:700;line-height:1.35;font-variant-numeric:tabular-nums;white-space:nowrap}
+.plan .price-list dd span{font-size:12px;font-weight:500;color:#515154}
+.price-note{margin:15px 0 0;color:#65656b;font-size:11px;line-height:1.7}
+.comparison{margin-top:34px;padding-top:30px;border-top:1px solid #303034}
+.comparison>h2{font-size:clamp(25px,3vw,34px);letter-spacing:-.04em;line-height:1.4;margin:0 0 22px}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.compare-card{background:#f5f5f7;color:#1d1d1f;border-radius:20px;padding:24px}
+.compare-card h3{font-size:26px;letter-spacing:-.03em;margin:0 0 18px;line-height:1.3}
+.compare-card h3 a{text-decoration:none}
+.compare-card h3 a:hover{color:#0066cc}
+.compare-card table{border-collapse:collapse;table-layout:fixed;width:100%;text-align:left;font-size:14px;line-height:1.65;overflow-wrap:anywhere}
+.compare-card th,.compare-card td{padding:12px 7px;border-bottom:1px solid #d8d8df;vertical-align:top}
+.compare-card thead th{font-size:12px;color:#515154;padding-top:0}
+.compare-card tbody th{font-weight:600;font-size:13px}
+.compare-card th:first-child{width:31%;padding-left:0}
+.compare-card th:last-child,.compare-card td:last-child{padding-right:0}
+.compare-card tr:last-child th,.compare-card tr:last-child td{border-bottom:0}
+.compare-card strong{color:#0066cc}
+.billing-note{margin:20px 0 0;font-size:15px;line-height:1.8}
+.comparison-note{color:#b5b5bc;font-size:12px;line-height:1.8;margin:14px 0 0}
+.comparison-note+.comparison-note{font-size:11px;margin-top:4px}
+.comparison-note a{text-underline-offset:3px}
+@media(max-width:760px){.compare-grid{grid-template-columns:1fr}.compare-card{padding:22px 20px}.compare-card table{font-size:14px}.comparison{margin-top:28px;padding-top:24px}}
+@media print{.comparison{border-color:#ddd;margin-top:8mm;padding-top:7mm}.comparison>h2{font-size:20pt}.compare-grid{grid-template-columns:1fr 1fr;gap:5mm}.compare-card{background:#fff;border:1px solid #ddd;padding:5mm;break-inside:avoid}.compare-card h3{font-size:18pt}.compare-card table{font-size:9pt}.compare-card tbody th{font-size:9pt}.comparison-note{color:#555}}
+.usage-label{font-size:13px;font-weight:600;color:#0066cc;margin:0 0 10px}
+.usage-guide .compare-card h3{font-size:23px;line-height:1.5;letter-spacing:-.035em;margin-bottom:18px}
+.usage-list{margin:0;padding-left:20px;color:#515154;font-size:15px;line-height:1.85}
+.usage-list li+li{margin-top:10px}
+.usage-note{margin:16px 0 0;color:#515154;font-size:13px;line-height:1.8}
+@media(max-width:600px){.usage-guide .compare-card h3{font-size:21px}.usage-list{font-size:14px}}
+@media print{.usage-guide .compare-card h3{font-size:16pt}.usage-list{font-size:10pt}}
+.entry-guide .compare-card table{font-size:15px}
+.entry-guide .compare-card tbody th{font-size:16px}
+.entry-guide .compare-card th:first-child{width:26%}
+.entry-kind{display:block;font-size:12px;font-weight:400;color:#515154}
+@media print{.entry-guide .compare-card table,.entry-guide .compare-card tbody th{font-size:10pt}}
+.practice-lead{margin:0 0 20px;color:var(--muted);font-size:16px;line-height:1.8}
+.practice-steps{margin:0;padding-left:24px;font-size:15px;line-height:1.8}
+.practice-steps>li{padding-left:4px}
+.practice-steps>li+li{margin-top:24px}
+.practice-steps p{margin:6px 0 0}
+.practice-prompt{margin:12px 0 0;padding:18px;background:#fff;color:#1d1d1f;border:1px solid #d8d8df;border-radius:12px;font:inherit;white-space:pre-wrap;overflow-wrap:anywhere}
+.prompt-block{margin-top:12px;overflow:hidden;border:1px solid #d8d8df;border-radius:12px;background:#fff}
+.prompt-block>pre.practice-prompt{margin:0;border:0;border-radius:0}
+.prompt-tools{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:5px 8px 5px 18px;border-bottom:1px solid #eeeef1;background:#f8f8fa}
+.prompt-tools[hidden]{display:none}
+.prompt-copy-status{margin-right:auto;font-size:12px;line-height:1.6;color:#515154}
+.prompt-copy{display:inline-flex;align-items:center;justify-content:center;gap:6px;flex-shrink:0;min-height:36px;min-width:44px;padding:5px 9px;border:0;border-radius:7px;background:transparent;color:#515154;font:inherit;font-size:12px;cursor:pointer}
+.prompt-copy:hover{background:#e8e8ed;color:#1d1d1f}
+.prompt-copy:focus-visible{outline:3px solid #0066cc;outline-offset:2px}
+.prompt-copy:disabled,.prompt-copy[aria-busy="true"]{cursor:wait;opacity:.6}
+.prompt-copy svg{width:18px;height:18px;flex-shrink:0}
+.prompt-copy .prompt-copy-check{display:none}
+.prompt-copy[data-copied="true"]{color:#16703f}
+.prompt-copy[data-copied="true"] .prompt-copy-icon{display:none}
+.prompt-copy[data-copied="true"] .prompt-copy-check{display:block}
+@media print{.prompt-tools{display:none}.prompt-block{border-color:#aaa}}
+.practice-download{display:inline-block;margin:0 0 22px;padding:12px 18px;border-radius:10px;background:#0066cc;color:#fff;font-size:15px;font-weight:600;text-decoration:none}
+.practice-download:hover{background:#0055aa}
+.practice-download:focus-visible{outline:3px solid #2997ff;outline-offset:4px}
+.prompt-guide .compare-card h3{font-size:23px;line-height:1.5;letter-spacing:-.035em;margin-bottom:14px}
+.prompt-guide .practice-prompt{font-size:14px;line-height:1.85}
+.prompt-guide .usage-note{margin-top:12px}
+#learning-guide>.usage-note{color:inherit}
+#drill-guide>.usage-note{color:inherit}
+.study-stages.drill-stages{grid-template-columns:repeat(6,minmax(0,1fr))}
+.drill-card{padding:26px;color:#1d1d1f}
+.drill-card[hidden],.drill-reveal[hidden]{display:none}
+.drill-card h4{margin:0 0 16px;font-size:25px;line-height:1.4;letter-spacing:-.035em}
+.drill-card>p{font-size:14px;line-height:1.85}
+.drill-code{margin:18px 0;padding:16px;border:1px solid #d8d8df;border-radius:12px;background:#fff;color:#1d1d1f;font:13px/1.9 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.drill-walk{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:18px 0;padding:0;list-style:none}
+.drill-walk li{padding:9px 3px;border:1px solid #c9c9d0;border-radius:8px;background:#fff;color:#515154;font-size:12px;text-align:center;line-height:1.7}
+.drill-walk li.is-current{border-color:#0066cc;background:#dcecff;color:#004b99;font-weight:700}
+.drill-count{display:flex;align-items:baseline;gap:8px;margin:18px 0 4px;color:#1d1d1f}
+.drill-count strong{font-size:50px;line-height:1;font-weight:750;letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+.drill-count span{font-size:13px;color:#515154}
+.drill-run-status{min-height:52px;margin:12px 0 0;color:#515154;font-size:13px;line-height:1.8}
+.drill-reveal{margin:18px 0 0;padding:14px 16px;border-left:3px solid #0066cc;border-radius:0 10px 10px 0;background:#e1edfa;color:#1d1d1f;font-size:14px;line-height:1.85}
+.drill-intro-list{padding-left:20px;margin:20px 0 0;color:#515154;font-size:15px;line-height:2.1}
+@media(max-width:760px){.study-stages.drill-stages{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:14px}.drill-card{padding:22px}.drill-card h4{font-size:22px}.drill-code{font-size:12px}.drill-count strong{font-size:38px}}
+@media print{.drill-card[hidden],.drill-reveal[hidden]{display:block}.drill-card{padding:5mm;break-inside:avoid}.drill-code{background:#fff;color:#111}.drill-card h4{font-size:15pt}.drill-walk,.drill-count,.drill-run-status{display:none}}
+.study-demo{margin-top:28px;overflow:hidden;border:1px solid #3c3c40;border-radius:24px;background:#1d1d1f;color:#f5f5f7}
+.study-header{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:20px;padding:28px}
+.study-header h3{margin:0 0 8px;font-size:clamp(23px,3vw,32px);line-height:1.35;letter-spacing:-.04em}
+.study-header p{margin:0;color:#b5b5bc;font-size:13px;line-height:1.8}
+.study-controls{display:flex;align-items:center;flex-wrap:wrap;gap:8px}
+.study-controls button,.study-controls select{min-height:44px;padding:10px 14px;border:1px solid #55555c;border-radius:10px;background:#333336;color:#f5f5f7;font:inherit;font-size:13px;cursor:pointer}
+.study-controls .study-play{background:#f5f5f7;color:#1d1d1f;border-color:#f5f5f7;font-weight:650;min-width:130px}
+.study-controls button:hover,.study-controls select:hover{border-color:#a1a1aa}
+.study-controls button:disabled,.study-controls select:disabled{cursor:default;opacity:.5}
+.study-demo button:focus-visible,.study-demo select:focus-visible,.study-chat-body:focus-visible{outline:3px solid #2997ff;outline-offset:3px}
+.study-stages{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;padding:0 28px 24px}
+.study-stages button{padding:13px 0 0;border:0;border-top:2px solid #55555c;background:transparent;color:#b5b5bc;text-align:left;font:inherit;font-size:13px;line-height:1.6;cursor:pointer}
+.study-stages button[aria-current]{border-color:#2997ff;color:#f5f5f7}
+.study-stages button.is-past{border-color:#9999a1}
+.study-workspace{display:grid;grid-template-columns:minmax(0,.82fr) minmax(0,1.18fr);border-top:1px solid #3c3c40}
+.study-material{display:flex;flex-direction:column;min-width:0;background:#f5f5f7;color:#1d1d1f;border-right:1px solid #d8d8df}
+.study-pane-header{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:48px;padding:13px 20px;border-bottom:1px solid #d8d8df;font-size:12px;line-height:1.5;font-weight:600}
+.study-material .study-pane-header span:last-child{color:#515154;font-weight:400}
+.study-lesson{padding:30px 26px}
+.study-lesson-label{margin:0 0 12px;color:#515154;font-size:12px;letter-spacing:.06em}
+.study-lesson h4{margin:0 0 22px;font-size:32px;line-height:1.3;letter-spacing:-.04em}
+.study-source{margin:0;font-size:18px;line-height:2.15}
+.study-source-text{padding:3px 0;background-image:linear-gradient(#c9e3ff,#c9e3ff);background-repeat:no-repeat;background-size:0% 100%;color:#1d1d1f;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.study-selection-status{min-height:24px;margin:18px 0 0;color:#0066cc;font-size:13px;line-height:1.8}
+.study-material-note{margin:auto 0 0;padding:22px 26px;border-top:1px solid #dedee3;color:#515154;font-size:13px;line-height:1.8}
+.study-chat{min-width:0;background:#111113;color:#f5f5f7}
+.study-chat>.study-pane-header{border-color:#35353b}
+.study-chat>.study-pane-header span:last-child{color:#b5b5bc;font-weight:400}
+.study-chat-body{height:530px;overflow-y:auto;overscroll-behavior-x:contain;padding:24px;scrollbar-color:#66666f #111113}
+.study-empty{margin:100px auto 0;max-width:250px;text-align:center;color:#b5b5bc;font-size:14px;line-height:1.9}
+.study-message{margin:0 0 24px}
+.study-message:last-child{margin-bottom:0}
+.study-message[hidden],.study-composer[hidden],.study-empty[hidden],.study-analogy[hidden]{display:none}
+.study-speaker{margin:0 0 8px;color:#b5b5bc;font-size:12px;line-height:1.6;font-weight:600}
+.study-message-text{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px;line-height:1.95}
+.study-message.user{margin-left:24px;padding:16px 18px;border:1px solid #48484f;border-radius:16px 16px 4px 16px;background:#2b2b30;color:#f5f5f7}
+.study-message.assistant{padding:0 4px;color:#f5f5f7}
+.study-composer{padding:16px 18px;border:1px solid #7ab8ff;border-radius:16px;background:#202026;color:#f5f5f7}
+.study-composer-label{margin:0 0 10px;color:#a8d1ff;font-size:12px;line-height:1.6}
+.study-composer-text{min-height:28px;margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px;line-height:1.95}
+.study-analogy{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0 0;padding:18px;border:1px solid #45454d;border-radius:12px;background:#24242a;color:#f5f5f7}
+.study-analogy p{margin:0;font-size:15px;line-height:1.6}
+.study-analogy span{display:block;margin-bottom:5px;color:#b5b5bc;font-size:11px}
+.study-progress{display:block;width:100%;height:3px;border:0;background:#3c3c40;accent-color:#2997ff}
+.study-progress::-webkit-progress-bar{background:#3c3c40}
+.study-progress::-webkit-progress-value{background:#2997ff}
+.study-progress::-moz-progress-bar{background:#2997ff}
+.study-caption{margin:0;padding:20px 28px;font-size:15px;line-height:1.8;color:#f5f5f7}
+@media(max-width:760px){.study-header{padding:22px 20px}.study-stages{gap:8px;padding:0 20px 20px}.study-stages button{font-size:11px}.study-workspace{grid-template-columns:1fr}.study-material{border-right:0;border-bottom:1px solid #d8d8df}.study-lesson{padding:22px}.study-lesson h4{margin-bottom:12px;font-size:25px}.study-source{font-size:16px;line-height:1.9}.study-material-note{padding:14px 22px}.study-chat-body{height:480px;padding:20px}.study-message.user{margin-left:12px}.study-caption{padding:18px 20px}}
+@media print{.study-demo{background:#fff;color:#111;border-color:#aaa;break-inside:auto}.study-header{padding:5mm}.study-header h3{font-size:16pt}.study-header p{color:#555}.study-controls,.study-stages,.study-progress,.study-caption,.study-empty,.study-composer,.study-selection-status{display:none!important}.study-workspace{display:block}.study-material,.study-chat{background:#fff;color:#111;border:0}.study-pane-header{border-color:#ccc!important}.study-pane-header span:last-child{color:#555!important}.study-lesson{padding:5mm}.study-source-text{background:none}.study-material-note{display:none}.study-chat-body{height:auto;overflow:visible;padding:5mm}.study-message[hidden]{display:block}.study-message.user,.study-message.assistant{background:#fff;color:#111;break-inside:avoid}.study-speaker{color:#555}.study-analogy{display:none!important}}
+.prompt-conversation{margin:0;display:grid;gap:15px}
+.prompt-conversation>div{padding-bottom:15px;border-bottom:1px solid #d8d8df}
+.prompt-conversation>div:last-child{padding-bottom:0;border:0}
+.prompt-conversation dt{font-size:13px;line-height:1.7;color:#515154}
+.prompt-conversation dd{margin:5px 0 0;padding-left:14px;border-left:2px solid #0066cc;font-size:15px;line-height:1.8;color:#1d1d1f}
+.prompt-finish{margin-top:18px}
+.prompt-start-copy,.prompt-finish>p:not(.usage-label){margin:0;font-size:15px;line-height:1.85;color:#515154}
+.prompt-context{margin-top:24px}
+.setup-step{margin-top:18px;padding:28px;border-radius:20px;background:#f5f5f7;color:#1d1d1f}
+.setup-step h3{margin:0 0 18px;font-size:clamp(22px,2.8vw,28px);line-height:1.4;letter-spacing:-.035em}
+.setup-step p:not(.usage-label){font-size:15px;line-height:1.85}
+.setup-step .practice-prompt{margin-bottom:18px;font-size:14px;line-height:1.85}
+.setup-step .prompt-block{margin-bottom:18px}
+.setup-os-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.setup-os{padding:18px 20px;border:1px solid #dedee3;border-radius:14px;background:#fff}
+.setup-os h4{margin:0 0 8px;font-size:16px}
+.setup-os p{margin:0;color:#515154}
+.setup-os ol+p{margin-top:12px}
+.setup-send-guide+.setup-os-grid{margin-top:16px}
+.setup-folder{display:flex;align-items:center;gap:12px;margin-top:18px;padding:16px 18px;border-radius:12px;background:#e8e8ed;font-size:15px;font-weight:600}
+.setup-folder svg{width:26px;height:26px;flex-shrink:0;color:#0066cc}
+.setup-folder span{color:#515154;font-size:13px;font-weight:400}
+.setup-rule{margin:18px 0 0;color:#515154}
+.setup-step ol{margin:0;padding-left:24px;font-size:15px;line-height:1.85}
+.setup-step li+li{margin-top:10px}
+.setup-step kbd{display:inline-block;padding:1px 6px;border:1px solid #c5c5cc;border-bottom-width:2px;border-radius:5px;background:#fff;color:#1d1d1f;font:inherit;font-size:12px;font-weight:600;line-height:1.6;white-space:nowrap}
+.setup-step a{text-underline-offset:3px}
+.setup-diagram{margin:24px 0 0;border:1px solid #3c3c40;border-radius:16px;overflow:hidden;background:#1b1b1e;color:#f5f5f7}
+.setup-diagram figcaption{padding:12px 18px;border-bottom:1px solid #3c3c40;color:#b5b5bc;font-size:12px;line-height:1.7}
+.setup-screen{padding:24px;background:#262626}
+.setup-composer{padding:16px 14px 10px;border:1px solid #454545;border-radius:22px;background:#373736;font-size:14px;line-height:1.8;color:#ddd}
+.setup-composer-text{min-height:54px;color:#aaa}
+.setup-composer-toolbar{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 20px}
+.setup-options,.setup-model-options{display:flex;align-items:center;gap:14px}
+.setup-add-icon{font-size:25px;font-weight:300;line-height:1}
+.setup-option{display:inline-flex;align-items:center;gap:6px;padding:3px 5px;border-bottom:2px solid #2997ff;color:#ddd;white-space:nowrap}
+.setup-option svg,.setup-mic-icon{width:18px;height:18px;flex-shrink:0}
+.setup-model-options{margin-left:auto;font-size:13px;white-space:nowrap}
+.setup-model-options strong{font-weight:600}
+.setup-effort{margin-left:4px;color:#aaa}
+.setup-voice-icon{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#3479dc;color:#fff}
+.setup-voice-icon svg{width:22px;height:22px}
+.setup-explanation{margin-top:18px}
+.setup-explanation p{margin:0;color:#515154}
+.setup-explanation strong{color:#1d1d1f}
+.setup-explanation p>strong:first-child{display:block}
+.setup-step details{margin-top:16px;padding-top:14px;border-top:1px solid #d2d2d7}
+.setup-step summary{cursor:pointer;font-size:14px;line-height:1.8;font-weight:600}
+.setup-step summary:focus-visible{outline:3px solid #2997ff;outline-offset:4px;border-radius:4px}
+.setup-step details p{margin:10px 0 0;color:#515154}
+.setup-send-guide{margin:0;color:#515154}
+.setup-stop,.setup-privacy{margin:18px 0 0;padding:16px 18px;border-left:3px solid #0066cc;background:#fff;border-radius:0 10px 10px 0}
+@media(max-width:600px){.setup-step{padding:22px 20px}.setup-os-grid{grid-template-columns:1fr}.setup-folder{flex-wrap:wrap}.setup-folder span{width:100%}.setup-screen{padding:14px 10px}.setup-model-options{gap:10px}.setup-step p:not(.usage-label),.setup-step ol{font-size:14px}}
+@media print{.setup-step{background:#fff;border:1px solid #ddd;padding:5mm;break-inside:avoid}.setup-step h3{font-size:17pt}.setup-step p:not(.usage-label),.setup-step ol{font-size:10pt}.setup-diagram,.setup-screen,.setup-composer{background:#fff;color:#111;border-color:#aaa}.setup-diagram figcaption,.setup-composer-text,.setup-effort{color:#555}.setup-option{color:#111;border-color:#777}.setup-stop{border-color:#777}}
+.prompt-example{margin-top:18px}
+.prompt-example summary{width:fit-content;cursor:pointer;color:#0066cc;font-size:14px;line-height:1.7;padding:6px 0}
+.prompt-example summary:focus-visible{outline:3px solid #2997ff;outline-offset:4px;border-radius:4px}
+@media(max-width:600px){.prompt-guide .compare-card h3{font-size:21px}.prompt-conversation dd,.prompt-start-copy,.prompt-finish>p:not(.usage-label){font-size:14px}}
+@media print{.prompt-guide .compare-card h3{font-size:16pt}.prompt-guide .practice-prompt,.prompt-conversation dt,.prompt-conversation dd,.prompt-start-copy,.prompt-finish>p:not(.usage-label){font-size:10pt}}
+@media print{.practice-lead{color:#555}.practice-steps{font-size:10pt}}
+@media print{.practice-download{background:#fff;color:#1d1d1f;border:1px solid #888}}
+.build-demo{margin:24px 0;border:1px solid #36363a;border-radius:22px;overflow:hidden;background:#161618}
+.build-heading{padding:25px 26px 20px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.build-heading h3{margin:0;font-size:clamp(22px,3vw,30px);line-height:1.4;letter-spacing:-.04em}
+.build-heading p{margin:6px 0 0;color:var(--muted);font-size:13px;line-height:1.7}
+.build-controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.build-demo button,.build-demo select{font:inherit;touch-action:manipulation}
+.build-controls button,.build-controls select{min-height:42px;border-radius:9px;border:1px solid #48484a;background:#29292c;color:#f5f5f7;padding:8px 12px;font-size:13px;cursor:pointer}
+.build-controls #build-play{background:#f5f5f7;color:#1d1d1f;border-color:#f5f5f7;font-weight:650;min-width:116px}
+.build-demo button:hover,.build-demo select:hover{filter:brightness(1.15)}
+.build-demo button:focus-visible,.build-demo select:focus-visible,.build-code:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
+.build-demo button:disabled{opacity:.45;cursor:default}
+.build-stages{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));padding:0 26px 22px;gap:8px;list-style:none;margin:0}
+.build-stages button{width:100%;text-align:left;color:#b5b5bc;background:transparent;border:0;border-top:2px solid #48484a;padding:10px 0 0;min-height:48px;cursor:pointer;font-size:13px;white-space:nowrap}
+.build-stages button span{margin-right:6px;font-size:11px;font-variant-numeric:tabular-nums}
+.build-stages button[aria-current="step"]{border-color:#2997ff;color:#fff}
+.build-stages button.is-past{border-color:#83838a;color:#e5e5ea}
+.build-workspace{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.12fr);border-top:1px solid #36363a}
+.build-editor,.build-browser{min-width:0}
+.build-editor{background:#101012}
+.build-browser{background:#f5f5f7;color:#1d1d1f;border-left:1px solid #36363a;position:relative}
+.build-pane-title{height:44px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:0 18px;font-size:12px;border-bottom:1px solid #36363a;color:#b5b5bc}
+.build-pane-title strong{font-weight:500;color:#f5f5f7}
+.build-browser .build-pane-title{background:#eaeaec;color:#515154;border-color:#d2d2d7}
+.build-browser .build-pane-title strong{color:#1d1d1f}
+.build-live{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.build-live::before{content:"";width:6px;height:6px;border-radius:50%;background:#2997ff}
+.build-code{height:590px;overflow:auto;margin:0;padding:22px 18px 26px 0;font:12px/1.8 Consolas,"SFMono-Regular",Menlo,monospace;tab-size:2;scrollbar-color:#48484a #101012;overscroll-behavior-x:contain;white-space:pre-wrap;overflow-wrap:anywhere}
+.build-line{display:grid;grid-template-columns:42px minmax(0,1fr)}
+.build-line-number{color:#74747c;text-align:right;padding-right:14px;user-select:none}
+.build-line-text{min-width:0;color:#dedee3}
+.build-token-string{color:#b7d7b4}.build-token-tag{color:#8fcaff}.build-token-keyword{color:#cfb6f7}.build-token-comment{color:#9898a2}
+.build-caret{display:inline-block;height:1.1em;width:2px;background:#f5f5f7;vertical-align:-.15em;margin-left:1px}
+.build-preview{display:block;border:0;width:100%;height:590px;background:#fff;color-scheme:light}
+.build-preview-cover{position:absolute;inset:44px 0 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:#f5f5f7;color:#6e6e73;text-align:center;padding:28px;pointer-events:none}
+.build-preview-cover[hidden]{display:none}
+.build-preview-cover svg{width:52px;height:52px;color:#86868b}
+.build-preview-cover strong{font-size:19px;color:#1d1d1f;font-weight:600}
+.build-preview-cover p{font-size:13px;line-height:1.8;margin:0}
+.build-bottom{padding:18px 26px 20px;border-top:1px solid #36363a}
+.build-caption{margin:0;font-size:15px;line-height:1.7;color:#f5f5f7}
+.build-checks{display:flex;flex-wrap:wrap;gap:8px 22px;list-style:none;margin:12px 0 0;padding:0;font-size:12px;color:#b5b5bc}
+.build-checks li{display:flex;align-items:center;gap:7px}
+.build-checks li::before{content:"○";color:#83838a;font-size:14px}
+.build-checks li[data-state="passed"]::before{content:"✓";color:#90d7a0}
+.build-checks li[data-state="failed"]::before{content:"!";color:#ffb4aa}
+.build-checks li[data-state="pending"]::before{content:"…";color:#8fcaff}
+.build-checks li[data-state="passed"]{color:#e5e5ea}
+.build-progress{height:2px;background:#36363a}
+.build-progress span{display:block;height:100%;width:0;background:#2997ff}
+.build-print-note{display:none}
+.build-demo [hidden]{display:none}
+.build-brief{height:590px;overflow:auto;padding:28px 26px;overscroll-behavior-x:contain}
+.build-brief-label{margin:0 0 14px;font-size:12px;letter-spacing:.04em;color:#8fcaff}
+.build-brief h4{margin:0 0 22px;font-size:27px;line-height:1.4;letter-spacing:-.04em}
+.build-brief-body{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px;line-height:1.95;color:#e5e5ea}
+.build-brief-status{margin:24px 0 0;padding-top:16px;border-top:1px solid #36363a;font-size:12px;line-height:1.7;color:#b5b5bc}
+.build-demo[data-view="brief"] .build-preview-cover{justify-content:flex-start;overflow-y:auto;overscroll-behavior-x:contain;pointer-events:auto}
+.build-preview-empty{display:flex;flex-direction:column;align-items:center;gap:12px;margin:auto 0}
+.build-outline{width:100%;max-width:400px;text-align:left}
+.build-outline-label{color:#0066cc!important;font-size:12px!important}
+.build-outline h4{margin:10px 0 22px;font-size:25px;line-height:1.4;letter-spacing:-.04em}
+.build-outline-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.build-outline-list li{padding:14px 16px;border:1px solid #dedee3;border-radius:12px;background:#fff}
+.build-outline-list span{display:block;font-size:11px;line-height:1.5;color:#6e6e73;margin-bottom:4px}
+.build-outline-list strong{display:block;font-size:14px;line-height:1.7;font-weight:550}
+@media(max-width:760px){
+.build-heading{padding:22px 18px 18px;gap:16px}.build-controls{width:100%}.build-stages{grid-template-columns:repeat(4,minmax(0,1fr));padding:0 18px 18px;gap:6px}.build-stages button{font-size:11px}.build-stages button span{display:block;margin:0 0 3px}
+.build-workspace{grid-template-columns:minmax(0,1fr)}.build-code{height:250px;font-size:11px}.build-browser{border-left:0;border-top:1px solid #36363a}.build-preview{height:640px}.build-bottom{padding:16px 18px}.build-caption{font-size:14px}.build-checks{gap:8px 14px}
+.build-brief{height:420px;padding:24px 20px}.build-brief h4{font-size:24px;margin-bottom:16px}.build-brief-body{font-size:14px}.build-demo[data-view="brief"] .build-preview{height:420px}.build-outline h4{font-size:23px}
+}
+@media(prefers-reduced-motion:no-preference){.build-demo[data-playing="true"] .build-caret{animation:build-blink 1s step-end infinite}@keyframes build-blink{50%{opacity:0}}}
+@media print{.build-demo{display:none}.build-print-note{display:block;color:#555;font-size:10pt}}
+</style>
+<style id="theme-styles">
+.theme-toggle{position:fixed;z-index:50;top:14px;right:max(16px,calc((100vw - 1100px)/2 + 32px));display:inline-flex;align-items:center;justify-content:center;gap:8px;width:104px;height:40px;padding:8px 12px;border:1px solid #55555c;border-radius:10px;background:#29292e;color:#f5f5f7;font:inherit;font-size:12px;line-height:1.5;cursor:pointer;touch-action:manipulation}
+.theme-toggle[hidden]{display:none}
+.theme-toggle:hover{background:#3a3a40}
+.theme-toggle:focus-visible{outline:3px solid #2997ff;outline-offset:3px}
+.theme-toggle svg{width:18px;height:18px;flex-shrink:0}
+.theme-moon{display:none}
+:root[data-theme] .guide-nav-inner{padding-right:148px}
+@media(max-width:600px){
+  .theme-toggle{right:12px;width:40px;padding:8px}
+  .theme-toggle-label{display:none}
+  :root[data-theme] .guide-nav-inner{padding-right:64px}
+}
+@media screen{
+  :root[data-theme="light"]{color-scheme:light;--ink:#1d1d1f;--muted:#62626a;--accent:#0066cc}
+  :root[data-theme="light"] body{background:#fff}
+  :root[data-theme="light"] .welcome{background:radial-gradient(ellipse at 50% 0,#e8edf5 0,transparent 70%)}
+  :root[data-theme="light"] .welcome-enter{background:#1d1d1f;color:#fff}
+  :root[data-theme="light"] .welcome-enter:hover{background:#3a3a40}
+  :root[data-theme="light"] .theme-toggle{background:#f5f5f7;color:#1d1d1f;border-color:#c5c5cc}
+  :root[data-theme="light"] .theme-toggle:hover{background:#e8e8ed}
+  :root[data-theme="light"] .theme-sun{display:none}
+  :root[data-theme="light"] .theme-moon{display:block}
+  :root[data-theme="light"] .guide-nav{background:#f5f5f7;color:#1d1d1f;border-color:#d8d8df}
+  :root[data-theme="light"] .guide-nav-label{color:#62626a}
+  :root[data-theme="light"] .guide-nav-links{scrollbar-color:#aaaab3 #f5f5f7}
+  :root[data-theme="light"] .guide-nav-links::-webkit-scrollbar-thumb{background:#aaaab3}
+  :root[data-theme="light"] .guide-nav-links a{color:#1d1d1f}
+  :root[data-theme="light"] .guide-nav-links a:hover{background:#e3e3e9}
+  :root[data-theme="light"] .guide-nav-links a[aria-current="location"]{background:#0066cc;color:#fff;box-shadow:inset 0 -2px 0 #004a99}
+  :root[data-theme="light"] .guide-nav-links a[aria-current="location"]:focus-visible{outline-color:#fff}
+  :root[data-theme="light"] .guide-nav-arrow{background:#e8e8ed;color:#1d1d1f;border-color:#c5c5cc}
+  :root[data-theme="light"] .comparison{border-color:#d8d8df}
+  :root[data-theme="light"] .comparison-note{color:#62626a}
+  :root[data-theme="light"] .liability-note{border-color:#d8d8df}
+  :root[data-theme="light"] .verify-checks{color:#1d1d1f}
+  /* 教材内の再現画面は、実画面に合わせた配色を保つ。 */
+  :root[data-theme="light"] .build-demo,:root[data-theme="light"] .study-demo{color-scheme:dark;--ink:#f5f5f7;--muted:#b5b5bc;--accent:#2997ff;color:#f5f5f7}
+}
+@media print{.theme-toggle{display:none}}
+</style>
+</head>
+<body>
+<button class="theme-toggle" id="theme-toggle" type="button" aria-label="ライトモードに切り替える" title="ライトモードに切り替える" hidden disabled>
+<svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
+<svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 14.3A9 9 0 0 1 9.7 3.2a9 9 0 1 0 11.1 11.1Z"/></svg>
+<span class="theme-toggle-label" id="theme-toggle-label">ライト</span>
+</button>
+<section class="welcome" id="welcome" aria-labelledby="welcome-title">
+<div class="welcome-inner">
+<h1 id="welcome-title">AIを使いはじめる。</h1>
+<p class="welcome-subtitle">選び方と設定から、アプリ作り・勉強まで。</p>
+<p class="welcome-copy" id="welcome-audience">これからAIを使い始める方に向けた入門資料です。<br>すでにアプリ開発でAIを使いこなしている方は対象としていません。</p>
+<p class="welcome-date"><time datetime="2026-09-11">2026年9月11日</time>時点の内容です。</p>
+<p class="welcome-copy welcome-update">AstraやFable 5.1が9月に登場して以来、AIへの指示の出し方も変わっています。<br>2026年8月以前の記事に載っている指示文は使わないでください。<br><br>プログラミング言語の古いバージョン向けの資料と同じで無駄になります。<br>使うモデル名と記事の日付を確認し、必ず最新の公式情報を調べてください。<a href="https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra">公式解説</a></p>
+<p class="liability-note" id="welcome-liability">この資料・掲載コード・AIの出力の利用は、利用者つまりあなた自身の判断と責任で行ってください。<br><strong>利用料金・追加請求、データの消失・破損、情報漏えい、第三者とのトラブルなど、これらの利用に関連して生じた費用・損害・不利益について、作成者は一切責任を負いません。</strong></p>
+<a class="welcome-enter" id="welcome-enter" href="#guide-content">内容を見る<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+</div>
+</section>
+<a class="skip" id="content-skip" href="#models">本文へ進む</a>
+<div id="guide-content">
+<nav class="guide-nav" id="section-nav" aria-label="目次">
+<div class="guide-nav-inner">
+<span class="guide-nav-label">目次</span>
+<button class="guide-nav-arrow" id="guide-nav-prev" type="button" aria-label="目次を左へ送る" aria-controls="guide-nav-links" hidden disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m15 5-7 7 7 7"/></svg></button>
+<ul class="guide-nav-links" id="guide-nav-links" aria-label="セクション一覧。横にスクロールできます" tabindex="0">
+<li><a href="#models">モデル</a></li>
+<li><a href="#conditions">料金と制限</a></li>
+<li><a href="#comparison">プラン比較</a></li>
+<li><a href="#usage-guide">できること</a></li>
+<li><a href="#entry-guide">アプリ版</a></li>
+<li><a href="#setup-guide">準備・設定</a></li>
+<li><a href="#free-app-example">アプリ作り</a></li>
+<li><a href="#prompt-guide">指示の出し方</a></li>
+<li><a href="#repair-guide">修正・やり直し</a></li>
+<li><a href="#learning-guide">教材の質問</a></li>
+<li><a href="#drill-guide">練習問題</a></li>
+<li><a href="#verify-guide">最後に</a></li>
+</ul>
+<button class="guide-nav-arrow" id="guide-nav-next" type="button" aria-label="目次を右へ送る" aria-controls="guide-nav-links" hidden disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m9 5 7 7-7 7"/></svg></button>
+</div>
+</nav>
+<main id="guide-main">
+<header class="guide-heading">
+<h1 id="title" tabindex="-1">AIを使いはじめる。</h1>
+<p class="guide-subtitle">選び方と設定から、アプリ作り・勉強まで。</p>
+</header>
+<section class="section" id="models" aria-labelledby="models-title">
+<div class="content">
+<h2 id="models-title">AIモデル</h2>
+<section class="company" aria-labelledby="anthropic">
+<h2 id="anthropic">Anthropic</h2>
+<ul class="models"><li>Fable</li><li>Opus</li><li>Sonnet</li></ul>
+</section>
+<section class="company" aria-labelledby="openai">
+<h2 id="openai">OpenAI</h2>
+<ul class="models"><li>Astra</li><li>Sol</li><li>Terra</li><li>Luna</li></ul>
+</section>
+</div>
+</section>
+<section class="section conditions" id="conditions" aria-labelledby="conditions-title">
+<div class="content">
+<h2 id="conditions-title">FableとAstraは、<span class="emphasis">無料プランの対象外。</span></h2>
+<p class="lead">利用枠の消費が大きく、早く上限に達しやすいモデルです。</p>
+<div class="plans">
+<section class="plan" aria-labelledby="fable">
+<h3 id="fable"><a href="https://support.claude.com/en/articles/15424964-claude-fable-models-on-your-plan" aria-label="Fableの公式利用条件">Fable</a></h3>
+<dl>
+<div><dt>Claude Pro</dt><dd>月額料金とは別にクレジットが必要</dd></div>
+<div><dt>Claude Max</dt><dd>契約内の枠で利用可能</dd></div>
+</dl>
+<div class="pricing">
+<h4><a href="https://support.claude.com/en/articles/11049762-choose-a-claude-plan">Claudeの月額料金</a></h4>
+<dl class="price-list">
+<div><dt>Pro</dt><dd>20<span> 米ドル</span></dd></div>
+<div><dt>Max 5x</dt><dd>100<span> 米ドル</span></dd></div>
+<div><dt>Max 20x</dt><dd>200<span> 米ドル</span></dd></div>
+</dl>
+</div>
+</section>
+<section class="plan" aria-labelledby="astra">
+<h3 id="astra"><a href="https://help.openai.com/en/articles/20001354-GPT-5.6" aria-label="Astraの公式利用条件">Astra</a></h3>
+<dl>
+<div><dt>ChatでAstra</dt><dd>ChatGPT Proが必要</dd></div>
+<div><dt>Work・Codex</dt><dd>Plusも対象</dd></div>
+</dl>
+
+<div class="pricing">
+<h4><a href="https://learn.chatgpt.com/docs/pricing">ChatGPTの月額料金</a></h4>
+<dl class="price-list">
+<div><dt>Plus</dt><dd>20<span> 米ドル</span></dd></div>
+<div><dt>Pro 5x</dt><dd>100<span> 米ドル</span></dd></div>
+<div><dt>Pro 20x</dt><dd>200<span> 米ドル</span></dd></div>
+</dl>
+</div>
+</section>
+</div>
+<p class="price-note">FableをClaude Proで使う追加クレジットは別料金です。</p>
+</div>
+</section>
+<!-- 公式情報確認日：2026-09-10。合意した内容は新しいsectionとして追記する。 -->
+<section class="section comparison" id="comparison" aria-labelledby="comparison-title">
+<h2 id="comparison-title">無料プランとエントリープランの違い</h2>
+<div class="compare-grid">
+<section class="compare-card" aria-labelledby="compare-claude">
+<h3 id="compare-claude"><a href="https://claude.com/pricing">Claude</a></h3>
+<table>
+<thead><tr><th scope="col">項目</th><th scope="col">Free</th><th scope="col">Pro</th></tr></thead>
+<tbody>
+<tr><th scope="row">月額</th><td>無料</td><td><strong>20米ドル</strong></td></tr>
+<tr><th scope="row">主な会話モデル</th><td>Sonnet</td><td>Sonnet・Opus</td></tr>
+<tr><th scope="row">利用量</th><td>上限あり</td><td>Freeより多い<br>上限あり</td></tr>
+<tr><th scope="row">Claude Code</th><td>使えない</td><td><strong>使える</strong></td></tr>
+<tr><th scope="row">Fable</th><td>使えない</td><td>追加クレジットが必要</td></tr>
+</tbody>
+</table>
+</section>
+<section class="compare-card" aria-labelledby="compare-openai">
+<h3 id="compare-openai"><a href="https://help.openai.com/en/articles/20001354-GPT-5.6">ChatGPT</a></h3>
+<table>
+<thead><tr><th scope="col">項目</th><th scope="col">Free</th><th scope="col">Plus</th></tr></thead>
+<tbody>
+<tr><th scope="row">月額</th><td>無料</td><td><strong>20米ドル</strong></td></tr>
+<tr><th scope="row">主な会話モデル</th><td>Luna</td><td><strong>Sol</strong></td></tr>
+<tr><th scope="row">Codexのモデル</th><td>Terra</td><td>Sol・Terra・Luna・Astra</td></tr>
+<tr><th scope="row">ChatのAstra</th><td>使えない</td><td>使えない<br>Proが必要</td></tr>
+<tr><th scope="row">Work・CodexのAstra</th><td>使えない</td><td><strong>使える</strong></td></tr>
+</tbody>
+</table>
+</section>
+</div>
+<p class="billing-note"><strong>従量課金のほうが安いのでは？という考えは捨てましょう。</strong><br>貴方の予算を一瞬でオーバーし青ざめることになります。</p>
+<p class="comparison-note">有料でも利用上限があります。料金・モデルは頻繁に変わるため、利用前に公式情報をご確認ください。（2026年9月10日確認）</p>
+</section>
+<section class="section comparison usage-guide" id="usage-guide" aria-labelledby="usage-title">
+<h2 id="usage-title">無料と有料、どう違う？</h2>
+<div class="compare-grid">
+<section class="compare-card" aria-labelledby="usage-free">
+<p class="usage-label">無料プラン</p>
+<h3 id="usage-free">無料プランでできること</h3>
+<ul class="usage-list">
+<li>分からないことを聞く</li>
+<li>文章を作ってもらう・直してもらう<br>例：メール、A4数枚程度の案内文、議事録から作る報告書</li>
+<li>コードを作ってもらう・直してもらう<br>例：簡単なWebページ、電卓、ToDoリストのコード一式</li>
+<li><a href="https://learn.chatgpt.com/docs/pricing">Codex</a>でファイルを直接編集する<br>例：ToDoリストに検索欄を付け、動くか確認してもらう</li>
+<li><a href="https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq">ChatGPT</a>で画像を作る<br>例：カフェの紹介ページに使うコーヒーのイラスト</li>
+</ul>
+<p class="usage-note">長いものや複雑なものは、分けて作り、修正を重ねます。<br>チャットで受け取ったコードは、自分でVS Codeなどにコピーして使います。</p>
+</section>
+<section class="compare-card" aria-labelledby="usage-paid">
+<p class="usage-label">有料プラン</p>
+<h3 id="usage-paid">無料プランでできることに加えて</h3>
+<ul class="usage-list">
+<li>Claude Pro：<a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork">Cowork</a>が使える<br>指定フォルダーの議事録3件を読み、決まったこと・担当者・期限をまとめたWordファイルの作成まで頼める</li>
+<li>Claude Pro：<a href="https://code.claude.com/docs/en/overview">Claude Code</a>が使える<br>Claudeの開発ツールで、ToDoリストのファイルに検索欄を追加し、動くか確認するところまで頼める</li>
+<li>ChatGPT Plus：<a href="https://learn.chatgpt.com/docs/pricing">Codexの作業中に画像生成も使える</a><br>カフェの紹介ページを編集しながら、コーヒーのイラスト作成とページへの配置もまとめて頼める</li>
+</ul>
+</section>
+</div>
+</section>
+<section class="section comparison entry-guide" id="entry-guide" aria-labelledby="entry-title">
+<h2 id="entry-title">迷ったら、アプリ版。</h2>
+<div class="compare-card">
+<table>
+<thead><tr><th scope="col">使う形</th><th scope="col">初めて使う人向けの選び方</th></tr></thead>
+<tbody>
+<tr><th scope="row">アプリ版（推奨）<span class="entry-kind">パソコンに入れて使う</span></th><td><strong>権限の設定から作業の確認まで、画面で進めやすい。</strong><br>AIに許可する操作や作業フォルダーを選び、ファイルの変更内容も確認できる。</td></tr>
+<tr><th scope="row">Web版<span class="entry-kind">ブラウザで開く</span></th><td><strong>インストールせずに使いたいとき。</strong><br>ブラウザでChatGPTやClaudeを開いて使う。</td></tr>
+<tr><th scope="row">ターミナル版<span class="entry-kind">文字の命令で起動する</span></th><td><strong>コマンド操作に慣れた人向け。</strong><br>開発手順や繰り返し作業に組み込んで使う。最初は選ばなくてよい。</td></tr>
+</tbody>
+</table>
+<p class="usage-note">アプリ版の公式案内：<a href="https://learn.chatgpt.com/docs/app">OpenAI</a>・<a href="https://code.claude.com/docs/en/desktop-quickstart">Claude</a></p>
+</div>
+<p class="comparison-note">ターミナル版を使うだけで従量課金になるわけではありません。料金は契約とログイン方法で決まります。<a href="https://learn.chatgpt.com/docs/pricing">OpenAI</a>・<a href="https://code.claude.com/docs/en/overview">Claude</a></p>
+</section>
+<section class="section comparison setup-guide" id="setup-guide" aria-labelledby="setup-title">
+<h2 id="setup-title">AIに作業を任せる準備をする。</h2>
+<p class="practice-lead">データの扱い、作業フォルダ、権限、モデルを確認してから始めます。<br>準備ができたら、次の練習例で割り勘計算機を作ります。</p>
+
+<section class="setup-step" id="setup-data" aria-labelledby="setup-data-title">
+<p class="usage-label">01　個人アカウントのデータ設定</p>
+<h3 id="setup-data-title">モデル改善への利用をオフにする。</h3>
+<p class="setup-send-guide">無料・有料どちらも、最初に確認します。Windows・Macともに、ブラウザから設定できます。</p>
+<div class="setup-os-grid">
+<div class="setup-os">
+<h4>ChatGPT・Codex</h4>
+<ol>
+<li><a href="https://chatgpt.com/">ChatGPT</a>を開き、プロフィールアイコン → <strong>「設定」</strong> → <strong>「データコントロール」</strong>。</li>
+<li><strong>「すべての人のためにモデルを改善する」</strong>をオフにします。</li>
+</ol>
+<p>同じアカウントで使うCodexの会話にも反映されます。<a href="https://help.openai.com/ja-jp/articles/7730893-data-controls-faq">設定の手順</a>・<a href="https://help.openai.com/en/articles/11369540-using-codex-with-your-chatgpt-plan">Codexへの適用</a></p>
+</div>
+<div class="setup-os">
+<h4>Claude・Claude Code</h4>
+<ol>
+<li>Claudeで自分の名前 → <strong>「設定」</strong> → <strong>「プライバシー」</strong>。<a href="https://claude.ai/settings/data-privacy-controls">設定画面を開く</a></li>
+<li><strong>「AIモデルの改善を支援する」</strong>をオフにします。</li>
+</ol>
+<p>同じ個人アカウントで使うClaude Codeにも適用されます。<a href="https://privacy.claude.com/ja/articles/12109829-モデル改善のプライバシー設定を変更するにはどうすればよいですか">公式の手順</a></p>
+</div>
+</div>
+<details><summary>Codexの「環境全体」の共有も確認する</summary><p><a href="https://chatgpt.com/codex/settings/general">Codexの設定</a>で、環境全体を学習に使う共有設定が表示される場合は、オフにします。これはChatGPTの会話の設定とは別です。<a href="https://help.openai.com/ja-jp/articles/5722486-how-your-data-is-used-to-improve-model-performance">公式の説明</a></p></details>
+<p class="setup-rule"><strong>オフにしても、情報の送信や保存がなくなるわけではありません。</strong><br>個人情報や秘密情報は、引き続き入力しません。</p>
+</section>
+
+<section class="setup-step" aria-labelledby="setup-folder-title">
+<p class="usage-label">02　作業フォルダを用意する</p>
+<h3 id="setup-folder-title">空の「AI練習」フォルダを作る。</h3>
+<div class="setup-os-grid">
+<div class="setup-os"><h4>Windows</h4><p>デスクトップの何もない所を右クリック。<br>「新規作成」→「フォルダー」を選び、名前を「AI練習」にします。</p></div>
+<div class="setup-os"><h4>Mac</h4><p>デスクトップの何もない所を右クリック（トラックパッドは2本指でクリック）。<br>「新規フォルダ」を選び、名前を「AI練習」にします。</p></div>
+</div>
+<div class="setup-folder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 6a2 2 0 0 1 2-2h5l2 3h7a2 2 0 0 1 2 2v10H3Z"/></svg>デスクトップ ／ AI練習<span>アプリごとにフォルダーを分けます。</span></div>
+<p class="setup-privacy"><strong>個人情報は、AIに渡さない。</strong><br>氏名・住所・電話番号・メールアドレス・顔写真など、自分や他人の情報を入力しません。<br>添付ファイル・スクリーンショット・作業フォルダの中身も対象です。<br>練習では、架空の名前やデータを使います。</p>
+<p class="setup-rule">パスワード、APIキー、.env、会社や顧客の資料も、入れたりチャットへ貼ったりしません。</p>
+<details><summary>APIキー・.envとは？</summary><p>APIキーは、外部サービスを使うための秘密の鍵です。.envは、APIキーやパスワードが入ることのある設定ファイルです。サンドボックスを使っても、秘密情報が自動で隠されるわけではありません。</p></details>
+</section>
+
+<section class="setup-step" aria-labelledby="setup-permissions-title">
+<p class="usage-label">03　Codexを開いて設定する</p>
+<h3 id="setup-permissions-title">作業フォルダと作業範囲を選ぶ。</h3>
+<ol>
+<li><strong>Codex</strong>を開きます。</li>
+<li>Windowsは <kbd>Ctrl</kbd> ＋ <kbd>O</kbd>、Macは <kbd>⌘</kbd> ＋ <kbd>O</kbd> を押します。「デスクトップ」→「AI練習」を選んで開きます。</li>
+<li>作業フォルダが<strong>「AI練習」</strong>になっていることを確認します。</li>
+<li>入力欄の左下から<strong>権限メニュー</strong>を開きます。下の図では<strong>「代わりに承認」</strong>の部分です。</li>
+</ol>
+<figure class="setup-diagram" aria-labelledby="setup-diagram-caption">
+<figcaption id="setup-diagram-caption">「代わりに承認」が選ばれている画面の例。青い下線の部分から設定を開きます。図の中では操作できません。</figcaption>
+<div class="setup-screen">
+<div class="setup-composer">
+<div class="setup-composer-text">何でもどうぞ</div>
+<div class="setup-composer-toolbar">
+<div class="setup-options"><span class="setup-add-icon" aria-hidden="true">＋</span><span class="setup-option"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m12 3 8 4v6c0 5-8 8-8 8s-8-3-8-8V7Z"/><path d="m9 10 3 3-3 3m5 0h3"/></svg>代わりに承認</span></div>
+<div class="setup-model-options"><span><strong>GPT-6 Astra</strong><span class="setup-effort">極高⌄</span></span><svg class="setup-mic-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"/><path d="M6 11v1a6 6 0 0 0 12 0v-1m-6 7v3m-3 0h6"/></svg><span class="setup-voice-icon" aria-label="音声ボタンの位置"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M5 9v6m4-10v14m4-11v8m4-12v16m4-11v6"/></svg></span></div>
+</div>
+</div>
+</div>
+</figure>
+<div class="setup-explanation">
+<p><strong>作業の許可を、どこまでAIに任せるかを選びます。</strong>「代わりに承認」では、安全でない可能性があると検出された操作だけ確認が入ります。<br>練習では、<strong>「承認を求める」</strong>に切り替えます。</p>
+</div>
+<p class="setup-rule">AIが作業できる範囲を制限するのが<strong>「サンドボックス」</strong>です。「代わりに承認」でも、この制限は残ります。<br><strong>今回の練習では「フルアクセス」を選びません。</strong></p>
+<details><summary>AIに任せる範囲の違い</summary>
+<p><strong>承認を求める</strong><br>外部ファイルの編集やインターネットの利用について、常に確認を求めます。</p>
+<p><strong>代わりに承認</strong><br>安全でない可能性があると検出された操作についてのみ確認を求めます。</p>
+<p><strong>フルアクセス</strong><br>インターネットとコンピューター上のすべてのファイルに無制限でアクセスします。</p>
+<p><a href="https://learn.chatgpt.com/docs/permission-modes">公式の説明</a></p>
+</details>
+<details><summary>Windowsでサンドボックスの初期設定が出たら</summary><p>Codexから始めたサンドボックス設定であることを確認し、案内に沿って進めます。初回はWindowsの管理者による許可が必要になることがあります。設定に失敗したら、表示されたエラーを確認します。<a href="https://learn.chatgpt.com/docs/windows/windows-sandbox">公式の対処方法</a></p></details>
+</section>
+
+<section class="setup-step" id="setup-model" aria-labelledby="setup-model-title">
+<p class="usage-label">04　最初に使うモデルを選ぶ</p>
+<h3 id="setup-model-title">この練習では、Terraを選びます。</h3>
+<div class="setup-os-grid">
+<div class="setup-os">
+<h4>Codexでアプリを作る</h4>
+<ol>
+<li>入力欄の右下にある<strong>モデル名</strong>、または<strong>「思考量を選択」</strong>を押します。</li>
+<li>開いたメニューの<strong>モデル名</strong>か、その上の<strong>思考量（例：「極高」）</strong>を押し、<strong>「GPT-5.6 Terra」</strong>を選びます。</li>
+<li><strong>思考量（考える強さ）</strong>は、まず<strong>「中」</strong>にします。</li>
+</ol>
+<p>入力欄に <code>/model</code> と入力して、モデル選択を開くこともできます。</p>
+<p>日常的な開発と利用量のバランスを考えた、この練習でのおすすめです。<a href="https://learn.chatgpt.com/ja-JP/docs/models?surface=app">モデルと強さの説明</a></p>
+</div>
+<div class="setup-os">
+<h4>Claudeで相談する</h4>
+<p>入力欄のモデル名を押し、まず<strong>「Sonnet」</strong>を選びます。考える強さは初期設定から始めます。<a href="https://support.claude.com/en/articles/8664678-change-the-model-effort-and-thinking-settings">モデルの選び方</a></p>
+</div>
+</div>
+<p class="setup-rule">上の図の<strong>「Astra・極高」は表示例</strong>です。考える強さを上げるほど時間や利用枠を使うため、必要になってから上げます。</p>
+<details><summary>Terraが見つからないとき</summary><p>モデルのメニューに<strong>「上級」</strong>があれば開きます。それでも選べない場合は、そのプランの標準モデルで始めます。選べるモデルや表示は、プランやアプリの更新で変わります。<a href="https://learn.chatgpt.com/ja-JP/docs/models?surface=app">公式の画面案内</a></p></details>
+</section>
+
+<section class="setup-step" aria-labelledby="setup-send-title">
+<p class="usage-label">05　作業前の説明を指示に入れる</p>
+<h3 id="setup-send-title">変更内容と外部送信を、先に説明させる。</h3>
+<p class="setup-send-guide">作業を頼むときは、この文章 (一例です) を指示に入れます。</p>
+<div class="prompt-block">
+<div class="prompt-tools" id="setup-explanation-prompt-copy-tools" hidden>
+<span class="prompt-copy-status" id="setup-explanation-prompt-copy-status" role="status" aria-live="polite" aria-atomic="true"></span>
+<button class="prompt-copy" id="copy-setup-explanation-prompt" type="button" data-copy-target="setup-explanation-prompt" aria-controls="setup-explanation-prompt" aria-label="作業前の説明を頼む指示文をコピー" title="コピー" disabled><svg class="prompt-copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M15 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h3"/></svg><svg class="prompt-copy-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>コピー</span></button>
+</div>
+<pre class="practice-prompt" id="setup-explanation-prompt">作業を始める前に、次の2点を短く説明してください。
+1. 何を変更するか（対象のファイル・フォルダと変更内容）
+2. 外部に送る情報があるか（ある場合は、内容・送信先・目的。なければ「なし」）
+途中で予定が変わる場合も、実行する前に説明してください。</pre>
+</div>
+<p class="setup-send-guide"><a href="#free-app-title">次の練習例</a>にある指示文の<strong>右上のコピーボタン</strong>を押します。<br>Codexの入力欄へ貼り付け、送信ボタン（↑）を押します。貼り付けは、Windowsなら <kbd>Ctrl</kbd> ＋ <kbd>V</kbd>、Macなら <kbd>⌘</kbd> ＋ <kbd>V</kbd> です。</p>
+<p class="setup-rule">最初に出てくる説明を確認し、頼んだ内容と違っていたら止めて訂正します。AIから質問が来たら、同じチャットで答えます。</p>
+<details><summary>承認の画面が出たら</summary><p>事前の説明と同じ作業かを確認し、必要な操作だけ許可します。説明にない変更や外部送信は許可せず、実行前に説明させます。個人情報や秘密情報の送信は許可しません。</p></details>
+<p class="setup-stop"><strong>途中で止めるときは、停止ボタン（■）。</strong><br>停止しても、すでに作られたファイルや変更は残ります。続きを頼むときは、同じチャットへ送ります。</p>
+</section>
+<p class="comparison-note">フォルダーを開くキー操作：<a href="https://learn.chatgpt.com/docs/reference/commands">OpenAI公式資料</a>（2026年9月11日確認）</p>
+</section>
+<section class="section comparison" id="free-app-example" aria-labelledby="free-app-title">
+<h2 id="free-app-title">Plusを使ったアプリ作りの練習例</h2>
+<p class="practice-lead">ブラウザで動く「割り勘計算機」を作ります。<br>ChatGPT Plusで、アプリ版の<a href="https://learn.chatgpt.com/docs/pricing">Codex</a>を使います。</p>
+<a class="practice-download" id="warikan-download" download="割り勘計算機.html" href="data:text/html;charset=utf-8;base64,PCFkb2N0eXBlIGh0bWw+CjxodG1sIGxhbmc9ImphIj4KPGhlYWQ+CiAgPG1ldGEgY2hhcnNldD0idXRmLTgiPgogIDxtZXRhIG5hbWU9InZpZXdwb3J0IiBjb250ZW50PSJ3aWR0aD1kZXZpY2Utd2lkdGgsIGluaXRpYWwtc2NhbGU9MSI+CiAgPG1ldGEgaHR0cC1lcXVpdj0iQ29udGVudC1TZWN1cml0eS1Qb2xpY3kiIGNvbnRlbnQ9ImRlZmF1bHQtc3JjICdub25lJzsgc2NyaXB0LXNyYyAndW5zYWZlLWlubGluZSc7IHN0eWxlLXNyYyAndW5zYWZlLWlubGluZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUnIj4KICA8bWV0YSBuYW1lPSJjb2xvci1zY2hlbWUiIGNvbnRlbnQ9ImxpZ2h0Ij4KICA8dGl0bGU+5Ymy44KK5YuY6KiI566X5qmfPC90aXRsZT4KICA8c3R5bGU+CiAgICAqIHsgYm94LXNpemluZzogYm9yZGVyLWJveDsgfQogICAgYm9keSB7IG1hcmdpbjogMDsgbWluLWhlaWdodDogMTAwdmg7IGJhY2tncm91bmQ6ICNmNWY1Zjc7IGNvbG9yOiAjMWQxZDFmOyBmb250LWZhbWlseTogLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCAiU2Vnb2UgVUkiLCAiSGlyYWdpbm8gS2FrdSBHb3RoaWMgUHJvTiIsICJZdSBHb3RoaWMiLCBNZWlyeW8sIHNhbnMtc2VyaWY7IC13ZWJraXQtZm9udC1zbW9vdGhpbmc6IGFudGlhbGlhc2VkOyB9CiAgICBtYWluIHsgd2lkdGg6IG1pbig5NjBweCwgMTAwJSk7IG1hcmdpbjogMCBhdXRvOyBwYWRkaW5nOiA2NHB4IDI0cHggMzJweDsgfQogICAgaGVhZGVyIHsgbWFyZ2luLWJvdHRvbTogMzJweDsgfQogICAgaDEgeyBtYXJnaW46IDAgMCAxMnB4OyBmb250LXNpemU6IGNsYW1wKDM0cHgsIDV2dywgNTJweCk7IGxpbmUtaGVpZ2h0OiAxLjI7IGxldHRlci1zcGFjaW5nOiAtLjA1NWVtOyBmb250LXdlaWdodDogNzUwOyB9CiAgICBoZWFkZXIgcCB7IG1hcmdpbjogMDsgY29sb3I6ICM1MTUxNTQ7IGZvbnQtc2l6ZTogMTZweDsgbGluZS1oZWlnaHQ6IDEuODsgfQogICAgLmNhbGN1bGF0b3IgeyBkaXNwbGF5OiBncmlkOyBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IDFmciAxZnI7IGdhcDogMjBweDsgYWxpZ24taXRlbXM6IHN0cmV0Y2g7IH0KICAgIGZvcm0sIC5yZXN1bHQgeyBtaW4td2lkdGg6IDA7IGJvcmRlci1yYWRpdXM6IDI0cHg7IHBhZGRpbmc6IDMycHg7IH0KICAgIGZvcm0geyBiYWNrZ3JvdW5kOiAjZmZmOyBib3JkZXI6IDFweCBzb2xpZCAjZTNlM2U4OyB9CiAgICAuZmllbGQgKyAuZmllbGQgeyBtYXJnaW4tdG9wOiAyMHB4OyB9CiAgICBsYWJlbCB7IGRpc3BsYXk6IGJsb2NrOyBtYXJnaW4tYm90dG9tOiAxMHB4OyBmb250LXNpemU6IDE1cHg7IGZvbnQtd2VpZ2h0OiA2NTA7IH0KICAgIC5pbnB1dC13cmFwIHsgcG9zaXRpb246IHJlbGF0aXZlOyB9CiAgICBpbnB1dCB7IHdpZHRoOiAxMDAlOyBoZWlnaHQ6IDY4cHg7IGJvcmRlcjogMXB4IHNvbGlkICM4Njg2OGI7IGJvcmRlci1yYWRpdXM6IDEycHg7IGJhY2tncm91bmQ6ICNmZmY7IGNvbG9yOiAjMWQxZDFmOyBwYWRkaW5nOiAxMnB4IDUycHggMTJweCAxNnB4OyBmb250OiBpbmhlcml0OyBmb250LXNpemU6IDI4cHg7IGZvbnQtd2VpZ2h0OiA2MDA7IGZvbnQtdmFyaWFudC1udW1lcmljOiB0YWJ1bGFyLW51bXM7IH0KICAgIGlucHV0OjpwbGFjZWhvbGRlciB7IGNvbG9yOiAjODY4NjhiOyBmb250LXdlaWdodDogNDAwOyBmb250LXNpemU6IDIwcHg7IH0KICAgIC51bml0IHsgcG9zaXRpb246IGFic29sdXRlOyByaWdodDogMThweDsgdG9wOiA1MCU7IHRyYW5zZm9ybTogdHJhbnNsYXRlWSgtNTAlKTsgY29sb3I6ICM1MTUxNTQ7IGZvbnQtc2l6ZTogMTdweDsgcG9pbnRlci1ldmVudHM6IG5vbmU7IH0KICAgIGlucHV0OmZvY3VzLXZpc2libGUsIGJ1dHRvbjpmb2N1cy12aXNpYmxlIHsgb3V0bGluZTogM3B4IHNvbGlkICMwMDcxZTM7IG91dGxpbmUtb2Zmc2V0OiA0cHg7IH0KICAgIGlucHV0W2FyaWEtaW52YWxpZD0idHJ1ZSJdIHsgYm9yZGVyOiAycHggc29saWQgI2I0MjMxODsgfQogICAgLmVycm9yIHsgbWFyZ2luOiA4cHggMCAwOyBjb2xvcjogI2I0MjMxODsgZm9udC1zaXplOiAxM3B4OyBsaW5lLWhlaWdodDogMS42OyB9CiAgICAuZXJyb3I6ZW1wdHkgeyBkaXNwbGF5OiBub25lOyB9CiAgICAuZm9ybS1ub3RlIHsgbWFyZ2luOiAxNnB4IDAgMjJweDsgY29sb3I6ICM2ZTZlNzM7IGZvbnQtc2l6ZTogMTNweDsgbGluZS1oZWlnaHQ6IDEuNzsgfQogICAgYnV0dG9uIHsgZm9udDogaW5oZXJpdDsgY3Vyc29yOiBwb2ludGVyOyB0b3VjaC1hY3Rpb246IG1hbmlwdWxhdGlvbjsgfQogICAgLmNhbGN1bGF0ZSB7IGRpc3BsYXk6IGJsb2NrOyB3aWR0aDogMTAwJTsgYm9yZGVyOiAwOyBib3JkZXItcmFkaXVzOiAxMnB4OyBwYWRkaW5nOiAxNnB4IDIwcHg7IGJhY2tncm91bmQ6ICMwMDY2Y2M7IGNvbG9yOiAjZmZmOyBmb250LXNpemU6IDE3cHg7IGZvbnQtd2VpZ2h0OiA2NTA7IH0KICAgIC5jYWxjdWxhdGU6aG92ZXIgeyBiYWNrZ3JvdW5kOiAjMDA1NWFhOyB9CiAgICAuY2FsY3VsYXRlOmFjdGl2ZSB7IGJhY2tncm91bmQ6ICMwMDRhOTU7IH0KICAgIC5jbGVhciB7IGRpc3BsYXk6IGJsb2NrOyBtYXJnaW46IDEycHggYXV0byAwOyBtaW4taGVpZ2h0OiA0NHB4OyBwYWRkaW5nOiAxMHB4IDE2cHg7IGJvcmRlcjogMDsgYm9yZGVyLXJhZGl1czogOHB4OyBiYWNrZ3JvdW5kOiB0cmFuc3BhcmVudDsgY29sb3I6ICM1MTUxNTQ7IGZvbnQtc2l6ZTogMTRweDsgfQogICAgLmNsZWFyOmhvdmVyIHsgYmFja2dyb3VuZDogI2Y1ZjVmNzsgY29sb3I6ICMxZDFkMWY7IH0KICAgIC5yZXN1bHQgeyBkaXNwbGF5OiBmbGV4OyBmbGV4LWRpcmVjdGlvbjogY29sdW1uOyBiYWNrZ3JvdW5kOiAjMWQxZDFmOyBjb2xvcjogI2Y1ZjVmNzsgfQogICAgLnJlc3VsdCBoMiB7IG1hcmdpbjogMDsgY29sb3I6ICNkMmQyZDc7IGZvbnQtc2l6ZTogMTZweDsgZm9udC13ZWlnaHQ6IDUwMDsgfQogICAgLmFtb3VudCB7IGRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiBiYXNlbGluZTsgZ2FwOiA4cHg7IG1hcmdpbjogMThweCAwIDI0cHg7IGZvbnQtdmFyaWFudC1udW1lcmljOiB0YWJ1bGFyLW51bXM7IGZsZXgtd3JhcDogd3JhcDsgfQogICAgI3Jlc3VsdC12YWx1ZSB7IG1heC13aWR0aDogMTAwJTsgZm9udC1zaXplOiBjbGFtcCg0OHB4LCA2Ljh2dywgNzhweCk7IGZvbnQtd2VpZ2h0OiA2NTA7IGxldHRlci1zcGFjaW5nOiAtLjA1NWVtOyBsaW5lLWhlaWdodDogMS4xMjsgb3ZlcmZsb3ctd3JhcDogYW55d2hlcmU7IH0KICAgICNyZXN1bHQtdmFsdWUuY29tcGFjdCB7IGZvbnQtc2l6ZTogY2xhbXAoMzJweCwgNHZ3LCA0NnB4KTsgfQogICAgLnllbiB7IGZvbnQtc2l6ZTogMjFweDsgY29sb3I6ICNkMmQyZDc7IH0KICAgIC5yZXN1bHQgZGwgeyBtYXJnaW46IGF1dG8gMCAwOyBwYWRkaW5nLXRvcDogMjJweDsgYm9yZGVyLXRvcDogMXB4IHNvbGlkICM0ODQ4NGE7IH0KICAgIC5yZXN1bHQgZGwgPiBkaXYgeyBkaXNwbGF5OiBmbGV4OyBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47IGFsaWduLWl0ZW1zOiBiYXNlbGluZTsgZ2FwOiAxOHB4OyBwYWRkaW5nOiA4cHggMDsgZm9udC1zaXplOiAxNHB4OyBsaW5lLWhlaWdodDogMS41OyB9CiAgICAucmVzdWx0IGR0IHsgY29sb3I6ICNjN2M3Y2M7IGZsZXgtc2hyaW5rOiAwOyB9CiAgICAucmVzdWx0IGRkIHsgbWFyZ2luOiAwOyB0ZXh0LWFsaWduOiByaWdodDsgZm9udC1zaXplOiAxNnB4OyBmb250LXdlaWdodDogNjAwOyBmb250LXZhcmlhbnQtbnVtZXJpYzogdGFidWxhci1udW1zOyBvdmVyZmxvdy13cmFwOiBhbnl3aGVyZTsgfQogICAgI3Jlc3VsdC1ub3RlIHsgbWFyZ2luOiAyMHB4IDAgMDsgcGFkZGluZzogMTRweCAxNnB4OyBib3JkZXItcmFkaXVzOiAxMnB4OyBiYWNrZ3JvdW5kOiAjMzMzMzM2OyBjb2xvcjogI2Y1ZjVmNzsgZm9udC1zaXplOiAxM3B4OyBsaW5lLWhlaWdodDogMS43NTsgfQogICAgZm9vdGVyIHsgcGFkZGluZy10b3A6IDIycHg7IHRleHQtYWxpZ246IGNlbnRlcjsgY29sb3I6ICM2ZTZlNzM7IGZvbnQtc2l6ZTogMTJweDsgbGluZS1oZWlnaHQ6IDEuODsgfQogICAgbm9zY3JpcHQgcCB7IHBhZGRpbmc6IDE2cHg7IGJvcmRlcjogMXB4IHNvbGlkICNiNDIzMTg7IGJvcmRlci1yYWRpdXM6IDEycHg7IGJhY2tncm91bmQ6ICNmZmY7IGNvbG9yOiAjYjQyMzE4OyB9CiAgICBAbWVkaWEgKG1heC13aWR0aDogNjgwcHgpIHsgbWFpbiB7IHBhZGRpbmc6IDM2cHggMThweCAyNHB4OyB9IGhlYWRlciB7IG1hcmdpbi1ib3R0b206IDI0cHg7IH0gLmNhbGN1bGF0b3IgeyBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IDFmcjsgZ2FwOiAxNnB4OyB9IGZvcm0sIC5yZXN1bHQgeyBwYWRkaW5nOiAyNnB4IDI0cHg7IGJvcmRlci1yYWRpdXM6IDIwcHg7IH0gI3Jlc3VsdC12YWx1ZSB7IGZvbnQtc2l6ZTogNjRweDsgfSAjcmVzdWx0LXZhbHVlLmNvbXBhY3QgeyBmb250LXNpemU6IDM2cHg7IH0gfQogICAgQG1lZGlhIChwcmVmZXJzLXJlZHVjZWQtbW90aW9uOiBuby1wcmVmZXJlbmNlKSB7IGJ1dHRvbiB7IHRyYW5zaXRpb246IGJhY2tncm91bmQtY29sb3IgLjE1cyBlYXNlOyB9IH0KICA8L3N0eWxlPgo8L2hlYWQ+Cjxib2R5PgogIDxtYWluPgogICAgPGhlYWRlcj4KICAgICAgPGgxPuWJsuOCiuWLmOioiOeul+apnzwvaDE+CiAgICAgIDxwPuWQiOioiOmHkemhjeOBqOS6uuaVsOOCkuWFpeOCjOOBpuOAgeOBsuOBqOOCiuWIhuOCkuioiOeul+OAgjwvcD4KICAgIDwvaGVhZGVyPgogICAgPG5vc2NyaXB0PjxwPuOBk+OBruioiOeul+apn+OCkuS9v+OBhuOBq+OBr+OAgeODluODqeOCpuOCtuOBrkphdmFTY3JpcHTjgpLmnInlirnjgavjgZfjgabjgY/jgaDjgZXjgYTjgII8L3A+PC9ub3NjcmlwdD4KICAgIDxkaXYgY2xhc3M9ImNhbGN1bGF0b3IiPgogICAgICA8Zm9ybSBpZD0iY2FsY3VsYXRvci1mb3JtIiBub3ZhbGlkYXRlPgogICAgICAgIDxkaXYgY2xhc3M9ImZpZWxkIj4KICAgICAgICAgIDxsYWJlbCBmb3I9InRvdGFsIj7lkIjoqIjph5HpoY08L2xhYmVsPgogICAgICAgICAgPGRpdiBjbGFzcz0iaW5wdXQtd3JhcCI+CiAgICAgICAgICAgIDxpbnB1dCBpZD0idG90YWwiIHR5cGU9InRleHQiIGlucHV0bW9kZT0ibnVtZXJpYyIgdmFsdWU9IjEwMDAiIHBsYWNlaG9sZGVyPSLkvovvvJoxMDAwIiBhdXRvY29tcGxldGU9Im9mZiIgc3BlbGxjaGVjaz0iZmFsc2UiIGFyaWEtZGVzY3JpYmVkYnk9InRvdGFsLWVycm9yIHJvdW5kaW5nLW5vdGUiPgogICAgICAgICAgICA8c3BhbiBjbGFzcz0idW5pdCIgYXJpYS1oaWRkZW49InRydWUiPuWGhjwvc3Bhbj4KICAgICAgICAgIDwvZGl2PgogICAgICAgICAgPHAgaWQ9InRvdGFsLWVycm9yIiBjbGFzcz0iZXJyb3IiIGFyaWEtbGl2ZT0icG9saXRlIj48L3A+CiAgICAgICAgPC9kaXY+CiAgICAgICAgPGRpdiBjbGFzcz0iZmllbGQiPgogICAgICAgICAgPGxhYmVsIGZvcj0icGVvcGxlIj7kurrmlbA8L2xhYmVsPgogICAgICAgICAgPGRpdiBjbGFzcz0iaW5wdXQtd3JhcCI+CiAgICAgICAgICAgIDxpbnB1dCBpZD0icGVvcGxlIiB0eXBlPSJ0ZXh0IiBpbnB1dG1vZGU9Im51bWVyaWMiIHZhbHVlPSIzIiBwbGFjZWhvbGRlcj0i5L6L77yaMyIgYXV0b2NvbXBsZXRlPSJvZmYiIHNwZWxsY2hlY2s9ImZhbHNlIiBhcmlhLWRlc2NyaWJlZGJ5PSJwZW9wbGUtZXJyb3IiPgogICAgICAgICAgICA8c3BhbiBjbGFzcz0idW5pdCIgYXJpYS1oaWRkZW49InRydWUiPuS6ujwvc3Bhbj4KICAgICAgICAgIDwvZGl2PgogICAgICAgICAgPHAgaWQ9InBlb3BsZS1lcnJvciIgY2xhc3M9ImVycm9yIiBhcmlhLWxpdmU9InBvbGl0ZSI+PC9wPgogICAgICAgIDwvZGl2PgogICAgICAgIDxwIGlkPSJyb3VuZGluZy1ub3RlIiBjbGFzcz0iZm9ybS1ub3RlIj4x5YaG5pyq5rqA44Gu56uv5pWw44Gv5YiH44KK5LiK44GS44G+44GZ44CCPC9wPgogICAgICAgIDxidXR0b24gY2xhc3M9ImNhbGN1bGF0ZSIgdHlwZT0ic3VibWl0Ij7oqIjnrpfjgZnjgos8L2J1dHRvbj4KICAgICAgICA8YnV0dG9uIGNsYXNzPSJjbGVhciIgaWQ9ImNsZWFyLWJ1dHRvbiIgdHlwZT0iYnV0dG9uIj7lhaXlipvjgpLjgq/jg6rjgqI8L2J1dHRvbj4KICAgICAgPC9mb3JtPgogICAgICA8c2VjdGlvbiBjbGFzcz0icmVzdWx0IiBhcmlhLWxhYmVsbGVkYnk9InJlc3VsdC10aXRsZSIgYXJpYS1saXZlPSJwb2xpdGUiIGFyaWEtYXRvbWljPSJ0cnVlIj4KICAgICAgICA8aDIgaWQ9InJlc3VsdC10aXRsZSI+MeS6uuOBguOBn+OCijwvaDI+CiAgICAgICAgPGRpdiBjbGFzcz0iYW1vdW50Ij48c3BhbiBpZD0icmVzdWx0LXZhbHVlIj7igJQ8L3NwYW4+PHNwYW4gY2xhc3M9InllbiI+5YaGPC9zcGFuPjwvZGl2PgogICAgICAgIDxkbD4KICAgICAgICAgIDxkaXY+PGR0PuWQiOioiOmHkemhjTwvZHQ+PGRkIGlkPSJyZXN1bHQtdG90YWwiPuKAlDwvZGQ+PC9kaXY+CiAgICAgICAgICA8ZGl2PjxkdD7kurrmlbA8L2R0PjxkZCBpZD0icmVzdWx0LXBlb3BsZSI+4oCUPC9kZD48L2Rpdj4KICAgICAgICAgIDxkaXY+PGR0PumbhuOBvuOCi+WQiOioiDwvZHQ+PGRkIGlkPSJyZXN1bHQtY29sbGVjdGVkIj7igJQ8L2RkPjwvZGl2PgogICAgICAgIDwvZGw+CiAgICAgICAgPHAgaWQ9InJlc3VsdC1ub3RlIj7ph5HpoY3jgajkurrmlbDjgpLlhaXlipvjgZfjgabjgY/jgaDjgZXjgYTjgII8L3A+CiAgICAgIDwvc2VjdGlvbj4KICAgIDwvZGl2PgogICAgPGZvb3Rlcj7jgZPjga7jg5bjg6njgqbjgrblhoXjgafoqIjnrpfjgZfjgb7jgZnjgILpgJrkv6Hjg7vkv53lrZjjga/ooYzjgYTjgb7jgZvjgpPjgII8L2Zvb3Rlcj4KICA8L21haW4+CiAgPHNjcmlwdD4KICAgICd1c2Ugc3RyaWN0JzsKICAgIGNvbnN0IGZvcm0gPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnY2FsY3VsYXRvci1mb3JtJyk7CiAgICBjb25zdCB0b3RhbElucHV0ID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3RvdGFsJyk7CiAgICBjb25zdCBwZW9wbGVJbnB1dCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdwZW9wbGUnKTsKICAgIGNvbnN0IG51bWJlckZvcm1hdCA9IG5ldyBJbnRsLk51bWJlckZvcm1hdCgnamEtSlAnKTsKCiAgICBmdW5jdGlvbiByZWFkSW50ZWdlcihyYXcsIGxhYmVsLCBtaW5pbXVtLCBtYXhpbXVtLCB1bml0KSB7CiAgICAgIGNvbnN0IHRleHQgPSByYXcubm9ybWFsaXplKCdORktDJykudHJpbSgpOwogICAgICBpZiAodGV4dCA9PT0gJycpIHJldHVybiB7IGVycm9yOiBsYWJlbCArICfjgpLlhaXlipvjgZfjgabjgY/jgaDjgZXjgYTjgIInIH07CiAgICAgIGlmICghL14oPzpcZCt8XGR7MSwzfSg/OixcZHszfSkrKSQvLnRlc3QodGV4dCkpIHsKICAgICAgICByZXR1cm4geyBlcnJvcjogbGFiZWwgKyAn44GvJyArIG1pbmltdW0gKyAn5Lul5LiK44Gu5pW05pWw44Gn5YWl5Yqb44GX44Gm44GP44Gg44GV44GE44CCJyB9OwogICAgICB9CiAgICAgIGNvbnN0IHZhbHVlID0gTnVtYmVyKHRleHQucmVwbGFjZUFsbCgnLCcsICcnKSk7CiAgICAgIGlmICh2YWx1ZSA8IG1pbmltdW0pIHJldHVybiB7IGVycm9yOiBsYWJlbCArICfjga8nICsgbWluaW11bSArIHVuaXQgKyAn5Lul5LiK44Gn5YWl5Yqb44GX44Gm44GP44Gg44GV44GE44CCJyB9OwogICAgICBpZiAoIU51bWJlci5pc1NhZmVJbnRlZ2VyKHZhbHVlKSB8fCB2YWx1ZSA+IG1heGltdW0pIHsKICAgICAgICByZXR1cm4geyBlcnJvcjogbGFiZWwgKyAn44GvJyArIG51bWJlckZvcm1hdC5mb3JtYXQobWF4aW11bSkgKyB1bml0ICsgJ+S7peS4i+OBp+WFpeWKm+OBl+OBpuOBj+OBoOOBleOBhOOAgicgfTsKICAgICAgfQogICAgICByZXR1cm4geyB2YWx1ZSwgZXJyb3I6ICcnIH07CiAgICB9CgogICAgZnVuY3Rpb24gc2V0RXJyb3IoaW5wdXQsIG1lc3NhZ2UpIHsKICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoaW5wdXQuaWQgKyAnLWVycm9yJykudGV4dENvbnRlbnQgPSBtZXNzYWdlOwogICAgICBpbnB1dC5zZXRBdHRyaWJ1dGUoJ2FyaWEtaW52YWxpZCcsIG1lc3NhZ2UgPyAndHJ1ZScgOiAnZmFsc2UnKTsKICAgIH0KCiAgICBmdW5jdGlvbiBjbGVhclJlc3VsdChtZXNzYWdlKSB7CiAgICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdyZXN1bHQtdmFsdWUnKS50ZXh0Q29udGVudCA9ICfigJQnOwogICAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgncmVzdWx0LXZhbHVlJykuY2xhc3NMaXN0LnJlbW92ZSgnY29tcGFjdCcpOwogICAgICBmb3IgKGNvbnN0IGlkIG9mIFsncmVzdWx0LXRvdGFsJywgJ3Jlc3VsdC1wZW9wbGUnLCAncmVzdWx0LWNvbGxlY3RlZCddKSB7CiAgICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoaWQpLnRleHRDb250ZW50ID0gJ+KAlCc7CiAgICAgIH0KICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3Jlc3VsdC1ub3RlJykudGV4dENvbnRlbnQgPSBtZXNzYWdlOwogICAgfQoKICAgIGZ1bmN0aW9uIGNhbGN1bGF0ZShmb2N1c0Vycm9yKSB7CiAgICAgIGNvbnN0IHRvdGFsID0gcmVhZEludGVnZXIodG90YWxJbnB1dC52YWx1ZSwgJ+WQiOioiOmHkemhjScsIDAsIDk5OTk5OTk5OTk5OSwgJ+WGhicpOwogICAgICBjb25zdCBwZW9wbGUgPSByZWFkSW50ZWdlcihwZW9wbGVJbnB1dC52YWx1ZSwgJ+S6uuaVsCcsIDEsIDk5OTk5LCAn5Lq6Jyk7CiAgICAgIHNldEVycm9yKHRvdGFsSW5wdXQsIHRvdGFsLmVycm9yKTsKICAgICAgc2V0RXJyb3IocGVvcGxlSW5wdXQsIHBlb3BsZS5lcnJvcik7CiAgICAgIGlmICh0b3RhbC5lcnJvciB8fCBwZW9wbGUuZXJyb3IpIHsKICAgICAgICBjbGVhclJlc3VsdCgn5YWl5Yqb5YaF5a6544KS56K66KqN44GX44Gm44GP44Gg44GV44GE44CCJyk7CiAgICAgICAgaWYgKGZvY3VzRXJyb3IpICh0b3RhbC5lcnJvciA/IHRvdGFsSW5wdXQgOiBwZW9wbGVJbnB1dCkuZm9jdXMoKTsKICAgICAgICByZXR1cm47CiAgICAgIH0KICAgICAgY29uc3QgZWFjaCA9IE1hdGguY2VpbCh0b3RhbC52YWx1ZSAvIHBlb3BsZS52YWx1ZSk7CiAgICAgIGNvbnN0IGNvbGxlY3RlZCA9IGVhY2ggKiBwZW9wbGUudmFsdWU7CiAgICAgIGNvbnN0IGV4dHJhID0gY29sbGVjdGVkIC0gdG90YWwudmFsdWU7CiAgICAgIGNvbnN0IHJlc3VsdFZhbHVlID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3Jlc3VsdC12YWx1ZScpOwogICAgICByZXN1bHRWYWx1ZS50ZXh0Q29udGVudCA9IG51bWJlckZvcm1hdC5mb3JtYXQoZWFjaCk7CiAgICAgIHJlc3VsdFZhbHVlLmNsYXNzTGlzdC50b2dnbGUoJ2NvbXBhY3QnLCByZXN1bHRWYWx1ZS50ZXh0Q29udGVudC5sZW5ndGggPiA3KTsKICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3Jlc3VsdC10b3RhbCcpLnRleHRDb250ZW50ID0gbnVtYmVyRm9ybWF0LmZvcm1hdCh0b3RhbC52YWx1ZSkgKyAn5YaGJzsKICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3Jlc3VsdC1wZW9wbGUnKS50ZXh0Q29udGVudCA9IG51bWJlckZvcm1hdC5mb3JtYXQocGVvcGxlLnZhbHVlKSArICfkuronOwogICAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgncmVzdWx0LWNvbGxlY3RlZCcpLnRleHRDb250ZW50ID0gbnVtYmVyRm9ybWF0LmZvcm1hdChjb2xsZWN0ZWQpICsgJ+WGhic7CiAgICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdyZXN1bHQtbm90ZScpLnRleHRDb250ZW50ID0gZXh0cmEgPT09IDAKICAgICAgICA/ICfnq6/mlbDjgarjgZfjgILlhajlk6HlkIzjgZjph5HpoY3jgaflibLjgorliIfjgozjgb7jgZnjgIInCiAgICAgICAgOiAn5YWo5ZOh44GM44GT44Gu6YeR6aGN44KS5omV44GG44Go44CB5YiH44KK5LiK44GS5YiG44Go44GX44GmJyArIG51bWJlckZvcm1hdC5mb3JtYXQoZXh0cmEpICsgJ+WGhuWkmuOBj+mbhuOBvuOCiuOBvuOBmeOAgic7CiAgICB9CgogICAgZm9ybS5hZGRFdmVudExpc3RlbmVyKCdzdWJtaXQnLCBmdW5jdGlvbiAoZXZlbnQpIHsKICAgICAgZXZlbnQucHJldmVudERlZmF1bHQoKTsKICAgICAgY2FsY3VsYXRlKHRydWUpOwogICAgfSk7CiAgICBmb3IgKGNvbnN0IGlucHV0IG9mIFt0b3RhbElucHV0LCBwZW9wbGVJbnB1dF0pIHsKICAgICAgaW5wdXQuYWRkRXZlbnRMaXN0ZW5lcignaW5wdXQnLCBmdW5jdGlvbiAoKSB7CiAgICAgICAgc2V0RXJyb3IoaW5wdXQsICcnKTsKICAgICAgICBjbGVhclJlc3VsdCgn44CM6KiI566X44GZ44KL44CN44KS5oq844GZ44Go57WQ5p6c44GM6KGo56S644GV44KM44G+44GZ44CCJyk7CiAgICAgIH0pOwogICAgfQogICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2NsZWFyLWJ1dHRvbicpLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJywgZnVuY3Rpb24gKCkgewogICAgICB0b3RhbElucHV0LnZhbHVlID0gJyc7CiAgICAgIHBlb3BsZUlucHV0LnZhbHVlID0gJyc7CiAgICAgIHNldEVycm9yKHRvdGFsSW5wdXQsICcnKTsKICAgICAgc2V0RXJyb3IocGVvcGxlSW5wdXQsICcnKTsKICAgICAgY2xlYXJSZXN1bHQoJ+mHkemhjeOBqOS6uuaVsOOCkuWFpeWKm+OBl+OBpuOBj+OBoOOBleOBhOOAgicpOwogICAgICB0b3RhbElucHV0LmZvY3VzKCk7CiAgICB9KTsKICAgIGNhbGN1bGF0ZShmYWxzZSk7CiAgPC9zY3JpcHQ+CjwvYm9keT4KPC9odG1sPgo=">動く完成例をダウンロード</a>
+<div class="compare-card">
+<ol class="practice-steps">
+<li><strong>準備した作業フォルダを確認する</strong>
+<p>Codexで、準備した「AI練習」フォルダと、<a href="#setup-model-title">練習用のモデル</a>が選ばれていることを確認します。</p>
+</li>
+<li><strong>この文章をそのまま送る</strong>
+<div class="prompt-block">
+<div class="prompt-tools" id="practice-prompt-copy-tools" hidden>
+<span class="prompt-copy-status" id="practice-prompt-copy-status" role="status" aria-live="polite" aria-atomic="true"></span>
+<button class="prompt-copy" id="copy-practice-prompt" type="button" data-copy-target="practice-prompt" aria-controls="practice-prompt" aria-label="割り勘計算機の指示文をコピー" title="コピー" disabled><svg class="prompt-copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M15 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h3"/></svg><svg class="prompt-copy-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>コピー</span></button>
+</div>
+<pre class="practice-prompt" id="practice-prompt">合計金額と人数を入力すると、1人あたりの金額を表示する「割り勘計算機」を作って。
+端数は1円単位で切り上げ、人数が0や空欄なら注意を表示して。
+ブラウザだけで動く index.html 1枚にまとめ、このフォルダーに保存して。
+追加料金がかかるサービスは使わないで。
+作成後は動作確認もして。
+
+作業前に、変更するファイル・フォルダと内容、外部送信の有無を説明して。
+外部送信がある場合は、送る情報・送信先・目的も書いて。
+途中で予定が変わる場合も、実行前に説明して。</pre>
+</div>
+</li>
+<li><strong>できたファイルをブラウザで開く</strong>
+<p>「AI練習」内の index.html を右クリックします。<br>Windows：「プログラムから開く」→ Edge<br>Mac：「このアプリケーションで開く」→ Safari</p>
+</li>
+<li><strong>自分でも数字を入れて確かめる</strong>
+<p>「1,000円・3人」なら334円。「人数0」なら注意が表示されるか確認します。</p>
+<p>うまく動かなければ「計算ボタンを押しても結果が出ない。直して」のように伝えます。修正後はブラウザを再読み込みして、もう一度試します。</p>
+</li>
+</ol>
+</div>
+<section class="build-demo" id="build-demo" aria-labelledby="build-title" data-playing="false" data-view="brief">
+<div class="build-heading">
+<div><h3 id="build-title">指示から、画面ができる。</h3><p>依頼から完成までを再現。AIの説明は、作業方針の例です。</p></div>
+<div class="build-controls">
+<button id="build-play" type="button" disabled>▶ 再生する</button>
+<button id="build-restart" type="button" disabled>最初から</button>
+<select id="build-speed" aria-label="再生速度"><option value="0.5">0.5倍速</option><option value="1" selected>1倍速</option><option value="2">2倍速</option></select>
+</div>
+</div>
+<ol class="build-stages" aria-label="制作工程">
+<li><button type="button" id="build-stage-prompt" aria-current="step" disabled><span>01</span>指示</button></li>
+<li><button type="button" id="build-stage-plan" disabled><span>02</span>作業方針</button></li>
+<li><button type="button" id="build-stage-0" disabled><span>03</span>入力欄</button></li>
+<li><button type="button" id="build-stage-1" disabled><span>04</span>見た目</button></li>
+<li><button type="button" id="build-stage-2" disabled><span>05</span>計算</button></li>
+<li><button type="button" id="build-stage-3" disabled><span>06</span>動作確認</button></li>
+<li><button type="button" id="build-stage-4" disabled><span>07</span>完成</button></li>
+</ol>
+<div class="build-workspace">
+<div class="build-editor">
+<div class="build-pane-title"><strong id="build-file">AIへの指示</strong><span id="build-code-label">あなた → AI</span></div>
+<div class="build-brief" id="build-brief">
+<p class="build-brief-label" id="build-brief-label">あなた → AI</p>
+<h4 id="build-brief-title">指示を渡す</h4>
+<p class="build-brief-body"><span id="build-brief-text">「再生する」で、AIへの指示から始まります。</span><span class="build-caret" id="build-brief-caret" aria-hidden="true" hidden></span></p>
+<p class="build-brief-status" id="build-brief-status">指示文は、上の例をそのまま使います。</p>
+</div>
+<pre class="build-code" id="build-code" tabindex="0" aria-label="作成中のコード" hidden><code id="build-code-content"></code></pre>
+</div>
+<div class="build-browser">
+<div class="build-pane-title"><strong id="build-preview-title">これから作るもの</strong><span class="build-live" id="build-preview-label">指示を受け取る</span></div>
+<iframe class="build-preview" id="build-preview" title="制作中の割り勘計算機。完成後に操作できます。" sandbox="allow-scripts allow-forms" tabindex="-1" inert></iframe>
+<div class="build-preview-cover" id="build-preview-cover">
+<div class="build-preview-empty" id="build-preview-empty">
+<svg viewBox="0 0 48 48" fill="none" aria-hidden="true"><rect x="7" y="4" width="34" height="40" rx="7" stroke="currentColor" stroke-width="1.5"/><path d="M14 13h20M14 19h20M15 28h3m12 0h3m-18 7h3m12 0h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+<strong id="build-empty-title">まず、AIに依頼する。</strong><p id="build-empty-text">作りたいものと条件を、文章で伝えます。</p>
+</div>
+<div class="build-outline" id="build-outline" hidden>
+<p class="build-outline-label">AIが整理した作業方針</p>
+<h4 id="build-outline-title">作るものと条件</h4>
+<ul class="build-outline-list" id="build-outline-list"></ul>
+</div>
+</div>
+</div>
+</div>
+<div class="build-progress" aria-hidden="true"><span id="build-progress"></span></div>
+<div class="build-bottom">
+<p class="build-caption" id="build-caption" role="status">「再生する」で始まります。完成後は、右の計算機をそのまま使えます。</p>
+<ul class="build-checks" aria-label="動作確認の結果">
+<li id="build-check-rounding" data-state="unchecked" aria-label="1,000円 ÷ 3人：未確認">1,000円 ÷ 3人 → 334円</li>
+<li id="build-check-zero" data-state="unchecked" aria-label="人数0：未確認">人数0 → 注意</li>
+<li id="build-check-empty" data-state="unchecked" aria-label="人数が空欄：未確認">人数が空欄 → 注意</li>
+</ul>
+</div>
+<noscript><p class="build-bottom">アニメーションを見るには、ブラウザのJavaScriptを有効にしてください。</p></noscript>
+</section>
+<p class="build-print-note">HTML版では、コードと画面ができていく工程を再生できます。</p>
+<p class="comparison-note">Plusにも利用上限があります。</p>
+</section>
+<section class="section comparison prompt-guide" id="prompt-guide" aria-labelledby="prompt-guide-title">
+<h2 id="prompt-guide-title">指示の出し方も、AIに相談する。</h2>
+<p class="practice-lead">「作りたいものはある。でも、何をどう頼めばいいか分からない」。<br>そんな段階から相談して大丈夫です。</p>
+<div class="compare-grid">
+<section class="compare-card" aria-labelledby="prompt-start-title">
+<p class="usage-label">01　まずは相談する</p>
+<h3 id="prompt-start-title">自分だけで指示を考える必要はありません。</h3>
+<p class="prompt-start-copy">何を決めるか、どう作るかも、AIと相談できます。まずは欲しいものを伝えて、足りないことはAIに質問してもらいましょう。</p>
+<div class="prompt-block">
+<div class="prompt-tools" id="planning-prompt-copy-tools" hidden>
+<span class="prompt-copy-status" id="planning-prompt-copy-status" role="status" aria-live="polite" aria-atomic="true"></span>
+<button class="prompt-copy" id="copy-planning-prompt" type="button" data-copy-target="planning-prompt" aria-controls="planning-prompt" aria-label="アプリ作りを相談する指示文をコピー" title="コピー" disabled><svg class="prompt-copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M15 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h3"/></svg><svg class="prompt-copy-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>コピー</span></button>
+</div>
+<pre class="practice-prompt" id="planning-prompt">食事代を割り勘するときに、1人あたりの金額が分かる計算機を作りたい。
+何を決めればよいか分からないから、まだ作り始めず、私に1つずつ質問して。
+難しい言葉を使わず、迷うところは選択肢とおすすめを教えて。
+最後に、決まった内容を開発用の指示文にまとめて。
+指示文には、変更内容と外部送信の有無を作業前に説明することも入れて。</pre>
+</div>
+<p class="usage-note">右上のコピーボタンを押して、ChatGPTやClaudeの入力欄に貼り付けます。最初の一文を自分の作りたいものに変えて、送ります。</p>
+</section>
+<section class="compare-card" aria-labelledby="prompt-answer-title">
+<p class="usage-label">02　質問に答える</p>
+<h3 id="prompt-answer-title">普段の言葉で答える。</h3>
+<dl class="prompt-conversation" aria-label="割り勘計算機について相談する例">
+<div><dt>AI：誰が、どこで使いますか？</dt><dd>自分だけ。パソコンで使う。</dd></div>
+<div><dt>AI：何を入力して、何を計算したいですか？</dt><dd>合計金額と人数を入れたら、1人あたりの金額を出してほしい。</dd></div>
+<div><dt>AI：割り切れないときの端数はどうしますか？</dt><dd>1円単位で切り上げたい。</dd></div>
+<div><dt>AI：人数が0や空欄のときはどうしますか？</dt><dd>計算せず、入力を直すように注意を出してほしい。</dd></div>
+</dl>
+<p class="usage-note">答えに迷ったら「違いとおすすめを教えて」と聞けば大丈夫です。</p>
+</section>
+</div>
+<section class="compare-card prompt-finish" aria-labelledby="prompt-finish-title">
+<p class="usage-label">03　指示文を確認して渡す</p>
+<h3 id="prompt-finish-title">作りたいものと合っているか、確認する。</h3>
+<p>違うところはAIに直してもらいます。<br>
+  合っていたら、<a href="#setup-permissions-title">準備の手順</a>で用意した「AI練習」をCodexで開き、まとまった指示文を送ります。下の例は右上のボタンでコピーできます。</p>
+<p class="usage-note">練習例の計算機を作成済みなら、作り直さずに<a href="#repair-guide">修正とやり直し</a>へ進みます。</p>
+<details class="prompt-example">
+<summary id="planning-result-toggle">まとまった指示文の例を見る</summary>
+<div class="prompt-block">
+<div class="prompt-tools" id="planning-result-copy-tools" hidden>
+<span class="prompt-copy-status" id="planning-result-copy-status" role="status" aria-live="polite" aria-atomic="true"></span>
+<button class="prompt-copy" id="copy-planning-result" type="button" data-copy-target="planning-result" aria-controls="planning-result" aria-label="割り勘計算機の指示文をコピー" title="コピー" disabled><svg class="prompt-copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M15 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h3"/></svg><svg class="prompt-copy-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>コピー</span></button>
+</div>
+<pre class="practice-prompt" id="planning-result">合計金額と人数を入力すると、1人あたりの金額を表示する「割り勘計算機」を作って。
+端数は1円単位で切り上げ、人数が0や空欄なら注意を表示して。
+ブラウザだけで動く index.html 1枚にまとめ、このフォルダーに保存して。
+追加料金がかかるサービスは使わないで。
+作成後は動作確認もして。
+
+作業前に、変更するファイル・フォルダと内容、外部送信の有無を説明して。
+外部送信がある場合は、送る情報・送信先・目的も書いて。
+途中で予定が変わる場合も、実行前に説明して。</pre>
+</div>
+</details>
+</section>
+<aside class="prompt-context" aria-label="モデルの進化と利用条件">
+<p class="practice-lead">2026年9月、<a href="https://www.anthropic.com/claude/fable">Fable 5.1</a>や<a href="https://openai.com/index/gpt-6-astra/">Astra</a>の登場で、AIに任せられる範囲がさらに広がりました。<br>以前うまくいかなかった使い方も、今のAIでもう一度試してみてください。</p>
+<p class="practice-lead">ただし、<a href="https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex">AstraはPlusのCodexでも利用枠を早く使い切ることがあります</a>。<a href="https://support.claude.com/en/articles/15424964-claude-fable-models-on-your-plan">Fable 5.1はClaude Proでは別料金</a>です。</p>
+</aside>
+</section>
+
+<section class="section comparison" id="repair-guide" aria-labelledby="repair-guide-title">
+<h2 id="repair-guide-title">修正とやり直し。</h2>
+<p class="practice-lead">動く状態を残してから、一つずつ直します。</p>
+
+<section class="setup-step" aria-labelledby="repair-backup-title">
+<p class="usage-label">01　変更前の状態を残す</p>
+<h3 id="repair-backup-title">直す前に、フォルダをコピーする。</h3>
+<p class="setup-send-guide">AIの作業が終わり、アプリが動くことを確認してから、デスクトップの「AI練習」を1回クリックします。</p>
+<div class="setup-os-grid" id="repair-copy-methods">
+<div class="setup-os"><h4>Windows</h4><p><kbd>Ctrl</kbd> ＋ <kbd>C</kbd> でコピーし、続けて <kbd>Ctrl</kbd> ＋ <kbd>V</kbd> で貼り付けます。</p></div>
+<div class="setup-os"><h4>Mac</h4><p><kbd>⌘</kbd> ＋ <kbd>D</kbd> で複製します。</p></div>
+</div>
+<p class="setup-rule">できたコピーを<strong>「AI練習_変更前」</strong>に名前変更します。Codexでは、元の<strong>「AI練習」</strong>で作業を続けます。同じ名前のコピーがある場合は、末尾に日付や番号を付けます。</p>
+<aside class="setup-stop" aria-labelledby="repair-commit-title">
+<p class="setup-send-guide"><strong id="repair-commit-title">コミットは、作業の「セーブポイント」。</strong><br>Git（変更履歴を残す仕組み）で、ファイルの状態を記録する操作です。<strong>動いたところでコミットしておけば、あとでその状態に戻せます。</strong></p>
+<p class="setup-rule">普通の「保存」とは別の操作です。戻せるのはコミットに含めたファイルで、記録していない変更やブラウザに保存したデータは含まれません。</p>
+</aside>
+</section>
+
+<section class="setup-step" aria-labelledby="repair-request-title">
+<p class="usage-label">02　直してほしいことを伝える</p>
+<h3 id="repair-request-title">操作・期待した結果・実際の結果を伝える。</h3>
+<p class="setup-send-guide">下の例を自分の状況に書き換えて、作成したのと同じチャットへ送ります。</p>
+<div class="prompt-block">
+<div class="prompt-tools" id="repair-prompt-copy-tools" hidden>
+<span class="prompt-copy-status" id="repair-prompt-copy-status" role="status" aria-live="polite" aria-atomic="true"></span>
+<button class="prompt-copy" id="copy-repair-prompt" type="button" data-copy-target="repair-prompt" aria-controls="repair-prompt" aria-label="修正を頼む指示文をコピー" title="コピー" disabled><svg class="prompt-copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M15 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h3"/></svg><svg class="prompt-copy-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>コピー</span></button>
+</div>
+<pre class="practice-prompt" id="repair-prompt">割り勘計算機を直して。
+操作：合計金額に1000、人数に3を入力して「計算する」を押した。
+期待した結果：1人あたり334円と表示される。
+実際の結果：結果が「—」のままで変わらない。
+この問題だけ直し、見た目や他の機能は変えないで。
+作業前に、変更内容と外部送信の有無を説明して。
+外部送信がある場合は、送る情報・送信先・目的も書いて。
+途中で予定が変わる場合も、実行前に説明して。
+修正後は、同じ操作で確認して。</pre>
+</div>
+<p class="setup-rule">エラーが表示されたら、その文章も添えます。個人情報や秘密情報が含まれる部分は除きます。<br>修正後は<strong>ブラウザを再読み込み</strong>して、自分でも同じ操作を試します。</p>
+</section>
+
+<section class="setup-step" aria-labelledby="repair-restore-title">
+<p class="usage-label">03　変更前の状態からやり直す</p>
+<h3 id="repair-restore-title">動いていたコピーから、やり直す。</h3>
+<p class="setup-send-guide">AIが作業中なら、<strong>■を押して停止</strong>を確認します。</p>
+<ol>
+<li><strong>再開用のコピーを作る。</strong><br>「AI練習_変更前」を<a href="#repair-copy-methods">フォルダごとコピー</a>し、名前を「AI練習_再開」にします。</li>
+<li><strong>動くか確かめる。</strong><br>「AI練習_再開」の index.html を開き、1,000円・3人で334円になるか試します。</li>
+<li><strong>そのコピーで続きを頼む。</strong><br>計算できたら、<a href="#setup-permissions-title">Codexで「AI練習_再開」を開き</a>、新しいチャットに下の文を送ります。</li>
+</ol>
+<p class="setup-rule">元のフォルダは残します。同じ名前があれば、上書きせず「AI練習_再開2」など別の名前にします。</p>
+<div class="prompt-block">
+<div class="prompt-tools" id="restore-prompt-copy-tools" hidden>
+<span class="prompt-copy-status" id="restore-prompt-copy-status" role="status" aria-live="polite" aria-atomic="true"></span>
+<button class="prompt-copy" id="copy-restore-prompt" type="button" data-copy-target="restore-prompt" aria-controls="restore-prompt" aria-label="保存したコピーで再開する指示文をコピー" title="コピー" disabled><svg class="prompt-copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M15 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h3"/></svg><svg class="prompt-copy-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>コピー</span></button>
+</div>
+<pre class="practice-prompt" id="restore-prompt">割り勘計算機を、変更前のコピーからやり直します。
+まず、この作業フォルダのファイルを確認してください。まだ変更はしないでください。
+次に直したいことを伝えるので、修正方針を相談させてください。</pre>
+</div>
+</section>
+</section>
+
+<section class="section comparison prompt-guide" id="learning-guide" aria-labelledby="learning-guide-title">
+<h2 id="learning-guide-title">勉強では、分からないところを聞く。</h2>
+<p class="practice-lead">教材の文章やコードを貼って、AIに説明してもらいます。</p>
+<div class="prompt-block">
+<div class="prompt-tools" id="learning-prompt-copy-tools" hidden>
+<span class="prompt-copy-status" id="learning-prompt-copy-status" role="status" aria-live="polite" aria-atomic="true"></span>
+<button class="prompt-copy" id="copy-learning-prompt" type="button" data-copy-target="learning-prompt" aria-controls="learning-prompt" aria-label="教材について質問する指示文をコピー" title="コピー" disabled><svg class="prompt-copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M15 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h3"/></svg><svg class="prompt-copy-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>コピー</span></button>
+</div>
+<pre class="practice-prompt" id="learning-prompt">この部分が分からない。プログラミングは未経験。
+言葉の意味から、身近な例を使って説明して。
+一度に全部説明せず、一つずつ教えて。
+［分からなかった文章やコードを貼る］</pre>
+</div>
+<p class="usage-note">右上のボタンでコピーし、［ ］の部分を教材の文章やコードに置き換えて、ChatGPTやClaudeへ送ります。</p>
+<section class="study-demo" id="study-demo" aria-labelledby="study-title" data-mode="idle">
+<div class="study-header">
+<div><h3 id="study-title">分からなければ、聞き返す。</h3><p>教材と会話は説明用の例です。コピー・入力・送信の操作を再現します。</p></div>
+<div class="study-controls">
+<button class="study-play" id="study-play" type="button" disabled>▶ 再生する</button>
+<button id="study-restart" type="button" disabled>最初から再生</button>
+<select id="study-speed" aria-label="学習デモの再生速度" disabled><option value="0.5">0.5倍速</option><option value="1" selected>1倍速</option><option value="2">2倍速</option></select>
+</div>
+</div>
+<div class="study-stages" aria-label="見たい場面を選ぶ">
+<button id="study-stage-0" type="button" disabled>01 文を選ぶ</button>
+<button id="study-stage-1" type="button" disabled>02 質問する</button>
+<button id="study-stage-2" type="button" disabled>03 説明を聞く</button>
+<button id="study-stage-3" type="button" disabled>04 聞き返す</button>
+<button id="study-stage-4" type="button" disabled>05 別の例で聞く</button>
+</div>
+<div class="study-workspace">
+<article class="study-material" aria-labelledby="study-lesson-title">
+<div class="study-pane-header"><span>教材の例</span><span>読む場所</span></div>
+<div class="study-lesson">
+<p class="study-lesson-label">プログラミングの基本</p>
+<h4 id="study-lesson-title">変数</h4>
+<p class="study-source"><span class="study-source-text" id="study-source">変数とは、値を格納するための名前付きの領域です。</span></p>
+<p class="study-selection-status" id="study-selection-status"></p>
+</div>
+<p class="study-material-note">分からなかった一文を、そのままAIに渡します。</p>
+</article>
+<div class="study-chat">
+<div class="study-pane-header"><span>AIとのチャット</span><span>会話の再現</span></div>
+<div class="study-chat-body" id="study-chat-body" role="region" aria-label="学習の会話例。上下にスクロールして読めます" tabindex="0">
+<p class="study-empty" id="study-empty" hidden>教材を読んで、分からないところを見つけます。</p>
+<div class="study-message user" id="study-question">
+<p class="study-speaker">あなた</p>
+<p class="study-message-text" id="study-question-text">この部分が分からない。プログラミングは未経験。
+言葉の意味から、身近な例を使って説明して。
+一度に全部説明せず、一つずつ教えて。
+変数とは、値を格納するための名前付きの領域です。</p>
+</div>
+<div class="study-message assistant" id="study-answer">
+<p class="study-speaker">AI</p>
+<p class="study-message-text" id="study-answer-text">「値」は、数や文字などのデータのことです。
+変数は、そのデータをしまう、名前付きの箱のようなものです。
+まずは「名前が付いた入れ物」と考えてみましょう。</p>
+</div>
+<div class="study-message user" id="study-followup">
+<p class="study-speaker">あなた</p>
+<p class="study-message-text" id="study-followup-text">まだ分からない。もっと簡単な例で教えて。</p>
+</div>
+<div class="study-message assistant" id="study-second-answer">
+<p class="study-speaker">AI</p>
+<p class="study-message-text" id="study-second-answer-text">「りんごの値段：100円」というメモを思い浮かべてください。
+「りんごの値段」が名前で、「100円」が中身です。
+変数も、このように名前を付けて中身を覚えておきます。
+まずは、この名前と中身の違いだけ考えてみましょう。</p>
+<div class="study-analogy" id="study-analogy"><p><span>名前</span>りんごの値段</p><p><span>中身</span>100円</p></div>
+</div>
+<div class="study-composer" id="study-composer" hidden><p class="study-composer-label">あなたの入力欄（再現）</p><p class="study-composer-text" id="study-composer-text"></p></div>
+</div>
+</div>
+</div>
+<progress class="study-progress" id="study-progress" max="100" value="0" aria-label="学習デモの進み具合"></progress>
+<p class="study-caption" id="study-caption" role="status" aria-live="polite">「再生する」で、質問から聞き返すまでの流れを見られます。</p>
+<noscript><p class="study-caption">JavaScriptが無効のため、会話の全文を表示しています。</p></noscript>
+</section>
+</section>
+
+<section class="section comparison prompt-guide" id="drill-guide" aria-labelledby="drill-guide-title">
+<h2 id="drill-guide-title">練習問題も、AIに作ってもらう。</h2>
+<p class="practice-lead">最初は解説を多めに。解けたら少し難しく、つまずいたら同じ難しさで練習します。</p>
+<div class="prompt-block">
+<div class="prompt-tools" id="drill-prompt-copy-tools" hidden>
+<span class="prompt-copy-status" id="drill-prompt-copy-status" role="status" aria-live="polite" aria-atomic="true"></span>
+<button class="prompt-copy" id="copy-drill-prompt" type="button" data-copy-target="drill-prompt" aria-controls="drill-prompt" aria-label="練習問題を頼む指示文をコピー" title="コピー" disabled><svg class="prompt-copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M15 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h3"/></svg><svg class="prompt-copy-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4L19 6"/></svg><span>コピー</span></button>
+</div>
+<pre class="practice-prompt" id="drill-prompt">PHPのループの考え方が分からない。
+最初は簡単な例を使って、解き方を詳しく説明して。
+そのあと、似た問題を一問ずつ出して。私が答えてから、答え合わせと解説をして。
+正解できたら少しずつ難しくして。間違えたら、分かっていないところを説明して、同じくらいの問題でもう一度練習させて。</pre>
+</div>
+<p class="usage-note">「PHPのループ」を自分の勉強したい内容に変えて、ChatGPTやClaudeへ送ります。</p>
+<section class="study-demo" id="drill-demo" aria-labelledby="drill-title" data-mode="idle">
+<div class="study-header">
+<div><h3 id="drill-title">一問ずつ。答えに合わせて、次へ。</h3><p>学習の会話例です。あなたの入力・回答も自動で再現します。</p></div>
+<div class="study-controls">
+<button class="study-play" id="drill-play" type="button" disabled>▶ 再生する</button>
+<button id="drill-restart" type="button" disabled>最初から再生</button>
+<select id="drill-speed" aria-label="練習問題デモの再生速度" disabled><option value="0.5">0.5倍速</option><option value="1" selected>1倍速</option><option value="2">2倍速</option></select>
+</div>
+</div>
+<div class="study-stages drill-stages" aria-label="練習の場面を選ぶ">
+<button id="drill-stage-0" type="button" disabled>01 頼む</button>
+<button id="drill-stage-1" type="button" disabled>02 解説を見る</button>
+<button id="drill-stage-2" type="button" disabled>03 一問目</button>
+<button id="drill-stage-3" type="button" disabled>04 少し難しく</button>
+<button id="drill-stage-4" type="button" disabled>05 もう一度</button>
+<button id="drill-stage-5" type="button" disabled>06 答え合わせ</button>
+</div>
+<div class="study-workspace">
+<div class="study-material">
+<div class="study-pane-header"><span>いまの解説・問題</span><span>PHPのループ</span></div>
+<div class="drill-card" id="drill-card-intro"><p class="study-lesson-label">これから練習すること</p><h4>同じ処理を、繰り返す。</h4><ol class="drill-intro-list"><li>まず、例を見て理解する</li><li>簡単な問題を解く</li><li>答えに合わせて次へ進む</li></ol></div>
+<div class="drill-card" id="drill-card-example">
+<p class="study-lesson-label">最初は、解き方を見る</p><h4>「こんにちは」を3回</h4>
+<pre class="drill-code" id="drill-code-example">for ($i = 1; $i &lt;= 3; $i++) {
+    echo "こんにちは";
+}</pre>
+<ol class="drill-walk" aria-label="変数の値の進み方"><li id="drill-walk-1">$i = 1<br>表示する</li><li id="drill-walk-2">$i = 2<br>表示する</li><li id="drill-walk-3">$i = 3<br>表示する</li><li id="drill-walk-4">$i = 4<br>終了</li></ol>
+<div class="drill-count"><strong id="drill-count">3</strong><span>回表示（再現）</span></div>
+<p class="drill-run-status" id="drill-run-status">1・2・3で表示し、4になると止まります。</p>
+</div>
+<div class="drill-card" id="drill-card-first">
+<p class="study-lesson-label">一問目 · 1から数える</p><h4>何回表示される？</h4>
+<pre class="drill-code" id="drill-code-first">for ($i = 1; $i &lt;= 2; $i++) {
+    echo "こんにちは";
+}</pre>
+<p>「こんにちは」が表示される回数を答えます。</p>
+<p class="drill-reveal" id="drill-result-first">1 → 2 の<strong>2回</strong>。3になると終了します。</p>
+</div>
+<div class="drill-card" id="drill-card-second">
+<p class="study-lesson-label">二問目 · 始まる数を変える</p><h4>今度は0から。</h4>
+<pre class="drill-code" id="drill-code-second">for ($i = 0; $i &lt;= 2; $i++) {
+    echo "こんにちは";
+}</pre>
+<p>「こんにちは」は何回表示されるでしょう？</p>
+<p class="drill-reveal" id="drill-result-second">0 → 1 → 2 の<strong>3回</strong>。0のときも一回に数えます。</p>
+</div>
+<div class="drill-card" id="drill-card-retry">
+<p class="study-lesson-label">同じ難しさでもう一問 · 0から数える</p><h4>通る数を、順に考える。</h4>
+<pre class="drill-code" id="drill-code-retry">for ($i = 0; $i &lt;= 3; $i++) {
+    echo "こんにちは";
+}</pre>
+<p>始まりは同じ0。今度は3以下の間、繰り返します。</p>
+<p class="drill-reveal" id="drill-result-retry">0 → 1 → 2 → 3 の<strong>4回</strong>。0も忘れずに数えられました。</p>
+</div>
+<p class="study-material-note">例のコードはPHPの一部分です。<a href="https://www.php.net/manual/ja/control-structures.for.php">forの公式説明</a></p>
+</div>
+<div class="study-chat">
+<div class="study-pane-header"><span>AIとのチャット</span><span>出題・回答の再現</span></div>
+<div class="study-chat-body" id="drill-chat-body" role="region" aria-label="練習問題を頼む会話例。上下にスクロールして読めます" tabindex="0">
+<div class="study-message user" id="drill-message-0"><p class="study-speaker">あなた</p><p class="study-message-text" id="drill-text-0">PHPのループの考え方が分からない。
+最初は簡単な例を使って、解き方を詳しく説明して。
+そのあと、似た問題を一問ずつ出して。私が答えてから、答え合わせと解説をして。
+正解できたら少しずつ難しくして。間違えたら、分かっていないところを説明して、同じくらいの問題でもう一度練習させて。</p></div>
+<div class="study-message assistant" id="drill-message-1"><p class="study-speaker">AI · 最初の解説</p><p class="study-message-text" id="drill-text-1">ループは、同じ処理を繰り返すことです。例のコードは「こんにちは」を3回表示します。
+
+for は繰り返すための書き方、echo は表示する指示です。
+$i は「いまの数」を覚える変数です。
+
+① $i = 1：1から始める。
+② $i &lt;= 3：3以下なら、中の処理を実行する。
+③ $i++：終わるたびに1増やし、もう一度②を確かめる。
+
+1、2、3で表示し、4になったら止まります。</p></div>
+<div class="study-message assistant" id="drill-message-2"><p class="study-speaker">AI · 一問目</p><p class="study-message-text" id="drill-text-2">では一問目。1から始めて、2以下の間だけ繰り返します。
+「こんにちは」は何回表示されますか？
+あなたの答えを待ちます。</p></div>
+<div class="study-message user" id="drill-message-3"><p class="study-speaker">あなた</p><p class="study-message-text" id="drill-text-3">2回。</p></div>
+<div class="study-message assistant" id="drill-message-4"><p class="study-speaker">AI · 答え合わせ</p><p class="study-message-text" id="drill-text-4">正解です。$i が1と2のときに表示するので、2回です。
+解けたので、次は始まる数を変えてみましょう。</p></div>
+<div class="study-message assistant" id="drill-message-5"><p class="study-speaker">AI · 少し難しい問題</p><p class="study-message-text" id="drill-text-5">二問目。今度は0から始めて、2以下の間だけ繰り返します。
+何回表示されますか？</p></div>
+<div class="study-message user" id="drill-message-6"><p class="study-speaker">あなた</p><p class="study-message-text" id="drill-text-6">2回だと思う。</p></div>
+<div class="study-message assistant" id="drill-message-7"><p class="study-speaker">AI · つまずいたところを解説</p><p class="study-message-text" id="drill-text-7">今回は3回です。0から始まるところがポイントです。
+$i は0 → 1 → 2と進みます。0のときにも表示するので、全部で3回です。
+同じ考え方を、もう一問練習しましょう。</p></div>
+<div class="study-message assistant" id="drill-message-8"><p class="study-speaker">AI · 同じ難しさでもう一問</p><p class="study-message-text" id="drill-text-8">もう一問。0から始めて、3以下の間だけ繰り返します。
+何回表示されますか？ 通る数を順に書いてみてください。</p></div>
+<div class="study-message user" id="drill-message-9"><p class="study-speaker">あなた</p><p class="study-message-text" id="drill-text-9">0、1、2、3だから4回。</p></div>
+<div class="study-message assistant" id="drill-message-10"><p class="study-speaker">AI · 答え合わせ</p><p class="study-message-text" id="drill-text-10">正解です。0も一回に数えられましたね。
+「始まる数」と「終わる条件」を見て、回数を考えられました。
+次も、一問ずつ少しずつ進めましょう。</p></div>
+<div class="study-composer" id="drill-composer" hidden><p class="study-composer-label">あなたの入力欄（再現）</p><p class="study-composer-text" id="drill-composer-text"></p></div>
+</div>
+</div>
+</div>
+<progress class="study-progress" id="drill-progress" max="100" value="0" aria-label="練習問題デモの進み具合"></progress>
+<p class="study-caption" id="drill-caption" role="status" aria-live="polite">「再生する」で、問題を頼むところから始まります。</p>
+<noscript><p class="study-caption">JavaScriptが無効のため、問題と会話の全文を表示しています。</p></noscript>
+</section>
+</section>
+
+<section class="section comparison verify-guide" id="verify-guide" aria-labelledby="verify-guide-title">
+<h2 id="verify-guide-title">AIに聞く。自分でも確かめる。</h2>
+<p class="practice-lead">AIは、事実と違う情報をもっともらしく答えることがあります。<br>これを<strong>「ハルシネーション」</strong>と呼びます。</p>
+<ul class="verify-checks">
+<li>大事な情報は、<strong>公式サイトや元の資料</strong>で確かめる。</li>
+<li>リンクは実際に開き、<strong>内容と日付</strong>を確認する。</li>
+<li>コードは自分でも動かし、<strong>期待どおりの結果になるか</strong>確かめる。</li>
+</ul>
+</section>
+<p class="liability-note" id="guide-liability">この資料・掲載コード・AIの出力の利用は、利用者自身の判断と責任で行ってください。<br><strong>利用料金・追加請求、データの消失・破損、情報漏えい、第三者とのトラブルなど、これらの利用に関連して生じた費用・損害・不利益について、作成者は一切責任を負いません。</strong></p>
+</main>
+</div>
+<script>
+(() => {
+  'use strict';
+  const root = document.documentElement;
+  const button = document.getElementById('theme-toggle');
+  const label = document.getElementById('theme-toggle-label');
+  function setTheme(light) {
+    root.setAttribute('data-theme', light ? 'light' : 'dark');
+    const action = light ? 'ダーク' : 'ライト';
+    label.textContent = action;
+    button.setAttribute('aria-label', action + 'モードに切り替える');
+    button.setAttribute('title', action + 'モードに切り替える');
+  }
+  button.addEventListener('click', () => setTheme(root.getAttribute('data-theme') !== 'light'));
+  setTheme(false);
+  button.disabled = false;
+  button.hidden = false;
+})();
+(() => {
+  'use strict';
+  function copyBySelection(text) {
+    const previousFocus = document.activeElement;
+    const field = document.createElement('textarea');
+    field.value = text;
+    field.readOnly = true;
+    field.setAttribute('aria-hidden', 'true');
+    field.setAttribute('tabindex', '-1');
+    field.style.position = 'fixed';
+    field.style.left = '-9999px';
+    field.style.top = '0';
+    document.body.appendChild(field);
+    try {
+      field.select();
+      field.setSelectionRange(0, text.length);
+      return document.execCommand('copy');
+    } finally {
+      field.remove();
+      if (previousFocus && typeof previousFocus.focus === 'function') previousFocus.focus({ preventScroll: true });
+    }
+  }
+
+  document.querySelectorAll('[data-copy-target]').forEach(button => {
+    const targetId = button.getAttribute('data-copy-target');
+    const source = document.getElementById(targetId);
+    const status = document.getElementById(targetId + '-copy-status');
+    const toolbar = document.getElementById(targetId + '-copy-tools');
+    if (!source || !status || !toolbar) return;
+    let resetTimer;
+    let copying = false;
+    button.addEventListener('click', async () => {
+      if (button.disabled || copying) return;
+      copying = true;
+      button.setAttribute('aria-disabled', 'true');
+      button.setAttribute('aria-busy', 'true');
+      button.removeAttribute('data-copied');
+      clearTimeout(resetTimer);
+      status.textContent = 'コピー中…';
+      try {
+        const text = source.textContent.trim();
+        if (!text) throw new Error('コピーする指示文がありません。');
+        let copied = false;
+        if (typeof navigator !== 'undefined' && navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+          try {
+            await navigator.clipboard.writeText(text);
+            copied = true;
+          } catch {
+            // ローカルHTMLなどでClipboard APIが使えない場合は、選択によるコピーを試す。
+          }
+        }
+        if (!copied) copied = copyBySelection(text);
+        if (!copied) throw new Error('コピーできませんでした。');
+        status.textContent = 'コピーしました';
+        button.setAttribute('data-copied', 'true');
+        resetTimer = setTimeout(() => {
+          status.textContent = '';
+          button.removeAttribute('data-copied');
+        }, 2500);
+      } catch {
+        status.textContent = 'コピーできませんでした。本文を選択してコピーしてください。';
+      } finally {
+        copying = false;
+        button.removeAttribute('aria-disabled');
+        button.removeAttribute('aria-busy');
+      }
+    });
+    toolbar.hidden = false;
+    button.disabled = false;
+  });
+})();
+
+(() => {
+  'use strict';
+  const welcome = document.getElementById('welcome');
+  const entry = document.getElementById('welcome-enter');
+  const content = document.getElementById('guide-content');
+  const skip = document.getElementById('content-skip');
+  const title = document.getElementById('title');
+
+  entry.addEventListener('click', event => {
+    event.preventDefault();
+    content.hidden = false;
+    welcome.hidden = true;
+    skip.hidden = false;
+    title.focus({ preventScroll: true });
+    window.scrollTo(0, 0);
+  });
+  // スクリプトが動かなくても、通常のページ内リンクで本文を読めるようにする。
+  content.hidden = true;
+  skip.hidden = true;
+})();
+
+(() => {
+  'use strict';
+  const byId = id => document.getElementById(id);
+  const panel = byId('build-demo');
+  const playButton = byId('build-play');
+  const restartButton = byId('build-restart');
+  const speedSelect = byId('build-speed');
+  const codeBox = byId('build-code');
+  const codeContent = byId('build-code-content');
+  const brief = byId('build-brief');
+  const briefText = byId('build-brief-text');
+  const outline = byId('build-outline');
+  const outlineList = byId('build-outline-list');
+  const preview = byId('build-preview');
+  const cover = byId('build-preview-cover');
+  const caption = byId('build-caption');
+  const progress = byId('build-progress');
+  const stageButtons = ['prompt', 'plan', 0, 1, 2, 3, 4].map(key => byId('build-stage-' + key));
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const checks = {
+    rounding: { label: '1,000円 ÷ 3人', total: '1000', people: '3', value: '334', error: '', collected: '1,002円' },
+    zero: { label: '人数0', total: '1000', people: '0', value: '—', error: '人数は1人以上で入力してください。', collected: '—' },
+    empty: { label: '人数が空欄', total: '1000', people: '', value: '—', error: '人数を入力してください。', collected: '—' }
+  };
+
+  try {
+    const instruction = byId('practice-prompt').textContent.trim();
+    if (!instruction) throw new Error('指示文を読み取れませんでした。');
+    // ダウンロード用の完成品を共通の元データにし、表示と実際の動作を揃える。
+    const encoded = byId('warikan-download').getAttribute('href').split(',')[1];
+    const finishedHtml = new TextDecoder().decode(Uint8Array.from(atob(encoded), char => char.charCodeAt(0))).replace(/\r\n/g, '\n');
+    const extract = pattern => {
+      const match = finishedHtml.match(pattern);
+      if (!match) throw new Error('計算機の構成を読み取れませんでした。');
+      return match[1];
+    };
+    const appCss = extract(/<style>([\s\S]*?)<\/style>/).trim();
+    const appScript = extract(/\x3Cscript>([\s\S]*?)<\/script>/).trim();
+    const header = extract(/(<header>[\s\S]*?<\/header>)/);
+    const fields = extract(/<form[^>]*>([\s\S]*?)<\/form>/);
+    const secondFieldAt = fields.indexOf('<div class="field">', fields.indexOf('<div class="field">') + 1);
+    const actionsAt = fields.indexOf('<p id="rounding-note"');
+    if (secondFieldAt < 0 || actionsAt < 0) throw new Error('入力欄を読み取れませんでした。');
+    const totalField = fields.slice(0, secondFieldAt).trim();
+    const peopleField = fields.slice(secondFieldAt, actionsAt).trim();
+    const actions = fields.slice(actionsAt).trim();
+    const result = extract(/(<section class="result"[\s\S]*?<\/section>)/);
+    const footer = extract(/(<footer>[\s\S]*?<\/footer>)/);
+    const foundationEnd = appCss.indexOf('.calculator {');
+    const resultStart = appCss.indexOf('\n    .result {');
+    if (foundationEnd < 0 || resultStart < 0) throw new Error('スタイルを読み取れませんでした。');
+    const formMarkup = content => '<div class="calculator"><form id="calculator-form" novalidate>' + content + '</form>';
+    const markup = [
+      header,
+      header + formMarkup(totalField) + '</div>',
+      header + formMarkup(totalField + peopleField) + '</div>',
+      header + formMarkup(totalField + peopleField + actions) + result + '</div>' + footer
+    ];
+    const policy = "default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'";
+    // 埋め込み枠の幅でも入力欄と結果を一緒に見られるよう、余白だけを調整する。
+    const previewCss = `
+      body { min-height: 0; }
+      main { width: 100%; padding: 24px 20px 18px; }
+      header { margin-bottom: 18px; }
+      h1 { font-size: 30px; margin-bottom: 8px; }
+      header p { font-size: 12px; }
+      .calculator { grid-template-columns: 1fr; gap: 12px; }
+      form, .result { padding: 18px 20px; border-radius: 16px; }
+      form { display: grid; grid-template-columns: minmax(0,1.4fr) minmax(0,1fr); gap: 0 14px; }
+      .field + .field { margin-top: 0; }
+      label { font-size: 13px; margin-bottom: 7px; }
+      input { height: 48px; font-size: 23px; padding: 8px 33px 8px 10px; }
+      input::placeholder { font-size: 15px; }
+      .unit { right: 12px; font-size: 13px; }
+      .error { font-size: 11px; }
+      .form-note, .calculate, .clear { grid-column: 1 / -1; }
+      .form-note { margin: 10px 0 12px; font-size: 11px; }
+      .calculate { padding: 11px 14px; font-size: 14px; }
+      .clear { margin: 3px auto 0; padding: 5px 12px; min-height: 32px; font-size: 12px; }
+      .result { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); column-gap: 18px; }
+      .result h2 { grid-column: 1; font-size: 13px; }
+      .amount { grid-column: 1; margin: 9px 0 0; gap: 4px; }
+      #result-value { font-size: 46px; }
+      #result-value.compact { font-size: 25px; }
+      .yen { font-size: 14px; }
+      .result dl { grid-column: 2; grid-row: 1 / 3; margin: 0; padding: 0 0 0 14px; border-top: 0; border-left: 1px solid #48484a; }
+      .result dl > div { font-size: 10px; gap: 6px; padding: 5px 0; }
+      .result dd { font-size: 12px; }
+      #result-note { grid-column: 1 / -1; margin: 12px 0 0; padding: 10px 12px; font-size: 11px; }
+      footer { padding-top: 12px; font-size: 10px; }
+      @media(max-width:340px) { main { padding: 20px 12px; } form, .result { padding: 16px 12px; } h1 { font-size: 27px; } #result-value { font-size: 38px; } }
+    `;
+    const compactCode = text => text.trim().replace(/^ {4}/gm, '');
+    const cssExcerpt = (start, end) => compactCode(appCss.slice(start, end));
+    const checkCode = key => {
+      const check = checks[key];
+      return "totalInput.value = '" + check.total + "';\npeopleInput.value = '" + check.people + "';\ntotalInput.dispatchEvent(new Event('input'));\npeopleInput.dispatchEvent(new Event('input'));\nform.requestSubmit();";
+    };
+    const segments = [
+      {
+        stage: -2, intro: 'prompt', title: '指示を渡す', text: instruction, ms: 2600, hold: 1800,
+        note: '作りたいものと条件を、文章でAIに伝えます。'
+      },
+      {
+        stage: -1, intro: 'plan', title: '条件を整理する', ms: 2100, hold: 1600,
+        text: '作るのは、割り勘計算機です。\n入力は「合計金額」と「人数」。\n答えは1円単位で切り上げます。\n人数が0や空欄なら、計算せず注意を表示します。',
+        outlineTitle: '何を作る？',
+        rows: [['入力するもの', '合計金額・人数'], ['表示するもの', '1人あたりの金額'], ['計算の決まり', '1円未満の端数は切り上げ'], ['入力が足りないとき', '人数0・空欄なら注意を表示']],
+        note: '指示を、必要な機能と守る条件に整理します。'
+      },
+      {
+        stage: -1, intro: 'plan', title: '変更内容と外部送信を伝える', ms: 2100, hold: 1600,
+        text: '「AI練習」フォルダに index.html を新しく作ります。\nHTMLで入力欄を作り、CSSで見た目を整え、JavaScriptで計算を動かします。\n\n作成・動作確認での外部送信はありません。\n追加料金のかかるサービスも使いません。',
+        outlineTitle: '作業前に伝えること',
+        rows: [['変更するファイル', 'AI練習 / index.html を新規作成'], ['作り方', 'HTML・CSS・JavaScriptを1枚にまとめる'], ['外部送信', 'なし（作成・動作確認）']],
+        note: 'ファイルを作る前に、変更内容と外部送信の有無を説明します。'
+      },
+      {
+        stage: -1, intro: 'plan', title: '作る順番を決める', ms: 2100, hold: 1600,
+        text: '入力欄 → 見た目 → 計算の順に作ります。\nできたら「1,000円・3人」「人数0」「空欄」を試します。\n\n保存先は、選んだフォルダーの index.html。\nでは、コードを書き始めます。',
+        outlineTitle: 'この順番で進める',
+        rows: [['1. 画面を作る', '入力欄と結果の置き場を用意'], ['2. 見た目を整える', '読みやすく、押しやすい形に'], ['3. 動きを付ける', '計算と入力チェックを追加'], ['4. 動作を確かめる', '1,000円・3人、人数0、空欄を試す']],
+        note: '作る順番と確認する内容を決めたら、コードを書き始めます。'
+      },
+      { stage: 0, code: compactCode(header), markup: 0, note: 'まず、アプリの名前を画面に置きます。' },
+      { stage: 0, code: compactCode(totalField), markup: 1, note: '合計金額を入力する欄を作ります。' },
+      { stage: 0, code: compactCode(peopleField), markup: 2, note: '人数を入力する欄も作ります。' },
+      { stage: 0, code: compactCode(actions + '\n' + result), markup: 3, note: '計算ボタンと、答えを表示する場所を作ります。' },
+      { stage: 1, code: cssExcerpt(0, foundationEnd), markup: 3, css: appCss.slice(0, foundationEnd), note: '文字の大きさ、背景、余白を整えます。' },
+      { stage: 1, code: cssExcerpt(foundationEnd, resultStart), markup: 3, css: appCss.slice(0, resultStart), note: '入力欄とボタンを、押しやすい形にします。' },
+      { stage: 1, code: cssExcerpt(resultStart), markup: 3, css: appCss, note: '答えが目に入るように、結果の部分を仕上げます。' },
+      { stage: 2, code: compactCode(appScript.slice(0, appScript.indexOf('function calculate('))), markup: 3, css: appCss, note: '空欄や人数0を見つけたら、注意を出す処理を書きます。' },
+      { stage: 2, code: compactCode(appScript.slice(appScript.indexOf('function calculate('))), finished: true, note: '金額を人数で割り、端数を切り上げます。これで計算が動きます。' },
+      { stage: 3, code: checkCode('rounding'), finished: true, check: 'rounding', note: '1,000円を3人で割って、334円になるか確かめます。' },
+      { stage: 3, code: checkCode('zero'), finished: true, check: 'zero', note: '人数を0にして、注意が出るか確かめます。' },
+      { stage: 3, code: checkCode('empty'), finished: true, check: 'empty', note: '人数を空欄にして、注意が出るか確かめます。' },
+      { stage: 4, code: finishedHtml, finished: true, note: '完成。右の計算機で、好きな金額と人数を試せます。' }
+    ];
+
+    let segmentIndex = 0;
+    let elapsed = 0;
+    let mode = 'typing';
+    let playing = false;
+    let started = false;
+    let speed = 1;
+    let animationId = 0;
+    let previousTime = null;
+    let revision = 0;
+    let loadTimeout = 0;
+    let pendingPreview = null;
+    let lastCode = '';
+
+    function setCheck(key, state) {
+      const item = byId('build-check-' + key);
+      item.dataset.state = state;
+      item.setAttribute('aria-label', checks[key].label + '：' + ({ unchecked: '未確認', pending: '確認中', passed: '確認済み', failed: '不一致' }[state]));
+    }
+    function resetChecks() { Object.keys(checks).forEach(key => setCheck(key, 'unchecked')); }
+    function escapeHtml(text) { return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+    function highlight(line) {
+      const tokens = /(\/\/.*|\x3C!--.*?-->|"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'|<\/?[\w-]+|\b(?:const|let|function|if|return|for|new|true|false)\b)/g;
+      let html = '';
+      let position = 0;
+      for (const match of line.matchAll(tokens)) {
+        html += escapeHtml(line.slice(position, match.index));
+        const token = match[0];
+        const kind = token.startsWith('//') || token.startsWith('\x3C!--') ? 'comment' : /^["']/.test(token) ? 'string' : token.startsWith('<') ? 'tag' : 'keyword';
+        html += '<span class="build-token-' + kind + '">' + escapeHtml(token) + '</span>';
+        position = match.index + token.length;
+      }
+      return html + escapeHtml(line.slice(position));
+    }
+    function renderCode(text, caret = true) {
+      const cacheKey = text + String(caret);
+      if (cacheKey === lastCode) return;
+      lastCode = cacheKey;
+      const lines = text.split('\n');
+      codeContent.innerHTML = lines.map((line, index) => '<span class="build-line"><span class="build-line-number" aria-hidden="true">' + (index + 1) + '</span><span class="build-line-text">' + highlight(line) + (caret && index === lines.length - 1 ? '<span class="build-caret" aria-hidden="true"></span>' : '') + '</span></span>').join('');
+      codeBox.scrollTop = segments[segmentIndex].stage === 4 ? 0 : codeBox.scrollHeight;
+    }
+    function renderBrief(fraction) {
+      const segment = segments[segmentIndex];
+      briefText.textContent = segment.text.slice(0, Math.floor(segment.text.length * fraction));
+      byId('build-brief-caret').hidden = fraction === 1;
+      if (segment.intro === 'plan') {
+        const visibleRows = Math.floor(segment.rows.length * fraction);
+        const rows = segment.rows.slice(0, visibleRows).map(([label, text]) => '<li><span>' + escapeHtml(label) + '</span><strong>' + escapeHtml(text) + '</strong></li>').join('');
+        if (outlineList.innerHTML !== rows) outlineList.innerHTML = rows;
+      } else if (fraction === 1) {
+        byId('build-brief-status').textContent = 'AIに指示を渡しました。';
+        byId('build-empty-title').textContent = '指示を受け取りました。';
+        byId('build-empty-text').textContent = '条件を整理して、作り方を決めます。';
+      }
+      brief.scrollTop = brief.scrollHeight;
+    }
+    function currentCode(count) {
+      const segment = segments[segmentIndex];
+      if (segment.stage >= 3) return segment.code.slice(0, count);
+      const before = segments.slice(0, segmentIndex).filter(item => item.stage === segment.stage).map(item => item.code);
+      return (before.length ? before.join('\n\n') + '\n\n' : '') + segment.code.slice(0, count);
+    }
+    function duration() {
+      const segment = segments[segmentIndex];
+      return reducedMotion.matches || segment.stage === 4 ? 0 : segment.intro ? segment.ms : Math.min(3400, Math.max(1000, segment.code.length * 5));
+    }
+    function updateControls() {
+      panel.dataset.playing = String(playing);
+      playButton.textContent = playing ? 'Ⅱ 一時停止' : mode === 'complete' || mode === 'error' ? '↻ もう一度再生' : started ? '▶ 続きから再生' : '▶ 再生する';
+    }
+    function schedule() {
+      if (playing && !animationId && mode !== 'waiting') animationId = requestAnimationFrame(tick);
+    }
+    function setPlaying(value) {
+      playing = value;
+      previousTime = null;
+      if (animationId) cancelAnimationFrame(animationId);
+      animationId = 0;
+      updateControls();
+      schedule();
+    }
+    function beginSegment(index) {
+      segmentIndex = index;
+      elapsed = 0;
+      mode = 'typing';
+      const segment = segments[index];
+      const wasIntro = panel.dataset.view === 'brief';
+      panel.dataset.view = segment.intro ? 'brief' : 'code';
+      brief.hidden = !segment.intro;
+      codeBox.hidden = Boolean(segment.intro);
+      byId('build-file').textContent = segment.intro ? segment.intro === 'prompt' ? 'AIへの指示' : 'AIの作業方針' : segment.stage === 3 ? '動作確認' : 'index.html';
+      byId('build-code-label').textContent = segment.intro ? segment.intro === 'prompt' ? 'あなた → AI' : '説明例' : segment.stage === 4 ? '完成したコード全体' : segment.stage === 3 ? '実際に入力して確かめる' : '書いている部分を抜粋';
+      byId('build-preview-title').textContent = segment.intro ? 'これから作るもの' : 'ブラウザ';
+      byId('build-preview-label').textContent = segment.intro ? segment.intro === 'prompt' ? '指示を受け取る' : '作り方を整理' : 'コードを画面に反映';
+      caption.textContent = segment.note;
+      preview.inert = true;
+      preview.tabIndex = -1;
+      stageButtons.forEach((button, position) => {
+        const stage = position - 2;
+        if (stage === segment.stage) button.setAttribute('aria-current', 'step');
+        else button.removeAttribute('aria-current');
+        button.classList.toggle('is-past', stage < segment.stage);
+      });
+      if (segment.intro) {
+        cover.hidden = false;
+        outline.hidden = segment.intro === 'prompt';
+        byId('build-preview-empty').hidden = !outline.hidden;
+        byId('build-brief-label').textContent = segment.intro === 'prompt' ? 'あなた → AI' : 'AIの作業方針（例）';
+        byId('build-brief-title').textContent = segment.title;
+        byId('build-brief-status').textContent = segment.intro === 'prompt' ? '指示文を入力しています…' : '依頼に対する作業方針を、短く説明しています。';
+        byId('build-empty-title').textContent = 'まず、AIに依頼する。';
+        byId('build-empty-text').textContent = '作りたいものと条件を、文章で伝えます。';
+        byId('build-outline-title').textContent = segment.outlineTitle || '';
+        renderBrief(0);
+      } else {
+        outline.hidden = true;
+        byId('build-preview-empty').hidden = false;
+        byId('build-empty-title').textContent = 'ここから、コードを書く。';
+        byId('build-empty-text').textContent = 'コードが増えると、ここに計算機ができていきます。';
+        if (wasIntro) cover.hidden = false;
+        renderCode(currentCode(0));
+      }
+    }
+    function fail(message) {
+      mode = 'error';
+      pendingPreview = null;
+      clearTimeout(loadTimeout);
+      caption.textContent = message;
+      setPlaying(false);
+    }
+    function previewDocument(segment, check, renderRevision) {
+      let html = segment.finished ? finishedHtml : '<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="' + policy + '"><meta name="color-scheme" content="light"><title>制作中の割り勘計算機</title><style>' + (segment.css || '') + '</style></head><body><main>' + markup[segment.markup] + '</main></body></html>';
+      if (segment.css || segment.finished) html = html.replace('</head>', '<style>' + previewCss + '</style></head>');
+      const bridge = (check ? checkCode(check) + '\n' : '') + `
+        parent.postMessage({ type: 'warikan-build-ready', revision: ${renderRevision},
+          value: document.getElementById('result-value')?.textContent ?? '',
+          error: document.getElementById('people-error')?.textContent ?? '',
+          collected: document.getElementById('result-collected')?.textContent ?? '',
+          invalid: document.getElementById('people')?.getAttribute('aria-invalid') ?? ''
+        }, '*');`;
+      return html.replace('</body>', '\x3Cscript>' + bridge + '<' + '/script></body>');
+    }
+    function showPreview(segment, nextMode, check = null) {
+      revision += 1;
+      mode = 'waiting';
+      previousTime = null;
+      pendingPreview = { revision, nextMode, check };
+      if (check) setCheck(check, 'pending');
+      // URLへの移動を挟まず、同じサンドボックス内で各工程のHTMLを表示する。
+      preview.srcdoc = previewDocument(segment, check, revision);
+      cover.hidden = true;
+      clearTimeout(loadTimeout);
+      loadTimeout = setTimeout(() => {
+        if (check) setCheck(check, 'failed');
+        fail('プレビューを読み込めませんでした。「もう一度再生」でやり直せます。');
+      }, 10000);
+    }
+    window.addEventListener('message', event => {
+      const data = event.data;
+      if (event.source !== preview.contentWindow || !data || data.type !== 'warikan-build-ready' || !pendingPreview || data.revision !== pendingPreview.revision) return;
+      clearTimeout(loadTimeout);
+      const { check, nextMode } = pendingPreview;
+      pendingPreview = null;
+      if (check) {
+        const expected = checks[check];
+        const passed = data.value === expected.value && data.error === expected.error && data.collected === expected.collected && data.invalid === (expected.error ? 'true' : 'false');
+        setCheck(check, passed ? 'passed' : 'failed');
+        if (!passed) { fail('確認結果が想定と違います。「もう一度再生」でやり直せます。'); return; }
+      }
+      mode = nextMode;
+      elapsed = 0;
+      previousTime = null;
+      if (mode === 'complete') {
+        preview.inert = false;
+        preview.tabIndex = 0;
+        byId('build-preview-label').textContent = 'このまま操作できます';
+        caption.textContent = '完成。右の計算機で、好きな金額と人数を試せます。';
+        progress.style.width = '100%';
+        setPlaying(false);
+      } else schedule();
+    });
+    function tick(time) {
+      animationId = 0;
+      if (!playing) return;
+      const delta = previousTime === null ? 0 : Math.min(time - previousTime, 100) * speed;
+      previousTime = time;
+      elapsed += delta;
+      const segment = segments[segmentIndex];
+      if (mode === 'typing') {
+        const fraction = duration() === 0 ? 1 : Math.min(1, elapsed / duration());
+        if (segment.intro) renderBrief(fraction);
+        else renderCode(currentCode(Math.floor(segment.code.length * fraction)), segment.stage !== 4);
+        progress.style.width = ((segmentIndex + fraction * .8) / segments.length * 100) + '%';
+        if (fraction === 1) {
+          if (segment.intro) { mode = 'hold'; elapsed = 0; }
+          else showPreview(segment, segment.stage === 4 ? 'complete' : 'hold', segment.check || null);
+        }
+      } else if (mode === 'hold' && elapsed >= (segment.hold ?? (segment.check ? 1600 : 650))) {
+        beginSegment(segmentIndex + 1);
+      }
+      schedule();
+    }
+    function invalidatePreview() {
+      revision += 1;
+      pendingPreview = null;
+      clearTimeout(loadTimeout);
+    }
+    function restart() {
+      setPlaying(false);
+      invalidatePreview();
+      resetChecks();
+      cover.hidden = false;
+      preview.removeAttribute('srcdoc');
+      preview.removeAttribute('src');
+      progress.style.width = '0%';
+      started = true;
+      beginSegment(0);
+      setPlaying(true);
+    }
+    playButton.addEventListener('click', () => {
+      if (mode === 'complete' || mode === 'error') { restart(); return; }
+      if (!started) beginSegment(0);
+      started = true;
+      if (!playing) caption.textContent = segments[segmentIndex].note;
+      setPlaying(!playing);
+    });
+    restartButton.addEventListener('click', restart);
+    speedSelect.addEventListener('change', () => {
+      const nextSpeed = Number(speedSelect.value);
+      speed = [0.5, 1, 2].includes(nextSpeed) ? nextSpeed : 1;
+      previousTime = null;
+    });
+    stageButtons.forEach((button, position) => button.addEventListener('click', () => {
+      const stage = position - 2;
+      if (stage === -2) { restart(); return; }
+      setPlaying(false);
+      invalidatePreview();
+      if (stage < 4) resetChecks();
+      started = true;
+      const index = segments.findIndex(segment => segment.stage === stage);
+      beginSegment(index);
+      progress.style.width = (index / segments.length * 100) + '%';
+      if (stage > 0 && stage < 4) showPreview(segments[index - 1], 'typing');
+      setPlaying(true);
+    }));
+    document.addEventListener('visibilitychange', () => { if (document.hidden) setPlaying(false); });
+    [playButton, restartButton, ...stageButtons].forEach(button => { button.disabled = false; });
+  } catch (error) {
+    caption.textContent = 'デモを読み込めませんでした。上の「動く完成例をダウンロード」から計算機を開けます。';
+  }
+})();
+(() => {
+  'use strict';
+  const byId = id => document.getElementById(id);
+  const panel = byId('study-demo');
+  if (!panel) return;
+  const play = byId('study-play');
+  const restart = byId('study-restart');
+  const speedControl = byId('study-speed');
+  const caption = byId('study-caption');
+  const source = byId('study-source');
+  const chat = byId('study-chat-body');
+  const composer = byId('study-composer');
+  const composerText = byId('study-composer-text');
+  const stageButtons = [0, 1, 2, 3, 4].map(stage => byId('study-stage-' + stage));
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const messages = ['question', 'answer', 'followup', 'second-answer'].map(name => ({
+    element: byId('study-' + name), text: byId('study-' + name + '-text')
+  }));
+  const texts = messages.map(message => message.text.textContent.trim());
+  texts[0] = byId('learning-prompt').textContent.trim().replace('［分からなかった文章やコードを貼る］', source.textContent.trim());
+  const phases = [
+    { stage: 0, duration: 0, hold: 1600, note: '教材の説明を読んで、分からないところを見つけます。' },
+    { stage: 0, duration: 1400, hold: 1200, note: '分からない一文を選び、コピーします。' },
+    { stage: 1, duration: 5000, hold: 1600, note: '質問文と、コピーした教材の一文を貼り付けます。' },
+    { stage: 1, duration: 0, hold: 1600, note: '質問を送りました。未経験であることも伝えています。' },
+    { stage: 2, duration: 4300, hold: 4500, note: 'AIが説明します。読みながら、分かったかどうか確かめます。' },
+    { stage: 3, duration: 2400, hold: 1000, note: 'まだ分からなければ、そのまま聞き返します。' },
+    { stage: 3, duration: 0, hold: 1500, note: '「もっと簡単な例で教えて」と伝えました。' },
+    { stage: 4, duration: 6000, hold: 5500, note: '身近な例で、もう一度説明してもらいます。' }
+  ];
+  const stagePhases = [1, 2, 4, 5, 7];
+  let phaseIndex = 0;
+  let elapsed = 0;
+  let playing = false;
+  let started = false;
+  let complete = false;
+  let speed = 1;
+  let frameId = 0;
+  let previousTime = null;
+  let previousRender = '';
+  function duration() { return reducedMotion.matches ? 0 : phases[phaseIndex].duration; }
+  function fraction() { return duration() === 0 ? 1 : Math.min(1, elapsed / duration()); }
+  function updateControls() {
+    panel.dataset.mode = complete ? 'complete' : playing ? 'playing' : started ? 'paused' : 'idle';
+    play.textContent = playing ? 'Ⅱ 一時停止' : complete ? '↻ もう一度再生' : started ? '▶ 続きから再生' : '▶ 再生する';
+    play.setAttribute('aria-pressed', String(playing));
+  }
+  function render(force = false) {
+    const amount = fraction();
+    const phase = phases[phaseIndex];
+    const draftIndex = phaseIndex === 2 ? 0 : phaseIndex === 5 ? 2 : -1;
+    const activeIndex = phaseIndex === 4 ? 1 : phaseIndex === 7 ? 3 : -1;
+    const activeText = texts[draftIndex !== -1 ? draftIndex : activeIndex] || '';
+    const characters = Math.floor(activeText.length * amount);
+    const renderKey = [phaseIndex, characters, Math.floor(amount * 100), complete].join(':');
+    byId('study-progress').value = complete ? 100 : (phaseIndex + amount * .8) / phases.length * 100;
+    if (!force && renderKey === previousRender) return;
+    previousRender = renderKey;
+    panel.dataset.phase = String(phaseIndex);
+    source.style.backgroundSize = (phaseIndex === 0 ? 0 : phaseIndex === 1 ? amount * 100 : 100) + '% 100%';
+    byId('study-selection-status').textContent = phaseIndex === 0 ? '' : phaseIndex === 1 && amount < 1 ? 'この一文を選んでいます' : 'この一文をコピーしました（再現）';
+    byId('study-empty').hidden = phaseIndex >= 2;
+    messages.forEach((message, index) => {
+      message.element.hidden = phaseIndex < [3, 4, 6, 7][index];
+      message.text.textContent = index === activeIndex ? texts[index].slice(0, characters) : texts[index];
+    });
+    composer.hidden = draftIndex === -1;
+    composerText.textContent = draftIndex === -1 ? '' : texts[draftIndex].slice(0, characters);
+    byId('study-analogy').hidden = phaseIndex < 7 || amount < 1;
+    stageButtons.forEach((button, index) => {
+      if (index === phase.stage) button.setAttribute('aria-current', 'step');
+      else button.removeAttribute('aria-current');
+      button.classList.toggle('is-past', index < phase.stage);
+    });
+    // ページ全体を動かさず、会話欄の新しい発言だけを見える位置にする。
+    if (phaseIndex >= 2) chat.scrollTop = chat.scrollHeight;
+    else chat.scrollTop = 0;
+  }
+  function schedule() {
+    if (playing && !frameId) frameId = requestAnimationFrame(tick);
+  }
+  function setPlaying(value) {
+    playing = Boolean(value && !document.hidden);
+    previousTime = null;
+    if (frameId) cancelAnimationFrame(frameId);
+    frameId = 0;
+    updateControls();
+    schedule();
+  }
+  function setCaption() {
+    caption.textContent = complete ? '一度で分からなくても大丈夫。例や言い方を変えてもらえます。' : phases[phaseIndex].note;
+  }
+  function tick(time) {
+    frameId = 0;
+    if (!playing) return;
+    elapsed += previousTime === null ? 0 : Math.max(0, Math.min(time - previousTime, 100)) * speed;
+    previousTime = time;
+    if (elapsed >= duration() + phases[phaseIndex].hold) {
+      if (phaseIndex === phases.length - 1) {
+        complete = true;
+        render(true);
+        setCaption();
+        setPlaying(false);
+        return;
+      }
+      phaseIndex += 1;
+      elapsed = 0;
+      setCaption();
+    }
+    render();
+    schedule();
+  }
+  function startOver() {
+    setPlaying(false);
+    phaseIndex = 0;
+    elapsed = 0;
+    started = true;
+    complete = false;
+    render(true);
+    setCaption();
+    setPlaying(true);
+  }
+  play.addEventListener('click', () => {
+    if (complete) { startOver(); return; }
+    started = true;
+    setCaption();
+    setPlaying(!playing);
+  });
+  restart.addEventListener('click', startOver);
+  speedControl.addEventListener('change', () => {
+    const next = Number(speedControl.value);
+    speed = [0.5, 1, 2].includes(next) ? next : 1;
+    previousTime = null;
+  });
+  stageButtons.forEach((button, stage) => button.addEventListener('click', () => {
+    setPlaying(false);
+    started = true;
+    complete = false;
+    phaseIndex = stagePhases[stage];
+    elapsed = duration();
+    render(true);
+    setCaption();
+    updateControls();
+  }));
+  document.addEventListener('visibilitychange', () => { if (document.hidden) setPlaying(false); });
+  window.addEventListener('beforeprint', () => {
+    setPlaying(false);
+    messages.forEach((message, index) => { message.text.textContent = texts[index]; });
+  });
+  window.addEventListener('afterprint', () => render(true));
+  if (typeof reducedMotion.addEventListener === 'function') reducedMotion.addEventListener('change', () => render(true));
+  render(true);
+  updateControls();
+  [play, restart, speedControl, ...stageButtons].forEach(control => { control.disabled = false; });
+})();
+(() => {
+  'use strict';
+  const byId = id => document.getElementById(id);
+  const panel = byId('drill-demo');
+  if (!panel) return;
+  const play = byId('drill-play');
+  const restart = byId('drill-restart');
+  const speedControl = byId('drill-speed');
+  const caption = byId('drill-caption');
+  const chat = byId('drill-chat-body');
+  const composer = byId('drill-composer');
+  const composerText = byId('drill-composer-text');
+  const cards = ['intro', 'example', 'first', 'second', 'retry'];
+  const messages = Array.from({ length: 11 }, (_, index) => ({
+    element: byId('drill-message-' + index), text: byId('drill-text-' + index)
+  }));
+  const texts = messages.map(message => message.text.textContent.trim());
+  texts[0] = byId('drill-prompt').textContent.trim();
+  const visibleAt = [1, 2, 7, 9, 10, 11, 13, 14, 15, 17, 18];
+  const stages = [0, 1, 2, 3, 4, 5].map(index => byId('drill-stage-' + index));
+  const stagePhases = [0, 2, 7, 11, 15, 18];
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const phases = [
+    { stage: 0, board: 'intro', draft: 0, duration: 4500, hold: 800, note: '学びたい内容と、「一問ずつ出してほしい」という進め方を伝えます。' },
+    { stage: 0, board: 'intro', message: 0, duration: 0, hold: 1400, note: '解説を多めにし、回答を待ってから答え合わせするように頼みました。' },
+    { stage: 1, board: 'example', message: 1, duration: 8000, hold: 2500, note: '最初は例を使って、言葉の意味と考え方を詳しく説明してもらいます。' },
+    { stage: 1, board: 'example', walk: 1, duration: 0, hold: 1200, note: '$i は1。3以下なので、1回目の「こんにちは」を表示します。' },
+    { stage: 1, board: 'example', walk: 2, duration: 0, hold: 1200, note: '1増やして2。まだ3以下なので、2回目を表示します。' },
+    { stage: 1, board: 'example', walk: 3, duration: 0, hold: 1200, note: '1増やして3。3も「3以下」に入るので、3回目を表示します。' },
+    { stage: 1, board: 'example', walk: 4, duration: 0, hold: 1800, note: '4になると条件に合わなくなり、繰り返しが終わります。' },
+    { stage: 2, board: 'first', message: 2, duration: 3300, hold: 2300, note: 'まずは簡単な一問。答えを先に出さず、あなたの回答を待ちます。' },
+    { stage: 2, board: 'first', draft: 3, duration: 700, hold: 500, note: '自分で考えた答えを送ります。ここでは「2回」と回答します。' },
+    { stage: 2, board: 'first', message: 3, duration: 0, hold: 900, note: '回答を送りました。ここから答え合わせです。' },
+    { stage: 2, board: 'first', message: 4, duration: 3400, hold: 1800, note: '正解できたので、理由を確認して少し難しい問題へ進みます。' },
+    { stage: 3, board: 'second', message: 5, duration: 3000, hold: 2300, note: '次は0から始まる問題。始まる数が変わると、回数はどうなるでしょう？' },
+    { stage: 3, board: 'second', draft: 6, duration: 1000, hold: 700, note: 'ここでは「2回だと思う」と回答する例を見せます。' },
+    { stage: 3, board: 'second', message: 6, duration: 0, hold: 900, note: '自信がなくても、考えた答えを伝えてみます。' },
+    { stage: 4, board: 'second', message: 7, duration: 5000, hold: 2800, note: '間違えたところを説明してもらいます。0のときも一回に数えるのがポイントです。' },
+    { stage: 4, board: 'retry', message: 8, duration: 3000, hold: 2300, note: '難しさを上げず、同じ考え方を使う問題でもう一度練習します。' },
+    { stage: 5, board: 'retry', draft: 9, duration: 1300, hold: 500, note: '今度は0も含めて、通る数を順に考えます。' },
+    { stage: 5, board: 'retry', message: 9, duration: 0, hold: 900, note: '答えと、そう考えた理由を伝えました。' },
+    { stage: 5, board: 'retry', message: 10, duration: 4000, hold: 4000, note: 'もう一度答え合わせ。つまずいたところを理解できたか確かめます。' }
+  ];
+  let phaseIndex = 0;
+  let elapsed = 0;
+  let started = false;
+  let playing = false;
+  let complete = false;
+  let speed = 1;
+  let frameId = 0;
+  let previousTime = null;
+  let previousRender = '';
+  function duration() { return reducedMotion.matches ? 0 : phases[phaseIndex].duration; }
+  function fraction() { return duration() === 0 ? 1 : Math.min(1, elapsed / duration()); }
+  function updateControls() {
+    panel.dataset.mode = complete ? 'complete' : playing ? 'playing' : started ? 'paused' : 'idle';
+    play.textContent = playing ? 'Ⅱ 一時停止' : complete ? '↻ もう一度再生' : started ? '▶ 続きから再生' : '▶ 再生する';
+    play.setAttribute('aria-pressed', String(playing));
+  }
+  function render(force = false) {
+    const phase = phases[phaseIndex];
+    const amount = fraction();
+    const activeIndex = phase.draft ?? phase.message;
+    const characters = Math.floor((texts[activeIndex] || '').length * amount);
+    const key = [phaseIndex, characters, Math.floor(amount * 100), complete].join(':');
+    byId('drill-progress').value = complete ? 100 : (phaseIndex + amount * .8) / phases.length * 100;
+    if (!force && key === previousRender) return;
+    previousRender = key;
+    panel.dataset.phase = String(phaseIndex);
+    cards.forEach(card => { byId('drill-card-' + card).hidden = card !== phase.board; });
+    messages.forEach((message, index) => {
+      message.element.hidden = phaseIndex < visibleAt[index];
+      message.text.textContent = index === phase.message ? texts[index].slice(0, characters) : texts[index];
+    });
+    composer.hidden = phase.draft === undefined;
+    composerText.textContent = composer.hidden ? '' : texts[phase.draft].slice(0, characters);
+    const walk = phase.walk || 0;
+    for (let step = 1; step <= 4; step += 1) byId('drill-walk-' + step).classList.toggle('is-current', walk === step);
+    byId('drill-count').textContent = String(Math.min(walk, 3));
+    byId('drill-run-status').textContent = walk === 0 ? '解説のあと、数の進み方を見てみましょう。' : walk === 4 ? '$i は4。3以下ではないので、ここで終了します。' : '$i は' + walk + '。3以下なので、文字を表示します。';
+    for (const [name, revealAt] of [['first', 10], ['second', 14], ['retry', 18]]) {
+      byId('drill-result-' + name).hidden = phaseIndex < revealAt || phaseIndex === revealAt && amount < 1;
+    }
+    stages.forEach((button, index) => {
+      if (index === phase.stage) button.setAttribute('aria-current', 'step');
+      else button.removeAttribute('aria-current');
+      button.classList.toggle('is-past', index < phase.stage);
+    });
+    chat.scrollTop = chat.scrollHeight;
+  }
+  function setCaption() {
+    caption.textContent = complete ? '解けたら少し難しく。つまずいたら同じ難しさで。自分の回答に合わせて、問題を作ってもらえます。' : phases[phaseIndex].note;
+  }
+  function schedule() { if (playing && !frameId) frameId = requestAnimationFrame(tick); }
+  function setPlaying(value) {
+    playing = Boolean(value && !document.hidden);
+    previousTime = null;
+    if (frameId) cancelAnimationFrame(frameId);
+    frameId = 0;
+    updateControls();
+    schedule();
+  }
+  function tick(time) {
+    frameId = 0;
+    if (!playing) return;
+    elapsed += previousTime === null ? 0 : Math.max(0, Math.min(time - previousTime, 100)) * speed;
+    previousTime = time;
+    if (elapsed >= duration() + phases[phaseIndex].hold) {
+      if (phaseIndex === phases.length - 1) {
+        complete = true;
+        render(true);
+        setCaption();
+        setPlaying(false);
+        return;
+      }
+      phaseIndex += 1;
+      elapsed = 0;
+      setCaption();
+    }
+    render();
+    schedule();
+  }
+  function startOver() {
+    setPlaying(false);
+    phaseIndex = 0;
+    elapsed = 0;
+    started = true;
+    complete = false;
+    render(true);
+    setCaption();
+    setPlaying(true);
+  }
+  play.addEventListener('click', () => {
+    if (complete) { startOver(); return; }
+    started = true;
+    setCaption();
+    setPlaying(!playing);
+  });
+  restart.addEventListener('click', startOver);
+  speedControl.addEventListener('change', () => {
+    const next = Number(speedControl.value);
+    speed = [0.5, 1, 2].includes(next) ? next : 1;
+    previousTime = null;
+  });
+  stages.forEach((button, stage) => button.addEventListener('click', () => {
+    setPlaying(false);
+    started = true;
+    complete = false;
+    phaseIndex = stagePhases[stage];
+    elapsed = duration();
+    render(true);
+    setCaption();
+    updateControls();
+  }));
+  document.addEventListener('visibilitychange', () => { if (document.hidden) setPlaying(false); });
+  window.addEventListener('beforeprint', () => {
+    setPlaying(false);
+    messages.forEach((message, index) => { message.text.textContent = texts[index]; });
+  });
+  window.addEventListener('afterprint', () => render(true));
+  if (typeof reducedMotion.addEventListener === 'function') reducedMotion.addEventListener('change', () => render(true));
+  render(true);
+  updateControls();
+  [play, restart, speedControl, ...stages].forEach(control => { control.disabled = false; });
+})();
+(() => {
+  'use strict';
+  const content = document.getElementById('guide-content');
+  const list = document.getElementById('guide-nav-links');
+  const previous = document.getElementById('guide-nav-prev');
+  const next = document.getElementById('guide-nav-next');
+  const navigation = document.getElementById('section-nav');
+  const sections = Array.from(list.querySelectorAll('a[href^="#"]'), link => ({
+    link,
+    section: document.getElementById(link.getAttribute('href').slice(1))
+  })).filter(item => item.section);
+  let current = null;
+  let scheduled = false;
+  let revealOnUpdate = false;
+  function update() {
+    const overflow = !content.hidden && list.scrollWidth > list.clientWidth + 2;
+    previous.hidden = !overflow;
+    next.hidden = !overflow;
+    previous.disabled = !overflow || list.scrollLeft <= 1;
+    next.disabled = !overflow || list.scrollLeft + list.clientWidth >= list.scrollWidth - 2;
+  }
+  function reveal(link) {
+    const viewport = list.getBoundingClientRect();
+    const bounds = link.getBoundingClientRect();
+    let left = 0;
+    if (bounds.left < viewport.left) left = bounds.left - viewport.left - 8;
+    else if (bounds.right > viewport.right) left = bounds.right - viewport.right + 8;
+    // 本文の位置を変えず、目次だけを横に送る。
+    if (left) list.scrollBy({ left, behavior: 'auto' });
+    update();
+  }
+  function updateCurrent() {
+    scheduled = false;
+    const shouldReveal = revealOnUpdate;
+    revealOnUpdate = false;
+    if (content.hidden || !sections.length) return;
+    const readingLine = navigation.getBoundingClientRect().bottom + 24;
+    let active = sections[0];
+    for (const item of sections) {
+      if (item.section.getBoundingClientRect().top > readingLine) break;
+      active = item;
+    }
+    // 最後の短いセクションは、見出しが上まで届かなくてもページ末尾で選ぶ。
+    if (window.scrollY > 0 && window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) {
+      active = sections[sections.length - 1];
+    }
+    const changed = active !== current;
+    if (changed) {
+      if (current) current.link.removeAttribute('aria-current');
+      active.link.setAttribute('aria-current', 'location');
+      current = active;
+    }
+    if (changed || shouldReveal) reveal(active.link);
+  }
+  function scheduleCurrent(revealActive = false) {
+    revealOnUpdate = revealOnUpdate || revealActive;
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(updateCurrent);
+  }
+  function refresh() {
+    update();
+    scheduleCurrent(true);
+  }
+  function move(direction) {
+    list.scrollBy({ left: direction * Math.max(160, list.clientWidth * .8), behavior: 'auto' });
+    update();
+  }
+  previous.addEventListener('click', () => move(-1));
+  next.addEventListener('click', () => move(1));
+  list.addEventListener('scroll', update);
+  window.addEventListener('scroll', () => scheduleCurrent(), { passive: true });
+  window.addEventListener('hashchange', () => scheduleCurrent(true));
+  window.addEventListener('resize', refresh);
+  window.addEventListener('load', refresh);
+  document.getElementById('welcome-enter').addEventListener('click', refresh);
+  refresh();
+})();
+</script>
+</body>
+</html>
