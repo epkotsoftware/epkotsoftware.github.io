@@ -1,0 +1,149 @@
+/* ============================================================
+   タスク管理
+   ============================================================ */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #eef2f7;
+  color: #0f172a;
+  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans", Meiryo, sans-serif;
+  line-height: 1.8;
+}
+
+header {
+  padding: 14px 24px;
+  background: linear-gradient(120deg, #0f766e 0%, #1e40af 55%, #4c1d95 100%);
+  color: #ffffff;
+  box-shadow: 0 2px 16px rgba(15, 23, 42, 0.18);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 17px;
+  letter-spacing: 0.01em;
+}
+
+main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 20px 24px 32px;
+}
+
+/* ------------------------------------------------------------
+   入力フォーム
+   ------------------------------------------------------------ */
+.entry {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding: 16px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06),
+    0 8px 24px -14px rgba(15, 23, 42, 0.35);
+}
+
+.entry input[type="text"] {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.entry button {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.16s ease;
+}
+
+.entry button:hover {
+  background: #1d4ed8;
+}
+
+/* 入力に不備があったとき */
+.error {
+  margin: 0 0 16px;
+  padding: 10px 14px;
+  border-left: 4px solid #dc2626;
+  border-radius: 6px;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-size: 13px;
+}
+
+/* ------------------------------------------------------------
+   一覧
+   ------------------------------------------------------------ */
+#task-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  padding: 14px 16px;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid #2563eb;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+}
+
+.task-name {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 700;
+  word-break: break-all;
+}
+
+.task-date {
+  flex: 0 0 auto;
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.done {
+  flex: 0 0 auto;
+  padding: 6px 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 999px;
+  background: #f8fafc;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.16s ease, color 0.16s ease;
+}
+
+.done:hover {
+  background: #16a34a;
+  border-color: #16a34a;
+  color: #ffffff;
+}
+
+/* タスクが1件も無いとき */
+.empty {
+  padding: 28px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 10px;
+  color: #94a3b8;
+  font-size: 13px;
+  text-align: center;
+}
