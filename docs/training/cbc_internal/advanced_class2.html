@@ -289,14 +289,14 @@
     <div class="ad-compare">
       <div class="ad-compare-item is-ng">
         <span class="ad-compare-label">#8 のとき</span>
-        <code class="ad-code">require_once '../config/config.php';
+        <code class="ad-code">require_once __DIR__ . '/config/config.php';
 
 $stmt = $pdo->query($sql);
 $rows = $stmt->fetchAll();</code>
       </div>
       <div class="ad-compare-item is-ok">
         <span class="ad-compare-label">クラスにすると</span>
-        <code class="ad-code">require_once '../Controller/Connect.php';
+        <code class="ad-code">require_once __DIR__ . '/Controller/Connect.php';
 
 $select = new SelectData();
 $rows = $select->select($sql);</code>
@@ -626,7 +626,7 @@ if (isset($_POST['id'])) {
 }</code>
       </div>
       <div class="ad-compare-item is-ok">
-        <span class="ad-compare-label">#12（sortable3）</span>
+        <span class="ad-compare-label">#9（sortable3）</span>
         <code class="ad-code">require_once __DIR__ . '/../Controller/Connect.php';
 require_once __DIR__ . '/../Controller/AppController.php';
 
@@ -687,7 +687,7 @@ if (isset($_POST['id'])) {
 <span class="ad-v">$select</span> = <span class="ad-k">new</span> <span class="ad-c">SelectData</span>();
 
 <span class="ad-v">$rows</span> = <span class="ad-v">$select</span>-&gt;<span class="ad-f">select</span>(
-    <span class="ad-s">'SELECT s.*, g.department
+    <span class="ad-s">'SELECT s.*, g.department AS department_name
      FROM sortable AS s
      LEFT JOIN departments AS g ON s.department_id = g.id
      ORDER BY s.id'</span>
@@ -709,7 +709,7 @@ if (isset($_POST['id'])) {
     <div class="ac2-three">
       <div class="ac2-three-item">
         <span class="ac2-three-name">index.php</span>
-        <span class="ac2-three-sub">#1〜#10</span>
+        <span class="ac2-three-sub">#5〜#7</span>
         <p>1枚に全部。<strong>動くものを作った</strong></p>
       </div>
       <div class="ac2-three-item">
@@ -719,7 +719,7 @@ if (isset($_POST['id'])) {
       </div>
       <div class="ac2-three-item">
         <span class="ac2-three-name">sortable3/</span>
-        <span class="ac2-three-sub">#12</span>
+        <span class="ac2-three-sub">#9</span>
         <p>クラスにまとめた。<strong>持ち運べるようになった</strong></p>
       </div>
     </div>
