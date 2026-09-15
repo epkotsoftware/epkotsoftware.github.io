@@ -371,7 +371,7 @@
 
     <h3>$( ) の中はCSSと同じ</h3>
     <p>
-      <strong>ここが一番の朗報です。</strong>要素の選び方は、<a href="beginner_7.html#chapter3">コーダー初級#7</a> でやったCSSのセレクタと<strong>まったく同じ書き方</strong>です。新しく覚えることはありません。
+      <strong>ここが一番の朗報です。</strong>要素の選び方は、<a href="beginner_7.html#chapter3">コーダー中級#7</a> でやったCSSのセレクタと<strong>まったく同じ書き方</strong>です。新しく覚えることはありません。
     </p>
 
     <table>
@@ -647,17 +647,16 @@
       課題ファイル <strong><code>kadai_06.html</code> の「1. クリックイベント」</strong>を作ります。<br>
       ボタンと箱を1つずつ置き、<strong>ボタンを押すと箱の見た目が変わる</strong>ようにしてください。ボタンには <code>id="change_btn"</code> を付けます。<br>
       見た目の指定は<strong>このページ専用のCSSファイルを新しく作って</strong>そこに書き（ファイル名は自分で決める）、jQueryでは<strong>クラスを付け外しするだけ</strong>にします。<br>
-      jQuery本体は課題ファイルで<strong>読み込み済み</strong>です（自分で足さない）。コードは <code>$(function(){ })</code> の中に書きます（3章参照）。
+      jQuery本体は課題ファイルで<strong>読み込み済み</strong>です（自分で足さない）。jQueryのコードは、課題ファイルの <code>&lt;head&gt;</code> 内にある <code>&lt;script&gt;〜&lt;/script&gt;</code> に <code>$(function(){ })</code> を作り、その中に書きます（3章参照）。
       <span class="jq-label">HTML（セクションの中）</span>
       <code class="jq-code hl">&lt;button type=<span class="v">"button"</span> id=<span class="v">"change_btn"</span>&gt;色を変える&lt;/button&gt;
 &lt;div id=<span class="v">"box"</span>&gt;ボタンを押すと、この箱の見た目が変わります。&lt;/div&gt;</code>
       <span class="jq-label">CSS（ページ専用のCSSファイル）</span>
       <code class="jq-code hl"><span class="s">#change_btn </span>{
-  <span class="p">padding</span>: <span class="v">8px 18px</span>;
-  <span class="p">border</span>: <span class="v">none</span>;
+  <span class="p">padding</span>: <span class="v">8px 16px</span>;
+  <span class="p">border</span>: <span class="v">1px solid #cbd5e1</span>;
   <span class="p">border-radius</span>: <span class="v">8px</span>;
-  <span class="p">background</span>: <span class="v">linear-gradient(135deg, #2563eb, #7c3aed)</span>;
-  <span class="p">color</span>: <span class="v">#ffffff</span>;
+  <span class="p">background</span>: <span class="v">#ffffff</span>;
   <span class="p">font-weight</span>: <span class="v">700</span>;
   <span class="p">cursor</span>: <span class="v">pointer</span>;
 }
@@ -697,15 +696,14 @@
       <code class="jq-code hl">&lt;div id=<span class="v">"text"</span>&gt;この箱にマウスを乗せると色が変わり、離すと戻ります。&lt;/div&gt;</code>
       <span class="jq-label">CSS（ページ専用のCSSファイル）</span>
       <code class="jq-code hl"><span class="s">#text </span>{
-  <span class="p">padding</span>: <span class="v">10px 14px</span>;
+  <span class="p">padding</span>: <span class="v">12px 14px</span>;
   <span class="p">border</span>: <span class="v">1px solid #e2e8f0</span>;
   <span class="p">border-radius</span>: <span class="v">10px</span>;
   <span class="p">background</span>: <span class="v">#f8fafc</span>;
-  <span class="p">transition</span>: <span class="v">background 0.2s, color 0.2s, border-color 0.2s</span>;
+  <span class="p">transition</span>: <span class="v">background 0.2s, color 0.2s</span>;
 }
 
 <span class="s">#text.is-hover </span>{
-  <span class="p">border-color</span>: <span class="v">#0f766e</span>;
   <span class="p">background</span>: <span class="v">#0f766e</span>;
   <span class="p">color</span>: <span class="v">#ffffff</span>;
 }</code>
@@ -913,10 +911,10 @@
         <code class="jq-code hl">&lt;button class=<span class="v">"open"</span>&gt;開く&lt;/button&gt;
 &lt;div class=<span class="v">"panel"</span>&gt;
   中身
-&lt;/div&gt;
+&lt;/div&gt;</code>
 
-<span class="c">/* CSS：最初は隠しておく */</span>
-<span class="s">.panel</span> { <span class="p">display</span>: <span class="v">none</span>; }</code>
+        <span class="jq-label">CSS（最初は隠しておく）</span>
+        <code class="jq-code hl"><span class="s">.panel</span> { <span class="p">display</span>: <span class="v">none</span>; }</code>
       </div>
       <div>
         <span class="jq-label">jQuery</span>
@@ -936,16 +934,50 @@
 
     <div class="note">
       <span class="label">.next() とは</span><br>
-      <strong>すぐ次にある兄弟要素</strong>を指します。<a href="beginner_7.html#chapter5">コーダー初級#7</a> でやった結合子の <code>+</code> と同じ考え方です。<br>
+      <strong>すぐ次にある兄弟要素</strong>を指します。<a href="beginner_7.html#chapter5">コーダー中級#7</a> でやった結合子の <code>+</code> と同じ考え方です。<br>
       この書き方なら、<strong>ボタンとパネルが何組あっても同じコード1つで動きます</strong>。押されたボタンの隣を開く、という指定になっているからです。
     </div>
 
     <div class="exercise">
       <span class="label">演習3</span><br>
       <strong><code>kadai_06.html</code> の「3. スライドボックス」</strong>を作ります。<br>
-      見出しと中身の組を<strong>3組</strong>作り、見出しをクリックすると<strong>その中身だけ</strong>が開閉するようにしてください。<br>
-      <strong>jQueryは1つで足ります。</strong>3組それぞれに書くのではなく、上の <code>$(this).next()</code> の形を使ってください。中身はCSSで <code>display: none;</code> にして、最初は閉じておきます。<br>
-      コードは<strong>上の見本がそのまま答え</strong>です。HTMLの「ボタン＋中身」の組を3つに増やして使ってください。
+      見出しボタンと中身の組を<strong>3組</strong>作り、見出しをクリックすると<strong>その中身だけ</strong>が開閉するようにしてください。<br>
+      この課題では、ボタンに <code>class="slide_btn"</code>、中身に <code>class="slide_box"</code> を付けます。<br>
+      ボタンを縦に並べ、<strong>幅・余白・枠線・色も、次のCSSで整えてください。</strong>CSSは演習1で作った<strong>ページ専用のCSSファイルに追加</strong>します。中身は <code>display: none;</code> で、最初は閉じておきます。<br>
+      <strong>jQueryは1つで足ります。</strong>上の見本と同じ <code>$(this).next()</code> の形で、押したボタンのすぐ次の中身だけを開閉します。
+      <span class="jq-label">HTML（「3. スライドボックス」のセクションの中）</span>
+      <code class="jq-code hl">&lt;button type=<span class="v">"button"</span> class=<span class="v">"slide_btn"</span>&gt;1つ目の見出し&lt;/button&gt;
+&lt;div class=<span class="v">"slide_box"</span>&gt;1つ目の中身です。見出しを押すと開き、もう一度押すと閉じます。&lt;/div&gt;
+&lt;button type=<span class="v">"button"</span> class=<span class="v">"slide_btn"</span>&gt;2つ目の見出し&lt;/button&gt;
+&lt;div class=<span class="v">"slide_box"</span>&gt;2つ目の中身です。押した見出しの中身だけが開きます。&lt;/div&gt;
+&lt;button type=<span class="v">"button"</span> class=<span class="v">"slide_btn"</span>&gt;3つ目の見出し&lt;/button&gt;
+&lt;div class=<span class="v">"slide_box"</span>&gt;3つ目の中身です。jQueryは1つしか書いていません。&lt;/div&gt;</code>
+      <span class="jq-label">CSS（ページ専用のCSSファイル）</span>
+      <code class="jq-code hl"><span class="s">.slide_btn </span>{
+  <span class="p">display</span>: <span class="v">block</span>;
+  <span class="p">width</span>: <span class="v">100%</span>;
+  <span class="p">margin-top</span>: <span class="v">8px</span>;
+  <span class="p">padding</span>: <span class="v">10px 14px</span>;
+  <span class="p">border</span>: <span class="v">1px solid #cbd5e1</span>;
+  <span class="p">border-radius</span>: <span class="v">8px</span>;
+  <span class="p">background</span>: <span class="v">#ffffff</span>;
+  <span class="p">font-weight</span>: <span class="v">700</span>;
+  <span class="p">text-align</span>: <span class="v">left</span>;
+  <span class="p">cursor</span>: <span class="v">pointer</span>;
+}
+
+<span class="s">.slide_box </span>{
+  <span class="p">display</span>: <span class="v">none</span>;
+  <span class="p">padding</span>: <span class="v">12px 14px</span>;
+  <span class="p">border</span>: <span class="v">1px solid #e2e8f0</span>;
+  <span class="p">border-top</span>: <span class="v">none</span>;
+  <span class="p">border-radius</span>: <span class="v">0 0 8px 8px</span>;
+  <span class="p">background</span>: <span class="v">#f8fafc</span>;
+}</code>
+      <span class="jq-label">jQuery（既存の $(function(){ }) の中）</span>
+      <code class="jq-code hl">$(<span class="v">'.slide_btn'</span>).on(<span class="v">'click'</span>, <span class="k">function</span> () {
+  $(this).next().slideToggle();
+});</code>
     </div>
 
     <h3>ツールチップ</h3>
@@ -977,7 +1009,7 @@
 
     <div class="note">
       <span class="label">.children() とは</span><br>
-      <strong>直下の子要素</strong>を指します。<a href="beginner_7.html#chapter5">コーダー初級#7</a> でやった結合子の <code>&gt;</code> と同じです。<br>
+      <strong>直下の子要素</strong>を指します。<a href="beginner_7.html#chapter5">コーダー中級#7</a> でやった結合子の <code>&gt;</code> と同じです。<br>
       <code>$(this).children('.tip')</code> で「マウスが乗った要素の中にある <code>.tip</code>」だけを狙えます。
     </div>
 
@@ -985,7 +1017,7 @@
       <span class="label">演習4</span><br>
       <strong><code>kadai_06.html</code> の「5. ツールチップ」</strong>を作ります。<br>
       横に並んだ項目を3つ作り、<strong>マウスを乗せた項目にだけ</strong>説明が出るようにしてください。<br>
-      説明を浮かせるには <code>position: absolute;</code> を使います。<strong>親側に <code>position: relative;</code> を付けるのを忘れると</strong>、まったく違う場所に出ます。<a href="beginner_6.html#chapter3">コーダー初級#6</a> で扱った内容です。
+      説明を浮かせるには <code>position: absolute;</code> を使います。<strong>親側に <code>position: relative;</code> を付けるのを忘れると</strong>、まったく違う場所に出ます。<a href="beginner_6.html#chapter3">コーダー中級#6</a> で扱った内容です。
       <span class="jq-label">HTML</span>
       <code class="jq-code hl">&lt;div id=<span class="v">"nav"</span>&gt;
   &lt;ul&gt;
@@ -1014,6 +1046,7 @@
   <span class="p">position</span>: <span class="v"><span class="blank">xxxxxx</span></span>;  <span class="c">/* 親を基準に自由に動かせる側 */</span>
   <span class="p">left</span>: <span class="v">0</span>;
   <span class="p">top</span>: <span class="v">calc(100% + 8px)</span>;
+  <span class="p">z-index</span>: <span class="v">10</span>;
   <span class="p">padding</span>: <span class="v">6px 12px</span>;
   <span class="p">border-radius</span>: <span class="v">6px</span>;
   <span class="p">background</span>: <span class="v">#1e293b</span>;
@@ -1052,6 +1085,7 @@
   <span class="p">position</span>: <span class="v">absolute</span>;
   <span class="p">left</span>: <span class="v">0</span>;
   <span class="p">top</span>: <span class="v">calc(100% + 8px)</span>;
+  <span class="p">z-index</span>: <span class="v">10</span>;
   <span class="p">padding</span>: <span class="v">6px 12px</span>;
   <span class="p">border-radius</span>: <span class="v">6px</span>;
   <span class="p">background</span>: <span class="v">#1e293b</span>;
@@ -1122,10 +1156,12 @@
     <div class="exercise">
       <span class="label">演習5</span><br>
       <strong><code>kadai_06.html</code> の「4. ページトップへ戻るボタン」</strong>を作ります。<br>
-      <strong>少しスクロールすると画面の右下に現れ、押すと先頭に戻る</strong>ボタンを作ってください。最初は隠しておきます。<br>
+      <strong>少しスクロールすると本文の外側の右下に現れ、押すと先頭に戻る</strong>ボタンを作ってください。最初は隠しておきます。<br>
       画面に貼り付けるので <code>position: fixed;</code> を使います。先頭へ戻す動きは、5章の <code>.animate()</code> で <code>scrollTop</code> を <code>0</code> にします。<br>
+      本文に重ならないよう、幅が1152px以下の画面では<strong>本文の右側に72px（ボタン48px＋画面端の余白24px）</strong>を確保します。狭い画面ではメニューを折り返し、ボタン用の余白にはみ出さないようにします。<br>
       この演習だけは<strong>上の見本と作りが違います</strong>。見本は枠の中を見ていますが、課題では <code>$(window)</code> で<strong>ページ全体</strong>を対象にしてください。<br>
-      中身が短いとページがスクロールできず、<strong>正しく作れてもボタンは出ません</strong>。ウィンドウを縦に縮めて、スクロールが出る状態で確認してください。
+      中身が短いとページがスクロールできず、<strong>正しく作れてもボタンは出ません</strong>。ウィンドウを縦に縮めて、スクロールが出る状態で確認してください。<br>
+      「4. ページトップへ戻るボタン」のセクション内にはボタンのHTMLを書きません。下のコードは、雛形の <code>&lt;/main&gt;</code> の直後にあるコメントの位置へ書いてください。
       <span class="jq-label">HTML（&lt;/main&gt; の後ろ、&lt;/body&gt; の前）</span>
       <code class="jq-code hl">&lt;div class=<span class="v">"pageTop_btn"</span>&gt;↑&lt;/div&gt;</code>
       <span class="jq-label">CSS（ページ専用のCSSファイル・穴埋め ― まず自分で考える）</span>
@@ -1134,6 +1170,7 @@
   <span class="p">position</span>: <span class="v"><span class="blank">xxxxxx</span></span>;  <span class="c">/* スクロールしても画面に貼り付いたままにする指定（初級#6） */</span>
   <span class="p">right</span>: <span class="v">24px</span>;
   <span class="p">bottom</span>: <span class="v">24px</span>;
+  <span class="p">z-index</span>: <span class="v">30</span>;
   <span class="p">width</span>: <span class="v">48px</span>;
   <span class="p">height</span>: <span class="v">48px</span>;
   <span class="p">border-radius</span>: <span class="v">50%</span>;
@@ -1143,6 +1180,16 @@
   <span class="p">line-height</span>: <span class="v">48px</span>;
   <span class="p">text-align</span>: <span class="v">center</span>;
   <span class="p">cursor</span>: <span class="v">pointer</span>;
+}
+
+<span class="k">@media</span> (<span class="p">max-width</span>: <span class="v">1152px</span>) {
+  <span class="s">main </span>{
+    <span class="p">margin-right</span>: <span class="v">72px</span>;
+  }
+
+  <span class="s">#nav ul </span>{
+    <span class="p">flex-wrap</span>: <span class="v">wrap</span>;
+  }
 }</code>
       <span class="jq-label">jQuery（穴埋め）</span>
       <code class="jq-code hl">$(window).on(<span class="v">'scroll'</span>, <span class="k">function</span>() {
@@ -1164,6 +1211,7 @@ $(<span class="v">'.pageTop_btn'</span>).on(<span class="v">'click'</span>, <spa
   <span class="p">position</span>: <span class="v">fixed</span>;
   <span class="p">right</span>: <span class="v">24px</span>;
   <span class="p">bottom</span>: <span class="v">24px</span>;
+  <span class="p">z-index</span>: <span class="v">30</span>;
   <span class="p">width</span>: <span class="v">48px</span>;
   <span class="p">height</span>: <span class="v">48px</span>;
   <span class="p">border-radius</span>: <span class="v">50%</span>;
@@ -1173,6 +1221,16 @@ $(<span class="v">'.pageTop_btn'</span>).on(<span class="v">'click'</span>, <spa
   <span class="p">line-height</span>: <span class="v">48px</span>;
   <span class="p">text-align</span>: <span class="v">center</span>;
   <span class="p">cursor</span>: <span class="v">pointer</span>;
+}
+
+<span class="k">@media</span> (<span class="p">max-width</span>: <span class="v">1152px</span>) {
+  <span class="s">main </span>{
+    <span class="p">margin-right</span>: <span class="v">72px</span>;
+  }
+
+  <span class="s">#nav ul </span>{
+    <span class="p">flex-wrap</span>: <span class="v">wrap</span>;
+  }
 }</code>
         <span class="jq-label">jQuery</span>
         <code class="jq-code hl">$(window).on(<span class="v">'scroll'</span>, <span class="k">function</span>() {
