@@ -48,7 +48,7 @@
     <div class="exercise">
       <span class="label">課題</span><br>
       <code>03_advanced/htdocs/index.php</code> の仕上げです。<br>
-      章の途中に<strong>演習が4つ</strong>あります（この色の枠です）。出てきたその場で書いてください。<br>
+      章の途中に<strong>演習が5つ</strong>あります（この色の枠です）。出てきたその場で書いてください。<br>
       <strong>このページまで終われば、1つ目の画面が完成</strong>します。チェックリストの5項目が全部そろいます。
     </div>
 
@@ -99,7 +99,7 @@
     <div class="note">
       <span class="label">自分のコードは &lt;script&gt; の中に書く</span><br>
       この2本を読み込んだあと、<strong>同じ <code>&lt;head&gt;</code> の中に <code>&lt;script&gt; … &lt;/script&gt;</code> を1つ足して</strong>、そこに自分のコードを書きます。<br>
-      <a href="basic_6.html">マークアップ中級#6</a> では <code>js/main.js</code> という別ファイルを作りました。<strong>ここでは1枚のファイルにまとめて書きます。</strong>別ファイルに切り出すのは <a href="advanced_class1.html">#11</a> でやります。
+      <a href="basic_6.html">マークアップ中級#6</a> では <code>js/main.js</code> という別ファイルを作りました。<strong>ここでは1枚のファイルにまとめて書きます。</strong>別ファイルに切り出すのは <a href="advanced_class1.html">#8</a> でやります。
     </div>
 
     <h3>draggable を付ける</h3>
@@ -310,6 +310,10 @@
     </div>
 
     <h3>送る</h3>
+
+    <p>
+      下の <code>$.ajax()</code> から <code>.fail()</code> までを、<strong><code>stop: function () { ... }</code> の中で、<code>id</code>・<code>left</code>・<code>top</code> を取得した直後</strong>に書きます。<code>stop</code> の外では、これらの変数を参照できません。演習2では座標の確認まで行い、送信処理を追加するのは演習3です。
+    </p>
 
     <div class="vscode">
       <div class="vscode-titlebar">
@@ -552,6 +556,7 @@
     <div class="exercise">
       <span class="label">演習3</span><br>
       ドラッグした位置が<strong>DBに保存される</strong>ようにしてください。<br>
+      演習2で作った <code>stop</code> の中の <code>const top = ...;</code> の直後に、2章「送る」の <code>$.ajax()</code> から <code>.fail()</code> までを追加します。そのうえで、PHP側に下の更新処理を書いてください。<br>
       できたら、札を動かして<strong>ページを再読み込み</strong>します。<strong>動かした場所に残っていれば成功</strong>です。<br>
       うまくいかないときは、次の章の調べ方を先に読んでください。
       <span class="ad-label">index.php（穴埋め）</span>

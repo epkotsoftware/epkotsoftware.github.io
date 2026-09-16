@@ -502,7 +502,7 @@ function/update.php     → 更新
 <span class="ad-k"><span class="blank">xxxxxx</span></span> <span class="ad-c">__DIR__</span> . <span class="ad-s">'/config/config.php'</span>;  <span class="ad-cm">/* 無いと止まる・1回だけ読む書き方は？（この章） */</span>
 
 <span class="ad-v">$rows</span> = <span class="ad-v">$pdo</span>-&gt;<span class="ad-f">query</span>(
-    <span class="ad-s">'SELECT s.*, g.department
+    <span class="ad-s">'SELECT s.*, g.department AS department_name
      FROM sortable AS s
      LEFT JOIN departments AS g ON s.department_id = g.id
      ORDER BY s.id'</span>
@@ -549,7 +549,7 @@ function/update.php     → 更新
 <span class="ad-k">require_once</span> <span class="ad-c">__DIR__</span> . <span class="ad-s">'/config/config.php'</span>;
 
 <span class="ad-v">$rows</span> = <span class="ad-v">$pdo</span>-&gt;<span class="ad-f">query</span>(
-    <span class="ad-s">'SELECT s.*, g.department
+    <span class="ad-s">'SELECT s.*, g.department AS department_name
      FROM sortable AS s
      LEFT JOIN departments AS g ON s.department_id = g.id
      ORDER BY s.id'</span>

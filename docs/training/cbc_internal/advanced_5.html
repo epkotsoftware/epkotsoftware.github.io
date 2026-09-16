@@ -54,7 +54,7 @@
     <div class="exercise">
       <span class="label">課題</span><br>
       このページで作るのは <code>03_advanced/htdocs/index.php</code> です。<br>
-      章の途中に<strong>演習が3つ</strong>あります（この色の枠です）。出てきたその場で書いてください。<br>
+      章の途中に<strong>演習が4つ</strong>あります（この色の枠です）。出てきたその場で書いてください。<br>
       完成は <a href="advanced_7.html">フロントエンド中級#7</a> までかかります。
     </div>
 
@@ -478,10 +478,10 @@
       <strong>開発中だけ出す。</strong>実際のサービスでは、画面には出さずログに残します。
     </div>
 
-    <h3>PDO のエラーも出るようにする</h3>
+    <h3>PDO のエラー処理を明示する</h3>
 
     <p>
-      上の2行は「PHPのエラー」を出す設定です。<strong>PDO には、別にもう1つ指定が要ります。</strong>
+      上の2行は「PHPのエラー」を出す設定です。<strong>PDO では、SQLに失敗したときの動作を指定できます。</strong>PHP 8以降は例外を出す動作が既定ですが、この教材では設定を明示します。
     </p>
 
     <div class="vscode">
@@ -513,7 +513,7 @@
       </tr>
       <tr>
         <td><code>ERRMODE_EXCEPTION</code></td>
-        <td>SQLに失敗したとき、<strong>その場で止まってエラーを出す</strong>。指定しないと、失敗しても黙って進みます</td>
+        <td>SQLに失敗したとき、<strong>例外を出す</strong>。PHP 8以降は既定の動作です。PHP 7以前では、この動作にするために指定が必要です</td>
       </tr>
       <tr>
         <td><code>FETCH_ASSOC</code></td>
@@ -538,7 +538,8 @@
       <span class="label">演習2</span><br>
       <code>03_advanced/htdocs/index.php</code> を作り、<strong>DBに接続するところまで</strong>書いてください。<br>
       接続できたか確かめるため、最後に <code>echo '接続成功';</code> を入れて、ブラウザで開いてみましょう。<br>
-      <strong>わざと失敗させてみるのも大事です。</strong><code>dbname</code> を存在しない名前に変えて、どんなエラーが出るか見てください。
+      <strong>わざと失敗させてみるのも大事です。</strong><code>dbname</code> を存在しない名前に変えて、どんなエラーが出るか見てください。<br>
+      接続確認が終わったら、確認用の <code>echo '接続成功';</code> を削除してから次の章へ進んでください。
       <span class="ad-label">index.php（穴埋め）</span>
       <code class="ad-code hl"><span class="sy-tag">&lt;?php</span>
 <span class="ad-f">ini_set</span>(<span class="ad-s">'display_errors'</span>, <span class="ad-s">'1'</span>);
@@ -652,13 +653,14 @@
     <div class="note">
       <span class="label">型が付いて返ってくる</span><br>
       <code>int(810)</code> <code>string(6)</code> のように、<strong>カラムの型がそのまま反映されます。</strong>数値のカラムは数値、文字のカラムは文字です。<br>
-      ただし<strong>これはDBから読んだときの話</strong>です。<a href="advanced_6.html">次のページ</a>で扱う<strong>フォームから送られてきた値は、数字を入力しても文字</strong>になります。<a href="basic_7.html#chapter3">マークアップ中級#7</a> でやった <code>'10' + 5</code> の問題は、そちらで起きます。
+      ただしこれはDBから読んだときの話です。次のページで扱うフォームから送られてきた値は、数字を入力しても文字になります。<strong>文字列と数値の計算方法はJavaScriptとPHPで違う</strong>ので、次のページで確認します。
     </div>
 
     <div class="exercise">
       <span class="label">演習3</span><br>
       <code>sortable</code> テーブルの中身を取り出して、<code>var_dump()</code> で表示してください。<br>
-      取れたら、<strong>1件目の名前だけ</strong>を <code>echo</code> で出してみましょう。
+      取れたら、<strong>1件目の名前だけ</strong>を <code>echo</code> で出してみましょう。<br>
+      確認が終わったら、<code>var_dump($rows);</code> と <code>echo $rows[0]['name'];</code> を削除してください。データを取り出して <code>$rows</code> に入れる処理は残します。
       <span class="ad-label">index.php（穴埋め）</span>
       <code class="ad-code hl"><span class="ad-v">$stmt</span> = <span class="ad-v">$pdo</span>-&gt;<span class="ad-f">query</span>(<span class="ad-s">'SELECT * FROM sortable ORDER BY id'</span>);
 <span class="ad-v">$rows</span> = <span class="ad-v">$stmt</span>-&gt;<span class="ad-f"><span class="blank">xxxxxx</span></span>();  <span class="ad-cm">/* 結果をまとめて配列で受け取るメソッドは？（この章） */</span>
@@ -829,11 +831,6 @@
 </main>
 
 <nav class="page-nav">
-  <a class="page-prev" href="advanced_4.html">
-    <span class="page-nav-label">前のページ</span>
-    <span class="page-nav-title">フロントエンド初級#4</span>
-    <span class="page-nav-sub">PHPを便利にするいろんな記号</span>
-  </a>
   <a class="page-next" href="advanced_6.html">
     <span class="page-nav-label">次のページ</span>
     <span class="page-nav-title">フロントエンド中級#6</span>

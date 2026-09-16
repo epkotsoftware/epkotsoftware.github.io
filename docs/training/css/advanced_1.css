@@ -1,0 +1,95 @@
+/* ============================================================
+   フロントエンド初級#1 専用スタイル
+   共通スタイル（training.css）にないもののみを定義する。
+
+   このページの図（.seq）は
+     ・骨格（カード・レーン・矢印） = インラインSVG（座標で精密に描く）
+     ・文言                          = HTML（折り返し・フォントを効かせる）
+   の2層で構成する。文字をSVGに入れると日本語が折り返せないため。
+   ============================================================ */
+
+.seq {
+  margin: 20px 0;
+  padding: 18px 18px 6px;
+  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+}
+
+/* --- 図の骨格（SVG） --- */
+.seq-canvas {
+  container-type: inline-size;
+}
+
+.seq-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* --- 図の下に置く説明。番号の色で往路・復路を示す --- */
+.seq-list {
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: none;
+}
+
+.seq-item {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  padding: 7px 2px;
+  color: #334155;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.seq-item + .seq-item {
+  border-top: 1px solid #e8eef4;
+}
+
+.seq-badge {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 22px;
+  text-align: center;
+  box-shadow: 0 1px 2px rgba(30, 50, 80, 0.22);
+}
+
+.seq-item.is-go span {
+  background: #2563eb;
+}
+
+.seq-item.is-back span {
+  background: #177245;
+}
+
+/* 狭い画面では図が小さくなりすぎるため、横スクロールに切り替える */
+@media (max-width: 620px) {
+  .seq-canvas {
+    overflow-x: auto;
+  }
+
+  .seq-svg {
+    width: 620px;
+  }
+}
+
+/* ============================================================
+   狭い画面での横溢れ対策
+   表のセルに URL のような長い連続文字が入ると、表の最小幅が
+   画面幅を超え、ページごと横スクロールしてしまう。
+   break-word は最小幅を縮めないため anywhere を使う
+   ============================================================ */
+@media (max-width: 620px) {
+  th code,
+  td code {
+    overflow-wrap: anywhere;
+  }
+}

@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- ▼ ページごとに変更 -->
+  <title>フロントエンド初級#3</title>
+  <link rel="stylesheet" href="../css/training.css" />
+
+  <!-- ▼ このページ専用のスタイル -->
+  <link rel="stylesheet" href="../css/advanced_3.css" />
+
+  <!-- ▼ 開いたときに、ページの先頭から読み始められるようにする。
+       ブラウザが前回の位置へ戻すより先に動かす必要があるため、
+       training.js とは分けて <head> で読み込んでいる -->
+  <script src="../js/scroll-reset.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <h1>フロントエンド初級#3</h1>
+    <p>条件分岐・ループ・配列</p>
+  </div>
+</header>
+
+<main>
+
+  <section class="toc" id="top">
+    <h2>目次</h2>
+
+    <ol start="4">
+      <li><a href="#chapter4">条件によって処理を変える（条件分岐）</a>
+        <ul>
+          <li><a href="#chapter4-if">条件で答えを分ける if 文</a></li>
+        </ul>
+      </li>
+      <li><a href="#chapter5">繰り返し処理を行う（ループ処理）</a>
+        <ul>
+          <li><a href="#chapter5-about">ループ処理とは</a></li>
+          <li><a href="#chapter5-for">for 文</a></li>
+          <li><a href="#chapter5-while">while 文と do 〜 while 文</a></li>
+        </ul>
+      </li>
+      <li><a href="#chapter6">配列変数</a>
+        <ul>
+          <li><a href="#chapter6-about">配列変数とは</a></li>
+          <li><a href="#chapter6-index">添字でデータを出力</a></li>
+          <li><a href="#chapter6-assoc">連想配列</a></li>
+          <li><a href="#chapter6-multi">多次元（二次元）配列</a></li>
+        </ul>
+      </li>
+      <li><a href="#chapter7">配列のループ処理</a>
+        <ul>
+          <li><a href="#chapter7-foreach">foreach 文</a></li>
+          <li><a href="#chapter7-summary">【重要】変数のまとめ</a></li>
+        </ul>
+      </li>
+    </ol>
+  </section>
+
+
+  <section id="chapter4">
+    <h2>4. 条件によって処理を変える（条件分岐）</h2>
+
+    <p class="lead">
+      ここまでは書いた順に上から実行されるだけでした。ここからは「条件によって処理を変える」書き方を学びます。
+    </p>
+
+    <h3 id="chapter4-if">条件で答えを分ける if 文</h3>
+    <p>
+      <code>if</code> は「もしも」という意味です。たとえば「男性だったら青、女性だったら赤にする」のように、<strong>なにかの条件</strong>によって<strong>いくつかの答え</strong>を用意し、結果を分岐させることを目的とします。
+    </p>
+    <p>
+      プログラムの <code>if</code> 文は、条件に対して <strong>真偽</strong>（<code>true</code>＝正しい／<code>false</code>＝間違っている）を判定し、その真偽によって答えを何通りかに分けます。
+    </p>
+
+    <h4>条件式の書き方</h4>
+    <p>
+      条件は「<strong>2 つの値をくらべて、真か偽かを出す</strong>」という形で書きます。くらべるときに使うのが次の記号です。
+    </p>
+
+    <table>
+      <tr>
+        <th>記号</th>
+        <th>読み方</th>
+        <th>真になるとき</th>
+      </tr>
+      <tr>
+        <td><code>==</code></td>
+        <td>等しい</td>
+        <td><code>$a == $b</code> … <code>$a</code> と <code>$b</code> が同じ値のとき</td>
+      </tr>
+      <tr>
+        <td><code>!=</code></td>
+        <td>等しくない</td>
+        <td><code>$a != $b</code> … 同じ値ではないとき</td>
+      </tr>
+      <tr>
+        <td><code>&gt;</code></td>
+        <td>より大きい</td>
+        <td><code>$a &gt; $b</code> … <code>$a</code> のほうが大きいとき（同じ値は偽）</td>
+      </tr>
+      <tr>
+        <td><code>&gt;=</code></td>
+        <td>以上</td>
+        <td><code>$a &gt;= $b</code> … 大きいか、同じ値のとき</td>
+      </tr>
+      <tr>
+        <td><code>&lt;</code></td>
+        <td>より小さい</td>
+        <td><code>$a &lt; $b</code> … <code>$a</code> のほうが小さいとき（同じ値は偽）</td>
+      </tr>
+      <tr>
+        <td><code>&lt;=</code></td>
+        <td>以下</td>
+        <td><code>$a &lt;= $b</code> … 小さいか、同じ値のとき</td>
+      </tr>
+    </table>
+
+    <div class="caution">
+      <span class="label">注意</span><br>
+      <code>=</code> と <code>==</code> は別のものです。<code>=</code> は<strong>代入</strong>（右の値を左に入れる）、<code>==</code> は<strong>比較</strong>（同じ値かどうかを調べる）。条件の中で <code>=</code> を書くと、くらべるつもりが代入になってしまいます。
+    </div>
+
+    <p>
+      条件を 2 つ以上組み合わせたいときは、次の記号でつなぎます。
+    </p>
+
+    <table>
+      <tr>
+        <th>記号</th>
+        <th>読み方</th>
+        <th>真になるとき</th>
+      </tr>
+      <tr>
+        <td><code>&amp;&amp;</code></td>
+        <td>かつ</td>
+        <td>左と右の<strong>両方</strong>が真のとき</td>
+      </tr>
+      <tr>
+        <td><code>||</code></td>
+        <td>または</td>
+        <td>左と右の<strong>どちらか</strong>が真のとき</td>
+      </tr>
+    </table>
+
+    <p>
+      以下の例では、あらかじめ次の変数を用意しておきます。
+    </p>
+
+    <pre><code>/* 変数への初期設定 */
+$ageA = 50;
+$ageB = 17;</code></pre>
+
+    <h4>単純な条件式（if 文）</h4>
+    <p>
+      条件が真のときだけ処理を実行します。
+    </p>
+
+    <pre><code><span class="sy-com">/* 書き方 */</span>
+if( 条件 ) {
+  真の時に実行される処理;
+}</code></pre>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-attr">$ageA</span> = <span class="sy-num">50</span>;
+<span class="sy-attr">$ageB</span> = <span class="sy-num">17</span>;
+<span class="sy-com">/* 例 */</span>
+<span class="sy-tag">if</span> (<span class="sy-attr">$ageA</span> &gt;= <span class="sy-num">18</span> || <span class="sy-attr">$ageB</span> &gt;= <span class="sy-num">18</span>) {
+  <span class="sy-tag">echo</span> <span class="sy-str">&quot;投票できる人がいます&quot;</span>;
+}</pre>
+      </div>
+    </div>
+
+    <div class="chrome">
+      <div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">ブラウザ</div></div>
+      <div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">http://localhost:8001/index.php</div></div>
+      <div class="chrome-viewport">
+        投票できる人がいます
+      </div>
+    </div>
+
+    <p>
+      <code>$ageA</code> は 18 以上なので真、<code>$ageB</code> は 17 なので偽ですが、<code>||</code> は<strong>どちらか一方が真であれば真</strong>になるため、中の処理が実行されます。
+    </p>
+
+    <h4>条件で分岐する場合（if 〜 else）</h4>
+    <p>
+      <code>else</code> を付けると、条件が偽のときの処理も書けます。
+    </p>
+
+    <pre><code><span class="sy-com">/* 書き方 */</span>
+if( 条件 ) {
+  真の時に実行される処理;
+} else {
+  偽の時に実行される処理;
+}</code></pre>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-attr">$ageA</span> = <span class="sy-num">50</span>;
+<span class="sy-attr">$ageB</span> = <span class="sy-num">17</span>;
+<span class="sy-com">/* 例 */</span>
+<span class="sy-tag">if</span> (<span class="sy-attr">$ageA</span> &gt;= <span class="sy-num">18</span>) {
+  <span class="sy-attr">$message</span> = <span class="sy-str">&quot;大人ですね&quot;</span>;
+} <span class="sy-tag">else</span> {
+  <span class="sy-attr">$message</span> = <span class="sy-str">&quot;子どもですね&quot;</span>;
+}
+<span class="sy-tag">echo</span> <span class="sy-attr">$message</span>;</pre>
+      </div>
+    </div>
+
+    <div class="chrome">
+      <div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">ブラウザ</div></div>
+      <div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">http://localhost:8001/index.php</div></div>
+      <div class="chrome-viewport">
+        大人ですね
+      </div>
+    </div>
+
+    <h4>条件が複数分岐の場合（elseif）</h4>
+    <p>
+      <code>elseif</code> を使うと、条件を上から順に判定して分岐を増やせます。
+    </p>
+
+    <pre><code><span class="sy-com">/* 書き方 */</span>
+if( 条件1 ){
+  条件1が真であれば実行;
+} elseif( 条件2 ) {  <span class="sy-com">/* elseif(条件3)、elseif(条件4)、と増やせます */</span>
+  条件1には該当しなかったが、条件2が真であれば実行;
+} else {
+  条件1も2も満たない、偽であれば実行;
+}</code></pre>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-attr">$ageA</span> = <span class="sy-num">50</span>;
+<span class="sy-attr">$ageB</span> = <span class="sy-num">17</span>;
+<span class="sy-com">/* 例 */</span>
+<span class="sy-tag">if</span> (<span class="sy-attr">$ageB</span> &lt; <span class="sy-num">18</span>) {
+  <span class="sy-attr">$message</span> = <span class="sy-str">&quot;こどもだ&quot;</span>;
+} <span class="sy-tag">elseif</span> (<span class="sy-attr">$ageB</span> &lt; <span class="sy-num">59</span>) {
+  <span class="sy-attr">$message</span> = <span class="sy-str">&quot;おとなだ！&quot;</span>;
+} <span class="sy-tag">else</span> {
+  <span class="sy-attr">$message</span> = <span class="sy-str">&quot;おじいちゃんかな？&quot;</span>;
+}
+<span class="sy-tag">echo</span> <span class="sy-attr">$message</span>;</pre>
+      </div>
+    </div>
+
+    <div class="chrome">
+      <div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">ブラウザ</div></div>
+      <div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">http://localhost:8001/index.php</div></div>
+      <div class="chrome-viewport">
+        こどもだ
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      <code>elseif</code> は<strong>上から順に</strong>判定され、最初に真になったところで終わります。<code>$ageB</code> は 17 なので、1 つ目の <code>$ageB &lt; 18</code> で確定します。
+    </div>
+
+    <h4>三項演算子</h4>
+    <p>
+      条件が単純な場合は、<code>if 〜 else</code> を1 行で書ける三項演算子が使えます。
+    </p>
+
+    <pre><code><span class="sy-com">/* 書き方 */</span>
+( 条件 ) ? 真の時に実行される処理 : 偽の時に実行される処理;</code></pre>
+
+        <p>
+      三項演算子が返すのは「処理」ではなく<strong>値</strong>です。上の行だけでは返ってきた値が捨てられてしまうので、下の例のように<strong>変数に代入する</strong>か <code>echo</code> で出力して使います。
+    </p>
+
+<div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-attr">$ageA</span> = <span class="sy-num">50</span>;
+<span class="sy-attr">$ageB</span> = <span class="sy-num">17</span>;
+<span class="sy-com">/* 例 */</span>
+<span class="sy-attr">$message</span> = (<span class="sy-attr">$ageB</span> &gt;= <span class="sy-num">18</span>) ? <span class="sy-str">&quot;大人ってことで&quot;</span> : <span class="sy-str">&quot;子どもってことで&quot;</span>;
+<span class="sy-tag">echo</span> <span class="sy-attr">$message</span>;</pre>
+      </div>
+    </div>
+
+    <div class="chrome">
+      <div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">ブラウザ</div></div>
+      <div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">http://localhost:8001/index.php</div></div>
+      <div class="chrome-viewport">
+        子どもってことで
+      </div>
+    </div>
+  </section>
+
+
+  <section id="chapter5">
+    <h2>5. 繰り返し処理を行う（ループ処理）</h2>
+
+    <h3 id="chapter5-about">ループ処理とは</h3>
+    <p>
+      ループ処理とは、ある条件が終わるまで「繰り返し」処理を行う構文です。たとえば「最初に 5 という数があり、その数字が 10 になるまで 1 ずつ足していく」といった処理です。
+    </p>
+    <p>
+      たとえば次のような場面で使います。
+    </p>
+
+    <ul>
+      <li>データベースの中に何行あるか分からないが、1 行目から終わりまで値を取ってきて出力したいとき</li>
+      <li>HTML のメニューで <code>option</code> タグを 1976 年〜2020 年まで自動で出したいとき</li>
+    </ul>
+    <p>
+      これを HTML だけで書くと、45 行を手で書くことになります。
+    </p>
+
+    <pre><code>&lt;select&gt;
+  &lt;option&gt;1976年&lt;/option&gt;
+  &lt;option&gt;1977年&lt;/option&gt;
+  &lt;option&gt;1978年&lt;/option&gt;
+  &lt;option&gt;1979年&lt;/option&gt;
+  &lt;option&gt;1980年&lt;/option&gt;
+  &lt;option&gt;1981年&lt;/option&gt;
+  &lt;option&gt;1982年&lt;/option&gt;
+  ︙
+  &lt;option&gt;2018年&lt;/option&gt;
+  &lt;option&gt;2019年&lt;/option&gt;
+  &lt;option&gt;2020年&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+
+    <p>
+      PHP のループを使えば、これが数行で済みます。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7</div>
+        <pre class="vscode-code">&lt;select&gt;
+<span class="sy-tag">&lt;?php
+</span><span class="sy-tag">for</span> (<span class="sy-attr">$i</span>=<span class="sy-num">1976</span>; <span class="sy-attr">$i</span>&lt;=<span class="sy-num">2020</span>; <span class="sy-attr">$i</span>++) {
+  <span class="sy-tag">echo</span> <span class="sy-str">&quot;&lt;option&gt;&quot;</span> . <span class="sy-attr">$i</span> . <span class="sy-str">&quot;年&lt;/option&gt;&quot;</span>;
+}
+<span class="sy-tag">?&gt;
+</span>&lt;/select&gt;</pre>
+      </div>
+    </div>
+
+    <p>
+      ループ処理ができる構文として、PHP には <code>for</code> 文と <code>while</code> 文が用意されています。
+    </p>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      <code>$i++</code> は <code>$i</code> に 1 ずつ足していく処理です（インクリメント演算子）。また、このあと出てくる <code>%</code> は<strong>割った余り</strong>を求める記号で、<code>$i % 5 == 0</code> なら「5 で割り切れる」という意味になります。どちらも次のページで詳しく扱います。
+    </div>
+
+    <h3 id="chapter5-for">for 文</h3>
+    <p>
+      ある整数 <code>$i</code>（<code>Integer</code> の略）が、ある数字になるまで、ある処理を行う場合に使います。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</div>
+            <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-tag">for</span> (<span class="sy-attr">$i</span> = <span class="sy-num">0</span>; <span class="sy-attr">$i</span> &lt; <span class="sy-num">10</span>; <span class="sy-attr">$i</span>++) {
+  <span class="sy-tag">echo</span> <span class="sy-attr">$i</span>;
+}
+
+<span class="sy-tag">echo</span> <span class="sy-str">&#039;&lt;br&gt;-------&lt;br&gt;&#039;</span>;
+
+<span class="sy-tag">for</span> (<span class="sy-attr">$i</span> = <span class="sy-num">0</span>; <span class="sy-attr">$i</span> &lt; <span class="sy-num">10</span>; <span class="sy-attr">$i</span>++) {
+  <span class="sy-tag">if</span> (<span class="sy-attr">$i</span> &gt; <span class="sy-num">5</span>){
+    <span class="sy-tag">break</span>;   <span class="sy-com">/* breakでループを抜ける */</span>
+  }
+  <span class="sy-tag">echo</span> <span class="sy-attr">$i</span>;
+}
+
+<span class="sy-tag">echo</span> <span class="sy-str">&#039;&lt;br&gt;-------&lt;br&gt;&#039;</span>;
+
+<span class="sy-tag">for</span> (<span class="sy-attr">$i</span> = <span class="sy-num">0</span>; <span class="sy-attr">$i</span> &lt; <span class="sy-num">10</span>; <span class="sy-attr">$i</span>++) {
+  <span class="sy-tag">if</span> (<span class="sy-attr">$i</span> % <span class="sy-num">2</span> == <span class="sy-num">0</span>) {  <span class="sy-com">/* iを2で割った時のあまりが0の場合（2で割り切れた場合、つまり偶数！） */</span>
+    <span class="sy-tag">continue</span>;   <span class="sy-com">/* continueでスキップする */</span>
+  }
+  <span class="sy-tag">echo</span> <span class="sy-attr">$i</span>;
+}
+<span class="sy-tag">?&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="chrome">
+      <div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">ブラウザ</div></div>
+      <div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">http://localhost:8001/index.php</div></div>
+      <div class="chrome-viewport">
+        0123456789<br>-------<br>012345<br>-------<br>13579
+      </div>
+    </div>
+
+    <p>
+      <code>for ( )</code> のカッコの中は、セミコロンで区切られた 3 つの部分でできています。それぞれがいつ実行されるのかを図にすると、次のようになります。
+    </p>
+
+    <figure class="forfig" role="img" aria-label="for 文の実行順を示す図。初期化を1回だけ行い、条件が真なら処理を実行して増減し、また条件の判定に戻る。条件が偽になると終了する">
+      <div class="forfig-canvas">
+        <svg class="forfig-svg" viewBox="0 0 700 186" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <marker id="fa-94a3b8" viewBox="0 0 12 10" refX="10.5" refY="5" markerWidth="5.2" markerHeight="5.2" orient="auto-start-reverse">
+              <path d="M1 1.2 L10.5 5 L1 8.8" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></marker>
+            <marker id="fa-177245" viewBox="0 0 12 10" refX="10.5" refY="5" markerWidth="5.2" markerHeight="5.2" orient="auto-start-reverse">
+              <path d="M1 1.2 L10.5 5 L1 8.8" fill="none" stroke="#177245" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></marker>
+            <marker id="fa-2563eb" viewBox="0 0 12 10" refX="10.5" refY="5" markerWidth="5.2" markerHeight="5.2" orient="auto-start-reverse">
+              <path d="M1 1.2 L10.5 5 L1 8.8" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></marker>
+          </defs>
+        
+              <g>
+                <rect x="31.0" y="51.0" width="122" height="46" rx="9"
+                      fill="#ffffff" stroke="#177245" stroke-width="2"/>
+                <text x="92" y="71" text-anchor="middle" font-size="13" font-weight="700"
+                      fill="#177245" font-family="system-ui,-apple-system,sans-serif">① 初期化</text>
+                <text x="92" y="87" text-anchor="middle" font-size="11"
+                      fill="#475569" font-family="system-ui,-apple-system,sans-serif">$i = 0</text>
+              </g>
+        
+              <g>
+                <rect x="193.0" y="51.0" width="122" height="46" rx="9"
+                      fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+                <text x="254" y="71" text-anchor="middle" font-size="13" font-weight="700"
+                      fill="#2563eb" font-family="system-ui,-apple-system,sans-serif">② 条件</text>
+                <text x="254" y="87" text-anchor="middle" font-size="11"
+                      fill="#475569" font-family="system-ui,-apple-system,sans-serif">$i &lt; 10</text>
+              </g>
+        
+              <g>
+                <rect x="363.0" y="51.0" width="122" height="46" rx="9"
+                      fill="#ffffff" stroke="#475569" stroke-width="2"/>
+                <text x="424" y="71" text-anchor="middle" font-size="13" font-weight="700"
+                      fill="#475569" font-family="system-ui,-apple-system,sans-serif">処理</text>
+                <text x="424" y="87" text-anchor="middle" font-size="11"
+                      fill="#475569" font-family="system-ui,-apple-system,sans-serif">{ } の中</text>
+              </g>
+        
+              <g>
+                <rect x="529.0" y="51.0" width="122" height="46" rx="9"
+                      fill="#ffffff" stroke="#2563eb" stroke-width="2"/>
+                <text x="590" y="71" text-anchor="middle" font-size="13" font-weight="700"
+                      fill="#2563eb" font-family="system-ui,-apple-system,sans-serif">③ 増減</text>
+                <text x="590" y="87" text-anchor="middle" font-size="11"
+                      fill="#475569" font-family="system-ui,-apple-system,sans-serif">$i++</text>
+              </g>
+              <path d="M153.0 74 L193.0 74" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" marker-end="url(#fa-94a3b8)"/>
+              <path d="M315.0 74 L363.0 74" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" marker-end="url(#fa-94a3b8)"/>
+              <text x="339.0" y="67" text-anchor="middle" font-size="11" font-weight="600" fill="#94a3b8" font-family="system-ui,sans-serif">真</text>
+              <path d="M485.0 74 L529.0 74" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" marker-end="url(#fa-94a3b8)"/>
+              <path d="M590 97.0 L590 136 L254 136 L254 97.0"
+                    fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" marker-end="url(#fa-2563eb)"/>
+              <text x="422.0" y="152" text-anchor="middle" font-size="11.5" font-weight="600"
+                    fill="#2563eb" font-family="system-ui,sans-serif">条件の判定へ戻る（繰り返し）</text>
+              <path d="M254 51.0 L254 22"
+                    fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" marker-end="url(#fa-94a3b8)"/>
+              <text x="264" y="24" font-size="11.5" font-weight="600" fill="#94a3b8"
+                    font-family="system-ui,sans-serif">偽になったら終了</text>
+        </svg>
+      </div>
+      <figcaption>
+        <span class="forfig-key forfig-once">緑</span> は最初に 1 回だけ、
+        <span class="forfig-key forfig-loop">青</span> は毎回くり返し実行される部分。
+        <span class="forfig-key forfig-outer">灰</span> は <code>{ }</code> の中の処理
+      </figcaption>
+    </figure>
+
+    <table>
+      <tr>
+        <th>回</th>
+        <th><code>$i</code> の値</th>
+        <th>条件 <code>$i &lt; 10</code></th>
+        <th>出力</th>
+      </tr>
+      <tr>
+        <td>1 回目</td>
+        <td>0</td>
+        <td>真</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>2 回目</td>
+        <td>1</td>
+        <td>真</td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>…</td>
+        <td>…</td>
+        <td>…</td>
+        <td>…</td>
+      </tr>
+      <tr>
+        <td>10 回目</td>
+        <td>9</td>
+        <td>真</td>
+        <td>9</td>
+      </tr>
+      <tr>
+        <td>11 回目</td>
+        <td>10</td>
+        <td>偽</td>
+        <td>（終了）</td>
+      </tr>
+    </table>
+
+    <p>
+      <code>break</code> はループそのものを抜け、<code>continue</code> はその回だけ飛ばして次の回に進みます。
+    </p>
+
+    <h4>小テスト</h4>
+    <div class="exercise">
+      <span class="label">演習</span><br>
+      1 から 100 まで（100 を含む）の整数のうち、<strong>5 の倍数の合計値</strong>を求めましょう。
+    </div>
+
+    <p>
+      考え方は次のとおりです。
+    </p>
+
+    <pre><code>&lt;?php
+$答え = 0;  <span class="sy-com">/* ← 変数を用意し、初期化（0にする）しておく */</span>
+
+for (カウンタ変数$iの初期設定; $iの最大数; $iを増加させる処理) {
+  もし、$iを 5 で割ったときに余りが 0 の数字であれば、{
+    $答え に　「$答え + $i」　という結果を代入し、またforループに戻る。
+  }
+}
+
+$答え を出力  <span class="sy-com">/* ← for文内で5の倍数が足された結果の数値を出力 */</span>
+?&gt;</code></pre>
+
+    <p>
+      ポイントは、答えを入れる変数を用意し、ループのたびに新しい数値へ<strong>上書きして</strong>増やしていくことです。答えは <code>1050</code> になります。
+    </p>
+
+    <div class="note">
+      <span class="label">ヒント</span><br>
+      この章の最初にある <code>for</code> 文の例の、一番最後あたりを参考にしてみてください。<code>continue</code> の代わりに、条件に当てはまった数字を足していく処理が入ります。分からないときは紙と鉛筆で計算を書き出して、ループの仕組みを考えてみましょう。
+    </div>
+
+    <details class="kotae">
+      <summary>答えを見る</summary>
+
+      <div class="vscode">
+        <div class="vscode-titlebar">
+          <span class="win-dot red"></span>
+          <span class="win-dot yellow"></span>
+          <span class="win-dot green"></span>
+          <span class="vscode-title">index.php — Visual Studio Code</span>
+        </div>
+        <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+        <div class="vscode-body">
+          <div class="vscode-gutter">1
+  2
+  3
+  4
+  5
+  6
+  7
+  8</div>
+          <pre class="vscode-code"><span class="sy-tag">&lt;?php
+  </span><span class="sy-attr">$answer</span> = <span class="sy-num">0</span>;
+  <span class="sy-tag">for</span> (<span class="sy-attr">$i</span> = <span class="sy-num">1</span>; <span class="sy-attr">$i</span> &lt;= <span class="sy-num">100</span>; <span class="sy-attr">$i</span>++) {
+    <span class="sy-tag">if</span>(<span class="sy-attr">$i</span> % <span class="sy-num">5</span> == <span class="sy-num">0</span>){
+      <span class="sy-attr">$answer</span> = <span class="sy-attr">$answer</span> + <span class="sy-attr">$i</span>;
+    }
+  }
+  <span class="sy-tag">echo</span> <span class="sy-attr">$answer</span>;</pre>
+        </div>
+      </div>
+
+      <div class="chrome">
+        <div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">ブラウザ</div></div>
+        <div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">http://localhost:8001/index.php</div></div>
+        <div class="chrome-viewport">
+          1050
+        </div>
+      </div>
+    </details>
+
+<h3 id="chapter5-while">while 文と do 〜 while 文</h3>
+    <p>
+      <code>while</code> 文は、指定した条件式が <code>true</code> の間は繰り返し実行し、<code>false</code> になると止まります。データベースからデータを取ってくるときなど「全部取ってきて、無くなったら終わる」という処理に使います。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-attr">$i</span> = <span class="sy-num">5</span>;            <span class="sy-com">/* 初期設定 */</span>
+<span class="sy-tag">while</span> (<span class="sy-attr">$i</span> &lt; <span class="sy-num">10</span>) {  <span class="sy-com">/* ① $iが 10 より小さい場合は{処理}を実行。大きくなったら(falseになったら)終了 */</span>
+  <span class="sy-tag">echo</span> <span class="sy-attr">$i</span>;         <span class="sy-com">/* ② いまの$iをecho */</span>
+  <span class="sy-attr">$i</span>++;            <span class="sy-com">/* ③ いまの$iに 1 を足し、①に戻る */</span>
+  <span class="sy-tag">echo</span> <span class="sy-str">&#039;&lt;br&gt;&#039;</span>;
+}
+<span class="sy-tag">?&gt;</span></pre>
+      </div>
+    </div>
+
+    <p>
+      <code>while</code> は<strong>前判定</strong>です。上の例は <code>$i</code> が 5 から始まり、<code>$i &lt; 10</code> を満たす間だけ処理が走ります。
+    </p>
+
+    <div class="chrome">
+      <div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">ブラウザ</div></div>
+      <div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">http://localhost:8001/index.php</div></div>
+      <div class="chrome-viewport">
+        5<br>6<br>7<br>8<br>9
+      </div>
+    </div>
+
+    <p>
+      一方 <code>do 〜 while</code> は<strong>後判定</strong>です。上の例は <code>$z</code> が最初から 50 で <code>$z &lt; 10</code> を満たしていませんが、判定より先に処理を1 回実行するため <code>50</code> が出力されます。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-attr">$z</span> = <span class="sy-num">50</span>;
+<span class="sy-tag">do</span> {
+  <span class="sy-tag">echo</span> <span class="sy-attr">$z</span>.<span class="sy-str">&#039;&lt;br&gt;&#039;</span>;
+  <span class="sy-attr">$z</span>++;
+} <span class="sy-tag">while</span> (<span class="sy-attr">$z</span> &lt; <span class="sy-num">10</span>);
+<span class="sy-tag">?&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="chrome">
+      <div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">ブラウザ</div></div>
+      <div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">http://localhost:8001/index.php</div></div>
+      <div class="chrome-viewport">
+        50
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      条件を満たさない値（<code>50</code>）を入れたとき、<code>while</code> なら1 回も実行されませんが、<code>do 〜 while</code> は上の例のように1 回実行されます。この「1 回は必ず実行される」かどうかが両者の違いです。
+    </div>
+
+    <h4>小テスト</h4>
+    <div class="exercise">
+      <span class="label">演習</span><br>
+      1 から 50 までの整数のうち、<strong>5 の倍数である数字をすべて出力</strong>しましょう。
+    </div>
+
+    <p>
+      考え方は次のとおりです。
+    </p>
+
+    <pre><code>&lt;?php
+$i = 1;  <span class="sy-com">/* 初期化 */</span>
+while ( $iの最大数 ) {
+  もし、$iを5で割ったときに余りが0であれば、{
+    $iを出力
+  }
+  $iに1を足し、またループに戻る。
+}
+?&gt;</code></pre>
+
+    <details class="kotae">
+      <summary>答えを見る</summary>
+
+      <div class="vscode">
+        <div class="vscode-titlebar">
+          <span class="win-dot red"></span>
+          <span class="win-dot yellow"></span>
+          <span class="win-dot green"></span>
+          <span class="vscode-title">index.php — Visual Studio Code</span>
+        </div>
+        <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+        <div class="vscode-body">
+          <div class="vscode-gutter">1
+  2
+  3
+  4
+  5
+  6
+  7
+  8</div>
+          <pre class="vscode-code"><span class="sy-tag">&lt;?php
+  </span><span class="sy-attr">$i</span> = <span class="sy-num">1</span>;
+  <span class="sy-tag">while</span> (<span class="sy-attr">$i</span> &lt;= <span class="sy-num">50</span>) {
+    <span class="sy-tag">if</span>( <span class="sy-attr">$i</span> % <span class="sy-num">5</span> == <span class="sy-num">0</span>){
+      <span class="sy-tag">echo</span> <span class="sy-attr">$i</span> . <span class="sy-str">&#039;&lt;br&gt;&#039;</span>;
+    }
+    <span class="sy-attr">$i</span>++;
+  }</pre>
+        </div>
+      </div>
+
+      <div class="chrome">
+        <div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">ブラウザ</div></div>
+        <div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">http://localhost:8001/index.php</div></div>
+        <div class="chrome-viewport">
+          5<br>10<br>15<br>20<br>25<br>30<br>35<br>40<br>45<br>50
+          </div>
+      </div>
+    </details>
+
+</section>
+
+
+  <section id="chapter6">
+    <h2>6. 配列変数</h2>
+
+    <h3 id="chapter6-about">配列変数とは</h3>
+    <p>
+      これまでの変数には、1 つの値を入れることができました。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-attr">$name</span> = <span class="sy-str">&#039;山田太郎&#039;</span>;
+<span class="sy-tag">?&gt;</span></pre>
+      </div>
+    </div>
+
+    <p>
+      これに対して<strong>配列</strong>（<code>array</code>）を使うと、1 つの変数に<strong>複数の値</strong>を入れられます。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-attr">$name</span> = array(<span class="sy-str">&#039;山田太郎&#039;</span>, <span class="sy-str">&#039;佐藤花子&#039;</span>, <span class="sy-str">&#039;鈴木一郎&#039;</span>);
+
+<span class="sy-com">/* 最近のバージョンでは以下のようにも書けます(PHP5.4以降)。 */</span>
+<span class="sy-attr">$name</span> = [<span class="sy-str">&#039;山田太郎&#039;</span>, <span class="sy-str">&#039;佐藤花子&#039;</span>, <span class="sy-str">&#039;鈴木一郎&#039;</span>];
+<span class="sy-tag">?&gt;</span></pre>
+      </div>
+    </div>
+
+    <p>
+      <code>$name</code> という1 つの変数に、3 つの値を入れることができました。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-attr">$name</span> = [<span class="sy-str">&#039;山田太郎&#039;</span>, <span class="sy-str">&#039;佐藤花子&#039;</span>, <span class="sy-str">&#039;鈴木一郎&#039;</span>];
+<span class="sy-tag">echo</span> <span class="sy-attr">$name</span>;        <span class="sy-com">/* 配列はechoやprintでは出力されません */</span>
+<span class="sy-tag">echo</span> <span class="sy-str">&#039;&lt;br&gt;-----------&lt;br&gt;&#039;</span>;
+print_r (<span class="sy-attr">$name</span>);   <span class="sy-com">/* print_r()関数は配列の中身を出してくれます */</span>
+<span class="sy-tag">?&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="chrome">
+      <div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">ブラウザ</div></div>
+      <div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">http://localhost:8001/index.php</div></div>
+      <div class="chrome-viewport">
+        Array<br>-----------<br>Array ( [0] =&gt; 山田太郎 [1] =&gt; 佐藤花子 [2] =&gt; 鈴木一郎 )
+      </div>
+    </div>
+
+    <div class="caution">
+      <span class="label">注意</span><br>
+      配列は <code>echo</code> では中身を出力できません。上のコードを実行すると警告が出て <code>Array</code> とだけ表示されます。中身をまとめて確認したいときは <code>print_r()</code> を使います。
+    </div>
+
+    <h3 id="chapter6-index">添字でデータを出力</h3>
+    <p>
+      配列の中の1 つの要素を取り出すには<strong>添字</strong> <code>[ ]</code>（インデックス＝通し番号）を使います。この例のようにキーを書かずに要素を並べた場合、先頭から順に 0, 1, 2 と番号が振られるので、その数字を指定します。
+    </p>
+
+    <figure class="idxfig" role="img" aria-label="1つの変数 $name の中に、0, 1, 2 と番号がついた区画が並び、それぞれに値が入っている様子">
+      <div class="idxfig-canvas">
+        <svg class="idxfig-svg" viewBox="0 0 560 238" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <marker id="idxArrow" viewBox="0 0 12 10" refX="10.5" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+              <path d="M1 1.2 L10.5 5 L1 8.8" fill="none" stroke="#be123c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </marker>
+          </defs>
+          <rect x="110" y="6" width="400" height="208" rx="10" fill="#faf7f2" stroke="#c98b3a" stroke-width="2.5"/>
+          <rect x="120" y="24" width="380" height="52" rx="6" fill="#ffffff" stroke="#c98b3a" stroke-width="1.6"/>
+          <rect x="132" y="35" width="46" height="30" rx="5" fill="#eef2ff" stroke="#2563eb" stroke-width="1.6"/>
+          <text x="155" y="55" text-anchor="middle" font-size="14" font-weight="700" fill="#2563eb" font-family="ui-monospace,Menlo,monospace">[0]</text>
+          <text x="196" y="55" font-size="14" font-weight="600" fill="#be123c" font-family="ui-monospace,Menlo,monospace">'山田太郎'</text>
+          <text x="24" y="55" font-size="13" font-weight="600" fill="#1e293b" font-family="ui-monospace,Menlo,monospace">$name[0]</text>
+          <path d="M96 50 L116 50" fill="none" stroke="#be123c" stroke-width="2" stroke-linecap="round" marker-end="url(#idxArrow)"/>
+          <rect x="120" y="84" width="380" height="52" rx="6" fill="#ffffff" stroke="#c98b3a" stroke-width="1.6"/>
+          <rect x="132" y="95" width="46" height="30" rx="5" fill="#eef2ff" stroke="#2563eb" stroke-width="1.6"/>
+          <text x="155" y="115" text-anchor="middle" font-size="14" font-weight="700" fill="#2563eb" font-family="ui-monospace,Menlo,monospace">[1]</text>
+          <text x="196" y="115" font-size="14" font-weight="600" fill="#be123c" font-family="ui-monospace,Menlo,monospace">'佐藤花子'</text>
+          <text x="24" y="115" font-size="13" font-weight="600" fill="#1e293b" font-family="ui-monospace,Menlo,monospace">$name[1]</text>
+          <path d="M96 110 L116 110" fill="none" stroke="#be123c" stroke-width="2" stroke-linecap="round" marker-end="url(#idxArrow)"/>
+          <rect x="120" y="144" width="380" height="52" rx="6" fill="#ffffff" stroke="#c98b3a" stroke-width="1.6"/>
+          <rect x="132" y="155" width="46" height="30" rx="5" fill="#eef2ff" stroke="#2563eb" stroke-width="1.6"/>
+          <text x="155" y="175" text-anchor="middle" font-size="14" font-weight="700" fill="#2563eb" font-family="ui-monospace,Menlo,monospace">[2]</text>
+          <text x="196" y="175" font-size="14" font-weight="600" fill="#be123c" font-family="ui-monospace,Menlo,monospace">'鈴木一郎'</text>
+          <text x="24" y="175" font-size="13" font-weight="600" fill="#1e293b" font-family="ui-monospace,Menlo,monospace">$name[2]</text>
+          <path d="M96 170 L116 170" fill="none" stroke="#be123c" stroke-width="2" stroke-linecap="round" marker-end="url(#idxArrow)"/>
+          <text x="310.0" y="230" text-anchor="middle" font-size="14" font-weight="700" fill="#1e293b" font-family="ui-monospace,Menlo,monospace">$name</text>
+        </svg>
+      </div>
+      <figcaption>配列は 1 つの変数の中に区画が並んだもの。番号を指定して 1 つずつ取り出せる</figcaption>
+    </figure>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-attr">$name</span> = [<span class="sy-str">&#039;山田太郎&#039;</span>, <span class="sy-str">&#039;佐藤花子&#039;</span>, <span class="sy-str">&#039;鈴木一郎&#039;</span>];
+<span class="sy-com">/* 添字をつけると一つのデータを取り出すことができる。echoで一つだけ出力。 */</span>
+<span class="sy-tag">echo</span> <span class="sy-attr">$name</span>[<span class="sy-num">0</span>] . <span class="sy-str">&#039;&lt;br&gt;&#039;</span>;  <span class="sy-com">/* 0番目 */</span>
+<span class="sy-tag">echo</span> <span class="sy-str">&#039;-----------&lt;br&gt;&#039;</span>;
+<span class="sy-tag">echo</span> <span class="sy-attr">$name</span>[<span class="sy-num">1</span>] . <span class="sy-str">&#039;&lt;br&gt;&#039;</span>;  <span class="sy-com">/* 1番目 */</span>
+<span class="sy-tag">echo</span> <span class="sy-str">&#039;-----------&lt;br&gt;&#039;</span>;
+<span class="sy-tag">echo</span> <span class="sy-attr">$name</span>[<span class="sy-num">2</span>] . <span class="sy-str">&#039;&lt;br&gt;&#039;</span>;  <span class="sy-com">/* 2番目 */</span>
+<span class="sy-tag">?&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="chrome">
+      <div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">ブラウザ</div></div>
+      <div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">http://localhost:8001/index.php</div></div>
+      <div class="chrome-viewport">
+        山田太郎<br>-----------<br>佐藤花子<br>-----------<br>鈴木一郎
+        </div>
+    </div>
+
+    <p>
+      <code>array</code> を使わずに、直接添字を指定して値を代入することもできます。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-attr">$name</span>[<span class="sy-num">0</span>] = <span class="sy-str">&#039;yamada&#039;</span>;
+<span class="sy-attr">$name</span>[<span class="sy-num">1</span>] = <span class="sy-str">&#039;sato&#039;</span>;
+<span class="sy-attr">$name</span>[<span class="sy-num">2</span>] = <span class="sy-str">&#039;suzuki&#039;</span>;
+<span class="sy-tag">echo</span> <span class="sy-attr">$name</span>[<span class="sy-num">2</span>];  <span class="sy-com">/* suzuki が出力されます */</span>
+<span class="sy-tag">?&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      番号はいつも <code>0</code> から始まるとは限りません。ほかの数字を指定すればそこから始まり、あとから要素を減らすと途中が抜けます。
+    </div>
+
+    <h3 id="chapter6-assoc">連想配列</h3>
+    <p>
+      添字が <code>[0]</code> や <code>[2]</code> だと、どのデータか分かりにくい場合があります。そこで <code>['name']</code> や <code>['age']</code> のように、添字を任意の文字列にできるのが<strong>連想配列</strong>です。
+    </p>
+    <p>
+      普通の配列と連想配列の違いは、要素を識別するものが<strong>数字</strong>（インデックス）か<strong>文字列</strong>（キー）かの違いです。添字が文字列のものは連想配列と覚えましょう。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-com">/* 普通の配列で複数の値をセットした場合 */</span>
+<span class="sy-attr">$data</span> = [
+  <span class="sy-str">&#039;山田太郎&#039;</span>,
+  <span class="sy-num">32</span>,
+  <span class="sy-str">&#039;開発部&#039;</span>,
+  <span class="sy-str">&#039;PHP&#039;</span>,
+  <span class="sy-str">&#039;入社1年目&#039;</span>
+];
+<span class="sy-tag">echo</span> <span class="sy-attr">$data</span>[<span class="sy-num">3</span>];  <span class="sy-com">/* PHP が出力されます */</span>
+
+
+<span class="sy-com">/* 連想配列で複数の値を配列にセットするには「=&gt;」を使います */</span>
+<span class="sy-attr">$data</span> = [
+  <span class="sy-str">&#039;name&#039;</span>=&gt;<span class="sy-str">&#039;山田太郎&#039;</span>,
+  <span class="sy-str">&#039;age&#039;</span>=&gt;<span class="sy-num">32</span>,
+  <span class="sy-str">&#039;dept&#039;</span>=&gt;<span class="sy-str">&#039;開発部&#039;</span>,
+  <span class="sy-str">&#039;skill&#039;</span>=&gt;<span class="sy-str">&#039;PHP&#039;</span>,
+  <span class="sy-str">&#039;since&#039;</span>=&gt;<span class="sy-str">&#039;入社1年目&#039;</span>
+];
+<span class="sy-tag">echo</span> <span class="sy-attr">$data</span>[<span class="sy-str">&#039;skill&#039;</span>];  <span class="sy-com">/* PHP が出力されます */</span>
+<span class="sy-tag">?&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      同じ「PHP」を取り出すのに、普通の配列では <code>$data[3]</code> と番号を覚えておく必要がありますが、連想配列なら <code>$data['skill']</code> と書けます。項目が増えるほど読みやすさに差が出ます。
+    </div>
+
+    <h4>まとめ</h4>
+    <table>
+      <tr>
+        <th>種類</th>
+        <th>状態</th>
+        <th>書き方と取り出し方</th>
+      </tr>
+      <tr>
+        <td>変数</td>
+        <td>箱にデータが1 つある状態</td>
+        <td><code>$data = 'yamada';</code> → <code>echo $data;</code></td>
+      </tr>
+      <tr>
+        <td>配列</td>
+        <td>箱の中に複数のデータがある状態（添字は数字）</td>
+        <td><code>$data = ['yamada', 'sato', 'suzuki'];</code> → <code>echo $data[0];</code></td>
+      </tr>
+      <tr>
+        <td>連想配列</td>
+        <td>添字が文字列になった状態</td>
+        <td><code>$data = ['name'=&gt;'yamada', 'dept'=&gt;'営業部'];</code> → <code>echo $data['name'];</code></td>
+      </tr>
+    </table>
+
+    <h3 id="chapter6-multi">多次元（二次元）配列</h3>
+    <p>
+      連想配列はデータベースのデータを出力する際によく使います。個人データのように、項目とデータの数が多くなる場合を考えてみましょう。
+    </p>
+    <p>
+      <strong>多次元</strong>とつく配列は、ID・氏名・年齢…をひとまとまりにした配列（＝1 人分）が、さらに<strong>配列（大きな箱）の中に</strong>並んでいる状態です。
+    </p>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-attr">$data</span> = [];  <span class="sy-com">/* 初期化 */</span>
+
+<span class="sy-com">/* 多次元配列としてデータ入力する書き方 */</span>
+<span class="sy-attr">$data</span> = [
+  [<span class="sy-str">&#039;1&#039;</span>, <span class="sy-str">&#039;山田太郎&#039;</span>, <span class="sy-num">32</span>, <span class="sy-str">&#039;開発部&#039;</span>, <span class="sy-str">&#039;PHP&#039;</span>, <span class="sy-str">&#039;入社1年目&#039;</span>],
+  [<span class="sy-str">&#039;2&#039;</span>, <span class="sy-str">&#039;佐藤花子&#039;</span>, <span class="sy-num">28</span>, <span class="sy-str">&#039;営業部&#039;</span>, <span class="sy-str">&#039;Excel&#039;</span>, <span class="sy-str">&#039;入社3年目&#039;</span>],
+  [<span class="sy-str">&#039;3&#039;</span>, <span class="sy-str">&#039;鈴木一郎&#039;</span>, <span class="sy-num">25</span>, <span class="sy-str">&#039;設計部&#039;</span>, <span class="sy-str">&#039;Figma&#039;</span>, <span class="sy-str">&#039;入社5年目&#039;</span>]
+];
+<span class="sy-tag">?&gt;</span></pre>
+      </div>
+    </div>
+
+    <p>
+      取り出すときは <code>echo $data[0][1];</code> のように添字を並べます。最初の <code>[0]</code> が大きな箱の番号、次の <code>[1]</code> が大きな箱の中の小さな箱の番号です。
+    </p>
+  </section>
+
+
+  <section id="chapter7">
+    <h2>7. 配列のループ処理</h2>
+
+    <h3 id="chapter7-foreach">foreach 文</h3>
+    <p>
+      <code>foreach</code> 文は、配列に含まれる<strong>要素の数だけ</strong>繰り返し処理を行い、そのたびに配列の<strong>値</strong>を<strong>変数に代入</strong>します。
+    </p>
+
+    <h4>for 文と foreach 文の違い</h4>
+    <table>
+      <tr>
+        <th>構文</th>
+        <th>ループに使う値</th>
+        <th>向いている場面</th>
+      </tr>
+      <tr>
+        <td><code>for</code></td>
+        <td>数値</td>
+        <td>連想配列を使っていない場合。配列の中身を書き換えたい場合</td>
+      </tr>
+      <tr>
+        <td><code>foreach</code></td>
+        <td>配列</td>
+        <td>配列や連想配列。中身を書き換える必要がない場合</td>
+      </tr>
+    </table>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-tag">for</span>(<span class="sy-attr">$i</span> = <span class="sy-num">0</span>; <span class="sy-attr">$i</span> &lt; <span class="sy-num">10</span>; <span class="sy-attr">$i</span>++){
+  <span class="sy-tag">echo</span> <span class="sy-attr">$i</span>;
+}</pre>
+      </div>
+    </div>
+
+    <p>
+      <code>foreach</code> の書き方は次のとおりです。
+    </p>
+
+    <pre><code>foreach (配列 as 変数){
+  実行する処理1;
+  実行する処理2;
+}
+<span class="sy-com">/* キーも一緒に取り出したい場合「=&gt;」を使って取り出します
+   キーは配列の添字番号のことです */</span>
+foreach (配列 as キー変数 =&gt; 値変数){
+  実行する処理1;
+  実行する処理2;
+}</code></pre>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18</div>
+            <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-attr">$name</span> = [<span class="sy-str">&#039;山田太郎&#039;</span>, <span class="sy-str">&#039;佐藤花子&#039;</span>, <span class="sy-str">&#039;鈴木一郎&#039;</span>];
+<span class="sy-tag">foreach</span>(<span class="sy-attr">$name</span> <span class="sy-tag">as</span> <span class="sy-attr">$val</span>){     <span class="sy-com">/* ① $nameの中身の最初[0]を取得し$valに代入 */</span>
+  <span class="sy-tag">echo</span> <span class="sy-attr">$val</span>.<span class="sy-str">&#039;&lt;br&gt;&#039;</span>;         <span class="sy-com">/* ② $valを出力し、$nameの中身がなくなるまで「① に戻って次の値を取得」を繰り返す */</span>
+}
+<span class="sy-tag">echo</span> <span class="sy-str">&#039;ーーーーーーーー&lt;br&gt;&#039;</span>;
+
+<span class="sy-attr">$data</span> = [<span class="sy-str">&#039;name&#039;</span>=&gt;<span class="sy-str">&#039;yamada&#039;</span>, <span class="sy-str">&#039;dept&#039;</span>=&gt;<span class="sy-str">&#039;営業部&#039;</span>, <span class="sy-str">&#039;age&#039;</span>=&gt;<span class="sy-num">32</span>];
+<span class="sy-tag">foreach</span>(<span class="sy-attr">$data</span> <span class="sy-tag">as</span> <span class="sy-attr">$key</span> =&gt; <span class="sy-attr">$val</span>){   <span class="sy-com">/* 1こめの $key は &#039;name&#039;　$val は &#039;yamada&#039; */</span>
+  <span class="sy-tag">echo</span> <span class="sy-attr">$key</span>.<span class="sy-str">&#039;：&#039;</span>.<span class="sy-attr">$val</span>.<span class="sy-str">&#039;&lt;br&gt;&#039;</span>;
+}
+<span class="sy-tag">echo</span> <span class="sy-str">&#039;ーーーーーーーー&lt;br&gt;&#039;</span>;
+
+<span class="sy-attr">$study</span> = [<span class="sy-str">&#039;math&#039;</span>=&gt;<span class="sy-num">95</span>, <span class="sy-str">&#039;eng&#039;</span>=&gt;<span class="sy-num">56</span>, <span class="sy-str">&#039;kokugo&#039;</span>=&gt;<span class="sy-num">100</span>];
+<span class="sy-tag">foreach</span>(<span class="sy-attr">$study</span> <span class="sy-tag">as</span> <span class="sy-attr">$val</span>){  <span class="sy-com">/* もちろん連想配列から「値のみ」の出力も可能です */</span>
+  <span class="sy-tag">echo</span> <span class="sy-attr">$val</span>.<span class="sy-str">&#039;&lt;br&gt;&#039;</span>;
+}
+<span class="sy-tag">?&gt;</span></pre>
+      </div>
+    </div>
+
+    <div class="chrome">
+      <div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">ブラウザ</div></div>
+      <div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">http://localhost:8001/index.php</div></div>
+      <div class="chrome-viewport">
+        山田太郎<br>佐藤花子<br>鈴木一郎<br>ーーーーーーーー<br>name：yamada<br>dept：営業部<br>age：32<br>ーーーーーーーー<br>95<br>56<br>100
+      </div>
+    </div>
+
+    <div class="point">
+      <span class="label">理解ポイント</span><br>
+      <code>foreach</code> には <code>while</code> や <code>for</code> と違って<strong>終了条件式がありません</strong>。配列の要素の数だけ繰り返して終了します。キーも取り出したいときは <code>as $key =&gt; $val</code> と書きます。
+    </div>
+
+    <h4>小テスト</h4>
+    <div class="exercise">
+      <span class="label">演習</span><br>
+      用意された多次元配列を <code>foreach</code> で出力し、下のような <code>table</code> タグの表を作ってみましょう。
+    </div>
+
+    <div class="chrome">
+      <div class="chrome-tabbar"><span class="win-dot red"></span><span class="win-dot yellow"></span><span class="win-dot green"></span><div class="chrome-tab">ブラウザ</div></div>
+      <div class="chrome-toolbar"><span class="chrome-nav">←&nbsp;→&nbsp;⟳</span><div class="chrome-url">http://localhost:8001/index.php</div></div>
+      <div class="chrome-viewport">
+        <table>
+          <tr><td>1</td><td>山田太郎</td><td>32</td><td>開発部</td><td>PHP</td><td>入社1年目</td></tr>
+          <tr><td>2</td><td>佐藤花子</td><td>28</td><td>営業部</td><td>Excel</td><td>入社3年目</td></tr>
+          <tr><td>3</td><td>鈴木一郎</td><td>25</td><td>設計部</td><td>Figma</td><td>入社5年目</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <h4>ヒント</h4>
+
+    <pre><code>&lt;?php
+<span class="sy-com">/* データは以下を利用してください */</span>
+$data = [
+  ['1', '山田太郎', 32, '開発部', 'PHP', '入社1年目'],
+  ['2', '佐藤花子', 28, '営業部', 'Excel', '入社3年目'],
+  ['3', '鈴木一郎', 25, '設計部', 'Figma', '入社5年目']
+];
+
+<span class="sy-com">/* おそらくこんな感じです */</span>
+echo '&lt;table&gt;';
+  foreach (多次元配列 as 変数){
+    echo '&lt;tr&gt;';
+      どんな処理が入るでしょうか？
+      &lt;td&gt;をechoすることは想像できますね
+    echo '&lt;/tr&gt;';
+  }
+echo '&lt;/table&gt;';
+?&gt;</code></pre>
+
+        <figure class="loopmap">
+      <table>
+        <tr>
+          <th>取り出す添字</th>
+          <th>1 回目<br><code>$data[0]</code></th>
+          <th>2 回目<br><code>$data[1]</code></th>
+          <th>3 回目<br><code>$data[2]</code></th>
+        </tr>
+        <tr>
+          <td><code class="loopmap-var">$val[0]</code></td>
+          <td>1</td>
+          <td>2</td>
+          <td>3</td>
+        </tr>
+        <tr>
+          <td><code class="loopmap-var">$val[1]</code></td>
+          <td>山田太郎</td>
+          <td>佐藤花子</td>
+          <td>鈴木一郎</td>
+        </tr>
+        <tr>
+          <td><code class="loopmap-var">$val[2]</code></td>
+          <td>32</td>
+          <td>28</td>
+          <td>25</td>
+        </tr>
+        <tr>
+          <td><code class="loopmap-var">$val[3]</code></td>
+          <td>開発部</td>
+          <td>営業部</td>
+          <td>設計部</td>
+        </tr>
+        <tr>
+          <td><code class="loopmap-var">$val[4]</code></td>
+          <td>PHP</td>
+          <td>Excel</td>
+          <td>Figma</td>
+        </tr>
+        <tr>
+          <td><code class="loopmap-var">$val[5]</code></td>
+          <td>入社1年目</td>
+          <td>入社3年目</td>
+          <td>入社5年目</td>
+        </tr>
+      </table>
+      <figcaption><code>foreach ($data as $val)</code> が 1 回まわるごとに、<code>$val</code> の中身が 1 人分ずつ入れ替わる</figcaption>
+    </figure>
+
+    <details class="kotae">
+      <summary>答えを見る</summary>
+
+      <div class="vscode">
+        <div class="vscode-titlebar">
+          <span class="win-dot red"></span>
+          <span class="win-dot yellow"></span>
+          <span class="win-dot green"></span>
+          <span class="vscode-title">index.php — Visual Studio Code</span>
+        </div>
+        <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+        <div class="vscode-body">
+          <div class="vscode-gutter">1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+  10
+  11
+  12
+  13
+  14
+  15
+  16
+  17
+  18
+  19</div>
+          <pre class="vscode-code"><span class="sy-tag">&lt;?php
+  </span><span class="sy-attr">$data</span> = [
+    [<span class="sy-str">&#039;1&#039;</span>, <span class="sy-str">&#039;山田太郎&#039;</span>, <span class="sy-num">32</span>, <span class="sy-str">&#039;開発部&#039;</span>, <span class="sy-str">&#039;PHP&#039;</span>, <span class="sy-str">&#039;入社1年目&#039;</span>],
+    [<span class="sy-str">&#039;2&#039;</span>, <span class="sy-str">&#039;佐藤花子&#039;</span>, <span class="sy-num">28</span>, <span class="sy-str">&#039;営業部&#039;</span>, <span class="sy-str">&#039;Excel&#039;</span>, <span class="sy-str">&#039;入社3年目&#039;</span>],
+    [<span class="sy-str">&#039;3&#039;</span>, <span class="sy-str">&#039;鈴木一郎&#039;</span>, <span class="sy-num">25</span>, <span class="sy-str">&#039;設計部&#039;</span>, <span class="sy-str">&#039;Figma&#039;</span>, <span class="sy-str">&#039;入社5年目&#039;</span>]
+  ];
+
+  <span class="sy-tag">echo</span> <span class="sy-str">&#039;&lt;table&gt;&#039;</span>;
+    <span class="sy-tag">foreach</span> (<span class="sy-attr">$data</span> <span class="sy-tag">as</span> <span class="sy-attr">$val</span>){
+      <span class="sy-tag">echo</span> <span class="sy-str">&#039;  &lt;tr&gt;&#039;</span>;
+      <span class="sy-tag">echo</span> <span class="sy-str">&#039;    &lt;td&gt;&#039;</span> . <span class="sy-attr">$val</span>[<span class="sy-num">0</span>] . <span class="sy-str">&#039;&lt;/td&gt;&#039;</span>;
+      <span class="sy-tag">echo</span> <span class="sy-str">&#039;    &lt;td&gt;&#039;</span> . <span class="sy-attr">$val</span>[<span class="sy-num">1</span>] . <span class="sy-str">&#039;&lt;/td&gt;&#039;</span>;
+      <span class="sy-tag">echo</span> <span class="sy-str">&#039;    &lt;td&gt;&#039;</span> . <span class="sy-attr">$val</span>[<span class="sy-num">2</span>] . <span class="sy-str">&#039;&lt;/td&gt;&#039;</span>;
+      <span class="sy-tag">echo</span> <span class="sy-str">&#039;    &lt;td&gt;&#039;</span> . <span class="sy-attr">$val</span>[<span class="sy-num">3</span>] . <span class="sy-str">&#039;&lt;/td&gt;&#039;</span>;
+      <span class="sy-tag">echo</span> <span class="sy-str">&#039;    &lt;td&gt;&#039;</span> . <span class="sy-attr">$val</span>[<span class="sy-num">4</span>] . <span class="sy-str">&#039;&lt;/td&gt;&#039;</span>;
+      <span class="sy-tag">echo</span> <span class="sy-str">&#039;    &lt;td&gt;&#039;</span> . <span class="sy-attr">$val</span>[<span class="sy-num">5</span>] . <span class="sy-str">&#039;&lt;/td&gt;&#039;</span>;
+      <span class="sy-tag">echo</span> <span class="sy-str">&#039;  &lt;/tr&gt;&#039;</span>;
+    }
+  <span class="sy-tag">echo</span> <span class="sy-str">&#039;&lt;/table&gt;&#039;</span>;</pre>
+        </div>
+      </div>
+
+      <p>
+        上の答えでは、出力する HTML の行頭に半角スペースを入れています。ただしこれは文字として出力されるだけで、ブラウザの表示は変わりません。
+      </p>
+    </details>
+
+<h3 id="chapter7-summary">【重要】変数のまとめ</h3>
+    <p>
+      ここまでに出てきた「値の入れ方」を一覧にまとめます。
+    </p>
+
+    <table>
+      <tr>
+        <th>種類</th>
+        <th>状態</th>
+        <th>入力</th>
+        <th>出力</th>
+      </tr>
+      <tr>
+        <td>変数</td>
+        <td>箱に1 つデータを入れた状態</td>
+        <td><code>$data = 'りんご';</code></td>
+        <td><code>echo $data;</code></td>
+      </tr>
+      <tr>
+        <td>配列</td>
+        <td>箱に複数のデータを入れた状態（添字は数値）</td>
+        <td><code>$data = ['りんご', 'みかん', 'なし'];</code></td>
+        <td><code>echo $data[2];</code></td>
+      </tr>
+      <tr>
+        <td>連想配列</td>
+        <td>配列と同じで、添字が文字列になった状態</td>
+        <td><code>$data = ['name'=&gt;'山田太郎', 'age'=&gt;32];</code></td>
+        <td><code>echo $data['name'];</code></td>
+      </tr>
+      <tr>
+        <td>多次元配列</td>
+        <td>配列の中に配列が複数入っている状態</td>
+        <td>下のコードを参照</td>
+        <td>多次元配列なら <code>echo $data[0][1];</code><br>多次元連想配列①なら <code>echo $data[0]['age'];</code><br>多次元連想配列②なら <code>echo $data['fruits'][0];</code></td>
+      </tr>
+    </table>
+
+    <div class="note">
+      <span class="label">補足</span><br>
+      下のコードは <code>$data</code> を 3 回書き換えています。上の表の取り出し方を試すときは、その形の <code>$data</code> を代入した直後に書いてください。まとめて実行すると、最後の「多次元連想配列②」しか残りません。
+    </div>
+
+    <div class="vscode">
+      <div class="vscode-titlebar">
+        <span class="win-dot red"></span>
+        <span class="win-dot yellow"></span>
+        <span class="win-dot green"></span>
+        <span class="vscode-title">index.php — Visual Studio Code</span>
+      </div>
+      <div class="vscode-tabs"><div class="vscode-tab is-active">index.php</div></div>
+      <div class="vscode-body">
+        <div class="vscode-gutter">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18</div>
+        <pre class="vscode-code"><span class="sy-tag">&lt;?php
+</span><span class="sy-com">//多次元(二次元)配列</span>
+<span class="sy-attr">$data</span> = [
+  [<span class="sy-str">&#039;山田太郎&#039;</span>, <span class="sy-num">32</span>, <span class="sy-str">&#039;PHP&#039;</span>],
+  [<span class="sy-str">&#039;佐藤花子&#039;</span>, <span class="sy-num">28</span>, <span class="sy-str">&#039;Excel&#039;</span>]
+];
+
+<span class="sy-com">//多次元連想配列①</span>
+<span class="sy-attr">$data</span> = [
+  [<span class="sy-str">&#039;name&#039;</span>=&gt;<span class="sy-str">&#039;山田太郎&#039;</span>, <span class="sy-str">&#039;age&#039;</span>=&gt;<span class="sy-num">32</span>, <span class="sy-str">&#039;skill&#039;</span>=&gt;<span class="sy-str">&#039;PHP&#039;</span>],
+  [<span class="sy-str">&#039;name&#039;</span>=&gt;<span class="sy-str">&#039;佐藤花子&#039;</span>, <span class="sy-str">&#039;age&#039;</span>=&gt;<span class="sy-num">28</span>, <span class="sy-str">&#039;skill&#039;</span>=&gt;<span class="sy-str">&#039;Excel&#039;</span>]
+];
+
+<span class="sy-com">//多次元連想配列②</span>
+<span class="sy-attr">$data</span> = [
+  <span class="sy-str">&#039;fruits&#039;</span> =&gt; [<span class="sy-str">&#039;orange&#039;</span>, <span class="sy-str">&#039;banana&#039;</span>, <span class="sy-str">&#039;apple&#039;</span>],
+  <span class="sy-str">&#039;veggie&#039;</span> =&gt; [<span class="sy-str">&#039;carrot&#039;</span>, <span class="sy-str">&#039;collard&#039;</span>, <span class="sy-str">&#039;pea&#039;</span>]
+];</pre>
+      </div>
+    </div>
+    <div class="caution">
+      <span class="label">注意</span><br>
+      配列はそのまま <code>echo</code> できないので、出力するときは添字を付けてください。中身をすべて確認したいときは <code>print_r()</code> を使います。
+    </div>
+
+    <h4>データを取り出す構文（ループ処理）</h4>
+    <table>
+      <tr>
+        <th>関数</th>
+        <th>説明</th>
+      </tr>
+      <tr>
+        <td><code>for</code></td>
+        <td>繰り返す回数があらかじめ分かっている場合。回数を指定したい場合。<code>false</code> になると終了</td>
+      </tr>
+      <tr>
+        <td><code>while</code></td>
+        <td>特定の条件の間だけ繰り返したい場合。条件を満たす間は出力を続ける</td>
+      </tr>
+      <tr>
+        <td><code>foreach</code></td>
+        <td>配列や連想配列、多次元配列を（添字をつけて）すべて出力する</td>
+      </tr>
+    </table>
+  </section>
+
+</main>
+
+<nav class="page-nav">
+  <a class="page-prev" href="advanced_2.html">
+    <span class="page-nav-label">前のページ</span>
+    <span class="page-nav-title">フロントエンド初級#2</span>
+    <span class="page-nav-sub">PHP の基本と変数</span>
+  </a>
+  <a class="page-next" href="advanced_4.html">
+    <span class="page-nav-label">次のページ</span>
+    <span class="page-nav-title">フロントエンド初級#4</span>
+    <span class="page-nav-sub">PHP を便利にするいろんな記号</span>
+  </a>
+</nav>
+
+<footer></footer>
+
+<!-- ▼ 共通スクリプト。章ナビ・コピーボタン・先頭へ戻るが自動で付く（編集不要） -->
+<script src="../js/training.js"></script>
+
+</body>
+</html>

@@ -96,6 +96,17 @@
   cursor: pointer;
 }
 
+/* ボタンを本文の外側に置くため、右側の余白を確保する */
+@media (max-width: 1152px) {
+  main {
+    margin-right: 72px;
+  }
+
+  #nav ul {
+    flex-wrap: wrap;
+  }
+}
+
 /* ------------------------------------------------------------
    5. ツールチップ
    浮かせる側に position: absolute、
