@@ -11,6 +11,18 @@
 フロントエンドエンジニア編ではCBCの応用コースをやっていきます。  
 開発環境については、自身のパソコン内に仮想的に環境を構築します。
 
+## AIについて
+
+わからない場合はAIを活用しましょう。2026/09現在、案件の半数以上はAIを利用しているようです。
+ただし、過度に頼ると学習の機会を奪ってしまうため、注意してください
+- このカリキュラムにおいては、相談程度のチャット利用にとどめ、AIにコーディングさせない
+- エージェントモード、VSCodeにビルドインされた機能でコードを書かせない
+- 以下のような場合、あなたの実力でコードを書いたとはいえず、学習になりません
+  - 自動でコードを提示された場合で、薄い灰色文字でほとかんどすべて勝手にコーディングされてしまった
+  - ✨マークが表示されていると、意図せずAIがコードを書いているケースがあります。
+  - 参考：VSCodeでGitHubCopilotを無効化する方法
+    -<https://zenn.dev/peter_norio/articles/f42609ddf5df34>
+
 ## 仮想環境
 
 まず仮想環境について学習しましょう。
@@ -76,28 +88,25 @@ Docker Desktop をインストールしてください。
   - PHPDocリファレンス
     - <https://zonuexe.github.io/phpDocumentor2-ja/references/phpdoc/index.html>
 
-## CBC 応用
+## フロントエンド編本編
 
-CBCと開発環境が異なるので、気を付けてください。応用1、応用2を学習してください。「応用3（フロントエンドエンジニア 中級2）」(CMS・WordPress)は研修で扱わないのでご注意ください。
-
-- 応用1（フロントエンドエンジニア 初級）
-  - <https://cbc-study.com/training/advanced/page1>
-    - **MAMP、XAMPPは不要です！**
-    - 環境はDockerで構築するため内容を確認するだけでOKです。
-  - <https://cbc-study.com/training/advanced/page2>
-  - <https://cbc-study.com/training/advanced/page3>
-  - <https://cbc-study.com/training/advanced/page4>
-    - 「レコードの登録」レコードで利用するファイル「dummy.css」がダウンロードできないようです。同一のファイルは自分のユーザーフォルダーの```03_advanced\htdocs\```に配置してありますので、そちらで代用してください。
-    - **[②テーブルの作成](https://cbc-study.com/training/advanced/page4#pl-12) でアニメーションGifでは「`left_x`」、「`top_y`」カラムの NULL にチェックを入れ忘れているのでご注意ください（CREATE文で作成した場合は問題なし）。**  
+- フロントエンド 初級
+  - <https://epkotsoftware.github.io/training/cbc_internal/advanced_1.html>
+  - <https://epkotsoftware.github.io/training/cbc_internal/advanced_2.html>
+  - <https://epkotsoftware.github.io/training/cbc_internal/advanced_3.html>
+  - <https://epkotsoftware.github.io/training/cbc_internal/advanced_4.html>
+- フロントエンド 中級
+  - <https://epkotsoftware.github.io/training/cbc_internal/advanced_5.html>
+      - **「`left_x`」、「`top_y`」カラムの NULL にチェックを入れ忘れているのでご注意ください（CREATE文で作成した場合は問題なし）。**  
       ![cbc_sortable.png](./images/cbc_sortable.png)  
-- 応用2（フロントエンドエンジニア 中級1）
-  - <https://cbc-study.com/training/advanced/page5>
+
     - PDO(DB_DNS)設定について
       - CBCの設定(host)と異なりますのでご注意ください。詳しくは[フロントエンドエンジニア編課題資料 ～ PHP](https://github.com/epkotsoftware/training-docs/blob/main/training/03_advanced/README.md#php)を参照
         - `define('DB_DNS', 'mysql:host=mysql; dbname=cri_sortable; charset=utf8');`
-  - <https://cbc-study.com/training/advanced/page6>
-  - <https://cbc-study.com/training/advanced/page7>
-  - <https://cbc-study.com/training/advanced/class1>
+  - <https://epkotsoftware.github.io/training/cbc_internal/advanced_6.html>
+  - <https://epkotsoftware.github.io/training/cbc_internal/advanced_7.html>
+  - <https://epkotsoftware.github.io/training/cbc_internal/advanced_8.html>
+  - <https://epkotsoftware.github.io/training/cbc_internal/advanced_9.html>
 
 ### エラーが出た場合
 
@@ -123,3 +132,66 @@ CBCと開発環境が異なるので、気を付けてください。応用1、�
 課題提出した日付で「研修進捗」資料の更新をお願いします。
 
 - [研修進捗](https://github.com/epkotsoftware/training-docs/blob/main/training/progress/README.md)
+
+
+## ここからさきは2026/09以前の資料です。講師から指示がない限り、通常時は閲覧禁止。TODO: 削除予定です。
+
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+
+
+
+## CBC 応用
+
+CBCと開発環境が異なるので、気を付けてください。応用1、応用2を学習してください。「応用3（フロントエンドエンジニア 中級2）」(CMS・WordPress)は研修で扱わないのでご注意ください。
+
+- 応用1（フロントエンドエンジニア 初級）
+  - <https://cbc-study.com/training/advanced/page1>
+    - **MAMP、XAMPPは不要です！**
+    - 環境はDockerで構築するため内容を確認するだけでOKです。
+  - <https://cbc-study.com/training/advanced/page2>
+  - <https://cbc-study.com/training/advanced/page3>
+  - <https://cbc-study.com/training/advanced/page4>
+    - 「レコードの登録」レコードで利用するファイル「dummy.css」がダウンロードできないようです。同一のファイルは自分のユーザーフォルダーの```03_advanced\htdocs\```に配置してありますので、そちらで代用してください。
+    - **[②テーブルの作成](https://cbc-study.com/training/advanced/page4#pl-12) でアニメーションGifでは「`left_x`」、「`top_y`」カラムの NULL にチェックを入れ忘れているのでご注意ください（CREATE文で作成した場合は問題なし）。**  
+      ![cbc_sortable.png](./images/cbc_sortable.png)  
+- 応用2（フロントエンドエンジニア 中級1）
+  - <https://cbc-study.com/training/advanced/page5>
+    - PDO(DB_DNS)設定について
+      - CBCの設定(host)と異なりますのでご注意ください。詳しくは[フロントエンドエンジニア編課題資料 ～ PHP](https://github.com/epkotsoftware/training-docs/blob/main/training/03_advanced/README.md#php)を参照
+        - `define('DB_DNS', 'mysql:host=mysql; dbname=cri_sortable; charset=utf8');`
+  - <https://cbc-study.com/training/advanced/page6>
+  - <https://cbc-study.com/training/advanced/page7>
+  - <https://cbc-study.com/training/advanced/class1>
