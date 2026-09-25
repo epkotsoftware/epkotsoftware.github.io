@@ -445,8 +445,8 @@ h1{font-size:28pt;margin-bottom:8mm}
 <h1 id="welcome-title">AIを使いはじめる。</h1>
 <p class="welcome-subtitle">選び方と設定から、アプリ作り・勉強まで。</p>
 <p class="welcome-copy" id="welcome-audience">これからAIを使い始める方に向けた入門資料です。<br>すでにアプリ開発でAIを使いこなしている方は対象としていません。</p>
-<p class="welcome-date"><time datetime="2026-09-11">2026年9月11日</time>時点の内容です。</p>
-<p class="welcome-copy welcome-update">AstraやFable 5.1が9月に登場して以来、AIへの指示の出し方も変わっています。<br>2026年8月以前の記事に載っている指示文は使わないでください。<br><br>プログラミング言語の古いバージョン向けの資料と同じで無駄になります。<br>使うモデル名と記事の日付を確認し、必ず最新の公式情報を調べてください。<a href="https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra">公式解説</a></p>
+<p class="welcome-date"><time datetime="2026-09-25">2026年9月25日</time>時点の最新情報です。</p>
+<p class="welcome-copy welcome-update">AIの情報は、数週間で大きく変わります。<br>この資料は作成時点の最新ですが、読んでいる日にも最新とは限りません。<br>AIの時代だからこそ、自分で調べて確かめる習慣を大切にしてください。<br><br>AstraやFable 5.1が9月に登場して以来、AIへの指示の出し方も変わっています。<br>2026年8月以前の記事に載っている指示文は使わないでください。<br><br>プログラミング言語の古いバージョン向けの資料と同じで無駄になります。<br>9月22日、Opus&nbsp;5.5とGPT-6&nbsp;Solも登場しました。<br>使うモデル名と記事の日付を確認し、必ず最新の公式情報を調べてください。<a href="https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra">公式解説</a></p>
 <p class="liability-note" id="welcome-liability">この資料・掲載コード・AIの出力の利用は、利用者つまりあなた自身の判断と責任で行ってください。<br><strong>利用料金・追加請求、データの消失・破損、情報漏えい、第三者とのトラブルなど、これらの利用に関連して生じた費用・損害・不利益について、作成者は一切責任を負いません。</strong></p>
 <a class="welcome-enter" id="welcome-enter" href="#guide-content">内容を見る<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
 </div>
@@ -488,7 +488,7 @@ h1{font-size:28pt;margin-bottom:8mm}
 </section>
 <section class="company" aria-labelledby="openai">
 <h2 id="openai">OpenAI</h2>
-<ul class="models"><li>Astra</li><li>Sol</li><li>Terra</li><li>Luna</li></ul>
+<ul class="models"><li>Astra</li><li>Sol</li><li>Luna</li></ul>
 </section>
 </div>
 </section>
@@ -504,7 +504,7 @@ h1{font-size:28pt;margin-bottom:8mm}
 <div><dt>Claude Max</dt><dd>契約内の枠で利用可能</dd></div>
 </dl>
 <div class="pricing">
-<h4><a href="https://support.claude.com/en/articles/11049762-choose-a-claude-plan">Claudeの月額料金</a></h4>
+<h4><a href="https://claude.com/pricing">Claudeの月額料金</a></h4>
 <dl class="price-list">
 <div><dt>Pro</dt><dd>20<span> 米ドル</span></dd></div>
 <div><dt>Max 5x</dt><dd>100<span> 米ドル</span></dd></div>
@@ -532,7 +532,7 @@ h1{font-size:28pt;margin-bottom:8mm}
 <p class="price-note">FableをClaude Proで使う追加クレジットは別料金です。</p>
 </div>
 </section>
-<!-- 公式情報確認日：2026-09-10。合意した内容は新しいsectionとして追記する。 -->
+<!-- 公式情報確認日：2026-09-24。合意した内容は新しいsectionとして追記する。 -->
 <section class="section comparison" id="comparison" aria-labelledby="comparison-title">
 <h2 id="comparison-title">無料プランとエントリープランの違い</h2>
 <div class="compare-grid">
@@ -555,8 +555,8 @@ h1{font-size:28pt;margin-bottom:8mm}
 <thead><tr><th scope="col">項目</th><th scope="col">Free</th><th scope="col">Plus</th></tr></thead>
 <tbody>
 <tr><th scope="row">月額</th><td>無料</td><td><strong>20米ドル</strong></td></tr>
-<tr><th scope="row">主な会話モデル</th><td>Luna</td><td><strong>Sol</strong></td></tr>
-<tr><th scope="row">Codexのモデル</th><td>Terra</td><td>Sol・Terra・Luna・Astra</td></tr>
+<tr><th scope="row">主な会話モデル</th><td>GPT-5.6 Luna</td><td><strong>GPT-5.6 Sol</strong></td></tr>
+<tr><th scope="row">Codexのモデル</th><td>GPT-6 Luna<br>アプリ版で<br>対応</td><td>GPT-6 Astra・Sol・Luna</td></tr>
 <tr><th scope="row">ChatのAstra</th><td>使えない</td><td>使えない<br>Proが必要</td></tr>
 <tr><th scope="row">Work・CodexのAstra</th><td>使えない</td><td><strong>使える</strong></td></tr>
 </tbody>
@@ -564,7 +564,7 @@ h1{font-size:28pt;margin-bottom:8mm}
 </section>
 </div>
 <p class="billing-note"><strong>従量課金のほうが安いのでは？という考えは捨てましょう。</strong><br>貴方の予算を一瞬でオーバーし青ざめることになります。</p>
-<p class="comparison-note">有料でも利用上限があります。料金・モデルは頻繁に変わるため、利用前に公式情報をご確認ください。（2026年9月10日確認）</p>
+<p class="comparison-note">有料でも利用上限があります。料金・モデルは頻繁に変わるため、利用前に公式情報をご確認ください。（2026年9月24日確認）</p>
 </section>
 <section class="section comparison usage-guide" id="usage-guide" aria-labelledby="usage-title">
 <h2 id="usage-title">無料と有料、どう違う？</h2>
@@ -686,17 +686,17 @@ h1{font-size:28pt;margin-bottom:8mm}
 
 <section class="setup-step" id="setup-model" aria-labelledby="setup-model-title">
 <p class="usage-label">04　最初に使うモデルを選ぶ</p>
-<h3 id="setup-model-title">この練習では、Terraを選びます。</h3>
+<h3 id="setup-model-title">この練習では、GPT-6 Solを選びます。</h3>
 <div class="setup-os-grid">
 <div class="setup-os">
 <h4>Codexでアプリを作る</h4>
 <ol>
 <li>入力欄の右下にある<strong>モデル名</strong>、または<strong>「思考量を選択」</strong>を押します。</li>
-<li>開いたメニューの<strong>モデル名</strong>か、その上の<strong>思考量（例：「極高」）</strong>を押し、<strong>「GPT-5.6 Terra」</strong>を選びます。</li>
+<li>開いたメニューの<strong>モデル名</strong>か、その上の<strong>思考量（例：「極高」）</strong>を押し、<strong>「GPT-6 Sol」</strong>を選びます。</li>
 <li><strong>思考量（考える強さ）</strong>は、まず<strong>「中」</strong>にします。</li>
 </ol>
 <p>入力欄に <code>/model</code> と入力して、モデル選択を開くこともできます。</p>
-<p>日常的な開発と利用量のバランスを考えた、この練習でのおすすめです。<a href="https://learn.chatgpt.com/ja-JP/docs/models?surface=app">モデルと強さの説明</a></p>
+<p>日常の作業や開発に向いた、公式のおすすめモデルの一つです。<a href="https://learn.chatgpt.com/ja-JP/docs/models?surface=app">モデルと強さの説明</a></p>
 </div>
 <div class="setup-os">
 <h4>Claudeで相談する</h4>
@@ -704,7 +704,7 @@ h1{font-size:28pt;margin-bottom:8mm}
 </div>
 </div>
 <p class="setup-rule">上の図の<strong>「Astra・極高」は表示例</strong>です。考える強さを上げるほど時間や利用枠を使うため、必要になってから上げます。</p>
-<details><summary>Terraが見つからないとき</summary><p>モデルのメニューに<strong>「上級」</strong>があれば開きます。それでも選べない場合は、そのプランの標準モデルで始めます。選べるモデルや表示は、プランやアプリの更新で変わります。<a href="https://learn.chatgpt.com/ja-JP/docs/models?surface=app">公式の画面案内</a></p></details>
+<details><summary>GPT-6 Solが見つからないとき</summary><p>モデルのメニューに<strong>「上級」</strong>があれば開きます。GPT-6 Solは順次公開中のため、まだ表示されないことがあります。時間をおいて確認し、それまでは<strong>「GPT-5.6 Terra」</strong>で始めます。どちらも選べない場合は、そのプランの標準モデルで始めます。選べるモデルや表示は、プランやアプリの更新で変わります。<a href="https://learn.chatgpt.com/ja-JP/docs/models?surface=app">公式の画面案内</a></p></details>
 </section>
 
 <section class="setup-step" aria-labelledby="setup-send-title">
@@ -881,8 +881,9 @@ h1{font-size:28pt;margin-bottom:8mm}
 </details>
 </section>
 <aside class="prompt-context" aria-label="モデルの進化と利用条件">
-<p class="practice-lead">2026年9月、<a href="https://www.anthropic.com/claude/fable">Fable 5.1</a>や<a href="https://openai.com/index/gpt-6-astra/">Astra</a>の登場で、AIに任せられる範囲がさらに広がりました。<br>以前うまくいかなかった使い方も、今のAIでもう一度試してみてください。</p>
+<p class="practice-lead">2026年9月、<a href="https://www.anthropic.com/claude/fable">Fable&nbsp;5.1</a>や<a href="https://openai.com/index/gpt-6-astra/">Astra</a>に続き、<a href="https://www.anthropic.com/claude-opus-5-5">Opus&nbsp;5.5</a>や<a href="https://openai.com/index/introducing-gpt-6-sol-and-luna/">GPT-6&nbsp;Sol</a>も登場しました。<br>AIに任せられる範囲がさらに広がりました。<br>以前うまくいかなかった使い方も、今のAIでもう一度試してみてください。</p>
 <p class="practice-lead">ただし、<a href="https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex">AstraはPlusのCodexでも利用枠を早く使い切ることがあります</a>。<a href="https://support.claude.com/en/articles/15424964-claude-fable-models-on-your-plan">Fable 5.1はClaude Proでは別料金</a>です。</p>
+<p class="practice-lead"><a href="https://claude.com/pricing">Opus&nbsp;5.5はClaude&nbsp;Proの契約内で使えます</a>。<br><a href="https://learn.chatgpt.com/docs/pricing">GPT-6&nbsp;SolはPlusのWork・Codexで使えます</a>。<br>通常のChatでは、まだ使えません。</p>
 </aside>
 </section>
 
@@ -1418,6 +1419,7 @@ $i は0 → 1 → 2と進みます。0のときにも表示するので、全部
     let loadTimeout = 0;
     let pendingPreview = null;
     let lastCode = '';
+    let renderedLines = [];
 
     function setCheck(key, state) {
       const item = byId('build-check-' + key);
@@ -1439,12 +1441,22 @@ $i は0 → 1 → 2と進みます。0のときにも表示するので、全部
       }
       return html + escapeHtml(line.slice(position));
     }
+    function codeLine(line, index, caret) {
+      return '<span class="build-line"><span class="build-line-number" aria-hidden="true">' + (index + 1) + '</span><span class="build-line-text">' + highlight(line) + (caret ? '<span class="build-caret" aria-hidden="true"></span>' : '') + '</span></span>';
+    }
     function renderCode(text, caret = true) {
       const cacheKey = text + String(caret);
       if (cacheKey === lastCode) return;
       lastCode = cacheKey;
       const lines = text.split('\n');
-      codeContent.innerHTML = lines.map((line, index) => '<span class="build-line"><span class="build-line-number" aria-hidden="true">' + (index + 1) + '</span><span class="build-line-text">' + highlight(line) + (caret && index === lines.length - 1 ? '<span class="build-caret" aria-hidden="true"></span>' : '') + '</span></span>').join('');
+      // 打っている途中は、変わらない行を残し、変わった最後の行から後ろだけを作り直す。
+      let kept = 0;
+      const limit = Math.min(lines.length, renderedLines.length, codeContent.childElementCount) - 1;
+      while (kept < limit && lines[kept] === renderedLines[kept]) kept += 1;
+      if (kept === 0) codeContent.innerHTML = '';
+      else while (codeContent.childElementCount > kept) codeContent.lastElementChild.remove();
+      codeContent.insertAdjacentHTML('beforeend', lines.slice(kept).map((line, offset) => codeLine(line, kept + offset, caret && kept + offset === lines.length - 1)).join(''));
+      renderedLines = lines;
       codeBox.scrollTop = segments[segmentIndex].stage === 4 ? 0 : codeBox.scrollHeight;
     }
     function renderBrief(fraction) {
@@ -1470,7 +1482,8 @@ $i は0 → 1 → 2と進みます。0のときにも表示するので、全部
     }
     function duration() {
       const segment = segments[segmentIndex];
-      return reducedMotion.matches || segment.stage === 4 ? 0 : segment.intro ? segment.ms : Math.min(3400, Math.max(1000, segment.code.length * 5));
+      // 長いコードも同じ速さで打つ。打ち終える時間に上限を付けると、長い区切りほど一度に出る文字が増える。
+      return reducedMotion.matches || segment.stage === 4 ? 0 : segment.intro ? segment.ms : Math.max(1000, segment.code.length * 5);
     }
     function updateControls() {
       panel.dataset.playing = String(playing);
