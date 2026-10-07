@@ -71,6 +71,8 @@ h1{font-size:clamp(34px,4.5vw,52px);line-height:1.2;letter-spacing:-.045em;margi
 .conditions{margin-top:32px;padding:28px 30px 30px;border-radius:24px;background:#f5f5f7;color:#1d1d1f}
 .conditions h2{margin:0;font-size:clamp(24px,3vw,34px);line-height:1.4;letter-spacing:-.04em;font-weight:750}
 .emphasis{color:#0066cc}
+/* モデル名など、途中で折り返したくない語句を1行に保つ。 */
+.keep{white-space:nowrap}
 .lead{margin:10px 0 22px;color:#515154;font-size:15px;line-height:1.8}
 .plans{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .plan{background:#fff;padding:22px 24px;border-radius:18px}
@@ -445,8 +447,8 @@ h1{font-size:28pt;margin-bottom:8mm}
 <h1 id="welcome-title">AIを使いはじめる。</h1>
 <p class="welcome-subtitle">選び方と設定から、アプリ作り・勉強まで。</p>
 <p class="welcome-copy" id="welcome-audience">これからAIを使い始める方に向けた入門資料です。<br>すでにアプリ開発でAIを使いこなしている方は対象としていません。</p>
-<p class="welcome-date"><time datetime="2026-09-11">2026年9月11日</time>時点の内容です。</p>
-<p class="welcome-copy welcome-update">AstraやFable 5.1が9月に登場して以来、AIへの指示の出し方も変わっています。<br>2026年8月以前の記事に載っている指示文は使わないでください。<br><br>プログラミング言語の古いバージョン向けの資料と同じで無駄になります。<br>使うモデル名と記事の日付を確認し、必ず最新の公式情報を調べてください。<a href="https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra">公式解説</a></p>
+<p class="welcome-date"><time datetime="2026-10-01">2026年10月1日</time>時点の最新情報です。</p>
+<p class="welcome-copy welcome-update">AIの情報は、数週間で大きく変わります。<br>この資料は作成時点の最新ですが、読んでいる日にも最新とは限りません。<br>AIの時代だからこそ、自分で調べて確かめる習慣を大切にしてください。<br><br>AstraやFable 5.1が9月に登場して以来、AIへの指示の出し方も変わっています。<br>2026年8月以前の記事に載っている指示文は使わないでください。<br><br>プログラミング言語の古いバージョン向けの資料と同じで無駄になります。<br>9月下旬にも、新しいモデルが登場しました。<br><span class="keep">Opus 5.5</span>・<span class="keep">Sonnet 5.5</span>・<span class="keep">GPT-6.1 Sol</span>です。<br>使うモデル名と記事の日付を確認し、必ず最新の公式情報を調べてください。<a href="https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra" target="_blank" rel="noopener noreferrer">公式解説</a></p>
 <p class="liability-note" id="welcome-liability">この資料・掲載コード・AIの出力の利用は、利用者つまりあなた自身の判断と責任で行ってください。<br><strong>利用料金・追加請求、データの消失・破損、情報漏えい、第三者とのトラブルなど、これらの利用に関連して生じた費用・損害・不利益について、作成者は一切責任を負いません。</strong></p>
 <a class="welcome-enter" id="welcome-enter" href="#guide-content">内容を見る<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
 </div>
@@ -482,29 +484,46 @@ h1{font-size:28pt;margin-bottom:8mm}
 <section class="section" id="models" aria-labelledby="models-title">
 <div class="content">
 <h2 id="models-title">AIモデル</h2>
+<section class="company" aria-labelledby="openai">
+<h2 id="openai">OpenAI</h2>
+<ul class="models"><li>Astra</li><li>Sol</li><li>Luna</li></ul>
+</section>
 <section class="company" aria-labelledby="anthropic">
 <h2 id="anthropic">Anthropic</h2>
 <ul class="models"><li>Fable</li><li>Opus</li><li>Sonnet</li></ul>
-</section>
-<section class="company" aria-labelledby="openai">
-<h2 id="openai">OpenAI</h2>
-<ul class="models"><li>Astra</li><li>Sol</li><li>Terra</li><li>Luna</li></ul>
 </section>
 </div>
 </section>
 <section class="section conditions" id="conditions" aria-labelledby="conditions-title">
 <div class="content">
-<h2 id="conditions-title">FableとAstraは、<span class="emphasis">無料プランの対象外。</span></h2>
+<h2 id="conditions-title">AstraとFableは、<span class="emphasis">無料プランの対象外。</span></h2>
 <p class="lead">利用枠の消費が大きく、早く上限に達しやすいモデルです。</p>
 <div class="plans">
+<section class="plan" aria-labelledby="astra">
+<h3 id="astra"><a href="https://help.openai.com/en/articles/20001354-GPT-5.6" target="_blank" rel="noopener noreferrer" aria-label="Astraの公式利用条件">Astra</a></h3>
+<dl>
+<div><dt>ChatでAstra</dt><dd>ChatGPT Proが必要</dd></div>
+<div><dt>Work・Codex</dt><dd>Plusも対象</dd></div>
+</dl>
+
+<div class="pricing">
+<h4><a href="https://learn.chatgpt.com/docs/pricing" target="_blank" rel="noopener noreferrer">ChatGPTの月額料金</a></h4>
+<dl class="price-list">
+<div><dt>Plus</dt><dd>20<span> 米ドル</span></dd></div>
+<div><dt>Pro 100</dt><dd>100<span> 米ドル</span></dd></div>
+<div><dt>Pro 200</dt><dd>200<span> 米ドル</span></dd></div>
+<div><dt>Pro 500</dt><dd>500<span> 米ドル</span></dd></div>
+</dl>
+</div>
+</section>
 <section class="plan" aria-labelledby="fable">
-<h3 id="fable"><a href="https://support.claude.com/en/articles/15424964-claude-fable-models-on-your-plan" aria-label="Fableの公式利用条件">Fable</a></h3>
+<h3 id="fable"><a href="https://support.claude.com/en/articles/15424964-claude-fable-models-on-your-plan" target="_blank" rel="noopener noreferrer" aria-label="Fableの公式利用条件">Fable</a></h3>
 <dl>
 <div><dt>Claude Pro</dt><dd>月額料金とは別にクレジットが必要</dd></div>
-<div><dt>Claude Max</dt><dd>契約内の枠で利用可能</dd></div>
+<div><dt>Claude Max</dt><dd>契約内で利用可能<br>週の利用上限の<span class="keep">50%まで</span></dd></div>
 </dl>
 <div class="pricing">
-<h4><a href="https://support.claude.com/en/articles/11049762-choose-a-claude-plan">Claudeの月額料金</a></h4>
+<h4><a href="https://claude.com/pricing" target="_blank" rel="noopener noreferrer">Claudeの月額料金</a></h4>
 <dl class="price-list">
 <div><dt>Pro</dt><dd>20<span> 米ドル</span></dd></div>
 <div><dt>Max 5x</dt><dd>100<span> 米ドル</span></dd></div>
@@ -512,59 +531,44 @@ h1{font-size:28pt;margin-bottom:8mm}
 </dl>
 </div>
 </section>
-<section class="plan" aria-labelledby="astra">
-<h3 id="astra"><a href="https://help.openai.com/en/articles/20001354-GPT-5.6" aria-label="Astraの公式利用条件">Astra</a></h3>
-<dl>
-<div><dt>ChatでAstra</dt><dd>ChatGPT Proが必要</dd></div>
-<div><dt>Work・Codex</dt><dd>Plusも対象</dd></div>
-</dl>
-
-<div class="pricing">
-<h4><a href="https://learn.chatgpt.com/docs/pricing">ChatGPTの月額料金</a></h4>
-<dl class="price-list">
-<div><dt>Plus</dt><dd>20<span> 米ドル</span></dd></div>
-<div><dt>Pro 5x</dt><dd>100<span> 米ドル</span></dd></div>
-<div><dt>Pro 20x</dt><dd>200<span> 米ドル</span></dd></div>
-</dl>
+</div>
+<p class="price-note"><a href="https://help.openai.com/en/articles/9793128-about-chatgpt-pro-plans" target="_blank" rel="noopener noreferrer">ChatGPTの<span class="keep">Pro 200</span>を新しく契約すると、以前の<span class="keep">「Plusの20倍」</span>より<span class="keep">利用枠が少なくなります</span></a>。<br><a href="https://chatgpt.com/ja-JP/pricing/" target="_blank" rel="noopener noreferrer"><span class="keep">ChatGPT Pro</span>のChatでは、<span class="keep">GPT-5.6 Sol</span>が無制限です</a><span class="keep">（合理的な範囲で）。</span><br>Work・Codexで使うと、利用枠を消費します。<br>Fableを<span class="keep">Claude Pro</span>で使う追加クレジットは別料金です。</p>
 </div>
 </section>
-</div>
-<p class="price-note">FableをClaude Proで使う追加クレジットは別料金です。</p>
-</div>
-</section>
-<!-- 公式情報確認日：2026-09-10。合意した内容は新しいsectionとして追記する。 -->
+<!-- 公式情報確認日：2026-10-01。合意した内容は新しいsectionとして追記する。 -->
 <section class="section comparison" id="comparison" aria-labelledby="comparison-title">
 <h2 id="comparison-title">無料プランとエントリープランの違い</h2>
 <div class="compare-grid">
+<section class="compare-card" aria-labelledby="compare-openai">
+<h3 id="compare-openai"><a href="https://help.openai.com/en/articles/20001354-GPT-5.6" target="_blank" rel="noopener noreferrer">ChatGPT</a></h3>
+<table>
+<thead><tr><th scope="col">項目</th><th scope="col">Free</th><th scope="col">Plus</th></tr></thead>
+<tbody>
+<tr><th scope="row">月額</th><td>無料</td><td><strong>20米ドル</strong></td></tr>
+<tr><th scope="row">主な会話<span class="keep">モデル</span></th><td>GPT-5.6 Luna</td><td><strong>GPT-5.6 Sol</strong></td></tr>
+<tr><th scope="row">Work・Codexの<span class="keep">モデル</span></th><td>GPT-6 Luna<br>アプリ版で<br>対応</td><td>GPT-6.1 Sol<br>GPT-6 Luna<br>など</td></tr>
+<tr><th scope="row">ChatのAstra</th><td>使えない</td><td>使えない<br>Proが必要</td></tr>
+<tr><th scope="row">Work・CodexのAstra</th><td>使えない</td><td><strong>使える</strong></td></tr>
+</tbody>
+</table>
+</section>
 <section class="compare-card" aria-labelledby="compare-claude">
-<h3 id="compare-claude"><a href="https://claude.com/pricing">Claude</a></h3>
+<h3 id="compare-claude"><a href="https://claude.com/pricing" target="_blank" rel="noopener noreferrer">Claude</a></h3>
 <table>
 <thead><tr><th scope="col">項目</th><th scope="col">Free</th><th scope="col">Pro</th></tr></thead>
 <tbody>
 <tr><th scope="row">月額</th><td>無料</td><td><strong>20米ドル</strong></td></tr>
-<tr><th scope="row">主な会話モデル</th><td>Sonnet</td><td>Sonnet・Opus</td></tr>
+<tr><th scope="row">主な会話<span class="keep">モデル</span></th><td>Sonnet 5.5</td><td>Sonnet 5.5<br>Opus 5.5</td></tr>
 <tr><th scope="row">利用量</th><td>上限あり</td><td>Freeより多い<br>上限あり</td></tr>
 <tr><th scope="row">Claude Code</th><td>使えない</td><td><strong>使える</strong></td></tr>
 <tr><th scope="row">Fable</th><td>使えない</td><td>追加クレジットが必要</td></tr>
 </tbody>
 </table>
 </section>
-<section class="compare-card" aria-labelledby="compare-openai">
-<h3 id="compare-openai"><a href="https://help.openai.com/en/articles/20001354-GPT-5.6">ChatGPT</a></h3>
-<table>
-<thead><tr><th scope="col">項目</th><th scope="col">Free</th><th scope="col">Plus</th></tr></thead>
-<tbody>
-<tr><th scope="row">月額</th><td>無料</td><td><strong>20米ドル</strong></td></tr>
-<tr><th scope="row">主な会話モデル</th><td>Luna</td><td><strong>Sol</strong></td></tr>
-<tr><th scope="row">Codexのモデル</th><td>Terra</td><td>Sol・Terra・Luna・Astra</td></tr>
-<tr><th scope="row">ChatのAstra</th><td>使えない</td><td>使えない<br>Proが必要</td></tr>
-<tr><th scope="row">Work・CodexのAstra</th><td>使えない</td><td><strong>使える</strong></td></tr>
-</tbody>
-</table>
-</section>
 </div>
+<p class="comparison-note"><span class="keep">GPT-6.1 Sol</span>と<span class="keep">GPT-6 Luna</span>は、WorkとCodexで使います。<br><a href="https://openai.com/index/introducing-gpt-6-1-sol/" target="_blank" rel="noopener noreferrer">通常のChatでは、まだ使えません</a>。</p>
 <p class="billing-note"><strong>従量課金のほうが安いのでは？という考えは捨てましょう。</strong><br>貴方の予算を一瞬でオーバーし青ざめることになります。</p>
-<p class="comparison-note">有料でも利用上限があります。料金・モデルは頻繁に変わるため、利用前に公式情報をご確認ください。（2026年9月10日確認）</p>
+<p class="comparison-note">有料でも利用上限があります。料金・モデルは頻繁に変わるため、利用前に公式情報をご確認ください。（2026年10月1日確認）</p>
 </section>
 <section class="section comparison usage-guide" id="usage-guide" aria-labelledby="usage-title">
 <h2 id="usage-title">無料と有料、どう違う？</h2>
@@ -576,8 +580,8 @@ h1{font-size:28pt;margin-bottom:8mm}
 <li>分からないことを聞く</li>
 <li>文章を作ってもらう・直してもらう<br>例：メール、A4数枚程度の案内文、議事録から作る報告書</li>
 <li>コードを作ってもらう・直してもらう<br>例：簡単なWebページ、電卓、ToDoリストのコード一式</li>
-<li><a href="https://learn.chatgpt.com/docs/pricing">Codex</a>でファイルを直接編集する<br>例：ToDoリストに検索欄を付け、動くか確認してもらう</li>
-<li><a href="https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq">ChatGPT</a>で画像を作る<br>例：カフェの紹介ページに使うコーヒーのイラスト</li>
+<li><a href="https://learn.chatgpt.com/docs/pricing" target="_blank" rel="noopener noreferrer">Codex</a>でファイルを直接編集する<br>例：ToDoリストに検索欄を付け、動くか確認してもらう</li>
+<li><a href="https://help.openai.com/en/articles/9275245-chatgpt-free-tier-faq" target="_blank" rel="noopener noreferrer">ChatGPT</a>で画像を作る<br>例：カフェの紹介ページに使うコーヒーのイラスト</li>
 </ul>
 <p class="usage-note">長いものや複雑なものは、分けて作り、修正を重ねます。<br>チャットで受け取ったコードは、自分でVS Codeなどにコピーして使います。</p>
 </section>
@@ -585,9 +589,10 @@ h1{font-size:28pt;margin-bottom:8mm}
 <p class="usage-label">有料プラン</p>
 <h3 id="usage-paid">無料プランでできることに加えて</h3>
 <ul class="usage-list">
-<li>Claude Pro：<a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork">Cowork</a>が使える<br>指定フォルダーの議事録3件を読み、決まったこと・担当者・期限をまとめたWordファイルの作成まで頼める</li>
-<li>Claude Pro：<a href="https://code.claude.com/docs/en/overview">Claude Code</a>が使える<br>Claudeの開発ツールで、ToDoリストのファイルに検索欄を追加し、動くか確認するところまで頼める</li>
-<li>ChatGPT Plus：<a href="https://learn.chatgpt.com/docs/pricing">Codexの作業中に画像生成も使える</a><br>カフェの紹介ページを編集しながら、コーヒーのイラスト作成とページへの配置もまとめて頼める</li>
+<li>Claude Pro：<a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork" target="_blank" rel="noopener noreferrer">Cowork</a>が使える<br>指定フォルダーの議事録3件を読み、決まったこと・担当者・期限をまとめたWordファイルの<span class="keep">作成まで頼める</span><br>画面に「Cowork」がないときは、<span class="keep">通常の会話で頼める</span></li>
+<li>Claude Pro：<a href="https://code.claude.com/docs/en/overview" target="_blank" rel="noopener noreferrer">Claude Code</a>が使える<br>Claudeの開発ツールで、ToDoリストのファイルに検索欄を追加し、動くか確認するところまで頼める</li>
+<li>ChatGPT Plus：<a href="https://learn.chatgpt.com/docs/pricing" target="_blank" rel="noopener noreferrer">Codexの作業中に画像生成も使える</a><br>カフェの紹介ページを編集しながら、コーヒーのイラスト作成とページへの配置もまとめて頼める</li>
+<li>ChatGPT Pro：<a href="https://help.openai.com/en/articles/20001530-getting-started-with-your-dot" target="_blank" rel="noopener noreferrer">dots</a>が使える<br>目標と任せる範囲を伝えておくと、つないだアプリを使って、離れている間も作業を進める<span class="keep">AIエージェント</span></li>
 </ul>
 </section>
 </div>
@@ -603,9 +608,9 @@ h1{font-size:28pt;margin-bottom:8mm}
 <tr><th scope="row">ターミナル版<span class="entry-kind">文字の命令で起動する</span></th><td><strong>コマンド操作に慣れた人向け。</strong><br>開発手順や繰り返し作業に組み込んで使う。最初は選ばなくてよい。</td></tr>
 </tbody>
 </table>
-<p class="usage-note">アプリ版の公式案内：<a href="https://learn.chatgpt.com/docs/app">OpenAI</a>・<a href="https://code.claude.com/docs/en/desktop-quickstart">Claude</a></p>
+<p class="usage-note">アプリ版の公式案内：<a href="https://learn.chatgpt.com/docs/app" target="_blank" rel="noopener noreferrer">OpenAI</a>・<a href="https://code.claude.com/docs/en/desktop-quickstart" target="_blank" rel="noopener noreferrer">Claude</a></p>
 </div>
-<p class="comparison-note">ターミナル版を使うだけで従量課金になるわけではありません。料金は契約とログイン方法で決まります。<a href="https://learn.chatgpt.com/docs/pricing">OpenAI</a>・<a href="https://code.claude.com/docs/en/overview">Claude</a></p>
+<p class="comparison-note">ターミナル版を使うだけで従量課金になるわけではありません。料金は契約とログイン方法で決まります。<a href="https://learn.chatgpt.com/docs/pricing" target="_blank" rel="noopener noreferrer">OpenAI</a>・<a href="https://code.claude.com/docs/en/overview" target="_blank" rel="noopener noreferrer">Claude</a></p>
 </section>
 <section class="section comparison setup-guide" id="setup-guide" aria-labelledby="setup-title">
 <h2 id="setup-title">AIに作業を任せる準備をする。</h2>
@@ -619,21 +624,22 @@ h1{font-size:28pt;margin-bottom:8mm}
 <div class="setup-os">
 <h4>ChatGPT・Codex</h4>
 <ol>
-<li><a href="https://chatgpt.com/">ChatGPT</a>を開き、プロフィールアイコン → <strong>「設定」</strong> → <strong>「データコントロール」</strong>。</li>
+<li><a href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer">ChatGPT</a>を開き、プロフィールアイコン → <strong>「設定」</strong> → <strong>「データコントロール」</strong>。</li>
 <li><strong>「すべての人のためにモデルを改善する」</strong>をオフにします。</li>
+<li><strong>「完了」</strong>を押します。</li>
 </ol>
-<p>同じアカウントで使うCodexの会話にも反映されます。<a href="https://help.openai.com/ja-jp/articles/7730893-data-controls-faq">設定の手順</a>・<a href="https://help.openai.com/en/articles/11369540-using-codex-with-your-chatgpt-plan">Codexへの適用</a></p>
+<p>同じアカウントで使うCodexの会話にも反映されます。<a href="https://help.openai.com/ja-jp/articles/7730893-data-controls-faq" target="_blank" rel="noopener noreferrer">設定の手順</a>・<a href="https://help.openai.com/en/articles/11369540-using-codex-with-your-chatgpt-plan" target="_blank" rel="noopener noreferrer">Codexへの適用</a></p>
 </div>
 <div class="setup-os">
 <h4>Claude・Claude Code</h4>
 <ol>
-<li>Claudeで自分の名前 → <strong>「設定」</strong> → <strong>「プライバシー」</strong>。<a href="https://claude.ai/settings/data-privacy-controls">設定画面を開く</a></li>
+<li>Claudeで自分の名前 → <strong>「設定」</strong> → <strong>「プライバシー」</strong>。<a href="https://claude.ai/settings/data-privacy-controls" target="_blank" rel="noopener noreferrer">設定画面を開く</a></li>
 <li><strong>「AIモデルの改善を支援する」</strong>をオフにします。</li>
 </ol>
-<p>同じ個人アカウントで使うClaude Codeにも適用されます。<a href="https://privacy.claude.com/ja/articles/12109829-モデル改善のプライバシー設定を変更するにはどうすればよいですか">公式の手順</a></p>
+<p>同じ個人アカウントで使うClaude Codeにも適用されます。<a href="https://privacy.claude.com/ja/articles/12109829-モデル改善のプライバシー設定を変更するにはどうすればよいですか" target="_blank" rel="noopener noreferrer">公式の手順</a></p>
 </div>
 </div>
-<details><summary>Codexの「環境全体」の共有も確認する</summary><p><a href="https://chatgpt.com/codex/settings/general">Codexの設定</a>で、環境全体を学習に使う共有設定が表示される場合は、オフにします。これはChatGPTの会話の設定とは別です。<a href="https://help.openai.com/ja-jp/articles/5722486-how-your-data-is-used-to-improve-model-performance">公式の説明</a></p></details>
+<details><summary>Codexの「環境を含める」設定も確認する</summary><p><a href="https://chatgpt.com/codex/settings/general" target="_blank" rel="noopener noreferrer">Codexの設定</a>に<strong>「環境を含める」</strong>（英語表示では <span class="keep">Include environments</span>）がある場合は、オフにします。環境全体を学習に使えるようにする設定で、ChatGPTの会話の設定とは別です。<a class="keep" href="https://help.openai.com/ja-jp/articles/5722486-how-your-data-is-used-to-improve-model-performance" target="_blank" rel="noopener noreferrer">公式の説明</a></p></details>
 <p class="setup-rule"><strong>オフにしても、情報の送信や保存がなくなるわけではありません。</strong><br>個人情報や秘密情報は、引き続き入力しません。</p>
 </section>
 
@@ -672,39 +678,39 @@ h1{font-size:28pt;margin-bottom:8mm}
 </div>
 </figure>
 <div class="setup-explanation">
-<p><strong>作業の許可を、どこまでAIに任せるかを選びます。</strong>「代わりに承認」では、安全でない可能性があると検出された操作だけ確認が入ります。<br>練習では、<strong>「承認を求める」</strong>に切り替えます。</p>
+<p><strong>作業の許可を、どこまでAIに任せるかを<span class="keep">選びます。</span></strong>「代わりに承認」では、安全でない可能性があると検出された操作だけ確認が入ります。<br>練習では、<strong>「承認を求める」</strong>に<span class="keep">切り替えます。</span><br>はじめて使うときは、メニューに<strong class="keep">「承認を求める」</strong>だけが表示されます。<br>その場合は、そのまま進めます。</p>
 </div>
 <p class="setup-rule">AIが作業できる範囲を制限するのが<strong>「サンドボックス」</strong>です。「代わりに承認」でも、この制限は残ります。<br><strong>今回の練習では「フルアクセス」を選びません。</strong></p>
 <details><summary>AIに任せる範囲の違い</summary>
 <p><strong>承認を求める</strong><br>外部ファイルの編集やインターネットの利用について、常に確認を求めます。</p>
 <p><strong>代わりに承認</strong><br>安全でない可能性があると検出された操作についてのみ確認を求めます。</p>
 <p><strong>フルアクセス</strong><br>インターネットとコンピューター上のすべてのファイルに無制限でアクセスします。</p>
-<p><a href="https://learn.chatgpt.com/docs/permission-modes">公式の説明</a></p>
+<p>「代わりに承認」と「フルアクセス」は、アプリの設定で有効にすると、メニューに<span class="keep">表示されます。</span><a class="keep" href="https://learn.chatgpt.com/docs/permission-modes" target="_blank" rel="noopener noreferrer">公式の説明</a></p>
 </details>
-<details><summary>Windowsでサンドボックスの初期設定が出たら</summary><p>Codexから始めたサンドボックス設定であることを確認し、案内に沿って進めます。初回はWindowsの管理者による許可が必要になることがあります。設定に失敗したら、表示されたエラーを確認します。<a href="https://learn.chatgpt.com/docs/windows/windows-sandbox">公式の対処方法</a></p></details>
+<details><summary>Windowsでサンドボックスの初期設定が出たら</summary><p>Codexから始めたサンドボックス設定であることを確認し、案内に沿って進めます。初回はWindowsの管理者による許可が必要になることがあります。設定に失敗したら、表示されたエラーを確認します。<a href="https://learn.chatgpt.com/docs/windows/windows-sandbox" target="_blank" rel="noopener noreferrer">公式の対処方法</a></p></details>
 </section>
 
 <section class="setup-step" id="setup-model" aria-labelledby="setup-model-title">
 <p class="usage-label">04　最初に使うモデルを選ぶ</p>
-<h3 id="setup-model-title">この練習では、Terraを選びます。</h3>
+<h3 id="setup-model-title">この練習では、<span class="keep">GPT-6.1 Sol</span>を選びます。</h3>
 <div class="setup-os-grid">
 <div class="setup-os">
 <h4>Codexでアプリを作る</h4>
 <ol>
 <li>入力欄の右下にある<strong>モデル名</strong>、または<strong>「思考量を選択」</strong>を押します。</li>
-<li>開いたメニューの<strong>モデル名</strong>か、その上の<strong>思考量（例：「極高」）</strong>を押し、<strong>「GPT-5.6 Terra」</strong>を選びます。</li>
-<li><strong>思考量（考える強さ）</strong>は、まず<strong>「中」</strong>にします。</li>
+<li>開いたメニューの<strong>モデル名</strong>か、その上の<strong>思考量（例：「極高」）</strong>を押し、<strong class="keep">「GPT-6.1 Sol」</strong>を選びます。</li>
+<li><strong>思考量（考える強さ）</strong>は、変えずに始めます。</li>
 </ol>
 <p>入力欄に <code>/model</code> と入力して、モデル選択を開くこともできます。</p>
-<p>日常的な開発と利用量のバランスを考えた、この練習でのおすすめです。<a href="https://learn.chatgpt.com/ja-JP/docs/models?surface=app">モデルと強さの説明</a></p>
+<p>日常の作業や開発に向いた、公式のおすすめモデルの一つです。<a class="keep" href="https://learn.chatgpt.com/ja-JP/docs/models?surface=app" target="_blank" rel="noopener noreferrer">モデルと強さの説明</a></p>
 </div>
 <div class="setup-os">
 <h4>Claudeで相談する</h4>
-<p>入力欄のモデル名を押し、まず<strong>「Sonnet」</strong>を選びます。考える強さは初期設定から始めます。<a href="https://support.claude.com/en/articles/8664678-change-the-model-effort-and-thinking-settings">モデルの選び方</a></p>
+<p>入力欄のモデル名を押し、まず<strong>「Sonnet」</strong>を選びます。考える強さは初期設定から始めます。<a href="https://support.claude.com/en/articles/8664678-change-the-model-effort-and-thinking-settings" target="_blank" rel="noopener noreferrer">モデルの選び方</a></p>
 </div>
 </div>
 <p class="setup-rule">上の図の<strong>「Astra・極高」は表示例</strong>です。考える強さを上げるほど時間や利用枠を使うため、必要になってから上げます。</p>
-<details><summary>Terraが見つからないとき</summary><p>モデルのメニューに<strong>「上級」</strong>があれば開きます。それでも選べない場合は、そのプランの標準モデルで始めます。選べるモデルや表示は、プランやアプリの更新で変わります。<a href="https://learn.chatgpt.com/ja-JP/docs/models?surface=app">公式の画面案内</a></p></details>
+<details><summary><span class="keep">GPT-6.1 Sol</span>が見つからないとき</summary><p>モデルのメニューに<strong>「上級」</strong>があれば開きます。それでも見つからない場合は、<strong class="keep">「GPT-6 Sol」</strong>で始めます。どちらも選べない場合は、そのプランの標準モデルで始めます。選べるモデルや表示は、プランやアプリの更新で変わります。<a class="keep" href="https://learn.chatgpt.com/ja-JP/docs/models?surface=app" target="_blank" rel="noopener noreferrer">公式の画面案内</a></p></details>
 </section>
 
 <section class="setup-step" aria-labelledby="setup-send-title">
@@ -726,11 +732,11 @@ h1{font-size:28pt;margin-bottom:8mm}
 <details><summary>承認の画面が出たら</summary><p>事前の説明と同じ作業かを確認し、必要な操作だけ許可します。説明にない変更や外部送信は許可せず、実行前に説明させます。個人情報や秘密情報の送信は許可しません。</p></details>
 <p class="setup-stop"><strong>途中で止めるときは、停止ボタン（■）。</strong><br>停止しても、すでに作られたファイルや変更は残ります。続きを頼むときは、同じチャットへ送ります。</p>
 </section>
-<p class="comparison-note">フォルダーを開くキー操作：<a href="https://learn.chatgpt.com/docs/reference/commands">OpenAI公式資料</a>（2026年9月11日確認）</p>
+<p class="comparison-note">フォルダーを開くキー操作：<a href="https://learn.chatgpt.com/docs/reference/commands" target="_blank" rel="noopener noreferrer">OpenAI公式資料</a>（2026年9月11日確認）</p>
 </section>
 <section class="section comparison" id="free-app-example" aria-labelledby="free-app-title">
 <h2 id="free-app-title">Plusを使ったアプリ作りの練習例</h2>
-<p class="practice-lead">ブラウザで動く「割り勘計算機」を作ります。<br>ChatGPT Plusで、アプリ版の<a href="https://learn.chatgpt.com/docs/pricing">Codex</a>を使います。</p>
+<p class="practice-lead">ブラウザで動く「割り勘計算機」を作ります。<br>ChatGPT Plusで、アプリ版の<a href="https://learn.chatgpt.com/docs/pricing" target="_blank" rel="noopener noreferrer">Codex</a>を使います。</p>
 <a class="practice-download" id="warikan-download" download="割り勘計算機.html" href="data:text/html;charset=utf-8;base64,PCFkb2N0eXBlIGh0bWw+CjxodG1sIGxhbmc9ImphIj4KPGhlYWQ+CiAgPG1ldGEgY2hhcnNldD0idXRmLTgiPgogIDxtZXRhIG5hbWU9InZpZXdwb3J0IiBjb250ZW50PSJ3aWR0aD1kZXZpY2Utd2lkdGgsIGluaXRpYWwtc2NhbGU9MSI+CiAgPG1ldGEgaHR0cC1lcXVpdj0iQ29udGVudC1TZWN1cml0eS1Qb2xpY3kiIGNvbnRlbnQ9ImRlZmF1bHQtc3JjICdub25lJzsgc2NyaXB0LXNyYyAndW5zYWZlLWlubGluZSc7IHN0eWxlLXNyYyAndW5zYWZlLWlubGluZSc7IGJhc2UtdXJpICdub25lJzsgZm9ybS1hY3Rpb24gJ25vbmUnIj4KICA8bWV0YSBuYW1lPSJjb2xvci1zY2hlbWUiIGNvbnRlbnQ9ImxpZ2h0Ij4KICA8dGl0bGU+5Ymy44KK5YuY6KiI566X5qmfPC90aXRsZT4KICA8c3R5bGU+CiAgICAqIHsgYm94LXNpemluZzogYm9yZGVyLWJveDsgfQogICAgYm9keSB7IG1hcmdpbjogMDsgbWluLWhlaWdodDogMTAwdmg7IGJhY2tncm91bmQ6ICNmNWY1Zjc7IGNvbG9yOiAjMWQxZDFmOyBmb250LWZhbWlseTogLWFwcGxlLXN5c3RlbSwgQmxpbmtNYWNTeXN0ZW1Gb250LCAiU2Vnb2UgVUkiLCAiSGlyYWdpbm8gS2FrdSBHb3RoaWMgUHJvTiIsICJZdSBHb3RoaWMiLCBNZWlyeW8sIHNhbnMtc2VyaWY7IC13ZWJraXQtZm9udC1zbW9vdGhpbmc6IGFudGlhbGlhc2VkOyB9CiAgICBtYWluIHsgd2lkdGg6IG1pbig5NjBweCwgMTAwJSk7IG1hcmdpbjogMCBhdXRvOyBwYWRkaW5nOiA2NHB4IDI0cHggMzJweDsgfQogICAgaGVhZGVyIHsgbWFyZ2luLWJvdHRvbTogMzJweDsgfQogICAgaDEgeyBtYXJnaW46IDAgMCAxMnB4OyBmb250LXNpemU6IGNsYW1wKDM0cHgsIDV2dywgNTJweCk7IGxpbmUtaGVpZ2h0OiAxLjI7IGxldHRlci1zcGFjaW5nOiAtLjA1NWVtOyBmb250LXdlaWdodDogNzUwOyB9CiAgICBoZWFkZXIgcCB7IG1hcmdpbjogMDsgY29sb3I6ICM1MTUxNTQ7IGZvbnQtc2l6ZTogMTZweDsgbGluZS1oZWlnaHQ6IDEuODsgfQogICAgLmNhbGN1bGF0b3IgeyBkaXNwbGF5OiBncmlkOyBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IDFmciAxZnI7IGdhcDogMjBweDsgYWxpZ24taXRlbXM6IHN0cmV0Y2g7IH0KICAgIGZvcm0sIC5yZXN1bHQgeyBtaW4td2lkdGg6IDA7IGJvcmRlci1yYWRpdXM6IDI0cHg7IHBhZGRpbmc6IDMycHg7IH0KICAgIGZvcm0geyBiYWNrZ3JvdW5kOiAjZmZmOyBib3JkZXI6IDFweCBzb2xpZCAjZTNlM2U4OyB9CiAgICAuZmllbGQgKyAuZmllbGQgeyBtYXJnaW4tdG9wOiAyMHB4OyB9CiAgICBsYWJlbCB7IGRpc3BsYXk6IGJsb2NrOyBtYXJnaW4tYm90dG9tOiAxMHB4OyBmb250LXNpemU6IDE1cHg7IGZvbnQtd2VpZ2h0OiA2NTA7IH0KICAgIC5pbnB1dC13cmFwIHsgcG9zaXRpb246IHJlbGF0aXZlOyB9CiAgICBpbnB1dCB7IHdpZHRoOiAxMDAlOyBoZWlnaHQ6IDY4cHg7IGJvcmRlcjogMXB4IHNvbGlkICM4Njg2OGI7IGJvcmRlci1yYWRpdXM6IDEycHg7IGJhY2tncm91bmQ6ICNmZmY7IGNvbG9yOiAjMWQxZDFmOyBwYWRkaW5nOiAxMnB4IDUycHggMTJweCAxNnB4OyBmb250OiBpbmhlcml0OyBmb250LXNpemU6IDI4cHg7IGZvbnQtd2VpZ2h0OiA2MDA7IGZvbnQtdmFyaWFudC1udW1lcmljOiB0YWJ1bGFyLW51bXM7IH0KICAgIGlucHV0OjpwbGFjZWhvbGRlciB7IGNvbG9yOiAjODY4NjhiOyBmb250LXdlaWdodDogNDAwOyBmb250LXNpemU6IDIwcHg7IH0KICAgIC51bml0IHsgcG9zaXRpb246IGFic29sdXRlOyByaWdodDogMThweDsgdG9wOiA1MCU7IHRyYW5zZm9ybTogdHJhbnNsYXRlWSgtNTAlKTsgY29sb3I6ICM1MTUxNTQ7IGZvbnQtc2l6ZTogMTdweDsgcG9pbnRlci1ldmVudHM6IG5vbmU7IH0KICAgIGlucHV0OmZvY3VzLXZpc2libGUsIGJ1dHRvbjpmb2N1cy12aXNpYmxlIHsgb3V0bGluZTogM3B4IHNvbGlkICMwMDcxZTM7IG91dGxpbmUtb2Zmc2V0OiA0cHg7IH0KICAgIGlucHV0W2FyaWEtaW52YWxpZD0idHJ1ZSJdIHsgYm9yZGVyOiAycHggc29saWQgI2I0MjMxODsgfQogICAgLmVycm9yIHsgbWFyZ2luOiA4cHggMCAwOyBjb2xvcjogI2I0MjMxODsgZm9udC1zaXplOiAxM3B4OyBsaW5lLWhlaWdodDogMS42OyB9CiAgICAuZXJyb3I6ZW1wdHkgeyBkaXNwbGF5OiBub25lOyB9CiAgICAuZm9ybS1ub3RlIHsgbWFyZ2luOiAxNnB4IDAgMjJweDsgY29sb3I6ICM2ZTZlNzM7IGZvbnQtc2l6ZTogMTNweDsgbGluZS1oZWlnaHQ6IDEuNzsgfQogICAgYnV0dG9uIHsgZm9udDogaW5oZXJpdDsgY3Vyc29yOiBwb2ludGVyOyB0b3VjaC1hY3Rpb246IG1hbmlwdWxhdGlvbjsgfQogICAgLmNhbGN1bGF0ZSB7IGRpc3BsYXk6IGJsb2NrOyB3aWR0aDogMTAwJTsgYm9yZGVyOiAwOyBib3JkZXItcmFkaXVzOiAxMnB4OyBwYWRkaW5nOiAxNnB4IDIwcHg7IGJhY2tncm91bmQ6ICMwMDY2Y2M7IGNvbG9yOiAjZmZmOyBmb250LXNpemU6IDE3cHg7IGZvbnQtd2VpZ2h0OiA2NTA7IH0KICAgIC5jYWxjdWxhdGU6aG92ZXIgeyBiYWNrZ3JvdW5kOiAjMDA1NWFhOyB9CiAgICAuY2FsY3VsYXRlOmFjdGl2ZSB7IGJhY2tncm91bmQ6ICMwMDRhOTU7IH0KICAgIC5jbGVhciB7IGRpc3BsYXk6IGJsb2NrOyBtYXJnaW46IDEycHggYXV0byAwOyBtaW4taGVpZ2h0OiA0NHB4OyBwYWRkaW5nOiAxMHB4IDE2cHg7IGJvcmRlcjogMDsgYm9yZGVyLXJhZGl1czogOHB4OyBiYWNrZ3JvdW5kOiB0cmFuc3BhcmVudDsgY29sb3I6ICM1MTUxNTQ7IGZvbnQtc2l6ZTogMTRweDsgfQogICAgLmNsZWFyOmhvdmVyIHsgYmFja2dyb3VuZDogI2Y1ZjVmNzsgY29sb3I6ICMxZDFkMWY7IH0KICAgIC5yZXN1bHQgeyBkaXNwbGF5OiBmbGV4OyBmbGV4LWRpcmVjdGlvbjogY29sdW1uOyBiYWNrZ3JvdW5kOiAjMWQxZDFmOyBjb2xvcjogI2Y1ZjVmNzsgfQogICAgLnJlc3VsdCBoMiB7IG1hcmdpbjogMDsgY29sb3I6ICNkMmQyZDc7IGZvbnQtc2l6ZTogMTZweDsgZm9udC13ZWlnaHQ6IDUwMDsgfQogICAgLmFtb3VudCB7IGRpc3BsYXk6IGZsZXg7IGFsaWduLWl0ZW1zOiBiYXNlbGluZTsgZ2FwOiA4cHg7IG1hcmdpbjogMThweCAwIDI0cHg7IGZvbnQtdmFyaWFudC1udW1lcmljOiB0YWJ1bGFyLW51bXM7IGZsZXgtd3JhcDogd3JhcDsgfQogICAgI3Jlc3VsdC12YWx1ZSB7IG1heC13aWR0aDogMTAwJTsgZm9udC1zaXplOiBjbGFtcCg0OHB4LCA2Ljh2dywgNzhweCk7IGZvbnQtd2VpZ2h0OiA2NTA7IGxldHRlci1zcGFjaW5nOiAtLjA1NWVtOyBsaW5lLWhlaWdodDogMS4xMjsgb3ZlcmZsb3ctd3JhcDogYW55d2hlcmU7IH0KICAgICNyZXN1bHQtdmFsdWUuY29tcGFjdCB7IGZvbnQtc2l6ZTogY2xhbXAoMzJweCwgNHZ3LCA0NnB4KTsgfQogICAgLnllbiB7IGZvbnQtc2l6ZTogMjFweDsgY29sb3I6ICNkMmQyZDc7IH0KICAgIC5yZXN1bHQgZGwgeyBtYXJnaW46IGF1dG8gMCAwOyBwYWRkaW5nLXRvcDogMjJweDsgYm9yZGVyLXRvcDogMXB4IHNvbGlkICM0ODQ4NGE7IH0KICAgIC5yZXN1bHQgZGwgPiBkaXYgeyBkaXNwbGF5OiBmbGV4OyBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47IGFsaWduLWl0ZW1zOiBiYXNlbGluZTsgZ2FwOiAxOHB4OyBwYWRkaW5nOiA4cHggMDsgZm9udC1zaXplOiAxNHB4OyBsaW5lLWhlaWdodDogMS41OyB9CiAgICAucmVzdWx0IGR0IHsgY29sb3I6ICNjN2M3Y2M7IGZsZXgtc2hyaW5rOiAwOyB9CiAgICAucmVzdWx0IGRkIHsgbWFyZ2luOiAwOyB0ZXh0LWFsaWduOiByaWdodDsgZm9udC1zaXplOiAxNnB4OyBmb250LXdlaWdodDogNjAwOyBmb250LXZhcmlhbnQtbnVtZXJpYzogdGFidWxhci1udW1zOyBvdmVyZmxvdy13cmFwOiBhbnl3aGVyZTsgfQogICAgI3Jlc3VsdC1ub3RlIHsgbWFyZ2luOiAyMHB4IDAgMDsgcGFkZGluZzogMTRweCAxNnB4OyBib3JkZXItcmFkaXVzOiAxMnB4OyBiYWNrZ3JvdW5kOiAjMzMzMzM2OyBjb2xvcjogI2Y1ZjVmNzsgZm9udC1zaXplOiAxM3B4OyBsaW5lLWhlaWdodDogMS43NTsgfQogICAgZm9vdGVyIHsgcGFkZGluZy10b3A6IDIycHg7IHRleHQtYWxpZ246IGNlbnRlcjsgY29sb3I6ICM2ZTZlNzM7IGZvbnQtc2l6ZTogMTJweDsgbGluZS1oZWlnaHQ6IDEuODsgfQogICAgbm9zY3JpcHQgcCB7IHBhZGRpbmc6IDE2cHg7IGJvcmRlcjogMXB4IHNvbGlkICNiNDIzMTg7IGJvcmRlci1yYWRpdXM6IDEycHg7IGJhY2tncm91bmQ6ICNmZmY7IGNvbG9yOiAjYjQyMzE4OyB9CiAgICBAbWVkaWEgKG1heC13aWR0aDogNjgwcHgpIHsgbWFpbiB7IHBhZGRpbmc6IDM2cHggMThweCAyNHB4OyB9IGhlYWRlciB7IG1hcmdpbi1ib3R0b206IDI0cHg7IH0gLmNhbGN1bGF0b3IgeyBncmlkLXRlbXBsYXRlLWNvbHVtbnM6IDFmcjsgZ2FwOiAxNnB4OyB9IGZvcm0sIC5yZXN1bHQgeyBwYWRkaW5nOiAyNnB4IDI0cHg7IGJvcmRlci1yYWRpdXM6IDIwcHg7IH0gI3Jlc3VsdC12YWx1ZSB7IGZvbnQtc2l6ZTogNjRweDsgfSAjcmVzdWx0LXZhbHVlLmNvbXBhY3QgeyBmb250LXNpemU6IDM2cHg7IH0gfQogICAgQG1lZGlhIChwcmVmZXJzLXJlZHVjZWQtbW90aW9uOiBuby1wcmVmZXJlbmNlKSB7IGJ1dHRvbiB7IHRyYW5zaXRpb246IGJhY2tncm91bmQtY29sb3IgLjE1cyBlYXNlOyB9IH0KICA8L3N0eWxlPgo8L2hlYWQ+Cjxib2R5PgogIDxtYWluPgogICAgPGhlYWRlcj4KICAgICAgPGgxPuWJsuOCiuWLmOioiOeul+apnzwvaDE+CiAgICAgIDxwPuWQiOioiOmHkemhjeOBqOS6uuaVsOOCkuWFpeOCjOOBpuOAgeOBsuOBqOOCiuWIhuOCkuioiOeul+OAgjwvcD4KICAgIDwvaGVhZGVyPgogICAgPG5vc2NyaXB0PjxwPuOBk+OBruioiOeul+apn+OCkuS9v+OBhuOBq+OBr+OAgeODluODqeOCpuOCtuOBrkphdmFTY3JpcHTjgpLmnInlirnjgavjgZfjgabjgY/jgaDjgZXjgYTjgII8L3A+PC9ub3NjcmlwdD4KICAgIDxkaXYgY2xhc3M9ImNhbGN1bGF0b3IiPgogICAgICA8Zm9ybSBpZD0iY2FsY3VsYXRvci1mb3JtIiBub3ZhbGlkYXRlPgogICAgICAgIDxkaXYgY2xhc3M9ImZpZWxkIj4KICAgICAgICAgIDxsYWJlbCBmb3I9InRvdGFsIj7lkIjoqIjph5HpoY08L2xhYmVsPgogICAgICAgICAgPGRpdiBjbGFzcz0iaW5wdXQtd3JhcCI+CiAgICAgICAgICAgIDxpbnB1dCBpZD0idG90YWwiIHR5cGU9InRleHQiIGlucHV0bW9kZT0ibnVtZXJpYyIgdmFsdWU9IjEwMDAiIHBsYWNlaG9sZGVyPSLkvovvvJoxMDAwIiBhdXRvY29tcGxldGU9Im9mZiIgc3BlbGxjaGVjaz0iZmFsc2UiIGFyaWEtZGVzY3JpYmVkYnk9InRvdGFsLWVycm9yIHJvdW5kaW5nLW5vdGUiPgogICAgICAgICAgICA8c3BhbiBjbGFzcz0idW5pdCIgYXJpYS1oaWRkZW49InRydWUiPuWGhjwvc3Bhbj4KICAgICAgICAgIDwvZGl2PgogICAgICAgICAgPHAgaWQ9InRvdGFsLWVycm9yIiBjbGFzcz0iZXJyb3IiIGFyaWEtbGl2ZT0icG9saXRlIj48L3A+CiAgICAgICAgPC9kaXY+CiAgICAgICAgPGRpdiBjbGFzcz0iZmllbGQiPgogICAgICAgICAgPGxhYmVsIGZvcj0icGVvcGxlIj7kurrmlbA8L2xhYmVsPgogICAgICAgICAgPGRpdiBjbGFzcz0iaW5wdXQtd3JhcCI+CiAgICAgICAgICAgIDxpbnB1dCBpZD0icGVvcGxlIiB0eXBlPSJ0ZXh0IiBpbnB1dG1vZGU9Im51bWVyaWMiIHZhbHVlPSIzIiBwbGFjZWhvbGRlcj0i5L6L77yaMyIgYXV0b2NvbXBsZXRlPSJvZmYiIHNwZWxsY2hlY2s9ImZhbHNlIiBhcmlhLWRlc2NyaWJlZGJ5PSJwZW9wbGUtZXJyb3IiPgogICAgICAgICAgICA8c3BhbiBjbGFzcz0idW5pdCIgYXJpYS1oaWRkZW49InRydWUiPuS6ujwvc3Bhbj4KICAgICAgICAgIDwvZGl2PgogICAgICAgICAgPHAgaWQ9InBlb3BsZS1lcnJvciIgY2xhc3M9ImVycm9yIiBhcmlhLWxpdmU9InBvbGl0ZSI+PC9wPgogICAgICAgIDwvZGl2PgogICAgICAgIDxwIGlkPSJyb3VuZGluZy1ub3RlIiBjbGFzcz0iZm9ybS1ub3RlIj4x5YaG5pyq5rqA44Gu56uv5pWw44Gv5YiH44KK5LiK44GS44G+44GZ44CCPC9wPgogICAgICAgIDxidXR0b24gY2xhc3M9ImNhbGN1bGF0ZSIgdHlwZT0ic3VibWl0Ij7oqIjnrpfjgZnjgos8L2J1dHRvbj4KICAgICAgICA8YnV0dG9uIGNsYXNzPSJjbGVhciIgaWQ9ImNsZWFyLWJ1dHRvbiIgdHlwZT0iYnV0dG9uIj7lhaXlipvjgpLjgq/jg6rjgqI8L2J1dHRvbj4KICAgICAgPC9mb3JtPgogICAgICA8c2VjdGlvbiBjbGFzcz0icmVzdWx0IiBhcmlhLWxhYmVsbGVkYnk9InJlc3VsdC10aXRsZSIgYXJpYS1saXZlPSJwb2xpdGUiIGFyaWEtYXRvbWljPSJ0cnVlIj4KICAgICAgICA8aDIgaWQ9InJlc3VsdC10aXRsZSI+MeS6uuOBguOBn+OCijwvaDI+CiAgICAgICAgPGRpdiBjbGFzcz0iYW1vdW50Ij48c3BhbiBpZD0icmVzdWx0LXZhbHVlIj7igJQ8L3NwYW4+PHNwYW4gY2xhc3M9InllbiI+5YaGPC9zcGFuPjwvZGl2PgogICAgICAgIDxkbD4KICAgICAgICAgIDxkaXY+PGR0PuWQiOioiOmHkemhjTwvZHQ+PGRkIGlkPSJyZXN1bHQtdG90YWwiPuKAlDwvZGQ+PC9kaXY+CiAgICAgICAgICA8ZGl2PjxkdD7kurrmlbA8L2R0PjxkZCBpZD0icmVzdWx0LXBlb3BsZSI+4oCUPC9kZD48L2Rpdj4KICAgICAgICAgIDxkaXY+PGR0PumbhuOBvuOCi+WQiOioiDwvZHQ+PGRkIGlkPSJyZXN1bHQtY29sbGVjdGVkIj7igJQ8L2RkPjwvZGl2PgogICAgICAgIDwvZGw+CiAgICAgICAgPHAgaWQ9InJlc3VsdC1ub3RlIj7ph5HpoY3jgajkurrmlbDjgpLlhaXlipvjgZfjgabjgY/jgaDjgZXjgYTjgII8L3A+CiAgICAgIDwvc2VjdGlvbj4KICAgIDwvZGl2PgogICAgPGZvb3Rlcj7jgZPjga7jg5bjg6njgqbjgrblhoXjgafoqIjnrpfjgZfjgb7jgZnjgILpgJrkv6Hjg7vkv53lrZjjga/ooYzjgYTjgb7jgZvjgpPjgII8L2Zvb3Rlcj4KICA8L21haW4+CiAgPHNjcmlwdD4KICAgICd1c2Ugc3RyaWN0JzsKICAgIGNvbnN0IGZvcm0gPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnY2FsY3VsYXRvci1mb3JtJyk7CiAgICBjb25zdCB0b3RhbElucHV0ID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3RvdGFsJyk7CiAgICBjb25zdCBwZW9wbGVJbnB1dCA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdwZW9wbGUnKTsKICAgIGNvbnN0IG51bWJlckZvcm1hdCA9IG5ldyBJbnRsLk51bWJlckZvcm1hdCgnamEtSlAnKTsKCiAgICBmdW5jdGlvbiByZWFkSW50ZWdlcihyYXcsIGxhYmVsLCBtaW5pbXVtLCBtYXhpbXVtLCB1bml0KSB7CiAgICAgIGNvbnN0IHRleHQgPSByYXcubm9ybWFsaXplKCdORktDJykudHJpbSgpOwogICAgICBpZiAodGV4dCA9PT0gJycpIHJldHVybiB7IGVycm9yOiBsYWJlbCArICfjgpLlhaXlipvjgZfjgabjgY/jgaDjgZXjgYTjgIInIH07CiAgICAgIGlmICghL14oPzpcZCt8XGR7MSwzfSg/OixcZHszfSkrKSQvLnRlc3QodGV4dCkpIHsKICAgICAgICByZXR1cm4geyBlcnJvcjogbGFiZWwgKyAn44GvJyArIG1pbmltdW0gKyAn5Lul5LiK44Gu5pW05pWw44Gn5YWl5Yqb44GX44Gm44GP44Gg44GV44GE44CCJyB9OwogICAgICB9CiAgICAgIGNvbnN0IHZhbHVlID0gTnVtYmVyKHRleHQucmVwbGFjZUFsbCgnLCcsICcnKSk7CiAgICAgIGlmICh2YWx1ZSA8IG1pbmltdW0pIHJldHVybiB7IGVycm9yOiBsYWJlbCArICfjga8nICsgbWluaW11bSArIHVuaXQgKyAn5Lul5LiK44Gn5YWl5Yqb44GX44Gm44GP44Gg44GV44GE44CCJyB9OwogICAgICBpZiAoIU51bWJlci5pc1NhZmVJbnRlZ2VyKHZhbHVlKSB8fCB2YWx1ZSA+IG1heGltdW0pIHsKICAgICAgICByZXR1cm4geyBlcnJvcjogbGFiZWwgKyAn44GvJyArIG51bWJlckZvcm1hdC5mb3JtYXQobWF4aW11bSkgKyB1bml0ICsgJ+S7peS4i+OBp+WFpeWKm+OBl+OBpuOBj+OBoOOBleOBhOOAgicgfTsKICAgICAgfQogICAgICByZXR1cm4geyB2YWx1ZSwgZXJyb3I6ICcnIH07CiAgICB9CgogICAgZnVuY3Rpb24gc2V0RXJyb3IoaW5wdXQsIG1lc3NhZ2UpIHsKICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoaW5wdXQuaWQgKyAnLWVycm9yJykudGV4dENvbnRlbnQgPSBtZXNzYWdlOwogICAgICBpbnB1dC5zZXRBdHRyaWJ1dGUoJ2FyaWEtaW52YWxpZCcsIG1lc3NhZ2UgPyAndHJ1ZScgOiAnZmFsc2UnKTsKICAgIH0KCiAgICBmdW5jdGlvbiBjbGVhclJlc3VsdChtZXNzYWdlKSB7CiAgICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdyZXN1bHQtdmFsdWUnKS50ZXh0Q29udGVudCA9ICfigJQnOwogICAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgncmVzdWx0LXZhbHVlJykuY2xhc3NMaXN0LnJlbW92ZSgnY29tcGFjdCcpOwogICAgICBmb3IgKGNvbnN0IGlkIG9mIFsncmVzdWx0LXRvdGFsJywgJ3Jlc3VsdC1wZW9wbGUnLCAncmVzdWx0LWNvbGxlY3RlZCddKSB7CiAgICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoaWQpLnRleHRDb250ZW50ID0gJ+KAlCc7CiAgICAgIH0KICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3Jlc3VsdC1ub3RlJykudGV4dENvbnRlbnQgPSBtZXNzYWdlOwogICAgfQoKICAgIGZ1bmN0aW9uIGNhbGN1bGF0ZShmb2N1c0Vycm9yKSB7CiAgICAgIGNvbnN0IHRvdGFsID0gcmVhZEludGVnZXIodG90YWxJbnB1dC52YWx1ZSwgJ+WQiOioiOmHkemhjScsIDAsIDk5OTk5OTk5OTk5OSwgJ+WGhicpOwogICAgICBjb25zdCBwZW9wbGUgPSByZWFkSW50ZWdlcihwZW9wbGVJbnB1dC52YWx1ZSwgJ+S6uuaVsCcsIDEsIDk5OTk5LCAn5Lq6Jyk7CiAgICAgIHNldEVycm9yKHRvdGFsSW5wdXQsIHRvdGFsLmVycm9yKTsKICAgICAgc2V0RXJyb3IocGVvcGxlSW5wdXQsIHBlb3BsZS5lcnJvcik7CiAgICAgIGlmICh0b3RhbC5lcnJvciB8fCBwZW9wbGUuZXJyb3IpIHsKICAgICAgICBjbGVhclJlc3VsdCgn5YWl5Yqb5YaF5a6544KS56K66KqN44GX44Gm44GP44Gg44GV44GE44CCJyk7CiAgICAgICAgaWYgKGZvY3VzRXJyb3IpICh0b3RhbC5lcnJvciA/IHRvdGFsSW5wdXQgOiBwZW9wbGVJbnB1dCkuZm9jdXMoKTsKICAgICAgICByZXR1cm47CiAgICAgIH0KICAgICAgY29uc3QgZWFjaCA9IE1hdGguY2VpbCh0b3RhbC52YWx1ZSAvIHBlb3BsZS52YWx1ZSk7CiAgICAgIGNvbnN0IGNvbGxlY3RlZCA9IGVhY2ggKiBwZW9wbGUudmFsdWU7CiAgICAgIGNvbnN0IGV4dHJhID0gY29sbGVjdGVkIC0gdG90YWwudmFsdWU7CiAgICAgIGNvbnN0IHJlc3VsdFZhbHVlID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3Jlc3VsdC12YWx1ZScpOwogICAgICByZXN1bHRWYWx1ZS50ZXh0Q29udGVudCA9IG51bWJlckZvcm1hdC5mb3JtYXQoZWFjaCk7CiAgICAgIHJlc3VsdFZhbHVlLmNsYXNzTGlzdC50b2dnbGUoJ2NvbXBhY3QnLCByZXN1bHRWYWx1ZS50ZXh0Q29udGVudC5sZW5ndGggPiA3KTsKICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3Jlc3VsdC10b3RhbCcpLnRleHRDb250ZW50ID0gbnVtYmVyRm9ybWF0LmZvcm1hdCh0b3RhbC52YWx1ZSkgKyAn5YaGJzsKICAgICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ3Jlc3VsdC1wZW9wbGUnKS50ZXh0Q29udGVudCA9IG51bWJlckZvcm1hdC5mb3JtYXQocGVvcGxlLnZhbHVlKSArICfkuronOwogICAgICBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgncmVzdWx0LWNvbGxlY3RlZCcpLnRleHRDb250ZW50ID0gbnVtYmVyRm9ybWF0LmZvcm1hdChjb2xsZWN0ZWQpICsgJ+WGhic7CiAgICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdyZXN1bHQtbm90ZScpLnRleHRDb250ZW50ID0gZXh0cmEgPT09IDAKICAgICAgICA/ICfnq6/mlbDjgarjgZfjgILlhajlk6HlkIzjgZjph5HpoY3jgaflibLjgorliIfjgozjgb7jgZnjgIInCiAgICAgICAgOiAn5YWo5ZOh44GM44GT44Gu6YeR6aGN44KS5omV44GG44Go44CB5YiH44KK5LiK44GS5YiG44Go44GX44GmJyArIG51bWJlckZvcm1hdC5mb3JtYXQoZXh0cmEpICsgJ+WGhuWkmuOBj+mbhuOBvuOCiuOBvuOBmeOAgic7CiAgICB9CgogICAgZm9ybS5hZGRFdmVudExpc3RlbmVyKCdzdWJtaXQnLCBmdW5jdGlvbiAoZXZlbnQpIHsKICAgICAgZXZlbnQucHJldmVudERlZmF1bHQoKTsKICAgICAgY2FsY3VsYXRlKHRydWUpOwogICAgfSk7CiAgICBmb3IgKGNvbnN0IGlucHV0IG9mIFt0b3RhbElucHV0LCBwZW9wbGVJbnB1dF0pIHsKICAgICAgaW5wdXQuYWRkRXZlbnRMaXN0ZW5lcignaW5wdXQnLCBmdW5jdGlvbiAoKSB7CiAgICAgICAgc2V0RXJyb3IoaW5wdXQsICcnKTsKICAgICAgICBjbGVhclJlc3VsdCgn44CM6KiI566X44GZ44KL44CN44KS5oq844GZ44Go57WQ5p6c44GM6KGo56S644GV44KM44G+44GZ44CCJyk7CiAgICAgIH0pOwogICAgfQogICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2NsZWFyLWJ1dHRvbicpLmFkZEV2ZW50TGlzdGVuZXIoJ2NsaWNrJywgZnVuY3Rpb24gKCkgewogICAgICB0b3RhbElucHV0LnZhbHVlID0gJyc7CiAgICAgIHBlb3BsZUlucHV0LnZhbHVlID0gJyc7CiAgICAgIHNldEVycm9yKHRvdGFsSW5wdXQsICcnKTsKICAgICAgc2V0RXJyb3IocGVvcGxlSW5wdXQsICcnKTsKICAgICAgY2xlYXJSZXN1bHQoJ+mHkemhjeOBqOS6uuaVsOOCkuWFpeWKm+OBl+OBpuOBj+OBoOOBleOBhOOAgicpOwogICAgICB0b3RhbElucHV0LmZvY3VzKCk7CiAgICB9KTsKICAgIGNhbGN1bGF0ZShmYWxzZSk7CiAgPC9zY3JpcHQ+CjwvYm9keT4KPC9odG1sPgo=">動く完成例をダウンロード</a>
 <div class="compare-card">
 <ol class="practice-steps">
@@ -881,8 +887,8 @@ h1{font-size:28pt;margin-bottom:8mm}
 </details>
 </section>
 <aside class="prompt-context" aria-label="モデルの進化と利用条件">
-<p class="practice-lead">2026年9月、<a href="https://www.anthropic.com/claude/fable">Fable 5.1</a>や<a href="https://openai.com/index/gpt-6-astra/">Astra</a>の登場で、AIに任せられる範囲がさらに広がりました。<br>以前うまくいかなかった使い方も、今のAIでもう一度試してみてください。</p>
-<p class="practice-lead">ただし、<a href="https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex">AstraはPlusのCodexでも利用枠を早く使い切ることがあります</a>。<a href="https://support.claude.com/en/articles/15424964-claude-fable-models-on-your-plan">Fable 5.1はClaude Proでは別料金</a>です。</p>
+<p class="practice-lead">2026年9月、<a class="keep" href="https://www.anthropic.com/claude/fable" target="_blank" rel="noopener noreferrer">Fable 5.1</a>や<a href="https://openai.com/index/gpt-6-astra/" target="_blank" rel="noopener noreferrer">Astra</a>に続き、<a class="keep" href="https://www.anthropic.com/claude-opus-5-5" target="_blank" rel="noopener noreferrer">Opus 5.5</a>や<a class="keep" href="https://openai.com/index/introducing-gpt-6-1-sol/" target="_blank" rel="noopener noreferrer">GPT-6.1 Sol</a>も登場しました。<br>AIに任せられる範囲がさらに広がりました。<br>以前うまくいかなかった使い方も、今のAIでもう一度試してみてください。</p>
+<p class="practice-lead">ただし、<a href="https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex" target="_blank" rel="noopener noreferrer">AstraはPlusのCodexでも利用枠を早く使い切ることがあります</a>。<a href="https://support.claude.com/en/articles/15424964-claude-fable-models-on-your-plan" target="_blank" rel="noopener noreferrer"><span class="keep">Fable 5.1</span>は<span class="keep">Claude Pro</span>では別料金</a>です。</p>
 </aside>
 </section>
 
@@ -1097,7 +1103,7 @@ h1{font-size:28pt;margin-bottom:8mm}
 <p>始まりは同じ0。今度は3以下の間、繰り返します。</p>
 <p class="drill-reveal" id="drill-result-retry">0 → 1 → 2 → 3 の<strong>4回</strong>。0も忘れずに数えられました。</p>
 </div>
-<p class="study-material-note">例のコードはPHPの一部分です。<a href="https://www.php.net/manual/ja/control-structures.for.php">forの公式説明</a></p>
+<p class="study-material-note">例のコードはPHPの一部分です。<a href="https://www.php.net/manual/ja/control-structures.for.php" target="_blank" rel="noopener noreferrer">forの公式説明</a></p>
 </div>
 <div class="study-chat">
 <div class="study-pane-header"><span>AIとのチャット</span><span>出題・回答の再現</span></div>
@@ -1418,6 +1424,7 @@ $i は0 → 1 → 2と進みます。0のときにも表示するので、全部
     let loadTimeout = 0;
     let pendingPreview = null;
     let lastCode = '';
+    let renderedLines = [];
 
     function setCheck(key, state) {
       const item = byId('build-check-' + key);
@@ -1439,12 +1446,22 @@ $i は0 → 1 → 2と進みます。0のときにも表示するので、全部
       }
       return html + escapeHtml(line.slice(position));
     }
+    function codeLine(line, index, caret) {
+      return '<span class="build-line"><span class="build-line-number" aria-hidden="true">' + (index + 1) + '</span><span class="build-line-text">' + highlight(line) + (caret ? '<span class="build-caret" aria-hidden="true"></span>' : '') + '</span></span>';
+    }
     function renderCode(text, caret = true) {
       const cacheKey = text + String(caret);
       if (cacheKey === lastCode) return;
       lastCode = cacheKey;
       const lines = text.split('\n');
-      codeContent.innerHTML = lines.map((line, index) => '<span class="build-line"><span class="build-line-number" aria-hidden="true">' + (index + 1) + '</span><span class="build-line-text">' + highlight(line) + (caret && index === lines.length - 1 ? '<span class="build-caret" aria-hidden="true"></span>' : '') + '</span></span>').join('');
+      // 打っている途中は、変わらない行を残し、変わった最後の行から後ろだけを作り直す。
+      let kept = 0;
+      const limit = Math.min(lines.length, renderedLines.length, codeContent.childElementCount) - 1;
+      while (kept < limit && lines[kept] === renderedLines[kept]) kept += 1;
+      if (kept === 0) codeContent.innerHTML = '';
+      else while (codeContent.childElementCount > kept) codeContent.lastElementChild.remove();
+      codeContent.insertAdjacentHTML('beforeend', lines.slice(kept).map((line, offset) => codeLine(line, kept + offset, caret && kept + offset === lines.length - 1)).join(''));
+      renderedLines = lines;
       codeBox.scrollTop = segments[segmentIndex].stage === 4 ? 0 : codeBox.scrollHeight;
     }
     function renderBrief(fraction) {
@@ -1470,7 +1487,8 @@ $i は0 → 1 → 2と進みます。0のときにも表示するので、全部
     }
     function duration() {
       const segment = segments[segmentIndex];
-      return reducedMotion.matches || segment.stage === 4 ? 0 : segment.intro ? segment.ms : Math.min(3400, Math.max(1000, segment.code.length * 5));
+      // 長いコードも同じ速さで打つ。打ち終える時間に上限を付けると、長い区切りほど一度に出る文字が増える。
+      return reducedMotion.matches || segment.stage === 4 ? 0 : segment.intro ? segment.ms : Math.max(1000, segment.code.length * 5);
     }
     function updateControls() {
       panel.dataset.playing = String(playing);
