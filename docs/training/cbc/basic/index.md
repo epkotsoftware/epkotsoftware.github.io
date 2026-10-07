@@ -1,8 +1,8 @@
-# マークアップエンジニア編
+# マークアップ編
 
 ## はじめに
 
-マークアップエンジニア編は課題提出がありますので予めご確認下さい。  
+マークアップ編は課題提出がありますので予めご確認下さい。  
 つまずいたら質問する前に[トラブルシューティング](./../../troubleshoot/index.md)を参照してください。
 
 - [研修課題提出](https://github.com/epkotsoftware/training-docs/blob/main/submission/README.md#研修課題提出)
@@ -21,8 +21,117 @@
 
 ## 基礎
 
-基礎1は読むだけです。  
+マークアップ初級は読むだけです。  
 課題提出はありません。
+
+- マークアップ 初級 #1~3
+  - <https://epkotsoftware.github.io/training/cbc_internal/basic_1.html>
+  - <https://epkotsoftware.github.io/training/cbc_internal/basic_2.html>
+  - <https://epkotsoftware.github.io/training/cbc_internal/basic_3.html>
+
+## Excel
+
+Excelをお持ちでない方は、無料のOffice OnlineでもOKです。
+【重要】Excel以外の互換アプリケーションや拡張機能は禁止。Excel以外で提出されたファイルが原因で、課題提出や進捗に大幅に遅れたたケースがありました。必ずExcel を利用すること。
+
+- Microsoft Office Online (Excel)
+  - <https://www.office.com/launch/excel>
+- 基礎2（マークアップエンジニア 中級）#4, 5 Excel
+  - <https://epkotsoftware.github.io/training/cbc_internal/basic_4.html>
+  - <https://epkotsoftware.github.io/training/cbc_internal/basic_5.html>
+
+## jQuery
+
+- 基礎2（マークアップエンジニア 中級）#6, 7 jQuery
+  - <https://epkotsoftware.github.io/training/cbc_internal/basic_6.html>
+    -   → 「`02_basic/htdocs/kadai_06.html`」
+  - <https://epkotsoftware.github.io/training/cbc_internal/basic_7.html>
+    - → 「`02_basic/htdocs/kadai_07.html`」
+
+**※ `css/common.css` はindex.htmlにも使われているCSSファイルで、共通で使うスタイルを想定しています。**  
+　**ページ固有のスタイルは入れないように注意しましょう（よくあるのが #change_btn 等のスタイルを入れてしまっている）。**
+ 
+## 課題
+
+- 作成したエクセルファイル
+  - 必須: 「`#4 簡単にエクセル関数を理解しよう（売上管理票）`」、「`#5 初めてのエクセル関数（成績表）`」
+  - 任意: 「`#5 の7章 オートカレンダーを作る`」
+- jQuery課題
+  - 必須
+    - 「`#6 簡単な機能をjQueryで実装しよう`」
+      - → 「`02_basic/htdocs/kadai_06.html`」
+    - 「`#7 変数と関数、モーダルウィンドウを作ろう`」
+      - 見た目も`kadai_06.html`と似せましょう。 → 「`02_basic/htdocs/kadai_07.html`」
+
+## 課題提出
+
+以下を参照してください。
+
+- [研修課題提出](https://github.com/epkotsoftware/training-docs/blob/main/submission/README.md#研修課題提出)
+
+## 研修進捗資料の更新
+
+課題提出した日付で「研修進捗」資料の更新をお願いします。
+
+- [研修進捗](https://github.com/epkotsoftware/training-docs/blob/main/training/progress/README.md)
+
+- **これより下は過去の記事で廃止予定です。閲覧する必要はありません。**
+- _
+- _
+- _
+
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+- _
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## ここから先は旧リンクです。廃止されます。読む必要はありません
 
 - 基礎1（マークアップエンジニア 初級）
   - <https://cbc-study.com/training/basic/page1>
@@ -66,14 +175,4 @@ Excelをお持ちでない方は、無料のOffice OnlineでもOKです。
       見た目も`kadai_07.html`と似せましょう。
       → 「`02_basic/htdocs/kadai_08.html`」
 
-## 課題提出
 
-以下を参照してください。
-
-- [研修課題提出](https://github.com/epkotsoftware/training-docs/blob/main/submission/README.md#研修課題提出)
-
-## 研修進捗資料の更新
-
-課題提出した日付で「研修進捗」資料の更新をお願いします。
-
-- [研修進捗](https://github.com/epkotsoftware/training-docs/blob/main/training/progress/README.md)

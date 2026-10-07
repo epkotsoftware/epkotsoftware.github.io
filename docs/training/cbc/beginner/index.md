@@ -21,9 +21,60 @@
   - VSCode フォルダ・ファイル追加方法  
     ![vscode_add_dir_and_file.gif](./images/vscode_add_dir_and_file.gif)
 
-動画を見終わったら、[CBC](https://cbc-study.com/)の入門コースをやっていきましょう。
+動画を見終わったら、下記入門コース1~3をやっていきましょう。
 
 - 入門1（コーダー 初級）
+  - <https://epkotsoftware.github.io/training/cbc_internal/beginner_1.html>
+  - <https://epkotsoftware.github.io/training/cbc_internal/beginner_2.html>
+  - <https://epkotsoftware.github.io/training/cbc_internal/beginner_3.html>
+  - <https://epkotsoftware.github.io/training/cbc_internal/beginner_4.html>
+- 入門2（コーダー 中級）
+  - <https://epkotsoftware.github.io/training/cbc_internal/beginner_5.html>  
+  - <https://epkotsoftware.github.io/training/cbc_internal/beginner_6.html>
+  - <https://epkotsoftware.github.io/training/cbc_internal/beginner_7.html>
+- 入門3（コーダー 上級）
+  - <https://epkotsoftware.github.io/training/cbc_internal/beginner_8.html>
+
+## 課題
+ここまで学習した知識をもとに、自由にページを作成しましょう。ただし、**要件や提出時のチェックリストは厳守**すること。
+作業日数をより重視します。**1日で出来る範囲で**、自由にページを作成しましょう。
+内容自体は採点に影響しませんので、思いつかなければ「実践を踏まえたコーディング」で作ったページのレイアウト変更でもOKです。  
+課題提出についてはGitHubで行います。
+
+- 要件
+  - 対応ブラウザ
+    - Google Chrome
+  - 表示
+    - 自分のユーザーディレクトリの「`01_beginner/htdocs/index.html`」をブラウザで開くと、作成したページが見れる。
+    - 横幅:`950px` と `1920px` で表示が崩れないようにする（確認方法は[横幅を指定した確認方法](./../../../public/t/google-chrome/index.md#使用)を参照）
+      - `950px` で横スクロールができないこと
+      - `950px` で文字・画像が切れていないこと
+      - `1920px` でコンテンツが中央寄せになっていること
+  - その他
+    - 自分のユーザーディレクトリの「`01_beginner/htdocs/`」ディレクトリ内にHTML・CSSが入っていること
+- [フリー素材](./../../../free-materials/index.md)
+
+## 課題提出
+
+以下を参照してください。**必ずすべてのチェック項目を確認してから、コミットすること**
+
+- [研修課題提出](https://github.com/epkotsoftware/training-docs/blob/main/submission/README.md#研修課題提出)
+
+## 研修進捗資料の更新
+
+課題提出した日付で「研修進捗」資料の更新をお願いします。
+
+- [研修進捗](https://github.com/epkotsoftware/training-docs/blob/main/training/progress/README.md)
+
+
+
+
+
+## ここから先は廃止されます。かつての資料です。緊急用に残してあるだけですので、指示がない限り学習しないでください)
+- *2026/8まで利用されていた資料へのリンクです。古い情報なので、学習しないこと。* ToDo: このセクションは本年中に廃止します。
+
+- 動画を見終わったら、[CBC](https://cbc-study.com/)の入門コースをやっていきましょう。
+- - 入門1（コーダー 初級）
   - <https://cbc-study.com/training/beginner/page1>
   - <https://cbc-study.com/training/beginner/page2>
   - <https://cbc-study.com/training/beginner/page3>
@@ -43,34 +94,4 @@ CSSの「`grid-template`」が、ほぼ全てのブラウザでサポートさ�
 - 動画
   - 【HTML/CSSレイアウト】Gridを使うとFlexboxより簡単に複雑なレイアウトを組めます
     - <https://youtu.be/cwkkD0ejX8Q>
-
-## 課題
-
-1日で出来る範囲で、自由にページを作成しましょう。  
-思いつかなければ「実践を踏まえたコーディング」で作ったページのレイアウト変更でもOKです。  
-課題提出についてはGitHubで行います。
-
-- 要件
-  - 対応ブラウザ
-    - Google Chrome
-  - 表示
-    - 自分のユーザーディレクトリの「`01_beginner/htdocs/index.html`」をブラウザで開くと、作成したページが見れる。
-    - 横幅:`950px` と `1920px` で表示が崩れないようにする（確認方法は[横幅を指定した確認方法](./../../../public/t/google-chrome/index.md#使用)を参照）
-      - `950px` で横スクロールができないこと
-      - `950px` で文字・画像が切れていないこと
-      - `1920px` でコンテンツが中央寄せになっていること
-  - その他
-    - 自分のユーザーディレクトリの「`01_beginner/htdocs/`」ディレクトリ内にHTML・CSSが入っていること
-- [フリー素材](./../../../free-materials/index.md)
-
-## 課題提出
-
-以下を参照してください。
-
-- [研修課題提出](https://github.com/epkotsoftware/training-docs/blob/main/submission/README.md#研修課題提出)
-
-## 研修進捗資料の更新
-
-課題提出した日付で「研修進捗」資料の更新をお願いします。
-
-- [研修進捗](https://github.com/epkotsoftware/training-docs/blob/main/training/progress/README.md)
+- 

@@ -447,6 +447,7 @@ h1{font-size:28pt;margin-bottom:8mm}
 <h1 id="welcome-title">AIを使いはじめる。</h1>
 <p class="welcome-subtitle">選び方と設定から、アプリ作り・勉強まで。</p>
 <p class="welcome-copy" id="welcome-audience">これからAIを使い始める方に向けた入門資料です。<br>すでにアプリ開発でAIを使いこなしている方は対象としていません。</p>
+
 <p class="welcome-date"><time datetime="2026-10-01">2026年10月1日</time>時点の最新情報です。</p>
 <p class="welcome-copy welcome-update">AIの情報は、数週間で大きく変わります。<br>この資料は作成時点の最新ですが、読んでいる日にも最新とは限りません。<br>AIの時代だからこそ、自分で調べて確かめる習慣を大切にしてください。<br><br>AstraやFable 5.1が9月に登場して以来、AIへの指示の出し方も変わっています。<br>2026年8月以前の記事に載っている指示文は使わないでください。<br><br>プログラミング言語の古いバージョン向けの資料と同じで無駄になります。<br>9月下旬にも、新しいモデルが登場しました。<br><span class="keep">Opus 5.5</span>・<span class="keep">Sonnet 5.5</span>・<span class="keep">GPT-6.1 Sol</span>です。<br>使うモデル名と記事の日付を確認し、必ず最新の公式情報を調べてください。<a href="https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra" target="_blank" rel="noopener noreferrer">公式解説</a></p>
 <p class="liability-note" id="welcome-liability">この資料・掲載コード・AIの出力の利用は、利用者つまりあなた自身の判断と責任で行ってください。<br><strong>利用料金・追加請求、データの消失・破損、情報漏えい、第三者とのトラブルなど、これらの利用に関連して生じた費用・損害・不利益について、作成者は一切責任を負いません。</strong></p>
@@ -507,7 +508,9 @@ h1{font-size:28pt;margin-bottom:8mm}
 </dl>
 
 <div class="pricing">
+
 <h4><a href="https://learn.chatgpt.com/docs/pricing" target="_blank" rel="noopener noreferrer">ChatGPTの月額料金</a></h4>
+
 <dl class="price-list">
 <div><dt>Plus</dt><dd>20<span> 米ドル</span></dd></div>
 <div><dt>Pro 100</dt><dd>100<span> 米ドル</span></dd></div>
@@ -535,7 +538,9 @@ h1{font-size:28pt;margin-bottom:8mm}
 <p class="price-note"><a href="https://help.openai.com/en/articles/9793128-about-chatgpt-pro-plans" target="_blank" rel="noopener noreferrer">ChatGPTの<span class="keep">Pro 200</span>を新しく契約すると、以前の<span class="keep">「Plusの20倍」</span>より<span class="keep">利用枠が少なくなります</span></a>。<br><a href="https://chatgpt.com/ja-JP/pricing/" target="_blank" rel="noopener noreferrer"><span class="keep">ChatGPT Pro</span>のChatでは、<span class="keep">GPT-5.6 Sol</span>が無制限です</a><span class="keep">（合理的な範囲で）。</span><br>Work・Codexで使うと、利用枠を消費します。<br>Fableを<span class="keep">Claude Pro</span>で使う追加クレジットは別料金です。</p>
 </div>
 </section>
+
 <!-- 公式情報確認日：2026-10-01。合意した内容は新しいsectionとして追記する。 -->
+
 <section class="section comparison" id="comparison" aria-labelledby="comparison-title">
 <h2 id="comparison-title">無料プランとエントリープランの違い</h2>
 <div class="compare-grid">
@@ -558,17 +563,22 @@ h1{font-size:28pt;margin-bottom:8mm}
 <thead><tr><th scope="col">項目</th><th scope="col">Free</th><th scope="col">Pro</th></tr></thead>
 <tbody>
 <tr><th scope="row">月額</th><td>無料</td><td><strong>20米ドル</strong></td></tr>
+
 <tr><th scope="row">主な会話<span class="keep">モデル</span></th><td>Sonnet 5.5</td><td>Sonnet 5.5<br>Opus 5.5</td></tr>
 <tr><th scope="row">利用量</th><td>上限あり</td><td>Freeより多い<br>上限あり</td></tr>
 <tr><th scope="row">Claude Code</th><td>使えない</td><td><strong>使える</strong></td></tr>
 <tr><th scope="row">Fable</th><td>使えない</td><td>追加クレジットが必要</td></tr>
+
 </tbody>
 </table>
 </section>
 </div>
 <p class="comparison-note"><span class="keep">GPT-6.1 Sol</span>と<span class="keep">GPT-6 Luna</span>は、WorkとCodexで使います。<br><a href="https://openai.com/index/introducing-gpt-6-1-sol/" target="_blank" rel="noopener noreferrer">通常のChatでは、まだ使えません</a>。</p>
 <p class="billing-note"><strong>従量課金のほうが安いのでは？という考えは捨てましょう。</strong><br>貴方の予算を一瞬でオーバーし青ざめることになります。</p>
+
 <p class="comparison-note">有料でも利用上限があります。料金・モデルは頻繁に変わるため、利用前に公式情報をご確認ください。（2026年10月1日確認）</p>
+
+
 </section>
 <section class="section comparison usage-guide" id="usage-guide" aria-labelledby="usage-title">
 <h2 id="usage-title">無料と有料、どう違う？</h2>
@@ -692,17 +702,21 @@ h1{font-size:28pt;margin-bottom:8mm}
 
 <section class="setup-step" id="setup-model" aria-labelledby="setup-model-title">
 <p class="usage-label">04　最初に使うモデルを選ぶ</p>
+
 <h3 id="setup-model-title">この練習では、<span class="keep">GPT-6.1 Sol</span>を選びます。</h3>
+
 <div class="setup-os-grid">
 <div class="setup-os">
 <h4>Codexでアプリを作る</h4>
 <ol>
 <li>入力欄の右下にある<strong>モデル名</strong>、または<strong>「思考量を選択」</strong>を押します。</li>
+
 <li>開いたメニューの<strong>モデル名</strong>か、その上の<strong>思考量（例：「極高」）</strong>を押し、<strong class="keep">「GPT-6.1 Sol」</strong>を選びます。</li>
 <li><strong>思考量（考える強さ）</strong>は、変えずに始めます。</li>
 </ol>
 <p>入力欄に <code>/model</code> と入力して、モデル選択を開くこともできます。</p>
 <p>日常の作業や開発に向いた、公式のおすすめモデルの一つです。<a class="keep" href="https://learn.chatgpt.com/ja-JP/docs/models?surface=app" target="_blank" rel="noopener noreferrer">モデルと強さの説明</a></p>
+
 </div>
 <div class="setup-os">
 <h4>Claudeで相談する</h4>
@@ -710,7 +724,9 @@ h1{font-size:28pt;margin-bottom:8mm}
 </div>
 </div>
 <p class="setup-rule">上の図の<strong>「Astra・極高」は表示例</strong>です。考える強さを上げるほど時間や利用枠を使うため、必要になってから上げます。</p>
+
 <details><summary><span class="keep">GPT-6.1 Sol</span>が見つからないとき</summary><p>モデルのメニューに<strong>「上級」</strong>があれば開きます。それでも見つからない場合は、<strong class="keep">「GPT-6 Sol」</strong>で始めます。どちらも選べない場合は、そのプランの標準モデルで始めます。選べるモデルや表示は、プランやアプリの更新で変わります。<a class="keep" href="https://learn.chatgpt.com/ja-JP/docs/models?surface=app" target="_blank" rel="noopener noreferrer">公式の画面案内</a></p></details>
+
 </section>
 
 <section class="setup-step" aria-labelledby="setup-send-title">
@@ -887,8 +903,10 @@ h1{font-size:28pt;margin-bottom:8mm}
 </details>
 </section>
 <aside class="prompt-context" aria-label="モデルの進化と利用条件">
+
 <p class="practice-lead">2026年9月、<a class="keep" href="https://www.anthropic.com/claude/fable" target="_blank" rel="noopener noreferrer">Fable 5.1</a>や<a href="https://openai.com/index/gpt-6-astra/" target="_blank" rel="noopener noreferrer">Astra</a>に続き、<a class="keep" href="https://www.anthropic.com/claude-opus-5-5" target="_blank" rel="noopener noreferrer">Opus 5.5</a>や<a class="keep" href="https://openai.com/index/introducing-gpt-6-1-sol/" target="_blank" rel="noopener noreferrer">GPT-6.1 Sol</a>も登場しました。<br>AIに任せられる範囲がさらに広がりました。<br>以前うまくいかなかった使い方も、今のAIでもう一度試してみてください。</p>
 <p class="practice-lead">ただし、<a href="https://help.openai.com/en/articles/20001516-managing-usage-with-gpt-6-astra-in-work-and-codex" target="_blank" rel="noopener noreferrer">AstraはPlusのCodexでも利用枠を早く使い切ることがあります</a>。<a href="https://support.claude.com/en/articles/15424964-claude-fable-models-on-your-plan" target="_blank" rel="noopener noreferrer"><span class="keep">Fable 5.1</span>は<span class="keep">Claude Pro</span>では別料金</a>です。</p>
+
 </aside>
 </section>
 
