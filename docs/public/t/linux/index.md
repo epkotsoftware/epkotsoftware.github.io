@@ -17,10 +17,9 @@ Dockerを使って構築可能です。
 ## 動画
 
 - 動画
-  - <https://youtube.com/playlist?list=PLCX3wwS3Gg4zOMS9ezkea4tDt5U7s2yRa>
-    - `13:03` Linuxコマンドの使い方入門｜CUIとGUIの違いやシェルについて解説！【プログラマー必須スキル】
-    - `6:31` シェルスクリプトとは？【分かりやすい解説シリーズ #68】【プログラミング】
-    - `7:47` CRONとは？【分かりやすい解説シリーズ #64】【プログラミング】
+  - `6:07` [Linuxコマンド入門](https://www.youtube.com/watch?v=bVx5Y-Pk-DQ)
+  - `3:44` [シェルスクリプトとは](https://www.youtube.com/watch?v=qVETxwPugo0)
+  - `3:41` [cronとは](https://www.youtube.com/watch?v=I6xFoEEDv3o)
 
 ## 資料
 

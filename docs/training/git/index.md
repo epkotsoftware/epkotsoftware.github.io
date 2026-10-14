@@ -6,12 +6,9 @@ Git(ギット)について学習していきます。
 まずは、以下の動画で仕組みについて学習しましょう。
 
 - 動画
-  - GitHubとは？【分かりやすい解説シリーズ #14】【プログラミング】
-    - <https://youtu.be/ycFvHGPZ2LU>
-  - 【Git入門】Git + Github使い方入門講座🐒Gitの仕組みや使い方を完全解説！パーフェクトGit入門！
-    - <https://youtu.be/LDOR5HfI_sQ>
-  - イケてるgitのブランチ運用｜git flowとgithub flowとは！？
-    - <https://youtu.be/0ge7ZJQvYLw>
+  - `3:45` [GitHubとは](https://www.youtube.com/watch?v=jpSUbTy6gpQ)
+  - `10:12` [GitとGitHubの操作](https://www.youtube.com/watch?v=GH-SkcYB3bo)
+  - `2:27` [ブランチの運用ルール](https://www.youtube.com/watch?v=jm-VX4L-hHE)
 
 ## Git学習準備
 
@@ -626,8 +623,8 @@ git branch | xargs git branch -D
 コンフリクトの解消方法については動画・サイトの記事を参考にしてください。  
 GitHubで解消することも出来ます。
 
-- `【Git入門】Git + Github使い方入門講座🐒Gitの仕組みや使い方を完全解説！パーフェクトGit入門！ 〜 コンフリクト(編集の競合)`
-  - <https://www.youtube.com/watch?v=LDOR5HfI_sQ&t=2568s>
+- `GitとGitHubの操作 〜 コンフリクト`
+  - <https://www.youtube.com/watch?v=GH-SkcYB3bo&t=532s>
 - GitHub でのマージ コンフリクトを解決する
   - <https://docs.github.com/ja/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-on-github>
 - コマンド ラインを使用してマージ コンフリクトを解決する

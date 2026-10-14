@@ -7,12 +7,9 @@
 運用方法についても現場によって様々ですが、一般的なgit flow等の動画も紹介します。
 
 - 動画
-  - バージョン管理ツールの2大勢力！Git VS SVN
-    - <https://youtu.be/jOFSn59q6IY>
-  - 【Git入門】Git + Github使い方入門講座🐒Gitの仕組みや使い方を完全解説！パーフェクトGit入門！
-    - <https://youtu.be/LDOR5HfI_sQ>
-  - イケてるgitのブランチ運用｜git flowとgithub flowとは！？
-    - <https://youtu.be/0ge7ZJQvYLw>
+  - `3:00` [バージョン管理とは](https://www.youtube.com/watch?v=D8TSsP6hrCU)
+  - `10:12` [GitとGitHubの操作](https://www.youtube.com/watch?v=GH-SkcYB3bo)
+  - `2:27` [ブランチの運用ルール](https://www.youtube.com/watch?v=jm-VX4L-hHE)
 
 Git で `master` という名称のブランチが使われていることが多いですが  
 現在では `main` がデフォルトとなっています。
