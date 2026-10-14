@@ -272,6 +272,8 @@ SQLはメソッドで書ける
       <span class="label">動かないときに見る場所</span><br>
       <strong>画面が真っ白</strong>… <code>storage/logs/laravel.log</code> にエラーが出ています。<br>
       <strong>500 が出る</strong>… 画面にエラーの内容が出ます。<code>.env</code> の <code>APP_DEBUG=true</code> のときだけです。<br>
+      <strong>Permission denied と出る</strong>… Laravel が <code>storage/</code> に書き込めていません。次のコマンドで、だれでも書き込める設定に変えると直ります。
+      <div class="bk-cmd"><span class="is-prompt">$</span> docker exec training-laravel-web chmod -R 777 storage</div>
       <strong>そもそも繋がらない</strong>… <code>docker ps</code> でコンテナが動いているか確認してください。
     </div>
   </section>
