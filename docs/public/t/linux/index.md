@@ -17,9 +17,12 @@ Dockerを使って構築可能です。
 ## 動画
 
 - 動画
-  - `6:07` [Linuxコマンド入門](https://www.youtube.com/watch?v=bVx5Y-Pk-DQ)
-  - `3:44` [シェルスクリプトとは](https://www.youtube.com/watch?v=qVETxwPugo0)
-  - `3:41` [cronとは](https://www.youtube.com/watch?v=I6xFoEEDv3o)
+  - `6:08` Linuxコマンド入門
+    - <https://www.youtube.com/watch?v=bVx5Y-Pk-DQ>
+  - `3:45` シェルスクリプトとは
+    - <https://www.youtube.com/watch?v=qVETxwPugo0>
+  - `3:42` cronとは
+    - <https://www.youtube.com/watch?v=I6xFoEEDv3o>
 
 ## 資料
 

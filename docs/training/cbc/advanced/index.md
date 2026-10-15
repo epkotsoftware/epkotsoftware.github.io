@@ -37,8 +37,10 @@
 今回はコンテナ型の仮想化環境である「Docker」を使います。
 
 - 動画
-  - `8:16` [1_Docker環境構築入門](https://www.youtube.com/watch?v=cLphsyAakvU)
-  - `7:49` [6_Docker最初の1歩](https://www.youtube.com/watch?v=HrGm7sqZXL8)
+  - `8:17` 1_Docker環境構築入門
+    - <https://www.youtube.com/watch?v=cLphsyAakvU>
+  - `7:50` 6_Docker最初の1歩
+    - <https://www.youtube.com/watch?v=HrGm7sqZXL8>
 
 #### Dockerインストール
 
@@ -69,9 +71,12 @@ Docker Desktop をインストールしてください。
 ## PHP入門
 
 - 動画
-  - `4:15` [2_サーバーサイドとは](https://www.youtube.com/watch?v=WI3rxoFJ2_4)
-  - `20:19` [3_PHP入門](https://www.youtube.com/watch?v=Z0fO5CEx8T4)
-  - `2:57` [4_セッション変数とは](https://www.youtube.com/watch?v=3JyS8BX1fdw)
+  - `4:16` 2_サーバーサイドとは
+    - <https://www.youtube.com/watch?v=WI3rxoFJ2_4>
+  - `20:20` 3_PHP入門
+    - <https://www.youtube.com/watch?v=Z0fO5CEx8T4>
+  - `2:58` 4_セッション変数とは
+    - <https://www.youtube.com/watch?v=3JyS8BX1fdw>
 
 ## PHP VSCode拡張機能
 
@@ -117,7 +122,8 @@ Docker Desktop をインストールしてください。
 - フレームワークとは
   - <https://www.otsuka-shokai.co.jp/words/framework.html>
 - 動画
-  - `4:07` [5_フレームワークとは](https://www.youtube.com/watch?v=WMW8-ZeEtj8)
+  - `4:08` 5_フレームワークとは
+    - <https://www.youtube.com/watch?v=WMW8-ZeEtj8>
 
 ## 課題提出
 

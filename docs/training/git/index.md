@@ -6,9 +6,12 @@ Git(ギット)について学習していきます。
 まずは、以下の動画で仕組みについて学習しましょう。
 
 - 動画
-  - `3:45` [GitHubとは](https://www.youtube.com/watch?v=jpSUbTy6gpQ)
-  - `10:12` [GitとGitHubの操作](https://www.youtube.com/watch?v=GH-SkcYB3bo)
-  - `2:27` [ブランチの運用ルール](https://www.youtube.com/watch?v=jm-VX4L-hHE)
+  - `3:46` GitHubとは
+    - <https://www.youtube.com/watch?v=jpSUbTy6gpQ>
+  - `10:13` GitとGitHubの操作
+    - <https://www.youtube.com/watch?v=GH-SkcYB3bo>
+  - `2:28` ブランチの運用ルール
+    - <https://www.youtube.com/watch?v=jm-VX4L-hHE>
 
 ## Git学習準備
 
