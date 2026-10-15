@@ -626,7 +626,7 @@ git branch | xargs git branch -D
 コンフリクトの解消方法については動画・サイトの記事を参考にしてください。  
 GitHubで解消することも出来ます。
 
-- `GitとGitHubの操作 〜 コンフリクト`
+- GitとGitHubの操作 〜 コンフリクト（8:52〜）
   - <https://www.youtube.com/watch?v=GH-SkcYB3bo&t=532s>
 - GitHub でのマージ コンフリクトを解決する
   - <https://docs.github.com/ja/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-on-github>
