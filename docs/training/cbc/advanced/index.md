@@ -37,8 +37,10 @@
 今回はコンテナ型の仮想化環境である「Docker」を使います。
 
 - 動画
-  - 【2021年最新】Docker環境構築入門｜14分でdocker-composeまで完全解説！【windows/mac対応】Dockerの使い方
-    - <https://youtu.be/VIzLh4BgKck>
+  - `8:17` 1_Docker環境構築入門
+    - <https://www.youtube.com/watch?v=cLphsyAakvU>
+  - `7:50` 6_Docker最初の1歩
+    - <https://www.youtube.com/watch?v=HrGm7sqZXL8>
 
 #### Dockerインストール
 
@@ -69,10 +71,12 @@ Docker Desktop をインストールしてください。
 ## PHP入門
 
 - 動画
-  - <https://www.youtube.com/playlist?list=PLCX3wwS3Gg4wr82E46gEdFnT6VTo_uehr>
-    - `10:01` サーバーサイドとは？サーバーサイドとクライアントサイド言語の違い
-    - `1:02:33` PHPプログラミング入門講座🔰【初心者でも1時間で学べるPHP入門！フル字幕】
-    - `4:05` セッション変数とは？【分かりやすい解説シリーズ #17】【プログラミング】
+  - `4:16` 2_サーバーサイドとは
+    - <https://www.youtube.com/watch?v=WI3rxoFJ2_4>
+  - `20:20` 3_PHP入門
+    - <https://www.youtube.com/watch?v=Z0fO5CEx8T4>
+  - `2:58` 4_セッション変数とは
+    - <https://www.youtube.com/watch?v=3JyS8BX1fdw>
 
 ## PHP VSCode拡張機能
 
@@ -118,8 +122,8 @@ Docker Desktop をインストールしてください。
 - フレームワークとは
   - <https://www.otsuka-shokai.co.jp/words/framework.html>
 - 動画
-  - フレームワークとは？プログラミングに必須のフレームワークを初心者向けに解説！
-    - <https://youtu.be/eTCjvTo5KgQ>
+  - `4:08` 5_フレームワークとは
+    - <https://www.youtube.com/watch?v=WMW8-ZeEtj8>
 
 ## 課題提出
 
