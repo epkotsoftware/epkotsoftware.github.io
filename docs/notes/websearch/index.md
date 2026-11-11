@@ -6,10 +6,10 @@
 
 ## 動画
 
-- 8割の人が知らない検索術・ググり方【知らないと損】
-  - <https://youtu.be/T6qcKQ-vEUA>
-- エンジニアは検索力が大事。プログラミングスキル向上にググり力は必須です。
-  - <https://youtu.be/kNiD4rfNkFA>
+- `4:15` 4_検索する力
+  - <https://www.youtube.com/watch?v=BMzLHEAb8dc>
+- `3:53` 5_調べ方5つ
+  - <https://www.youtube.com/watch?v=-KBpXaOz9HE>
 
 ## セキュリティ
 

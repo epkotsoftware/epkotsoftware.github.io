@@ -78,11 +78,14 @@
 
 - Google Chromeの便利な使い方15選
   - <https://www.e-conne.co.jp/blog/1584>
-- Chrome DevToolsの使い方を徹底解説！Chrome Developer Toolsを使いこなすと開発効率が上がる！
-  - <https://youtu.be/awRkFcv51r4>
+- `3:59` 7_開発者ツールで、HTMLとCSSを調べる
+  - <https://www.youtube.com/watch?v=3JO8vp2F7qo>
+- `2:52` 8_開発者ツールで、デバッグする
+  - <https://www.youtube.com/watch?v=O42hVDgc918>
+- `3:22` 9_開発者ツールで、パフォーマンスと品質を調べる
+  - <https://www.youtube.com/watch?v=67dGOvRANYE>
 - `Chrome Developer Toolsの使い方【サイボウズ開運研修2021】`
   - 資料: <https://speakerdeck.com/cybozuinsideout/chrome-developer-tools>
-  - 動画: <https://youtu.be/aL9OarYImm0>
 
 ## 参考資料
 

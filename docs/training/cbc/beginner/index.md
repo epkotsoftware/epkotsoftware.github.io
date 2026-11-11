@@ -11,13 +11,16 @@
 まずは動画で学習しましょう。
 
 - 動画
-  - <https://youtube.com/playlist?list=PLCX3wwS3Gg4wQs1w27nhrURdByT3cSNBp>
-    - `10:17` 【2021年最新】HTML入門🔰初心者向けにHTMLの基礎を解説！
-    - `11:33` 【CSS入門講座🔰】HTMLとCSSの基本を解説！WEBデザインの言語CSSを理解しよう
-      - ※ 動画内で`<header>`タグが出てきますが`<head>`タグの間違いです。`<header>`タグは別の用途で使用します。
-    - `11:25` 【Web業界の常識】「パス」の書き方、説明できますか？Webデザイナー・プログラマー志望の皆さんへ 初心者向け【HTML・CSS コーディング】
-    - `14:24` 【Webデザイナー・プログラマーになりたい皆さんへ】Web業界の常識シリーズ10選！知らないままではマズいです… キャッシュ/スーパーリロード/アクセス制限の方法etc【初心者必見】
-    - `8:22` HTML入門講座 #02：初めてのHTMLページを作ろう／ファイル名の付け方
+  - `3:28` 1_HTML入門
+    - <https://www.youtube.com/watch?v=g18PGx1c9eY>
+  - `3:12` 2_CSS入門
+    - <https://www.youtube.com/watch?v=2tuSsocxFbM>
+  - `3:18` 3_パスの書き方
+    - <https://www.youtube.com/watch?v=DPKmGdhZysQ>
+  - `2:43` 4_現場でよく出るWebの言葉
+    - <https://www.youtube.com/watch?v=eVGTr1Wi38Y>
+  - `3:22` 5_初めてのHTMLページ
+    - <https://www.youtube.com/watch?v=4O9X38fLvl4>
   - VSCode フォルダ・ファイル追加方法  
     ![vscode_add_dir_and_file.gif](./images/vscode_add_dir_and_file.gif)
 
@@ -92,6 +95,6 @@ CSSの「`grid-template`」が、ほぼ全てのブラウザでサポートさ�
 今後、使われる事が増えそうなので以下も覚えておきましょう。
 
 - 動画
-  - 【HTML/CSSレイアウト】Gridを使うとFlexboxより簡単に複雑なレイアウトを組めます
-    - <https://youtu.be/cwkkD0ejX8Q>
+  - `4:25` 6_グリッドでレイアウトを組む
+    - <https://www.youtube.com/watch?v=mws5joZq4Oo>
 - 
