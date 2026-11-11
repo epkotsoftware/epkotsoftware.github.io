@@ -11,13 +11,18 @@
 まずは動画で学習しましょう。
 
 - 動画
-  - <https://youtube.com/playlist?list=PLCX3wwS3Gg4y99r2bSBpir2nmMv4rzfcL>
-    - `12:56` HTTPの仕組み｜GET・POSTリクエスト/ステータスコード/サーバー通信/ユーザエージェントなどの基礎を解説
-    - `15:56` IPアドレスの仕組みとは🔰プライベートIP/パブリックIPやIPv6など、IPアドレスの基本を解説
-    - `5:57` ポートとは？【TCP/IP基礎】｜プログラマー養成講座
-    - `6:28` ドメイン、サーバーとは？ホームページの仕組みを解説😃これでDNSやIPアドレスもわかるようになる！
-    - `6:24` WEBサーバーの仕組み入門｜ApacheやNginxなどWEBサーバーの基本を初心者向けに解説
-    - `16:19` 【超入門】初心者向け レスポンシブデザイン完全攻略！メディアクエリ等解説【HTML・CSS コーディング】
+  - `3:32` 1_HTTPのしくみ
+    - <https://www.youtube.com/watch?v=dZ5XntQIfZg>
+  - `3:45` 2_IPアドレスのしくみ
+    - <https://www.youtube.com/watch?v=dSdcqcHp6Nk>
+  - `2:43` 3_ポートとは
+    - <https://www.youtube.com/watch?v=6I6L4fOBl2Q>
+  - `2:53` 4_ドメインとサーバー
+    - <https://www.youtube.com/watch?v=XzFj70XVluk>
+  - `3:35` 5_Webサーバーの仕組み
+    - <https://www.youtube.com/watch?v=pdTFxIqa1yU>
+  - `4:56` 6_レスポンシブWebデザイン
+    - <https://www.youtube.com/watch?v=hQSqdmq04Is>
 
 ## 基礎
 

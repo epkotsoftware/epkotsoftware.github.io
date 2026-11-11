@@ -150,9 +150,14 @@ Laravelなどのフレームワークでも、デフォルトで`bigint unsigned
 
 ## Google Chrome Developer Tools
 
+- `3:59` 7_開発者ツールで、HTMLとCSSを調べる
+  - <https://www.youtube.com/watch?v=3JO8vp2F7qo>
+- `2:52` 8_開発者ツールで、デバッグする
+  - <https://www.youtube.com/watch?v=O42hVDgc918>
+- `3:22` 9_開発者ツールで、パフォーマンスと品質を調べる
+  - <https://www.youtube.com/watch?v=67dGOvRANYE>
 - `Chrome Developer Toolsの使い方【サイボウズ開運研修2021】`
   - 資料: <https://speakerdeck.com/cybozuinsideout/chrome-developer-tools>
-  - 動画: <https://youtu.be/aL9OarYImm0>
 
 ## プログラミング環境
 

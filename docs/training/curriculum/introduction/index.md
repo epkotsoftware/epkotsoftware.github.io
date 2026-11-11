@@ -13,13 +13,18 @@
 また、エンジニアになると検索することが多くなりますので検索力も身につけましょう。
 
 - 動画
-  - <https://youtube.com/playlist?list=PLCX3wwS3Gg4x7RMa9JE5uelCqvzmdmVfA>
-    - `4:57` 【初心者向け】Webエンジニアとして独り立ちするために学ぶべきスキルマップ【プログラミング】
-    - `6:56` 【初心者向け】Webプログラミングの始め方 スキル0⇒1のためにやるべき具体的な手順
-    - `11:02` GitHubとは？【分かりやすい解説シリーズ #14】【プログラミング】
-    - `12:30` 8割の人が知らない検索術・ググり方【知らないと損】
-    - `23:25` エンジニアは検索力が大事。プログラミングスキル向上にググり力は必須です。
-    - `14:39` プログラミングにおける正しい質問の仕方とは？おすすめ質問サイトも紹介
+  - `2:26` 1_Webアプリ開発のスキルマップ
+    - <https://www.youtube.com/watch?v=CPjPaKq_Lfg>
+  - `2:55` 2_Webプログラミングの始め方
+    - <https://www.youtube.com/watch?v=fgA74si1rZU>
+  - `3:46` 3_GitHubとは
+    - <https://www.youtube.com/watch?v=L3Hi3gK0JLE>
+  - `4:15` 4_検索する力
+    - <https://www.youtube.com/watch?v=BMzLHEAb8dc>
+  - `3:53` 5_調べ方5つ
+    - <https://www.youtube.com/watch?v=-KBpXaOz9HE>
+  - `3:03` 6_質問のしかた
+    - <https://www.youtube.com/watch?v=pRlfzSrOxUo>
 
 ## 休止時間
 
